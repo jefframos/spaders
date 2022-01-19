@@ -85,22 +85,23 @@ export default class LevelSelectContainer extends PIXI.Container {
         this.visible = true;
     }
     addCard(data) {
-        let pieceSize = 18;
+        let pieceSize = 16;
         let card = this.gameScreen.generateImage(data.pieces, pieceSize, 32)
         card.y = 0
         card.pivot.x = card.width / 2
 
         let label = new PIXI.Text(data.levelName, { font: '22px', fill: 0xFFFFFF, align: 'center', fontWeight: '200', fontFamily: 'round_popregular' });
-        label.x = card.width / 2 - pieceSize - label.width / 2
+        label.x = 0//card.width / 2 - pieceSize - label.width / 2
         label.y = card.height - pieceSize / 2 - 32
+
+        //label.scale.set(card.width / label.width)
+
         card.addChild(label)
 
         card.on('mousedown', this.selectLevel.bind(this, data)).on('touchstart', this.selectLevel.bind(this, data));
         card.interactive = true;
         card.buttonMode = true;
 
-        // let center =new PIXI.Graphics().beginFill(0xFF0000).drawCircle(0, 0, 30);
-        // card.addChild(center)
         this.levelCards.push({ data: data, image: card })
     }
 
@@ -115,6 +116,8 @@ export default class LevelSelectContainer extends PIXI.Container {
         let line = -1
         let col = 0
 
+        let lines = []
+
         for (let index = 0; index < this.levelCards.length; index++) {
             const element = this.levelCards[index];
             this.addChild(element.image)
@@ -122,7 +125,19 @@ export default class LevelSelectContainer extends PIXI.Container {
                 line++
             }
             element.image.x = (index % maxPerLine) * distance + margin + distance * 0.5///+ element.image.width / 2 + margin * 0.5
-            element.image.y = line * 280 + 100
+            
+            if(index >= maxPerLine){
+                element.image.y = 30 + lines[index - maxPerLine]
+                console.log(lines[index % maxPerLine])
+                console.log(lines)
+
+            }else{
+
+                element.image.y = 100
+            }
+
+            lines.push(element.image.y + element.image.height)
+
         }
 
     }

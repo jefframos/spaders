@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="9" height="12" tilewidth="64" tileheight="64" infinite="0" nextlayerid="12" nextobjectid="1">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="9" height="12" tilewidth="64" tileheight="64" infinite="0" nextlayerid="13" nextobjectid="1">
  <editorsettings>
-  <export target="../assets/levelsRaw.json" format="json"/>
+  <export target="../../www/assets/levelsRaw.json" format="json"/>
  </editorsettings>
  <tileset firstgid="1" source="spadersTileset.tsx"/>
  <layer id="9" name="Tetris" width="9" height="12">
@@ -16,27 +16,6 @@
 0,3,3,8,8,8,8,0,0,
 3,3,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0
-</data>
- </layer>
- <layer id="11" name="Arrow" width="9" height="12">
-  <properties>
-   <property name="i" type="int" value="7"/>
-   <property name="j" type="int" value="8"/>
-   <property name="tier" type="int" value="0"/>
-  </properties>
-  <data encoding="csv">
-0,0,0,2,0,0,0,0,0,
-0,0,2,2,2,0,0,0,0,
-0,2,2,0,2,2,0,0,0,
-2,2,0,0,0,2,2,0,0,
-2,0,0,0,0,0,2,0,0,
 0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,
@@ -64,6 +43,48 @@
 0,0,4,4,4,4,4,0,0,
 0,4,4,0,4,0,4,0,0,
 4,4,4,0,0,4,4,0,0,
+0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="11" name="Arrow" width="9" height="12">
+  <properties>
+   <property name="i" type="int" value="7"/>
+   <property name="j" type="int" value="8"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,2,0,0,0,0,0,
+0,0,2,2,2,0,0,0,0,
+0,2,2,0,2,2,0,0,0,
+2,2,0,0,0,2,2,0,0,
+2,0,0,0,0,0,2,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="12" name="Copy of Tetris" width="9" height="12">
+  <properties>
+   <property name="i" type="int" value="7"/>
+   <property name="j" type="int" value="8"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+4,4,1,1,1,0,2,0,0,
+0,4,4,1,2,2,2,0,0,
+0,3,3,8,8,8,8,0,0,
+3,3,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0
 </data>
  </layer>
