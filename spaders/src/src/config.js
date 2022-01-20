@@ -13,7 +13,7 @@ export default {
 		green: 0x7BCA93,
 		blue2: 0x1376B9,
 		pink: 0xDD6290,
-		red2: 0xFF2320,
+		red2: 0xdf6b33,
 		dark: 0x333333,
 		purple: 0x8957c7,
 		white: 0xDDDDDD,

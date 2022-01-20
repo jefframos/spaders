@@ -118,7 +118,8 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.center = new PIXI.Graphics().beginFill(0xFF0000).drawCircle(0, 0, 10);
 		this.screenContainer.addChild(this.center)
 		this.center.alpha = 0
-		this.screenState = 1
+		this.screenState = 2
+
 	}
 	getRect(size = 4, color = 0xFFFFFF) {
 		return new PIXI.Graphics().beginFill(color).drawRect(0, 0, size, size);
@@ -138,9 +139,9 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.mainCanvas.height = innerResolution.height;
 
 		this.gameScreen.resizeToFitAR({ width: this.mainCanvas.width, height: this.mainCanvas.height }, this.screenContainer, this.mainCanvas)
-		this.gameScreen.resizeToFitAR({ width: this.mainCanvas.width, height: this.mainCanvas.height }, this.levelSelectionContainer, this.mainCanvas)
+		//this.gameScreen.resizeToFitAR({ width: this.mainCanvas.width, height: this.mainCanvas.height }, this.levelSelectionContainer, this.mainCanvas)
 
-
+		this.chooseLevelPanel.resize(innerResolution);
 		let globalPos = this.toLocal({ x: 0, y: 0 })
 		this.mainCanvas.position = globalPos
 
@@ -175,13 +176,11 @@ export default class StartScreenContainer extends PIXI.Container {
 			this.screenContainer.x = this.mainCanvas.width / 2 + this.mainCanvas.x
 			this.screenContainer.y = utils.lerp(this.screenContainer.y, this.mainCanvas.y, 0.5)
 
-
-			//this.backButton.visible = true;
 			this.backButton.scale.set(this.screenContainer.scale.x)
 			this.backButton.x = utils.lerp(this.backButton.x, this.mainCanvas.x + this.mainCanvas.width - this.backButton.width, 0.2)//this.mainCanvas.width / 2* this.screenContainer.scale.x//globalPosRightCorner.x//- this.mainCanvas.x;//globalPosRightCorner.x// - 80 * this.screenContainer.scale.x
 
 			this.levelSelectionContainer.visible = true;
-			this.levelSelectionContainer.x = utils.lerp(this.levelSelectionContainer.x,  this.mainCanvas.width / 2 + this.mainCanvas.x - this.levelSelectionContainer.width / 2, 0.2)
+			this.levelSelectionContainer.x = this.mainCanvas.x//utils.lerp(this.levelSelectionContainer.x,  this.mainCanvas.width / 2 + this.mainCanvas.x - this.levelSelectionContainer.width / 2, 0.2)
 
 		}
 	}
@@ -193,6 +192,8 @@ export default class StartScreenContainer extends PIXI.Container {
 		} else {
 			this.changeLabelTimer -= delta;
 		}
+
+		this.chooseLevelPanel.update(delta)
 
 	}
 	startMenuState(delay = 0) {
@@ -235,7 +236,8 @@ export default class StartScreenContainer extends PIXI.Container {
 	show(force = false, delay = 0) {
 		TweenLite.killTweensOf(this.screenContainer)
 
-		this.startState(delay, force);
+		//this.startState(delay, force);
+		this.startMenuState(delay, force);
 
 		this.playLine.interactive = true;
 		this.playButton.interactive = true;

@@ -35,7 +35,7 @@ window.colorsOrder = [
 	config.colors.dark,
 ],
 
-window.config = config;
+	window.config = config;
 window.POOL = new Pool();
 
 window.console.warn = function () { }
@@ -77,8 +77,8 @@ window.IMAGE_DATA.enemyBlockImages = ['./assets/images/newEnemies/block.png']
 window.IMAGE_DATA.enemyImages = []
 
 for (let index = 0; index < 10; index++) {
-	window.IMAGE_DATA.enemyImages.push('./assets/images/newEnemies/pixil-layer-'+index+'.png');
-	
+	window.IMAGE_DATA.enemyImages.push('./assets/images/newEnemies/pixil-layer-' + index + '.png');
+
 }
 window.IMAGE_DATA.enemyBlockImages.forEach(element => {
 	PIXI.loader.add(element)
@@ -88,6 +88,7 @@ window.IMAGE_DATA.enemyImages.forEach(element => {
 });
 
 PIXI.loader
+	.add('./data/levelSections.json')
 	.add('./assets/fonts/stylesheet.css')
 	.add('./assets/images/tvlines.png')
 	.add('./assets/images/backLabel.png')
@@ -104,11 +105,91 @@ PIXI.loader
 	.add('./assets/images/screen_displacement.jpg')
 	.add('./assets/images/block.jpg')
 	// .add('./assets/images/map.jpg')
-	.load(configGame);
+	.load(loadJsons);
 
 window.levelsJson = ""
 
+
+const jsonPath = "./data/"
+
+function loadJsons() {
+
+	window.levelSections = PIXI.loader.resources[jsonPath + "levelSections.json"].data
+
+	window.levelSections.sections.forEach(section => {
+		section.levels.forEach(level => {
+			PIXI.loader.add(jsonPath + level.dataPath)
+		});
+
+	});
+
+
+
+	PIXI.loader.load(configGame);
+	// .add('./data/levelSections.json')
+	// .load(configGame);
+}
+
+function extractData(element) {
+	if (element.visible) {
+
+		let data = {}
+		data.levelName = element.name;
+		let i = element.width;
+		let j = element.height;
+		data.tier = 0;
+		if (element.properties[0].name == "i") {
+			i = element.properties[0].value;
+		}
+		if (element.properties[1].name == "j") {
+			j = element.properties[1].value;
+		}
+		if (element.properties[2].name == "tier") {
+			data.tier = element.properties[2].value;
+		}
+		let tempArr = [];
+		let levelMatrix = [];
+		for (let index = 0; index < element.data.length; index++) {
+			const id = element.data[index];
+			tempArr.push(id - 1)
+			if (tempArr.length >= i) {
+				index += element.width - i
+				levelMatrix.push(tempArr)
+				if (levelMatrix.length >= j) {
+					break;
+				}
+				tempArr = []
+			}
+		}
+
+		data.pieces = levelMatrix;
+		return data
+	}
+
+}
 function configGame() {
+
+
+	window.levelSections.sections.forEach(section => {
+
+		section.levels.forEach(level => {
+			
+			let res = PIXI.loader.resources[jsonPath + level.dataPath].data
+			
+			let sectionLevels = []
+			res.layers.forEach(layer => {
+				let data = extractData(layer);
+
+				if (data) {
+					sectionLevels.push(data);
+					console.log(data)
+				}
+			});
+			level.data = sectionLevels
+		});
+	});
+
+
 
 	window.game = new Game(config);
 	window.levelsRawJson = PIXI.loader.resources["./assets/levelsRaw.json"].data
@@ -157,7 +238,7 @@ function configGame() {
 			window.levelData.push(data)
 			window.levelTiersData[data.tier].push(data);
 		}
-		
+
 	});
 	console.log(window.levelTiersData)
 	//create screen manager

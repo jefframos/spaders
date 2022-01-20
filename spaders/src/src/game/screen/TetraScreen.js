@@ -835,7 +835,6 @@ export default class TetraScreen extends Screen {
 		if (!this.currentCard || !this.gameRunning) {
 			return;
 		}
-		console.log(renderer.plugins.interaction.activeInteractionData)
 		if (renderer.plugins.interaction.activeInteractionData) {
 
 			for (const key in renderer.plugins.interaction.activeInteractionData) {
@@ -852,8 +851,8 @@ export default class TetraScreen extends Screen {
 			this.mousePosition = renderer.plugins.interaction.mouse.global
 
 		}
-		console.log(this.topUIContainer.position.y, this.topUIContainer.position + config.height * 0.1)
-		if (this.mousePosition.y < this.topUIContainer.position.y + config.height * 0.1) {
+		console.log(this.topUIContainer.getGlobalPosition())
+		if (this.mousePosition.y < this.topUIContainer.getGlobalPosition().y + config.height * 0.2) {
 			return;
 		}
 
@@ -940,7 +939,7 @@ export default class TetraScreen extends Screen {
 		utils.scaleSize(this.gameCanvas, innerResolution, this.ratio)
 
 		//this.resizeToFitAR({width:this.bottomUICanvas.width * 0.8, height:this.bottomUICanvas.height * 0.4},this.containerQueue)
-		this.resizeToFitAR({width:this.gameCanvas.width * 0.8, height:this.gameCanvas.height * 0.75},this.gridContainer)
+		this.resizeToFitAR({width:this.gameCanvas.width * 0.95, height:this.gameCanvas.height * 0.7},this.gridContainer)
 		this.resizeToFit({width:this.gameCanvas.width, height:this.gameCanvas.height * 0.1},this.topCanvas)
 		this.resizeToFit({width:this.gameCanvas.width, height:this.gameCanvas.height * 0.125},this.bottomUICanvas)
 		
