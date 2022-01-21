@@ -8,7 +8,7 @@
   <property name="sectionName" value="Generation 2"/>
  </properties>
  <tileset firstgid="1" source="spadersTileset.tsx"/>
- <layer id="9" name="Tetris" width="11" height="12" visible="0">
+ <layer id="9" name="Tetris" width="11" height="12">
   <properties>
    <property name="i" type="int" value="7"/>
    <property name="j" type="int" value="8"/>
@@ -71,7 +71,7 @@
 0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="14" name="Template" width="11" height="12">
+ <layer id="14" name="Template" width="11" height="12" visible="0">
   <properties>
    <property name="i" type="int" value="8"/>
    <property name="j" type="int" value="11"/>
@@ -134,7 +134,7 @@
 0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="21" name="Asteroid" width="11" height="12" visible="0">
+ <layer id="21" name="Asteroid" width="11" height="12">
   <properties>
    <property name="i" type="int" value="5"/>
    <property name="j" type="int" value="9"/>
@@ -155,7 +155,7 @@
 0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="16" name="Pong" width="11" height="12" visible="0">
+ <layer id="16" name="Pong" width="11" height="12">
   <properties>
    <property name="i" type="int" value="7"/>
    <property name="j" type="int" value="9"/>
@@ -386,7 +386,7 @@
 0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="7" name="Superhard" width="11" height="12">
+ <layer id="7" name="Superhard" width="11" height="12" visible="0">
   <properties>
    <property name="i" type="int" value="9"/>
    <property name="j" type="int" value="12"/>

@@ -157,7 +157,7 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.playLabel.text = "PLAY"
 
 		//console.log(this.playLine.getGlobalPosition())
-		
+
 
 		this.levelSelectionContainer.y = this.mainCanvas.y
 		this.backButton.y = this.mainCanvas.y + this.backButton.height
@@ -167,8 +167,11 @@ export default class StartScreenContainer extends PIXI.Container {
 			this.screenContainer.x = this.mainCanvas.width / 2 + this.mainCanvas.x
 			this.screenContainer.y = utils.lerp(this.screenContainer.y, this.mainCanvas.height / 2 + this.mainCanvas.y, 0.5)
 
-			this.levelSelectionContainer.x = utils.lerp(this.levelSelectionContainer.x,  this.mainCanvas.width  + this.mainCanvas.x + this.levelSelectionContainer.width / 2, 0.2)
+			this.levelSelectionContainer.x = utils.lerp(this.levelSelectionContainer.x, this.mainCanvas.width + this.mainCanvas.x + this.levelSelectionContainer.width / 2, 0.2)
 
+			this.backButton.visible = false
+
+			this.chooseLevelPanel.alpha = utils.lerp(this.chooseLevelPanel.alpha, 0, 0.5)
 			this.backButton.scale.set(this.screenContainer.scale.x)
 			this.backButton.x = utils.lerp(this.backButton.x, this.mainCanvas.x + this.mainCanvas.width + this.backButton.width, 0.2)//this.mainCanvas.width / 2* this.screenContainer.scale.x//globalPosRightCorner.x//- this.mainCanvas.x;//globalPosRightCorner.x// - 80 * this.screenContainer.scale.x
 
@@ -180,13 +183,21 @@ export default class StartScreenContainer extends PIXI.Container {
 			this.backButton.scale.set(this.screenContainer.scale.x)
 			this.backButton.x = utils.lerp(this.backButton.x, this.mainCanvas.x + this.mainCanvas.width - this.backButton.width, 0.2)//this.mainCanvas.width / 2* this.screenContainer.scale.x//globalPosRightCorner.x//- this.mainCanvas.x;//globalPosRightCorner.x// - 80 * this.screenContainer.scale.x
 
+			this.backButton.visible = true
+
+			this.chooseLevelPanel.alpha = utils.lerp(this.chooseLevelPanel.alpha, 1, 0.5)
 			this.levelSelectionContainer.visible = true;
 			this.levelSelectionContainer.x = this.mainCanvas.x//utils.lerp(this.levelSelectionContainer.x,  this.mainCanvas.width / 2 + this.mainCanvas.x - this.levelSelectionContainer.width / 2, 0.2)
 
 		}
-		this.backButton.x = this.mainCanvas.x
-		this.backButton.y = this.mainCanvas.y
-		this.backButton.visible = true
+
+		this.chooseLevelPanel.visible = this.chooseLevelPanel.alpha > 0.1;
+
+		//console.log(this.chooseLevelPanel.visible, this.screenState)
+
+		this.backButton.x = this.mainCanvas.x + this.backButton.width
+		this.backButton.y = this.mainCanvas.y + this.backButton.height
+
 		let lineConvertedPosition = this.mainCanvas.toLocal(this.playLine.getGlobalPosition())
 		this.chooseLevelPanel.y = lineConvertedPosition.y + this.playLine.height
 		this.chooseLevelPanel.resize(innerResolution);
@@ -219,7 +230,7 @@ export default class StartScreenContainer extends PIXI.Container {
 		//this.levelSelectionContainer.y = -this.y;
 	}
 	startState(delay = 1, force = false) {
-		if(force){
+		if (force) {
 			this.screenState = 1;
 			this.backButton.visible = false;
 		}
@@ -227,11 +238,13 @@ export default class StartScreenContainer extends PIXI.Container {
 		//TweenLite.killTweensOf(this.levelSelectionContainer)
 		this.playLine.interactive = true;
 		this.backButton.interactive = false;
-		
-		TweenLite.to(this.screenContainer, force ? 0 : 0.75, { delay: delay, alpha: 1, rotation: 0, ease: Cubic.easeOut, onStart:()=>{
-			this.screenState = 1;
-			
-		} })
+
+		TweenLite.to(this.screenContainer, force ? 0 : 0.75, {
+			delay: delay, alpha: 1, rotation: 0, ease: Cubic.easeOut, onStart: () => {
+				this.screenState = 1;
+
+			}
+		})
 	}
 	updateStartLabel() {
 		if (Math.random() < 0.2) return;
@@ -278,8 +291,10 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.playLine.visible = false;
 		this.playButton.visible = false;
 		this.backButton.visible = false;
-
+		this.screenState = 1
 		this.chooseLevelPanel.visible = false;
+
+		console.log("HideStart")
 
 		TweenLite.to(this.screenContainer, force ? 0 : 0.2, { alpha: 0 })
 

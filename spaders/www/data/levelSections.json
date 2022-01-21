@@ -2,7 +2,7 @@
     "sections": [
         {
             "color": "0xFF0000",
-            "name": "videogames",
+            "name": "Video\nGames",
             "displayName": "Video Game History",
             "levels": [
                 {
@@ -12,6 +12,10 @@
                 {
                     "name": "3nd gen",
                     "dataPath": "videogames/videogamesLevels2.json"
+                },
+                {
+                    "name": "3nd gen",
+                    "dataPath": "videogames/videogamesLevels3.json"
                 }
             ]
         },

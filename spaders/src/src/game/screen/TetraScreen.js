@@ -106,8 +106,8 @@ export default class TetraScreen extends Screen {
 		window.GRID = {
 			i: this.currentLevelData.pieces[0].length,
 			j: this.currentLevelData.pieces.length,
-			height: config.height * 0.7,
-			width: config.width * 0.9,
+			height: config.height * 0.75,
+			width: config.width * 0.92,
 		}
 
 		window.CARD = {
@@ -477,6 +477,7 @@ export default class TetraScreen extends Screen {
 		this.showInGameElements();
 		this.addEvents();
 		this.endGameScreenContainer.hide();
+		this.startScreenContainer.hide()
 		this.board.startNewGame();
 
 		//console.log("gameState")
@@ -957,7 +958,7 @@ export default class TetraScreen extends Screen {
 		utils.scaleSize(this.gameCanvas, innerResolution, this.ratio)
 
 		//this.resizeToFitAR({width:this.bottomUICanvas.width * 0.8, height:this.bottomUICanvas.height * 0.4},this.containerQueue)
-		this.resizeToFitAR({width:this.gameCanvas.width * 0.8, height:this.gameCanvas.height * 0.75},this.gridContainer)
+		this.resizeToFitAR({width:this.gameCanvas.width * 0.9, height:this.gameCanvas.height * 0.7},this.gridContainer)
 		this.resizeToFit({width:this.gameCanvas.width, height:this.gameCanvas.height * 0.1},this.topCanvas)
 		this.resizeToFit({width:this.gameCanvas.width, height:this.gameCanvas.height * 0.125},this.bottomUICanvas)
 		
@@ -986,7 +987,7 @@ export default class TetraScreen extends Screen {
 		this.cardsContainer.y = this.gridContainer.y;
 
 		if(this.currentCard){
-			this.currentCard.y = (this.gridContainer.height / this.gridContainer.scale.y) + 10;
+			this.currentCard.y = (this.gridContainer.height / this.gridContainer.scale.y) + 1;
 		}
 
 		//utils.centerObject(this.startScreenContainer, this)
