@@ -43046,20 +43046,92 @@
 		PIXI.loader.add(element);
 	});
 	
-	PIXI.loader.add('./assets/fonts/stylesheet.css').add('./assets/images/tvlines.png').add('./assets/images/backLabel.png').add('./assets/levels.json').add('./assets/levelsRaw.json').add('./assets/images/cancel.png').add('./assets/images/cycle.png').add('./assets/images/previous-button.png').add('./assets/images/game_bg.png').add('./assets/images/enemy.png').add('./assets/images/glitch1.jpg').add('./assets/images/glitch2.jpg').add('./assets/images/particle1.png').add('./assets/images/screen_displacement.jpg').add('./assets/images/block.jpg')
+	PIXI.loader.add('./data/levelSections.json').add('./assets/fonts/stylesheet.css').add('./assets/images/tvlines.png').add('./assets/images/backLabel.png').add('./assets/levels.json').add('./assets/levelsRaw.json').add('./assets/images/cancel.png').add('./assets/images/cycle.png').add('./assets/images/previous-button.png').add('./assets/images/game_bg.png').add('./assets/images/enemy.png').add('./assets/images/glitch1.jpg').add('./assets/images/glitch2.jpg').add('./assets/images/particle1.png').add('./assets/images/screen_displacement.jpg').add('./assets/images/block.jpg')
 	// .add('./assets/images/map.jpg')
-	.load(configGame);
+	.load(loadJsons);
 	
 	window.levelsJson = "";
 	
+	var jsonPath = "./data/";
+	
+	function loadJsons() {
+	
+		window.levelSections = PIXI.loader.resources[jsonPath + "levelSections.json"].data;
+	
+		window.levelSections.sections.forEach(function (section) {
+			section.levels.forEach(function (level) {
+				PIXI.loader.add(jsonPath + level.dataPath);
+			});
+		});
+	
+		PIXI.loader.load(configGame);
+		// .add('./data/levelSections.json')
+		// .load(configGame);
+	}
+	
+	function extractData(element) {
+		if (element.visible) {
+	
+			var data = {};
+			data.levelName = element.name;
+			var i = element.width;
+			var j = element.height;
+			data.tier = 0;
+			if (element.properties[0].name == "i") {
+				i = element.properties[0].value;
+			}
+			if (element.properties[1].name == "j") {
+				j = element.properties[1].value;
+			}
+			if (element.properties[2].name == "tier") {
+				data.tier = element.properties[2].value;
+			}
+			var tempArr = [];
+			var levelMatrix = [];
+			for (var _index = 0; _index < element.data.length; _index++) {
+				var id = element.data[_index];
+				tempArr.push(id - 1);
+				if (tempArr.length >= i) {
+					_index += element.width - i;
+					levelMatrix.push(tempArr);
+					if (levelMatrix.length >= j) {
+						break;
+					}
+					tempArr = [];
+				}
+			}
+	
+			data.pieces = levelMatrix;
+			return data;
+		}
+	}
 	function configGame() {
+	
+		window.levelSections.sections.forEach(function (section) {
+	
+			section.levels.forEach(function (level) {
+	
+				var res = PIXI.loader.resources[jsonPath + level.dataPath].data;
+	
+				var sectionLevels = [];
+				res.layers.forEach(function (layer) {
+					var data = extractData(layer);
+	
+					if (data) {
+						sectionLevels.push(data);
+						console.log(data);
+					}
+				});
+				level.data = sectionLevels;
+			});
+		});
 	
 		window.game = new _Game2.default(_config2.default);
 		window.levelsRawJson = PIXI.loader.resources["./assets/levelsRaw.json"].data;
 		window.levelsJson = PIXI.loader.resources["./assets/levels.json"].data;
 	
 		window.levelTiersData = [];
-		for (var _index = 0; _index < 10; _index++) {
+		for (var _index2 = 0; _index2 < 10; _index2++) {
 			window.levelTiersData.push([]);
 		}
 		window.levelData = [];
@@ -43082,11 +43154,11 @@
 				}
 				var tempArr = [];
 				var levelMatrix = [];
-				for (var _index2 = 0; _index2 < element.data.length; _index2++) {
-					var id = element.data[_index2];
+				for (var _index3 = 0; _index3 < element.data.length; _index3++) {
+					var id = element.data[_index3];
 					tempArr.push(id - 1);
 					if (tempArr.length >= i) {
-						_index2 += element.width - i;
+						_index3 += element.width - i;
 						levelMatrix.push(tempArr);
 						if (levelMatrix.length >= j) {
 							break;
@@ -43653,7 +43725,7 @@
 			green: 0x7BCA93,
 			blue2: 0x1376B9,
 			pink: 0xDD6290,
-			red2: 0xFF2320,
+			red2: 0xdf6b33,
 			dark: 0x333333,
 			purple: 0x8957c7,
 			white: 0xDDDDDD,
@@ -58617,6 +58689,7 @@
 						}
 					}
 				}
+				container.nodeSize = size;
 				return container;
 			}
 		}, {
@@ -58625,10 +58698,12 @@
 				this.pointsLabel = new PIXI.Text(this.currentPoints, { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: 'round_popregular' });
 				this.roundsLabel = new PIXI.Text(0, { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: 'round_popregular' });
 				this.entitiesLabel = new PIXI.Text(0, { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: 'round_popregular' });
+				this.timeLabel = new PIXI.Text(0, { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: 'round_popregular' });
 	
 				this.pointsLabelStatic = new PIXI.Text("POINTS", { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: 'round_popregular' });
 				this.roundsLabelStatic = new PIXI.Text("MOVES", { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: 'round_popregular' });
 				this.entitiesLabelStatic = new PIXI.Text("ENTITIES", { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: 'round_popregular' });
+				this.timeLabelStatic = new PIXI.Text("TIME", { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: 'round_popregular' });
 	
 				this.levelNameLabel = new PIXI.Text("name", { font: '30px', fill: 0xFFFFFF, align: 'center', fontWeight: '800', fontFamily: 'round_popregular' });
 	
@@ -58670,11 +58745,13 @@
 				this.UIInGame.addChild(this.restartButton);
 				this.UIInGame.addChild(this.pointsLabelStatic);
 				this.UIInGame.addChild(this.roundsLabelStatic);
-				this.UIInGame.addChild(this.entitiesLabelStatic);
+				//this.UIInGame.addChild(this.entitiesLabelStatic)
+				this.UIInGame.addChild(this.timeLabelStatic);
 				this.UIInGame.addChild(this.levelNameLabel);
 				this.UIInGame.addChild(this.pointsLabel);
 				this.UIInGame.addChild(this.roundsLabel);
-				this.UIInGame.addChild(this.entitiesLabel);
+				//this.UIInGame.addChild(this.entitiesLabel)
+				this.UIInGame.addChild(this.timeLabel);
 				//this.UIInGame.y = -400;
 	
 				this.containerQueue = new PIXI.Container();
@@ -58735,14 +58812,14 @@
 			key: 'updateLabelsPosition',
 			value: function updateLabelsPosition() {
 	
-				var tempList = [this.backButton, this.restartButton, this.levelNameLabel, this.pointsLabelStatic, this.roundsLabelStatic, this.entitiesLabelStatic];
+				var tempList = [this.backButton, this.restartButton, this.levelNameLabel, this.pointsLabelStatic, this.roundsLabelStatic, this.timeLabelStatic];
 	
 				this.backButton.margin = 5;
 				this.backButton.customLength = 0.15;
 				this.restartButton.margin = 5;
 				this.restartButton.customLength = 0.15;
 				//this.levelNameLabel.margin = 10
-				this.levelNameLabel.customLength = 0.3;
+				this.levelNameLabel.customLength = 0.1;
 				//this.levelNameLabel.debug = false
 				this.levelNameLabel.text = ""; //this.currentLevelData.levelName
 	
@@ -58764,6 +58841,7 @@
 				this.entitiesLabelStatic.scale.set(labelsScale);
 				this.pointsLabelStatic.scale.set(labelsScale);
 				this.roundsLabelStatic.scale.set(labelsScale);
+				this.timeLabelStatic.scale.set(labelsScale);
 	
 				for (var index = 0; index < tempList.length; index++) {
 					length = _config2.default.width * scales[index] - margin * 2;
@@ -58803,6 +58881,10 @@
 				this.pointsLabel.x = this.pointsLabelStatic.x;
 				this.pointsLabel.y = this.pointsLabelStatic.y + 20;
 	
+				this.timeLabel.scale = this.timeLabelStatic.scale;
+				this.timeLabel.x = this.timeLabelStatic.x;
+				this.timeLabel.y = this.timeLabelStatic.y + 20;
+	
 				this.resizeToFitAR({ width: this.topCanvas.width * 0.8, height: this.topCanvas.height }, this.UIInGame);
 	
 				this.levelNameLabel.y = this.pointsLabel.y;
@@ -58811,8 +58893,8 @@
 	
 				this.levelNameLabel.text = this.currentLevelData.levelName;
 	
-				var nameLevelSize = { width: this.entitiesLabelStatic.x - this.pointsLabel.x, height: 40 };
-				nameLevelSize.width += this.entitiesLabelStatic.width;
+				var nameLevelSize = { width: this.timeLabelStatic.x - this.pointsLabel.x, height: 40 };
+				nameLevelSize.width += this.timeLabelStatic.width;
 	
 				this.levelNameLabel.x = this.pointsLabel.x + nameLevelSize.width / 2 - this.levelNameLabel.width / 2; // this.levelNameLabel.scale.x
 				this.levelNameLabel.y = this.pointsLabel.y + 20;
@@ -58878,7 +58960,7 @@
 				this.gameRunning = false;
 				this.startScreenContainer.hide(true);
 				var tempid = this.currentLevelID >= 0 ? this.currentLevelID : 0;
-				this.endGameScreenContainer.setStats(this.currentPoints, this.currentRound, this.generateImage(this.currentLevelData.pieces), this.currentLevelData);
+				this.endGameScreenContainer.setStats(this.currentPoints, this.currentRound, Math.ceil(this.currentTime), this.generateImage(this.currentLevelData.pieces), this.currentLevelData);
 				this.endGameScreenContainer.show(false, 1);
 				this.hideInGameElements();
 				this.removeEvents();
@@ -58892,7 +58974,9 @@
 				setTimeout(function () {
 	
 					_this2.gameRunning = true;
-				}, 100);
+				}, 500);
+	
+				this.currentTime = 0;
 				this.showInGameElements();
 				this.addEvents();
 				this.endGameScreenContainer.hide();
@@ -58993,6 +59077,7 @@
 				if (this.currentLevelID < 0) {
 					this.currentLevelID = 0;
 				}
+				this.currentTime = 0;
 				this.currentPoints = 0;
 				this.currentPointsLabel = 0;
 				this.currentRound = 0;
@@ -59067,6 +59152,7 @@
 				this.pointsLabel.text = this.formatPointsLabel(Math.ceil(this.currentPointsLabel));
 				this.roundsLabel.text = this.formatPointsLabel(Math.ceil(this.currentRound));
 				this.entitiesLabel.text = this.formatPointsLabel(Math.ceil(this.board.totalCards));
+				this.timeLabel.text = this.formatPointsLabel(Math.ceil(this.currentTime));
 			}
 		}, {
 			key: 'addRandomPiece',
@@ -59194,6 +59280,7 @@
 				}
 	
 				////console.log(this.mousePosition)
+				this.currentTime += delta;
 	
 				if (!this.board.newGameFinished && this.board.totalCards <= 0) {
 					this.endGameState();
@@ -59414,6 +59501,7 @@
 				//utils.centerObject(this.startScreenContainer, this)
 	
 				this.startScreenContainer.resize(innerResolution, this.ratio);
+				this.endGameScreenContainer.resize(innerResolution, this.ratio);
 	
 				// if(innerResolution.width < config.width){
 	
@@ -103300,6 +103388,7 @@
 					_this.screenContainer.addChild(_this.center);
 					_this.center.alpha = 0;
 					_this.screenState = 1;
+	
 					return _this;
 			}
 	
@@ -103329,7 +103418,7 @@
 							this.mainCanvas.height = innerResolution.height;
 	
 							this.gameScreen.resizeToFitAR({ width: this.mainCanvas.width, height: this.mainCanvas.height }, this.screenContainer, this.mainCanvas);
-							this.gameScreen.resizeToFitAR({ width: this.mainCanvas.width, height: this.mainCanvas.height }, this.levelSelectionContainer, this.mainCanvas);
+							//this.gameScreen.resizeToFitAR({ width: this.mainCanvas.width, height: this.mainCanvas.height }, this.levelSelectionContainer, this.mainCanvas)
 	
 							var globalPos = this.toLocal({ x: 0, y: 0 });
 							this.mainCanvas.position = globalPos;
@@ -103343,6 +103432,9 @@
 							this.playLabel.x = 50;
 							this.playLabel.y = this.playLine.y - 85;
 							this.playLabel.text = "PLAY";
+	
+							//console.log(this.playLine.getGlobalPosition())
+	
 	
 							this.levelSelectionContainer.y = this.mainCanvas.y;
 							this.backButton.y = this.mainCanvas.y + this.backButton.height;
@@ -103361,13 +103453,18 @@
 									this.screenContainer.x = this.mainCanvas.width / 2 + this.mainCanvas.x;
 									this.screenContainer.y = _utils2.default.lerp(this.screenContainer.y, this.mainCanvas.y, 0.5);
 	
-									//this.backButton.visible = true;
 									this.backButton.scale.set(this.screenContainer.scale.x);
 									this.backButton.x = _utils2.default.lerp(this.backButton.x, this.mainCanvas.x + this.mainCanvas.width - this.backButton.width, 0.2); //this.mainCanvas.width / 2* this.screenContainer.scale.x//globalPosRightCorner.x//- this.mainCanvas.x;//globalPosRightCorner.x// - 80 * this.screenContainer.scale.x
 	
 									this.levelSelectionContainer.visible = true;
-									this.levelSelectionContainer.x = _utils2.default.lerp(this.levelSelectionContainer.x, this.mainCanvas.width / 2 + this.mainCanvas.x - this.levelSelectionContainer.width / 2, 0.2);
+									this.levelSelectionContainer.x = this.mainCanvas.x; //utils.lerp(this.levelSelectionContainer.x,  this.mainCanvas.width / 2 + this.mainCanvas.x - this.levelSelectionContainer.width / 2, 0.2)
 							}
+							this.backButton.x = this.mainCanvas.x;
+							this.backButton.y = this.mainCanvas.y;
+							this.backButton.visible = true;
+							var lineConvertedPosition = this.mainCanvas.toLocal(this.playLine.getGlobalPosition());
+							this.chooseLevelPanel.y = lineConvertedPosition.y + this.playLine.height;
+							this.chooseLevelPanel.resize(innerResolution);
 					}
 			}, {
 					key: 'update',
@@ -103378,6 +103475,8 @@
 							} else {
 									this.changeLabelTimer -= delta;
 							}
+	
+							this.chooseLevelPanel.update(delta);
 					}
 			}, {
 					key: 'startMenuState',
@@ -103437,6 +103536,7 @@
 							_gsap2.default.killTweensOf(this.screenContainer);
 	
 							this.startState(delay, force);
+							//this.startMenuState(delay, force);
 	
 							this.playLine.interactive = true;
 							this.playButton.interactive = true;
@@ -103516,7 +103616,7 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	        value: true
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -103533,6 +103633,10 @@
 	
 	var _config2 = _interopRequireDefault(_config);
 	
+	var _utils = __webpack_require__(233);
+	
+	var _utils2 = _interopRequireDefault(_utils);
+	
 	var _webpack = __webpack_require__(260);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -103545,174 +103649,367 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	//import { utils } from 'pixi.js/lib/core';
+	
 	var LevelSelectContainer = function (_PIXI$Container) {
-	    _inherits(LevelSelectContainer, _PIXI$Container);
+	        _inherits(LevelSelectContainer, _PIXI$Container);
 	
-	    function LevelSelectContainer(screen) {
-	        _classCallCheck(this, LevelSelectContainer);
+	        function LevelSelectContainer(screen) {
+	                _classCallCheck(this, LevelSelectContainer);
 	
-	        var _this = _possibleConstructorReturn(this, (LevelSelectContainer.__proto__ || Object.getPrototypeOf(LevelSelectContainer)).call(this));
+	                var _this = _possibleConstructorReturn(this, (LevelSelectContainer.__proto__ || Object.getPrototypeOf(LevelSelectContainer)).call(this));
 	
-	        _this.gameScreen = screen;
+	                _this.currentTier = 0;
+	                _this.gameScreen = screen;
 	
-	        _this.screenContainer = new PIXI.Container();
-	        _this.addChild(_this.screenContainer);
+	                _this.navButtons = [];
 	
-	        _this.levelCards = [];
+	                _this.levelBackShape = new PIXI.Graphics().beginFill(0xFF0000).drawRect(0, 0, _config2.default.width, _config2.default.height * 0.8);
+	                _this.addChild(_this.levelBackShape);
+	                _this.levelBackShape.alpha = 0;
 	
-	        var navMargin = 20;
-	        var navSize = (_config2.default.width - navMargin * 2) / 10;
+	                _this.sections = window.levelSections.sections;
+	                console.log(_this.sections);
 	
-	        _this.currentTier = 0;
+	                _this.mainCanvas = new PIXI.Graphics().beginFill(0xFF0000).drawRect(0, 0, _config2.default.width, _config2.default.height);
+	                _this.addChild(_this.mainCanvas);
+	                _this.mainCanvas.alpha = 0;
 	
-	        _this.navButtons = [];
+	                _this.newContainer = new PIXI.Container();
+	                _this.sectionsContainer = new PIXI.Container();
+	                _this.sectionsView = new PIXI.Container();
 	
-	        _this.navMarker = new PIXI.Graphics().beginFill(0xFFFFFF).drawRect(0, 0, navSize, 8);
-	        for (var index = 0; index < 10; index++) {
+	                _this.levelsContainer = new PIXI.Container();
+	                _this.levelsView = new PIXI.Container();
 	
-	            var navButton = _this.getRect(navSize, window.colorsOrder[index]);
-	            _this.addChild(navButton);
+	                _this.tiersContainer = new PIXI.Container();
+	                _this.tiersView = new PIXI.Container();
 	
-	            var label = new PIXI.Text(index + 1, { font: '24px', fill: 0xFFFFFF, align: 'center', fontWeight: '200', fontFamily: 'round_popregular' });
-	            label.pivot.x = label.width / 2;
-	            label.pivot.y = label.height / 2;
-	            label.x = navButton.width / 2;
-	            label.y = navButton.height / 2;
-	            navButton.addChild(label);
+	                _this.unscaledCardSize = { width: 120, height: 150 };
+	                _this.unscaledButtonSize = { width: 200, height: 200 };
 	
-	            navButton.x = index * navSize + navMargin;
+	                _this.backButton = new PIXI.Graphics().beginFill(0xFF0000).drawRect(0, 0, _this.unscaledButtonSize.width, _this.unscaledButtonSize.height);
+	                //this.addChild(this.backButton);
 	
-	            navButton.interactive = true;
-	            navButton.buttonMode = true;
-	            navButton.on('mousedown', _this.updateTier.bind(_this, index)).on('touchstart', _this.updateTier.bind(_this, index));
+	                _this.backButton.x = _config2.default.width + _this.backButton.width;
 	
-	            _this.navButtons.push(navButton);
+	                _this.backButton.buttonMode = true;
+	                _this.backButton.interactive = true;
+	
+	                _this.backButton.on('mousedown', _this.onBack.bind(_this)).on('touchstart', _this.onBack.bind(_this));
+	
+	                _this.currentSection = "";
+	                _this.currentTier = "";
+	                _this.sectionButtons = [];
+	                _this.levelCards = [];
+	                setTimeout(function () {
+	                        _this.addChild(_this.newContainer);
+	
+	                        _this.sectionsContainer.addChild(_this.sectionsView);
+	                        _this.newContainer.addChild(_this.sectionsContainer);
+	
+	                        _this.tiersContainer.addChild(_this.tiersView);
+	                        _this.newContainer.addChild(_this.tiersContainer);
+	
+	                        _this.levelsContainer.addChild(_this.levelsView);
+	                        _this.newContainer.addChild(_this.levelsContainer);
+	
+	                        _this.buildSections();
+	
+	                        _this.resize({ width: window.innerWidth, height: window.innerHeight }, true);
+	                }, 100);
+	
+	                _this.sectionsContainer.x = 0;
+	                _this.tiersContainer.x = _config2.default.width;
+	                _this.levelsContainer.x = _config2.default.width * 2;
+	                //this.updateTier(0);
+	                _this.currentUISection = 0;
+	
+	                _this.panelOrder = [_this.sectionsContainer, _this.tiersContainer, _this.levelsContainer];
+	
+	                _this.currentResolution = { width: _config2.default.width, height: _config2.default.height };
+	
+	                // let center = new PIXI.Graphics().beginFill(0xFF00FF).drawCircle(0, 0, 20)
+	                // this.levelsView.addChild(center)
+	
+	                return _this;
 	        }
 	
-	        _this.addChild(_this.navMarker);
-	        _this.navMarker.y = navSize + 8;
-	        _this.updateTier(0);
-	
-	        _this.levelBackShape = new PIXI.Graphics().beginFill(0xFF0000).drawRect(0, 0, _config2.default.width, _config2.default.height * 0.8);
-	        _this.addChild(_this.levelBackShape);
-	        _this.levelBackShape.alpha = 0;
-	        return _this;
-	    }
-	
-	    _createClass(LevelSelectContainer, [{
-	        key: 'updateTier',
-	        value: function updateTier(tier) {
-	            var _this2 = this;
-	
-	            this.currentTier = tier;
-	
-	            this.levelCards.forEach(function (element) {
-	                if (element.image.parent) {
-	                    element.image.parent.removeChild(element.image);
+	        _createClass(LevelSelectContainer, [{
+	                key: 'onBack',
+	                value: function onBack() {
+	                        if (this.currentUISection > 0) {
+	                                this.currentUISection--;
+	                        }
 	                }
-	            });
-	            this.levelCards = [];
-	            window.levelTiersData[this.currentTier].forEach(function (element) {
+	        }, {
+	                key: 'buildSections',
+	                value: function buildSections() {
+	                        for (var index = 0; index < this.sections.length; index++) {
+	                                var _section = this.sections[index];
 	
-	                _this2.addCard(element);
-	            });
+	                                var navButton = this.buildSectionButton(_section);
+	                                this.sectionsView.addChild(navButton);
 	
-	            this.drawCards();
+	                                navButton.y = index * navButton.height;
 	
-	            _gsap2.default.to(this.navMarker, 0.25, { x: this.navButtons[this.currentTier].x });
-	        }
-	    }, {
-	        key: 'getRect',
-	        value: function getRect() {
-	            var size = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 4;
-	            var color = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0xFFFFFF;
+	                                navButton.interactive = true;
+	                                navButton.buttonMode = true;
+	                                //navButton.on('mousedown', this.updateTier.bind(this, index)).on('touchstart', this.updateTier.bind(this, index));
 	
-	            return new PIXI.Graphics().beginFill(color).drawRect(0, 0, size, size);
-	        }
-	    }, {
-	        key: 'show',
-	        value: function show() {
-	            var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-	            var delay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-	
-	
-	            this.visible = true;
-	        }
-	    }, {
-	        key: 'hide',
-	        value: function hide() {
-	            var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-	
-	
-	            this.visible = true;
-	        }
-	    }, {
-	        key: 'addCard',
-	        value: function addCard(data) {
-	            var pieceSize = 18;
-	            var card = this.gameScreen.generateImage(data.pieces, pieceSize, 32);
-	            card.y = 0;
-	            card.pivot.x = card.width / 2;
-	
-	            var label = new PIXI.Text(data.levelName, { font: '22px', fill: 0xFFFFFF, align: 'center', fontWeight: '200', fontFamily: 'round_popregular' });
-	            label.x = card.width / 2 - pieceSize - label.width / 2;
-	            label.y = card.height - pieceSize / 2 - 32;
-	            card.addChild(label);
-	
-	            card.on('mousedown', this.selectLevel.bind(this, data)).on('touchstart', this.selectLevel.bind(this, data));
-	            card.interactive = true;
-	            card.buttonMode = true;
-	
-	            // let center =new PIXI.Graphics().beginFill(0xFF0000).drawCircle(0, 0, 30);
-	            // card.addChild(center)
-	            this.levelCards.push({ data: data, image: card });
-	        }
-	    }, {
-	        key: 'selectLevel',
-	        value: function selectLevel(data) {
-	            console.log(data);
-	            this.gameScreen.startNewLevel(data, false);
-	        }
-	    }, {
-	        key: 'drawCards',
-	        value: function drawCards() {
-	            var maxPerLine = 3;
-	            var margin = 30;
-	            var distance = (_config2.default.width - margin * 2) / maxPerLine;
-	            var line = -1;
-	            var col = 0;
-	
-	            for (var index = 0; index < this.levelCards.length; index++) {
-	                var element = this.levelCards[index];
-	                this.addChild(element.image);
-	                if (index % maxPerLine == 0) {
-	                    line++;
+	                                this.navButtons.push(navButton);
+	                                navButton.on('mousedown', this.openSection.bind(this, _section)).on('touchstart', this.openSection.bind(this, _section));
+	                                //this.sectionButtons.push(navButton);
+	                        }
 	                }
-	                element.image.x = index % maxPerLine * distance + margin + distance * 0.5; ///+ element.image.width / 2 + margin * 0.5
-	                element.image.y = line * 280 + 100;
-	            }
-	        }
-	    }, {
-	        key: 'update',
-	        value: function update(delta) {}
-	    }, {
-	        key: 'updateStartLabel',
-	        value: function updateStartLabel() {}
-	    }, {
-	        key: 'restart',
-	        value: function restart() {}
-	    }, {
-	        key: 'goBack',
-	        value: function goBack() {}
-	    }, {
-	        key: 'removeEvents',
-	        value: function removeEvents() {}
-	    }, {
-	        key: 'addEvents',
-	        value: function addEvents() {}
-	    }]);
+	        }, {
+	                key: 'buildSectionButton',
+	                value: function buildSectionButton(section) {
+	                        var secButton = new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledButtonSize.width, this.unscaledButtonSize.height);
 	
-	    return LevelSelectContainer;
+	                        var label = new PIXI.Text(section.name, { font: '24px', fill: 0xFFFFFF, align: 'center', fontWeight: '200', fontFamily: 'round_popregular' });
+	                        label.pivot.x = label.width / 2;
+	                        label.pivot.y = label.height / 2;
+	                        label.x = secButton.width / 2;
+	                        label.y = secButton.height / 2;
+	                        secButton.label = label;
+	                        secButton.addChild(label);
+	                        return secButton;
+	                }
+	        }, {
+	                key: 'buildLevelTierButton',
+	                value: function buildLevelTierButton(level, index) {
+	                        var levelTierButton = new PIXI.Graphics().beginFill(window.colorsOrder[index]).drawRect(0, 0, this.unscaledButtonSize.width, this.unscaledButtonSize.height);
+	
+	                        var label = new PIXI.Text(level.name, { font: '24px', fill: 0xFFFFFF, align: 'center', fontWeight: '200', fontFamily: 'round_popregular' });
+	                        label.pivot.x = label.width / 2;
+	                        label.pivot.y = label.height / 2;
+	                        label.x = levelTierButton.width / 2;
+	                        label.y = levelTierButton.height / 2;
+	                        levelTierButton.label = label;
+	                        levelTierButton.addChild(label);
+	                        return levelTierButton;
+	                }
+	        }, {
+	                key: 'openSection',
+	                value: function openSection(section) {
+	                        this.currentUISection = 1;
+	                        if (this.currentSection == section) {
+	                                return;
+	                        }
+	
+	                        console.log("section", section);
+	                        this.currentSection = section;
+	                        this.sectionButtons.forEach(function (element) {
+	                                if (element.parent) {
+	                                        element.parent.removeChild(element);
+	                                }
+	                        });
+	
+	                        this.sectionButtons = [];
+	
+	                        var titleSection = this.buildSectionButton(section);
+	                        this.tiersView.addChild(titleSection);
+	                        this.sectionButtons.push(titleSection);
+	
+	                        titleSection.buttonMode = true;
+	                        titleSection.interactive = true;
+	
+	                        titleSection.on('mousedown', this.onBack.bind(this)).on('touchstart', this.onBack.bind(this));
+	
+	                        for (var index = 0; index < section.levels.length; index++) {
+	                                var level = section.levels[index];
+	
+	                                var levelTierButton = this.buildLevelTierButton(level, index);
+	                                this.tiersView.addChild(levelTierButton);
+	                                levelTierButton.y = index * levelTierButton.height; // + titleSection.height;
+	
+	                                console.log(levelTierButton.y);
+	                                levelTierButton.interactive = true;
+	                                levelTierButton.buttonMode = true;
+	                                levelTierButton.on('mousedown', this.openLevelTier.bind(this, level.data)).on('touchstart', this.openLevelTier.bind(this, level.data));
+	                                this.sectionButtons.push(levelTierButton);
+	                        }
+	                        this.resize(null, true);
+	                        console.log(section);
+	                }
+	        }, {
+	                key: 'openLevelTier',
+	                value: function openLevelTier(tier) {
+	                        var _this2 = this;
+	
+	                        this.currentUISection = 2;
+	                        if (this.currentTier == tier) {
+	                                return;
+	                        }
+	                        this.currentTier = tier;
+	                        this.levelCards.forEach(function (element) {
+	                                if (element.image.parent) {
+	                                        if (element.image.parent) {
+	                                                element.image.parent.removeChild(element.image);
+	                                        }
+	                                }
+	                        });
+	
+	                        console.log("tier", tier);
+	                        this.levelCards = [];
+	                        tier.forEach(function (element) {
+	                                _this2.addCard(element);
+	                        });
+	                }
+	        }, {
+	                key: 'update',
+	                value: function update(delta) {
+	
+	                        for (var index = 0; index < this.panelOrder.length; index++) {
+	                                var element = this.panelOrder[index];
+	                                //element.x = index * config.width - this.currentUISection* config.width;
+	                                element.x = _utils2.default.lerp(element.x, index * this.mainCanvas.width - this.currentUISection * this.mainCanvas.width, 0.1);
+	                        }
+	                        this.centerLevels();
+	                }
+	        }, {
+	                key: 'addCard',
+	                value: function addCard(data) {
+	
+	                        var pieceSize = 16;
+	                        if (data.pieces[0].length >= data.pieces.length) {
+	                                pieceSize = this.unscaledCardSize.width / data.pieces[0].length + 2;
+	                        } else {
+	                                pieceSize = this.unscaledCardSize.height / data.pieces.length + 2;
+	                        }
+	
+	                        var card = this.gameScreen.generateImage(data.pieces, pieceSize, 32);
+	                        card.y = 0;
+	                        card.pivot.x = card.width / 2;
+	                        card.pivot.y = 0;
+	
+	                        var label = new PIXI.Text(data.levelName, { font: '22px', fill: 0xFFFFFF, align: 'center', fontWeight: '200', fontFamily: 'round_popregular' });
+	                        label.x = 0;
+	                        label.y = card.height - pieceSize / 2 - 32;
+	
+	                        card.addChild(label);
+	
+	                        card.on('mousedown', this.selectLevel.bind(this, data)).on('touchstart', this.selectLevel.bind(this, data));
+	                        card.interactive = true;
+	                        card.buttonMode = true;
+	
+	                        card.data = data;
+	                        if (!this.levelsView.children.includes(card)) {
+	                                this.levelsView.addChild(card);
+	                        }
+	
+	                        this.levelCards.push(card);
+	                }
+	        }, {
+	                key: 'getGridGraphic',
+	                value: function getGridGraphic() {
+	                        return new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, 100, 130);
+	                }
+	        }, {
+	                key: 'selectLevel',
+	                value: function selectLevel(data) {
+	                        console.log(data);
+	                        this.gameScreen.startNewLevel(data, false);
+	                }
+	        }, {
+	                key: 'drawGrid',
+	                value: function drawGrid(elements) {
+	                        var margin = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 20;
+	
+	                        var maxPerLine = Math.floor(this.mainCanvas.width / (this.unscaledCardSize.width + margin * 2));
+	                        var fullWidth = this.mainCanvas.width - margin * 2;
+	                        var distance = fullWidth / maxPerLine;
+	                        var line = -1;
+	                        var col = 0;
+	
+	                        var lines = [];
+	
+	                        for (var index = 0; index < elements.length; index++) {
+	                                var element = elements[index];
+	
+	                                if (index % maxPerLine == 0) {
+	                                        line++;
+	                                }
+	                                element.x = index % maxPerLine * distance + margin * 0.5 + distance * 0.5 - fullWidth * 0.5; ///+ element.width / 2 + margin * 0.5
+	
+	                                element.scale.set(0.8);
+	                                if (index >= maxPerLine) {
+	                                        element.y = 30 + lines[index - maxPerLine];
+	                                } else {
+	
+	                                        element.y = 50;
+	                                }
+	
+	                                lines.push(element.y + element.height);
+	                        }
+	                }
+	        }, {
+	                key: 'resize',
+	                value: function resize(innerResolution, force) {
+	                        if (!force && this.currentResolution.width == innerResolution.width && this.currentResolution.height == innerResolution.height) {
+	                                //return;
+	                        }
+	                        if (innerResolution) {
+	                                this.currentResolution = innerResolution;
+	                        }
+	
+	                        var globalPos = this.toLocal({ x: 0, y: this.y });
+	                        this.mainCanvas.position = globalPos;
+	                        this.mainCanvas.width = this.currentResolution.width;
+	                        this.mainCanvas.height = this.currentResolution.height - this.y;
+	
+	                        // this.sectionButtons.forEach(element => {
+	                        //     element.width = this.mainCanvas.width
+	                        //     let sclX = this.unscaledButtonSize.width / element.width;
+	                        //     element.label.scale.x = sclX
+	
+	                        //     let sclY = this.unscaledButtonSize.height / element.height;
+	                        //     element.label.scale.y = sclY
+	                        // });
+	
+	                        // this.navButtons.forEach(element => {
+	                        //     element.width = this.mainCanvas.width
+	
+	                        //     let sclX = this.unscaledButtonSize.width / element.width;
+	                        //     element.label.scale.x = sclX
+	
+	                        //     let sclY = this.unscaledButtonSize.height / element.height;
+	                        //     element.label.scale.y = sclY
+	                        // });
+	
+	
+	                        this.centerLevels();
+	
+	                        this.newContainer.y = this.mainCanvas.y;
+	                        // this.sectionsContainer.y = this.mainCanvas.y;
+	                        // this.tiersContainer.y = this.mainCanvas.y
+	                        // this.levelsContainer.y = this.mainCanvas.y
+	                        //console.log(this.currentResolution)
+	                        var globalBottom = this.newContainer.toLocal({ x: 0, y: 500 });
+	                        this.backButton.x = this.mainCanvas.x;
+	                        this.backButton.y = globalBottom.y;
+	                        this.backButton.width = this.mainCanvas.width;
+	                }
+	        }, {
+	                key: 'centerLevels',
+	                value: function centerLevels() {
+	                        this.drawGrid(this.sectionButtons);
+	                        this.drawGrid(this.navButtons);
+	                        this.drawGrid(this.levelCards);
+	                        this.levelsView.pivot.x = this.mainCanvas.width / 2;
+	                        this.levelsView.x = this.mainCanvas.x + this.mainCanvas.width;
+	
+	                        this.sectionsView.pivot.x = this.mainCanvas.width / 2;
+	                        this.sectionsView.x = this.mainCanvas.x + this.mainCanvas.width - this.unscaledButtonSize.width / 2;
+	
+	                        this.tiersView.pivot.x = this.mainCanvas.width / 2;
+	                        this.tiersView.x = this.mainCanvas.x + this.mainCanvas.width - this.unscaledButtonSize.width / 2;
+	                        //this.tiersView.y = this.mainCanvas.y //- this.mainCanvas.height * 0.5;
+	                }
+	        }]);
+	
+	        return LevelSelectContainer;
 	}(PIXI.Container);
 	
 	exports.default = LevelSelectContainer;
@@ -104180,58 +104477,41 @@
 	                _this.changeLabelTimer = 0;
 	
 	                _this.currentButtonLabel = "YOU WIN";
-	                _this.resetLabelBack = new PIXI.Text(_this.currentButtonLabel, { font: '90px', fill: 0xFFFFFF, align: 'center', fontWeight: '800', fontFamily: 'round_popregular' });
-	                _this.resetLabel = new PIXI.Text(_this.resetLabelBack.text, { font: '90px', fill: 0xFFFFFF, align: 'center', fontWeight: '800', fontFamily: 'round_popregular' });
+	                _this.youWinLabel = new PIXI.Text(_this.currentButtonLabel, { font: '80px', fill: 0xFFFFFF, align: 'center', fontWeight: '800', fontFamily: 'round_popregular' });
 	
 	                _this.addChild(_this.screenContainer);
-	                _this.screenContainer.addChild(_this.resetLabelBack);
 	                _this.screenContainer.addChild(_this.stripsContainer);
-	                _this.screenContainer.addChild(_this.resetLabel);
+	                _this.screenContainer.addChild(_this.youWinLabel);
 	                var height = 50;
-	                var line1 = new PIXI.Graphics().beginFill(window.config.colors.blue2).drawRect(0, -height * 4, 2000, height * 5);
-	                _this.stripsContainer.addChild(line1);
+	                var width = 3000;
+	                _this.line1 = new PIXI.Graphics().beginFill(window.config.colors.blue2).drawRect(-width / 2, -height * 4, width, height * 5);
+	                _this.stripsContainer.addChild(_this.line1);
 	
-	                var line2 = new PIXI.Graphics().beginFill(window.config.colors.red).drawRect(0, 0, 2000, height);
+	                var line2 = new PIXI.Graphics().beginFill(window.config.colors.red).drawRect(-width / 2, 0, width, height);
 	                _this.stripsContainer.addChild(line2);
 	                line2.y = height;
 	
-	                var line3 = new PIXI.Graphics().beginFill(window.config.colors.yellow).drawRect(0, 0, 2000, height);
+	                var line3 = new PIXI.Graphics().beginFill(window.config.colors.yellow).drawRect(-width / 2, 0, width, height);
 	                _this.stripsContainer.addChild(line3);
 	                line3.y = height * 2;
 	
-	                var line4 = new PIXI.Graphics().beginFill(window.config.colors.green).drawRect(0, 0, 2000, height);
+	                var line4 = new PIXI.Graphics().beginFill(window.config.colors.green).drawRect(-width / 2, 0, width, height);
 	                _this.stripsContainer.addChild(line4);
 	                line4.y = height * 3;
 	
-	                var line5 = new PIXI.Graphics().beginFill(window.config.colors.pink).drawRect(0, 0, 2000, height);
+	                var line5 = new PIXI.Graphics().beginFill(window.config.colors.pink).drawRect(-width / 2, 0, width, height);
 	                _this.stripsContainer.addChild(line5);
 	                line5.y = height * 4;
 	
 	                var center = new PIXI.Graphics().beginFill(0xff0000).drawCircle(0, 0, 10);
 	                //this.addChild(center);
-	                _this.stripsContainer.pivot.x = _this.stripsContainer.width / 2;
-	                _this.stripsContainer.pivot.y = _this.stripsContainer.height / 2;
+	
 	                _this.stripsContainer.rotation = Math.PI * 0.5;
-	
-	                _this.resetLabelBack.pivot.x = _this.resetLabelBack.width / 2;
-	                _this.resetLabelBack.pivot.y = _this.resetLabelBack.height / 2;
-	
-	                _this.resetLabel.pivot.x = _this.resetLabel.width / 2;
-	                _this.resetLabel.pivot.y = _this.resetLabel.height / 2;
 	
 	                //this.interactive = true;
 	                _this.buttonMode = true;
 	
 	                _this.stripsContainer.rotation = -Math.PI * 0.25;
-	                _this.resetLabel.rotation = -Math.PI * 0.25;
-	
-	                _this.resetLabel.y = 130;
-	                _this.resetLabel.x += Math.cos(_this.resetLabel.rotation) * 20;
-	                _this.resetLabel.y += Math.sin(_this.resetLabel.rotation) * 20;
-	
-	                _this.getMask();
-	                _this.screenContainer.addChild(_this.currentMask);
-	                _this.resetLabel.mask = _this.currentMask;
 	
 	                _this.levelName = new PIXI.Text("Level 1", { font: '64px', fill: 0x000, align: 'left', fontWeight: '300', fontFamily: 'round_popregular' });
 	                _this.screenContainer.addChild(_this.levelName);
@@ -104240,9 +104520,9 @@
 	                _this.pointsLabel.pivot.x = _this.pointsLabel.width / 2;
 	                _this.pointsLabel.pivot.y = _this.pointsLabel.height / 2;
 	                _this.pointsLabel.rotation = -Math.PI * 0.25;
-	                _this.pointsLabel.y = 250;
-	                _this.pointsLabel.x += Math.cos(_this.pointsLabel.rotation) * 100;
-	                _this.pointsLabel.y += Math.sin(_this.pointsLabel.rotation) * 100;
+	                _this.pointsLabel.y = 110;
+	                _this.pointsLabel.x += Math.cos(_this.pointsLabel.rotation) * -12;
+	                _this.pointsLabel.y += Math.sin(_this.pointsLabel.rotation) * -12;
 	                _this.screenContainer.addChild(_this.pointsLabel);
 	
 	                _this.movesLabel = new PIXI.Text("MOVES: 34", { font: '30px', fill: 0xFFFFFF, align: 'left', fontWeight: '300', fontface: 'round_popregular', fontFamily: 'round_popregular' });
@@ -104251,12 +104531,22 @@
 	                _this.movesLabel.rotation = -Math.PI * 0.25;
 	                _this.movesLabel.x = _this.pointsLabel.x + Math.cos(_this.pointsLabel.rotation) * 12;
 	                _this.movesLabel.y = _this.pointsLabel.y + Math.sin(_this.pointsLabel.rotation) * 12;
-	                _this.movesLabel.y += 50;
+	                _this.movesLabel.y += 71;
 	                _this.screenContainer.addChild(_this.movesLabel);
+	
+	                _this.timeLabel = new PIXI.Text("TIME: 34", { font: '30px', fill: 0xFFFFFF, align: 'left', fontWeight: '300', fontface: 'round_popregular', fontFamily: 'round_popregular' });
+	                _this.timeLabel.pivot.x = _this.timeLabel.width / 2;
+	                _this.timeLabel.pivot.y = _this.timeLabel.height / 2;
+	                _this.timeLabel.rotation = -Math.PI * 0.25;
+	                _this.timeLabel.x = _this.movesLabel.x + Math.cos(_this.movesLabel.rotation) * 12;
+	                _this.timeLabel.y = _this.movesLabel.y + Math.sin(_this.movesLabel.rotation) * 12;
+	                _this.timeLabel.y += 71;
+	                _this.screenContainer.addChild(_this.timeLabel);
 	
 	                _this.backButton = new PIXI.Graphics().beginFill(window.config.colors.red).drawCircle(0, 0, 50);
 	                _this.backButton.x = 90;
 	                _this.backButton.y = _config2.default.height - 90;
+	                _this.addChild(_this.backButton);
 	
 	                //this.backButton.rotation = Math.PI * 0.25
 	
@@ -104274,6 +104564,7 @@
 	                _this.replayButton = new PIXI.Graphics().beginFill(window.config.colors.blue).drawCircle(0, 0, 50);
 	                _this.replayButton.x = _config2.default.width - 90;
 	                _this.replayButton.y = _config2.default.height - 90;
+	                _this.addChild(_this.replayButton);
 	
 	                //this.replayButton.rotation = Math.PI * 0.25
 	
@@ -104288,10 +104579,41 @@
 	
 	                _this.replayButton.on('mousedown', _this.restart.bind(_this)).on('touchstart', _this.restart.bind(_this));
 	
+	                _this.mainCanvas = new PIXI.Graphics().beginFill(0xFF0000).drawRect(0, 0, _config2.default.width, _config2.default.height);
+	                _this.addChild(_this.mainCanvas);
+	                _this.mainCanvas.alpha = 0;
 	                return _this;
 	        }
 	
 	        _createClass(EndGameContainer, [{
+	                key: 'resize',
+	                value: function resize(innerResolution) {
+	                        this.mainCanvas.width = innerResolution.width;
+	                        this.mainCanvas.height = innerResolution.height;
+	
+	                        var globalPos = this.toLocal({ x: 0, y: 0 });
+	                        this.mainCanvas.position = globalPos;
+	
+	                        this.stripsContainer.x = 0;
+	                        this.stripsContainer.y = 0;
+	
+	                        this.gameScreen.resizeToFitAR({ width: this.mainCanvas.width, height: this.mainCanvas.height }, this.screenContainer, this.mainCanvas);
+	
+	                        this.screenContainer.x = this.mainCanvas.width / 2 + this.mainCanvas.x;
+	                        this.screenContainer.y = this.mainCanvas.height / 2 + this.mainCanvas.y;
+	
+	                        if (this.screenContainer.scale.x < 1) {
+	                                this.replayButton.scale.set(this.screenContainer.scale.x);
+	                                this.backButton.scale.set(this.screenContainer.scale.x);
+	                        }
+	
+	                        this.replayButton.x = this.mainCanvas.x + this.mainCanvas.width - this.replayButton.width;
+	                        this.replayButton.y = this.mainCanvas.y + this.mainCanvas.height - this.replayButton.height;
+	
+	                        this.backButton.x = this.mainCanvas.x + this.backButton.width;
+	                        this.backButton.y = this.mainCanvas.y + this.mainCanvas.height - this.backButton.height;
+	                }
+	        }, {
 	                key: 'getRect',
 	                value: function getRect() {
 	                        var size = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 4;
@@ -104316,14 +104638,12 @@
 	                        _gsap2.default.to(this.backButton, 0.5, { delay: delay, alpha: 1, ease: Cubic.easeOut });
 	                        this.backButton.interactive = true;
 	                        this.backButton.buttonMode = true;
-	                        this.parent.addChild(this.backButton);
 	                        this.backButton.visible = true;
 	
 	                        this.replayButton.alpha = 0;
 	                        _gsap2.default.to(this.replayButton, 0.5, { delay: delay, alpha: 1, ease: Cubic.easeOut });
 	                        this.replayButton.interactive = true;
 	                        this.replayButton.buttonMode = true;
-	                        this.parent.addChild(this.replayButton);
 	                        this.replayButton.visible = true;
 	                }
 	        }, {
@@ -104344,30 +104664,52 @@
 	                }
 	        }, {
 	                key: 'setStats',
-	                value: function setStats(points, rounds, image, data) {
+	                value: function setStats(points, rounds, time, image, data) {
 	
+	                        if (this.currentLevelImage && this.currentLevelImage.parent) {
+	                                this.currentLevelImage.parent.removeChild(this.currentLevelImage);
+	                        }
 	                        this.currentLevelImage = image;
 	                        this.movesLabel.text = "MOVES: " + rounds;
 	                        this.pointsLabel.text = "POINTS: " + points;
+	                        this.timeLabel.text = "TIME: " + time;
 	                        this.levelName.text = data.levelName;
 	
 	                        if (this.levelName.width > 300) {
 	
 	                                this.levelName.scale.set(300 / this.levelName.width);
 	                        }
-	                        this.screenContainer.addChild(this.currentLevelImage);
-	                        image.pivot.x = image.width * 0.5;
-	                        image.pivot.y = image.height;
-	                        image.rotation = Math.PI * -0.25;
+	                        //this.currentLevelImage.rotation = Math.PI * -0.25
+	                        if (this.youWinLabel.parent) {
+	                                this.youWinLabel.parent.removeChild(this.youWinLabel);
+	                        }
 	
-	                        this.levelName.x = image.width;
-	                        this.levelName.y = 120 - this.levelName.height;
+	                        this.levelName.x = this.currentLevelImage.width + 10;
+	                        this.levelName.y = 0;
+	
+	                        this.youWinLabel.x = this.levelName.x;
+	                        this.youWinLabel.y = this.levelName.height;
+	
+	                        this.currentLevelImage.pivot.x = this.currentLevelImage.width / 2;
+	                        this.currentLevelImage.pivot.y = this.currentLevelImage.height / 2;
+	                        //let locStripe = this.screenContainer.toLocal(this.line1.getGlobalPosition())
+	                        this.currentLevelImage.x = -90; //Math.cos(this.currentLevelImage.rotation) * -350
+	                        this.currentLevelImage.y = -65; //locStripe.y//-imageAspect.height + Math.sin(this.currentLevelImage.rotation) * -350
+	
+	                        var imageAspect = { width: this.line1.width, height: this.line1.height * 0.8 };
+	                        this.gameScreen.resizeToFitAR(imageAspect, this.currentLevelImage);
+	
+	                        this.line1.addChild(this.currentLevelImage);
+	
+	                        this.currentLevelImage.addChild(this.youWinLabel);
 	                        this.currentLevelImage.addChild(this.levelName);
-	                        this.currentLevelImage.x = 0;
-	                        this.currentLevelImage.y = 0;
-	                        // this.currentLevelImage.x -= 150;
-	                        // this.currentLevelImage.y -= 300;
-	                        var s = new PIXI.Graphics().beginFill(window.config.colors.blue).drawRect(0, 0, 50, 50);
+	
+	                        this.levelName.scale.set(1 + (1 - this.currentLevelImage.scale.x));
+	                        this.youWinLabel.scale.set(1 + (1 - this.currentLevelImage.scale.x));
+	
+	                        console.log(this.currentLevelImage.scale);
+	                        console.log(this.youWinLabel.scale);
+	
 	                        //this.screenContainer.addChild(s);
 	                }
 	        }, {
@@ -104384,7 +104726,6 @@
 	        }, {
 	                key: 'update',
 	                value: function update(delta) {
-	                        this.currentMask.rotation = this.stripsContainer.rotation;
 	
 	                        if (this.changeLabelTimer <= 0) {
 	                                //this.updateStartLabel();
@@ -104392,23 +104733,13 @@
 	                        } else {
 	                                this.changeLabelTimer -= delta;
 	                        }
-	
-	                        this.resetLabelBack.x = this.resetLabel.x;
-	                        this.resetLabelBack.y = this.resetLabel.y;
-	                        this.resetLabelBack.rotation = this.resetLabel.rotation;
-	                        this.resetLabelBack.text = this.resetLabel.text;
-	
-	                        // this.stripsContainer.rotation += delta * 0.1
-	                        // this.currentMask.rotation = this.stripsContainer.rotation;
-	                        //this.resetLabel.mask = this.currentMask;
-	
 	                }
 	        }, {
 	                key: 'updateStartLabel',
 	                value: function updateStartLabel() {
 	                        if (Math.random() < 0.2) return;
-	                        this.resetLabel.text = window.shuffleText(this.currentButtonLabel, true);
-	                        //this.resetLabel.style.fill = ENEMIES.list[Math.floor(ENEMIES.list.length * Math.random())].color;
+	                        this.youWinLabel.text = window.shuffleText(this.currentButtonLabel, true);
+	                        //this.youWinLabel.style.fill = ENEMIES.list[Math.floor(ENEMIES.list.length * Math.random())].color;
 	
 	                        this.changeLabelTimer = 0.5;
 	                }

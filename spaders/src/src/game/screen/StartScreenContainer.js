@@ -118,7 +118,7 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.center = new PIXI.Graphics().beginFill(0xFF0000).drawCircle(0, 0, 10);
 		this.screenContainer.addChild(this.center)
 		this.center.alpha = 0
-		this.screenState = 2
+		this.screenState = 1
 
 	}
 	getRect(size = 4, color = 0xFFFFFF) {
@@ -141,7 +141,6 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.gameScreen.resizeToFitAR({ width: this.mainCanvas.width, height: this.mainCanvas.height }, this.screenContainer, this.mainCanvas)
 		//this.gameScreen.resizeToFitAR({ width: this.mainCanvas.width, height: this.mainCanvas.height }, this.levelSelectionContainer, this.mainCanvas)
 
-		this.chooseLevelPanel.resize(innerResolution);
 		let globalPos = this.toLocal({ x: 0, y: 0 })
 		this.mainCanvas.position = globalPos
 
@@ -157,7 +156,9 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.playLabel.y = this.playLine.y - 85
 		this.playLabel.text = "PLAY"
 
+		//console.log(this.playLine.getGlobalPosition())
 		
+
 		this.levelSelectionContainer.y = this.mainCanvas.y
 		this.backButton.y = this.mainCanvas.y + this.backButton.height
 
@@ -183,6 +184,13 @@ export default class StartScreenContainer extends PIXI.Container {
 			this.levelSelectionContainer.x = this.mainCanvas.x//utils.lerp(this.levelSelectionContainer.x,  this.mainCanvas.width / 2 + this.mainCanvas.x - this.levelSelectionContainer.width / 2, 0.2)
 
 		}
+		this.backButton.x = this.mainCanvas.x
+		this.backButton.y = this.mainCanvas.y
+		this.backButton.visible = true
+		let lineConvertedPosition = this.mainCanvas.toLocal(this.playLine.getGlobalPosition())
+		this.chooseLevelPanel.y = lineConvertedPosition.y + this.playLine.height
+		this.chooseLevelPanel.resize(innerResolution);
+
 	}
 	update(delta) {
 
@@ -236,8 +244,8 @@ export default class StartScreenContainer extends PIXI.Container {
 	show(force = false, delay = 0) {
 		TweenLite.killTweensOf(this.screenContainer)
 
-		//this.startState(delay, force);
-		this.startMenuState(delay, force);
+		this.startState(delay, force);
+		//this.startMenuState(delay, force);
 
 		this.playLine.interactive = true;
 		this.playButton.interactive = true;
