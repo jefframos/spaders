@@ -40,7 +40,7 @@ export default class Card extends PIXI.Container{
 		cardContainer.addChild(this.circleBackground);
 		cardContainer.addChild(this.sprite);
 		
-		
+		this.isCard = false;
 		this.cardContainer = cardContainer;//card;
 		this.addChild(card);
 		cardContainer.pivot.x = CARD.width / 2;

@@ -44,7 +44,7 @@ export default class EffectLayer extends PIXI.Container{
 
 
 		//crosshatch
-		this.crossHatch = new FILTERS.CrossHatchFilter();
+		this.noise = new PIXI.filters.NoiseFilter(0.0);
 
 		//blur
 		this.blur = new PIXI.filters.BlurFilter();
@@ -105,7 +105,7 @@ export default class EffectLayer extends PIXI.Container{
 		this.displacementFilterGlitch1,
 		this.bloom,
 		this.shockwave,
-		this.crossHatch,
+		this.noise,
 		this.invertFilter,
 		this.ascii,
 		this.gray,
@@ -122,7 +122,7 @@ export default class EffectLayer extends PIXI.Container{
 		this.ID_GLITCH1 = 3;
 		this.ID_BLOOM = 4;
 		this.ID_SHOCKWAVE = 4;
-		this.ID_CROSSHATCH = 6;
+		this.ID_NOISE = 6;
 		this.ID_INVERT = 7;
 		this.ID_ASCII = 8;
 		this.ID_GRAY = 9;

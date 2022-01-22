@@ -144,6 +144,7 @@ export default class Board {
 		ACTION_ZONES.forEach(element => {
 			allZones.push(element);
 		});
+		let areaAttacksCards = [];
 		for (var i = 0; i < allZones.length; i++) {
 			let actionPosId = {
 				i: card.pos.i + allZones[i].dir.x,
@@ -153,21 +154,30 @@ export default class Board {
 				(actionPosId.i >= 0 && actionPosId.i < window.GRID.i) &&
 				(actionPosId.j >= 0 && actionPosId.j < window.GRID.j)) {
 				cardFound = this.cards[actionPosId.i][actionPosId.j];
-				if (cardFound && !cardFound.dead) {
+				if (cardFound && !cardFound.dead){//} && !cardFound.isCard) {
 					// findCards = true;					
 					//this.cards[actionPosId.i][actionPosId.j] = 0
 
-					let cardGlobal = cardFound.getGlobalPosition({ x: 0, y: 0 });
-					cardGlobal.x += CARD.width / 2;
-					cardGlobal.y += CARD.height / 2;
-					this.game.addPoints(30);
-					this.popLabel(this.game.toLocal(cardGlobal), "+" + 10 * 3, 0, 0.1, 1.25);
-					//cardsToDestroy.push({cardFound:cardFound, currentCard: card, attackZone:zones[i]});
-					this.attackCard(cardFound, 1);
+					areaAttacksCards.push(cardFound)
+
 					cardFound = null;
 				}
 			}
 		}
+		console.log("-------------------------")
+		areaAttacksCards.forEach(element => {
+			console.log(element)
+			let cardGlobal = element.getGlobalPosition({ x: 0, y: 0 });
+			cardGlobal.x += CARD.width / 2;
+			cardGlobal.y += CARD.height / 2;
+			let points = (areaAttacksCards.length + 1) * 10
+			this.game.addPoints(points);
+
+			////AREA ATTACK
+			this.popLabel(this.game.toLocal(cardGlobal), "+" + points, 0.1, 0.5, 0.5);
+			//cardsToDestroy.push({cardFound:cardFound, currentCard: card, attackZone:zones[i]});
+			this.attackCard(element, 1);
+		});
 	}
 
 	addCrazyCards2(numCards, cardToIgnore) {
@@ -234,7 +244,8 @@ export default class Board {
 					}
 					window.EFFECTS.addShockwave(screenPos.x, screenPos.y, 2);
 					this.game.addPoints(10 * id);
-					this.popLabel(this.game.toLocal(arrowGlobal), "+" + 10 * id, 0, 1, 1 + id * 0.15);
+					//normal attack
+					this.popLabel(this.game.toLocal(arrowGlobal), "+" + 10 * id, 0, 1, 0.5 + id * 0.15);
 					window.EFFECTS.shakeSplitter(0.2, 3, 0.5);
 				}.bind(this),
 				onCompleteParams: [card, list[i].cardFound],
@@ -245,7 +256,9 @@ export default class Board {
 						arrowGlobal2.y += 30;
 						if (cardFound.crazyMood) {
 							this.game.addPoints(100);
-							this.popLabel(this.game.toLocal(arrowGlobal2), "+" + 100, 0.45, 0, 2, 0xE2C756, Elastic.easeOut);
+
+							//explosion
+							this.popLabel(this.game.toLocal(arrowGlobal2), "+" + 100, 0.25, 0.4, 0.8, 0xE2C756, Elastic.easeOut);
 							this.areaAttack(cardFound, card);
 						}
 						
@@ -276,7 +289,7 @@ export default class Board {
 				let counterHits = (list.length + 1);
 				this.game.addPoints(10 * counterHits);
 
-				this.popLabel(this.game.toLocal(arrowGlobal), "+" + 10 * counterHits + "\nCOUNTER", 0.2, 0, 1 + counterHits * 0.1, 0xD81639);
+				this.popLabel(this.game.toLocal(arrowGlobal), "+" + 10 * counterHits + "\nCOUNTER", 0.2, 0, 0.4 + counterHits * 0.1, 0xD81639);
 				// this.popLabel(arrowGlobal,10 * counterHits , 0.1, -0.5, 1 + counterHits * 0.15);
 				
 
@@ -290,7 +303,16 @@ export default class Board {
 	}
 	popLabel(pos, label, delay = 0, dir = 1, scale = 1, color = 0xFFFFFF, ease = Back.easeOut) {
 		//console.log(pos.x, pos.y);
-		let tempLabel = new PIXI.Text(label, { font: '20px', fill: color, align: 'center', fontFamily:'round_popregular' });
+		let style = { 
+			font: '50px', 
+			fill: color, 
+			align: 'center', 
+			fontFamily:'round_popregular',
+			stroke: color == 0xFFFFFF ? 0x000000 : 0xFFFFFF,
+			strokeThickness: 8 * scale
+		 }
+
+		let tempLabel = new PIXI.Text(label, style		);
 		this.game.addChild(tempLabel);
 		tempLabel.x = pos.x;
 		tempLabel.y = pos.y;

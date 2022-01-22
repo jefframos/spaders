@@ -8,121 +8,23 @@ export default class BackgroundEffects extends PIXI.Container {
 	constructor() {
 
 		super();
-		// 0x3B61A0, 0x313984
-		window.SKYCOLOR = {
-			morningOld: {
-				top: 0x4373d4,
-				// top: 0x4e72c4,
-				// bottom: 0x313984,
-				bottom: 0x75a2fb,
-				front1: 0xf5ddff,
-				blur: 0xf5ddff,
-				additiveSky: 0xf5ddff,
-				slot: 0xFFFFFF,
-			},
-			night: {
-				top: 0x9900ff,
-				bottom: 0x3300FF, //0x313984,
-				// bottom: 0x3B61A0,
-				front1: 0x8985ff,
-				blur: 0x00FF00,
-				additiveSky: 0xFF00FF,
-				slot: 0xFFFFFF,
-			},
-			day: {
-				top: 0x003399,
-				bottom: 0x663399,
-				front1: 0x8985ff,
-				blur: 0x00FF00,
-				additiveSky: 0xFF00FF,
-				slot: 0xFFFFFF,
-			},
-			morning: {
-				top: 0x313984,
-				// top: 0x4e72c4,
-				// bottom: 0x313984,
-				bottom: 0xFF00FF,
-				front1: 0x8985ff,
-				blur: 0x00FF00,
-				additiveSky: 0xFF00FF,
-				slot: 0xFFFFFF,
-			},
-		}
-
-		window.CURRENT_SKYCOLOR = null;
+		
 
 		this.background = new PIXI.Graphics().beginFill(0x151515).drawRect(0, 0, config.width, config.height);
 		this.addChild(this.background);
 
-		// this.debugs = new PIXI.Graphics().beginFill(0xFF00FF).drawCircle(0, 0, 20);
-		// this.addChild(this.debugs);
-
-		// this.topGradient = new PIXI.Sprite(PIXI.Texture.from('sky-gradient'));
-		// this.topGradient.width = config.width + 50;
-		// this.topGradient.height = config.height + 50;
-		// this.topGradient.x = -25;
-		// this.topGradient.y = -25;
-		// this.addChild(this.topGradient);
-
-		// this.bottomGradient = new PIXI.Sprite(PIXI.Texture.from('sky-gradient'));
-		// this.bottomGradient.scale.y = -1;
-		// this.bottomGradient.width = config.width + 50;
-		// this.bottomGradient.height = config.height + 50;
-		// this.bottomGradient.x = -25;
-		// this.bottomGradient.y = this.bottomGradient.height + 25;
-		// this.addChild(this.bottomGradient);
-
-		// this.bigblur = new PIXI.Sprite(PIXI.Texture.from('bigblur'));
-		// this.bigblur.width = config.width + 50;
-		// this.bigblur.height = config.height + 50;
-		// this.bigblur.x = -25;
-		// this.bigblur.y = -25;
-		// this.bigblur.blendMode = PIXI.BLEND_MODES.ADD;
-		// this.bigblur.tint = 0
-		// this.bigblur.alpha = 0.5
-		// this.addChild(this.bigblur);
-
-		// // new PIXI.extras.TilingSprite(PIXI.Texture.fromImage('./assets/images/glitch1.jpg', config.width, config.height))
-		// this.additiveSky = new PIXI.extras.TilingSprite(PIXI.Texture.from('testefx1'), 1080, 1800);
-		// this.additiveSky.width = config.width * 2;
-		// this.additiveSky.height = config.height * 2;
-		// this.additiveSky.blendMode = PIXI.BLEND_MODES.ADD;
-		// this.additiveSky.tint = 0
-		// this.additiveSky.alpha = 0.3
-		// this.additiveSky.scale.set(0.75, 0.5)
-		// // this.addChild(this.additiveSky);
-
+		this.backgroundImage = PIXI.Sprite.fromImage("./assets/images/background.png");
+		this.background.addChild(this.backgroundImage);
+		
 		this.starsContainer = new PIXI.Container();
 		this.addChild(this.starsContainer);
 
-		//this.addStars();
-		// this.groundContainer = new PIXI.Container();
-		// // this.addChild(this.groundContainer);
 
-		// this.fogGradient = new PIXI.Sprite(PIXI.Texture.from('sky-gradient'));
-		// this.fogGradient.scale.y = -1;
-		// this.fogGradient.width = config.width + 50;
-		// this.fogGradient.height = config.height * 0.35;
-		// this.fogGradient.x = -25;
-		// this.fogGradient.y = config.height // - 200;
-		//     // this.fogGradient.blendMode = PIXI.BLEND_MODES.ADD;
-		// this.fogGradient.tint = 0xfed7ff;
-		// this.groundContainer.addChild(this.fogGradient);
-
-		// this.topGradient.tint = 0x000000;
-		// this.bottomGradient.tint = 0x000000;
+		this.innerResolution = { width: config.width, height: config.height }
 
 
-		// if (window.location.hash) {
-		//     var hash = window.location.hash.substring(1); //Puts hash in variable, and removes the # character
-		//     if (hash == 'd') {
-		//         //this.changeColors('day');
-		//     } else {
-		//         this.changeColors();
-		//     }
-		// } else {
-		//     this.changeColors();
-		// }
+		this.addStars();
+	
 
 		this.starsMoveTimer = 0;
 
@@ -130,16 +32,28 @@ export default class BackgroundEffects extends PIXI.Container {
 
 		this.currentSpeed = {
 			x: 0,
-			y: 0
+			y: 200
 		}
+
+		// let center = new PIXI.Graphics().beginFill(0xFF0000).drawCircle(0,0,10);
+		// this.starsContainer.addChild(center)
+
 	}
 	resize(scaledResolution, innerResolution) {
+
+		this.innerResolution = innerResolution;
 		//console.log(resolution, innerResolution)
 		this.background.width = innerResolution.width
 		this.background.height = innerResolution.height
 
 		this.background.x = -innerResolution.width / 2
 		this.background.y = -innerResolution.height / 2
+
+		//this.starsContainer.width = innerResolution.width
+		//this.starsContainer.height = innerResolution.height
+
+		//this.starsContainer.x = -innerResolution.width / 2
+		//this.starsContainer.y = -innerResolution.height / 2
 
 	}
 	changeStates(type = 'start') {
@@ -158,25 +72,19 @@ export default class BackgroundEffects extends PIXI.Container {
 		}
 	}
 	update(delta) {
-		// console.log(delta);
-		// console.log(this.starsDeacc);
-		// if (this.starsMoveTimer > 0) {
 
-		this.additiveSky.tilePosition.y += this.currentSpeed.y * delta;
-		// this.additiveSky.tilePosition.y %= this.additiveSky.tilePosition.height;
+		this.currentSpeed.y = this.innerResolution.height * 0.2
 		for (var i = 0; i < this.stars.length; i++) {
-			// this.stars[i].velocity.x *= this.starsDeacc;
-			// this.stars[i].velocity.y *= this.starsDeacc;
-			this.stars[i].update(delta);
+			this.stars[i].update(this.currentSpeed.y * delta, this.innerResolution);
 		}
-		// this.starsMoveTimer -= delta;
-		// }
 	}
 	addStars() {
-		let totalStars = 80;
+		let totalStars = this.innerResolution.width * 0.08;
+		let l = this.innerResolution.width * 0.001
+		l = Math.max(l, 0.7)
 		this.stars = [];
 		for (var i = 0; i < totalStars; i++) {
-			let dist = Math.random() * 2 + 1;
+			let dist = Math.random() * (l *2) + l;
 			let tempStar = new StarParticle(dist);
 			tempStar.alpha = (dist / 3 * 0.6) + 0.2
 			let toClose = true;
@@ -184,9 +92,10 @@ export default class BackgroundEffects extends PIXI.Container {
 			while (toClose || acc > 0) {
 				acc--;
 				let angle = Math.random() * Math.PI * 2;
-				let radius = Math.random() * config.height * 0.5 + 20;
-				tempStar.x = Math.cos(angle) * radius + config.width / 2;
-				tempStar.y = Math.sin(angle) * radius + config.height / 2;
+				let max = Math.max(this.innerResolution.width, this.innerResolution.height)
+				let radius = Math.random() * max + 20;
+				tempStar.x = Math.cos(angle) * radius// - this.innerResolution.width/2;
+				tempStar.y = Math.sin(angle) * radius// - this.innerResolution.height/2;
 				toClose = false;
 				for (var j = 0; j < this.stars.length; j++) {
 					let distance = utils.distance(this.stars[j].x, this.stars[j].y, tempStar.x, tempStar.y)
@@ -201,22 +110,6 @@ export default class BackgroundEffects extends PIXI.Container {
 		}
 	}
 
-	moveStars(side = 1) {
-		// console.log('move', side);
-		for (var i = 0; i < this.stars.length; i++) {
-
-			this.stars[i].velocity.x = side * this.stars[i].alpha;
-		}
-		this.starsMoveTimer = 1;
-	}
-	moveStarsVertical(speed = 1) {
-		this.currentSpeed.y = speed;
-		for (var i = 0; i < this.stars.length; i++) {
-
-			this.stars[i].velocity.y = this.currentSpeed.y * this.stars[i].alpha;
-		}
-		this.starsMoveTimer = 1;
-	}
 	changeColors(type = 'morning') {
 
 		CURRENT_SKYCOLOR = SKYCOLOR[type];

@@ -103,6 +103,8 @@ PIXI.loader
 	.add('./assets/images/glitch2.jpg')
 	.add('./assets/images/particle1.png')
 	.add('./assets/images/screen_displacement.jpg')
+	.add('./assets/images/background.png')
+	.add('./assets/images/gridSquare.png')
 	.add('./assets/images/block.jpg')
 	// .add('./assets/images/map.jpg')
 	.load(loadJsons);

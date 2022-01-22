@@ -1,5 +1,59 @@
 import config from './config';
 export default {
+    horizontalListHelper(list){
+        for (let index = 0; index < list.length; index++) {
+			length = config.width * scales[index] - margin * 2;
+			//console.log(length)
+
+			const element = list[index];
+			element.x = nextPosition; //+ length*0.5
+			element.scale.set(1)
+			if (doDebug && !element.debugShape) {
+				//element.debugShape = new PIXI.Graphics().beginFill(0x005566).drawRect(-length/2, -this.topCanvas.height / 2, length, this.topCanvas.height);
+				element.debugShape = new PIXI.Graphics().beginFill(0xFFFFFF * Math.random()).drawRect(0, 0, length, element.height);
+				if (element.parent) {
+					element.parent.addChild(element.debugShape);
+				}
+				element.debugShape.alpha = 0.8
+				element.debugShape.x = element.x
+			}
+			if (element.margin) {
+				let scl = (length - element.margin * 2) / (element.width / element.scale.x)
+				element.scale.set(scl)
+				element.x += element.margin
+				if (element.debug) {
+					console.log(element.width, length)
+				}
+			}
+			nextPosition += length
+		}
+    },
+    formatPointsLabel(tempPoints) {
+		if (tempPoints < 10) {
+			return "00000" + tempPoints
+		} else if (tempPoints < 100) {
+			return "0000" + tempPoints
+		} else if (tempPoints < 1000) {
+			return "000" + tempPoints
+		} else if (tempPoints < 10000) {
+			return "00" + tempPoints
+		} else if (tempPoints < 100000) {
+			return "0" + tempPoints
+		} else {
+			return tempPoints
+		}
+	},
+    convertNumToTime(number) {
+        var sec_num = parseInt(number, 10); // don't forget the second param
+        var hours = Math.floor(sec_num / 3600);
+        var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+        var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+        if (hours < 10) { hours = "0" + hours; }
+        if (minutes < 10) { minutes = "0" + minutes; }
+        if (seconds < 10) { seconds = "0" + seconds; }
+        return hours + ':' + minutes + ':' + seconds;
+    },
     getRandomValue(array, exception) {
         let value = array[Math.floor(Math.random() * array.length)];
         if (exception) {

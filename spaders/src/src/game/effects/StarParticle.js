@@ -4,17 +4,17 @@ export default class StarParticle extends PIXI.Container {
     constructor(size) {
         super();
 
-        let listParticles = ['./assets/images/p1.png', './assets/images/p2.png', './assets/images/p1.png', './assets/images/p2.png']
+        let listParticles = ['./assets/images/gridSquare.png']
         let p = listParticles[Math.floor(Math.random() * listParticles.length)];
         // console.log(p);
         this.graphics = new PIXI.Sprite(PIXI.Texture.from(p)); // new PIXI.Graphics().beginFill(0xFFFFFF).drawRect(0,0,size,size);
         this.graphics.anchor.set(0.5);
 
-        if (p == listParticles[listParticles.length - 1]) {
-            this.graphics.scale.set(size / this.graphics.width * 4.5 * 0.05)
-        } else {
-            this.graphics.scale.set(size / this.graphics.width * 1.5 * 0.05)
-        }
+        //if (p == listParticles[listParticles.length - 1]) {
+        //    this.graphics.scale.set(size / this.graphics.width * 4.5 * 0.05)
+        //} else {
+        this.graphics.scale.set(size / this.graphics.width)
+        //}
         // this.graphics.rotation = Math.PI / 4;
         this.addChild(this.graphics);
         this.velocity = {
@@ -22,20 +22,16 @@ export default class StarParticle extends PIXI.Container {
             y: 0
         }
     }
-    update(delta) {
-        this.x += this.velocity.x * delta;
-        this.y += this.velocity.y * delta;
+    update(velY, size) {
 
-        if (this.x > config.width * 1.2) {
-            this.x = -Math.random() * config.width * 0.15;
-        } else if (this.x < -config.width * 0.2) {
-            this.x = config.width + Math.random() * config.width * 0.15;
-        }
+        //console.log(this.velocity)
+        //this.x += this.velocity.x
+        this.y += velY * this.alpha
 
-        if (this.y > config.height * 1.2) {
-            this.y = -Math.random() * config.height * 0.05;
-        } else if (this.y < -config.height * 0.2) {
-            this.y = config.height + Math.random() * config.height * 0.05;
+        if (this.y > size.height / 2) {
+            this.y -= size.height * 1.5
+            this.x = Math.random() * size.width - size.width / 2
+
         }
 
     }

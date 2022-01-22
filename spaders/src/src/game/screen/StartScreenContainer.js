@@ -30,8 +30,8 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.chooseLevelPanel.y = 150;
 		this.logoLabel = new PIXI.Text(window.shuffleText(this.currentButtonLabel, true), { font: '90px', fill: 0xFFFFFF, align: 'center', fontWeight: '800', fontFamily: 'round_popregular' });
 
-		this.addChild(this.screenContainer);
 		this.addChild(this.levelSelectionContainer);
+		this.addChild(this.screenContainer);
 
 		this.screenContainer.addChild(this.stripsContainer);
 		this.screenContainer.addChild(this.logoLabel);
@@ -164,6 +164,7 @@ export default class StartScreenContainer extends PIXI.Container {
 
 		if (this.screenState == 1) {
 
+			this.screenContainer.rotation = utils.lerp(this.screenContainer.rotation, 0, 0.5)
 			this.screenContainer.x = this.mainCanvas.width / 2 + this.mainCanvas.x
 			this.screenContainer.y = utils.lerp(this.screenContainer.y, this.mainCanvas.height / 2 + this.mainCanvas.y, 0.5)
 
@@ -177,6 +178,9 @@ export default class StartScreenContainer extends PIXI.Container {
 
 
 		} else if (this.screenState == 2) {
+
+			this.screenContainer.rotation = utils.lerp(this.screenContainer.rotation, Math.PI * 0.25, 0.5)
+
 			this.screenContainer.x = this.mainCanvas.width / 2 + this.mainCanvas.x
 			this.screenContainer.y = utils.lerp(this.screenContainer.y, this.mainCanvas.y, 0.5)
 
@@ -220,7 +224,7 @@ export default class StartScreenContainer extends PIXI.Container {
 		TweenLite.killTweensOf(this.screenContainer)
 		//TweenLite.killTweensOf(this.levelSelectionContainer)
 
-		TweenLite.to(this.screenContainer, 1, { delay: delay, alpha: 1, rotation: Math.PI * 0.25, ease: Back.easeOut.config(1.2) })
+		TweenLite.to(this.screenContainer, 1, { delay: delay, alpha: 1 })
 		//TweenLite.to(this.levelSelectionContainer, 1, { delay: delay, alpha: 1, x: -this.x, ease: Back.easeOut.config(1.2) })
 		this.playLine.interactive = false;
 		this.backButton.interactive = true;
@@ -240,7 +244,7 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.backButton.interactive = false;
 
 		TweenLite.to(this.screenContainer, force ? 0 : 0.75, {
-			delay: delay, alpha: 1, rotation: 0, ease: Cubic.easeOut, onStart: () => {
+			delay: delay, alpha: 1, onStart: () => {
 				this.screenState = 1;
 
 			}
