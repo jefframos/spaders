@@ -1,9 +1,10 @@
 {
     "sections": [
         {
-            "color": "0xFF0000",
+            "color": "0xDDDDDD",
             "name": "Video\nGames",
             "displayName": "Video Game History",
+            "imageSrc": "levels/consoles.png",
             "levels": [
                 {
                     "name": "2nd gen",
@@ -20,12 +21,13 @@
             ]
         },
         {
-            "color": "0xFF00FF",
+            "color": "0x8957c7",
             "name": "movies",
             "displayName": "Movies",
+            "imageSrc": "levels/consoles2.png",
             "levels": [
                 {
-                    "name": "60s",
+                    "name": "70s",
                     "dataPath": "movies/moviesLevels1.json"
                 }
             ]

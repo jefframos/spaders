@@ -130,6 +130,8 @@ function loadJsons() {
 	window.levelSections = PIXI.loader.resources[jsonPath + "levelSections.json"].data
 
 	window.levelSections.sections.forEach(section => {
+		console.log('./assets/' + section.imageSrc)
+		PIXI.loader.add('./assets/' + section.imageSrc)
 		section.levels.forEach(level => {
 			PIXI.loader.add(jsonPath + level.dataPath)
 		});

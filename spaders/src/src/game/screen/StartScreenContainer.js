@@ -84,20 +84,9 @@ export default class StartScreenContainer extends PIXI.Container {
 			this.startState(0)
 		});
 
-		// this.backButton = new PIXI.Graphics().beginFill(window.config.colors.red).drawCircle(0, 0, 40);
-		this.addChild(this.backButton);
-
-		// this.backButton.x = config.width + this.backButton.width;
-
-		// this.backButton.buttonMode = true;
-		// this.backButton.interactive = true;
-
-		// this.backButton.on('mousedown', this.startState.bind(this)).on('touchstart', this.startState.bind(this));
-
+		//this.addChild(this.backButton);
 
 		this.playButton = new PIXI.Graphics().beginFill(window.config.colors.blue).drawCircle(0, 0, 50);
-		//this.levelSelectionContainer.addChild(this.playButton);
-
 
 		this.playButton.x = config.width - 80
 		this.playButton.y = this.backButton.y

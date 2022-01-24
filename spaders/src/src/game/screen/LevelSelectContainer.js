@@ -18,7 +18,6 @@ export default class LevelSelectContainer extends PIXI.Container {
         this.levelBackShape.alpha = 0
 
         this.sections = window.levelSections.sections
-        console.log(this.sections)
 
         this.unscaledCardSize = { width: window.innerWidth / 5, height: window.innerWidth / 5 }
 
@@ -36,18 +35,6 @@ export default class LevelSelectContainer extends PIXI.Container {
         this.tiersContainer = new PIXI.Container();
         this.tiersView = new PIXI.Container();
 
-        //this.unscaledButtonSize = { width: 200, height: 200 }
-
-        // this.backButton = new PIXI.Graphics().beginFill(0xFF0000).drawRect(0, 0, this.unscaledButtonSize.width, this.unscaledButtonSize.height);
-        // //this.addChild(this.backButton);
-
-        // this.backButton.x = config.width + this.backButton.width;
-
-        // this.backButton.buttonMode = true;
-        // this.backButton.interactive = true;
-
-        // this.backButton.on('mousedown', this.onBack.bind(this)).on('touchstart', this.onBack.bind(this));
-
         this.currentSection = "";
         this.currentTier = "";
         this.sectionButtons = [];
@@ -59,6 +46,10 @@ export default class LevelSelectContainer extends PIXI.Container {
 
             if(this.unscaledCardSize.width > 120){
                 this.unscaledCardSize = { width: 120, height: 120 }
+            }
+
+            if(this.unscaledCardSize.width < 80){
+                this.unscaledCardSize = { width: 80, height: 80 }
             }
 
             this.sectionsContainer.addChild(this.sectionsView)
@@ -80,7 +71,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         this.sectionsContainer.x = 0;
         this.tiersContainer.x = config.width;
         this.levelsContainer.x = config.width * 2;
-        //this.updateTier(0);
+        
         this.currentUISection = 0;
 
         this.panelOrder = [this.sectionsContainer, this.tiersContainer, this.levelsContainer];
@@ -96,12 +87,22 @@ export default class LevelSelectContainer extends PIXI.Container {
     onBack() {
         if (this.currentUISection > 0) {
             this.currentUISection--
+        }else{
+            //ouch
+            this.gameScreen.startScreenContainer.startState(0);
+            this.currentUISection = 0;
         }
     }
     buildSections() {
+
+        let backButton = this.buildBackButton();
+        this.sectionsView.addChild(backButton);
+        this.navButtons.push(backButton);
+
         for (let index = 0; index < this.sections.length; index++) {
             let section = this.sections[index];
 
+            console.log("BUIDDDD0, section", section)
             let navButton = this.buildSectionButton(section);
             this.sectionsView.addChild(navButton)
 
@@ -117,32 +118,58 @@ export default class LevelSelectContainer extends PIXI.Container {
         }
     }
 
-    buildBackButton(text) {
+    buildBackButton() {
         //let secButton = new PIXI.Graphics().beginFill(0xFFFFFF).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
 
         let secButton = PIXI.Sprite.fromImage('./assets/images/largeCard.png');//new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
         secButton.scale.set(this.unscaledCardSize.width / secButton.width)
 
-        let label = new PIXI.Text(text, { font: '24px', fill: 0xFFFFFF, align: 'center', fontWeight: '200', fontFamily: 'round_popregular' });
-        label.pivot.x = label.width / 2
-        label.pivot.y = label.height / 2
-        label.x = secButton.width / 2 / secButton.scale.x
-        label.y = secButton.height / 2 / secButton.scale.y
-        secButton.label = label;
-        secButton.addChild(label)
+        let icon = PIXI.Sprite.fromImage('./assets/images/icons/icons8-back-128.png');//new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
+        icon.tint = config.colors.dark
+        icon.scale.set(this.unscaledCardSize.width / icon.width)
+        icon.anchor.set(0.5)
+
+        icon.x = secButton.width / 2 / secButton.scale.x
+        icon.y = secButton.height / 2 / secButton.scale.y
+        secButton.addChild(icon)
+
+        secButton.buttonMode = true;
+        secButton.interactive = true;
+
+        secButton.on('mousedown', this.onBack.bind(this)).on('touchstart', this.onBack.bind(this));
+
         return secButton
     }
 
     buildSectionButton(section) {
         let secButton = PIXI.Sprite.fromImage('./assets/images/largeCard.png');//new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
-        secButton.scale.set(this.unscaledCardSize.width / secButton.width)
         secButton.tint = section.color
-        let label = new PIXI.Text(section.name, { font: '24px', fill: 0xFFFFFF, align: 'center', fontWeight: '200', fontFamily: 'round_popregular' });
+        
+        
+        
+        let icon = PIXI.Sprite.fromImage('./assets/'+section.imageSrc);//new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
+        icon.scale.set(secButton.width / icon.width)
+        secButton.scale.set(this.unscaledCardSize.width / secButton.width)
+        icon.anchor.set(0,1)
+        icon.x = 0
+        icon.y = secButton.height / secButton.scale.y
+        
+        let label = new PIXI.Text(section.name, { 
+            font: '48px', 
+            fill: 0xFFFFFF, 
+            align: 'center', 
+            fontWeight: '600', 
+            fontFamily: 'round_popregular' ,
+            stroke:0x000000,
+			strokeThickness: 12 
+        });
         label.pivot.x = label.width / 2
         label.pivot.y = label.height / 2
         label.x = secButton.width / 2 / secButton.scale.x
         label.y = secButton.height / 2 / secButton.scale.y
+        label.scale.set(0.7)
         secButton.label = label;
+        secButton.addChild(icon)
         secButton.addChild(label)
         return secButton
     }
@@ -180,14 +207,11 @@ export default class LevelSelectContainer extends PIXI.Container {
 
 
 
-        let backButton = this.buildBackButton("Back");
+        let backButton = this.buildBackButton();
         this.tiersView.addChild(backButton);
         this.sectionButtons.push(backButton);
 
-        backButton.buttonMode = true;
-        backButton.interactive = true;
-
-        backButton.on('mousedown', this.onBack.bind(this)).on('touchstart', this.onBack.bind(this));
+        
 
 
         for (let index = 0; index < section.levels.length; index++) {
@@ -203,7 +227,6 @@ export default class LevelSelectContainer extends PIXI.Container {
             this.sectionButtons.push(levelTierButton);
         }
         this.resize(null, true);
-        console.log(section)
     }
 
     openLevelTier(tier) {
@@ -227,14 +250,10 @@ export default class LevelSelectContainer extends PIXI.Container {
         this.levelCards = [];
 
 
-        let backButton = this.buildBackButton("Back");
+        let backButton = this.buildBackButton();
         this.levelsView.addChild(backButton);
         this.levelCards.push(backButton);
 
-        backButton.buttonMode = true;
-        backButton.interactive = true;
-
-        backButton.on('mousedown', this.onBack.bind(this)).on('touchstart', this.onBack.bind(this));
 
 
         tier.forEach(element => {
@@ -269,8 +288,6 @@ export default class LevelSelectContainer extends PIXI.Container {
         let card = this.gameScreen.generateImage(data.pieces, pieceSize, 32)
         card.y = 0
         card.removeChild(card.background)
-        //card.pivot.x = 0//card.width / 2
-        //card.pivot.y = 0
 
         let label = new PIXI.Text(data.levelName, { font: '30px', fill: 0xFFFFFF, align: 'center', fontWeight: '200', fontFamily: 'round_popregular' });
         label.x = levelCard.width / 2 - label.width / 2
@@ -370,7 +387,7 @@ export default class LevelSelectContainer extends PIXI.Container {
 
         this.centerLevels();
 
-        this.newContainer.y = this.mainCanvas.y;
+        this.newContainer.y = this.mainCanvas.y - 20;
     }
     centerLevels() {
         this.drawGrid(this.sectionButtons, 20);
