@@ -11,6 +11,7 @@ import Board from '../core/Board'
 import StartScreenContainer from './StartScreenContainer'
 import EndGameContainer from './EndGameContainer'
 import BackgroundEffects from '../effects/BackgroundEffects'
+import UIRectLabel from './UIRectLabel'
 import { debug } from 'webpack';
 
 export default class TetraScreen extends Screen {
@@ -98,7 +99,7 @@ export default class TetraScreen extends Screen {
 
 		this.mouseDirty = false;
 
-		this.latestShoot = {x:0, id:0};
+		this.latestShoot = { x: 0, id: 0 };
 		//console.log(utils.convertNumToTime(1231))
 	}
 
@@ -201,12 +202,12 @@ export default class TetraScreen extends Screen {
 
 
 
-
 		//this.UIContainer.addChild(this.resetLabelBack)
 
 
 		this.mainMenuContainer = new PIXI.Container();
 		this.UIInGame = new PIXI.Container();
+		this.UIInGameNew = new PIXI.Container();
 
 		this.startScreenContainer = new StartScreenContainer(this);
 		this.mainMenuContainer.addChild(this.startScreenContainer)
@@ -236,8 +237,8 @@ export default class TetraScreen extends Screen {
 		utils.centerObject(restartIcon, this.restartButton);
 		this.restartButton.addChild(restartIcon);
 
-		this.topUIContainer.addChild(this.UIInGame)
-		this.UIInGame.addChild(this.backButton)
+		//this.bottomUIContainer.addChild(this.UIInGame)
+		this.bottomUIContainer.addChild(this.UIInGameNew)
 		this.UIInGame.addChild(this.restartButton)
 		this.UIInGame.addChild(this.pointsLabelStatic)
 		this.UIInGame.addChild(this.roundsLabelStatic)
@@ -250,7 +251,6 @@ export default class TetraScreen extends Screen {
 		this.UIInGame.addChild(this.timeLabel)
 		//this.UIInGame.y = -400;
 
-		this.containerQueue = new PIXI.Container();
 		// this.startScreenContainer.x = this.width / 2
 		// this.startScreenContainer.y = this.height / 2
 
@@ -262,14 +262,25 @@ export default class TetraScreen extends Screen {
 
 		this.endGameScreenContainer.addEvents();
 
-		this.bottomUIContainer.addChild(this.containerQueue)
+
 
 
 		this.UIContainer.addChild(this.mainMenuContainer)
 
 
 		//this.UIContainer.addChild();
+		// this.nextCardLabel =  new PIXI.Text("Next", { font: '18px', fill: 0xFFFFFF, align: 'center', fontWeight: '800', fontFamily: 'round_popregular' });
+		// this.UIInGameNew.addChild(this.nextCardLabel)
+		this.UIInGameNew.addChild(this.backButton)
 
+		this.containerQueue = new PIXI.Container();
+		this.UIInGameNew.addChild(this.containerQueue)
+
+		this.timerRect = new UIRectLabel(config.colors.yellow, './assets/images/time.png');
+		this.UIInGameNew.addChild(this.timerRect)
+
+		this.movesRect = new UIRectLabel(config.colors.green, './assets/images/time.png');
+		this.UIInGameNew.addChild(this.movesRect)
 
 
 		this.backButton.on('mousedown', this.mainmenuState.bind(this)).on('touchstart', this.mainmenuState.bind(this));
@@ -314,67 +325,23 @@ export default class TetraScreen extends Screen {
 
 
 		//let tempList = [this.backButton, this.restartButton, this.levelNameLabel, this.pointsLabelStatic, this.timeLabelStatic, this.roundsLabelStatic];
-		let tempList = [this.backButton, this.restartButton,  this.pointsLabelStatic, this.timeLabelStatic, this.roundsLabelStatic];
+		let tempList = [this.backButton, this.restartButton, this.pointsLabelStatic, this.timeLabelStatic, this.roundsLabelStatic];
 
 		this.backButton.margin = 5
 		this.backButton.customLength = 0.09
 		this.restartButton.margin = 5
 		this.restartButton.customLength = 0.09
-		//this.levelNameLabel.margin = 10
-		//this.levelNameLabel.customLength = 0.1
-		//this.levelNameLabel.debug = false
-		//this.levelNameLabel.text = ""//this.currentLevelData.levelName
-
-		let scales = []
-		tempList.forEach(element => {
-			if (element.customLength) {
-				scales.push(element.customLength);
-			} else {
-				scales.push(1 / tempList.length)
-			}
-
-		});
-		let margin = 2;
-		let length = config.width * scales[0] - margin * 2;
-		let nextPosition = 0;
-		let doDebug = false;
-
-		let lastScale = config.width * scales[5] - margin * 2;
-		let labelsScale = lastScale / this.entitiesLabelStatic.width * this.entitiesLabelStatic.scale.x
-		this.entitiesLabelStatic.scale.set(labelsScale)
-		this.pointsLabelStatic.scale.set(labelsScale)
-		this.roundsLabelStatic.scale.set(labelsScale)
-		this.timeLabelStatic.scale.set(labelsScale)
 
 
-		for (let index = 0; index < tempList.length; index++) {
-			length = config.width * scales[index] - margin * 2;
-			//console.log(length)
+		// let lastScale = config.width * scales[5] - margin * 2;
+		// let labelsScale = lastScale / this.entitiesLabelStatic.width * this.entitiesLabelStatic.scale.x
+		// this.entitiesLabelStatic.scale.set(labelsScale)
+		// this.pointsLabelStatic.scale.set(labelsScale)
+		// this.roundsLabelStatic.scale.set(labelsScale)
+		// this.timeLabelStatic.scale.set(labelsScale)
 
-			const element = tempList[index];
-			element.x = nextPosition; //+ length*0.5
-			element.scale.set(0.71)
-			if (doDebug && !element.debugShape) {
-				//element.debugShape = new PIXI.Graphics().beginFill(0x005566).drawRect(-length/2, -this.topCanvas.height / 2, length, this.topCanvas.height);
-				element.debugShape = new PIXI.Graphics().beginFill(0xFFFFFF * Math.random()).drawRect(0, 0, length, element.height);
-				if (element.parent) {
-					element.parent.addChild(element.debugShape);
-				}
-				element.debugShape.alpha = 0.8
-				element.debugShape.x = element.x
-			}
-			if (element.margin) {
-				let scl = (length - element.margin * 2) / (element.width / element.scale.x)
-				element.scale.set(scl)
-				element.x += element.margin
-				if (element.debug) {
-					console.log(element.width, length)
-				}
-			}
-			nextPosition += length
-		}
+		//utils.horizontalListHelper(tempList);
 
-		//console.log(this.entitiesLabelStatic.scale.x,this.entitiesLabelStatic.x,this.entitiesLabelStatic.y)
 		this.entitiesLabel.scale = this.entitiesLabelStatic.scale;
 		this.entitiesLabel.x = this.entitiesLabelStatic.x;
 		this.entitiesLabel.y = this.entitiesLabelStatic.y + 20;
@@ -403,9 +370,29 @@ export default class TetraScreen extends Screen {
 		let nameLevelSize = { width: this.timeLabelStatic.x - this.pointsLabel.x, height: 40 }
 		nameLevelSize.width += this.timeLabelStatic.width
 
-		// this.levelNameLabel.x = this.pointsLabel.x + nameLevelSize.width / 2 - this.levelNameLabel.width / 2 // this.levelNameLabel.scale.x
-		// this.levelNameLabel.y = this.pointsLabel.y + 20
-		// this.resizeToFitAR(nameLevelSize, this.levelNameLabel)
+
+		this.timerRect.scale.set(this.bottomUICanvas.height / this.timerRect.backShape.height * 0.3)
+		this.movesRect.scale.set(this.timerRect.scale.x)
+		this.timerRect.x = this.bottomUICanvas.x + this.bottomUICanvas.width - this.timerRect.width - this.bottomUICanvas.height * 0.1
+		this.movesRect.x = this.bottomUICanvas.x + this.bottomUICanvas.width - this.timerRect.width - this.bottomUICanvas.height * 0.1
+
+		this.movesRect.y = this.bottomUICanvas.height - this.movesRect.height - this.bottomUICanvas.height * 0.1
+		this.timerRect.y = this.movesRect.y - this.timerRect.height - this.bottomUICanvas.height * 0.025
+
+
+
+		this.containerQueue.scale.set(this.bottomUICanvas.height / CARD.height * 0.5)
+		this.containerQueue.x = this.bottomUICanvas.height * 0.1
+		this.containerQueue.y = this.movesRect.y + this.movesRect.height - this.containerQueue.height
+
+		this.backButton.x = this.containerQueue.x
+		this.backButton.y = this.containerQueue.y - this.backButton.height
+
+
+		// this.nextCardLabel.scale.set(this.bottomUICanvas.height / CARD.width * 0.6)
+
+		// this.nextCardLabel.x = this.containerQueue.x + this.containerQueue.width - this.nextCardLabel.width - (this.nextCardLabel.scale.x * CARD.width * 0.2);
+		// this.nextCardLabel.y = this.containerQueue.y + this.containerQueue.height - this.nextCardLabel.height * 0.5
 
 
 
@@ -633,9 +620,14 @@ export default class TetraScreen extends Screen {
 
 
 		this.mousePosition = new PIXI.Point()
-		this.mousePosition.x = -config.width / 2
 
-		this.latestShoot.id = Math.floor(GRID.i / 2)
+		let toGrid = this.gridContainer.toLocal(this.innerResolution.width / 2)
+		this.mousePosID = Math.floor((toGrid.x) / CARD.width);
+
+		this.latestShoot.id = 2//this.mousePosID;
+		this.latestShoot.x = this.mousePosition
+
+
 
 		//this.currentButtonLabel = 'RESET';
 
@@ -646,6 +638,9 @@ export default class TetraScreen extends Screen {
 		this.roundsLabel.text = utils.formatPointsLabel(Math.ceil(this.currentRound));
 		this.entitiesLabel.text = utils.formatPointsLabel(Math.ceil(this.board.totalCards));
 		this.timeLabel.text = utils.convertNumToTime(Math.ceil(this.currentTime));
+
+		this.timerRect.updateLavel(utils.convertNumToTime(Math.ceil(this.currentTime)))
+		this.movesRect.updateLavel(utils.formatPointsLabel(Math.ceil(this.currentRound)), "MOVES")
 	}
 	addRandomPiece() {
 	}
@@ -687,14 +682,18 @@ export default class TetraScreen extends Screen {
 			// this.cardQueue[i].y = ;
 		}
 
+		this.cardQueue[1].mark();
+
 	}
 	newRound() {
 		this.updateQueue();
 		this.currentCard = this.cardQueue[0];
 		this.cardQueue.shift();
 		//if (this.mousePosID < 0) {
-			this.mousePosID = this.latestShoot.id
-			this.currentCard.x = this.latestShoot.x
+		this.mousePosID = this.latestShoot.id
+		this.currentCard.x = this.latestShoot.x
+
+		console.log("latest", this.currentCard.x)
 		//}
 		this.currentCard.scale.set(1)
 		//console.log(this.mousePosID)
@@ -704,9 +703,9 @@ export default class TetraScreen extends Screen {
 		this.currentCard.updateCard(true);
 		this.cardsContainer.addChild(this.currentCard);
 
-		let globalQueue = this.toGlobal(this.containerQueue)
-		let localQueue = this.cardsContainer.toLocal(globalQueue)
-		
+		//let globalQueue = this.toGlobal(this.containerQueue)
+		//let localQueue = this.cardsContainer.toLocal(globalQueue)
+
 		//this.currentCard.x = this.latestShoot.x//CARD.width * GRID.i//- this.cardsContainer.x//CARD.width/2 - this.currentCard.width / 2;
 	}
 
@@ -764,6 +763,11 @@ export default class TetraScreen extends Screen {
 			this.topUIContainer.y = utils.lerp(this.topUIContainer.y, this.gameCanvas.y - 500, 0.2)
 			this.bottomUIContainer.x = this.gameCanvas.x
 			this.bottomUIContainer.y = utils.lerp(this.bottomUIContainer.y, this.gameCanvas.y + this.gameCanvas.height - this.bottomUICanvas.height + 500, 0.2)
+
+			if(this.currentCard){
+				this.currentCard.alpha = 0;
+			}
+
 			return;
 		}
 
@@ -778,6 +782,15 @@ export default class TetraScreen extends Screen {
 
 		if (renderer.plugins.interaction.mouse.global) {
 			this.mousePosition = renderer.plugins.interaction.mouse.global;
+
+			let toGrid = this.gridContainer.toLocal(this.mousePosition)
+			this.mousePosID = Math.floor((toGrid.x) / CARD.width);
+
+			this.latestShoot.id = this.mousePosID;
+			if(this.latestShoot.id < 0){
+				this.latestShoot.id = Math.floor(GRID.i / 2)
+			}
+			this.latestShoot.x = this.mousePosition
 		}
 
 
@@ -803,6 +816,7 @@ export default class TetraScreen extends Screen {
 
 	updateMousePosition() {
 		if (!this.currentCard) {
+			this.trailMarker.alpha = 0;
 			return;
 		}
 
@@ -810,21 +824,33 @@ export default class TetraScreen extends Screen {
 		let toGrid = this.gridContainer.toLocal(this.mousePosition)
 		this.mousePosID = Math.floor((toGrid.x) / CARD.width);
 
-		if(this.mousePosID < 0){
+		if (this.mousePosID < 0) {
 			this.mousePosID = this.latestShoot.id
 		}
+
 		// this.trailMarker.alpha = 0;
 		if (this.mousePosID >= 0 && this.mousePosID < GRID.i) {
 			TweenLite.to(this.trailMarker, 0.1, { x: this.mousePosID * CARD.width });
 			this.trailMarker.tint = this.currentCard.enemySprite.tint
 			this.trailMarker.alpha = 0.15;
+			this.currentCard.alpha = 1;
 			if (this.currentCard) {
 				if (this.mousePosID * CARD.width >= 0) {
 					// console.log("MOUSE MOVE");
 					this.currentCard.moveX(this.mousePosID * CARD.width, 0.1);
 				}
 			}
-		}
+		} 
+		// else {
+		// 	this.mousePosition = this.innerResolution.width / 2
+		// 	this.mousePosID = Math.floor(GRID.i / 2);
+
+		// 	this.currentCard.moveX(this.mousePosID * CARD.width, 0.1);
+		// 	this.trailMarker.x = this.currentCard.x
+		// 	this.trailMarker.tint = this.currentCard.enemySprite.tint
+		// 	this.trailMarker.alpha = 0.15;
+
+		// }
 	}
 
 	transitionOut(nextScreen) {
@@ -850,6 +876,7 @@ export default class TetraScreen extends Screen {
 	}
 	onTapUp() {
 		if (!this.currentCard || !this.gameRunning) {
+			
 			return;
 		}
 		//console.log(renderer.plugins.interaction.activeInteractionData)
@@ -964,10 +991,7 @@ export default class TetraScreen extends Screen {
 		this.resizeToFit({ width: this.gameCanvas.width, height: this.gameCanvas.height * 0.08 }, this.topCanvas)
 		this.resizeToFit({ width: this.gameCanvas.width, height: this.gameCanvas.height * 0.125 }, this.bottomUICanvas)
 
-		this.containerQueue.x = 20;
-		this.containerQueue.y = this.bottomUICanvas.height * 0.5
 
-		this.containerQueue.scale.set(this.bottomUICanvas.height / CARD.height * 0.4)
 		//console.log(this.bottomUICanvas.scale.y, this.bottomUICanvas.height)
 
 		this.cardsContainer.scale.x = (this.gridContainer.scale.x)
@@ -982,14 +1006,15 @@ export default class TetraScreen extends Screen {
 
 
 		this.gridContainer.x = this.gameCanvas.x + this.gameCanvas.width / 2 - (this.gridContainer.width) / 2
-		this.gridContainer.y = this.gameCanvas.y + this.gameCanvas.height / 2 - this.gridContainer.height / 2 - 20//* 0.1125
+		this.gridContainer.y = this.gameCanvas.y + this.gameCanvas.height / 2 - this.gridContainer.height / 2 - this.topCanvas.height//* 0.1125
 		//utils.centerObject(this.gridContainer, this.gameCanvas)
 
 		this.cardsContainer.x = this.gridContainer.x;
 		this.cardsContainer.y = this.gridContainer.y;
 
 		if (this.currentCard) {
-			this.currentCard.y = (this.gridContainer.height / this.gridContainer.scale.y);
+			//13 is the width of the border on the grid
+			this.currentCard.y = ((this.gridContainer.height - 13) / this.gridContainer.scale.y) - 1;
 		}
 
 		//utils.centerObject(this.startScreenContainer, this)

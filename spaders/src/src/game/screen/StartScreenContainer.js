@@ -2,15 +2,7 @@ import * as PIXI from 'pixi.js';
 import TweenLite from 'gsap';
 import config from '../../config';
 import utils from '../../utils';
-import Screen from '../../screenManager/Screen'
-import Grid from '../elements/Grid'
-import Card from '../elements/Card'
-import Block from '../elements/Block'
 import LevelSelectContainer from './LevelSelectContainer'
-import Board from '../core/Board'
-import BackgroundEffects from '../effects/BackgroundEffects'
-import { debug } from 'webpack';
-
 export default class StartScreenContainer extends PIXI.Container {
 	constructor(screen) {
 		super();

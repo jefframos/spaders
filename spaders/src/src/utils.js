@@ -1,6 +1,20 @@
 import config from './config';
 export default {
     horizontalListHelper(list){
+        let scales = []
+		list.forEach(element => {
+			if (element.customLength) {
+				scales.push(element.customLength);
+			} else {
+				scales.push(1 / list.length)
+			}
+
+		});
+		let margin = 2;
+		let length = config.width * scales[0] - margin * 2;
+		let nextPosition = 0;
+		let doDebug = false;
+
         for (let index = 0; index < list.length; index++) {
 			length = config.width * scales[index] - margin * 2;
 			//console.log(length)

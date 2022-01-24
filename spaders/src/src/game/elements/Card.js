@@ -23,7 +23,7 @@ export default class Card extends PIXI.Container {
 		this.cardBack3 = new PIXI.Graphics().beginFill(0x000000).drawRect(CARD.width / 2 - 10, CARD.height / 2, 19, 10);
 		this.enemySprite = PIXI.Sprite.fromImage('./assets/images/enemy.png');
 
-		this.enemySprite.scale.set(CARD.width / this.enemySprite.width * 0.55)
+		this.enemySprite.scale.set(72 / this.enemySprite.width * 0.55)
 		this.enemySprite.anchor.set(0.5);
 
 		this.cardForeground.alpha = 1;
@@ -283,16 +283,29 @@ export default class Card extends PIXI.Container {
 		// console.log(	'moveX', pos);
 		TweenLite.to(this, time, { x: pos, delay: delay });
 	}
-	setOnQueue() {
+	mark() {
 		this.backshape = new PIXI.Graphics();
-		//this.backshape.lineStyle(3, this.enemySprite.tint, 1);
-		this.backshape.beginFill(this.enemySprite.tint);
+		this.backshape.lineStyle(3, this.enemySprite.tint, 1);
+		//this.backshape.beginFill(this.enemySprite.tint);
 		this.backshape.drawRect(-CARD.width / 2, -CARD.height / 2, CARD.width, CARD.height);
 		this.backshape.endFill();
 		this.addChildAt(this.backshape, 0);
 		this.backshape.x = this.enemySprite.x
 		this.backshape.y = this.enemySprite.y
-		this.backshape.alpha = 0.25
+		this.backshape.alpha = 0.5
+		this.cardForeground.alpha = 0;
+		this.updateSize();
+	}
+	setOnQueue() {
+		// this.backshape = new PIXI.Graphics();
+		// //this.backshape.lineStyle(3, this.enemySprite.tint, 1);
+		// this.backshape.beginFill(this.enemySprite.tint);
+		// this.backshape.drawRect(-CARD.width / 2, -CARD.height / 2, CARD.width, CARD.height);
+		// this.backshape.endFill();
+		// this.addChildAt(this.backshape, 0);
+		// this.backshape.x = this.enemySprite.x
+		// this.backshape.y = this.enemySprite.y
+		// this.backshape.alpha = 0.25
 		this.cardForeground.alpha = 0;
 		this.updateSize();
 	}

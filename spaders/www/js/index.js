@@ -42973,19 +42973,19 @@
 	
 	var _TetraScreen2 = _interopRequireDefault(_TetraScreen);
 	
-	var _EffectLayer = __webpack_require__(624);
+	var _EffectLayer = __webpack_require__(625);
 	
 	var _EffectLayer2 = _interopRequireDefault(_EffectLayer);
 	
-	var _BackgroundEffects = __webpack_require__(621);
+	var _BackgroundEffects = __webpack_require__(622);
 	
 	var _BackgroundEffects2 = _interopRequireDefault(_BackgroundEffects);
 	
-	var _ChooseMatchScreen = __webpack_require__(625);
+	var _ChooseMatchScreen = __webpack_require__(626);
 	
 	var _ChooseMatchScreen2 = _interopRequireDefault(_ChooseMatchScreen);
 	
-	var _Pool = __webpack_require__(626);
+	var _Pool = __webpack_require__(627);
 	
 	var _Pool2 = _interopRequireDefault(_Pool);
 	
@@ -43046,7 +43046,7 @@
 		PIXI.loader.add(element);
 	});
 	
-	PIXI.loader.add('./data/levelSections.json').add('./assets/fonts/stylesheet.css').add('./assets/images/tvlines.png').add('./assets/images/backLabel.png').add('./assets/levels.json').add('./assets/levelsRaw.json').add('./assets/images/cancel.png').add('./assets/images/cycle.png').add('./assets/images/previous-button.png').add('./assets/images/game_bg.png').add('./assets/images/enemy.png').add('./assets/images/glitch1.jpg').add('./assets/images/glitch2.jpg').add('./assets/images/particle1.png').add('./assets/images/screen_displacement.jpg').add('./assets/images/background.png').add('./assets/images/gridSquare.png').add('./assets/images/block.jpg')
+	PIXI.loader.add('./data/levelSections.json').add('./assets/fonts/stylesheet.css').add('./assets/images/tvlines.png').add('./assets/images/backLabel.png').add('./assets/levels.json').add('./assets/levelsRaw.json').add('./assets/images/cancel.png').add('./assets/images/cycle.png').add('./assets/images/previous-button.png').add('./assets/images/game_bg.png').add('./assets/images/enemy.png').add('./assets/images/glitch1.jpg').add('./assets/images/glitch2.jpg').add('./assets/images/particle1.png').add('./assets/images/screen_displacement.jpg').add('./assets/images/background.png').add('./assets/images/gridSquare.png').add('./assets/images/block.jpg').add('./assets/images/rect.png').add('./assets/images/time.png').add('./assets/images/lineBorder.png')
 	// .add('./assets/images/map.jpg')
 	.load(loadJsons);
 	
@@ -53460,6 +53460,19 @@
 	
 	exports.default = {
 	    horizontalListHelper: function horizontalListHelper(list) {
+	        var scales = [];
+	        list.forEach(function (element) {
+	            if (element.customLength) {
+	                scales.push(element.customLength);
+	            } else {
+	                scales.push(1 / list.length);
+	            }
+	        });
+	        var margin = 2;
+	        var length = _config2.default.width * scales[0] - margin * 2;
+	        var nextPosition = 0;
+	        var doDebug = false;
+	
 	        for (var index = 0; index < list.length; index++) {
 	            length = _config2.default.width * scales[index] - margin * 2;
 	            //console.log(length)
@@ -58559,13 +58572,17 @@
 	
 	var _StartScreenContainer2 = _interopRequireDefault(_StartScreenContainer);
 	
-	var _EndGameContainer = __webpack_require__(623);
+	var _EndGameContainer = __webpack_require__(621);
 	
 	var _EndGameContainer2 = _interopRequireDefault(_EndGameContainer);
 	
-	var _BackgroundEffects = __webpack_require__(621);
+	var _BackgroundEffects = __webpack_require__(622);
 	
 	var _BackgroundEffects2 = _interopRequireDefault(_BackgroundEffects);
+	
+	var _UIRectLabel = __webpack_require__(624);
+	
+	var _UIRectLabel2 = _interopRequireDefault(_UIRectLabel);
 	
 	var _webpack = __webpack_require__(260);
 	
@@ -58774,6 +58791,7 @@
 	
 							this.mainMenuContainer = new PIXI.Container();
 							this.UIInGame = new PIXI.Container();
+							this.UIInGameNew = new PIXI.Container();
 	
 							this.startScreenContainer = new _StartScreenContainer2.default(this);
 							this.mainMenuContainer.addChild(this.startScreenContainer);
@@ -58802,8 +58820,8 @@
 							_utils2.default.centerObject(restartIcon, this.restartButton);
 							this.restartButton.addChild(restartIcon);
 	
-							this.topUIContainer.addChild(this.UIInGame);
-							this.UIInGame.addChild(this.backButton);
+							//this.bottomUIContainer.addChild(this.UIInGame)
+							this.bottomUIContainer.addChild(this.UIInGameNew);
 							this.UIInGame.addChild(this.restartButton);
 							this.UIInGame.addChild(this.pointsLabelStatic);
 							this.UIInGame.addChild(this.roundsLabelStatic);
@@ -58816,7 +58834,6 @@
 							this.UIInGame.addChild(this.timeLabel);
 							//this.UIInGame.y = -400;
 	
-							this.containerQueue = new PIXI.Container();
 							// this.startScreenContainer.x = this.width / 2
 							// this.startScreenContainer.y = this.height / 2
 	
@@ -58827,12 +58844,21 @@
 	
 							this.endGameScreenContainer.addEvents();
 	
-							this.bottomUIContainer.addChild(this.containerQueue);
-	
 							this.UIContainer.addChild(this.mainMenuContainer);
 	
 							//this.UIContainer.addChild();
+							// this.nextCardLabel =  new PIXI.Text("Next", { font: '18px', fill: 0xFFFFFF, align: 'center', fontWeight: '800', fontFamily: 'round_popregular' });
+							// this.UIInGameNew.addChild(this.nextCardLabel)
+							this.UIInGameNew.addChild(this.backButton);
 	
+							this.containerQueue = new PIXI.Container();
+							this.UIInGameNew.addChild(this.containerQueue);
+	
+							this.timerRect = new _UIRectLabel2.default(_config2.default.colors.yellow, './assets/images/time.png');
+							this.UIInGameNew.addChild(this.timerRect);
+	
+							this.movesRect = new _UIRectLabel2.default(_config2.default.colors.green, './assets/images/time.png');
+							this.UIInGameNew.addChild(this.movesRect);
 	
 							this.backButton.on('mousedown', this.mainmenuState.bind(this)).on('touchstart', this.mainmenuState.bind(this));
 							this.backButton.interactive = true;
@@ -58881,59 +58907,16 @@
 							this.backButton.customLength = 0.09;
 							this.restartButton.margin = 5;
 							this.restartButton.customLength = 0.09;
-							//this.levelNameLabel.margin = 10
-							//this.levelNameLabel.customLength = 0.1
-							//this.levelNameLabel.debug = false
-							//this.levelNameLabel.text = ""//this.currentLevelData.levelName
 	
-							var scales = [];
-							tempList.forEach(function (element) {
-									if (element.customLength) {
-											scales.push(element.customLength);
-									} else {
-											scales.push(1 / tempList.length);
-									}
-							});
-							var margin = 2;
-							var length = _config2.default.width * scales[0] - margin * 2;
-							var nextPosition = 0;
-							var doDebug = false;
+							// let lastScale = config.width * scales[5] - margin * 2;
+							// let labelsScale = lastScale / this.entitiesLabelStatic.width * this.entitiesLabelStatic.scale.x
+							// this.entitiesLabelStatic.scale.set(labelsScale)
+							// this.pointsLabelStatic.scale.set(labelsScale)
+							// this.roundsLabelStatic.scale.set(labelsScale)
+							// this.timeLabelStatic.scale.set(labelsScale)
 	
-							var lastScale = _config2.default.width * scales[5] - margin * 2;
-							var labelsScale = lastScale / this.entitiesLabelStatic.width * this.entitiesLabelStatic.scale.x;
-							this.entitiesLabelStatic.scale.set(labelsScale);
-							this.pointsLabelStatic.scale.set(labelsScale);
-							this.roundsLabelStatic.scale.set(labelsScale);
-							this.timeLabelStatic.scale.set(labelsScale);
+							//utils.horizontalListHelper(tempList);
 	
-							for (var index = 0; index < tempList.length; index++) {
-									length = _config2.default.width * scales[index] - margin * 2;
-									//console.log(length)
-	
-									var element = tempList[index];
-									element.x = nextPosition; //+ length*0.5
-									element.scale.set(0.71);
-									if (doDebug && !element.debugShape) {
-											//element.debugShape = new PIXI.Graphics().beginFill(0x005566).drawRect(-length/2, -this.topCanvas.height / 2, length, this.topCanvas.height);
-											element.debugShape = new PIXI.Graphics().beginFill(0xFFFFFF * Math.random()).drawRect(0, 0, length, element.height);
-											if (element.parent) {
-													element.parent.addChild(element.debugShape);
-											}
-											element.debugShape.alpha = 0.8;
-											element.debugShape.x = element.x;
-									}
-									if (element.margin) {
-											var scl = (length - element.margin * 2) / (element.width / element.scale.x);
-											element.scale.set(scl);
-											element.x += element.margin;
-											if (element.debug) {
-													console.log(element.width, length);
-											}
-									}
-									nextPosition += length;
-							}
-	
-							//console.log(this.entitiesLabelStatic.scale.x,this.entitiesLabelStatic.x,this.entitiesLabelStatic.y)
 							this.entitiesLabel.scale = this.entitiesLabelStatic.scale;
 							this.entitiesLabel.x = this.entitiesLabelStatic.x;
 							this.entitiesLabel.y = this.entitiesLabelStatic.y + 20;
@@ -58961,9 +58944,25 @@
 							var nameLevelSize = { width: this.timeLabelStatic.x - this.pointsLabel.x, height: 40 };
 							nameLevelSize.width += this.timeLabelStatic.width;
 	
-							// this.levelNameLabel.x = this.pointsLabel.x + nameLevelSize.width / 2 - this.levelNameLabel.width / 2 // this.levelNameLabel.scale.x
-							// this.levelNameLabel.y = this.pointsLabel.y + 20
-							// this.resizeToFitAR(nameLevelSize, this.levelNameLabel)
+							this.timerRect.scale.set(this.bottomUICanvas.height / this.timerRect.backShape.height * 0.3);
+							this.movesRect.scale.set(this.timerRect.scale.x);
+							this.timerRect.x = this.bottomUICanvas.x + this.bottomUICanvas.width - this.timerRect.width - this.bottomUICanvas.height * 0.1;
+							this.movesRect.x = this.bottomUICanvas.x + this.bottomUICanvas.width - this.timerRect.width - this.bottomUICanvas.height * 0.1;
+	
+							this.movesRect.y = this.bottomUICanvas.height - this.movesRect.height - this.bottomUICanvas.height * 0.1;
+							this.timerRect.y = this.movesRect.y - this.timerRect.height - this.bottomUICanvas.height * 0.025;
+	
+							this.containerQueue.scale.set(this.bottomUICanvas.height / CARD.height * 0.5);
+							this.containerQueue.x = this.bottomUICanvas.height * 0.1;
+							this.containerQueue.y = this.movesRect.y + this.movesRect.height - this.containerQueue.height;
+	
+							this.backButton.x = this.containerQueue.x;
+							this.backButton.y = this.containerQueue.y - this.backButton.height;
+	
+							// this.nextCardLabel.scale.set(this.bottomUICanvas.height / CARD.width * 0.6)
+	
+							// this.nextCardLabel.x = this.containerQueue.x + this.containerQueue.width - this.nextCardLabel.width - (this.nextCardLabel.scale.x * CARD.width * 0.2);
+							// this.nextCardLabel.y = this.containerQueue.y + this.containerQueue.height - this.nextCardLabel.height * 0.5
 	
 					}
 			}, {
@@ -59195,9 +59194,12 @@
 							this.startScreenContainer.hide();
 	
 							this.mousePosition = new PIXI.Point();
-							this.mousePosition.x = -_config2.default.width / 2;
 	
-							this.latestShoot.id = Math.floor(GRID.i / 2);
+							var toGrid = this.gridContainer.toLocal(this.innerResolution.width / 2);
+							this.mousePosID = Math.floor(toGrid.x / CARD.width);
+	
+							this.latestShoot.id = 2; //this.mousePosID;
+							this.latestShoot.x = this.mousePosition;
 	
 							//this.currentButtonLabel = 'RESET';
 					}
@@ -59208,6 +59210,9 @@
 							this.roundsLabel.text = _utils2.default.formatPointsLabel(Math.ceil(this.currentRound));
 							this.entitiesLabel.text = _utils2.default.formatPointsLabel(Math.ceil(this.board.totalCards));
 							this.timeLabel.text = _utils2.default.convertNumToTime(Math.ceil(this.currentTime));
+	
+							this.timerRect.updateLavel(_utils2.default.convertNumToTime(Math.ceil(this.currentTime)));
+							this.movesRect.updateLavel(_utils2.default.formatPointsLabel(Math.ceil(this.currentRound)), "MOVES");
 					}
 			}, {
 					key: 'addRandomPiece',
@@ -59251,6 +59256,8 @@
 									this.cardQueue[i].y = 0;
 									// this.cardQueue[i].y = ;
 							}
+	
+							this.cardQueue[1].mark();
 					}
 			}, {
 					key: 'newRound',
@@ -59261,6 +59268,8 @@
 							//if (this.mousePosID < 0) {
 							this.mousePosID = this.latestShoot.id;
 							this.currentCard.x = this.latestShoot.x;
+	
+							console.log("latest", this.currentCard.x);
 							//}
 							this.currentCard.scale.set(1);
 							//console.log(this.mousePosID)
@@ -59270,8 +59279,8 @@
 							this.currentCard.updateCard(true);
 							this.cardsContainer.addChild(this.currentCard);
 	
-							var globalQueue = this.toGlobal(this.containerQueue);
-							var localQueue = this.cardsContainer.toLocal(globalQueue);
+							//let globalQueue = this.toGlobal(this.containerQueue)
+							//let localQueue = this.cardsContainer.toLocal(globalQueue)
 	
 							//this.currentCard.x = this.latestShoot.x//CARD.width * GRID.i//- this.cardsContainer.x//CARD.width/2 - this.currentCard.width / 2;
 					}
@@ -59335,6 +59344,11 @@
 									this.topUIContainer.y = _utils2.default.lerp(this.topUIContainer.y, this.gameCanvas.y - 500, 0.2);
 									this.bottomUIContainer.x = this.gameCanvas.x;
 									this.bottomUIContainer.y = _utils2.default.lerp(this.bottomUIContainer.y, this.gameCanvas.y + this.gameCanvas.height - this.bottomUICanvas.height + 500, 0.2);
+	
+									if (this.currentCard) {
+											this.currentCard.alpha = 0;
+									}
+	
 									return;
 							}
 	
@@ -59349,6 +59363,15 @@
 	
 							if (renderer.plugins.interaction.mouse.global) {
 									this.mousePosition = renderer.plugins.interaction.mouse.global;
+	
+									var toGrid = this.gridContainer.toLocal(this.mousePosition);
+									this.mousePosID = Math.floor(toGrid.x / CARD.width);
+	
+									this.latestShoot.id = this.mousePosID;
+									if (this.latestShoot.id < 0) {
+											this.latestShoot.id = Math.floor(GRID.i / 2);
+									}
+									this.latestShoot.x = this.mousePosition;
 							}
 	
 							this.initGridAcc += 0.05;
@@ -59371,6 +59394,7 @@
 					key: 'updateMousePosition',
 					value: function updateMousePosition() {
 							if (!this.currentCard) {
+									this.trailMarker.alpha = 0;
 									return;
 							}
 	
@@ -59381,11 +59405,13 @@
 							if (this.mousePosID < 0) {
 									this.mousePosID = this.latestShoot.id;
 							}
+	
 							// this.trailMarker.alpha = 0;
 							if (this.mousePosID >= 0 && this.mousePosID < GRID.i) {
 									_gsap2.default.to(this.trailMarker, 0.1, { x: this.mousePosID * CARD.width });
 									this.trailMarker.tint = this.currentCard.enemySprite.tint;
 									this.trailMarker.alpha = 0.15;
+									this.currentCard.alpha = 1;
 									if (this.currentCard) {
 											if (this.mousePosID * CARD.width >= 0) {
 													// console.log("MOUSE MOVE");
@@ -59393,6 +59419,16 @@
 											}
 									}
 							}
+							// else {
+							// 	this.mousePosition = this.innerResolution.width / 2
+							// 	this.mousePosID = Math.floor(GRID.i / 2);
+	
+							// 	this.currentCard.moveX(this.mousePosID * CARD.width, 0.1);
+							// 	this.trailMarker.x = this.currentCard.x
+							// 	this.trailMarker.tint = this.currentCard.enemySprite.tint
+							// 	this.trailMarker.alpha = 0.15;
+	
+							// }
 					}
 			}, {
 					key: 'transitionOut',
@@ -59423,6 +59459,7 @@
 					key: 'onTapUp',
 					value: function onTapUp() {
 							if (!this.currentCard || !this.gameRunning) {
+	
 									return;
 							}
 							//console.log(renderer.plugins.interaction.activeInteractionData)
@@ -59535,10 +59572,6 @@
 							this.resizeToFit({ width: this.gameCanvas.width, height: this.gameCanvas.height * 0.08 }, this.topCanvas);
 							this.resizeToFit({ width: this.gameCanvas.width, height: this.gameCanvas.height * 0.125 }, this.bottomUICanvas);
 	
-							this.containerQueue.x = 20;
-							this.containerQueue.y = this.bottomUICanvas.height * 0.5;
-	
-							this.containerQueue.scale.set(this.bottomUICanvas.height / CARD.height * 0.4);
 							//console.log(this.bottomUICanvas.scale.y, this.bottomUICanvas.height)
 	
 							this.cardsContainer.scale.x = this.gridContainer.scale.x;
@@ -59552,14 +59585,15 @@
 	
 	
 							this.gridContainer.x = this.gameCanvas.x + this.gameCanvas.width / 2 - this.gridContainer.width / 2;
-							this.gridContainer.y = this.gameCanvas.y + this.gameCanvas.height / 2 - this.gridContainer.height / 2 - 20; //* 0.1125
+							this.gridContainer.y = this.gameCanvas.y + this.gameCanvas.height / 2 - this.gridContainer.height / 2 - this.topCanvas.height; //* 0.1125
 							//utils.centerObject(this.gridContainer, this.gameCanvas)
 	
 							this.cardsContainer.x = this.gridContainer.x;
 							this.cardsContainer.y = this.gridContainer.y;
 	
 							if (this.currentCard) {
-									this.currentCard.y = this.gridContainer.height / this.gridContainer.scale.y;
+									//13 is the width of the border on the grid
+									this.currentCard.y = (this.gridContainer.height - 13) / this.gridContainer.scale.y - 1;
 							}
 	
 							//utils.centerObject(this.startScreenContainer, this)
@@ -59684,7 +59718,7 @@
 						gridSquare.x = i * CARD.width;
 						gridSquare.y = j * CARD.height;
 	
-						gridSquare.alpha = Math.random() * 0.1 + 0.05;
+						gridSquare.alpha = Math.random() * 0.15 + 0.075;
 						gridSquare.speed = 0.25;
 						gridSquare.startAlpha = gridSquare.alpha;
 						gridSquare.sin = Math.random() * Math.PI * 2;
@@ -59694,17 +59728,33 @@
 						this.grids.push(gridSquare);
 					}
 				}
-				// for (var i = GRID.i; i >= 0; i--) {
-				// 	let line = new PIXI.Graphics().beginFill(0x999999).drawRect(-1,0,2, GRID.height);
-				// 	line.x = i * CARD.width;
-				// 	gridContainer.addChild(line)
-				// }
 	
-				// for (var j = GRID.j; j >= 0; j--) {
-				// 	let line = new PIXI.Graphics().beginFill(0x999999).drawRect(0,-1,GRID.width, 2);
-				// 	line.y = j * CARD.height;
-				// 	gridContainer.addChild(line)
-				// }
+				for (var i = GRID.j - 1; i >= 0; i--) {
+					var line = new PIXI.Sprite.fromImage('./assets/images/lineBorder.png');
+					line.y = i * CARD.width;
+					line.x = -line.width;
+					line.height = CARD.height;
+					gridContainer.addChild(line);
+				}
+	
+				for (var i = GRID.j - 1; i >= 0; i--) {
+					var _line = new PIXI.Sprite.fromImage('./assets/images/lineBorder.png');
+					_line.y = i * CARD.width + CARD.height;
+					_line.rotation = Math.PI;
+					_line.x = GRID.i * CARD.width + _line.width;
+					_line.height = CARD.height;
+					gridContainer.addChild(_line);
+				}
+	
+				for (var i = GRID.i; i > 0; i--) {
+					var _line2 = new PIXI.Sprite.fromImage('./assets/images/lineBorder.png');
+					_line2.y = -_line2.width;
+					_line2.rotation = Math.PI * 0.5;
+					_line2.x = i * CARD.width;
+					_line2.height = CARD.height;
+					gridContainer.addChild(_line2);
+				}
+	
 				gridContainer.alpha = 1;
 	
 				this.addChild(gridContainer);
@@ -59780,7 +59830,7 @@
 			_this.cardBack3 = new PIXI.Graphics().beginFill(0x000000).drawRect(CARD.width / 2 - 10, CARD.height / 2, 19, 10);
 			_this.enemySprite = PIXI.Sprite.fromImage('./assets/images/enemy.png');
 	
-			_this.enemySprite.scale.set(CARD.width / _this.enemySprite.width * 0.55);
+			_this.enemySprite.scale.set(72 / _this.enemySprite.width * 0.55);
 			_this.enemySprite.anchor.set(0.5);
 	
 			_this.cardForeground.alpha = 1;
@@ -60084,17 +60134,32 @@
 				TweenLite.to(this, time, { x: pos, delay: delay });
 			}
 		}, {
-			key: 'setOnQueue',
-			value: function setOnQueue() {
+			key: 'mark',
+			value: function mark() {
 				this.backshape = new PIXI.Graphics();
-				//this.backshape.lineStyle(3, this.enemySprite.tint, 1);
-				this.backshape.beginFill(this.enemySprite.tint);
+				this.backshape.lineStyle(3, this.enemySprite.tint, 1);
+				//this.backshape.beginFill(this.enemySprite.tint);
 				this.backshape.drawRect(-CARD.width / 2, -CARD.height / 2, CARD.width, CARD.height);
 				this.backshape.endFill();
 				this.addChildAt(this.backshape, 0);
 				this.backshape.x = this.enemySprite.x;
 				this.backshape.y = this.enemySprite.y;
-				this.backshape.alpha = 0.25;
+				this.backshape.alpha = 0.5;
+				this.cardForeground.alpha = 0;
+				this.updateSize();
+			}
+		}, {
+			key: 'setOnQueue',
+			value: function setOnQueue() {
+				// this.backshape = new PIXI.Graphics();
+				// //this.backshape.lineStyle(3, this.enemySprite.tint, 1);
+				// this.backshape.beginFill(this.enemySprite.tint);
+				// this.backshape.drawRect(-CARD.width / 2, -CARD.height / 2, CARD.width, CARD.height);
+				// this.backshape.endFill();
+				// this.addChildAt(this.backshape, 0);
+				// this.backshape.x = this.enemySprite.x
+				// this.backshape.y = this.enemySprite.y
+				// this.backshape.alpha = 0.25
 				this.cardForeground.alpha = 0;
 				this.updateSize();
 			}
@@ -103360,35 +103425,9 @@
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
-	var _Screen = __webpack_require__(234);
-	
-	var _Screen2 = _interopRequireDefault(_Screen);
-	
-	var _Grid = __webpack_require__(255);
-	
-	var _Grid2 = _interopRequireDefault(_Grid);
-	
-	var _Card = __webpack_require__(256);
-	
-	var _Card2 = _interopRequireDefault(_Card);
-	
-	var _Block = __webpack_require__(258);
-	
-	var _Block2 = _interopRequireDefault(_Block);
-	
 	var _LevelSelectContainer = __webpack_require__(620);
 	
 	var _LevelSelectContainer2 = _interopRequireDefault(_LevelSelectContainer);
-	
-	var _Board = __webpack_require__(259);
-	
-	var _Board2 = _interopRequireDefault(_Board);
-	
-	var _BackgroundEffects = __webpack_require__(621);
-	
-	var _BackgroundEffects2 = _interopRequireDefault(_BackgroundEffects);
-	
-	var _webpack = __webpack_require__(260);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -104166,264 +104205,6 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _pixi = __webpack_require__(1);
-	
-	var PIXI = _interopRequireWildcard(_pixi);
-	
-	var _config = __webpack_require__(225);
-	
-	var _config2 = _interopRequireDefault(_config);
-	
-	var _utils = __webpack_require__(233);
-	
-	var _utils2 = _interopRequireDefault(_utils);
-	
-	var _StarParticle = __webpack_require__(622);
-	
-	var _StarParticle2 = _interopRequireDefault(_StarParticle);
-	
-	var _gsap = __webpack_require__(229);
-	
-	var _gsap2 = _interopRequireDefault(_gsap);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var BackgroundEffects = function (_PIXI$Container) {
-		_inherits(BackgroundEffects, _PIXI$Container);
-	
-		function BackgroundEffects() {
-			_classCallCheck(this, BackgroundEffects);
-	
-			var _this = _possibleConstructorReturn(this, (BackgroundEffects.__proto__ || Object.getPrototypeOf(BackgroundEffects)).call(this));
-	
-			_this.background = new PIXI.Graphics().beginFill(0x151515).drawRect(0, 0, _config2.default.width, _config2.default.height);
-			_this.addChild(_this.background);
-	
-			_this.backgroundImage = PIXI.Sprite.fromImage("./assets/images/background.png");
-			_this.background.addChild(_this.backgroundImage);
-	
-			_this.starsContainer = new PIXI.Container();
-			_this.addChild(_this.starsContainer);
-	
-			_this.innerResolution = { width: _config2.default.width, height: _config2.default.height };
-	
-			_this.addStars();
-	
-			_this.starsMoveTimer = 0;
-	
-			_this.starsDeacc = 0.9;
-	
-			_this.currentSpeed = {
-				x: 0,
-				y: 200
-	
-				// let center = new PIXI.Graphics().beginFill(0xFF0000).drawCircle(0,0,10);
-				// this.starsContainer.addChild(center)
-	
-			};return _this;
-		}
-	
-		_createClass(BackgroundEffects, [{
-			key: 'resize',
-			value: function resize(scaledResolution, innerResolution) {
-	
-				this.innerResolution = innerResolution;
-				//console.log(resolution, innerResolution)
-				this.background.width = innerResolution.width;
-				this.background.height = innerResolution.height;
-	
-				this.background.x = -innerResolution.width / 2;
-				this.background.y = -innerResolution.height / 2;
-	
-				//this.starsContainer.width = innerResolution.width
-				//this.starsContainer.height = innerResolution.height
-	
-				//this.starsContainer.x = -innerResolution.width / 2
-				//this.starsContainer.y = -innerResolution.height / 2
-			}
-		}, {
-			key: 'changeStates',
-			value: function changeStates() {
-				var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'start';
-	
-				return;
-				if (type == 'start') {
-					_gsap2.default.to(this.groundContainer, 2, {
-						y: 0
-					});
-					// this.groundContainer
-				}
-				if (type == 'load') {
-					_gsap2.default.to(this.groundContainer, 2, {
-						y: 400
-					});
-					// this.groundContainer
-				}
-			}
-		}, {
-			key: 'update',
-			value: function update(delta) {
-	
-				this.currentSpeed.y = this.innerResolution.height * 0.2;
-				for (var i = 0; i < this.stars.length; i++) {
-					this.stars[i].update(this.currentSpeed.y * delta, this.innerResolution);
-				}
-			}
-		}, {
-			key: 'addStars',
-			value: function addStars() {
-				var totalStars = this.innerResolution.width * 0.08;
-				var l = this.innerResolution.width * 0.001;
-				l = Math.max(l, 0.7);
-				this.stars = [];
-				for (var i = 0; i < totalStars; i++) {
-					var dist = Math.random() * (l * 2) + l;
-					var tempStar = new _StarParticle2.default(dist);
-					tempStar.alpha = dist / 3 * 0.6 + 0.2;
-					var toClose = true;
-					var acc = 5;
-					while (toClose || acc > 0) {
-						acc--;
-						var angle = Math.random() * Math.PI * 2;
-						var max = Math.max(this.innerResolution.width, this.innerResolution.height);
-						var radius = Math.random() * max + 20;
-						tempStar.x = Math.cos(angle) * radius; // - this.innerResolution.width/2;
-						tempStar.y = Math.sin(angle) * radius; // - this.innerResolution.height/2;
-						toClose = false;
-						for (var j = 0; j < this.stars.length; j++) {
-							var distance = _utils2.default.distance(this.stars[j].x, this.stars[j].y, tempStar.x, tempStar.y);
-							if (distance > 15) {} else {
-								toClose = true;
-								break;
-							}
-						}
-					}
-					this.starsContainer.addChild(tempStar);
-					this.stars.push(tempStar);
-				}
-			}
-		}, {
-			key: 'changeColors',
-			value: function changeColors() {
-				var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'morning';
-	
-	
-				CURRENT_SKYCOLOR = SKYCOLOR[type];
-				_utils2.default.addColorTween(this.topGradient, this.topGradient.tint, SKYCOLOR[type].top);
-				_utils2.default.addColorTween(this.bottomGradient, this.bottomGradient.tint, SKYCOLOR[type].bottom);
-				_utils2.default.addColorTween(this.bigblur, this.bigblur.tint, SKYCOLOR[type].blur);
-				_utils2.default.addColorTween(this.additiveSky, this.additiveSky.tint, SKYCOLOR[type].additiveSky);
-				// utils.addColorTween(this.front1, this.front1.tint, SKYCOLOR[type].front1);
-				// utils.addColorTween(this.front2, this.front2.tint, SKYCOLOR[type].front2);
-				// utils.addColorTween(this.front3, this.front3.tint, SKYCOLOR[type].front3);
-				_utils2.default.addColorTween(this.fogGradient, this.fogGradient.tint, SKYCOLOR[type].fogGradient);
-				// utils.addColorTween(this.man, this.man.tint, SKYCOLOR[type].man);
-			}
-		}]);
-	
-		return BackgroundEffects;
-	}(PIXI.Container);
-	
-	exports.default = BackgroundEffects;
-
-/***/ }),
-/* 622 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _pixi = __webpack_require__(1);
-	
-	var PIXI = _interopRequireWildcard(_pixi);
-	
-	var _config = __webpack_require__(225);
-	
-	var _config2 = _interopRequireDefault(_config);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var StarParticle = function (_PIXI$Container) {
-	    _inherits(StarParticle, _PIXI$Container);
-	
-	    function StarParticle(size) {
-	        _classCallCheck(this, StarParticle);
-	
-	        var _this = _possibleConstructorReturn(this, (StarParticle.__proto__ || Object.getPrototypeOf(StarParticle)).call(this));
-	
-	        var listParticles = ['./assets/images/gridSquare.png'];
-	        var p = listParticles[Math.floor(Math.random() * listParticles.length)];
-	        // console.log(p);
-	        _this.graphics = new PIXI.Sprite(PIXI.Texture.from(p)); // new PIXI.Graphics().beginFill(0xFFFFFF).drawRect(0,0,size,size);
-	        _this.graphics.anchor.set(0.5);
-	
-	        //if (p == listParticles[listParticles.length - 1]) {
-	        //    this.graphics.scale.set(size / this.graphics.width * 4.5 * 0.05)
-	        //} else {
-	        _this.graphics.scale.set(size / _this.graphics.width);
-	        //}
-	        // this.graphics.rotation = Math.PI / 4;
-	        _this.addChild(_this.graphics);
-	        _this.velocity = {
-	            x: 0,
-	            y: 0
-	        };
-	        return _this;
-	    }
-	
-	    _createClass(StarParticle, [{
-	        key: 'update',
-	        value: function update(velY, size) {
-	
-	            //console.log(this.velocity)
-	            //this.x += this.velocity.x
-	            this.y += velY * this.alpha;
-	
-	            if (this.y > size.height / 2) {
-	                this.y -= size.height * 1.5;
-	                this.x = Math.random() * size.width - size.width / 2;
-	            }
-	        }
-	    }]);
-	
-	    return StarParticle;
-	}(PIXI.Container);
-	
-	exports.default = StarParticle;
-
-/***/ }),
-/* 623 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
 	        value: true
 	});
 	
@@ -104465,7 +104246,7 @@
 	
 	var _Board2 = _interopRequireDefault(_Board);
 	
-	var _BackgroundEffects = __webpack_require__(621);
+	var _BackgroundEffects = __webpack_require__(622);
 	
 	var _BackgroundEffects2 = _interopRequireDefault(_BackgroundEffects);
 	
@@ -104794,7 +104575,364 @@
 	exports.default = EndGameContainer;
 
 /***/ }),
+/* 622 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _pixi = __webpack_require__(1);
+	
+	var PIXI = _interopRequireWildcard(_pixi);
+	
+	var _config = __webpack_require__(225);
+	
+	var _config2 = _interopRequireDefault(_config);
+	
+	var _utils = __webpack_require__(233);
+	
+	var _utils2 = _interopRequireDefault(_utils);
+	
+	var _StarParticle = __webpack_require__(623);
+	
+	var _StarParticle2 = _interopRequireDefault(_StarParticle);
+	
+	var _gsap = __webpack_require__(229);
+	
+	var _gsap2 = _interopRequireDefault(_gsap);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var BackgroundEffects = function (_PIXI$Container) {
+		_inherits(BackgroundEffects, _PIXI$Container);
+	
+		function BackgroundEffects() {
+			_classCallCheck(this, BackgroundEffects);
+	
+			var _this = _possibleConstructorReturn(this, (BackgroundEffects.__proto__ || Object.getPrototypeOf(BackgroundEffects)).call(this));
+	
+			_this.background = new PIXI.Graphics().beginFill(0x151515).drawRect(0, 0, _config2.default.width, _config2.default.height);
+			_this.addChild(_this.background);
+	
+			_this.backgroundImage = PIXI.Sprite.fromImage("./assets/images/background.png");
+			_this.background.addChild(_this.backgroundImage);
+	
+			_this.starsContainer = new PIXI.Container();
+			_this.addChild(_this.starsContainer);
+	
+			_this.innerResolution = { width: _config2.default.width, height: _config2.default.height };
+	
+			_this.addStars();
+	
+			_this.starsMoveTimer = 0;
+	
+			_this.starsDeacc = 0.9;
+	
+			_this.currentSpeed = {
+				x: 0,
+				y: 200
+	
+				// let center = new PIXI.Graphics().beginFill(0xFF0000).drawCircle(0,0,10);
+				// this.starsContainer.addChild(center)
+	
+			};return _this;
+		}
+	
+		_createClass(BackgroundEffects, [{
+			key: 'resize',
+			value: function resize(scaledResolution, innerResolution) {
+	
+				this.innerResolution = innerResolution;
+				//console.log(resolution, innerResolution)
+				this.background.width = innerResolution.width;
+				this.background.height = innerResolution.height;
+	
+				this.background.x = -innerResolution.width / 2;
+				this.background.y = -innerResolution.height / 2;
+	
+				//this.starsContainer.width = innerResolution.width
+				//this.starsContainer.height = innerResolution.height
+	
+				//this.starsContainer.x = -innerResolution.width / 2
+				//this.starsContainer.y = -innerResolution.height / 2
+			}
+		}, {
+			key: 'changeStates',
+			value: function changeStates() {
+				var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'start';
+	
+				return;
+				if (type == 'start') {
+					_gsap2.default.to(this.groundContainer, 2, {
+						y: 0
+					});
+					// this.groundContainer
+				}
+				if (type == 'load') {
+					_gsap2.default.to(this.groundContainer, 2, {
+						y: 400
+					});
+					// this.groundContainer
+				}
+			}
+		}, {
+			key: 'update',
+			value: function update(delta) {
+	
+				this.currentSpeed.y = this.innerResolution.height * 0.2;
+				for (var i = 0; i < this.stars.length; i++) {
+					this.stars[i].update(this.currentSpeed.y * delta, this.innerResolution);
+				}
+			}
+		}, {
+			key: 'addStars',
+			value: function addStars() {
+				var totalStars = this.innerResolution.width * 0.08;
+				var l = this.innerResolution.width * 0.001;
+				l = Math.max(l, 0.7);
+				this.stars = [];
+				for (var i = 0; i < totalStars; i++) {
+					var dist = Math.random() * (l * 2) + l;
+					var tempStar = new _StarParticle2.default(dist);
+					tempStar.alpha = dist / 3 * 0.6 + 0.2;
+					var toClose = true;
+					var acc = 5;
+					while (toClose || acc > 0) {
+						acc--;
+						var angle = Math.random() * Math.PI * 2;
+						var max = Math.max(this.innerResolution.width, this.innerResolution.height);
+						var radius = Math.random() * max + 20;
+						tempStar.x = Math.cos(angle) * radius; // - this.innerResolution.width/2;
+						tempStar.y = Math.sin(angle) * radius; // - this.innerResolution.height/2;
+						toClose = false;
+						for (var j = 0; j < this.stars.length; j++) {
+							var distance = _utils2.default.distance(this.stars[j].x, this.stars[j].y, tempStar.x, tempStar.y);
+							if (distance > 15) {} else {
+								toClose = true;
+								break;
+							}
+						}
+					}
+					this.starsContainer.addChild(tempStar);
+					this.stars.push(tempStar);
+				}
+			}
+		}, {
+			key: 'changeColors',
+			value: function changeColors() {
+				var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'morning';
+	
+	
+				CURRENT_SKYCOLOR = SKYCOLOR[type];
+				_utils2.default.addColorTween(this.topGradient, this.topGradient.tint, SKYCOLOR[type].top);
+				_utils2.default.addColorTween(this.bottomGradient, this.bottomGradient.tint, SKYCOLOR[type].bottom);
+				_utils2.default.addColorTween(this.bigblur, this.bigblur.tint, SKYCOLOR[type].blur);
+				_utils2.default.addColorTween(this.additiveSky, this.additiveSky.tint, SKYCOLOR[type].additiveSky);
+				// utils.addColorTween(this.front1, this.front1.tint, SKYCOLOR[type].front1);
+				// utils.addColorTween(this.front2, this.front2.tint, SKYCOLOR[type].front2);
+				// utils.addColorTween(this.front3, this.front3.tint, SKYCOLOR[type].front3);
+				_utils2.default.addColorTween(this.fogGradient, this.fogGradient.tint, SKYCOLOR[type].fogGradient);
+				// utils.addColorTween(this.man, this.man.tint, SKYCOLOR[type].man);
+			}
+		}]);
+	
+		return BackgroundEffects;
+	}(PIXI.Container);
+	
+	exports.default = BackgroundEffects;
+
+/***/ }),
+/* 623 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _pixi = __webpack_require__(1);
+	
+	var PIXI = _interopRequireWildcard(_pixi);
+	
+	var _config = __webpack_require__(225);
+	
+	var _config2 = _interopRequireDefault(_config);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var StarParticle = function (_PIXI$Container) {
+	    _inherits(StarParticle, _PIXI$Container);
+	
+	    function StarParticle(size) {
+	        _classCallCheck(this, StarParticle);
+	
+	        var _this = _possibleConstructorReturn(this, (StarParticle.__proto__ || Object.getPrototypeOf(StarParticle)).call(this));
+	
+	        var listParticles = ['./assets/images/gridSquare.png'];
+	        var p = listParticles[Math.floor(Math.random() * listParticles.length)];
+	        // console.log(p);
+	        _this.graphics = new PIXI.Sprite(PIXI.Texture.from(p)); // new PIXI.Graphics().beginFill(0xFFFFFF).drawRect(0,0,size,size);
+	        _this.graphics.anchor.set(0.5);
+	
+	        //if (p == listParticles[listParticles.length - 1]) {
+	        //    this.graphics.scale.set(size / this.graphics.width * 4.5 * 0.05)
+	        //} else {
+	        _this.graphics.scale.set(size / _this.graphics.width);
+	        //}
+	        // this.graphics.rotation = Math.PI / 4;
+	        _this.addChild(_this.graphics);
+	        _this.velocity = {
+	            x: 0,
+	            y: 0
+	        };
+	        return _this;
+	    }
+	
+	    _createClass(StarParticle, [{
+	        key: 'update',
+	        value: function update(velY, size) {
+	
+	            //console.log(this.velocity)
+	            //this.x += this.velocity.x
+	            this.y += velY * this.alpha;
+	
+	            if (this.y > size.height / 2) {
+	                this.y -= size.height * 1.5;
+	                this.x = Math.random() * size.width - size.width / 2;
+	            }
+	        }
+	    }]);
+	
+	    return StarParticle;
+	}(PIXI.Container);
+	
+	exports.default = StarParticle;
+
+/***/ }),
 /* 624 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+			value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _pixi = __webpack_require__(1);
+	
+	var PIXI = _interopRequireWildcard(_pixi);
+	
+	var _gsap = __webpack_require__(229);
+	
+	var _gsap2 = _interopRequireDefault(_gsap);
+	
+	var _config = __webpack_require__(225);
+	
+	var _config2 = _interopRequireDefault(_config);
+	
+	var _utils = __webpack_require__(233);
+	
+	var _utils2 = _interopRequireDefault(_utils);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var UIRectLabel = function (_PIXI$Container) {
+			_inherits(UIRectLabel, _PIXI$Container);
+	
+			function UIRectLabel(color, icon) {
+					_classCallCheck(this, UIRectLabel);
+	
+					var _this = _possibleConstructorReturn(this, (UIRectLabel.__proto__ || Object.getPrototypeOf(UIRectLabel)).call(this));
+	
+					_this.mainContainer = new PIXI.Container();
+					//this.backShape = PIXI.Sprite.fromImage('./assets/images/rect.png');
+					_this.icon = PIXI.Sprite.fromImage(icon);
+					//this.backShape.tint = color;
+	
+					_this.backShape = new PIXI.Graphics();
+					_this.backShape.lineStyle(3, color, 1);
+					_this.backShape.drawRect(0, 0, 224, 60);
+					_this.backShape.endFill();
+					_this.backShape.alpha = 0.5;
+	
+					_this.label = new PIXI.Text("name", { font: '30px', fill: 0xFFFFFF, align: 'center', fontFamily: 'round_popregular' });
+					_this.title = new PIXI.Text("title", {
+							font: '20px',
+							fill: 0x000000,
+							align: 'center',
+							wight: '800',
+							fontFamily: 'round_popregular',
+							stroke: color,
+							strokeThickness: 8
+					});
+	
+					_this.icon.scale.set(_this.backShape.height / _this.icon.height * 0.7);
+					_this.mainContainer.addChild(_this.backShape);
+					_this.mainContainer.addChild(_this.icon);
+					_this.mainContainer.addChild(_this.label);
+					_this.addChild(_this.mainContainer);
+					//this.addChild(this.title);
+	
+					_this.updateLavel("00000");
+					return _this;
+			}
+	
+			_createClass(UIRectLabel, [{
+					key: 'updateLavel',
+					value: function updateLavel(text, title) {
+							this.label.text = text;
+							this.title.text = title ? title : "";
+							//this.title.pivot.x = this.title.width * 0.5
+							this.title.x = 20;
+							this.title.pivot.y = this.title.height * 0.5;
+							_utils2.default.centerObject(this.icon, this.mainContainer);
+							this.icon.x = this.icon.y;
+							_utils2.default.centerObject(this.label, this.mainContainer);
+							this.label.x += this.icon.x;
+					}
+			}]);
+	
+			return UIRectLabel;
+	}(PIXI.Container);
+	
+	exports.default = UIRectLabel;
+
+/***/ }),
+/* 625 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -105305,7 +105443,7 @@
 	exports.default = EffectLayer;
 
 /***/ }),
-/* 625 */
+/* 626 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -105531,7 +105669,7 @@
 	exports.default = ChooseMatchScreen;
 
 /***/ }),
-/* 626 */
+/* 627 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -105554,7 +105692,7 @@
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
-	var _Ball = __webpack_require__(627);
+	var _Ball = __webpack_require__(628);
 	
 	var _Ball2 = _interopRequireDefault(_Ball);
 	
@@ -105621,7 +105759,7 @@
 	exports.default = Pool;
 
 /***/ }),
-/* 627 */
+/* 628 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';

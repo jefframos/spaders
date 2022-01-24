@@ -106,6 +106,9 @@ PIXI.loader
 	.add('./assets/images/background.png')
 	.add('./assets/images/gridSquare.png')
 	.add('./assets/images/block.jpg')
+	.add('./assets/images/rect.png')
+	.add('./assets/images/time.png')
+	.add('./assets/images/lineBorder.png')
 	// .add('./assets/images/map.jpg')
 	.load(loadJsons);
 
