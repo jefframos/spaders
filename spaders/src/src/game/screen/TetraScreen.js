@@ -12,7 +12,9 @@ import StartScreenContainer from './StartScreenContainer'
 import EndGameContainer from './EndGameContainer'
 import BackgroundEffects from '../effects/BackgroundEffects'
 import UIRectLabel from './UIRectLabel'
+import UIButton1 from './UIButton1'
 import { debug } from 'webpack';
+import InGameMenu from './InGameMenu';
 
 export default class TetraScreen extends Screen {
 	constructor(label) {
@@ -184,6 +186,7 @@ export default class TetraScreen extends Screen {
 				}
 			}
 		}
+		container.background = background;
 		container.nodeSize = size;
 		return container;
 	}
@@ -207,7 +210,7 @@ export default class TetraScreen extends Screen {
 
 		this.mainMenuContainer = new PIXI.Container();
 		this.UIInGame = new PIXI.Container();
-		this.UIInGameNew = new PIXI.Container();
+		this.bottomUINewContainer = new PIXI.Container();
 
 		this.startScreenContainer = new StartScreenContainer(this);
 		this.mainMenuContainer.addChild(this.startScreenContainer)
@@ -215,44 +218,11 @@ export default class TetraScreen extends Screen {
 		this.endGameScreenContainer = new EndGameContainer(this);
 		this.mainMenuContainer.addChild(this.endGameScreenContainer)
 
-		this.backButton = new PIXI.Graphics().beginFill(config.colors.pink).drawCircle(20, 20, 20);
-		let backIcon = PIXI.Sprite.fromImage('./assets/images/cancel.png');
-		backIcon.tint = 0x000000;
-		let sclb = this.backButton.height / backIcon.height;
-		sclb *= 0.9;
-		//backIcon.anchor = { x: 0.5, y: 0.5 }
-		backIcon.scale = { x: sclb, y: sclb }
-		utils.centerObject(backIcon, this.backButton);
-		this.backButton.addChild(backIcon);
 
 
-		this.restartButton = new PIXI.Graphics().beginFill(config.colors.yellow).drawCircle(20, 20, 20);
-
-		let restartIcon = PIXI.Sprite.fromImage('./assets/images/cycle.png');
-		restartIcon.tint = 0x000000;
-		let scl = this.restartButton.height / restartIcon.height;
-		scl *= 0.9;
-		//restartIcon.anchor = { x: 0.5, y: 0.5 }
-		restartIcon.scale = { x: scl, y: scl }
-		utils.centerObject(restartIcon, this.restartButton);
-		this.restartButton.addChild(restartIcon);
-
-		//this.bottomUIContainer.addChild(this.UIInGame)
-		this.bottomUIContainer.addChild(this.UIInGameNew)
-		this.UIInGame.addChild(this.restartButton)
-		this.UIInGame.addChild(this.pointsLabelStatic)
-		this.UIInGame.addChild(this.roundsLabelStatic)
-		//this.UIInGame.addChild(this.entitiesLabelStatic)
-		this.UIInGame.addChild(this.timeLabelStatic)
-		//this.UIInGame.addChild(this.levelNameLabel)
-		this.UIInGame.addChild(this.pointsLabel)
-		this.UIInGame.addChild(this.roundsLabel)
-		//this.UIInGame.addChild(this.entitiesLabel)
-		this.UIInGame.addChild(this.timeLabel)
-		//this.UIInGame.y = -400;
-
-		// this.startScreenContainer.x = this.width / 2
-		// this.startScreenContainer.y = this.height / 2
+		this.topUIContainer.addChild(this.UIInGame)
+		this.bottomUIContainer.addChild(this.bottomUINewContainer)
+		
 
 		this.startScreenContainer.addEvents();
 
@@ -267,31 +237,27 @@ export default class TetraScreen extends Screen {
 
 		this.UIContainer.addChild(this.mainMenuContainer)
 
-
-		//this.UIContainer.addChild();
-		// this.nextCardLabel =  new PIXI.Text("Next", { font: '18px', fill: 0xFFFFFF, align: 'center', fontWeight: '800', fontFamily: 'round_popregular' });
-		// this.UIInGameNew.addChild(this.nextCardLabel)
-		this.UIInGameNew.addChild(this.backButton)
-
 		this.containerQueue = new PIXI.Container();
-		this.UIInGameNew.addChild(this.containerQueue)
+		this.bottomUINewContainer.addChild(this.containerQueue)
 
 		this.timerRect = new UIRectLabel(config.colors.yellow, './assets/images/time.png');
-		this.UIInGameNew.addChild(this.timerRect)
+		this.bottomUINewContainer.addChild(this.timerRect)
 
 		this.movesRect = new UIRectLabel(config.colors.green, './assets/images/time.png');
-		this.UIInGameNew.addChild(this.movesRect)
+		this.bottomUINewContainer.addChild(this.movesRect)
+
+		this.scoreRect = new UIRectLabel(config.colors.red2, './assets/images/icons/icons8-star-48.png');
+		this.bottomUINewContainer.addChild(this.scoreRect)
 
 
-		this.backButton.on('mousedown', this.mainmenuState.bind(this)).on('touchstart', this.mainmenuState.bind(this));
-		this.backButton.interactive = true;
-		this.backButton.buttonMode = true;
-
-
-
-		this.restartButton.on('mousedown', this.resetGame.bind(this)).on('touchstart', this.resetGame.bind(this));
-		this.restartButton.interactive = true;
-		this.restartButton.buttonMode = true;
+		this.backButton = new UIButton1(config.colors.white, './assets/images/icons/icons8-menu-48.png', config.colors.dark );	
+		this.backButton.onClick.add(()=>this.mainmenuState());
+		
+		this.inGameMenu = new InGameMenu(config.colors.green);	
+		this.UIInGame.addChild(this.inGameMenu)
+		//this.UIInGame.addChild(this.backButton)
+		this.inGameMenu.onBack.add(()=>this.mainmenuState())
+		this.inGameMenu.onRestart.add(()=>this.resetGame())
 
 		this.gridContainer.alpha = 0;
 		this.updateUI();
@@ -302,7 +268,6 @@ export default class TetraScreen extends Screen {
 			if (this.currentLevelID < 0) {
 				this.endGameState();
 			} else {
-				//console.log(this.currentLevelID)
 				this.resetGame();
 			}
 		} else {
@@ -323,78 +288,39 @@ export default class TetraScreen extends Screen {
 	}
 	updateLabelsPosition() {
 
-
-		//let tempList = [this.backButton, this.restartButton, this.levelNameLabel, this.pointsLabelStatic, this.timeLabelStatic, this.roundsLabelStatic];
-		let tempList = [this.backButton, this.restartButton, this.pointsLabelStatic, this.timeLabelStatic, this.roundsLabelStatic];
-
-		this.backButton.margin = 5
-		this.backButton.customLength = 0.09
-		this.restartButton.margin = 5
-		this.restartButton.customLength = 0.09
-
-
-		// let lastScale = config.width * scales[5] - margin * 2;
-		// let labelsScale = lastScale / this.entitiesLabelStatic.width * this.entitiesLabelStatic.scale.x
-		// this.entitiesLabelStatic.scale.set(labelsScale)
-		// this.pointsLabelStatic.scale.set(labelsScale)
-		// this.roundsLabelStatic.scale.set(labelsScale)
-		// this.timeLabelStatic.scale.set(labelsScale)
-
-		//utils.horizontalListHelper(tempList);
-
-		this.entitiesLabel.scale = this.entitiesLabelStatic.scale;
-		this.entitiesLabel.x = this.entitiesLabelStatic.x;
-		this.entitiesLabel.y = this.entitiesLabelStatic.y + 20;
-
-		this.roundsLabel.scale = this.roundsLabelStatic.scale;
-		this.roundsLabel.x = this.roundsLabelStatic.x;
-		this.roundsLabel.y = this.roundsLabelStatic.y + 20;
-
-
-		this.pointsLabel.scale = this.pointsLabelStatic.scale;
-		this.pointsLabel.x = this.pointsLabelStatic.x;
-		this.pointsLabel.y = this.pointsLabelStatic.y + 20;
-
-		this.timeLabel.scale = this.timeLabelStatic.scale;
-		this.timeLabel.x = this.timeLabelStatic.x;
-		this.timeLabel.y = this.timeLabelStatic.y + 20;
-
-		this.resizeToFitAR({ width: this.topCanvas.width * 0.8, height: this.topCanvas.height }, this.UIInGame)
-
-		// this.levelNameLabel.y = this.pointsLabel.y
-		this.UIInGame.y = this.topCanvas.height / 2 - this.UIInGame.height / 2
-		utils.centerObject(this.UIInGame, this.topCanvas)
-
-		// this.levelNameLabel.text = this.currentLevelData.levelName
-
 		let nameLevelSize = { width: this.timeLabelStatic.x - this.pointsLabel.x, height: 40 }
 		nameLevelSize.width += this.timeLabelStatic.width
 
 
 		this.timerRect.scale.set(this.bottomUICanvas.height / this.timerRect.backShape.height * 0.3)
 		this.movesRect.scale.set(this.timerRect.scale.x)
+		this.scoreRect.scale.set(this.timerRect.scale.x)
+
 		this.timerRect.x = this.bottomUICanvas.x + this.bottomUICanvas.width - this.timerRect.width - this.bottomUICanvas.height * 0.1
 		this.movesRect.x = this.bottomUICanvas.x + this.bottomUICanvas.width - this.timerRect.width - this.bottomUICanvas.height * 0.1
 
+		
+		
 		this.movesRect.y = this.bottomUICanvas.height - this.movesRect.height - this.bottomUICanvas.height * 0.1
 		this.timerRect.y = this.movesRect.y - this.timerRect.height - this.bottomUICanvas.height * 0.025
 
 
+		this.scoreRect.y =this.timerRect.y 
+		this.scoreRect.x = this.bottomUICanvas.x + this.bottomUICanvas.width/2 - this.timerRect.width/2
 
 		this.containerQueue.scale.set(this.bottomUICanvas.height / CARD.height * 0.5)
 		this.containerQueue.x = this.bottomUICanvas.height * 0.1
 		this.containerQueue.y = this.movesRect.y + this.movesRect.height - this.containerQueue.height
 
-		this.backButton.x = this.containerQueue.x
-		this.backButton.y = this.containerQueue.y - this.backButton.height
+		//console.log()
+		this.backButton.scale.set(this.topCanvas.height/ (this.backButton.height  / this.backButton.scale.y) * 0.7 )// / this.backButton.scale.y)
+		this.backButton.x = this.topCanvas.x + this.topCanvas.width  - this.backButton.width * 0.5 - this.backButton.width*0.25;
+		this.backButton.y = this.backButton.height * 0.5 + this.backButton.width*0.25
 
-
-		// this.nextCardLabel.scale.set(this.bottomUICanvas.height / CARD.width * 0.6)
-
-		// this.nextCardLabel.x = this.containerQueue.x + this.containerQueue.width - this.nextCardLabel.width - (this.nextCardLabel.scale.x * CARD.width * 0.2);
-		// this.nextCardLabel.y = this.containerQueue.y + this.containerQueue.height - this.nextCardLabel.height * 0.5
-
-
+		let scaledWidth = this.inGameMenu.customWidth * this.inGameMenu.scale.x
+		this.inGameMenu.scale.set(this.topCanvas.height/ (this.inGameMenu.customWidth ) * 0.5 )// / this.inGameMenu.scale.y)
+		this.inGameMenu.x = this.topCanvas.x + this.topCanvas.width - scaledWidth * 0.5 - scaledWidth*0.5;
+		this.inGameMenu.y = scaledWidth * 0.5 + scaledWidth*0.5
 
 	}
 	hideInGameElements() {
@@ -478,7 +404,7 @@ export default class TetraScreen extends Screen {
 		let alphas = 0;
 
 
-		this.changeLabelTimer = 0;
+		this.changeLabelTimer = 0.1;
 
 		this.background = new BackgroundEffects();
 		this.addChild(this.background)
@@ -640,7 +566,8 @@ export default class TetraScreen extends Screen {
 		this.timeLabel.text = utils.convertNumToTime(Math.ceil(this.currentTime));
 
 		this.timerRect.updateLavel(utils.convertNumToTime(Math.ceil(this.currentTime)))
-		this.movesRect.updateLavel(utils.formatPointsLabel(Math.ceil(this.currentRound)), "MOVES")
+		this.movesRect.updateLavel(utils.formatPointsLabel(Math.ceil(this.currentRound)))
+		this.scoreRect.updateLavel(utils.formatPointsLabel(Math.ceil(this.currentPointsLabel)))
 	}
 	addRandomPiece() {
 	}
@@ -757,6 +684,7 @@ export default class TetraScreen extends Screen {
 		this.grid.update(delta)
 		this.startScreenContainer.update(delta)
 		this.endGameScreenContainer.update(delta)
+		this.inGameMenu.update(delta)
 
 		if (!this.gameRunning) {
 			this.topUIContainer.x = this.gameCanvas.x
@@ -897,7 +825,7 @@ export default class TetraScreen extends Screen {
 
 		}
 		//console.log(this.topUIContainer.position.y, this.topUIContainer.position + config.height * 0.1)
-		if (this.mousePosition.y < this.topUIContainer.position.y + config.height * 0.1) {
+		if (this.mousePosition.y < this.topUIContainer.position.y + config.height * 0.2) {
 			return;
 		}
 
@@ -987,7 +915,7 @@ export default class TetraScreen extends Screen {
 		utils.scaleSize(this.gameCanvas, innerResolution, this.ratio)
 
 		//this.resizeToFitAR({width:this.bottomUICanvas.width * 0.8, height:this.bottomUICanvas.height * 0.4},this.containerQueue)
-		this.resizeToFitAR({ width: this.gameCanvas.width * 0.93, height: this.gameCanvas.height * 0.8 }, this.gridContainer)
+		this.resizeToFitAR({ width: this.gameCanvas.width * 0.9, height: this.gameCanvas.height * 0.75 }, this.gridContainer)
 		this.resizeToFit({ width: this.gameCanvas.width, height: this.gameCanvas.height * 0.08 }, this.topCanvas)
 		this.resizeToFit({ width: this.gameCanvas.width, height: this.gameCanvas.height * 0.125 }, this.bottomUICanvas)
 
@@ -1014,7 +942,7 @@ export default class TetraScreen extends Screen {
 
 		if (this.currentCard) {
 			//13 is the width of the border on the grid
-			this.currentCard.y = ((this.gridContainer.height) / this.gridContainer.scale.y) - 13 / this.gridContainer.scale.y + 1;
+			this.currentCard.y = ((this.gridContainer.height) / this.gridContainer.scale.y);
 		}
 
 		//utils.centerObject(this.startScreenContainer, this)

@@ -42973,19 +42973,19 @@
 	
 	var _TetraScreen2 = _interopRequireDefault(_TetraScreen);
 	
-	var _EffectLayer = __webpack_require__(625);
+	var _EffectLayer = __webpack_require__(628);
 	
 	var _EffectLayer2 = _interopRequireDefault(_EffectLayer);
 	
-	var _BackgroundEffects = __webpack_require__(622);
+	var _BackgroundEffects = __webpack_require__(624);
 	
 	var _BackgroundEffects2 = _interopRequireDefault(_BackgroundEffects);
 	
-	var _ChooseMatchScreen = __webpack_require__(626);
+	var _ChooseMatchScreen = __webpack_require__(629);
 	
 	var _ChooseMatchScreen2 = _interopRequireDefault(_ChooseMatchScreen);
 	
-	var _Pool = __webpack_require__(627);
+	var _Pool = __webpack_require__(630);
 	
 	var _Pool2 = _interopRequireDefault(_Pool);
 	
@@ -43046,7 +43046,7 @@
 		PIXI.loader.add(element);
 	});
 	
-	PIXI.loader.add('./data/levelSections.json').add('./assets/fonts/stylesheet.css').add('./assets/images/tvlines.png').add('./assets/images/backLabel.png').add('./assets/levels.json').add('./assets/levelsRaw.json').add('./assets/images/cancel.png').add('./assets/images/cycle.png').add('./assets/images/previous-button.png').add('./assets/images/game_bg.png').add('./assets/images/enemy.png').add('./assets/images/glitch1.jpg').add('./assets/images/glitch2.jpg').add('./assets/images/particle1.png').add('./assets/images/screen_displacement.jpg').add('./assets/images/background.png').add('./assets/images/gridSquare.png').add('./assets/images/block.jpg').add('./assets/images/rect.png').add('./assets/images/time.png').add('./assets/images/lineBorder.png')
+	PIXI.loader.add('./data/levelSections.json').add('./assets/fonts/stylesheet.css').add('./assets/images/tvlines.png').add('./assets/images/backLabel.png').add('./assets/levels.json').add('./assets/levelsRaw.json').add('./assets/images/cancel.png').add('./assets/images/cycle.png').add('./assets/images/previous-button.png').add('./assets/images/game_bg.png').add('./assets/images/enemy.png').add('./assets/images/glitch1.jpg').add('./assets/images/glitch2.jpg').add('./assets/images/particle1.png').add('./assets/images/screen_displacement.jpg').add('./assets/images/background.png').add('./assets/images/gridSquare.png').add('./assets/images/block.jpg').add('./assets/images/rect.png').add('./assets/images/time.png').add('./assets/images/largeCard.png').add('./assets/images/icons/icons8-menu-48.png').add('./assets/images/icons/icons8-star-48.png').add('./assets/images/icons/icons8-back-100.png').add('./assets/images/icons/icons8-close-100.png').add('./assets/images/icons/icons8-refresh-64.png').add('./assets/images/icons/icons8-back-128.png').add('./assets/images/icons/icons8-forward-100.png').add('./assets/images/lineBorder.png')
 	// .add('./assets/images/map.jpg')
 	.load(loadJsons);
 	
@@ -58572,19 +58572,27 @@
 	
 	var _StartScreenContainer2 = _interopRequireDefault(_StartScreenContainer);
 	
-	var _EndGameContainer = __webpack_require__(621);
+	var _EndGameContainer = __webpack_require__(623);
 	
 	var _EndGameContainer2 = _interopRequireDefault(_EndGameContainer);
 	
-	var _BackgroundEffects = __webpack_require__(622);
+	var _BackgroundEffects = __webpack_require__(624);
 	
 	var _BackgroundEffects2 = _interopRequireDefault(_BackgroundEffects);
 	
-	var _UIRectLabel = __webpack_require__(624);
+	var _UIRectLabel = __webpack_require__(626);
 	
 	var _UIRectLabel2 = _interopRequireDefault(_UIRectLabel);
 	
+	var _UIButton = __webpack_require__(620);
+	
+	var _UIButton2 = _interopRequireDefault(_UIButton);
+	
 	var _webpack = __webpack_require__(260);
+	
+	var _InGameMenu = __webpack_require__(627);
+	
+	var _InGameMenu2 = _interopRequireDefault(_InGameMenu);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -58768,12 +58776,15 @@
 											}
 									}
 							}
+							container.background = background;
 							container.nodeSize = size;
 							return container;
 					}
 			}, {
 					key: 'buildUI',
 					value: function buildUI() {
+							var _this2 = this;
+	
 							this.pointsLabel = new PIXI.Text(this.currentPoints, { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: 'round_popregular' });
 							this.roundsLabel = new PIXI.Text(0, { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: 'round_popregular' });
 							this.entitiesLabel = new PIXI.Text(0, { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: 'round_popregular' });
@@ -58791,7 +58802,7 @@
 	
 							this.mainMenuContainer = new PIXI.Container();
 							this.UIInGame = new PIXI.Container();
-							this.UIInGameNew = new PIXI.Container();
+							this.bottomUINewContainer = new PIXI.Container();
 	
 							this.startScreenContainer = new _StartScreenContainer2.default(this);
 							this.mainMenuContainer.addChild(this.startScreenContainer);
@@ -58799,43 +58810,8 @@
 							this.endGameScreenContainer = new _EndGameContainer2.default(this);
 							this.mainMenuContainer.addChild(this.endGameScreenContainer);
 	
-							this.backButton = new PIXI.Graphics().beginFill(_config2.default.colors.pink).drawCircle(20, 20, 20);
-							var backIcon = PIXI.Sprite.fromImage('./assets/images/cancel.png');
-							backIcon.tint = 0x000000;
-							var sclb = this.backButton.height / backIcon.height;
-							sclb *= 0.9;
-							//backIcon.anchor = { x: 0.5, y: 0.5 }
-							backIcon.scale = { x: sclb, y: sclb };
-							_utils2.default.centerObject(backIcon, this.backButton);
-							this.backButton.addChild(backIcon);
-	
-							this.restartButton = new PIXI.Graphics().beginFill(_config2.default.colors.yellow).drawCircle(20, 20, 20);
-	
-							var restartIcon = PIXI.Sprite.fromImage('./assets/images/cycle.png');
-							restartIcon.tint = 0x000000;
-							var scl = this.restartButton.height / restartIcon.height;
-							scl *= 0.9;
-							//restartIcon.anchor = { x: 0.5, y: 0.5 }
-							restartIcon.scale = { x: scl, y: scl };
-							_utils2.default.centerObject(restartIcon, this.restartButton);
-							this.restartButton.addChild(restartIcon);
-	
-							//this.bottomUIContainer.addChild(this.UIInGame)
-							this.bottomUIContainer.addChild(this.UIInGameNew);
-							this.UIInGame.addChild(this.restartButton);
-							this.UIInGame.addChild(this.pointsLabelStatic);
-							this.UIInGame.addChild(this.roundsLabelStatic);
-							//this.UIInGame.addChild(this.entitiesLabelStatic)
-							this.UIInGame.addChild(this.timeLabelStatic);
-							//this.UIInGame.addChild(this.levelNameLabel)
-							this.UIInGame.addChild(this.pointsLabel);
-							this.UIInGame.addChild(this.roundsLabel);
-							//this.UIInGame.addChild(this.entitiesLabel)
-							this.UIInGame.addChild(this.timeLabel);
-							//this.UIInGame.y = -400;
-	
-							// this.startScreenContainer.x = this.width / 2
-							// this.startScreenContainer.y = this.height / 2
+							this.topUIContainer.addChild(this.UIInGame);
+							this.bottomUIContainer.addChild(this.bottomUINewContainer);
 	
 							this.startScreenContainer.addEvents();
 	
@@ -58846,27 +58822,32 @@
 	
 							this.UIContainer.addChild(this.mainMenuContainer);
 	
-							//this.UIContainer.addChild();
-							// this.nextCardLabel =  new PIXI.Text("Next", { font: '18px', fill: 0xFFFFFF, align: 'center', fontWeight: '800', fontFamily: 'round_popregular' });
-							// this.UIInGameNew.addChild(this.nextCardLabel)
-							this.UIInGameNew.addChild(this.backButton);
-	
 							this.containerQueue = new PIXI.Container();
-							this.UIInGameNew.addChild(this.containerQueue);
+							this.bottomUINewContainer.addChild(this.containerQueue);
 	
 							this.timerRect = new _UIRectLabel2.default(_config2.default.colors.yellow, './assets/images/time.png');
-							this.UIInGameNew.addChild(this.timerRect);
+							this.bottomUINewContainer.addChild(this.timerRect);
 	
 							this.movesRect = new _UIRectLabel2.default(_config2.default.colors.green, './assets/images/time.png');
-							this.UIInGameNew.addChild(this.movesRect);
+							this.bottomUINewContainer.addChild(this.movesRect);
 	
-							this.backButton.on('mousedown', this.mainmenuState.bind(this)).on('touchstart', this.mainmenuState.bind(this));
-							this.backButton.interactive = true;
-							this.backButton.buttonMode = true;
+							this.scoreRect = new _UIRectLabel2.default(_config2.default.colors.red2, './assets/images/icons/icons8-star-48.png');
+							this.bottomUINewContainer.addChild(this.scoreRect);
 	
-							this.restartButton.on('mousedown', this.resetGame.bind(this)).on('touchstart', this.resetGame.bind(this));
-							this.restartButton.interactive = true;
-							this.restartButton.buttonMode = true;
+							this.backButton = new _UIButton2.default(_config2.default.colors.white, './assets/images/icons/icons8-menu-48.png', _config2.default.colors.dark);
+							this.backButton.onClick.add(function () {
+									return _this2.mainmenuState();
+							});
+	
+							this.inGameMenu = new _InGameMenu2.default(_config2.default.colors.green);
+							this.UIInGame.addChild(this.inGameMenu);
+							//this.UIInGame.addChild(this.backButton)
+							this.inGameMenu.onBack.add(function () {
+									return _this2.mainmenuState();
+							});
+							this.inGameMenu.onRestart.add(function () {
+									return _this2.resetGame();
+							});
 	
 							this.gridContainer.alpha = 0;
 							this.updateUI();
@@ -58877,7 +58858,6 @@
 									if (this.currentLevelID < 0) {
 											this.endGameState();
 									} else {
-											//console.log(this.currentLevelID)
 											this.resetGame();
 									}
 							} else {
@@ -58900,70 +58880,35 @@
 					key: 'updateLabelsPosition',
 					value: function updateLabelsPosition() {
 	
-							//let tempList = [this.backButton, this.restartButton, this.levelNameLabel, this.pointsLabelStatic, this.timeLabelStatic, this.roundsLabelStatic];
-							var tempList = [this.backButton, this.restartButton, this.pointsLabelStatic, this.timeLabelStatic, this.roundsLabelStatic];
-	
-							this.backButton.margin = 5;
-							this.backButton.customLength = 0.09;
-							this.restartButton.margin = 5;
-							this.restartButton.customLength = 0.09;
-	
-							// let lastScale = config.width * scales[5] - margin * 2;
-							// let labelsScale = lastScale / this.entitiesLabelStatic.width * this.entitiesLabelStatic.scale.x
-							// this.entitiesLabelStatic.scale.set(labelsScale)
-							// this.pointsLabelStatic.scale.set(labelsScale)
-							// this.roundsLabelStatic.scale.set(labelsScale)
-							// this.timeLabelStatic.scale.set(labelsScale)
-	
-							//utils.horizontalListHelper(tempList);
-	
-							this.entitiesLabel.scale = this.entitiesLabelStatic.scale;
-							this.entitiesLabel.x = this.entitiesLabelStatic.x;
-							this.entitiesLabel.y = this.entitiesLabelStatic.y + 20;
-	
-							this.roundsLabel.scale = this.roundsLabelStatic.scale;
-							this.roundsLabel.x = this.roundsLabelStatic.x;
-							this.roundsLabel.y = this.roundsLabelStatic.y + 20;
-	
-							this.pointsLabel.scale = this.pointsLabelStatic.scale;
-							this.pointsLabel.x = this.pointsLabelStatic.x;
-							this.pointsLabel.y = this.pointsLabelStatic.y + 20;
-	
-							this.timeLabel.scale = this.timeLabelStatic.scale;
-							this.timeLabel.x = this.timeLabelStatic.x;
-							this.timeLabel.y = this.timeLabelStatic.y + 20;
-	
-							this.resizeToFitAR({ width: this.topCanvas.width * 0.8, height: this.topCanvas.height }, this.UIInGame);
-	
-							// this.levelNameLabel.y = this.pointsLabel.y
-							this.UIInGame.y = this.topCanvas.height / 2 - this.UIInGame.height / 2;
-							_utils2.default.centerObject(this.UIInGame, this.topCanvas);
-	
-							// this.levelNameLabel.text = this.currentLevelData.levelName
-	
 							var nameLevelSize = { width: this.timeLabelStatic.x - this.pointsLabel.x, height: 40 };
 							nameLevelSize.width += this.timeLabelStatic.width;
 	
 							this.timerRect.scale.set(this.bottomUICanvas.height / this.timerRect.backShape.height * 0.3);
 							this.movesRect.scale.set(this.timerRect.scale.x);
+							this.scoreRect.scale.set(this.timerRect.scale.x);
+	
 							this.timerRect.x = this.bottomUICanvas.x + this.bottomUICanvas.width - this.timerRect.width - this.bottomUICanvas.height * 0.1;
 							this.movesRect.x = this.bottomUICanvas.x + this.bottomUICanvas.width - this.timerRect.width - this.bottomUICanvas.height * 0.1;
 	
 							this.movesRect.y = this.bottomUICanvas.height - this.movesRect.height - this.bottomUICanvas.height * 0.1;
 							this.timerRect.y = this.movesRect.y - this.timerRect.height - this.bottomUICanvas.height * 0.025;
 	
+							this.scoreRect.y = this.timerRect.y;
+							this.scoreRect.x = this.bottomUICanvas.x + this.bottomUICanvas.width / 2 - this.timerRect.width / 2;
+	
 							this.containerQueue.scale.set(this.bottomUICanvas.height / CARD.height * 0.5);
 							this.containerQueue.x = this.bottomUICanvas.height * 0.1;
 							this.containerQueue.y = this.movesRect.y + this.movesRect.height - this.containerQueue.height;
 	
-							this.backButton.x = this.containerQueue.x;
-							this.backButton.y = this.containerQueue.y - this.backButton.height;
+							//console.log()
+							this.backButton.scale.set(this.topCanvas.height / (this.backButton.height / this.backButton.scale.y) * 0.7); // / this.backButton.scale.y)
+							this.backButton.x = this.topCanvas.x + this.topCanvas.width - this.backButton.width * 0.5 - this.backButton.width * 0.25;
+							this.backButton.y = this.backButton.height * 0.5 + this.backButton.width * 0.25;
 	
-							// this.nextCardLabel.scale.set(this.bottomUICanvas.height / CARD.width * 0.6)
-	
-							// this.nextCardLabel.x = this.containerQueue.x + this.containerQueue.width - this.nextCardLabel.width - (this.nextCardLabel.scale.x * CARD.width * 0.2);
-							// this.nextCardLabel.y = this.containerQueue.y + this.containerQueue.height - this.nextCardLabel.height * 0.5
-	
+							var scaledWidth = this.inGameMenu.customWidth * this.inGameMenu.scale.x;
+							this.inGameMenu.scale.set(this.topCanvas.height / this.inGameMenu.customWidth * 0.5); // / this.inGameMenu.scale.y)
+							this.inGameMenu.x = this.topCanvas.x + this.topCanvas.width - scaledWidth * 0.5 - scaledWidth * 0.5;
+							this.inGameMenu.y = scaledWidth * 0.5 + scaledWidth * 0.5;
 					}
 			}, {
 					key: 'hideInGameElements',
@@ -59034,11 +58979,11 @@
 			}, {
 					key: 'gameState',
 					value: function gameState() {
-							var _this2 = this;
+							var _this3 = this;
 	
 							setTimeout(function () {
 	
-									_this2.gameRunning = true;
+									_this3.gameRunning = true;
 							}, 500);
 	
 							this.currentTime = 0;
@@ -59057,7 +59002,7 @@
 	
 							var alphas = 0;
 	
-							this.changeLabelTimer = 0;
+							this.changeLabelTimer = 0.1;
 	
 							this.background = new _BackgroundEffects2.default();
 							this.addChild(this.background);
@@ -59140,7 +59085,7 @@
 			}, {
 					key: 'resetGame',
 					value: function resetGame() {
-							var _this3 = this;
+							var _this4 = this;
 	
 							this.gameState();
 							if (this.currentLevelID < 0) {
@@ -59187,7 +59132,7 @@
 	
 							_gsap2.default.to(this.cardsContainer, 0.1, { alpha: 1 });
 							_gsap2.default.to(this.gridContainer, 0.1, { alpha: 1, onComplete: function onComplete() {
-											_this3.gameState();
+											_this4.gameState();
 									} });
 							//TweenLite.to(this.UIInGame, 0.75, { y: 0, ease: Cubic.easeOut, onComplete: () => { this.gameState() } })
 	
@@ -59212,7 +59157,8 @@
 							this.timeLabel.text = _utils2.default.convertNumToTime(Math.ceil(this.currentTime));
 	
 							this.timerRect.updateLavel(_utils2.default.convertNumToTime(Math.ceil(this.currentTime)));
-							this.movesRect.updateLavel(_utils2.default.formatPointsLabel(Math.ceil(this.currentRound)), "MOVES");
+							this.movesRect.updateLavel(_utils2.default.formatPointsLabel(Math.ceil(this.currentRound)));
+							this.scoreRect.updateLavel(_utils2.default.formatPointsLabel(Math.ceil(this.currentPointsLabel)));
 					}
 			}, {
 					key: 'addRandomPiece',
@@ -59338,6 +59284,7 @@
 							this.grid.update(delta);
 							this.startScreenContainer.update(delta);
 							this.endGameScreenContainer.update(delta);
+							this.inGameMenu.update(delta);
 	
 							if (!this.gameRunning) {
 									this.topUIContainer.x = this.gameCanvas.x;
@@ -59475,7 +59422,7 @@
 									this.mousePosition = renderer.plugins.interaction.mouse.global;
 							}
 							//console.log(this.topUIContainer.position.y, this.topUIContainer.position + config.height * 0.1)
-							if (this.mousePosition.y < this.topUIContainer.position.y + _config2.default.height * 0.1) {
+							if (this.mousePosition.y < this.topUIContainer.position.y + _config2.default.height * 0.2) {
 									return;
 							}
 	
@@ -59568,7 +59515,7 @@
 							_utils2.default.scaleSize(this.gameCanvas, innerResolution, this.ratio);
 	
 							//this.resizeToFitAR({width:this.bottomUICanvas.width * 0.8, height:this.bottomUICanvas.height * 0.4},this.containerQueue)
-							this.resizeToFitAR({ width: this.gameCanvas.width * 0.93, height: this.gameCanvas.height * 0.8 }, this.gridContainer);
+							this.resizeToFitAR({ width: this.gameCanvas.width * 0.9, height: this.gameCanvas.height * 0.75 }, this.gridContainer);
 							this.resizeToFit({ width: this.gameCanvas.width, height: this.gameCanvas.height * 0.08 }, this.topCanvas);
 							this.resizeToFit({ width: this.gameCanvas.width, height: this.gameCanvas.height * 0.125 }, this.bottomUICanvas);
 	
@@ -59593,7 +59540,7 @@
 	
 							if (this.currentCard) {
 									//13 is the width of the border on the grid
-									this.currentCard.y = this.gridContainer.height / this.gridContainer.scale.y - 13 / this.gridContainer.scale.y + 1;
+									this.currentCard.y = this.gridContainer.height / this.gridContainer.scale.y;
 							}
 	
 							//utils.centerObject(this.startScreenContainer, this)
@@ -59719,7 +59666,7 @@
 						gridSquare.y = j * CARD.height;
 	
 						gridSquare.alpha = Math.random() * 0.15 + 0.075;
-						gridSquare.speed = 0.25;
+						gridSquare.speed = 0.35;
 						gridSquare.startAlpha = gridSquare.alpha;
 						gridSquare.sin = Math.random() * Math.PI * 2;
 	
@@ -59729,31 +59676,32 @@
 					}
 				}
 	
-				for (var i = GRID.j - 1; i >= 0; i--) {
-					var line = new PIXI.Sprite.fromImage('./assets/images/lineBorder.png');
-					line.y = i * CARD.width;
-					line.x = -line.width;
-					line.height = CARD.height;
-					gridContainer.addChild(line);
-				}
+				// for (var i = GRID.j-1; i >= 0; i--) {
+				// 	let line = new PIXI.Sprite.fromImage('./assets/images/lineBorder.png')
+				// 	line.y = i * CARD.width;
+				// 	line.x = - line.width
+				// 	line.height = CARD.height;
+				// 	gridContainer.addChild(line)
+				// }
 	
-				for (var i = GRID.j - 1; i >= 0; i--) {
-					var _line = new PIXI.Sprite.fromImage('./assets/images/lineBorder.png');
-					_line.y = i * CARD.width + CARD.height;
-					_line.rotation = Math.PI;
-					_line.x = GRID.i * CARD.width + _line.width;
-					_line.height = CARD.height;
-					gridContainer.addChild(_line);
-				}
+				// for (var i = GRID.j-1; i >= 0; i--) {
+				// 	let line = new PIXI.Sprite.fromImage('./assets/images/lineBorder.png')
+				// 	line.y = i * CARD.width + CARD.height;
+				// 	line.rotation = Math.PI;
+				// 	line.x = GRID.i * CARD.width + line.width
+				// 	line.height = CARD.height;
+				// 	gridContainer.addChild(line)
+				// }
 	
-				for (var i = GRID.i; i > 0; i--) {
-					var _line2 = new PIXI.Sprite.fromImage('./assets/images/lineBorder.png');
-					_line2.y = -_line2.width;
-					_line2.rotation = Math.PI * 0.5;
-					_line2.x = i * CARD.width;
-					_line2.height = CARD.height;
-					gridContainer.addChild(_line2);
-				}
+				// for (var i = GRID.i; i > 0; i--) {
+				// 	let line = new PIXI.Sprite.fromImage('./assets/images/lineBorder.png')
+				// 	line.y = - line.width;
+				// 	line.rotation = Math.PI * 0.5;
+				// 	line.x = i * CARD.width
+				// 	line.height = CARD.height;
+				// 	gridContainer.addChild(line)
+				// }
+	
 	
 				gridContainer.alpha = 1;
 	
@@ -60004,7 +59952,7 @@
 						this.backshape.parent.removeChild(this.backshape);
 					}
 					this.backshape = new PIXI.Graphics();
-					//this.backshape.lineStyle(3, this.enemySprite.tint, 1);
+					this.backshape.lineStyle(3, this.enemySprite.tint, 1);
 					this.backshape.beginFill(this.enemySprite.tint);
 					//this.backshape.drawCircle(0, 0, CARD.width * 0.5);
 					this.backshape.drawRect(CARD.width * -0.5, CARD.width * -0.5, CARD.width, CARD.width);
@@ -60901,6 +60849,7 @@
 				TweenLite.to(tempLabel, 1, {
 					delay: delay, y: tempLabel.y - 50 * dir, onStartParams: [tempLabel], onStart: function onStart(temp) {
 						temp.alpha = 1;
+						temp.parent.addChild(temp);
 					}
 				});
 				TweenLite.to(tempLabel, 0.5, {
@@ -103425,7 +103374,11 @@
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
-	var _LevelSelectContainer = __webpack_require__(620);
+	var _UIButton = __webpack_require__(620);
+	
+	var _UIButton2 = _interopRequireDefault(_UIButton);
+	
+	var _LevelSelectContainer = __webpack_require__(622);
 	
 	var _LevelSelectContainer2 = _interopRequireDefault(_LevelSelectContainer);
 	
@@ -103513,15 +103466,22 @@
 	
 					_this.playLine.on('mousedown', _this.resetGame.bind(_this)).on('touchstart', _this.resetGame.bind(_this));
 	
-					_this.backButton = new PIXI.Graphics().beginFill(window.config.colors.red).drawCircle(0, 0, 40);
+					_this.backButton = new _UIButton2.default(_config2.default.colors.red2, './assets/images/icons/icons8-close-100.png', _config2.default.colors.white);
+					_this.backButton.onClick.add(function () {
+							console.log("TO START");
+							_this.startState(0);
+					});
+	
+					// this.backButton = new PIXI.Graphics().beginFill(window.config.colors.red).drawCircle(0, 0, 40);
 					_this.addChild(_this.backButton);
 	
-					_this.backButton.x = _config2.default.width + _this.backButton.width;
+					// this.backButton.x = config.width + this.backButton.width;
 	
-					_this.backButton.buttonMode = true;
-					_this.backButton.interactive = true;
+					// this.backButton.buttonMode = true;
+					// this.backButton.interactive = true;
 	
-					_this.backButton.on('mousedown', _this.startState.bind(_this)).on('touchstart', _this.startState.bind(_this));
+					// this.backButton.on('mousedown', this.startState.bind(this)).on('touchstart', this.startState.bind(this));
+	
 	
 					_this.playButton = new PIXI.Graphics().beginFill(window.config.colors.blue).drawCircle(0, 0, 50);
 					//this.levelSelectionContainer.addChild(this.playButton);
@@ -103793,6 +103753,553 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
+					value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _pixi = __webpack_require__(1);
+	
+	var PIXI = _interopRequireWildcard(_pixi);
+	
+	var _signals = __webpack_require__(621);
+	
+	var signals = _interopRequireWildcard(_signals);
+	
+	var _gsap = __webpack_require__(229);
+	
+	var _gsap2 = _interopRequireDefault(_gsap);
+	
+	var _config = __webpack_require__(225);
+	
+	var _config2 = _interopRequireDefault(_config);
+	
+	var _utils = __webpack_require__(233);
+	
+	var _utils2 = _interopRequireDefault(_utils);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var UIButton1 = function (_PIXI$Container) {
+					_inherits(UIButton1, _PIXI$Container);
+	
+					function UIButton1(color, icon, iconColor) {
+									_classCallCheck(this, UIButton1);
+	
+									var _this = _possibleConstructorReturn(this, (UIButton1.__proto__ || Object.getPrototypeOf(UIButton1)).call(this));
+	
+									_this.mainContainer = new PIXI.Container();
+									//this.backShape = PIXI.Sprite.fromImage('./assets/images/rect.png');
+									_this.icon = PIXI.Sprite.fromImage(icon);
+									_this.icon.tint = iconColor;
+	
+									var width = 60;
+									_this.backShape = new PIXI.Graphics();
+									//this.backShape.lineStyle(3, color, 1);
+									_this.backShape.beginFill(color);
+									_this.backShape.drawRect(-width / 2, -width / 2, width, width);
+									_this.backShape.endFill();
+									_this.backShape.alpha = 1;
+									_this.backShape.rotation = Math.PI * 0.25;
+									_this.icon.anchor.set(0.5);
+	
+									_this.icon.scale.set(_this.backShape.height / _this.icon.height * 0.7);
+									_this.mainContainer.addChild(_this.backShape);
+									_this.mainContainer.addChild(_this.icon);
+									_this.addChild(_this.mainContainer);
+	
+									_this.onClick = new signals.Signal();
+	
+									_this.on('touchstart', _this.click.bind(_this));
+									_this.interactive = true;
+									_this.buttonMode = true;
+									return _this;
+					}
+	
+					_createClass(UIButton1, [{
+									key: 'click',
+									value: function click() {
+													this.onClick.dispatch();
+									}
+					}, {
+									key: 'updateTexture',
+									value: function updateTexture(texture) {
+													this.icon.texture = PIXI.Texture.fromImage(texture);
+													this.icon.scale.set(this.backShape.height / this.icon.height * 0.7 * this.icon.scale.x);
+									}
+					}]);
+	
+					return UIButton1;
+	}(PIXI.Container);
+	
+	exports.default = UIButton1;
+
+/***/ }),
+/* 621 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_RESULT__;/*jslint onevar:true, undef:true, newcap:true, regexp:true, bitwise:true, maxerr:50, indent:4, white:false, nomen:false, plusplus:false */
+	/*global define:false, require:false, exports:false, module:false, signals:false */
+	
+	/** @license
+	 * JS Signals <http://millermedeiros.github.com/js-signals/>
+	 * Released under the MIT license
+	 * Author: Miller Medeiros
+	 * Version: 1.0.0 - Build: 268 (2012/11/29 05:48 PM)
+	 */
+	
+	(function(global){
+	
+	    // SignalBinding -------------------------------------------------
+	    //================================================================
+	
+	    /**
+	     * Object that represents a binding between a Signal and a listener function.
+	     * <br />- <strong>This is an internal constructor and shouldn't be called by regular users.</strong>
+	     * <br />- inspired by Joa Ebert AS3 SignalBinding and Robert Penner's Slot classes.
+	     * @author Miller Medeiros
+	     * @constructor
+	     * @internal
+	     * @name SignalBinding
+	     * @param {Signal} signal Reference to Signal object that listener is currently bound to.
+	     * @param {Function} listener Handler function bound to the signal.
+	     * @param {boolean} isOnce If binding should be executed just once.
+	     * @param {Object} [listenerContext] Context on which listener will be executed (object that should represent the `this` variable inside listener function).
+	     * @param {Number} [priority] The priority level of the event listener. (default = 0).
+	     */
+	    function SignalBinding(signal, listener, isOnce, listenerContext, priority) {
+	
+	        /**
+	         * Handler function bound to the signal.
+	         * @type Function
+	         * @private
+	         */
+	        this._listener = listener;
+	
+	        /**
+	         * If binding should be executed just once.
+	         * @type boolean
+	         * @private
+	         */
+	        this._isOnce = isOnce;
+	
+	        /**
+	         * Context on which listener will be executed (object that should represent the `this` variable inside listener function).
+	         * @memberOf SignalBinding.prototype
+	         * @name context
+	         * @type Object|undefined|null
+	         */
+	        this.context = listenerContext;
+	
+	        /**
+	         * Reference to Signal object that listener is currently bound to.
+	         * @type Signal
+	         * @private
+	         */
+	        this._signal = signal;
+	
+	        /**
+	         * Listener priority
+	         * @type Number
+	         * @private
+	         */
+	        this._priority = priority || 0;
+	    }
+	
+	    SignalBinding.prototype = {
+	
+	        /**
+	         * If binding is active and should be executed.
+	         * @type boolean
+	         */
+	        active : true,
+	
+	        /**
+	         * Default parameters passed to listener during `Signal.dispatch` and `SignalBinding.execute`. (curried parameters)
+	         * @type Array|null
+	         */
+	        params : null,
+	
+	        /**
+	         * Call listener passing arbitrary parameters.
+	         * <p>If binding was added using `Signal.addOnce()` it will be automatically removed from signal dispatch queue, this method is used internally for the signal dispatch.</p>
+	         * @param {Array} [paramsArr] Array of parameters that should be passed to the listener
+	         * @return {*} Value returned by the listener.
+	         */
+	        execute : function (paramsArr) {
+	            var handlerReturn, params;
+	            if (this.active && !!this._listener) {
+	                params = this.params? this.params.concat(paramsArr) : paramsArr;
+	                handlerReturn = this._listener.apply(this.context, params);
+	                if (this._isOnce) {
+	                    this.detach();
+	                }
+	            }
+	            return handlerReturn;
+	        },
+	
+	        /**
+	         * Detach binding from signal.
+	         * - alias to: mySignal.remove(myBinding.getListener());
+	         * @return {Function|null} Handler function bound to the signal or `null` if binding was previously detached.
+	         */
+	        detach : function () {
+	            return this.isBound()? this._signal.remove(this._listener, this.context) : null;
+	        },
+	
+	        /**
+	         * @return {Boolean} `true` if binding is still bound to the signal and have a listener.
+	         */
+	        isBound : function () {
+	            return (!!this._signal && !!this._listener);
+	        },
+	
+	        /**
+	         * @return {boolean} If SignalBinding will only be executed once.
+	         */
+	        isOnce : function () {
+	            return this._isOnce;
+	        },
+	
+	        /**
+	         * @return {Function} Handler function bound to the signal.
+	         */
+	        getListener : function () {
+	            return this._listener;
+	        },
+	
+	        /**
+	         * @return {Signal} Signal that listener is currently bound to.
+	         */
+	        getSignal : function () {
+	            return this._signal;
+	        },
+	
+	        /**
+	         * Delete instance properties
+	         * @private
+	         */
+	        _destroy : function () {
+	            delete this._signal;
+	            delete this._listener;
+	            delete this.context;
+	        },
+	
+	        /**
+	         * @return {string} String representation of the object.
+	         */
+	        toString : function () {
+	            return '[SignalBinding isOnce:' + this._isOnce +', isBound:'+ this.isBound() +', active:' + this.active + ']';
+	        }
+	
+	    };
+	
+	
+	/*global SignalBinding:false*/
+	
+	    // Signal --------------------------------------------------------
+	    //================================================================
+	
+	    function validateListener(listener, fnName) {
+	        if (typeof listener !== 'function') {
+	            throw new Error( 'listener is a required param of {fn}() and should be a Function.'.replace('{fn}', fnName) );
+	        }
+	    }
+	
+	    /**
+	     * Custom event broadcaster
+	     * <br />- inspired by Robert Penner's AS3 Signals.
+	     * @name Signal
+	     * @author Miller Medeiros
+	     * @constructor
+	     */
+	    function Signal() {
+	        /**
+	         * @type Array.<SignalBinding>
+	         * @private
+	         */
+	        this._bindings = [];
+	        this._prevParams = null;
+	
+	        // enforce dispatch to aways work on same context (#47)
+	        var self = this;
+	        this.dispatch = function(){
+	            Signal.prototype.dispatch.apply(self, arguments);
+	        };
+	    }
+	
+	    Signal.prototype = {
+	
+	        /**
+	         * Signals Version Number
+	         * @type String
+	         * @const
+	         */
+	        VERSION : '1.0.0',
+	
+	        /**
+	         * If Signal should keep record of previously dispatched parameters and
+	         * automatically execute listener during `add()`/`addOnce()` if Signal was
+	         * already dispatched before.
+	         * @type boolean
+	         */
+	        memorize : false,
+	
+	        /**
+	         * @type boolean
+	         * @private
+	         */
+	        _shouldPropagate : true,
+	
+	        /**
+	         * If Signal is active and should broadcast events.
+	         * <p><strong>IMPORTANT:</strong> Setting this property during a dispatch will only affect the next dispatch, if you want to stop the propagation of a signal use `halt()` instead.</p>
+	         * @type boolean
+	         */
+	        active : true,
+	
+	        /**
+	         * @param {Function} listener
+	         * @param {boolean} isOnce
+	         * @param {Object} [listenerContext]
+	         * @param {Number} [priority]
+	         * @return {SignalBinding}
+	         * @private
+	         */
+	        _registerListener : function (listener, isOnce, listenerContext, priority) {
+	
+	            var prevIndex = this._indexOfListener(listener, listenerContext),
+	                binding;
+	
+	            if (prevIndex !== -1) {
+	                binding = this._bindings[prevIndex];
+	                if (binding.isOnce() !== isOnce) {
+	                    throw new Error('You cannot add'+ (isOnce? '' : 'Once') +'() then add'+ (!isOnce? '' : 'Once') +'() the same listener without removing the relationship first.');
+	                }
+	            } else {
+	                binding = new SignalBinding(this, listener, isOnce, listenerContext, priority);
+	                this._addBinding(binding);
+	            }
+	
+	            if(this.memorize && this._prevParams){
+	                binding.execute(this._prevParams);
+	            }
+	
+	            return binding;
+	        },
+	
+	        /**
+	         * @param {SignalBinding} binding
+	         * @private
+	         */
+	        _addBinding : function (binding) {
+	            //simplified insertion sort
+	            var n = this._bindings.length;
+	            do { --n; } while (this._bindings[n] && binding._priority <= this._bindings[n]._priority);
+	            this._bindings.splice(n + 1, 0, binding);
+	        },
+	
+	        /**
+	         * @param {Function} listener
+	         * @return {number}
+	         * @private
+	         */
+	        _indexOfListener : function (listener, context) {
+	            var n = this._bindings.length,
+	                cur;
+	            while (n--) {
+	                cur = this._bindings[n];
+	                if (cur._listener === listener && cur.context === context) {
+	                    return n;
+	                }
+	            }
+	            return -1;
+	        },
+	
+	        /**
+	         * Check if listener was attached to Signal.
+	         * @param {Function} listener
+	         * @param {Object} [context]
+	         * @return {boolean} if Signal has the specified listener.
+	         */
+	        has : function (listener, context) {
+	            return this._indexOfListener(listener, context) !== -1;
+	        },
+	
+	        /**
+	         * Add a listener to the signal.
+	         * @param {Function} listener Signal handler function.
+	         * @param {Object} [listenerContext] Context on which listener will be executed (object that should represent the `this` variable inside listener function).
+	         * @param {Number} [priority] The priority level of the event listener. Listeners with higher priority will be executed before listeners with lower priority. Listeners with same priority level will be executed at the same order as they were added. (default = 0)
+	         * @return {SignalBinding} An Object representing the binding between the Signal and listener.
+	         */
+	        add : function (listener, listenerContext, priority) {
+	            validateListener(listener, 'add');
+	            return this._registerListener(listener, false, listenerContext, priority);
+	        },
+	
+	        /**
+	         * Add listener to the signal that should be removed after first execution (will be executed only once).
+	         * @param {Function} listener Signal handler function.
+	         * @param {Object} [listenerContext] Context on which listener will be executed (object that should represent the `this` variable inside listener function).
+	         * @param {Number} [priority] The priority level of the event listener. Listeners with higher priority will be executed before listeners with lower priority. Listeners with same priority level will be executed at the same order as they were added. (default = 0)
+	         * @return {SignalBinding} An Object representing the binding between the Signal and listener.
+	         */
+	        addOnce : function (listener, listenerContext, priority) {
+	            validateListener(listener, 'addOnce');
+	            return this._registerListener(listener, true, listenerContext, priority);
+	        },
+	
+	        /**
+	         * Remove a single listener from the dispatch queue.
+	         * @param {Function} listener Handler function that should be removed.
+	         * @param {Object} [context] Execution context (since you can add the same handler multiple times if executing in a different context).
+	         * @return {Function} Listener handler function.
+	         */
+	        remove : function (listener, context) {
+	            validateListener(listener, 'remove');
+	
+	            var i = this._indexOfListener(listener, context);
+	            if (i !== -1) {
+	                this._bindings[i]._destroy(); //no reason to a SignalBinding exist if it isn't attached to a signal
+	                this._bindings.splice(i, 1);
+	            }
+	            return listener;
+	        },
+	
+	        /**
+	         * Remove all listeners from the Signal.
+	         */
+	        removeAll : function () {
+	            var n = this._bindings.length;
+	            while (n--) {
+	                this._bindings[n]._destroy();
+	            }
+	            this._bindings.length = 0;
+	        },
+	
+	        /**
+	         * @return {number} Number of listeners attached to the Signal.
+	         */
+	        getNumListeners : function () {
+	            return this._bindings.length;
+	        },
+	
+	        /**
+	         * Stop propagation of the event, blocking the dispatch to next listeners on the queue.
+	         * <p><strong>IMPORTANT:</strong> should be called only during signal dispatch, calling it before/after dispatch won't affect signal broadcast.</p>
+	         * @see Signal.prototype.disable
+	         */
+	        halt : function () {
+	            this._shouldPropagate = false;
+	        },
+	
+	        /**
+	         * Dispatch/Broadcast Signal to all listeners added to the queue.
+	         * @param {...*} [params] Parameters that should be passed to each handler.
+	         */
+	        dispatch : function (params) {
+	            if (! this.active) {
+	                return;
+	            }
+	
+	            var paramsArr = Array.prototype.slice.call(arguments),
+	                n = this._bindings.length,
+	                bindings;
+	
+	            if (this.memorize) {
+	                this._prevParams = paramsArr;
+	            }
+	
+	            if (! n) {
+	                //should come after memorize
+	                return;
+	            }
+	
+	            bindings = this._bindings.slice(); //clone array in case add/remove items during dispatch
+	            this._shouldPropagate = true; //in case `halt` was called before dispatch or during the previous dispatch.
+	
+	            //execute all callbacks until end of the list or until a callback returns `false` or stops propagation
+	            //reverse loop since listeners with higher priority will be added at the end of the list
+	            do { n--; } while (bindings[n] && this._shouldPropagate && bindings[n].execute(paramsArr) !== false);
+	        },
+	
+	        /**
+	         * Forget memorized arguments.
+	         * @see Signal.memorize
+	         */
+	        forget : function(){
+	            this._prevParams = null;
+	        },
+	
+	        /**
+	         * Remove all bindings from signal and destroy any reference to external objects (destroy Signal object).
+	         * <p><strong>IMPORTANT:</strong> calling any method on the signal instance after calling dispose will throw errors.</p>
+	         */
+	        dispose : function () {
+	            this.removeAll();
+	            delete this._bindings;
+	            delete this._prevParams;
+	        },
+	
+	        /**
+	         * @return {string} String representation of the object.
+	         */
+	        toString : function () {
+	            return '[Signal active:'+ this.active +' numListeners:'+ this.getNumListeners() +']';
+	        }
+	
+	    };
+	
+	
+	    // Namespace -----------------------------------------------------
+	    //================================================================
+	
+	    /**
+	     * Signals namespace
+	     * @namespace
+	     * @name signals
+	     */
+	    var signals = Signal;
+	
+	    /**
+	     * Custom event broadcaster
+	     * @see Signal
+	     */
+	    // alias for backwards compatibility (see #gh-44)
+	    signals.Signal = Signal;
+	
+	
+	
+	    //exports to multiple environments
+	    if(true){ //AMD
+	        !(__WEBPACK_AMD_DEFINE_RESULT__ = function () { return signals; }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	    } else if (typeof module !== 'undefined' && module.exports){ //node
+	        module.exports = signals;
+	    } else { //browser
+	        //use string because of Google closure compiler ADVANCED_MODE
+	        /*jslint sub:true */
+	        global['signals'] = signals;
+	    }
+	
+	}(this));
+
+
+/***/ }),
+/* 622 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
 	        value: true
 	});
 	
@@ -103848,6 +104355,8 @@
 	                _this.sections = window.levelSections.sections;
 	                console.log(_this.sections);
 	
+	                _this.unscaledCardSize = { width: window.innerWidth / 5, height: window.innerWidth / 5 };
+	
 	                _this.mainCanvas = new PIXI.Graphics().beginFill(0xFF0000).drawRect(0, 0, _config2.default.width, _config2.default.height);
 	                _this.addChild(_this.mainCanvas);
 	                _this.mainCanvas.alpha = 0;
@@ -103862,25 +104371,30 @@
 	                _this.tiersContainer = new PIXI.Container();
 	                _this.tiersView = new PIXI.Container();
 	
-	                _this.unscaledCardSize = { width: _config2.default.width / 5, height: _config2.default.width / 5
-	                        //this.unscaledButtonSize = { width: 200, height: 200 }
+	                //this.unscaledButtonSize = { width: 200, height: 200 }
 	
-	                        // this.backButton = new PIXI.Graphics().beginFill(0xFF0000).drawRect(0, 0, this.unscaledButtonSize.width, this.unscaledButtonSize.height);
-	                        // //this.addChild(this.backButton);
+	                // this.backButton = new PIXI.Graphics().beginFill(0xFF0000).drawRect(0, 0, this.unscaledButtonSize.width, this.unscaledButtonSize.height);
+	                // //this.addChild(this.backButton);
 	
-	                        // this.backButton.x = config.width + this.backButton.width;
+	                // this.backButton.x = config.width + this.backButton.width;
 	
-	                        // this.backButton.buttonMode = true;
-	                        // this.backButton.interactive = true;
+	                // this.backButton.buttonMode = true;
+	                // this.backButton.interactive = true;
 	
-	                        // this.backButton.on('mousedown', this.onBack.bind(this)).on('touchstart', this.onBack.bind(this));
+	                // this.backButton.on('mousedown', this.onBack.bind(this)).on('touchstart', this.onBack.bind(this));
 	
-	                };_this.currentSection = "";
+	                _this.currentSection = "";
 	                _this.currentTier = "";
 	                _this.sectionButtons = [];
 	                _this.levelCards = [];
 	                setTimeout(function () {
 	                        _this.addChild(_this.newContainer);
+	
+	                        _this.unscaledCardSize = { width: window.innerWidth / 5, height: window.innerWidth / 5 };
+	
+	                        if (_this.unscaledCardSize.width > 120) {
+	                                _this.unscaledCardSize = { width: 120, height: 120 };
+	                        }
 	
 	                        _this.sectionsContainer.addChild(_this.sectionsView);
 	                        _this.newContainer.addChild(_this.sectionsContainer);
@@ -103942,13 +104456,16 @@
 	        }, {
 	                key: 'buildBackButton',
 	                value: function buildBackButton(text) {
-	                        var secButton = new PIXI.Graphics().beginFill(0xFFFFFF).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
+	                        //let secButton = new PIXI.Graphics().beginFill(0xFFFFFF).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
+	
+	                        var secButton = PIXI.Sprite.fromImage('./assets/images/largeCard.png'); //new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
+	                        secButton.scale.set(this.unscaledCardSize.width / secButton.width);
 	
 	                        var label = new PIXI.Text(text, { font: '24px', fill: 0xFFFFFF, align: 'center', fontWeight: '200', fontFamily: 'round_popregular' });
 	                        label.pivot.x = label.width / 2;
 	                        label.pivot.y = label.height / 2;
-	                        label.x = secButton.width / 2;
-	                        label.y = secButton.height / 2;
+	                        label.x = secButton.width / 2 / secButton.scale.x;
+	                        label.y = secButton.height / 2 / secButton.scale.y;
 	                        secButton.label = label;
 	                        secButton.addChild(label);
 	                        return secButton;
@@ -103956,13 +104473,14 @@
 	        }, {
 	                key: 'buildSectionButton',
 	                value: function buildSectionButton(section) {
-	                        var secButton = new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
-	
+	                        var secButton = PIXI.Sprite.fromImage('./assets/images/largeCard.png'); //new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
+	                        secButton.scale.set(this.unscaledCardSize.width / secButton.width);
+	                        secButton.tint = section.color;
 	                        var label = new PIXI.Text(section.name, { font: '24px', fill: 0xFFFFFF, align: 'center', fontWeight: '200', fontFamily: 'round_popregular' });
 	                        label.pivot.x = label.width / 2;
 	                        label.pivot.y = label.height / 2;
-	                        label.x = secButton.width / 2;
-	                        label.y = secButton.height / 2;
+	                        label.x = secButton.width / 2 / secButton.scale.x;
+	                        label.y = secButton.height / 2 / secButton.scale.y;
 	                        secButton.label = label;
 	                        secButton.addChild(label);
 	                        return secButton;
@@ -103970,13 +104488,17 @@
 	        }, {
 	                key: 'buildLevelTierButton',
 	                value: function buildLevelTierButton(level, index) {
-	                        var levelTierButton = new PIXI.Graphics().beginFill(window.colorsOrder[index]).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
+	                        //let levelTierButton = new PIXI.Graphics().beginFill(window.colorsOrder[index]).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
+	
+	                        var levelTierButton = PIXI.Sprite.fromImage('./assets/images/largeCard.png'); //new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
+	                        levelTierButton.scale.set(this.unscaledCardSize.width / levelTierButton.width);
+	                        levelTierButton.tint = window.colorsOrder[index];
 	
 	                        var label = new PIXI.Text(level.name, { font: '24px', fill: 0xFFFFFF, align: 'center', fontWeight: '200', fontFamily: 'round_popregular' });
 	                        label.pivot.x = label.width / 2;
 	                        label.pivot.y = label.height / 2;
-	                        label.x = levelTierButton.width / 2;
-	                        label.y = levelTierButton.height / 2;
+	                        label.x = levelTierButton.width / 2 / levelTierButton.scale.x;
+	                        label.y = levelTierButton.height / 2 / levelTierButton.scale.y;
 	                        levelTierButton.label = label;
 	                        levelTierButton.addChild(label);
 	                        return levelTierButton;
@@ -104080,29 +104602,39 @@
 	                                pieceSize = this.unscaledCardSize.height / data.pieces.length + 2;
 	                        }
 	
+	                        var levelCard = PIXI.Sprite.fromImage('./assets/images/largeCard.png'); //new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
+	                        levelCard.tint = _config2.default.colors.dark;
+	
 	                        var card = this.gameScreen.generateImage(data.pieces, pieceSize, 32);
 	                        card.y = 0;
-	                        card.pivot.x = 0; //card.width / 2
-	                        card.pivot.y = 0;
+	                        card.removeChild(card.background);
+	                        //card.pivot.x = 0//card.width / 2
+	                        //card.pivot.y = 0
 	
-	                        var label = new PIXI.Text(data.levelName, { font: '22px', fill: 0xFFFFFF, align: 'center', fontWeight: '200', fontFamily: 'round_popregular' });
-	                        label.x = 0;
-	                        label.y = card.height - pieceSize / 2 - 32;
+	                        var label = new PIXI.Text(data.levelName, { font: '30px', fill: 0xFFFFFF, align: 'center', fontWeight: '200', fontFamily: 'round_popregular' });
+	                        label.x = levelCard.width / 2 - label.width / 2;
+	                        label.y = levelCard.height - label.height * 1.5;
 	
 	                        this.gameScreen.resizeToFitAR(this.unscaledCardSize, card);
+	                        _utils2.default.centerObject(card, levelCard);
+	                        card.y -= label.height * 0.5;
 	
-	                        card.addChild(label);
+	                        levelCard.addChild(card);
+	                        levelCard.addChild(label);
 	
-	                        card.on('mousedown', this.selectLevel.bind(this, data)).on('touchstart', this.selectLevel.bind(this, data));
-	                        card.interactive = true;
-	                        card.buttonMode = true;
+	                        levelCard.on('mousedown', this.selectLevel.bind(this, data)).on('touchstart', this.selectLevel.bind(this, data));
+	                        levelCard.interactive = true;
+	                        levelCard.buttonMode = true;
 	
-	                        card.data = data;
-	                        if (!this.levelsView.children.includes(card)) {
-	                                this.levelsView.addChild(card);
+	                        levelCard.data = data;
+	
+	                        levelCard.scale.set(this.unscaledCardSize.width / levelCard.width);
+	
+	                        if (!this.levelsView.children.includes(levelCard)) {
+	                                this.levelsView.addChild(levelCard);
 	                        }
 	
-	                        this.levelCards.push(card);
+	                        this.levelCards.push(levelCard);
 	                }
 	        }, {
 	                key: 'getGridGraphic',
@@ -104139,19 +104671,30 @@
 	                                var chunck = distance;
 	                                var adj = -(chunck * maxPerLine) / 2; //0//(margin - fullWidth) * 0.5
 	                                element.x = index % maxPerLine * chunck + adj + chunck / 2 - element.width / 2; //+ distance * 0.5 - fullWidth * 0.5///+ element.width / 2 + margin * 0.5
-	                                // if(!element.debug){
-	                                //     element.debug = new PIXI.Graphics().beginFill(0xff0066).drawRect(0,0,chunck,element.height);
-	                                //     element.parent.addChild(element.debug)
-	                                //     element.debug.position = element.position
-	                                // }
 	
-	                                element.scale.set(0.8);
+	                                // // if(!element.debug){
+	                                // //     element.debug = new PIXI.Graphics().beginFill(0xff0066).drawRect(0,0,chunck,element.height);
+	                                // //     element.parent.addChild(element.debug)
+	                                // //     element.debug.position = element.position
+	                                // // }
+	
+	                                //element.scale.set(0.8)
 	                                if (index >= maxPerLine) {
 	                                        element.y = 30 + lines[index - maxPerLine];
 	                                } else {
 	
 	                                        element.y = 50;
 	                                }
+	
+	                                // if(!element.debug){
+	                                //     element.debug = new PIXI.Graphics().beginFill(0xff0066 * Math.random()).drawRect(0,0,chunck,element.height);
+	                                //     element.parent.addChild(element.debug)
+	                                //     element.debug.position = element.position
+	                                //     element.debug.alpha = 0.5
+	                                // }else{
+	                                //     element.debug.position = element.position
+	
+	                                // }
 	
 	                                lines.push(element.y + element.height);
 	                        }
@@ -104178,9 +104721,9 @@
 	        }, {
 	                key: 'centerLevels',
 	                value: function centerLevels() {
-	                        this.drawGrid(this.sectionButtons);
-	                        this.drawGrid(this.navButtons);
-	                        this.drawGrid(this.levelCards);
+	                        this.drawGrid(this.sectionButtons, 20);
+	                        this.drawGrid(this.navButtons, 20);
+	                        this.drawGrid(this.levelCards, 20);
 	                        this.levelsView.pivot.x = this.mainCanvas.width / 2;
 	                        this.levelsView.x = this.mainCanvas.x + this.mainCanvas.width;
 	
@@ -104199,7 +104742,7 @@
 	exports.default = LevelSelectContainer;
 
 /***/ }),
-/* 621 */
+/* 623 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -104246,7 +104789,7 @@
 	
 	var _Board2 = _interopRequireDefault(_Board);
 	
-	var _BackgroundEffects = __webpack_require__(622);
+	var _BackgroundEffects = __webpack_require__(624);
 	
 	var _BackgroundEffects2 = _interopRequireDefault(_BackgroundEffects);
 	
@@ -104575,7 +105118,7 @@
 	exports.default = EndGameContainer;
 
 /***/ }),
-/* 622 */
+/* 624 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -104598,7 +105141,7 @@
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
-	var _StarParticle = __webpack_require__(623);
+	var _StarParticle = __webpack_require__(625);
 	
 	var _StarParticle2 = _interopRequireDefault(_StarParticle);
 	
@@ -104755,7 +105298,7 @@
 	exports.default = BackgroundEffects;
 
 /***/ }),
-/* 623 */
+/* 625 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -104833,7 +105376,7 @@
 	exports.default = StarParticle;
 
 /***/ }),
-/* 624 */
+/* 626 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -104932,7 +105475,138 @@
 	exports.default = UIRectLabel;
 
 /***/ }),
-/* 625 */
+/* 627 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _pixi = __webpack_require__(1);
+	
+	var PIXI = _interopRequireWildcard(_pixi);
+	
+	var _signals = __webpack_require__(621);
+	
+	var signals = _interopRequireWildcard(_signals);
+	
+	var _gsap = __webpack_require__(229);
+	
+	var _gsap2 = _interopRequireDefault(_gsap);
+	
+	var _config = __webpack_require__(225);
+	
+	var _config2 = _interopRequireDefault(_config);
+	
+	var _utils = __webpack_require__(233);
+	
+	var _utils2 = _interopRequireDefault(_utils);
+	
+	var _UIButton = __webpack_require__(620);
+	
+	var _UIButton2 = _interopRequireDefault(_UIButton);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var InGameMenu = function (_PIXI$Container) {
+		_inherits(InGameMenu, _PIXI$Container);
+	
+		function InGameMenu(color, icon, iconColor) {
+			_classCallCheck(this, InGameMenu);
+	
+			var _this = _possibleConstructorReturn(this, (InGameMenu.__proto__ || Object.getPrototypeOf(InGameMenu)).call(this));
+	
+			_this.mainContainer = new PIXI.Container();
+	
+			_this.customWidth = 60;
+			_this.backShape = new PIXI.Graphics();
+			_this.backShape.lineStyle(2, color, 1);
+			_this.backShape.beginFill(0x000000);
+			_this.backShape.drawRect(0, 0, 200, 100);
+			_this.backShape.endFill();
+			_this.backShape.alpha = 1;
+	
+			_this.openMenu = new _UIButton2.default(_config2.default.colors.white, './assets/images/icons/icons8-menu-48.png', _config2.default.colors.dark);
+			_this.openMenu.onClick.add(function () {
+				return _this.toggleState();
+			});
+	
+			_this.closeButton = new _UIButton2.default(_config2.default.colors.red2, './assets/images/icons/icons8-back-128.png', _config2.default.colors.dark);
+			_this.closeButton.onClick.add(function () {
+				_this.state = 1;
+				_this.onBack.dispatch();
+			});
+			_this.closeButton.backShape.rotation = 0;
+	
+			_this.refreshButton = new _UIButton2.default(_config2.default.colors.blue, './assets/images/icons/icons8-refresh-64.png', _config2.default.colors.dark);
+			_this.refreshButton.onClick.add(function () {
+				_this.state = 1;
+				_this.onRestart.dispatch();
+			});
+			_this.refreshButton.backShape.rotation = 0;
+	
+			_this.mainContainer.addChild(_this.backShape);
+			_this.mainContainer.scale.set(1.5);
+	
+			_this.mainContainer.x = -_this.backShape.width;
+			_this.addChild(_this.mainContainer);
+			_this.mainContainer.addChild(_this.closeButton);
+			_this.mainContainer.addChild(_this.refreshButton);
+			_this.refreshButton.x = _this.backShape.width - 60;
+			_this.closeButton.x = _this.refreshButton.x - 90;
+			_this.refreshButton.y = 50;
+			_this.closeButton.y = _this.refreshButton.y;
+			_this.addChild(_this.openMenu);
+	
+			_this.onBack = new signals.Signal();
+			_this.onRestart = new signals.Signal();
+	
+			_this.state = 1;
+			return _this;
+		}
+	
+		_createClass(InGameMenu, [{
+			key: 'toggleState',
+			value: function toggleState() {
+				console.log("STATE", this.state);
+				if (this.state == 1) {
+					this.state = 2;
+				} else {
+					this.state = 1;
+				}
+			}
+		}, {
+			key: 'update',
+			value: function update(delta) {
+				if (this.state == 1) {
+					this.openMenu.updateTexture('./assets/images/icons/icons8-menu-48.png');
+					this.mainContainer.x = _utils2.default.lerp(this.mainContainer.x, this.backShape.width * this.mainContainer.scale.x + 50, 0.5);
+				} else {
+					this.openMenu.updateTexture('./assets/images/icons/icons8-close-100.png');
+					this.mainContainer.x = _utils2.default.lerp(this.mainContainer.x, -this.backShape.width * this.mainContainer.scale.x, 0.5);
+				}
+			}
+		}]);
+	
+		return InGameMenu;
+	}(PIXI.Container);
+	
+	exports.default = InGameMenu;
+
+/***/ }),
+/* 628 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -105443,7 +106117,7 @@
 	exports.default = EffectLayer;
 
 /***/ }),
-/* 626 */
+/* 629 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -105669,7 +106343,7 @@
 	exports.default = ChooseMatchScreen;
 
 /***/ }),
-/* 627 */
+/* 630 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -105692,7 +106366,7 @@
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
-	var _Ball = __webpack_require__(628);
+	var _Ball = __webpack_require__(631);
 	
 	var _Ball2 = _interopRequireDefault(_Ball);
 	
@@ -105759,7 +106433,7 @@
 	exports.default = Pool;
 
 /***/ }),
-/* 628 */
+/* 631 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';

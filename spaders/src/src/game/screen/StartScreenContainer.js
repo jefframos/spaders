@@ -2,6 +2,7 @@ import * as PIXI from 'pixi.js';
 import TweenLite from 'gsap';
 import config from '../../config';
 import utils from '../../utils';
+import UIButton1 from './UIButton1';
 import LevelSelectContainer from './LevelSelectContainer'
 export default class StartScreenContainer extends PIXI.Container {
 	constructor(screen) {
@@ -77,15 +78,21 @@ export default class StartScreenContainer extends PIXI.Container {
 
 
 
-		this.backButton = new PIXI.Graphics().beginFill(window.config.colors.red).drawCircle(0, 0, 40);
+		this.backButton = new UIButton1(config.colors.red2, './assets/images/icons/icons8-close-100.png', config.colors.white);
+		this.backButton.onClick.add(() => {
+			console.log("TO START")
+			this.startState(0)
+		});
+
+		// this.backButton = new PIXI.Graphics().beginFill(window.config.colors.red).drawCircle(0, 0, 40);
 		this.addChild(this.backButton);
 
-		this.backButton.x = config.width + this.backButton.width;
+		// this.backButton.x = config.width + this.backButton.width;
 
-		this.backButton.buttonMode = true;
-		this.backButton.interactive = true;
+		// this.backButton.buttonMode = true;
+		// this.backButton.interactive = true;
 
-		this.backButton.on('mousedown', this.startState.bind(this)).on('touchstart', this.startState.bind(this));
+		// this.backButton.on('mousedown', this.startState.bind(this)).on('touchstart', this.startState.bind(this));
 
 
 		this.playButton = new PIXI.Graphics().beginFill(window.config.colors.blue).drawCircle(0, 0, 50);

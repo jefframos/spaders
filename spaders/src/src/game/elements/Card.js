@@ -175,7 +175,7 @@ export default class Card extends PIXI.Container {
 				this.backshape.parent.removeChild(this.backshape)
 			}
 			this.backshape = new PIXI.Graphics();
-			//this.backshape.lineStyle(3, this.enemySprite.tint, 1);
+			this.backshape.lineStyle(3, this.enemySprite.tint, 1);
 			this.backshape.beginFill(this.enemySprite.tint);
 			//this.backshape.drawCircle(0, 0, CARD.width * 0.5);
 			this.backshape.drawRect(CARD.width * -0.5, CARD.width * -0.5, CARD.width, CARD.width);

@@ -324,6 +324,7 @@ export default class Board {
 		TweenLite.to(tempLabel, 1, {
 			delay: delay, y: tempLabel.y - 50 * dir, onStartParams: [tempLabel], onStart: function (temp) {
 				temp.alpha = 1;
+				temp.parent.addChild(temp)
 			}
 		})
 		TweenLite.to(tempLabel, 0.5, {

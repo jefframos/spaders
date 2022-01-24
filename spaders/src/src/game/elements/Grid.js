@@ -35,7 +35,7 @@ export default class Grid extends PIXI.Container {
 				gridSquare.y = j * CARD.height;
 
 				gridSquare.alpha = Math.random() * 0.15 + 0.075
-				gridSquare.speed = 0.25;
+				gridSquare.speed = 0.35;
 				gridSquare.startAlpha = gridSquare.alpha;
 				gridSquare.sin = Math.random() * Math.PI * 2;
 
@@ -48,31 +48,31 @@ export default class Grid extends PIXI.Container {
 
 
 
-		for (var i = GRID.j-1; i >= 0; i--) {
-			let line = new PIXI.Sprite.fromImage('./assets/images/lineBorder.png')
-			line.y = i * CARD.width;
-			line.x = - line.width
-			line.height = CARD.height;
-			gridContainer.addChild(line)
-		}
+		// for (var i = GRID.j-1; i >= 0; i--) {
+		// 	let line = new PIXI.Sprite.fromImage('./assets/images/lineBorder.png')
+		// 	line.y = i * CARD.width;
+		// 	line.x = - line.width
+		// 	line.height = CARD.height;
+		// 	gridContainer.addChild(line)
+		// }
 
-		for (var i = GRID.j-1; i >= 0; i--) {
-			let line = new PIXI.Sprite.fromImage('./assets/images/lineBorder.png')
-			line.y = i * CARD.width + CARD.height;
-			line.rotation = Math.PI;
-			line.x = GRID.i * CARD.width + line.width
-			line.height = CARD.height;
-			gridContainer.addChild(line)
-		}
+		// for (var i = GRID.j-1; i >= 0; i--) {
+		// 	let line = new PIXI.Sprite.fromImage('./assets/images/lineBorder.png')
+		// 	line.y = i * CARD.width + CARD.height;
+		// 	line.rotation = Math.PI;
+		// 	line.x = GRID.i * CARD.width + line.width
+		// 	line.height = CARD.height;
+		// 	gridContainer.addChild(line)
+		// }
 
-		for (var i = GRID.i; i > 0; i--) {
-			let line = new PIXI.Sprite.fromImage('./assets/images/lineBorder.png')
-			line.y = - line.width;
-			line.rotation = Math.PI * 0.5;
-			line.x = i * CARD.width
-			line.height = CARD.height;
-			gridContainer.addChild(line)
-		}
+		// for (var i = GRID.i; i > 0; i--) {
+		// 	let line = new PIXI.Sprite.fromImage('./assets/images/lineBorder.png')
+		// 	line.y = - line.width;
+		// 	line.rotation = Math.PI * 0.5;
+		// 	line.x = i * CARD.width
+		// 	line.height = CARD.height;
+		// 	gridContainer.addChild(line)
+		// }
 
 		
 		gridContainer.alpha = 1
