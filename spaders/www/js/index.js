@@ -59593,7 +59593,7 @@
 	
 							if (this.currentCard) {
 									//13 is the width of the border on the grid
-									this.currentCard.y = (this.gridContainer.height - 13) / this.gridContainer.scale.y - 1;
+									this.currentCard.y = this.gridContainer.height / this.gridContainer.scale.y - 13 / this.gridContainer.scale.y + 1;
 							}
 	
 							//utils.centerObject(this.startScreenContainer, this)
