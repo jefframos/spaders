@@ -20,6 +20,7 @@ export default class TetraScreen extends Screen {
 	constructor(label) {
 		super(label);
 
+		window.AUTO_PLAY_HARD = false;
 		window.AUTO_PLAY = false;
 		////console.log(levels)
 		this.innerResolution = { width: config.width, height: config.height };
@@ -393,7 +394,7 @@ export default class TetraScreen extends Screen {
 		this.removeEvents();
 
 
-		if(window.AUTO_PLAY){
+		if(window.AUTO_PLAY_HARD){
 
 			if(this.currentRound < this.dataToSave.bestMoves){
 				this.dataToSave.bestMoves = this.currentRound;
@@ -709,7 +710,7 @@ export default class TetraScreen extends Screen {
 			clearTimeout(this.autoPlayTimeout);
 		}
 		//FIND BEST OPTION TO SHOOT
-		if(window.AUTO_PLAY){
+		if(window.AUTO_PLAY_HARD || window.AUTO_PLAY){
 			this.autoPlayTimeout = setTimeout(() => {
 				this.playRandom();
 			}, 500 / window.TIME_SCALE);
@@ -722,6 +723,7 @@ export default class TetraScreen extends Screen {
 			this.dataToSave.loses ++;
 			console.log("playRandom resetGame", this.mousePosID, this.currentRound, this.dataToSave)
 			this.resetGame();
+			window.AUTO_PLAY = false;
 		}else{
 			this.onTapUp(null, this.mousePosID)
 		}

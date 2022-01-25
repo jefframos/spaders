@@ -58637,6 +58637,7 @@
 	
 					var _this = _possibleConstructorReturn(this, (TetraScreen.__proto__ || Object.getPrototypeOf(TetraScreen)).call(this, label));
 	
+					window.AUTO_PLAY_HARD = false;
 					window.AUTO_PLAY = false;
 					////console.log(levels)
 					_this.innerResolution = { width: _config2.default.width, height: _config2.default.height };
@@ -59009,7 +59010,7 @@
 							this.hideInGameElements();
 							this.removeEvents();
 	
-							if (window.AUTO_PLAY) {
+							if (window.AUTO_PLAY_HARD) {
 	
 									if (this.currentRound < this.dataToSave.bestMoves) {
 											this.dataToSave.bestMoves = this.currentRound;
@@ -59326,7 +59327,7 @@
 									clearTimeout(this.autoPlayTimeout);
 							}
 							//FIND BEST OPTION TO SHOOT
-							if (window.AUTO_PLAY) {
+							if (window.AUTO_PLAY_HARD || window.AUTO_PLAY) {
 									this.autoPlayTimeout = setTimeout(function () {
 											_this5.playRandom();
 									}, 500 / window.TIME_SCALE);
@@ -59341,6 +59342,7 @@
 									this.dataToSave.loses++;
 									console.log("playRandom resetGame", this.mousePosID, this.currentRound, this.dataToSave);
 									this.resetGame();
+									window.AUTO_PLAY = false;
 							} else {
 									this.onTapUp(null, this.mousePosID);
 							}
@@ -104805,7 +104807,7 @@
 	                        for (var index = 0; index < this.panelOrder.length; index++) {
 	                                var element = this.panelOrder[index];
 	                                //element.x = index * config.width - this.currentUISection* config.width;
-	                                element.x = _utils2.default.lerp(element.x, index * this.mainCanvas.width - this.currentUISection * this.mainCanvas.width, 0.1);
+	                                element.x = _utils2.default.lerp(element.x, index * this.mainCanvas.width - this.currentUISection * this.mainCanvas.width, 0.5);
 	                        }
 	                        this.centerLevels();
 	                }
@@ -105697,7 +105699,7 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+			value: true
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -105737,86 +105739,101 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var InGameMenu = function (_PIXI$Container) {
-		_inherits(InGameMenu, _PIXI$Container);
+			_inherits(InGameMenu, _PIXI$Container);
 	
-		function InGameMenu(color, icon, iconColor) {
-			_classCallCheck(this, InGameMenu);
+			function InGameMenu(color, icon, iconColor) {
+					_classCallCheck(this, InGameMenu);
 	
-			var _this = _possibleConstructorReturn(this, (InGameMenu.__proto__ || Object.getPrototypeOf(InGameMenu)).call(this));
+					var _this = _possibleConstructorReturn(this, (InGameMenu.__proto__ || Object.getPrototypeOf(InGameMenu)).call(this));
 	
-			_this.mainContainer = new PIXI.Container();
+					_this.mainContainer = new PIXI.Container();
 	
-			_this.customWidth = 60;
-			_this.backShape = new PIXI.Graphics();
-			_this.backShape.lineStyle(2, color, 1);
-			_this.backShape.beginFill(0x000000);
-			_this.backShape.drawRect(0, 0, 200, 100);
-			_this.backShape.endFill();
-			_this.backShape.alpha = 1;
+					_this.customWidth = 60;
+					_this.backShape = new PIXI.Graphics();
+					_this.backShape.lineStyle(2, color, 1);
+					_this.backShape.beginFill(0x000000);
+					_this.backShape.drawRect(0, 0, 290, 100);
+					_this.backShape.endFill();
+					_this.backShape.alpha = 1;
 	
-			_this.openMenu = new _UIButton2.default(_config2.default.colors.white, './assets/images/icons/icons8-menu-48.png', _config2.default.colors.dark);
-			_this.openMenu.onClick.add(function () {
-				return _this.toggleState();
-			});
+					_this.openMenu = new _UIButton2.default(_config2.default.colors.white, './assets/images/icons/icons8-menu-48.png', _config2.default.colors.dark);
+					_this.openMenu.onClick.add(function () {
+							return _this.toggleState();
+					});
 	
-			_this.closeButton = new _UIButton2.default(_config2.default.colors.red2, './assets/images/icons/icons8-back-128.png', _config2.default.colors.dark);
-			_this.closeButton.onClick.add(function () {
-				_this.state = 1;
-				_this.onBack.dispatch();
-			});
-			_this.closeButton.backShape.rotation = 0;
+					_this.closeButton = new _UIButton2.default(_config2.default.colors.red2, './assets/images/icons/icons8-back-128.png', _config2.default.colors.dark);
+					_this.closeButton.onClick.add(function () {
+							_this.state = 1;
+							_this.onBack.dispatch();
+					});
+					_this.closeButton.backShape.rotation = 0;
 	
-			_this.refreshButton = new _UIButton2.default(_config2.default.colors.blue, './assets/images/icons/icons8-refresh-64.png', _config2.default.colors.dark);
-			_this.refreshButton.onClick.add(function () {
-				_this.state = 1;
-				_this.onRestart.dispatch();
-			});
-			_this.refreshButton.backShape.rotation = 0;
+					_this.refreshButton = new _UIButton2.default(_config2.default.colors.blue, './assets/images/icons/icons8-refresh-64.png', _config2.default.colors.dark);
+					_this.refreshButton.onClick.add(function () {
+							_this.state = 1;
+							_this.onRestart.dispatch();
+					});
+					_this.refreshButton.backShape.rotation = 0;
 	
-			_this.mainContainer.addChild(_this.backShape);
-			_this.mainContainer.scale.set(1.5);
+					_this.mainContainer.addChild(_this.backShape);
+					_this.mainContainer.scale.set(1.5);
 	
-			_this.mainContainer.x = -_this.backShape.width;
-			_this.addChild(_this.mainContainer);
-			_this.mainContainer.addChild(_this.closeButton);
-			_this.mainContainer.addChild(_this.refreshButton);
-			_this.refreshButton.x = _this.backShape.width - 60;
-			_this.closeButton.x = _this.refreshButton.x - 90;
-			_this.refreshButton.y = 50;
-			_this.closeButton.y = _this.refreshButton.y;
-			_this.addChild(_this.openMenu);
+					_this.autoPlayButton = new _UIButton2.default(_config2.default.colors.blue, './assets/images/icons/icons8-refresh-64.png', _config2.default.colors.dark);
+					_this.autoPlayButton.onClick.add(function () {
+							_this.state = 1;
+							window.AUTO_PLAY = !window.AUTO_PLAY;
+							_this.onRestart.dispatch();
+					});
+					_this.autoPlayButton.backShape.rotation = 0;
 	
-			_this.onBack = new signals.Signal();
-			_this.onRestart = new signals.Signal();
+					_this.mainContainer.x = -_this.backShape.width;
+					_this.addChild(_this.mainContainer);
+					_this.mainContainer.addChild(_this.closeButton);
+					_this.mainContainer.addChild(_this.refreshButton);
+					_this.mainContainer.addChild(_this.autoPlayButton);
+					_this.refreshButton.x = _this.backShape.width - 60;
+					_this.closeButton.x = _this.refreshButton.x - 90;
+					_this.refreshButton.y = 50;
+					_this.closeButton.y = _this.refreshButton.y;
 	
-			_this.state = 1;
-			return _this;
-		}
+					_this.autoPlayButton.x = _this.closeButton.x - 90;
+					_this.autoPlayButton.y = _this.refreshButton.y;
 	
-		_createClass(InGameMenu, [{
-			key: 'toggleState',
-			value: function toggleState() {
-				console.log("STATE", this.state);
-				if (this.state == 1) {
-					this.state = 2;
-				} else {
-					this.state = 1;
-				}
+					_this.addChild(_this.openMenu);
+	
+					_this.onBack = new signals.Signal();
+					_this.onRestart = new signals.Signal();
+	
+					_this.state = 1;
+					return _this;
 			}
-		}, {
-			key: 'update',
-			value: function update(delta) {
-				if (this.state == 1) {
-					this.openMenu.updateTexture('./assets/images/icons/icons8-menu-48.png');
-					this.mainContainer.x = _utils2.default.lerp(this.mainContainer.x, this.backShape.width * this.mainContainer.scale.x + 50, 0.5);
-				} else {
-					this.openMenu.updateTexture('./assets/images/icons/icons8-close-100.png');
-					this.mainContainer.x = _utils2.default.lerp(this.mainContainer.x, -this.backShape.width * this.mainContainer.scale.x, 0.5);
-				}
-			}
-		}]);
 	
-		return InGameMenu;
+			_createClass(InGameMenu, [{
+					key: 'toggleState',
+					value: function toggleState() {
+							console.log("STATE", this.state);
+							if (this.state == 1) {
+									this.state = 2;
+							} else {
+									this.state = 1;
+							}
+					}
+			}, {
+					key: 'update',
+					value: function update(delta) {
+							if (this.state == 1) {
+									this.openMenu.updateTexture('./assets/images/icons/icons8-menu-48.png');
+									this.mainContainer.x = _utils2.default.lerp(this.mainContainer.x, this.backShape.width * this.mainContainer.scale.x + 50, 0.5);
+									this.mainContainer.alpha = _utils2.default.lerp(this.mainContainer.alpha, 0, 0.5);
+							} else {
+									this.openMenu.updateTexture('./assets/images/icons/icons8-close-100.png');
+									this.mainContainer.x = _utils2.default.lerp(this.mainContainer.x, -this.backShape.width * this.mainContainer.scale.x, 0.5);
+									this.mainContainer.alpha = _utils2.default.lerp(this.mainContainer.alpha, 1, 0.5);
+							}
+					}
+			}]);
+	
+			return InGameMenu;
 	}(PIXI.Container);
 	
 	exports.default = InGameMenu;

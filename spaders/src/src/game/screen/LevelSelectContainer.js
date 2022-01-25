@@ -273,7 +273,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         for (let index = 0; index < this.panelOrder.length; index++) {
             const element = this.panelOrder[index];
             //element.x = index * config.width - this.currentUISection* config.width;
-            element.x = utils.lerp(element.x, index * this.mainCanvas.width - this.currentUISection * this.mainCanvas.width, 0.1)
+            element.x = utils.lerp(element.x, index * this.mainCanvas.width - this.currentUISection * this.mainCanvas.width, 0.5)
         }
         this.centerLevels();
     }
