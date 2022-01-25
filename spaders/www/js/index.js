@@ -61168,11 +61168,41 @@
 				console.log(moveDownList);
 			}
 		}, {
+			key: 'getWhereWillStop',
+			value: function getWhereWillStop(laneID) {
+				var spaceID = -1;
+				for (var i = this.cards[laneID].length - 1; i >= 0; i--) {
+					if (!this.cards[laneID][i]) {
+						spaceID = i;
+					} else {
+						break;
+					}
+				}
+				return spaceID;
+			}
+		}, {
 			key: 'findBestShoot',
 			value: function findBestShoot(card) {
 	
 				var ids = [];
 				var canShoot = false;
+	
+				//finds out if needs to build a tower
+				var isolated = this.findOneIsolated();
+	
+				if (isolated) {
+					//console.log("FOUND ISOLATED", isolated.pos)
+					if (this.isPossibleShot(isolated.pos.i - 1)) {
+						if (this.getWhereWillStop(isolated.pos.i - 1) <= isolated.pos.j) {
+							return isolated.pos.i - 1;
+						}
+					} else if (this.isPossibleShot(isolated.pos.i + 1)) {
+						if (this.getWhereWillStop(isolated.pos.i + 1) <= isolated.pos.j) {
+							return isolated.pos.i + 1;
+						}
+					}
+				}
+	
 				for (var index = 0; index < GRID.i; index++) {
 					if (!this.isPossibleShot(index)) {
 						ids.push(-999999);
@@ -61198,6 +61228,59 @@
 				} else {
 					return idMax;
 				}
+			}
+		}, {
+			key: 'findOneIsolated',
+			value: function findOneIsolated() {
+				var _this3 = this;
+	
+				var offsets = [{ i: 0, j: -1 }, { i: -1, j: -1 }, { i: 1, j: -1 }, { i: 1, j: 0 }, { i: -1, j: 0 }];
+	
+				var noCard = false;
+				var cards = [];
+				for (var i = this.cards.length - 1; i >= 0; i--) {
+					var _loop = function _loop() {
+						var card = _this3.cards[i][j];
+						var aroundData = { card: card, arounds: [] };
+						if (card) {
+							offsets.forEach(function (element) {
+								var next = {
+									i: i + element.i,
+									j: j + element.j
+								};
+	
+								if (next.i >= 0 && next.i < _this3.cards.length - 1 && next.j >= 0 && next.j < _this3.cards[i].length - 1) {
+									if (_this3.cards[next.i][next.j]) {
+										aroundData.arounds.push(_this3.cards[next.i][next.j]);
+									}
+								}
+							});
+							cards.push(aroundData);
+						}
+					};
+	
+					for (var j = this.cards[i].length - 1; j > 2; j--) {
+						_loop();
+					}
+				}
+	
+				var isolated = null;
+	
+				// for (let index = 0; index < cards.length; index++) {
+				// 	const element = array[index];
+	
+				// }
+				// for (let index = cards.length - 1; index >= 0; index--) {
+				for (var index = 0; index < cards.length; index++) {
+					var element = cards[index];
+					if (element.arounds.length == 0) {
+						isolated = element.card;
+						console.log(isolated.pos);
+						break;
+					}
+				}
+	
+				return isolated;
 			}
 		}, {
 			key: 'simulate',

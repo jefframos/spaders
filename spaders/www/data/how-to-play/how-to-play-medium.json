@@ -115,8 +115,46 @@
          "width":11,
          "x":0,
          "y":0
+        }, 
+        {
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "height":12,
+         "id":33,
+         "name":"Stress Level",
+         "opacity":1,
+         "properties":[
+                {
+                 "name":"i",
+                 "type":"int",
+                 "value":8
+                }, 
+                {
+                 "name":"j",
+                 "type":"int",
+                 "value":10
+                }, 
+                {
+                 "name":"startI",
+                 "type":"int",
+                 "value":0
+                }, 
+                {
+                 "name":"startJ",
+                 "type":"int",
+                 "value":0
+                }, 
+                {
+                 "name":"tier",
+                 "type":"int",
+                 "value":0
+                }],
+         "type":"tilelayer",
+         "visible":true,
+         "width":11,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":33,
+ "nextlayerid":34,
  "nextobjectid":1,
  "orientation":"orthogonal",
  "properties":[
