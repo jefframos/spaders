@@ -23,6 +23,9 @@ export default class ScreenManager extends PIXI.Container
             screen.onAdded();
         }
     }
+    backKeyDown(){
+        this.currentScreen.backKeyDown();
+    }
     backScreen()
     {
         this.change(this.prevScreen);

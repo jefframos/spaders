@@ -323,6 +323,7 @@ export default class LevelSelectContainer extends PIXI.Container {
     getGridGraphic() {
         return new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, 100, 130);
     }
+
     selectLevel(data) {
         console.log(data)
         this.gameScreen.startNewLevel(data, false);

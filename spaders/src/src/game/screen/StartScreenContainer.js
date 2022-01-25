@@ -108,6 +108,12 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.center.alpha = 0
 		this.screenState = 1
 
+		this.closeApplicationButton = new UIButton1(config.colors.white, './assets/images/icons/icons8-close-100.png', config.colors.dark);
+		this.closeApplicationButton.onClick.add(() => this.gameScreen.closeApplication());
+		if( window.isCordova){
+			this.addChild(this.closeApplicationButton);
+		}
+
 	}
 	getRect(size = 4, color = 0xFFFFFF) {
 		return new PIXI.Graphics().beginFill(color).drawRect(0, 0, size, size);
@@ -152,6 +158,7 @@ export default class StartScreenContainer extends PIXI.Container {
 
 		if (this.screenState == 1) {
 
+			this.closeApplicationButton.alpha = utils.lerp(this.closeApplicationButton.alpha, 1, 0.5)
 			this.screenContainer.rotation = utils.lerp(this.screenContainer.rotation, 0, 0.5)
 			this.screenContainer.x = this.mainCanvas.width / 2 + this.mainCanvas.x
 			this.screenContainer.y = utils.lerp(this.screenContainer.y, this.mainCanvas.height / 2 + this.mainCanvas.y, 0.5)
@@ -162,11 +169,13 @@ export default class StartScreenContainer extends PIXI.Container {
 
 			this.chooseLevelPanel.alpha = utils.lerp(this.chooseLevelPanel.alpha, 0, 0.5)
 			this.backButton.scale.set(this.screenContainer.scale.x)
-			this.backButton.x = utils.lerp(this.backButton.x, this.mainCanvas.x + this.mainCanvas.width + this.backButton.width, 0.2)//this.mainCanvas.width / 2* this.screenContainer.scale.x//globalPosRightCorner.x//- this.mainCanvas.x;//globalPosRightCorner.x// - 80 * this.screenContainer.scale.x
+			this.backButton.x = utils.lerp(this.backButton.x, this.mainCanvas.x + this.mainCanvas.width + this.backButton.width, 0.5)//this.mainCanvas.width / 2* this.screenContainer.scale.x//globalPosRightCorner.x//- this.mainCanvas.x;//globalPosRightCorner.x// - 80 * this.screenContainer.scale.x
 
 
 		} else if (this.screenState == 2) {
 
+			
+			this.closeApplicationButton.alpha = utils.lerp(this.closeApplicationButton.alpha, 0, 0.2)
 			this.screenContainer.rotation = utils.lerp(this.screenContainer.rotation, Math.PI * 0.25, 0.5)
 
 			this.screenContainer.x = this.mainCanvas.width / 2 + this.mainCanvas.x
@@ -193,6 +202,12 @@ export default class StartScreenContainer extends PIXI.Container {
 		let lineConvertedPosition = this.mainCanvas.toLocal(this.playLine.getGlobalPosition())
 		this.chooseLevelPanel.y = lineConvertedPosition.y + this.playLine.height
 		this.chooseLevelPanel.resize(innerResolution);
+
+		
+
+		this.closeApplicationButton.x = this.mainCanvas.x+ this.closeApplicationButton.height * 0.75;
+		this.closeApplicationButton.y = this.mainCanvas.y + this.closeApplicationButton.height * 0.75;
+		this.closeApplicationButton.scale.set(0.75);
 
 	}
 	update(delta) {
@@ -224,8 +239,9 @@ export default class StartScreenContainer extends PIXI.Container {
 	startState(delay = 1, force = false) {
 		if (force) {
 			this.screenState = 1;
-			this.backButton.visible = false;
+			this.backButton.visible = false;			
 		}
+		
 		TweenLite.killTweensOf(this.screenContainer)
 		//TweenLite.killTweensOf(this.levelSelectionContainer)
 		this.playLine.interactive = true;
@@ -260,6 +276,9 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.playButton.visible = true;
 		this.backButton.visible = false;
 	}
+	showCloseButton(){
+		this.closeApplicationButton.visible = true;
+	}
 	showFromGame(force = false, delay = 0) {
 		TweenLite.killTweensOf(this.screenContainer)
 
@@ -272,7 +291,6 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.playLine.visible = true;
 		this.playButton.visible = true;
 		this.backButton.visible = true;
-
 	}
 	hide(force = false) {
 		TweenLite.killTweensOf(this.screenContainer)
@@ -292,10 +310,15 @@ export default class StartScreenContainer extends PIXI.Container {
 
 
 	}
+	newLevelStarted(){
+		this.closeApplicationButton.visible = false;
+    }
 	goToLevel() {
 		this.hide(true);
 		this.screenState = 1
 		this.gameScreen.resetGame()
+		console.log("GO TO LEVEL")
+		this.closeApplicationButton.visible = false;
 	}
 	resetGame() {
 		this.startMenuState();

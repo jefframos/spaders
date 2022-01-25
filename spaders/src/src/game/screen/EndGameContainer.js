@@ -68,7 +68,7 @@ export default class EndGameContainer extends PIXI.Container {
         this.pointsLabel.pivot.x = this.pointsLabel.width / 2;
         this.pointsLabel.pivot.y = this.pointsLabel.height / 2;
         this.pointsLabel.rotation = -Math.PI * 0.25
-        this.pointsLabel.y = 110
+        this.pointsLabel.y = 105
         this.pointsLabel.x += Math.cos(this.pointsLabel.rotation) * -12
         this.pointsLabel.y += Math.sin(this.pointsLabel.rotation) * -12
         this.screenContainer.addChild(this.pointsLabel);

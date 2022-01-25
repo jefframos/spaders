@@ -18,7 +18,6 @@ import ChooseMatchScreen from './game/screen/ChooseMatchScreen';
 import Pool from './game/core/Pool';
 
 
-
 window.COOKIE_MANAGER = new CookieManager();
 window.GAME_DATA = new GameData();
 
@@ -135,6 +134,7 @@ PIXI.loader
 	.add('./assets/images/icons/icons8-forward-100.png')
 	.add('./assets/images/lineBorder.png')
 	.add('./assets/images/innerBorder.png')
+	.add('./assets/images/robot-antennas.png')
 	// .add('./assets/images/map.jpg')
 	.load(loadJsons);
 
@@ -292,10 +292,16 @@ function configGame() {
 	window.EFFECTS = new EffectLayer(screenManager);
 	game.stage.addChild(EFFECTS);
 
+}
 
-	// screenManager.filters = [this.pixelate]
+document.addEventListener("deviceready", onDeviceReady, true);
 
 
-
-
+window.isCordova = false;
+function onDeviceReady(){
+	window.isCordova = true;
+	document.addEventListener("backbutton", onBackKeyDown, false);
+}
+function onBackKeyDown(){
+	window.game.screenManager.backKeyDown();
 }

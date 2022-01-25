@@ -41,10 +41,17 @@ export default class InGameMenu extends PIXI.Container {
 		this.mainContainer.addChild(this.backShape);
 		this.mainContainer.scale.set(1.5)
 
-		this.autoPlayButton = new UIButton1(config.colors.blue, './assets/images/icons/icons8-refresh-64.png', config.colors.dark);
+		this.autoPlayButton = new UIButton1(config.colors.purple, './assets/images/robot-antennas.png', config.colors.white);
 		this.autoPlayButton.onClick.add(() => {
 			this.state = 1;
 			window.AUTO_PLAY = !window.AUTO_PLAY;
+
+			if (window.AUTO_PLAY) {
+				window.TIME_SCALE = 3;
+			} else {
+				window.TIME_SCALE = 1;
+			}
+
 			this.onRestart.dispatch();
 		});
 		this.autoPlayButton.backShape.rotation = 0

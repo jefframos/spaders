@@ -106,12 +106,12 @@ export default class TetraScreen extends Screen {
 		this.latestShoot = { x: 0, id: 0 };
 
 		this.dataToSave = {
-			levelName:"",
-			wins:0,
-			loses:0,
-			bestTime:999999999,
-			bestMoves:99999999,
-			bestScore:0
+			levelName: "",
+			wins: 0,
+			loses: 0,
+			bestTime: 999999999,
+			bestMoves: 99999999,
+			bestScore: 0
 		}
 		//console.log(utils.convertNumToTime(1231))
 	}
@@ -264,8 +264,11 @@ export default class TetraScreen extends Screen {
 		this.backButton = new UIButton1(config.colors.white, './assets/images/icons/icons8-menu-48.png', config.colors.dark);
 		this.backButton.onClick.add(() => this.mainmenuState());
 
+		
 		this.inGameMenu = new InGameMenu(config.colors.green);
 		this.UIInGame.addChild(this.inGameMenu)
+
+
 		//this.UIInGame.addChild(this.backButton)
 		this.inGameMenu.onBack.add(() => this.mainmenuState())
 		this.inGameMenu.onRestart.add(() => this.resetGame())
@@ -321,7 +324,7 @@ export default class TetraScreen extends Screen {
 
 		this.containerQueue.scale.set(this.bottomUICanvas.height / CARD.height * 0.5)
 		this.containerQueue.x = this.bottomUICanvas.height * 0.1
-		this.containerQueue.y = this.movesRect.y + this.movesRect.height - this.containerQueue.height
+		this.containerQueue.y = this.scoreRect.y//this.movesRect.y + this.movesRect.height - this.containerQueue.height
 
 		//console.log()
 		this.backButton.scale.set(this.topCanvas.height / (this.backButton.height / this.backButton.scale.y) * 0.7)// / this.backButton.scale.y)
@@ -334,15 +337,12 @@ export default class TetraScreen extends Screen {
 		this.inGameMenu.y = scaledWidth * 0.5 + scaledWidth * 0.5
 
 	}
-	hideInGameElements() {
+	hideInGameElements(delay = 0) {
 		TweenMax.killTweensOf(this.cardsContainer);
 		TweenMax.killTweensOf(this.gridContainer);
 
 		TweenMax.to(this.cardsContainer, 0.5, { alpha: 0 })
-		TweenMax.to(this.gridContainer, 0.5, { alpha: 0 })
-
-
-
+		TweenMax.to(this.gridContainer, 0.5, { delay:delay, alpha: 0 })
 
 		if (this.currentCard) {
 
@@ -368,6 +368,7 @@ export default class TetraScreen extends Screen {
 		this.startScreenContainer.show(force, force ? 0.2 : 0.75);
 		this.gameRunning = false;
 
+		this.startScreenContainer.showCloseButton();
 		this.hideInGameElements();
 
 		this.removeEvents();
@@ -378,61 +379,67 @@ export default class TetraScreen extends Screen {
 		this.startScreenContainer.showFromGame(force, force ? 0.2 : 0.75);
 		this.gameRunning = false;
 
+		this.startScreenContainer.showCloseButton();
 		this.hideInGameElements();
 
 		this.removeEvents();
 
 	}
-	
+
 	endGameState() {
 		this.gameRunning = false;
 		this.startScreenContainer.hide(true);
 		let tempid = this.currentLevelID >= 0 ? this.currentLevelID : 0
-		this.endGameScreenContainer.setStats(this.currentPoints, this.currentRound, Math.ceil(this.currentTime), this.generateImage(this.currentLevelData.pieces), this.currentLevelData);
+		this.endGameScreenContainer.setStats(this.currentPoints, this.currentRound, utils.convertNumToTime(Math.ceil(this.currentTime)), this.generateImage(this.currentLevelData.pieces), this.currentLevelData);
 		this.endGameScreenContainer.show(false, 1);
-		this.hideInGameElements();
+		this.hideInGameElements(1);
 		this.removeEvents();
 
 
-		if(window.AUTO_PLAY_HARD){
+		if (window.AUTO_PLAY_HARD) {
 
-			if(this.currentRound < this.dataToSave.bestMoves){
+			if (this.currentRound < this.dataToSave.bestMoves) {
 				this.dataToSave.bestMoves = this.currentRound;
-		}
-
-		if(this.currentTime < this.dataToSave.bestTime){
-			this.dataToSave.bestTime = this.currentTime;
-		}
-
-		if(this.currentPoints > this.dataToSave.bestScore){
-			this.dataToSave.bestScore = this.currentPoints;
-		}
-
-		this.dataToSave.wins ++;
-
-		if(this.dataToSave.wins > 10){
-			let toSave = this.dataToSave.levelName + "\n"
-			toSave += "bestMoves :"+this.dataToSave.bestMoves+"\n"
-			toSave += "bestTime :"+this.dataToSave.bestTime+"\n"
-			toSave += "bestScore :"+this.dataToSave.bestScore+"\n"
-			toSave += "wins :"+this.dataToSave.wins+"\n"
-			toSave += "loses :"+this.dataToSave.loses+"\n"
-			
-			window.SAVE_DATA(toSave, this.dataToSave.levelName , 'text/plain');
-
-			this.dataToSave = {
-				levelName:"",
-				wins:0,
-				loses:0,
-				bestTime:999999999,
-				bestMoves:99999999,
-				bestScore:0
 			}
+
+			if (this.currentTime < this.dataToSave.bestTime) {
+				this.dataToSave.bestTime = this.currentTime;
+			}
+
+			if (this.currentPoints > this.dataToSave.bestScore) {
+				this.dataToSave.bestScore = this.currentPoints;
+			}
+
+			this.dataToSave.wins++;
+
+			if (this.dataToSave.wins > 10) {
+				let toSave = this.dataToSave.levelName + "\n"
+				toSave += "bestMoves :" + this.dataToSave.bestMoves + "\n"
+				toSave += "bestTime :" + this.dataToSave.bestTime + "\n"
+				toSave += "bestScore :" + this.dataToSave.bestScore + "\n"
+				toSave += "wins :" + this.dataToSave.wins + "\n"
+				toSave += "loses :" + this.dataToSave.loses + "\n"
+
+				window.SAVE_DATA(toSave, this.dataToSave.levelName, 'text/plain');
+
+				this.dataToSave = {
+					levelName: "",
+					wins: 0,
+					loses: 0,
+					bestTime: 999999999,
+					bestMoves: 99999999,
+					bestScore: 0
+				}
+			}
+
+			console.log("on Win Reset", this.currentRound, this.dataToSave)
+			this.resetGame()
 		}
 
-		console.log("on Win Reset", this.currentRound, this.dataToSave)
-		this.resetGame()
-	}
+		if (window.AUTO_PLAY) {
+			window.TIME_SCALE = 1;
+			window.AUTO_PLAY = false;
+		}
 		//console.log("endGameState")
 	}
 	gameState() {
@@ -529,11 +536,13 @@ export default class TetraScreen extends Screen {
 		}
 		utils.shuffle(tempPosRandom);
 
+		
+
 	}
 
 	startNewLevel(data, isEasy) {
 		this.currentLevelData = data;
-
+		this.startScreenContainer.newLevelStarted();
 		this.updateGridDimensions();
 		this.gridContainer.x = config.width / 2 - ((GRID.i + 1) * CARD.width) / 2;
 		this.cardsContainer.x = this.gridContainer.x;
@@ -551,8 +560,8 @@ export default class TetraScreen extends Screen {
 			counter: 0
 		}
 
-		for (let index = this.cardsContainer.children.length - 1; index >=0 ; index--) {
-			this.cardsContainer.removeChildAt(0);			
+		for (let index = this.cardsContainer.children.length - 1; index >= 0; index--) {
+			this.cardsContainer.removeChildAt(0);
 		}
 
 
@@ -706,11 +715,11 @@ export default class TetraScreen extends Screen {
 		this.cardsContainer.addChild(this.currentCard);
 
 
-		if(this.autoPlayTimeout){
+		if (this.autoPlayTimeout) {
 			clearTimeout(this.autoPlayTimeout);
 		}
 		//FIND BEST OPTION TO SHOOT
-		if(window.AUTO_PLAY_HARD || window.AUTO_PLAY){
+		if (window.AUTO_PLAY_HARD || window.AUTO_PLAY) {
 			this.autoPlayTimeout = setTimeout(() => {
 				this.playRandom();
 			}, 500 / window.TIME_SCALE);
@@ -718,13 +727,13 @@ export default class TetraScreen extends Screen {
 	}
 	playRandom() {
 		this.mousePosID = this.board.findBestShoot(this.currentCard);
-		if(this.mousePosID == -1 || this.currentRound > 1500){
+		if (this.mousePosID == -1 || this.currentRound > 1500) {
 
-			this.dataToSave.loses ++;
+			this.dataToSave.loses++;
 			console.log("playRandom resetGame", this.mousePosID, this.currentRound, this.dataToSave)
 			this.resetGame();
 			window.AUTO_PLAY = false;
-		}else{
+		} else {
 			this.onTapUp(null, this.mousePosID)
 		}
 	}
@@ -895,7 +904,7 @@ export default class TetraScreen extends Screen {
 	}
 	onTapUp(event, customID) {
 		if (!this.currentCard || !this.gameRunning) {
-			
+
 			console.log("NO")
 			return;
 		}
@@ -916,11 +925,11 @@ export default class TetraScreen extends Screen {
 				return;
 			}
 			this.updateMousePosition();
-		}else{
+		} else {
 			this.mousePosID = customID;
 		}
 
-		
+
 		if (!this.board.isPossibleShot(this.mousePosID)) {
 			console.log("isPossibleShot")
 			return;
@@ -1052,6 +1061,7 @@ export default class TetraScreen extends Screen {
 		this.updateLabelsPosition();
 		//this.gameContainer.scale.set(window.ratio)
 
+
 	}
 	shuffleText(label) {
 		let rnd1 = String.fromCharCode(Math.floor(Math.random() * 20) + 65);
@@ -1076,5 +1086,22 @@ export default class TetraScreen extends Screen {
 			returnLabel += tempLabel[i];
 		}
 		return returnLabel
+	}
+
+	closeApplication(){
+		navigator.app.exitApp();
+	}
+	backKeyDown(){
+		if(this.gameRunning){
+			this.mainmenuState();
+		}else if(this.startScreenContainer.screenState == 2){
+			if(this.startScreenContainer.chooseLevelPanel.currentUISection <= 0){
+				this.startScreenContainer.startState(0);
+			}else{
+				this.startScreenContainer.chooseLevelPanel.onBack();
+			}
+		}else{
+			navigator.app.exitApp();
+		}
 	}
 }
