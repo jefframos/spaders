@@ -2,6 +2,26 @@
     "sections": [
         {
             "color": "0xDDDDDD",
+            "name": "How to\nPlay",
+            "displayName": "Video Game History",
+            "imageSrc": "levels/consoles3.png",
+            "levels": [
+                {
+                    "name": "Small",
+                    "dataPath": "how-to-play/how-to-play-small.json"
+                },
+                {
+                    "name": "Medium",
+                    "dataPath": "how-to-play/how-to-play-medium.json"
+                },
+                {
+                    "name": "Large",
+                    "dataPath": "how-to-play/how-to-play-large.json"
+                }
+            ]
+        },
+        {
+            "color": "0xDDDDDD",
             "name": "Video\nGames",
             "displayName": "Video Game History",
             "imageSrc": "levels/consoles.png",

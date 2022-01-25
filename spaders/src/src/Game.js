@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js';
 import ScreenManager from './screenManager/ScreenManager';
 import config from './config';
-
+import TweenLite from 'gsap';
 export default class Game {
 
 	constructor() {
@@ -158,7 +158,9 @@ export default class Game {
 		// }else{
 		// 	this.frameskip = 1;
 		// }
-		this.dt /= 1000;
+		TweenMax.globalTimeScale(window.TIME_SCALE);
+		this.dt /= 1000
+		this.dt /= window.TIME_SCALE;
 		this.resize2();
 		this.screenManager.update(this.dt)
 		this.renderer.render(this.stage);

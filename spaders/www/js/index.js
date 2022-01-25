@@ -42929,7 +42929,7 @@
 	
 	var _Game2 = _interopRequireDefault(_Game);
 	
-	var _GameData = __webpack_require__(228);
+	var _GameData = __webpack_require__(229);
 	
 	var _GameData2 = _interopRequireDefault(_GameData);
 	
@@ -43045,13 +43045,30 @@
 	window.IMAGE_DATA.enemyImages.forEach(function (element) {
 		PIXI.loader.add(element);
 	});
-	
-	PIXI.loader.add('./data/levelSections.json').add('./assets/fonts/stylesheet.css').add('./assets/images/tvlines.png').add('./assets/images/backLabel.png').add('./assets/levels.json').add('./assets/levelsRaw.json').add('./assets/images/cancel.png').add('./assets/images/cycle.png').add('./assets/images/previous-button.png').add('./assets/images/game_bg.png').add('./assets/images/enemy.png').add('./assets/images/glitch1.jpg').add('./assets/images/glitch2.jpg').add('./assets/images/particle1.png').add('./assets/images/screen_displacement.jpg').add('./assets/images/background.png').add('./assets/images/gridSquare.png').add('./assets/images/block.jpg').add('./assets/images/rect.png').add('./assets/images/time.png').add('./assets/images/largeCard.png').add('./assets/images/icons/icons8-menu-48.png').add('./assets/images/icons/icons8-star-48.png').add('./assets/images/icons/icons8-back-100.png').add('./assets/images/icons/icons8-close-100.png').add('./assets/images/icons/icons8-refresh-64.png').add('./assets/images/icons/icons8-back-128.png').add('./assets/images/icons/icons8-forward-100.png').add('./assets/images/lineBorder.png')
+	window.SAVE_DATA = function (data, filename, type) {
+		var file = new Blob([data], { type: type });
+		if (window.navigator.msSaveOrOpenBlob) // IE10+
+			window.navigator.msSaveOrOpenBlob(file, filename);else {
+			// Others
+			var a = document.createElement("a"),
+			    url = URL.createObjectURL(file);
+			a.href = url;
+			a.download = filename;
+			document.body.appendChild(a);
+			a.click();
+			setTimeout(function () {
+				document.body.removeChild(a);
+				window.URL.revokeObjectURL(url);
+			}, 0);
+		}
+	};
+	PIXI.loader.add('./data/levelSections.json').add('./assets/fonts/stylesheet.css').add('./assets/images/tvlines.png').add('./assets/images/backLabel.png').add('./assets/levels.json').add('./assets/levelsRaw.json').add('./assets/images/cancel.png').add('./assets/images/cycle.png').add('./assets/images/previous-button.png').add('./assets/images/game_bg.png').add('./assets/images/enemy.png').add('./assets/images/glitch1.jpg').add('./assets/images/glitch2.jpg').add('./assets/images/particle1.png').add('./assets/images/screen_displacement.jpg').add('./assets/images/background.png').add('./assets/images/gridSquare.png').add('./assets/images/block.jpg').add('./assets/images/rect.png').add('./assets/images/time.png').add('./assets/images/largeCard.png').add('./assets/images/icons/icons8-menu-48.png').add('./assets/images/icons/icons8-star-48.png').add('./assets/images/icons/icons8-back-100.png').add('./assets/images/icons/icons8-close-100.png').add('./assets/images/icons/icons8-refresh-64.png').add('./assets/images/icons/icons8-back-128.png').add('./assets/images/icons/icons8-forward-100.png').add('./assets/images/lineBorder.png').add('./assets/images/innerBorder.png')
 	// .add('./assets/images/map.jpg')
 	.load(loadJsons);
 	
 	window.levelsJson = "";
 	
+	window.TIME_SCALE = 1;
 	var jsonPath = "./data/";
 	
 	function loadJsons() {
@@ -43766,6 +43783,10 @@
 	
 	var _config2 = _interopRequireDefault(_config);
 	
+	var _gsap = __webpack_require__(228);
+	
+	var _gsap2 = _interopRequireDefault(_gsap);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
@@ -43939,7 +43960,9 @@
 				// }else{
 				// 	this.frameskip = 1;
 				// }
+				TweenMax.globalTimeScale(window.TIME_SCALE);
 				this.dt /= 1000;
+				this.dt /= window.TIME_SCALE;
 				this.resize2();
 				this.screenManager.update(this.dt);
 				this.renderer.render(this.stage);
@@ -44416,112 +44439,6 @@
 
 /***/ }),
 /* 228 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _pixi = __webpack_require__(1);
-	
-	var PIXI = _interopRequireWildcard(_pixi);
-	
-	var _gsap = __webpack_require__(229);
-	
-	var _gsap2 = _interopRequireDefault(_gsap);
-	
-	var _config = __webpack_require__(225);
-	
-	var _config2 = _interopRequireDefault(_config);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	var GameData = function () {
-	    function GameData() {
-	        _classCallCheck(this, GameData);
-	
-	        this.maxPoints = 0;
-	        this.currentPoints = 0;
-	        this.opponentID = 0;
-	        this.points = 0;
-	        this.lifes = 0;
-	    }
-	
-	    _createClass(GameData, [{
-	        key: 'getOther',
-	        value: function getOther() {}
-	    }, {
-	        key: 'savePlayer',
-	        value: function savePlayer() {
-	            COOKIE_MANAGER.storeObject('player-kickxel', this.currentTeamData);
-	        }
-	    }, {
-	        key: 'getTeamById',
-	        value: function getTeamById(id) {
-	            console.log(id, this.teamsData);
-	            for (var i = this.teamsData.length - 1; i >= 0; i--) {
-	                if (this.teamsData[i].id == id) {
-	                    console.log(id, i, 'ID');
-	                    return this.teamsData[i];
-	                }
-	            }
-	        }
-	    }, {
-	        key: 'addPlayers',
-	        value: function addPlayers() {
-	            // let tempPlayer = {force:1, curve:1}
-	            for (var i = this.teamsData.length - 1; i >= 0; i--) {
-	                this.teamsData[i].players.push({ force: 1, curve: 1 });
-	                this.teamsData[i].players.push({ force: 0.75, curve: 1.5 });
-	                this.teamsData[i].players.push({ force: 1.5, curve: 0.75 });
-	            }
-	        }
-	    }, {
-	        key: 'getStadium',
-	        value: function getStadium() {
-	            return this.fieldsTextures[this.currentTeamData.stadiumID];
-	        }
-	    }, {
-	        key: 'changeOpponent',
-	        value: function changeOpponent(team) {
-	            this.opponentID = team;
-	        }
-	    }, {
-	        key: 'changePlayer',
-	        value: function changePlayer(id) {
-	            this.currentTeamData.playerID = id;
-	            this.savePlayer();
-	        }
-	    }, {
-	        key: 'changeTeam',
-	        value: function changeTeam(team) {
-	            this.currentTeamData.teamID = team;
-	            GAME_VIEW.updateTeam(this.getTeamById(this.currentTeamData.teamID));
-	            this.savePlayer();
-	        }
-	    }, {
-	        key: 'startNewGame',
-	        value: function startNewGame() {
-	            this.lifes = 12 + this.fieldsTextures[this.currentTeamData.stadiumID].extraBalls;
-	            this.points = 0;
-	        }
-	    }]);
-	
-	    return GameData;
-	}();
-	
-	exports.default = GameData;
-
-/***/ }),
-/* 229 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(global) {/*!
@@ -52525,6 +52442,112 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ }),
+/* 229 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _pixi = __webpack_require__(1);
+	
+	var PIXI = _interopRequireWildcard(_pixi);
+	
+	var _gsap = __webpack_require__(228);
+	
+	var _gsap2 = _interopRequireDefault(_gsap);
+	
+	var _config = __webpack_require__(225);
+	
+	var _config2 = _interopRequireDefault(_config);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var GameData = function () {
+	    function GameData() {
+	        _classCallCheck(this, GameData);
+	
+	        this.maxPoints = 0;
+	        this.currentPoints = 0;
+	        this.opponentID = 0;
+	        this.points = 0;
+	        this.lifes = 0;
+	    }
+	
+	    _createClass(GameData, [{
+	        key: 'getOther',
+	        value: function getOther() {}
+	    }, {
+	        key: 'savePlayer',
+	        value: function savePlayer() {
+	            COOKIE_MANAGER.storeObject('player-kickxel', this.currentTeamData);
+	        }
+	    }, {
+	        key: 'getTeamById',
+	        value: function getTeamById(id) {
+	            console.log(id, this.teamsData);
+	            for (var i = this.teamsData.length - 1; i >= 0; i--) {
+	                if (this.teamsData[i].id == id) {
+	                    console.log(id, i, 'ID');
+	                    return this.teamsData[i];
+	                }
+	            }
+	        }
+	    }, {
+	        key: 'addPlayers',
+	        value: function addPlayers() {
+	            // let tempPlayer = {force:1, curve:1}
+	            for (var i = this.teamsData.length - 1; i >= 0; i--) {
+	                this.teamsData[i].players.push({ force: 1, curve: 1 });
+	                this.teamsData[i].players.push({ force: 0.75, curve: 1.5 });
+	                this.teamsData[i].players.push({ force: 1.5, curve: 0.75 });
+	            }
+	        }
+	    }, {
+	        key: 'getStadium',
+	        value: function getStadium() {
+	            return this.fieldsTextures[this.currentTeamData.stadiumID];
+	        }
+	    }, {
+	        key: 'changeOpponent',
+	        value: function changeOpponent(team) {
+	            this.opponentID = team;
+	        }
+	    }, {
+	        key: 'changePlayer',
+	        value: function changePlayer(id) {
+	            this.currentTeamData.playerID = id;
+	            this.savePlayer();
+	        }
+	    }, {
+	        key: 'changeTeam',
+	        value: function changeTeam(team) {
+	            this.currentTeamData.teamID = team;
+	            GAME_VIEW.updateTeam(this.getTeamById(this.currentTeamData.teamID));
+	            this.savePlayer();
+	        }
+	    }, {
+	        key: 'startNewGame',
+	        value: function startNewGame() {
+	            this.lifes = 12 + this.fieldsTextures[this.currentTeamData.stadiumID].extraBalls;
+	            this.points = 0;
+	        }
+	    }]);
+	
+	    return GameData;
+	}();
+	
+	exports.default = GameData;
+
+/***/ }),
 /* 230 */
 /***/ (function(module, exports) {
 
@@ -52597,7 +52620,7 @@
 	
 	var PIXI = _interopRequireWildcard(_pixi);
 	
-	var _gsap = __webpack_require__(229);
+	var _gsap = __webpack_require__(228);
 	
 	var _gsap2 = _interopRequireDefault(_gsap);
 	
@@ -52706,7 +52729,7 @@
 	
 	var PIXI = _interopRequireWildcard(_pixi);
 	
-	var _gsap = __webpack_require__(229);
+	var _gsap = __webpack_require__(228);
 	
 	var _gsap2 = _interopRequireDefault(_gsap);
 	
@@ -55030,7 +55053,7 @@
 	
 	var _config2 = _interopRequireDefault(_config);
 	
-	var _gsap = __webpack_require__(229);
+	var _gsap = __webpack_require__(228);
 	
 	var _gsap2 = _interopRequireDefault(_gsap);
 	
@@ -57072,7 +57095,7 @@
 	
 	var PIXI = _interopRequireWildcard(_pixi);
 	
-	var _gsap = __webpack_require__(229);
+	var _gsap = __webpack_require__(228);
 	
 	var _gsap2 = _interopRequireDefault(_gsap);
 	
@@ -57170,7 +57193,7 @@
 	
 	var PIXI = _interopRequireWildcard(_pixi);
 	
-	var _gsap = __webpack_require__(229);
+	var _gsap = __webpack_require__(228);
 	
 	var _gsap2 = _interopRequireDefault(_gsap);
 	
@@ -57367,7 +57390,7 @@
 	
 	var PIXI = _interopRequireWildcard(_pixi);
 	
-	var _gsap = __webpack_require__(229);
+	var _gsap = __webpack_require__(228);
 	
 	var _gsap2 = _interopRequireDefault(_gsap);
 	
@@ -57624,7 +57647,7 @@
 	
 	var PIXI = _interopRequireWildcard(_pixi);
 	
-	var _gsap = __webpack_require__(229);
+	var _gsap = __webpack_require__(228);
 	
 	var _gsap2 = _interopRequireDefault(_gsap);
 	
@@ -57926,7 +57949,7 @@
 	
 	var PIXI = _interopRequireWildcard(_pixi);
 	
-	var _gsap = __webpack_require__(229);
+	var _gsap = __webpack_require__(228);
 	
 	var _gsap2 = _interopRequireDefault(_gsap);
 	
@@ -58225,7 +58248,7 @@
 	
 	var PIXI = _interopRequireWildcard(_pixi);
 	
-	var _gsap = __webpack_require__(229);
+	var _gsap = __webpack_require__(228);
 	
 	var _gsap2 = _interopRequireDefault(_gsap);
 	
@@ -58403,7 +58426,7 @@
 	
 	var PIXI = _interopRequireWildcard(_pixi);
 	
-	var _gsap = __webpack_require__(229);
+	var _gsap = __webpack_require__(228);
 	
 	var _gsap2 = _interopRequireDefault(_gsap);
 	
@@ -58538,7 +58561,7 @@
 	
 	var PIXI = _interopRequireWildcard(_pixi);
 	
-	var _gsap = __webpack_require__(229);
+	var _gsap = __webpack_require__(228);
 	
 	var _gsap2 = _interopRequireDefault(_gsap);
 	
@@ -58612,9 +58635,10 @@
 			function TetraScreen(label) {
 					_classCallCheck(this, TetraScreen);
 	
-					////console.log(levels)
 					var _this = _possibleConstructorReturn(this, (TetraScreen.__proto__ || Object.getPrototypeOf(TetraScreen)).call(this, label));
 	
+					window.AUTO_PLAY = false;
+					////console.log(levels)
 					_this.innerResolution = { width: _config2.default.width, height: _config2.default.height };
 					window.ENEMIES = {
 							list: [{ isBlock: false, color: _config2.default.colors.blue, life: 0 }, { isBlock: false, color: _config2.default.colors.red, life: 1 }, { isBlock: false, color: _config2.default.colors.yellow, life: 2 }, { isBlock: false, color: _config2.default.colors.green, life: 3 }, { isBlock: false, color: _config2.default.colors.blue2, life: 4 }, { isBlock: false, color: _config2.default.colors.pink, life: 5 }, { isBlock: false, color: _config2.default.colors.red2, life: 6 }, { isBlock: false, color: _config2.default.colors.purple, life: 7 }, { isBlock: false, color: _config2.default.colors.white, life: 8 }, { isBlock: false, color: _config2.default.colors.dark, life: 9 }, { isBlock: true, color: _config2.default.colors.block }]
@@ -58673,8 +58697,16 @@
 					_this.mouseDirty = false;
 	
 					_this.latestShoot = { x: 0, id: 0 };
-					//console.log(utils.convertNumToTime(1231))
-					return _this;
+	
+					_this.dataToSave = {
+							levelName: "",
+							wins: 0,
+							loses: 0,
+							bestTime: 999999999,
+							bestMoves: 99999999,
+							bestScore: 0
+							//console.log(utils.convertNumToTime(1231))
+					};return _this;
 			}
 	
 			_createClass(TetraScreen, [{
@@ -58976,6 +59008,46 @@
 							this.endGameScreenContainer.show(false, 1);
 							this.hideInGameElements();
 							this.removeEvents();
+	
+							if (window.AUTO_PLAY) {
+	
+									if (this.currentRound < this.dataToSave.bestMoves) {
+											this.dataToSave.bestMoves = this.currentRound;
+									}
+	
+									if (this.currentTime < this.dataToSave.bestTime) {
+											this.dataToSave.bestTime = this.currentTime;
+									}
+	
+									if (this.currentPoints > this.dataToSave.bestScore) {
+											this.dataToSave.bestScore = this.currentPoints;
+									}
+	
+									this.dataToSave.wins++;
+	
+									if (this.dataToSave.wins > 10) {
+											var toSave = this.dataToSave.levelName + "\n";
+											toSave += "bestMoves :" + this.dataToSave.bestMoves + "\n";
+											toSave += "bestTime :" + this.dataToSave.bestTime + "\n";
+											toSave += "bestScore :" + this.dataToSave.bestScore + "\n";
+											toSave += "wins :" + this.dataToSave.wins + "\n";
+											toSave += "loses :" + this.dataToSave.loses + "\n";
+	
+											window.SAVE_DATA(toSave, this.dataToSave.levelName, 'text/plain');
+	
+											this.dataToSave = {
+													levelName: "",
+													wins: 0,
+													loses: 0,
+													bestTime: 999999999,
+													bestMoves: 99999999,
+													bestScore: 0
+											};
+									}
+	
+									console.log("on Win Reset", this.currentRound, this.dataToSave);
+									this.resetGame();
+							}
 							//console.log("endGameState")
 					}
 			}, {
@@ -58986,7 +59058,7 @@
 							setTimeout(function () {
 	
 									_this3.gameRunning = true;
-							}, 500);
+							}, 500 / window.TIME_SCALE);
 	
 							this.currentTime = 0;
 							this.showInGameElements();
@@ -59074,6 +59146,7 @@
 					key: 'startNewLevel',
 					value: function startNewLevel(data, isEasy) {
 							this.currentLevelData = data;
+	
 							this.updateGridDimensions();
 							this.gridContainer.x = _config2.default.width / 2 - (GRID.i + 1) * CARD.width / 2;
 							this.cardsContainer.x = this.gridContainer.x;
@@ -59088,6 +59161,15 @@
 					key: 'resetGame',
 					value: function resetGame() {
 							var _this4 = this;
+	
+							this.cardQueueData = {
+									latest: -1,
+									counter: 0
+							};
+	
+							for (var index = this.cardsContainer.children.length - 1; index >= 0; index--) {
+									this.cardsContainer.removeChildAt(0);
+							}
 	
 							this.gameState();
 							if (this.currentLevelID < 0) {
@@ -59108,6 +59190,8 @@
 							this.cardQueue = [];
 							if (this.currentCard) this.currentCard.forceDestroy();
 							this.currentCard = null;
+	
+							this.dataToSave.levelName = this.currentLevelData.levelName;
 	
 							for (var i = 0; i < this.currentLevelData.pieces.length; i++) {
 									for (var j = 0; j < this.currentLevelData.pieces[i].length; j++) {
@@ -59136,7 +59220,7 @@
 							_gsap2.default.to(this.gridContainer, 0.1, { alpha: 1, onComplete: function onComplete() {
 											_this4.gameState();
 									} });
-							//TweenLite.to(this.UIInGame, 0.75, { y: 0, ease: Cubic.easeOut, onComplete: () => { this.gameState() } })
+							//TweenMax.to(this.UIInGame, 0.75, { y: 0, ease: Cubic.easeOut, onComplete: () => { this.gameState() } })
 	
 							this.startScreenContainer.hide();
 	
@@ -59182,14 +59266,29 @@
 							while (this.cardQueue.length < this.cardQueueSize) {
 									var card = void 0;
 									if (CARD_POOL.length) {
-											// //console.log(CARD_POOL);
 											card = CARD_POOL[0];
 											CARD_POOL.shift();
 									} else {
 											card = new _Card2.default(this);
 									}
-									// //console.log(1 - (this.currentRound % 3)*0.12);
-									card.life = Math.random() < 1 - this.currentRound % 3 * 0.17 ? 0 : Math.random() < 0.5 ? 2 : 1;
+	
+									var nextLife = Math.random() < 1 - this.currentRound % 3 * 0.17 ? 0 : Math.random() < 0.5 ? 2 : 1;
+	
+									//console.log(nextLife,this.cardQueueData.counter)
+									if (nextLife > 0) {
+											if (this.cardQueueData.counter <= 0) {
+													//change frequecy of high level cards
+													this.cardQueueData.counter = 3 + Math.floor(Math.random() * 3);
+											} else {
+													nextLife = 0;
+											}
+									}
+	
+									if (this.cardQueueData.counter > 0) {
+											this.cardQueueData.counter--;
+									}
+	
+									card.life = nextLife;
 									card.createCard();
 									card.updateSprite(card.life);
 									card.type = 0;
@@ -59210,27 +59309,41 @@
 			}, {
 					key: 'newRound',
 					value: function newRound() {
+							var _this5 = this;
+	
 							this.updateQueue();
 							this.currentCard = this.cardQueue[0];
 							this.cardQueue.shift();
-							//if (this.mousePosID < 0) {
 							this.mousePosID = this.latestShoot.id;
 							this.currentCard.x = this.latestShoot.x;
-	
-							console.log("latest", this.currentCard.x);
-							//}
 							this.currentCard.scale.set(1);
-							//console.log(this.mousePosID)
-							//this.currentCard.x = CARD.width * this.mousePosID;
 							this.currentCard.alpha = 0;
 							_gsap2.default.to(this.currentCard, 0.3, { alpha: 1, y: this.gridContainer.height + 20, ease: Elastic.easeOut });
 							this.currentCard.updateCard(true);
 							this.cardsContainer.addChild(this.currentCard);
 	
-							//let globalQueue = this.toGlobal(this.containerQueue)
-							//let localQueue = this.cardsContainer.toLocal(globalQueue)
+							if (this.autoPlayTimeout) {
+									clearTimeout(this.autoPlayTimeout);
+							}
+							//FIND BEST OPTION TO SHOOT
+							if (window.AUTO_PLAY) {
+									this.autoPlayTimeout = setTimeout(function () {
+											_this5.playRandom();
+									}, 500 / window.TIME_SCALE);
+							}
+					}
+			}, {
+					key: 'playRandom',
+					value: function playRandom() {
+							this.mousePosID = this.board.findBestShoot(this.currentCard);
+							if (this.mousePosID == -1 || this.currentRound > 1500) {
 	
-							//this.currentCard.x = this.latestShoot.x//CARD.width * GRID.i//- this.cardsContainer.x//CARD.width/2 - this.currentCard.width / 2;
+									this.dataToSave.loses++;
+									console.log("playRandom resetGame", this.mousePosID, this.currentRound, this.dataToSave);
+									this.resetGame();
+							} else {
+									this.onTapUp(null, this.mousePosID);
+							}
 					}
 			}, {
 					key: 'placeCard',
@@ -59239,7 +59352,6 @@
 	
 							var card = void 0;
 							if (CARD_POOL.length) {
-									// //console.log(CARD_POOL);
 									card = CARD_POOL[0];
 									CARD_POOL.shift();
 							} else {
@@ -59302,7 +59414,7 @@
 							}
 	
 							////console.log(this.mousePosition)
-							this.currentTime += delta;
+							this.currentTime += delta * window.TIME_SCALE * window.TIME_SCALE;
 	
 							if (!this.board.newGameFinished && this.board.totalCards <= 0) {
 									this.endGameState();
@@ -59406,30 +59518,33 @@
 					}
 			}, {
 					key: 'onTapUp',
-					value: function onTapUp() {
+					value: function onTapUp(event, customID) {
 							if (!this.currentCard || !this.gameRunning) {
 	
+									console.log("NO");
 									return;
 							}
-							//console.log(renderer.plugins.interaction.activeInteractionData)
-							if (renderer.plugins.interaction.activeInteractionData) {
-	
-									for (var key in renderer.plugins.interaction.activeInteractionData) {
-											var element = renderer.plugins.interaction.activeInteractionData[key];
-											if (element.pointerType == "touch") {
-													this.mousePosition = element.global;
+							if (customID == undefined) {
+									if (renderer.plugins.interaction.activeInteractionData) {
+											for (var key in renderer.plugins.interaction.activeInteractionData) {
+													var element = renderer.plugins.interaction.activeInteractionData[key];
+													if (element.pointerType == "touch") {
+															this.mousePosition = element.global;
+													}
 											}
+									} else {
+											this.mousePosition = renderer.plugins.interaction.mouse.global;
 									}
+									if (this.mousePosition.y < this.topUIContainer.position.y + _config2.default.height * 0.2) {
+											return;
+									}
+									this.updateMousePosition();
 							} else {
-									this.mousePosition = renderer.plugins.interaction.mouse.global;
-							}
-							//console.log(this.topUIContainer.position.y, this.topUIContainer.position + config.height * 0.1)
-							if (this.mousePosition.y < this.topUIContainer.position.y + _config2.default.height * 0.2) {
-									return;
+									this.mousePosID = customID;
 							}
 	
-							this.updateMousePosition();
 							if (!this.board.isPossibleShot(this.mousePosID)) {
+									console.log("isPossibleShot");
 									return;
 							}
 	
@@ -59449,7 +59564,7 @@
 							// console.log(0.1 * normalDist * 100);
 							setTimeout(function () {
 									this.newRound();
-							}.bind(this), 0.1 * normalDist + nextRoundTimer);
+							}.bind(this), 0.1 * normalDist + nextRoundTimer / window.TIME_SCALE);
 	
 							// console.log(nextRoundTimer);
 					}
@@ -59728,6 +59843,10 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
+	var _gsap = __webpack_require__(228);
+	
+	var _gsap2 = _interopRequireDefault(_gsap);
+	
 	var _pixi = __webpack_require__(1);
 	
 	var PIXI = _interopRequireWildcard(_pixi);
@@ -59744,9 +59863,9 @@
 	
 	var _ParticleSystem2 = _interopRequireDefault(_ParticleSystem);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -59845,7 +59964,7 @@
 				this.crazyMood = true;
 				this.circleBackground.alpha = 0.2;
 				this.circleBackground.scale.set(0);
-				TweenLite.to(this.circleBackground.scale, 0.5, { x: 1, y: 1, ease: Elastic.easeOut });
+				_gsap2.default.to(this.circleBackground.scale, 0.5, { x: 1, y: 1, ease: Elastic.easeOut });
 			}
 		}, {
 			key: 'removeCrazyMood',
@@ -60056,7 +60175,7 @@
 					this.backshape.parent.removeChild(this.backshape);
 				}
 	
-				TweenLite.to(this, time, { x: pos.x, y: pos.y, delay: delay });
+				_gsap2.default.to(this, time, { x: pos.x, y: pos.y, delay: delay });
 			}
 		}, {
 			key: 'show',
@@ -60066,11 +60185,11 @@
 				var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0.3;
 				var delay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 	
-				TweenLite.killTweensOf(this.cardForeground, true);
+				_gsap2.default.killTweensOf(this.cardForeground, true);
 				this.cardForeground.tint = this.enemySprite.tint;
 				this.cardForeground.alpha = 1;
 				this.cardContainer.alpha = 0;
-				TweenLite.to(this.cardForeground, time, { alpha: 0, delay: delay, onStart: function onStart() {
+				_gsap2.default.to(this.cardForeground, time, { alpha: 0, delay: delay, onStart: function onStart() {
 						_this2.cardContainer.alpha = 1;
 					} });
 			}
@@ -60081,7 +60200,7 @@
 				var delay = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
 	
 				// console.log(	'moveX', pos);
-				TweenLite.to(this, time, { x: pos, delay: delay });
+				_gsap2.default.to(this, time, { x: pos, delay: delay });
 			}
 		}, {
 			key: 'mark',
@@ -60116,13 +60235,19 @@
 		}, {
 			key: 'forceDestroy',
 			value: function forceDestroy() {
-				this.parent.removeChild(this);
+				var returnToPool = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+	
+				if (this.parent) {
+					this.parent.removeChild(this);
+				}
 				if (this.isCard) this.removeActionZones();
 	
 				if (this.backshape && this.backshape.parent) {
 					this.backshape.parent.removeChild(this.backshape);
 				}
-				window.CARD_POOL.push(this);
+				if (returnToPool) {
+					window.CARD_POOL.push(this);
+				}
 			}
 		}, {
 			key: 'update',
@@ -60156,24 +60281,26 @@
 				// 	return
 				// }
 				if (this.dead) {
-					TweenLite.killTweensOf(this);
+					_gsap2.default.killTweensOf(this);
 					console.log("FORCE THIS CARD TO DIE");
-					this.alpha = 0.1;
-					this.forceDestroy();
+					if (this.parent) {
+						this.parent.removeChild(this);
+					}
+					this.forceDestroy(false);
 					return false;
 					this.forceDestroy();
 				}
 				// this.removeCrazyMood();
 				this.shake(0.2, 6, 0.2);
-				TweenLite.killTweensOf(this);
+				_gsap2.default.killTweensOf(this);
 	
 				this.dead = true;
 	
 				if (this.crazyMood) {
-					TweenLite.to(this.circleBackground.scale, 0.5, { x: 2, y: 2, ease: Elastic.easeOut });
+					_gsap2.default.to(this.circleBackground.scale, 0.5, { x: 2, y: 2, ease: Elastic.easeOut });
 				}
-				// TweenLite.to(this.cardContainer.scale, 0.2, {x:this.cardContainer.scale.x + 0.3, y:this.cardContainer.scale.y + 0.3})			
-				TweenLite.to(this, 0.2, {
+				// TweenMax.to(this.cardContainer.scale, 0.2, {x:this.cardContainer.scale.x + 0.3, y:this.cardContainer.scale.y + 0.3})			
+				_gsap2.default.to(this, 0.2, {
 					delay: 0.2, alpha: 0.5, onComplete: function () {
 						this.forceDestroy();
 					}.bind(this)
@@ -60191,10 +60318,10 @@
 				var spliterForce = force * 20;
 				var speed = time / steps;
 				for (var i = steps; i >= 0; i--) {
-					timelinePosition.append(TweenLite.to(this.position, speed, { x: this.position.x + (Math.random() * positionForce - positionForce / 2), y: this.position.y + (Math.random() * positionForce - positionForce / 2), ease: "easeNoneLinear" }));
+					timelinePosition.append(_gsap2.default.to(this.position, speed, { x: this.position.x + (Math.random() * positionForce - positionForce / 2), y: this.position.y + (Math.random() * positionForce - positionForce / 2), ease: "easeNoneLinear" }));
 				};
 	
-				timelinePosition.append(TweenLite.to(this.position, speed, { x: this.position.x, y: this.position.y, ease: "easeeaseNoneLinear" }));
+				timelinePosition.append(_gsap2.default.to(this.position, speed, { x: this.position.x, y: this.position.y, ease: "easeeaseNoneLinear" }));
 			}
 		}]);
 	
@@ -60223,7 +60350,7 @@
 	
 	var _config2 = _interopRequireDefault(_config);
 	
-	var _gsap = __webpack_require__(229);
+	var _gsap = __webpack_require__(228);
 	
 	var _gsap2 = _interopRequireDefault(_gsap);
 	
@@ -60586,7 +60713,7 @@
 				card.cardContainer.scale.x = 0.5;
 				card.cardContainer.scale.y = 1.5;
 	
-				TweenLite.to(card.cardContainer.scale, 0.2, { x: 1, y: 1 });
+				TweenMax.to(card.cardContainer.scale, 0.2, { x: 1, y: 1 });
 				var spaceID = -1;
 				for (var i = this.cards[laneID].length - 1; i >= 0; i--) {
 					if (!this.cards[laneID][i]) {
@@ -60652,8 +60779,8 @@
 				} else {
 					setTimeout(function () {
 						this.destroyCards(cardsToDestroy, card, autoDestroyCardData, starterLife + 1);
-					}.bind(this), 200);
-					return 200 + 300 * (cardsToDestroy.length + 1);
+					}.bind(this), 200 / window.TIME_SCALE);
+					return 200 + 300 * (cardsToDestroy.length + 1) / window.TIME_SCALE;
 				}
 			}
 		}, {
@@ -60753,28 +60880,30 @@
 			key: 'destroyCards',
 			value: function destroyCards(list, card, autoDestroyCardData, hits) {
 				var timeline = new TimelineLite();
-				TweenLite.killTweensOf(card);
+				TweenMax.killTweensOf(card);
 				for (var i = 0; i < list.length; i++) {
-					//timeline.append(TweenLite.to(list[i].currentCard.getArrow(list[i].attackZone.label).scale, 0.1, {x:0, y:0}))
+					//timeline.append(TweenMax.to(list[i].currentCard.getArrow(list[i].attackZone.label).scale, 0.1, {x:0, y:0}))
 	
-					timeline.append(TweenLite.to(list[i].cardFound, 0.3, {
+					timeline.append(TweenMax.to(list[i].cardFound, 0.3, {
 						onStartParams: [list[i].currentCard.getArrow(list[i].attackZone.label), list[i].attackZone, i + 1],
 						onStart: function (arrow, zone, id) {
-							TweenLite.to(arrow.scale, 0.3, { x: 0, y: 0, ease: Back.easeIn });
-							TweenLite.to(arrow.scale, 0.3, { delay: 0.3, x: 1, y: 1, ease: Back.easeOut });
+							if (arrow) {
+								TweenMax.to(arrow.scale, 0.3, { x: 0, y: 0, ease: Back.easeIn });
+								TweenMax.to(arrow.scale, 0.3, { delay: 0.3, x: 1, y: 1, ease: Back.easeOut });
 	
-							TweenLite.to(arrow, 0.05, { x: arrow.x + 10 * zone.dir.x, y: arrow.y + 10 * zone.dir.y, ease: Back.easeIn });
-							TweenLite.to(arrow, 0.2, { delay: 0.2, x: arrow.x, y: arrow.y, ease: Back.easeIn });
-							var arrowGlobal = arrow.getGlobalPosition({ x: 0, y: 0 });
-							var screenPos = {
-								x: arrowGlobal.x / _config2.default.width,
-								y: arrowGlobal.y / _config2.default.height
-							};
-							window.EFFECTS.addShockwave(screenPos.x, screenPos.y, 2);
-							this.game.addPoints(10 * id);
-							//normal attack
-							this.popLabel(this.game.toLocal(arrowGlobal), "+" + 10 * id, 0, 1, 0.5 + id * 0.15);
-							window.EFFECTS.shakeSplitter(0.2, 3, 0.5);
+								TweenMax.to(arrow, 0.05, { x: arrow.x + 10 * zone.dir.x, y: arrow.y + 10 * zone.dir.y, ease: Back.easeIn });
+								TweenMax.to(arrow, 0.2, { delay: 0.2, x: arrow.x, y: arrow.y, ease: Back.easeIn });
+								var arrowGlobal = arrow.getGlobalPosition({ x: 0, y: 0 });
+								var screenPos = {
+									x: arrowGlobal.x / _config2.default.width,
+									y: arrowGlobal.y / _config2.default.height
+								};
+								window.EFFECTS.addShockwave(screenPos.x, screenPos.y, 2);
+								this.game.addPoints(10 * id);
+								//normal attack
+								this.popLabel(this.game.toLocal(arrowGlobal), "+" + 10 * id, 0, 1, 0.5 + id * 0.15);
+								window.EFFECTS.shakeSplitter(0.2, 3, 0.5);
+							}
 						}.bind(this),
 						onCompleteParams: [card, list[i].cardFound],
 						onComplete: function (card, cardFound) {
@@ -60797,7 +60926,7 @@
 				if (totalHits > 3) {
 					setTimeout(function () {
 						this.addCrazyCards(totalHits - 3, card);
-					}.bind(this), list.length * 310);
+					}.bind(this), list.length * 310 / window.TIME_SCALE);
 				}
 	
 				if (autoDestroyCardData) {
@@ -60815,7 +60944,7 @@
 						this.popLabel(this.game.toLocal(arrowGlobal), "+" + 10 * counterHits + "\nCOUNTER", 0.2, 0, 0.4 + counterHits * 0.1, 0xD81639);
 						// this.popLabel(arrowGlobal,10 * counterHits , 0.1, -0.5, 1 + counterHits * 0.15);
 	
-					}.bind(this), list.length * 200);
+					}.bind(this), list.length * 200 / window.TIME_SCALE);
 				} else {
 					card.convertCard();
 				}
@@ -60847,14 +60976,14 @@
 				tempLabel.pivot.y = tempLabel.height / 2;
 				tempLabel.alpha = 0;
 				tempLabel.scale.set(0);
-				TweenLite.to(tempLabel.scale, 0.5, { delay: delay, x: scale, y: scale, ease: ease });
-				TweenLite.to(tempLabel, 1, {
+				TweenMax.to(tempLabel.scale, 0.5, { delay: delay, x: scale, y: scale, ease: ease });
+				TweenMax.to(tempLabel, 1, {
 					delay: delay, y: tempLabel.y - 50 * dir, onStartParams: [tempLabel], onStart: function onStart(temp) {
 						temp.alpha = 1;
 						temp.parent.addChild(temp);
 					}
 				});
-				TweenLite.to(tempLabel, 0.5, {
+				TweenMax.to(tempLabel, 0.5, {
 					delay: 0.5 + delay, alpha: 0, onCompleteParams: [tempLabel], onComplete: function onComplete(temp) {
 						temp.parent.removeChild(temp);
 					}
@@ -60991,6 +61120,84 @@
 					this.moveCardDown(moveDownList[i]);
 				}
 				console.log(moveDownList);
+			}
+		}, {
+			key: 'findBestShoot',
+			value: function findBestShoot(card) {
+	
+				var ids = [];
+				var canShoot = false;
+				for (var index = 0; index < GRID.i; index++) {
+					if (!this.isPossibleShot(index)) {
+						ids.push(-999999);
+					} else {
+						canShoot = true;
+						ids.push(this.simulate(card, index));
+					}
+				}
+	
+				var max = -999;
+				var idMax = -1;
+	
+				for (var _index = 0; _index < ids.length; _index++) {
+					var element = ids[_index];
+					if (element > max) {
+						max = element;
+						idMax = _index;
+					}
+				}
+				//console.log(ids)
+				if (!canShoot) {
+					return -1;
+				} else {
+					return idMax;
+				}
+			}
+		}, {
+			key: 'simulate',
+			value: function simulate(card, laneID) {
+				var zones = card.zones;
+				var findCards = false;
+				var cardFound = null;
+				var cardsToDestroy = [];
+	
+				var spaceID = -1;
+				for (var i = this.cards[laneID].length - 1; i >= 0; i--) {
+					if (!this.cards[laneID][i]) {
+						spaceID = i;
+					} else {
+						break;
+					}
+				}
+	
+				var simulatedPosition = {
+					i: laneID,
+					j: spaceID
+				};
+	
+				var value = -(simulatedPosition.j * 2);
+				for (var i = 0; i < zones.length; i++) {
+					var actionPosId = {
+						i: simulatedPosition.i + zones[i].dir.x,
+						j: simulatedPosition.j + zones[i].dir.y
+					};
+					if (actionPosId.i >= 0 && actionPosId.i < window.GRID.i && actionPosId.j >= 0 && actionPosId.j < window.GRID.j) {
+						cardFound = this.cards[actionPosId.i][actionPosId.j];
+						if (cardFound && cardFound.isCard) {
+							findCards = true;
+	
+							value += 50 - cardFound.life;
+	
+							var tempZone = cardFound.hasZone(this.getOpposite(zones[i].label));
+	
+							if (tempZone) {
+								value += 150;
+							}
+						}
+					}
+				}
+	
+				return value;
 			}
 		}]);
 	
@@ -103364,7 +103571,7 @@
 	
 	var PIXI = _interopRequireWildcard(_pixi);
 	
-	var _gsap = __webpack_require__(229);
+	var _gsap = __webpack_require__(228);
 	
 	var _gsap2 = _interopRequireDefault(_gsap);
 	
@@ -103470,7 +103677,7 @@
 	
 					_this.backButton = new _UIButton2.default(_config2.default.colors.red2, './assets/images/icons/icons8-close-100.png', _config2.default.colors.white);
 					_this.backButton.onClick.add(function () {
-							console.log("TO START");
+							//console.log("TO START")
 							_this.startState(0);
 					});
 	
@@ -103542,7 +103749,7 @@
 							this.playLabel.y = this.playLine.y - 85;
 							this.playLabel.text = "PLAY";
 	
-							//console.log(this.playLine.getGlobalPosition())
+							////console.log(this.playLine.getGlobalPosition())
 	
 	
 							this.levelSelectionContainer.y = this.mainCanvas.y;
@@ -103581,7 +103788,7 @@
 	
 							this.chooseLevelPanel.visible = this.chooseLevelPanel.alpha > 0.1;
 	
-							//console.log(this.chooseLevelPanel.visible, this.screenState)
+							////console.log(this.chooseLevelPanel.visible, this.screenState)
 	
 							this.backButton.x = this.mainCanvas.x + this.backButton.width;
 							this.backButton.y = this.mainCanvas.y + this.backButton.height;
@@ -103706,7 +103913,7 @@
 							this.screenState = 1;
 							this.chooseLevelPanel.visible = false;
 	
-							console.log("HideStart");
+							//console.log("HideStart")
 	
 							_gsap2.default.to(this.screenContainer, force ? 0 : 0.2, { alpha: 0 });
 					}
@@ -103757,7 +103964,7 @@
 	
 	var signals = _interopRequireWildcard(_signals);
 	
-	var _gsap = __webpack_require__(229);
+	var _gsap = __webpack_require__(228);
 	
 	var _gsap2 = _interopRequireDefault(_gsap);
 	
@@ -104300,7 +104507,7 @@
 	
 	var PIXI = _interopRequireWildcard(_pixi);
 	
-	var _gsap = __webpack_require__(229);
+	var _gsap = __webpack_require__(228);
 	
 	var _gsap2 = _interopRequireDefault(_gsap);
 	
@@ -104475,12 +104682,16 @@
 	                        var secButton = PIXI.Sprite.fromImage('./assets/images/largeCard.png'); //new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
 	                        secButton.tint = section.color;
 	
+	                        var secButtonMask = PIXI.Sprite.fromImage('./assets/images/largeCard.png');
+	                        var innerBorder = PIXI.Sprite.fromImage('./assets/images/innerBorder.png');
+	
 	                        var icon = PIXI.Sprite.fromImage('./assets/' + section.imageSrc); //new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
 	                        icon.scale.set(secButton.width / icon.width);
 	                        secButton.scale.set(this.unscaledCardSize.width / secButton.width);
 	                        icon.anchor.set(0, 1);
 	                        icon.x = 0;
 	                        icon.y = secButton.height / secButton.scale.y;
+	                        icon.mask = secButtonMask;
 	
 	                        var label = new PIXI.Text(section.name, {
 	                                font: '48px',
@@ -104498,7 +104709,9 @@
 	                        label.scale.set(0.7);
 	                        secButton.label = label;
 	                        secButton.addChild(icon);
+	                        secButton.addChild(secButtonMask);
 	                        secButton.addChild(label);
+	                        secButton.addChild(innerBorder);
 	                        return secButton;
 	                }
 	        }, {
@@ -104760,7 +104973,7 @@
 	
 	var PIXI = _interopRequireWildcard(_pixi);
 	
-	var _gsap = __webpack_require__(229);
+	var _gsap = __webpack_require__(228);
 	
 	var _gsap2 = _interopRequireDefault(_gsap);
 	
@@ -105005,7 +105218,7 @@
 	                        _gsap2.default.to(this.replayButton, force ? 0 : 0.5, { alpha: 0, ease: Cubic.easeIn });
 	                        this.backButton.interactive = false;
 	                        this.replayButton.interactive = false;
-	                        console.log("hide");
+	                        //console.log("hide")
 	                        //console.trace()
 	                }
 	        }, {
@@ -105053,8 +105266,8 @@
 	                        this.levelName.scale.set(1 + (1 - this.currentLevelImage.scale.x));
 	                        this.youWinLabel.scale.set(1 + (1 - this.currentLevelImage.scale.x));
 	
-	                        console.log(this.currentLevelImage.scale);
-	                        console.log(this.youWinLabel.scale);
+	                        //console.log( this.currentLevelImage.scale)
+	                        //console.log( this.youWinLabel.scale)
 	
 	                        //this.screenContainer.addChild(s);
 	                }
@@ -105103,14 +105316,14 @@
 	        }, {
 	                key: 'removeEvents',
 	                value: function removeEvents() {
-	                        console.log("removeEvents");
+	                        //console.log("removeEvents")
 	                        this.backButton.interactive = true;
 	                }
 	        }, {
 	                key: 'addEvents',
 	                value: function addEvents() {
 	                        this.removeEvents();
-	                        console.log("addEvents");
+	                        //console.log("addEvents")
 	                        this.backButton.interactive = true;
 	                }
 	        }]);
@@ -105148,7 +105361,7 @@
 	
 	var _StarParticle2 = _interopRequireDefault(_StarParticle);
 	
-	var _gsap = __webpack_require__(229);
+	var _gsap = __webpack_require__(228);
 	
 	var _gsap2 = _interopRequireDefault(_gsap);
 	
@@ -105394,7 +105607,7 @@
 	
 	var PIXI = _interopRequireWildcard(_pixi);
 	
-	var _gsap = __webpack_require__(229);
+	var _gsap = __webpack_require__(228);
 	
 	var _gsap2 = _interopRequireDefault(_gsap);
 	
@@ -105497,7 +105710,7 @@
 	
 	var signals = _interopRequireWildcard(_signals);
 	
-	var _gsap = __webpack_require__(229);
+	var _gsap = __webpack_require__(228);
 	
 	var _gsap2 = _interopRequireDefault(_gsap);
 	
@@ -105628,7 +105841,7 @@
 	
 	var _config2 = _interopRequireDefault(_config);
 	
-	var _gsap = __webpack_require__(229);
+	var _gsap = __webpack_require__(228);
 	
 	var _gsap2 = _interopRequireDefault(_gsap);
 	
@@ -106137,7 +106350,7 @@
 	
 	var PIXI = _interopRequireWildcard(_pixi);
 	
-	var _gsap = __webpack_require__(229);
+	var _gsap = __webpack_require__(228);
 	
 	var _gsap2 = _interopRequireDefault(_gsap);
 	

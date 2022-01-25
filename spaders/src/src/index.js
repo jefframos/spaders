@@ -86,7 +86,24 @@ window.IMAGE_DATA.enemyBlockImages.forEach(element => {
 window.IMAGE_DATA.enemyImages.forEach(element => {
 	PIXI.loader.add(element)
 });
+window.SAVE_DATA = function(data, filename, type){
+	var file = new Blob([data], {type: type});
+	if (window.navigator.msSaveOrOpenBlob) // IE10+
+		window.navigator.msSaveOrOpenBlob(file, filename);
+	else { // Others
+		var a = document.createElement("a"),
+				url = URL.createObjectURL(file);
+		a.href = url;
+		a.download = filename;
+		document.body.appendChild(a);
+		a.click();
+		setTimeout(function() {
+			document.body.removeChild(a);
+			window.URL.revokeObjectURL(url);  
+		}, 0); 
+	}
 
+}
 PIXI.loader
 	.add('./data/levelSections.json')
 	.add('./assets/fonts/stylesheet.css')
@@ -117,12 +134,13 @@ PIXI.loader
 	.add('./assets/images/icons/icons8-back-128.png')
 	.add('./assets/images/icons/icons8-forward-100.png')
 	.add('./assets/images/lineBorder.png')
+	.add('./assets/images/innerBorder.png')
 	// .add('./assets/images/map.jpg')
 	.load(loadJsons);
 
 window.levelsJson = ""
 
-
+window.TIME_SCALE = 1;
 const jsonPath = "./data/"
 
 function loadJsons() {

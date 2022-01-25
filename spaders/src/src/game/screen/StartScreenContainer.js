@@ -80,7 +80,7 @@ export default class StartScreenContainer extends PIXI.Container {
 
 		this.backButton = new UIButton1(config.colors.red2, './assets/images/icons/icons8-close-100.png', config.colors.white);
 		this.backButton.onClick.add(() => {
-			console.log("TO START")
+			//console.log("TO START")
 			this.startState(0)
 		});
 
@@ -144,7 +144,7 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.playLabel.y = this.playLine.y - 85
 		this.playLabel.text = "PLAY"
 
-		//console.log(this.playLine.getGlobalPosition())
+		////console.log(this.playLine.getGlobalPosition())
 
 
 		this.levelSelectionContainer.y = this.mainCanvas.y
@@ -185,7 +185,7 @@ export default class StartScreenContainer extends PIXI.Container {
 
 		this.chooseLevelPanel.visible = this.chooseLevelPanel.alpha > 0.1;
 
-		//console.log(this.chooseLevelPanel.visible, this.screenState)
+		////console.log(this.chooseLevelPanel.visible, this.screenState)
 
 		this.backButton.x = this.mainCanvas.x + this.backButton.width
 		this.backButton.y = this.mainCanvas.y + this.backButton.height
@@ -286,7 +286,7 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.screenState = 1
 		this.chooseLevelPanel.visible = false;
 
-		console.log("HideStart")
+		//console.log("HideStart")
 
 		TweenLite.to(this.screenContainer, force ? 0 : 0.2, { alpha: 0 })
 

@@ -192,7 +192,7 @@ export default class EndGameContainer extends PIXI.Container {
         TweenLite.to(this.replayButton, force ? 0 : 0.5, { alpha: 0, ease: Cubic.easeIn })
         this.backButton.interactive = false;
         this.replayButton.interactive = false;
-        console.log("hide")
+        //console.log("hide")
         //console.trace()
     }
     setStats(points, rounds,time, image, data) {
@@ -241,8 +241,8 @@ export default class EndGameContainer extends PIXI.Container {
         this.levelName.scale.set(1 + (1-this.currentLevelImage.scale.x))
         this.youWinLabel.scale.set(1 + (1-this.currentLevelImage.scale.x))
         
-        console.log( this.currentLevelImage.scale)
-        console.log( this.youWinLabel.scale)
+        //console.log( this.currentLevelImage.scale)
+        //console.log( this.youWinLabel.scale)
 
         //this.screenContainer.addChild(s);
     }
@@ -281,13 +281,13 @@ export default class EndGameContainer extends PIXI.Container {
         this.gameScreen.mainmenuStateFromGame(true)
     }
     removeEvents() {
-        console.log("removeEvents")
+        //console.log("removeEvents")
         this.backButton.interactive = true;
 
     }
     addEvents() {
         this.removeEvents();
-        console.log("addEvents")
+        //console.log("addEvents")
         this.backButton.interactive = true;
 
 

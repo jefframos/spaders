@@ -146,13 +146,16 @@ export default class LevelSelectContainer extends PIXI.Container {
         secButton.tint = section.color
         
         
-        
+        let secButtonMask = PIXI.Sprite.fromImage('./assets/images/largeCard.png');
+        let innerBorder = PIXI.Sprite.fromImage('./assets/images/innerBorder.png');
+
         let icon = PIXI.Sprite.fromImage('./assets/'+section.imageSrc);//new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
         icon.scale.set(secButton.width / icon.width)
         secButton.scale.set(this.unscaledCardSize.width / secButton.width)
         icon.anchor.set(0,1)
         icon.x = 0
         icon.y = secButton.height / secButton.scale.y
+        icon.mask = secButtonMask
         
         let label = new PIXI.Text(section.name, { 
             font: '48px', 
@@ -170,7 +173,9 @@ export default class LevelSelectContainer extends PIXI.Container {
         label.scale.set(0.7)
         secButton.label = label;
         secButton.addChild(icon)
+        secButton.addChild(secButtonMask)
         secButton.addChild(label)
+        secButton.addChild(innerBorder)
         return secButton
     }
     buildLevelTierButton(level, index) {

@@ -1,3 +1,4 @@
+import TweenMax from 'gsap';
 import * as PIXI from 'pixi.js';
 import config from '../../config';
 import utils from '../../utils';
@@ -85,7 +86,7 @@ export default class Card extends PIXI.Container {
 		this.crazyMood = true;
 		this.circleBackground.alpha = 0.2
 		this.circleBackground.scale.set(0)
-		TweenLite.to(this.circleBackground.scale, 0.5, { x: 1, y: 1, ease: Elastic.easeOut });
+		TweenMax.to(this.circleBackground.scale, 0.5, { x: 1, y: 1, ease: Elastic.easeOut });
 	}
 	removeCrazyMood() {
 		this.crazyMood = false;
@@ -266,22 +267,22 @@ export default class Card extends PIXI.Container {
 			this.backshape.parent.removeChild(this.backshape)
 		}
 
-		TweenLite.to(this, time, { x: pos.x, y: pos.y, delay: delay });
+		TweenMax.to(this, time, { x: pos.x, y: pos.y, delay: delay });
 	}
 
 	show(time = 0.3, delay = 0) {
-		TweenLite.killTweensOf(this.cardForeground, true)
+		TweenMax.killTweensOf(this.cardForeground, true)
 		this.cardForeground.tint = this.enemySprite.tint
 		this.cardForeground.alpha = 1
 		this.cardContainer.alpha = 0;
-		TweenLite.to(this.cardForeground, time, { alpha: 0, delay: delay , onStart:()=>{
+		TweenMax.to(this.cardForeground, time, { alpha: 0, delay: delay , onStart:()=>{
 			this.cardContainer.alpha = 1;
 		}});
 	}
 
 	moveX(pos, time = 0.3, delay = 0) {
 		// console.log(	'moveX', pos);
-		TweenLite.to(this, time, { x: pos, delay: delay });
+		TweenMax.to(this, time, { x: pos, delay: delay });
 	}
 	mark() {
 		this.backshape = new PIXI.Graphics();
@@ -309,15 +310,19 @@ export default class Card extends PIXI.Container {
 		this.cardForeground.alpha = 0;
 		this.updateSize();
 	}
-	forceDestroy() {
-		this.parent.removeChild(this);
+	forceDestroy(returnToPool = true) {
+		if(this.parent){			
+			this.parent.removeChild(this);
+		}
 		if (this.isCard)
 			this.removeActionZones();
 
 		if (this.backshape && this.backshape.parent) {
 			this.backshape.parent.removeChild(this.backshape)
 		}
-		window.CARD_POOL.push(this);
+		if(returnToPool){
+			window.CARD_POOL.push(this);
+		}
 	}
 	update(delta) {
 		// this.particleSystem.update(delta);
@@ -350,24 +355,26 @@ export default class Card extends PIXI.Container {
 		// 	return
 		// }
 		if (this.dead) {
-			TweenLite.killTweensOf(this);
+			TweenMax.killTweensOf(this);
 			console.log("FORCE THIS CARD TO DIE");
-			this.alpha = 0.1;
-			this.forceDestroy();
+			if(this.parent){			
+				this.parent.removeChild(this);
+			}
+			this.forceDestroy(false);
 			return false;
 			this.forceDestroy();
 		}
 		// this.removeCrazyMood();
 		this.shake(0.2, 6, 0.2);
-		TweenLite.killTweensOf(this);
+		TweenMax.killTweensOf(this);
 
 		this.dead = true;
 
 		if (this.crazyMood) {
-			TweenLite.to(this.circleBackground.scale, 0.5, { x: 2, y: 2, ease: Elastic.easeOut });
+			TweenMax.to(this.circleBackground.scale, 0.5, { x: 2, y: 2, ease: Elastic.easeOut });
 		}
-		// TweenLite.to(this.cardContainer.scale, 0.2, {x:this.cardContainer.scale.x + 0.3, y:this.cardContainer.scale.y + 0.3})			
-		TweenLite.to(this, 0.2, {
+		// TweenMax.to(this.cardContainer.scale, 0.2, {x:this.cardContainer.scale.x + 0.3, y:this.cardContainer.scale.y + 0.3})			
+		TweenMax.to(this, 0.2, {
 			delay: 0.2, alpha: 0.5, onComplete: function () {
 				this.forceDestroy();
 			}.bind(this)
@@ -380,9 +387,9 @@ export default class Card extends PIXI.Container {
 		let spliterForce = (force * 20);
 		let speed = time / steps;
 		for (var i = steps; i >= 0; i--) {
-			timelinePosition.append(TweenLite.to(this.position, speed, { x: this.position.x + (Math.random() * positionForce - positionForce / 2), y: this.position.y + (Math.random() * positionForce - positionForce / 2), ease: "easeNoneLinear" }));
+			timelinePosition.append(TweenMax.to(this.position, speed, { x: this.position.x + (Math.random() * positionForce - positionForce / 2), y: this.position.y + (Math.random() * positionForce - positionForce / 2), ease: "easeNoneLinear" }));
 		};
 
-		timelinePosition.append(TweenLite.to(this.position, speed, { x: this.position.x, y: this.position.y, ease: "easeeaseNoneLinear" }));
+		timelinePosition.append(TweenMax.to(this.position, speed, { x: this.position.x, y: this.position.y, ease: "easeeaseNoneLinear" }));
 	}
 }

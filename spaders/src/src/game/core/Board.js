@@ -49,7 +49,7 @@ export default class Board {
 		if (laneID >= this.cards.length || laneID < 0) {
 			return false;
 		}
-		if(!this.cards[laneID]){
+		if (!this.cards[laneID]) {
 			return false;
 		}
 		for (var i = this.cards[laneID].length - 1; i >= 0; i--) {
@@ -65,7 +65,7 @@ export default class Board {
 		card.cardContainer.scale.x = 0.5;
 		card.cardContainer.scale.y = 1.5;
 
-		TweenLite.to(card.cardContainer.scale, 0.2, { x: 1, y: 1 });
+		TweenMax.to(card.cardContainer.scale, 0.2, { x: 1, y: 1 });
 		let spaceID = -1;
 		for (var i = this.cards[laneID].length - 1; i >= 0; i--) {
 			if (!this.cards[laneID][i]) {
@@ -129,8 +129,8 @@ export default class Board {
 		} else {
 			setTimeout(function () {
 				this.destroyCards(cardsToDestroy, card, autoDestroyCardData, starterLife + 1);
-			}.bind(this), 200);
-			return 200 + 300 * (cardsToDestroy.length + 1)
+			}.bind(this), 200 / window.TIME_SCALE);
+			return 200 + 300 * (cardsToDestroy.length + 1) / window.TIME_SCALE
 		}
 
 	}
@@ -154,7 +154,7 @@ export default class Board {
 				(actionPosId.i >= 0 && actionPosId.i < window.GRID.i) &&
 				(actionPosId.j >= 0 && actionPosId.j < window.GRID.j)) {
 				cardFound = this.cards[actionPosId.i][actionPosId.j];
-				if (cardFound && !cardFound.dead){//} && !cardFound.isCard) {
+				if (cardFound && !cardFound.dead) {//} && !cardFound.isCard) {
 					// findCards = true;					
 					//this.cards[actionPosId.i][actionPosId.j] = 0
 
@@ -191,7 +191,7 @@ export default class Board {
 		}
 		//utils.shuffle(tempCardList);
 		for (var i = 0; i < tempCardList.length; i++) {
-			if(tempCardList[i] && tempCardList[i].startCrazyMood){
+			if (tempCardList[i] && tempCardList[i].startCrazyMood) {
 
 				tempCardList[i].startCrazyMood();
 				numCards--;
@@ -213,9 +213,9 @@ export default class Board {
 		}
 		utils.shuffle(tempCardList);
 		for (var i = 0; i < tempCardList.length; i++) {
-			if(tempCardList[i] && tempCardList[i].startCrazyMood){
-			tempCardList[i].startCrazyMood();
-			numCards--;
+			if (tempCardList[i] && tempCardList[i].startCrazyMood) {
+				tempCardList[i].startCrazyMood();
+				numCards--;
 			}
 			if (numCards <= 0) {
 				return
@@ -225,28 +225,30 @@ export default class Board {
 
 	destroyCards(list, card, autoDestroyCardData, hits) {
 		let timeline = new TimelineLite();
-		TweenLite.killTweensOf(card);
+		TweenMax.killTweensOf(card);
 		for (var i = 0; i < list.length; i++) {
-			//timeline.append(TweenLite.to(list[i].currentCard.getArrow(list[i].attackZone.label).scale, 0.1, {x:0, y:0}))
+			//timeline.append(TweenMax.to(list[i].currentCard.getArrow(list[i].attackZone.label).scale, 0.1, {x:0, y:0}))
 
-			timeline.append(TweenLite.to(list[i].cardFound, 0.3, {
+			timeline.append(TweenMax.to(list[i].cardFound, 0.3, {
 				onStartParams: [list[i].currentCard.getArrow(list[i].attackZone.label), list[i].attackZone, (i + 1)],
 				onStart: function (arrow, zone, id) {
-					TweenLite.to(arrow.scale, 0.3, { x: 0, y: 0, ease: Back.easeIn })
-					TweenLite.to(arrow.scale, 0.3, { delay: 0.3, x: 1, y: 1, ease: Back.easeOut })
+					if (arrow) {
+						TweenMax.to(arrow.scale, 0.3, { x: 0, y: 0, ease: Back.easeIn })
+						TweenMax.to(arrow.scale, 0.3, { delay: 0.3, x: 1, y: 1, ease: Back.easeOut })
 
-					TweenLite.to(arrow, 0.05, { x: arrow.x + 10 * zone.dir.x, y: arrow.y + 10 * zone.dir.y, ease: Back.easeIn })
-					TweenLite.to(arrow, 0.2, { delay: 0.2, x: arrow.x, y: arrow.y, ease: Back.easeIn })
-					let arrowGlobal = arrow.getGlobalPosition({ x: 0, y: 0 });
-					let screenPos = {
-						x: arrowGlobal.x / config.width,
-						y: arrowGlobal.y / config.height
+						TweenMax.to(arrow, 0.05, { x: arrow.x + 10 * zone.dir.x, y: arrow.y + 10 * zone.dir.y, ease: Back.easeIn })
+						TweenMax.to(arrow, 0.2, { delay: 0.2, x: arrow.x, y: arrow.y, ease: Back.easeIn })
+						let arrowGlobal = arrow.getGlobalPosition({ x: 0, y: 0 });
+						let screenPos = {
+							x: arrowGlobal.x / config.width,
+							y: arrowGlobal.y / config.height
+						}
+						window.EFFECTS.addShockwave(screenPos.x, screenPos.y, 2);
+						this.game.addPoints(10 * id);
+						//normal attack
+						this.popLabel(this.game.toLocal(arrowGlobal), "+" + 10 * id, 0, 1, 0.5 + id * 0.15);
+						window.EFFECTS.shakeSplitter(0.2, 3, 0.5);
 					}
-					window.EFFECTS.addShockwave(screenPos.x, screenPos.y, 2);
-					this.game.addPoints(10 * id);
-					//normal attack
-					this.popLabel(this.game.toLocal(arrowGlobal), "+" + 10 * id, 0, 1, 0.5 + id * 0.15);
-					window.EFFECTS.shakeSplitter(0.2, 3, 0.5);
 				}.bind(this),
 				onCompleteParams: [card, list[i].cardFound],
 				onComplete: function (card, cardFound) {
@@ -261,9 +263,9 @@ export default class Board {
 							this.popLabel(this.game.toLocal(arrowGlobal2), "+" + 100, 0.25, 0.4, 0.8, 0xE2C756, Elastic.easeOut);
 							this.areaAttack(cardFound, card);
 						}
-						
+
 					}
-					
+
 				}.bind(this)
 			}));
 
@@ -272,10 +274,10 @@ export default class Board {
 		if (totalHits > 3) {
 			setTimeout(function () {
 				this.addCrazyCards(totalHits - 3, card);
-			}.bind(this), list.length * 310);
+			}.bind(this), list.length * 310 / window.TIME_SCALE);
 		}
 
-		
+
 
 		if (autoDestroyCardData) {
 			setTimeout(function () {
@@ -291,28 +293,28 @@ export default class Board {
 
 				this.popLabel(this.game.toLocal(arrowGlobal), "+" + 10 * counterHits + "\nCOUNTER", 0.2, 0, 0.4 + counterHits * 0.1, 0xD81639);
 				// this.popLabel(arrowGlobal,10 * counterHits , 0.1, -0.5, 1 + counterHits * 0.15);
-				
 
-			}.bind(this), list.length * 200);
+
+			}.bind(this), list.length * 200 / window.TIME_SCALE);
 		} else {
 			card.convertCard();
-			
+
 		}
 
-		
+
 	}
 	popLabel(pos, label, delay = 0, dir = 1, scale = 1, color = 0xFFFFFF, ease = Back.easeOut) {
 		//console.log(pos.x, pos.y);
-		let style = { 
-			font: '50px', 
-			fill: color, 
-			align: 'center', 
-			fontFamily:'round_popregular',
+		let style = {
+			font: '50px',
+			fill: color,
+			align: 'center',
+			fontFamily: 'round_popregular',
 			stroke: color == 0xFFFFFF ? 0x000000 : 0xFFFFFF,
 			strokeThickness: 8 * scale
-		 }
+		}
 
-		let tempLabel = new PIXI.Text(label, style		);
+		let tempLabel = new PIXI.Text(label, style);
 		this.game.addChild(tempLabel);
 		tempLabel.x = pos.x;
 		tempLabel.y = pos.y;
@@ -320,14 +322,14 @@ export default class Board {
 		tempLabel.pivot.y = tempLabel.height / 2;
 		tempLabel.alpha = 0;
 		tempLabel.scale.set(0);
-		TweenLite.to(tempLabel.scale, 0.5, { delay: delay, x: scale, y: scale, ease: ease })
-		TweenLite.to(tempLabel, 1, {
+		TweenMax.to(tempLabel.scale, 0.5, { delay: delay, x: scale, y: scale, ease: ease })
+		TweenMax.to(tempLabel, 1, {
 			delay: delay, y: tempLabel.y - 50 * dir, onStartParams: [tempLabel], onStart: function (temp) {
 				temp.alpha = 1;
 				temp.parent.addChild(temp)
 			}
 		})
-		TweenLite.to(tempLabel, 0.5, {
+		TweenMax.to(tempLabel, 0.5, {
 			delay: 0.5 + delay, alpha: 0, onCompleteParams: [tempLabel], onComplete: function (temp) {
 				temp.parent.removeChild(temp);
 			}
@@ -339,14 +341,14 @@ export default class Board {
 			this.cards[card.pos.i][card.pos.j] = 0;
 			card.destroy();
 			card.convertCard();
-			
+
 			return true;
 		}
-		
+
 	}
 	delayedDestroy(card, hits) {
 		this.attackCard(card, hits);
-		
+
 	}
 	getOpposite(zone) {
 		let id = 0;
@@ -452,5 +454,85 @@ export default class Board {
 			this.moveCardDown(moveDownList[i]);
 		}
 		console.log(moveDownList);
+	}
+
+
+	findBestShoot(card) {
+
+		let ids = [];
+		let canShoot = false;
+		for (let index = 0; index < GRID.i; index++) {
+			if (!this.isPossibleShot(index)) {
+				ids.push(-999999)
+			} else {
+				canShoot = true;
+				ids.push(this.simulate(card, index))
+			}
+		}
+
+
+		let max = -999;
+		let idMax = -1
+
+		for (let index = 0; index < ids.length; index++) {
+			const element = ids[index];
+			if (element > max) {
+				max = element;
+				idMax = index;
+			}
+
+		}
+		//console.log(ids)
+		if (!canShoot) {
+			return -1
+		} else {
+			return idMax;
+		}
+	}
+	simulate(card, laneID) {
+		let zones = card.zones;
+		let findCards = false;
+		let cardFound = null;
+		let cardsToDestroy = [];
+
+		let spaceID = -1;
+		for (var i = this.cards[laneID].length - 1; i >= 0; i--) {
+			if (!this.cards[laneID][i]) {
+				spaceID = i;
+			} else {
+				break;
+			}
+		}
+
+		let simulatedPosition = {
+			i: laneID,
+			j: spaceID
+		}
+
+		let value = - (simulatedPosition.j * 2);
+		for (var i = 0; i < zones.length; i++) {
+			let actionPosId = {
+				i: simulatedPosition.i + zones[i].dir.x,
+				j: simulatedPosition.j + zones[i].dir.y
+			}
+			if ((actionPosId.i >= 0 && actionPosId.i < window.GRID.i) &&
+				(actionPosId.j >= 0 && actionPosId.j < window.GRID.j)) {
+				cardFound = this.cards[actionPosId.i][actionPosId.j];
+				if (cardFound && cardFound.isCard) {
+					findCards = true;
+
+					value += 50 - cardFound.life;
+
+					let tempZone = cardFound.hasZone(this.getOpposite(zones[i].label));
+
+					if (tempZone) {
+						value += 150
+					}
+				}
+			}
+		}
+
+		return value;
+
 	}
 }
