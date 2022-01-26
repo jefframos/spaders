@@ -24,7 +24,7 @@
         },
         "how-to-play/creatures.tmx": {
             "scale": 1.0512073863636362,
-            "selectedLayer": -1,
+            "selectedLayer": 0,
             "viewCenter": {
                 "x": 352.4518613607189,
                 "y": 384.31997837983926
@@ -34,7 +34,7 @@
             "scale": 1.0512073863636362,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 352.92750489831775,
+                "x": 353.4031484359166,
                 "y": 384.31997837983926
             }
         },
@@ -50,8 +50,8 @@
             "scale": 0.8201171875,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 289.59276018099547,
-                "y": 386.5301262205287
+                "x": 352.38866396761136,
+                "y": 384.0914503453203
             }
         },
         "how-to-play/spadersTileset.tsx": {
@@ -59,7 +59,7 @@
         },
         "how-to-play/things.tmx": {
             "scale": 1.0512073863636362,
-            "selectedLayer": -1,
+            "selectedLayer": 0,
             "viewCenter": {
                 "x": 352.4518613607189,
                 "y": 384.31997837983926
@@ -109,8 +109,24 @@
             "scale": 0.8201171875,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 319.46653965229814,
-                "y": 384.7011193141224
+                "x": 320.07620862110025,
+                "y": 549.9214098594904
+            }
+        },
+        "videogames/levels2.tmx": {
+            "scale": 0.8275390625,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 320.8307764928015,
+                "y": 549.8229879631814
+            }
+        },
+        "videogames/levels3.tmx": {
+            "scale": 0.8275390625,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 320.8307764928015,
+                "y": 551.031390134529
             }
         },
         "videogames/spadersTileset.tsx": {
@@ -119,7 +135,7 @@
             "scaleInEditor": 1
         }
     },
-    "last.exportedFilePath": "E:/projects/spaders/spaders/www/data/how-to-play",
+    "last.exportedFilePath": "E:/projects/spaders/spaders/www/data/videogames",
     "last.externalTilesetPath": "E:/projects/spaders/spaders/src/map/tilesets",
     "last.imagePath": "D:/Projects/tetra/map",
     "map.height": 10,

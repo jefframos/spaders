@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="11" height="12" tilewidth="64" tileheight="64" infinite="0" nextlayerid="23" nextobjectid="1">
  <editorsettings>
-  <export target="../../www/data/videogames/videogamesLevels2.json" format="json"/>
+  <export target="../../../www/data/videogames/videogamesLevels3.json" format="json"/>
  </editorsettings>
  <properties>
   <property name="description" value="no description here"/>
-  <property name="sectionName" value="Generation 3"/>
+  <property name="sectionName" value=""/>
  </properties>
- <tileset firstgid="1" source="spadersTileset.tsx"/>
+ <tileset firstgid="1" source="../tilesets/spadersTileset.tsx"/>
  <layer id="9" name="Tetris" width="11" height="12" visible="0">
   <properties>
    <property name="i" type="int" value="7"/>

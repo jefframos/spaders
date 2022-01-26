@@ -602,7 +602,7 @@
         {
          "name":"sectionName",
          "type":"string",
-         "value":"Generation 2"
+         "value":""
         }],
  "renderorder":"right-down",
  "tiledversion":"1.7.2",
@@ -610,7 +610,7 @@
  "tilesets":[
         {
          "firstgid":1,
-         "source":"..\/..\/..\/src\/map\/spadersTileset.tsx"
+         "source":"..\/..\/..\/src\/map\/tilesets\/spadersTileset.tsx"
         }],
  "tilewidth":64,
  "type":"map",

@@ -5,9 +5,9 @@
  </editorsettings>
  <properties>
   <property name="description" value="no description here"/>
-  <property name="sectionName" value="Generation 2"/>
+  <property name="sectionName" value=""/>
  </properties>
- <tileset firstgid="1" source="spadersTileset.tsx"/>
+ <tileset firstgid="1" source="../tilesets/spadersTileset.tsx"/>
  <layer id="9" name="Tetris" width="11" height="12">
   <properties>
    <property name="i" type="int" value="7"/>
