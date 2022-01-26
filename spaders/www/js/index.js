@@ -42973,19 +42973,19 @@
 	
 	var _TetraScreen2 = _interopRequireDefault(_TetraScreen);
 	
-	var _EffectLayer = __webpack_require__(628);
+	var _EffectLayer = __webpack_require__(629);
 	
 	var _EffectLayer2 = _interopRequireDefault(_EffectLayer);
 	
-	var _BackgroundEffects = __webpack_require__(624);
+	var _BackgroundEffects = __webpack_require__(625);
 	
 	var _BackgroundEffects2 = _interopRequireDefault(_BackgroundEffects);
 	
-	var _ChooseMatchScreen = __webpack_require__(629);
+	var _ChooseMatchScreen = __webpack_require__(630);
 	
 	var _ChooseMatchScreen2 = _interopRequireDefault(_ChooseMatchScreen);
 	
-	var _Pool = __webpack_require__(630);
+	var _Pool = __webpack_require__(631);
 	
 	var _Pool2 = _interopRequireDefault(_Pool);
 	
@@ -58631,15 +58631,15 @@
 	
 	var _StartScreenContainer2 = _interopRequireDefault(_StartScreenContainer);
 	
-	var _EndGameContainer = __webpack_require__(623);
+	var _EndGameContainer = __webpack_require__(624);
 	
 	var _EndGameContainer2 = _interopRequireDefault(_EndGameContainer);
 	
-	var _BackgroundEffects = __webpack_require__(624);
+	var _BackgroundEffects = __webpack_require__(625);
 	
 	var _BackgroundEffects2 = _interopRequireDefault(_BackgroundEffects);
 	
-	var _UIRectLabel = __webpack_require__(626);
+	var _UIRectLabel = __webpack_require__(627);
 	
 	var _UIRectLabel2 = _interopRequireDefault(_UIRectLabel);
 	
@@ -58649,9 +58649,13 @@
 	
 	var _webpack = __webpack_require__(260);
 	
-	var _InGameMenu = __webpack_require__(627);
+	var _InGameMenu = __webpack_require__(628);
 	
 	var _InGameMenu2 = _interopRequireDefault(_InGameMenu);
+	
+	var _SquareButton = __webpack_require__(623);
+	
+	var _SquareButton2 = _interopRequireDefault(_SquareButton);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -58810,8 +58814,8 @@
 							var tempRect = null;
 	
 							var background = this.getRect2(level[0].length * size + size, (level.length - 1) * size + size + paddingBottom, 0x222222);
-							background.x -= size * 0.5;
-							background.y -= size * 0.5;
+							//background.x = size * 0.5
+							//background.y -= size * 0.5
 							container.addChild(background);
 							for (var i = 0; i < level.length - 1; i++) {
 									for (var j = 0; j < level[i].length; j++) {
@@ -58821,24 +58825,24 @@
 													if (ENEMIES.list[level[i][j]].isBlock) {
 															tempRect = this.getRect(size, _config2.default.colors.dark);
 															container.addChild(tempRect);
-															tempRect.x = j * size;
-															tempRect.y = i * size;
+															tempRect.x = j * size + size * 0.5;
+															tempRect.y = i * size + size * 0.5;
 													} else {
 															tempRect = this.getRect(size, ENEMIES.list[level[i][j]].color);
 															container.addChild(tempRect);
-															tempRect.x = j * size;
-															tempRect.y = i * size;
+															tempRect.x = j * size + size * 0.5;
+															tempRect.y = i * size + size * 0.5;
 													}
 											} else if (level[i][j] == -2) {
 													tempRect = this.getRect(size, _config2.default.colors.dark);
 													container.addChild(tempRect);
-													tempRect.x = j * size;
-													tempRect.y = i * size;
+													tempRect.x = j * size + size * 0.5;
+													tempRect.y = i * size + size * 0.5;
 											} else {
 													tempRect = this.getRect(size, 0x111111);
 													container.addChild(tempRect);
-													tempRect.x = j * size;
-													tempRect.y = i * size;
+													tempRect.x = j * size + size * 0.5;
+													tempRect.y = i * size + size * 0.5;
 											}
 									}
 							}
@@ -58931,6 +58935,12 @@
 									this.mainmenuState();
 							}
 	
+							// let square = new SquareButton({width:120, height:120});
+							// this.addChild(square)
+	
+							// this.currentLevelData = this.levels[0];
+	
+							// square.updateIcon(this.generateImage(this.currentLevelData.pieces))
 							// this.debugs = new PIXI.Graphics().beginFill(0xFF0000).drawCircle(0, 0, 20);
 							// //this.addChild(this.debugs);
 	
@@ -104696,6 +104706,10 @@
 	
 	var _webpack = __webpack_require__(260);
 	
+	var _SquareButton = __webpack_require__(623);
+	
+	var _SquareButton2 = _interopRequireDefault(_SquareButton);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
@@ -105021,7 +105035,7 @@
 	                        label.pivot.x = label.width / 2;
 	                        label.pivot.y = label.height / 2;
 	                        label.x = levelTierButton.width / 2 / levelTierButton.scale.x;
-	                        label.y = levelTierButton.height / 2 / levelTierButton.scale.y;
+	                        label.y = levelTierButton.height / 2 / levelTierButton.scale.y + label.height / label.scale.y;
 	                        levelTierButton.label = label;
 	                        levelTierButton.addChild(icon);
 	                        levelTierButton.addChild(secButtonMask);
@@ -105122,51 +105136,62 @@
 	                key: 'addCard',
 	                value: function addCard(data) {
 	
-	                        var pieceSize = 16;
-	                        if (data.pieces[0].length >= data.pieces.length) {
-	                                pieceSize = this.unscaledCardSize.width / data.pieces[0].length + 2;
-	                        } else {
-	                                pieceSize = this.unscaledCardSize.height / data.pieces.length + 2;
+	                        // let pieceSize = 16;
+	                        // if (data.pieces[0].length >= data.pieces.length) {
+	                        //     pieceSize = this.unscaledCardSize.width / data.pieces[0].length + 2;
+	                        // } else {
+	                        //     pieceSize = this.unscaledCardSize.height / data.pieces.length + 2;
+	                        // }
+	
+	                        // let levelCard = PIXI.Sprite.fromImage('./assets/images/largeCard.png');//new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
+	                        // levelCard.tint = config.colors.dark
+	
+	                        // let card = this.gameScreen.generateImage(data.pieces, pieceSize, 32)
+	                        // card.y = 0
+	                        // card.removeChild(card.background)
+	
+	                        // let label = new PIXI.Text(data.levelName, { font: '30px', fill: 0xFFFFFF, align: 'center', fontWeight: '200', fontFamily: 'round_popregular' });
+	
+	                        // if (label.width > levelCard.width * 0.8) {
+	                        //     label.scale.set(levelCard.width / label.width * 0.8)
+	                        // }
+	
+	                        // label.pivot.y = label.height / 2
+	
+	                        // label.x = levelCard.width / 2 - label.width / 2
+	                        // label.y = levelCard.height * 0.85
+	
+	                        // this.gameScreen.resizeToFitAR(this.unscaledCardSize, card)
+	                        // utils.centerObject(card, levelCard)
+	                        // card.y -= label.height * 0.5
+	
+	                        // levelCard.addChild(card)
+	                        // levelCard.addChild(label)
+	
+	                        // levelCard.on('mouseup', this.selectLevel.bind(this, data)).on('touchend', this.selectLevel.bind(this, data));
+	                        // levelCard.interactive = true;
+	                        // levelCard.buttonMode = true;
+	
+	                        // levelCard.data = data;
+	
+	                        // levelCard.scale.set(this.unscaledCardSize.width / levelCard.width)
+	
+	                        var levelButton = new _SquareButton2.default(this.unscaledCardSize);
+	                        levelButton.updateLabel(data.levelName);
+	                        levelButton.updateIcon(this.gameScreen.generateImage(data.pieces));
+	
+	                        this.gameScreen.resizeToFitAR(this.unscaledCardSize, levelButton);
+	                        levelButton.data = data;
+	
+	                        levelButton.on('mouseup', this.selectLevel.bind(this, data)).on('touchend', this.selectLevel.bind(this, data));
+	                        levelButton.interactive = true;
+	                        levelButton.buttonMode = true;
+	
+	                        if (!this.levelsView.children.includes(levelButton)) {
+	                                this.levelsView.addChild(levelButton);
 	                        }
 	
-	                        var levelCard = PIXI.Sprite.fromImage('./assets/images/largeCard.png'); //new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
-	                        levelCard.tint = _config2.default.colors.dark;
-	
-	                        var card = this.gameScreen.generateImage(data.pieces, pieceSize, 32);
-	                        card.y = 0;
-	                        card.removeChild(card.background);
-	
-	                        var label = new PIXI.Text(data.levelName, { font: '30px', fill: 0xFFFFFF, align: 'center', fontWeight: '200', fontFamily: 'round_popregular' });
-	
-	                        if (label.width > levelCard.width * 0.8) {
-	                                label.scale.set(levelCard.width / label.width * 0.8);
-	                        }
-	
-	                        label.pivot.y = label.height / 2;
-	
-	                        label.x = levelCard.width / 2 - label.width / 2;
-	                        label.y = levelCard.height * 0.85;
-	
-	                        this.gameScreen.resizeToFitAR(this.unscaledCardSize, card);
-	                        _utils2.default.centerObject(card, levelCard);
-	                        card.y -= label.height * 0.5;
-	
-	                        levelCard.addChild(card);
-	                        levelCard.addChild(label);
-	
-	                        levelCard.on('mouseup', this.selectLevel.bind(this, data)).on('touchend', this.selectLevel.bind(this, data));
-	                        levelCard.interactive = true;
-	                        levelCard.buttonMode = true;
-	
-	                        levelCard.data = data;
-	
-	                        levelCard.scale.set(this.unscaledCardSize.width / levelCard.width);
-	
-	                        if (!this.levelsView.children.includes(levelCard)) {
-	                                this.levelsView.addChild(levelCard);
-	                        }
-	
-	                        this.levelCards.push(levelCard);
+	                        this.levelCards.push(levelButton);
 	                }
 	        }, {
 	                key: 'getGridGraphic',
@@ -105290,6 +105315,129 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _gsap = __webpack_require__(228);
+	
+	var _gsap2 = _interopRequireDefault(_gsap);
+	
+	var _pixi = __webpack_require__(1);
+	
+	var PIXI = _interopRequireWildcard(_pixi);
+	
+	var _config = __webpack_require__(225);
+	
+	var _config2 = _interopRequireDefault(_config);
+	
+	var _utils = __webpack_require__(233);
+	
+	var _utils2 = _interopRequireDefault(_utils);
+	
+	var _ParticleSystem = __webpack_require__(257);
+	
+	var _ParticleSystem2 = _interopRequireDefault(_ParticleSystem);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var SquareButton = function (_PIXI$Container) {
+	    _inherits(SquareButton, _PIXI$Container);
+	
+	    function SquareButton(unscaledCardSize) {
+	        _classCallCheck(this, SquareButton);
+	
+	        var _this = _possibleConstructorReturn(this, (SquareButton.__proto__ || Object.getPrototypeOf(SquareButton)).call(this));
+	
+	        _this.unscaledCardSize = unscaledCardSize;
+	        _this.container = new PIXI.Container();
+	        _this.squareButtonShape = PIXI.Sprite.fromImage('./assets/images/largeCard.png'); //new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
+	        //this.squareButtonShape.scale.set(this.unscaledCardSize.width / this.squareButtonShape.width)
+	        _this.squareButtonShape.tint = 0x333333;
+	
+	        _this.buttonMask = PIXI.Sprite.fromImage('./assets/images/largeCard.png');
+	        _this.innerBorder = PIXI.Sprite.fromImage('./assets/images/innerBorder.png');
+	
+	        _this.label = new PIXI.Text("level.name", {
+	            font: '24px',
+	            fill: 0xFFFFFF,
+	            align: 'left',
+	            fontWeight: '200',
+	            fontFamily: 'round_popregular',
+	            stroke: 0x000000,
+	            strokeThickness: 12
+	        });
+	
+	        _this.container.addChild(_this.squareButtonShape);
+	        _this.container.addChild(_this.buttonMask);
+	        _this.container.addChild(_this.label);
+	        _this.container.addChild(_this.innerBorder);
+	
+	        _this.addChild(_this.container);
+	
+	        //this.updateLabel("round_ar rlar")
+	        return _this;
+	    }
+	
+	    _createClass(SquareButton, [{
+	        key: 'updateLabel',
+	        value: function updateLabel(text) {
+	            this.label.text = text;
+	
+	            if (this.label.width > this.squareButtonShape.width * 0.9) {
+	                this.label.scale.set(this.squareButtonShape.width / this.label.width * 0.9);
+	            }
+	
+	            this.label.pivot.x = this.label.width / 2 / this.label.scale.x;
+	            this.label.pivot.y = this.label.height / this.label.scale.y;
+	            this.label.x = this.squareButtonShape.width / 2; // this.container.scale.x
+	            this.label.y = this.squareButtonShape.height * 0.9; // this.container.scale.y
+	        }
+	    }, {
+	        key: 'updateIcon',
+	        value: function updateIcon(graphic) {
+	            var offset = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { x: 0, y: 0 };
+	
+	            if (this.icon && this.icon.parent) {
+	                this.icon.parent.removeChild(this.icon);
+	            }
+	            this.icon = graphic;
+	            this.container.addChildAt(this.icon, 1);
+	            this.icon.x = offset.x;
+	            this.icon.y = offset.y;
+	            if (graphic.width > graphic.height) {
+	                this.icon.scale.set(this.buttonMask.width / this.icon.width * 1.2);
+	            } else {
+	                this.icon.scale.set(this.buttonMask.height / this.icon.height * 1.2);
+	            }
+	
+	            this.icon.x = this.squareButtonShape.width / 2 - this.icon.width / 2;
+	            this.icon.y = this.squareButtonShape.height / 2 - this.icon.height / 2;
+	            this.icon.mask = this.buttonMask;
+	        }
+	    }]);
+	
+	    return SquareButton;
+	}(PIXI.Container);
+	
+	exports.default = SquareButton;
+
+/***/ }),
+/* 624 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
 	        value: true
 	});
 	
@@ -105331,7 +105479,7 @@
 	
 	var _Board2 = _interopRequireDefault(_Board);
 	
-	var _BackgroundEffects = __webpack_require__(624);
+	var _BackgroundEffects = __webpack_require__(625);
 	
 	var _BackgroundEffects2 = _interopRequireDefault(_BackgroundEffects);
 	
@@ -105660,7 +105808,7 @@
 	exports.default = EndGameContainer;
 
 /***/ }),
-/* 624 */
+/* 625 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -105683,7 +105831,7 @@
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
-	var _StarParticle = __webpack_require__(625);
+	var _StarParticle = __webpack_require__(626);
 	
 	var _StarParticle2 = _interopRequireDefault(_StarParticle);
 	
@@ -105840,7 +105988,7 @@
 	exports.default = BackgroundEffects;
 
 /***/ }),
-/* 625 */
+/* 626 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -105918,7 +106066,7 @@
 	exports.default = StarParticle;
 
 /***/ }),
-/* 626 */
+/* 627 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -106017,7 +106165,7 @@
 	exports.default = UIRectLabel;
 
 /***/ }),
-/* 627 */
+/* 628 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -106170,7 +106318,7 @@
 	exports.default = InGameMenu;
 
 /***/ }),
-/* 628 */
+/* 629 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -106681,7 +106829,7 @@
 	exports.default = EffectLayer;
 
 /***/ }),
-/* 629 */
+/* 630 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -106907,7 +107055,7 @@
 	exports.default = ChooseMatchScreen;
 
 /***/ }),
-/* 630 */
+/* 631 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -106930,7 +107078,7 @@
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
-	var _Ball = __webpack_require__(631);
+	var _Ball = __webpack_require__(632);
 	
 	var _Ball2 = _interopRequireDefault(_Ball);
 	
@@ -106997,7 +107145,7 @@
 	exports.default = Pool;
 
 /***/ }),
-/* 631 */
+/* 632 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';

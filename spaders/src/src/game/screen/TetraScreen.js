@@ -15,6 +15,7 @@ import UIRectLabel from './UIRectLabel'
 import UIButton1 from './UIButton1'
 import { debug } from 'webpack';
 import InGameMenu from './InGameMenu';
+import SquareButton from './SquareButton';
 
 export default class TetraScreen extends Screen {
 	constructor(label) {
@@ -141,8 +142,8 @@ export default class TetraScreen extends Screen {
 
 
 		let background = this.getRect2(level[0].length * size + size, (level.length - 1) * size + size + paddingBottom, 0x222222)
-		background.x -= size * 0.5
-		background.y -= size * 0.5
+		//background.x = size * 0.5
+		//background.y -= size * 0.5
 		container.addChild(background)
 		for (var i = 0; i < level.length - 1; i++) {
 			for (var j = 0; j < level[i].length; j++) {
@@ -152,24 +153,24 @@ export default class TetraScreen extends Screen {
 					if (ENEMIES.list[level[i][j]].isBlock) {
 						tempRect = this.getRect(size, config.colors.dark)
 						container.addChild(tempRect)
-						tempRect.x = j * size;
-						tempRect.y = i * size;
+						tempRect.x = j * size + size * 0.5;
+						tempRect.y = i * size +size * 0.5;
 					} else {
 						tempRect = this.getRect(size, ENEMIES.list[level[i][j]].color)
 						container.addChild(tempRect)
-						tempRect.x = j * size;
-						tempRect.y = i * size;
+						tempRect.x = j * size + size * 0.5;
+						tempRect.y = i * size +size * 0.5;
 					}
 				} else if (level[i][j] == -2) {
 					tempRect = this.getRect(size, config.colors.dark)
 					container.addChild(tempRect)
-					tempRect.x = j * size;
-					tempRect.y = i * size;
+					tempRect.x = j * size + size * 0.5;
+					tempRect.y = i * size +size * 0.5;
 				} else {
 					tempRect = this.getRect(size, 0x111111)
 					container.addChild(tempRect)
-					tempRect.x = j * size;
-					tempRect.y = i * size;
+					tempRect.x = j * size + size * 0.5;
+					tempRect.y = i * size +size * 0.5;
 				}
 			}
 		}
@@ -264,6 +265,12 @@ export default class TetraScreen extends Screen {
 			this.mainmenuState();
 		}
 
+		// let square = new SquareButton({width:120, height:120});
+		// this.addChild(square)
+
+		// this.currentLevelData = this.levels[0];
+
+		// square.updateIcon(this.generateImage(this.currentLevelData.pieces))
 		// this.debugs = new PIXI.Graphics().beginFill(0xFF0000).drawCircle(0, 0, 20);
 		// //this.addChild(this.debugs);
 

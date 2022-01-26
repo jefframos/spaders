@@ -3,6 +3,7 @@ import TweenLite from 'gsap';
 import config from '../../config';
 import utils from '../../utils';
 import { debug } from 'webpack';
+import SquareButton from './SquareButton';
 //import { utils } from 'pixi.js/lib/core';
 
 export default class LevelSelectContainer extends PIXI.Container {
@@ -303,7 +304,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         label.pivot.x = label.width / 2
         label.pivot.y = label.height / 2
         label.x = levelTierButton.width / 2 / levelTierButton.scale.x
-        label.y = levelTierButton.height / 2 / levelTierButton.scale.y
+        label.y = levelTierButton.height / 2 / levelTierButton.scale.y + label.height / label.scale.y
         levelTierButton.label = label;
         levelTierButton.addChild(icon)
         levelTierButton.addChild(secButtonMask)
@@ -408,52 +409,62 @@ export default class LevelSelectContainer extends PIXI.Container {
 
     addCard(data) {
 
-        let pieceSize = 16;
-        if (data.pieces[0].length >= data.pieces.length) {
-            pieceSize = this.unscaledCardSize.width / data.pieces[0].length + 2;
-        } else {
-            pieceSize = this.unscaledCardSize.height / data.pieces.length + 2;
+        // let pieceSize = 16;
+        // if (data.pieces[0].length >= data.pieces.length) {
+        //     pieceSize = this.unscaledCardSize.width / data.pieces[0].length + 2;
+        // } else {
+        //     pieceSize = this.unscaledCardSize.height / data.pieces.length + 2;
+        // }
+
+        // let levelCard = PIXI.Sprite.fromImage('./assets/images/largeCard.png');//new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
+        // levelCard.tint = config.colors.dark
+
+        // let card = this.gameScreen.generateImage(data.pieces, pieceSize, 32)
+        // card.y = 0
+        // card.removeChild(card.background)
+
+        // let label = new PIXI.Text(data.levelName, { font: '30px', fill: 0xFFFFFF, align: 'center', fontWeight: '200', fontFamily: 'round_popregular' });
+
+        // if (label.width > levelCard.width * 0.8) {
+        //     label.scale.set(levelCard.width / label.width * 0.8)
+        // }
+
+        // label.pivot.y = label.height / 2
+
+        // label.x = levelCard.width / 2 - label.width / 2
+        // label.y = levelCard.height * 0.85
+
+        // this.gameScreen.resizeToFitAR(this.unscaledCardSize, card)
+        // utils.centerObject(card, levelCard)
+        // card.y -= label.height * 0.5
+
+        // levelCard.addChild(card)
+        // levelCard.addChild(label)
+
+        // levelCard.on('mouseup', this.selectLevel.bind(this, data)).on('touchend', this.selectLevel.bind(this, data));
+        // levelCard.interactive = true;
+        // levelCard.buttonMode = true;
+
+        // levelCard.data = data;
+
+        // levelCard.scale.set(this.unscaledCardSize.width / levelCard.width)
+
+        let levelButton = new SquareButton(this.unscaledCardSize);
+        levelButton.updateLabel(data.levelName);
+        levelButton.updateIcon(this.gameScreen.generateImage(data.pieces));
+
+        this.gameScreen.resizeToFitAR(this.unscaledCardSize, levelButton)
+        levelButton.data = data;
+
+        levelButton.on('mouseup', this.selectLevel.bind(this, data)).on('touchend', this.selectLevel.bind(this, data));
+        levelButton.interactive = true;
+        levelButton.buttonMode = true;
+
+        if (!this.levelsView.children.includes(levelButton)) {
+            this.levelsView.addChild(levelButton)
         }
 
-        let levelCard = PIXI.Sprite.fromImage('./assets/images/largeCard.png');//new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
-        levelCard.tint = config.colors.dark
-
-        let card = this.gameScreen.generateImage(data.pieces, pieceSize, 32)
-        card.y = 0
-        card.removeChild(card.background)
-
-        let label = new PIXI.Text(data.levelName, { font: '30px', fill: 0xFFFFFF, align: 'center', fontWeight: '200', fontFamily: 'round_popregular' });
-
-        if (label.width > levelCard.width * 0.8) {
-            label.scale.set(levelCard.width / label.width * 0.8)
-        }
-
-        label.pivot.y = label.height / 2
-
-        label.x = levelCard.width / 2 - label.width / 2
-        label.y = levelCard.height * 0.85
-
-        this.gameScreen.resizeToFitAR(this.unscaledCardSize, card)
-        utils.centerObject(card, levelCard)
-        card.y -= label.height * 0.5
-
-        levelCard.addChild(card)
-        levelCard.addChild(label)
-
-        levelCard.on('mouseup', this.selectLevel.bind(this, data)).on('touchend', this.selectLevel.bind(this, data));
-        levelCard.interactive = true;
-        levelCard.buttonMode = true;
-
-        levelCard.data = data;
-
-        levelCard.scale.set(this.unscaledCardSize.width / levelCard.width)
-
-
-        if (!this.levelsView.children.includes(levelCard)) {
-            this.levelsView.addChild(levelCard)
-        }
-
-        this.levelCards.push(levelCard)
+        this.levelCards.push(levelButton)
     }
     getGridGraphic() {
         return new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, 100, 130);
