@@ -113,7 +113,7 @@ export default class Card extends PIXI.Container {
 	}
 	attacked(hits = 1) {
 		this.life -= hits;
-
+		this.life = Math.floor(this.life)
 		this.updateCard()
 
 		if (this.life < 0) {
@@ -163,7 +163,7 @@ export default class Card extends PIXI.Container {
 			this.lifeContainer.alpha = 0;
 		} else {
 			this.lifeContainer.alpha = 1;
-			this.lifeLabel.text = this.life;
+			this.lifeLabel.text = Math.floor(this.life);
 			this.lifeContainer.x = CARD.width * 0.75;
 			this.lifeContainer.y = CARD.height * 0.75;
 
@@ -186,7 +186,7 @@ export default class Card extends PIXI.Container {
 			this.backshape.y = this.enemySprite.y
 			this.backshape.alpha = 0.25
 		}
-
+		//this.life = Math.floor(this.life)
 	}
 	convertCard() {
 		//this.type = this.type == 1 ? 0 : 1;

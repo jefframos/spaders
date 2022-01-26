@@ -60063,7 +60063,7 @@
 				var hits = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
 	
 				this.life -= hits;
-	
+				this.life = Math.floor(this.life);
 				this.updateCard();
 	
 				if (this.life < 0) {
@@ -60125,7 +60125,7 @@
 					this.lifeContainer.alpha = 0;
 				} else {
 					this.lifeContainer.alpha = 1;
-					this.lifeLabel.text = this.life;
+					this.lifeLabel.text = Math.floor(this.life);
 					this.lifeContainer.x = CARD.width * 0.75;
 					this.lifeContainer.y = CARD.height * 0.75;
 	
@@ -60147,6 +60147,7 @@
 					this.backshape.y = this.enemySprite.y;
 					this.backshape.alpha = 0.25;
 				}
+				//this.life = Math.floor(this.life)
 			}
 		}, {
 			key: 'convertCard',
