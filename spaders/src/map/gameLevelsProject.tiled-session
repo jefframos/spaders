@@ -3,8 +3,10 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "how-to-play/how-to-play-medium.tmx",
+    "activeFile": "how-to-play/things.tmx",
     "expandedProjectPaths": [
+        "how-to-play",
+        "videogames"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -54,6 +56,14 @@
         },
         "how-to-play/spadersTileset.tsx": {
             "scaleInDock": 1
+        },
+        "how-to-play/things.tmx": {
+            "scale": 1.0512073863636362,
+            "selectedLayer": -1,
+            "viewCenter": {
+                "x": 352.4518613607189,
+                "y": 384.31997837983926
+            }
         },
         "levels.tmx": {
             "scale": 0.9681423611111112,
@@ -117,23 +127,27 @@
     "map.lastUsedFormat": "tmx",
     "map.width": 7,
     "openFiles": [
+        "how-to-play/people-set-1.tmx",
+        "how-to-play/how-to-play-medium.tmx",
         "how-to-play/how-to-play-small.tmx",
-        "how-to-play/how-to-play-medium.tmx"
+        "how-to-play/creatures.tmx",
+        "how-to-play/things.tmx"
     ],
     "project": "gameLevelsProject.tiled-project",
     "property.type": "string",
     "recentFiles": [
-        "how-to-play/how-to-play-small.tmx",
+        "how-to-play/people-set-1.tmx",
         "how-to-play/how-to-play-medium.tmx",
+        "how-to-play/how-to-play-small.tmx",
+        "how-to-play/creatures.tmx",
+        "how-to-play/things.tmx",
         "videogames/levels.tmx",
         "tilesets/spadersTileset.tsx",
         "videogames/spadersTileset.tsx",
         "movies1.tmx",
         "levels3.tmx",
         "levels2.tmx",
-        "levels.tmx",
-        "D:/Projects/tetra/map/levels.tmx",
-        "D:/Projects/tetra/map/spadersTileset.tsx"
+        "levels.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
