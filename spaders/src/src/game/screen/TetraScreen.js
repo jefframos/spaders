@@ -24,31 +24,7 @@ export default class TetraScreen extends Screen {
 		window.AUTO_PLAY = false;
 		////console.log(levels)
 		this.innerResolution = { width: config.width, height: config.height };
-		window.ENEMIES = {
-			list: [
-				{ isBlock: false, color: config.colors.blue, life: 0 },
-				{ isBlock: false, color: config.colors.red, life: 1 },
-				{ isBlock: false, color: config.colors.yellow, life: 2 },
-				{ isBlock: false, color: config.colors.green, life: 3 },
-				{ isBlock: false, color: config.colors.blue2, life: 4 },
-				{ isBlock: false, color: config.colors.pink, life: 5 },
-				{ isBlock: false, color: config.colors.red2, life: 6 },
-				{ isBlock: false, color: config.colors.purple, life: 7 },
-				{ isBlock: false, color: config.colors.white, life: 8 },
-				{ isBlock: false, color: config.colors.dark, life: 9 },
-				{ isBlock: true, color: config.colors.block }
-			]
-		}
-		window.ACTION_ZONES = [
-			{ label: "TOP_LEFT", pos: { x: 0, y: 0 }, dir: { x: -1, y: -1 } },
-			{ label: "TOP_CENTER", pos: { x: 1, y: 0 }, dir: { x: 0, y: -1 } },
-			{ label: "TOP_RIGHT", pos: { x: 2, y: 0 }, dir: { x: 1, y: -1 } },
-			{ label: "CENTER_RIGHT", pos: { x: 2, y: 1 }, dir: { x: 1, y: 0 } },
-			{ label: "BOTTOM_RIGHT", pos: { x: 2, y: 2 }, dir: { x: 1, y: 1 } },
-			{ label: "BOTTOM_CENTER", pos: { x: 1, y: 2 }, dir: { x: 0, y: 1 } },
-			{ label: "BOTTOM_LEFT", pos: { x: 0, y: 2 }, dir: { x: -1, y: 1 } },
-			{ label: "CENTER_LEFT", pos: { x: 0, y: 1 }, dir: { x: -1, y: 0 } }
-		]
+		
 		let a = -1;
 		let b = -2;
 

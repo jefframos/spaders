@@ -44,11 +44,11 @@ export default class LevelSelectContainer extends PIXI.Container {
 
             this.unscaledCardSize = { width: window.innerWidth / 5, height: window.innerWidth / 5 }
 
-            if(this.unscaledCardSize.width > 120){
+            if (this.unscaledCardSize.width > 120) {
                 this.unscaledCardSize = { width: 120, height: 120 }
             }
 
-            if(this.unscaledCardSize.width < 80){
+            if (this.unscaledCardSize.width < 80) {
                 this.unscaledCardSize = { width: 80, height: 80 }
             }
 
@@ -71,7 +71,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         this.sectionsContainer.x = 0;
         this.tiersContainer.x = config.width;
         this.levelsContainer.x = config.width * 2;
-        
+
         this.currentUISection = 0;
 
         this.panelOrder = [this.sectionsContainer, this.tiersContainer, this.levelsContainer];
@@ -81,16 +81,103 @@ export default class LevelSelectContainer extends PIXI.Container {
         // let center = new PIXI.Graphics().beginFill(0xFF00FF).drawCircle(0, 0, 20)
         // this.sectionsView.addChild(center)
 
+        this.interactive = true;
+        this.on('mousemove', this.onTouchMove.bind(this)).on('touchmove', this.onTouchMove.bind(this));
+        this.on('mousedown', this.onTouchStart.bind(this)).on('touchstart', this.onTouchStart.bind(this));
+        this
+            .on('mouseup', this.onTouchEnd.bind(this))
+            .on('touchend', this.onTouchEnd.bind(this))
+            .on('mouseupoutside', this.onTouchEnd.bind(this))
+            .on('touchendoutside', this.onTouchEnd.bind(this));
+
+        this.isHolding = false;
+        this.disableClickCounter = 0;
+        this.originTouch = { x: -9999, y: -9999 }
+        this.currentTouch = { x: -9999, y: -9999 }
+        this.endTouch = { x: -9999, y: -9999 }
+        this.dragSpeed = { x: 0, y: 0 }
+
+        this.draggables = [this.sectionsView, this.tiersView, this.levelsView]
+        this.draggables.forEach(element => {
+            element.dragPosition = { x: element.x, y: element.y }
+        });
+
+        this.resetDrags();
+        // this.center1 = new PIXI.Graphics().beginFill(0xFF00FF).drawCircle(0, 0, 20)
+        // this.levelsContainer.addChild(this.center1)
+
+        // this.center2 = new PIXI.Graphics().beginFill(0xF00FFF).drawCircle(0, 0, 20)
+        // this.levelsContainer.addChild(this.center2)
+
     }
+    resetDrags() {
+        this.draggables.forEach(element => {
+            element.y = 0;
+            element.dragPosition = { x: element.x, y: element.y }
+        });
+    }
+    updateDrag(element) {
+        //console.log(this.newContainer.getGlobalPosition())
+        let cElementH = element.height //- this.newContainer.y;
+        let cCanvasH = this.mainCanvas.height - this.newContainer.getGlobalPosition().y//+ this.newContainer.y;
+        if (cElementH > cCanvasH) {
+            element.y = element.dragPosition.y + this.dragSpeed.y;
+            element.y = Math.min(element.y, 0);
+            element.y = Math.max(element.y, cCanvasH - cElementH - 40);
+        } else {
+            element.y = 0;
+        }
+    }
+    onTouchStart(evt) {
+        this.originTouch.x = evt.data.global.x;
+        this.originTouch.y = evt.data.global.y;
+        this.isHolding = true;
+
+        this.draggables.forEach(element => {
+            element.dragPosition = { x: element.x, y: element.y }
+        });
+
+    }
+    onTouchEnd(evt) {
+        //console.log(evt)
+        this.endTouch.x = evt.data.global.x;
+        this.endTouch.y = evt.data.global.y;
+
+        this.levelsView.dragPosition = { x: this.levelsView.x, y: this.levelsView.y }
+        this.dragSpeed = { x: 0, y: 0 }
+
+        this.isHolding = false;
+    }
+    onTouchMove(evt) {
+        if (!this.isHolding) {
+            return;
+        }
+
+        this.currentTouch.x = evt.data.global.x;
+        this.currentTouch.y = evt.data.global.y;
 
 
+
+        if (utils.distance(this.originTouch.x, this.originTouch.y, this.currentTouch.x, this.currentTouch.y) > 20) {
+            this.disableClickCounter = 5;
+
+            this.dragSpeed.x = this.originTouch.x - this.currentTouch.x;
+            this.dragSpeed.y = this.currentTouch.y - this.originTouch.y;
+        } else {
+            this.dragSpeed = { x: 0, y: 0 }
+        }
+    }
     onBack() {
+        if (this.disableClickCounter > 0) {
+            return;
+        }
         if (this.currentUISection > 0) {
             this.currentUISection--
-        }else{
+        } else {
             //ouch
             this.gameScreen.startScreenContainer.startState(0);
             this.currentUISection = 0;
+            this.resetDrags();
         }
     }
     buildSections() {
@@ -102,7 +189,6 @@ export default class LevelSelectContainer extends PIXI.Container {
         for (let index = 0; index < this.sections.length; index++) {
             let section = this.sections[index];
 
-            console.log("BUIDDDD0, section", section)
             let navButton = this.buildSectionButton(section);
             this.sectionsView.addChild(navButton)
 
@@ -110,11 +196,8 @@ export default class LevelSelectContainer extends PIXI.Container {
 
             navButton.interactive = true;
             navButton.buttonMode = true;
-            //navButton.on('mousedown', this.updateTier.bind(this, index)).on('touchstart', this.updateTier.bind(this, index));
-
             this.navButtons.push(navButton);
-            navButton.on('mousedown', this.openSection.bind(this, section)).on('touchstart', this.openSection.bind(this, section));
-            //this.sectionButtons.push(navButton);
+            navButton.on('mouseup', this.openSection.bind(this, section)).on('touchend', this.openSection.bind(this, section));
         }
     }
 
@@ -136,7 +219,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         secButton.buttonMode = true;
         secButton.interactive = true;
 
-        secButton.on('mousedown', this.onBack.bind(this)).on('touchstart', this.onBack.bind(this));
+        secButton.on('mouseup', this.onBack.bind(this)).on('touchend', this.onBack.bind(this));
 
         return secButton
     }
@@ -144,27 +227,27 @@ export default class LevelSelectContainer extends PIXI.Container {
     buildSectionButton(section) {
         let secButton = PIXI.Sprite.fromImage('./assets/images/largeCard.png');//new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
         secButton.tint = section.color
-        
-        
+
+
         let secButtonMask = PIXI.Sprite.fromImage('./assets/images/largeCard.png');
         let innerBorder = PIXI.Sprite.fromImage('./assets/images/innerBorder.png');
 
-        let icon = PIXI.Sprite.fromImage('./assets/'+section.imageSrc);//new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
+        let icon = PIXI.Sprite.fromImage('./assets/' + section.imageSrc);//new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
         icon.scale.set(secButton.width / icon.width)
         secButton.scale.set(this.unscaledCardSize.width / secButton.width)
-        icon.anchor.set(0,1)
+        icon.anchor.set(0, 1)
         icon.x = 0
         icon.y = secButton.height / secButton.scale.y
         icon.mask = secButtonMask
-        
-        let label = new PIXI.Text(section.name, { 
-            font: '48px', 
-            fill: 0xFFFFFF, 
-            align: 'center', 
-            fontWeight: '600', 
-            fontFamily: 'round_popregular' ,
-            stroke:0x000000,
-			strokeThickness: 12 
+
+        let label = new PIXI.Text(section.name, {
+            font: '48px',
+            fill: 0xFFFFFF,
+            align: 'center',
+            fontWeight: '600',
+            fontFamily: 'round_popregular',
+            stroke: 0x000000,
+            strokeThickness: 12
         });
         label.pivot.x = label.width / 2
         label.pivot.y = label.height / 2
@@ -179,11 +262,10 @@ export default class LevelSelectContainer extends PIXI.Container {
         return secButton
     }
     buildLevelTierButton(level, index) {
-        //let levelTierButton = new PIXI.Graphics().beginFill(window.colorsOrder[index]).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
 
         let levelTierButton = PIXI.Sprite.fromImage('./assets/images/largeCard.png');//new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
         levelTierButton.scale.set(this.unscaledCardSize.width / levelTierButton.width)
-        levelTierButton.tint = window.colorsOrder[index]
+        levelTierButton.tint = level.customColor ? level.customColor : 0x333333
 
         let label = new PIXI.Text(level.name, { font: '24px', fill: 0xFFFFFF, align: 'center', fontWeight: '200', fontFamily: 'round_popregular' });
         label.pivot.x = label.width / 2
@@ -195,11 +277,14 @@ export default class LevelSelectContainer extends PIXI.Container {
         return levelTierButton
     }
     openSection(section) {
+        if (this.disableClickCounter > 0) {
+            return;
+        }
         this.currentUISection = 1
         if (this.currentSection == section) {
             return;
         }
-
+        this.resetDrags()
         console.log("section", section)
         this.currentSection = section;
         this.sectionButtons.forEach(element => {
@@ -216,7 +301,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         this.tiersView.addChild(backButton);
         this.sectionButtons.push(backButton);
 
-        
+
 
 
         for (let index = 0; index < section.levels.length; index++) {
@@ -228,19 +313,22 @@ export default class LevelSelectContainer extends PIXI.Container {
 
             levelTierButton.interactive = true;
             levelTierButton.buttonMode = true;
-            levelTierButton.on('mousedown', this.openLevelTier.bind(this, level.data)).on('touchstart', this.openLevelTier.bind(this, level.data));
+            levelTierButton.on('mouseup', this.openLevelTier.bind(this, level.data)).on('touchend', this.openLevelTier.bind(this, level.data));
             this.sectionButtons.push(levelTierButton);
         }
         this.resize(null, true);
     }
 
     openLevelTier(tier) {
+        if (this.disableClickCounter > 0) {
+            return;
+        }
         this.currentUISection = 2
         if (this.currentTier == tier) {
             return;
         }
         this.currentTier = tier;
-
+        this.resetDrags()
 
 
         this.levelCards.forEach(element => {
@@ -275,7 +363,12 @@ export default class LevelSelectContainer extends PIXI.Container {
             //element.x = index * config.width - this.currentUISection* config.width;
             element.x = utils.lerp(element.x, index * this.mainCanvas.width - this.currentUISection * this.mainCanvas.width, 0.5)
         }
+
         this.centerLevels();
+
+        if (!this.isHolding && this.disableClickCounter > 0) {
+            this.disableClickCounter--;
+        }
     }
 
     addCard(data) {
@@ -295,17 +388,22 @@ export default class LevelSelectContainer extends PIXI.Container {
         card.removeChild(card.background)
 
         let label = new PIXI.Text(data.levelName, { font: '30px', fill: 0xFFFFFF, align: 'center', fontWeight: '200', fontFamily: 'round_popregular' });
+
+        if (label.width > levelCard.width * 0.8) {
+            label.scale.set(levelCard.width / label.width * 0.8)
+        }
+
         label.x = levelCard.width / 2 - label.width / 2
-        label.y = levelCard.height - label.height * 1.5
+        label.y = levelCard.height * 0.8
 
         this.gameScreen.resizeToFitAR(this.unscaledCardSize, card)
         utils.centerObject(card, levelCard)
         card.y -= label.height * 0.5
-        
+
         levelCard.addChild(card)
         levelCard.addChild(label)
 
-        levelCard.on('mousedown', this.selectLevel.bind(this, data)).on('touchstart', this.selectLevel.bind(this, data));
+        levelCard.on('mouseup', this.selectLevel.bind(this, data)).on('touchend', this.selectLevel.bind(this, data));
         levelCard.interactive = true;
         levelCard.buttonMode = true;
 
@@ -313,7 +411,7 @@ export default class LevelSelectContainer extends PIXI.Container {
 
         levelCard.scale.set(this.unscaledCardSize.width / levelCard.width)
 
-        
+
         if (!this.levelsView.children.includes(levelCard)) {
             this.levelsView.addChild(levelCard)
         }
@@ -325,9 +423,12 @@ export default class LevelSelectContainer extends PIXI.Container {
     }
 
     selectLevel(data) {
-        console.log(data)
+        if (this.disableClickCounter > 0) {
+            return;
+        }
         this.gameScreen.startNewLevel(data, false);
         this.currentUISection = 0;
+        this.resetDrags()
         this.resize(null, true)
     }
     drawGrid(elements, margin = 10) {
@@ -348,7 +449,7 @@ export default class LevelSelectContainer extends PIXI.Container {
             let chunck = distance
             let adj = -(chunck * maxPerLine) / 2//0//(margin - fullWidth) * 0.5
             element.x = (index % maxPerLine) * chunck + adj + chunck / 2 - element.width / 2//+ distance * 0.5 - fullWidth * 0.5///+ element.width / 2 + margin * 0.5
-           
+
             // // if(!element.debug){
             // //     element.debug = new PIXI.Graphics().beginFill(0xff0066).drawRect(0,0,chunck,element.height);
             // //     element.parent.addChild(element.debug)
@@ -389,16 +490,24 @@ export default class LevelSelectContainer extends PIXI.Container {
         let globalPos = this.toLocal({ x: 0, y: this.y })
         this.mainCanvas.position = globalPos
         this.mainCanvas.width = this.currentResolution.width
-        this.mainCanvas.height = this.currentResolution.height - this.y
+        this.mainCanvas.height = this.currentResolution.height
 
         this.centerLevels();
 
         this.newContainer.y = this.mainCanvas.y - 20;
+
     }
     centerLevels() {
         this.drawGrid(this.sectionButtons, 20);
         this.drawGrid(this.navButtons, 20);
         this.drawGrid(this.levelCards, 20);
+
+        this.updateDrag(this.draggables[this.currentUISection])
+        // if(this.currentUISection == 2){
+        //     this.updateDrag(this.levelsView);
+
+        // }
+
         this.levelsView.pivot.x = this.mainCanvas.width / 2
         this.levelsView.x = this.mainCanvas.x + this.mainCanvas.width
 

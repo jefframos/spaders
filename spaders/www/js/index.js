@@ -42994,6 +42994,11 @@
 	window.COOKIE_MANAGER = new _CookieManager2.default();
 	window.GAME_DATA = new _GameData2.default();
 	
+	window.ENEMIES = {
+		list: [{ isBlock: false, color: _config2.default.colors.blue, life: 0 }, { isBlock: false, color: _config2.default.colors.red, life: 1 }, { isBlock: false, color: _config2.default.colors.yellow, life: 2 }, { isBlock: false, color: _config2.default.colors.green, life: 3 }, { isBlock: false, color: _config2.default.colors.blue2, life: 4 }, { isBlock: false, color: _config2.default.colors.pink, life: 5 }, { isBlock: false, color: _config2.default.colors.red2, life: 6 }, { isBlock: false, color: _config2.default.colors.purple, life: 7 }, { isBlock: false, color: _config2.default.colors.white, life: 8 }, { isBlock: false, color: _config2.default.colors.dark, life: 9 }, { isBlock: true, color: _config2.default.colors.block }]
+	};
+	window.ACTION_ZONES = [{ label: "TOP_LEFT", pos: { x: 0, y: 0 }, dir: { x: -1, y: -1 } }, { label: "TOP_CENTER", pos: { x: 1, y: 0 }, dir: { x: 0, y: -1 } }, { label: "TOP_RIGHT", pos: { x: 2, y: 0 }, dir: { x: 1, y: -1 } }, { label: "CENTER_RIGHT", pos: { x: 2, y: 1 }, dir: { x: 1, y: 0 } }, { label: "BOTTOM_RIGHT", pos: { x: 2, y: 2 }, dir: { x: 1, y: 1 } }, { label: "BOTTOM_CENTER", pos: { x: 1, y: 2 }, dir: { x: 0, y: 1 } }, { label: "BOTTOM_LEFT", pos: { x: 0, y: 2 }, dir: { x: -1, y: 1 } }, { label: "CENTER_LEFT", pos: { x: 0, y: 1 }, dir: { x: -1, y: 0 } }];
+	
 	window.colorsOrder = [_config2.default.colors.blue, _config2.default.colors.red, _config2.default.colors.yellow, _config2.default.colors.green, _config2.default.colors.blue2, _config2.default.colors.pink, _config2.default.colors.red2, _config2.default.colors.purple, _config2.default.colors.white, _config2.default.colors.dark], window.config = _config2.default;
 	window.POOL = new _Pool2.default();
 	
@@ -58563,7 +58568,7 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+			value: true
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -58643,1109 +58648,1106 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var TetraScreen = function (_Screen) {
-		_inherits(TetraScreen, _Screen);
+			_inherits(TetraScreen, _Screen);
 	
-		function TetraScreen(label) {
-			_classCallCheck(this, TetraScreen);
+			function TetraScreen(label) {
+					_classCallCheck(this, TetraScreen);
 	
-			var _this = _possibleConstructorReturn(this, (TetraScreen.__proto__ || Object.getPrototypeOf(TetraScreen)).call(this, label));
+					var _this = _possibleConstructorReturn(this, (TetraScreen.__proto__ || Object.getPrototypeOf(TetraScreen)).call(this, label));
 	
-			window.AUTO_PLAY_HARD = false;
-			window.AUTO_PLAY = false;
-			////console.log(levels)
-			_this.innerResolution = { width: _config2.default.width, height: _config2.default.height };
-			window.ENEMIES = {
-				list: [{ isBlock: false, color: _config2.default.colors.blue, life: 0 }, { isBlock: false, color: _config2.default.colors.red, life: 1 }, { isBlock: false, color: _config2.default.colors.yellow, life: 2 }, { isBlock: false, color: _config2.default.colors.green, life: 3 }, { isBlock: false, color: _config2.default.colors.blue2, life: 4 }, { isBlock: false, color: _config2.default.colors.pink, life: 5 }, { isBlock: false, color: _config2.default.colors.red2, life: 6 }, { isBlock: false, color: _config2.default.colors.purple, life: 7 }, { isBlock: false, color: _config2.default.colors.white, life: 8 }, { isBlock: false, color: _config2.default.colors.dark, life: 9 }, { isBlock: true, color: _config2.default.colors.block }]
-			};
-			window.ACTION_ZONES = [{ label: "TOP_LEFT", pos: { x: 0, y: 0 }, dir: { x: -1, y: -1 } }, { label: "TOP_CENTER", pos: { x: 1, y: 0 }, dir: { x: 0, y: -1 } }, { label: "TOP_RIGHT", pos: { x: 2, y: 0 }, dir: { x: 1, y: -1 } }, { label: "CENTER_RIGHT", pos: { x: 2, y: 1 }, dir: { x: 1, y: 0 } }, { label: "BOTTOM_RIGHT", pos: { x: 2, y: 2 }, dir: { x: 1, y: 1 } }, { label: "BOTTOM_CENTER", pos: { x: 1, y: 2 }, dir: { x: 0, y: 1 } }, { label: "BOTTOM_LEFT", pos: { x: 0, y: 2 }, dir: { x: -1, y: 1 } }, { label: "CENTER_LEFT", pos: { x: 0, y: 1 }, dir: { x: -1, y: 0 } }];
-			var a = -1;
-			var b = -2;
+					window.AUTO_PLAY_HARD = false;
+					window.AUTO_PLAY = false;
+					////console.log(levels)
+					_this.innerResolution = { width: _config2.default.width, height: _config2.default.height };
 	
-			_this.levels = window.levelData; //window.levelsJson.levels;
+					var a = -1;
+					var b = -2;
+	
+					_this.levels = window.levelData; //window.levelsJson.levels;
 	
 	
-			//console.log(this.levels)
-			_this.hasHash = false;
-			_this.currentLevelID = 0;
-			_this.currentLevelData = _this.levels[_this.currentLevelID];
-			if (window.location.hash) {
-				var hash = window.location.hash.substring(1); //Puts hash in variable, and removes the # character
-				//console.log(hash)
-				_this.hasHash = true;
-				if (hash == "a") {
+					//console.log(this.levels)
+					_this.hasHash = false;
+					_this.currentLevelID = 0;
+					_this.currentLevelData = _this.levels[_this.currentLevelID];
+					if (window.location.hash) {
+							var hash = window.location.hash.substring(1); //Puts hash in variable, and removes the # character
+							//console.log(hash)
+							_this.hasHash = true;
+							if (hash == "a") {
 	
-					_this.currentLevelID = -1;
-				} else {
-					if (hash < _this.levels.length) {
-	
-						_this.currentLevelID = hash;
-	
-						_this.currentLevelData = _this.levels[hash];
-					}
-				}
-			}
-	
-			var tempid = _this.currentLevelID >= 0 ? _this.currentLevelID : 0;
-	
-			_this.updateGridDimensions();
-	
-			window.CARD_POOL = [];
-	
-			window.CARD_NUMBER = 0;
-	
-			_this.grid = new _Grid2.default(_this);
-			_this.board = new _Board2.default(_this);
-			_this.totalLines = 6;
-	
-			_this.currentPoints = 0;
-			_this.currentPointsLabel = 0;
-			_this.currentRound = 0;
-	
-			_this.cardQueue = [];
-			_this.cardQueueSize = 4;
-	
-			_this.currentButtonLabel = 'START';
-	
-			_this.gameRunning = false;
-	
-			_this.mouseDirty = false;
-	
-			_this.latestShoot = { x: 0, id: 0 };
-	
-			_this.dataToSave = {
-				levelName: "",
-				wins: 0,
-				loses: 0,
-				bestTime: 999999999,
-				bestMoves: 99999999,
-				bestScore: 0
-				//console.log(utils.convertNumToTime(1231))
-			};return _this;
-		}
-	
-		_createClass(TetraScreen, [{
-			key: 'updateGridDimensions',
-			value: function updateGridDimensions() {
-				window.GRID = {
-					i: this.currentLevelData.pieces[0].length,
-					j: this.currentLevelData.pieces.length,
-					height: _config2.default.height * 0.75,
-					width: _config2.default.width * 0.92
-				};
-	
-				window.CARD = {
-					width: GRID.height / GRID.j,
-					height: GRID.height / GRID.j //GRID.height / GRID.j
-	
-	
-					// window.CARD = {
-					// 	width: GRID.width / GRID.i,
-					// 	height: GRID.width / GRID.i,//GRID.height / GRID.j
-					// }
-	
-	
-				};window.GRID.width = window.GRID.i * CARD.width;
-				window.GRID.height = window.GRID.j * CARD.height;
-	
-				if (this.gridContainer) {
-	
-					if (this.trailMarker && this.trailMarker.parent) {
-						this.trailMarker.parent.removeChild(this.trailMarker);
-					}
-					this.trailMarker = new PIXI.Graphics().beginFill(0xFFFFFF).drawRoundedRect(0, 0, CARD.width, GRID.height, 0);
-					this.gridContainer.addChild(this.trailMarker);
-					this.trailMarker.alpha = 0.15;
-				}
-			}
-		}, {
-			key: 'getRect',
-			value: function getRect() {
-				var size = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 4;
-				var color = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0xFFFFFF;
-	
-				return new PIXI.Graphics().beginFill(color).drawRect(0, 0, size, size);
-			}
-		}, {
-			key: 'getRect2',
-			value: function getRect2() {
-				var w = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 4;
-				var h = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 4;
-				var color = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0xFFFFFF;
-	
-				return new PIXI.Graphics().beginFill(color).drawRect(0, 0, w, h);
-			}
-		}, {
-			key: 'getCircle',
-			value: function getCircle() {
-				var size = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 4;
-				var color = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0xFFFFFF;
-	
-				return new PIXI.Graphics().beginFill(color).drawCircle(0, 0, size * 0.5);
-			}
-		}, {
-			key: 'generateImage',
-			value: function generateImage(level) {
-				var size = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 24;
-				var paddingBottom = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-	
-				var container = new PIXI.Container();
-				var tempRect = null;
-	
-				var background = this.getRect2(level[0].length * size + size, (level.length - 1) * size + size + paddingBottom, 0x222222);
-				background.x -= size * 0.5;
-				background.y -= size * 0.5;
-				container.addChild(background);
-				for (var i = 0; i < level.length - 1; i++) {
-					for (var j = 0; j < level[i].length; j++) {
-						if (level[i][j] >= 0) {
-							// this.cardsContainer.addChild(this.placeCard(j, i, ENEMIES.list[level[i][j]].life));
-	
-							if (ENEMIES.list[level[i][j]].isBlock) {
-								tempRect = this.getRect(size, _config2.default.colors.dark);
-								container.addChild(tempRect);
-								tempRect.x = j * size;
-								tempRect.y = i * size;
+									_this.currentLevelID = -1;
 							} else {
-								tempRect = this.getRect(size, ENEMIES.list[level[i][j]].color);
-								container.addChild(tempRect);
-								tempRect.x = j * size;
-								tempRect.y = i * size;
+									if (hash < _this.levels.length) {
+	
+											_this.currentLevelID = hash;
+	
+											_this.currentLevelData = _this.levels[hash];
+									}
 							}
-						} else if (level[i][j] == -2) {
-							tempRect = this.getRect(size, _config2.default.colors.dark);
-							container.addChild(tempRect);
-							tempRect.x = j * size;
-							tempRect.y = i * size;
-						} else {
-							tempRect = this.getRect(size, 0x111111);
-							container.addChild(tempRect);
-							tempRect.x = j * size;
-							tempRect.y = i * size;
-						}
-					}
-				}
-				container.background = background;
-				container.nodeSize = size;
-				return container;
-			}
-		}, {
-			key: 'buildUI',
-			value: function buildUI() {
-				var _this2 = this;
-	
-				this.pointsLabel = new PIXI.Text(this.currentPoints, { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: 'round_popregular' });
-				this.roundsLabel = new PIXI.Text(0, { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: 'round_popregular' });
-				this.entitiesLabel = new PIXI.Text(0, { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: 'round_popregular' });
-				this.timeLabel = new PIXI.Text(0, { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: 'round_popregular' });
-	
-				this.pointsLabelStatic = new PIXI.Text("SCORE", { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: 'round_popregular' });
-				this.roundsLabelStatic = new PIXI.Text("MOVES", { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: 'round_popregular' });
-				this.entitiesLabelStatic = new PIXI.Text("ENTITIES", { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: 'round_popregular' });
-				this.timeLabelStatic = new PIXI.Text("TIME", { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: 'round_popregular' });
-	
-				this.levelNameLabel = new PIXI.Text("name", { font: '30px', fill: 0xFFFFFF, align: 'center', fontWeight: '800', fontFamily: 'round_popregular' });
-	
-				//this.UIContainer.addChild(this.resetLabelBack)
-	
-	
-				this.mainMenuContainer = new PIXI.Container();
-				this.UIInGame = new PIXI.Container();
-				this.bottomUINewContainer = new PIXI.Container();
-	
-				this.startScreenContainer = new _StartScreenContainer2.default(this);
-				this.mainMenuContainer.addChild(this.startScreenContainer);
-	
-				this.endGameScreenContainer = new _EndGameContainer2.default(this);
-				this.mainMenuContainer.addChild(this.endGameScreenContainer);
-	
-				this.topUIContainer.addChild(this.UIInGame);
-				this.bottomUIContainer.addChild(this.bottomUINewContainer);
-	
-				this.startScreenContainer.addEvents();
-	
-				this.endGameScreenContainer.x = this.width / 2;
-				this.endGameScreenContainer.y = this.height / 2;
-	
-				this.endGameScreenContainer.addEvents();
-	
-				this.UIContainer.addChild(this.mainMenuContainer);
-	
-				this.containerQueue = new PIXI.Container();
-				this.bottomUINewContainer.addChild(this.containerQueue);
-	
-				this.timerRect = new _UIRectLabel2.default(_config2.default.colors.yellow, './assets/images/time.png');
-				this.bottomUINewContainer.addChild(this.timerRect);
-	
-				this.movesRect = new _UIRectLabel2.default(_config2.default.colors.green, './assets/images/time.png');
-				this.bottomUINewContainer.addChild(this.movesRect);
-	
-				this.scoreRect = new _UIRectLabel2.default(_config2.default.colors.red2, './assets/images/icons/icons8-star-48.png');
-				this.bottomUINewContainer.addChild(this.scoreRect);
-	
-				this.backButton = new _UIButton2.default(_config2.default.colors.white, './assets/images/icons/icons8-menu-48.png', _config2.default.colors.dark);
-				this.backButton.onClick.add(function () {
-					return _this2.mainmenuState();
-				});
-	
-				this.inGameMenu = new _InGameMenu2.default(_config2.default.colors.green);
-				this.UIInGame.addChild(this.inGameMenu);
-	
-				//this.UIInGame.addChild(this.backButton)
-				this.inGameMenu.onBack.add(function () {
-					return _this2.mainmenuState();
-				});
-				this.inGameMenu.onRestart.add(function () {
-					return _this2.resetGame();
-				});
-	
-				this.gridContainer.alpha = 0;
-				this.updateUI();
-	
-				this.endGameScreenContainer.hide(true);
-	
-				if (this.hasHash) {
-					if (this.currentLevelID < 0) {
-						this.endGameState();
-					} else {
-						this.resetGame();
-					}
-				} else {
-					this.mainmenuState();
-				}
-	
-				// this.debugs = new PIXI.Graphics().beginFill(0xFF0000).drawCircle(0, 0, 20);
-				// //this.addChild(this.debugs);
-	
-				// this.debugs2 = new PIXI.Graphics().beginFill(0xFF55AA).drawCircle(0, 0, 20);
-				// //this.addChild(this.debugs2);
-	
-				// this.debugs3 = new PIXI.Graphics().beginFill(0x44FFAA).drawCircle(0, 0, 10);
-				// this.addChild(this.debugs3);
-	
-				// this.debugs.x = config.width / 2
-				// this.debugs.y = config.height / 2
-			}
-		}, {
-			key: 'updateLabelsPosition',
-			value: function updateLabelsPosition() {
-	
-				var nameLevelSize = { width: this.timeLabelStatic.x - this.pointsLabel.x, height: 40 };
-				nameLevelSize.width += this.timeLabelStatic.width;
-	
-				this.timerRect.scale.set(this.bottomUICanvas.height / this.timerRect.backShape.height * 0.3);
-				this.movesRect.scale.set(this.timerRect.scale.x);
-				this.scoreRect.scale.set(this.timerRect.scale.x);
-	
-				this.timerRect.x = this.bottomUICanvas.x + this.bottomUICanvas.width - this.timerRect.width - this.bottomUICanvas.height * 0.1;
-				this.movesRect.x = this.bottomUICanvas.x + this.bottomUICanvas.width - this.timerRect.width - this.bottomUICanvas.height * 0.1;
-	
-				this.movesRect.y = this.bottomUICanvas.height - this.movesRect.height - this.bottomUICanvas.height * 0.1;
-				this.timerRect.y = this.movesRect.y - this.timerRect.height - this.bottomUICanvas.height * 0.025;
-	
-				this.scoreRect.y = this.timerRect.y;
-				this.scoreRect.x = this.bottomUICanvas.x + this.bottomUICanvas.width / 2 - this.timerRect.width / 2;
-	
-				this.containerQueue.scale.set(this.bottomUICanvas.height / CARD.height * 0.5);
-				this.containerQueue.x = this.bottomUICanvas.height * 0.1;
-				this.containerQueue.y = this.scoreRect.y; //this.movesRect.y + this.movesRect.height - this.containerQueue.height
-	
-				//console.log()
-				this.backButton.scale.set(this.topCanvas.height / (this.backButton.height / this.backButton.scale.y) * 0.7); // / this.backButton.scale.y)
-				this.backButton.x = this.topCanvas.x + this.topCanvas.width - this.backButton.width * 0.5 - this.backButton.width * 0.25;
-				this.backButton.y = this.backButton.height * 0.5 + this.backButton.width * 0.25;
-	
-				var scaledWidth = this.inGameMenu.customWidth * this.inGameMenu.scale.x;
-				this.inGameMenu.scale.set(this.topCanvas.height / this.inGameMenu.customWidth * 0.5); // / this.inGameMenu.scale.y)
-				this.inGameMenu.x = this.topCanvas.x + this.topCanvas.width - scaledWidth * 0.5 - scaledWidth * 0.5;
-				this.inGameMenu.y = scaledWidth * 0.5 + scaledWidth * 0.5;
-			}
-		}, {
-			key: 'hideInGameElements',
-			value: function hideInGameElements() {
-				var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-	
-				_gsap2.default.killTweensOf(this.cardsContainer);
-				_gsap2.default.killTweensOf(this.gridContainer);
-	
-				_gsap2.default.to(this.cardsContainer, 0.5, { alpha: 0 });
-				_gsap2.default.to(this.gridContainer, 0.5, { delay: delay, alpha: 0 });
-	
-				if (this.currentCard) {
-	
-					_gsap2.default.killTweensOf(this.currentCard);
-					_gsap2.default.to(this.currentCard, 0.5, { alpha: 0 });
-				}
-			}
-		}, {
-			key: 'showInGameElements',
-			value: function showInGameElements() {
-				_gsap2.default.killTweensOf(this.cardsContainer);
-				_gsap2.default.killTweensOf(this.gridContainer);
-	
-				_gsap2.default.to(this.cardsContainer, 0.1, { alpha: 1 });
-				_gsap2.default.to(this.gridContainer, 0.1, { alpha: 1 });
-				if (this.currentCard) {
-					_gsap2.default.killTweensOf(this.currentCard);
-					_gsap2.default.to(this.currentCard, 0.1, { alpha: 1 });
-				}
-			}
-		}, {
-			key: 'mainmenuState',
-			value: function mainmenuState() {
-				var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-	
-				this.endGameScreenContainer.hide(force);
-				this.startScreenContainer.show(force, force ? 0.2 : 0.75);
-				this.gameRunning = false;
-	
-				this.startScreenContainer.showCloseButton();
-				this.hideInGameElements();
-	
-				this.removeEvents();
-			}
-		}, {
-			key: 'mainmenuStateFromGame',
-			value: function mainmenuStateFromGame() {
-				var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-	
-				this.endGameScreenContainer.hide(force);
-				this.startScreenContainer.showFromGame(force, force ? 0.2 : 0.75);
-				this.gameRunning = false;
-	
-				this.startScreenContainer.showCloseButton();
-				this.hideInGameElements();
-	
-				this.removeEvents();
-			}
-		}, {
-			key: 'endGameState',
-			value: function endGameState() {
-				this.gameRunning = false;
-				this.startScreenContainer.hide(true);
-				var tempid = this.currentLevelID >= 0 ? this.currentLevelID : 0;
-				this.endGameScreenContainer.setStats(this.currentPoints, this.currentRound, _utils2.default.convertNumToTime(Math.ceil(this.currentTime)), this.generateImage(this.currentLevelData.pieces), this.currentLevelData);
-				this.endGameScreenContainer.show(false, 1);
-				this.hideInGameElements(1);
-				this.removeEvents();
-	
-				if (window.AUTO_PLAY_HARD) {
-	
-					if (this.currentRound < this.dataToSave.bestMoves) {
-						this.dataToSave.bestMoves = this.currentRound;
 					}
 	
-					if (this.currentTime < this.dataToSave.bestTime) {
-						this.dataToSave.bestTime = this.currentTime;
-					}
+					var tempid = _this.currentLevelID >= 0 ? _this.currentLevelID : 0;
 	
-					if (this.currentPoints > this.dataToSave.bestScore) {
-						this.dataToSave.bestScore = this.currentPoints;
-					}
+					_this.updateGridDimensions();
 	
-					this.dataToSave.wins++;
+					window.CARD_POOL = [];
 	
-					if (this.dataToSave.wins > 10) {
-						var toSave = this.dataToSave.levelName + "\n";
-						toSave += "bestMoves :" + this.dataToSave.bestMoves + "\n";
-						toSave += "bestTime :" + this.dataToSave.bestTime + "\n";
-						toSave += "bestScore :" + this.dataToSave.bestScore + "\n";
-						toSave += "wins :" + this.dataToSave.wins + "\n";
-						toSave += "loses :" + this.dataToSave.loses + "\n";
+					window.CARD_NUMBER = 0;
 	
-						window.SAVE_DATA(toSave, this.dataToSave.levelName, 'text/plain');
+					_this.grid = new _Grid2.default(_this);
+					_this.board = new _Board2.default(_this);
+					_this.totalLines = 6;
 	
-						this.dataToSave = {
+					_this.currentPoints = 0;
+					_this.currentPointsLabel = 0;
+					_this.currentRound = 0;
+	
+					_this.cardQueue = [];
+					_this.cardQueueSize = 4;
+	
+					_this.currentButtonLabel = 'START';
+	
+					_this.gameRunning = false;
+	
+					_this.mouseDirty = false;
+	
+					_this.latestShoot = { x: 0, id: 0 };
+	
+					_this.dataToSave = {
 							levelName: "",
 							wins: 0,
 							loses: 0,
 							bestTime: 999999999,
 							bestMoves: 99999999,
 							bestScore: 0
-						};
+							//console.log(utils.convertNumToTime(1231))
+					};return _this;
+			}
+	
+			_createClass(TetraScreen, [{
+					key: 'updateGridDimensions',
+					value: function updateGridDimensions() {
+							window.GRID = {
+									i: this.currentLevelData.pieces[0].length,
+									j: this.currentLevelData.pieces.length,
+									height: _config2.default.height * 0.75,
+									width: _config2.default.width * 0.92
+							};
+	
+							window.CARD = {
+									width: GRID.height / GRID.j,
+									height: GRID.height / GRID.j //GRID.height / GRID.j
+	
+	
+									// window.CARD = {
+									// 	width: GRID.width / GRID.i,
+									// 	height: GRID.width / GRID.i,//GRID.height / GRID.j
+									// }
+	
+	
+							};window.GRID.width = window.GRID.i * CARD.width;
+							window.GRID.height = window.GRID.j * CARD.height;
+	
+							if (this.gridContainer) {
+	
+									if (this.trailMarker && this.trailMarker.parent) {
+											this.trailMarker.parent.removeChild(this.trailMarker);
+									}
+									this.trailMarker = new PIXI.Graphics().beginFill(0xFFFFFF).drawRoundedRect(0, 0, CARD.width, GRID.height, 0);
+									this.gridContainer.addChild(this.trailMarker);
+									this.trailMarker.alpha = 0.15;
+							}
 					}
+			}, {
+					key: 'getRect',
+					value: function getRect() {
+							var size = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 4;
+							var color = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0xFFFFFF;
 	
-					console.log("on Win Reset", this.currentRound, this.dataToSave);
-					this.resetGame();
-				}
+							return new PIXI.Graphics().beginFill(color).drawRect(0, 0, size, size);
+					}
+			}, {
+					key: 'getRect2',
+					value: function getRect2() {
+							var w = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 4;
+							var h = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 4;
+							var color = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0xFFFFFF;
 	
-				if (window.AUTO_PLAY) {
-					window.TIME_SCALE = 1;
-					window.AUTO_PLAY = false;
-				}
-				//console.log("endGameState")
-			}
-		}, {
-			key: 'gameState',
-			value: function gameState() {
-				var _this3 = this;
+							return new PIXI.Graphics().beginFill(color).drawRect(0, 0, w, h);
+					}
+			}, {
+					key: 'getCircle',
+					value: function getCircle() {
+							var size = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 4;
+							var color = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0xFFFFFF;
 	
-				setTimeout(function () {
+							return new PIXI.Graphics().beginFill(color).drawCircle(0, 0, size * 0.5);
+					}
+			}, {
+					key: 'generateImage',
+					value: function generateImage(level) {
+							var size = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 24;
+							var paddingBottom = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
 	
-					_this3.gameRunning = true;
-				}, 500 / window.TIME_SCALE);
+							var container = new PIXI.Container();
+							var tempRect = null;
 	
-				this.currentTime = 0;
-				this.showInGameElements();
-				this.addEvents();
-				this.endGameScreenContainer.hide();
-				this.startScreenContainer.hide();
-				this.board.startNewGame();
+							var background = this.getRect2(level[0].length * size + size, (level.length - 1) * size + size + paddingBottom, 0x222222);
+							background.x -= size * 0.5;
+							background.y -= size * 0.5;
+							container.addChild(background);
+							for (var i = 0; i < level.length - 1; i++) {
+									for (var j = 0; j < level[i].length; j++) {
+											if (level[i][j] >= 0) {
+													// this.cardsContainer.addChild(this.placeCard(j, i, ENEMIES.list[level[i][j]].life));
 	
-				//console.log("gameState")
-			}
-		}, {
-			key: 'build',
-			value: function build() {
-				_get(TetraScreen.prototype.__proto__ || Object.getPrototypeOf(TetraScreen.prototype), 'build', this).call(this);
+													if (ENEMIES.list[level[i][j]].isBlock) {
+															tempRect = this.getRect(size, _config2.default.colors.dark);
+															container.addChild(tempRect);
+															tempRect.x = j * size;
+															tempRect.y = i * size;
+													} else {
+															tempRect = this.getRect(size, ENEMIES.list[level[i][j]].color);
+															container.addChild(tempRect);
+															tempRect.x = j * size;
+															tempRect.y = i * size;
+													}
+											} else if (level[i][j] == -2) {
+													tempRect = this.getRect(size, _config2.default.colors.dark);
+													container.addChild(tempRect);
+													tempRect.x = j * size;
+													tempRect.y = i * size;
+											} else {
+													tempRect = this.getRect(size, 0x111111);
+													container.addChild(tempRect);
+													tempRect.x = j * size;
+													tempRect.y = i * size;
+											}
+									}
+							}
+							container.background = background;
+							container.nodeSize = size;
+							return container;
+					}
+			}, {
+					key: 'buildUI',
+					value: function buildUI() {
+							var _this2 = this;
 	
-				var alphas = 0;
+							this.pointsLabel = new PIXI.Text(this.currentPoints, { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: 'round_popregular' });
+							this.roundsLabel = new PIXI.Text(0, { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: 'round_popregular' });
+							this.entitiesLabel = new PIXI.Text(0, { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: 'round_popregular' });
+							this.timeLabel = new PIXI.Text(0, { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: 'round_popregular' });
 	
-				this.changeLabelTimer = 0.1;
+							this.pointsLabelStatic = new PIXI.Text("SCORE", { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: 'round_popregular' });
+							this.roundsLabelStatic = new PIXI.Text("MOVES", { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: 'round_popregular' });
+							this.entitiesLabelStatic = new PIXI.Text("ENTITIES", { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: 'round_popregular' });
+							this.timeLabelStatic = new PIXI.Text("TIME", { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: 'round_popregular' });
 	
-				this.background = new _BackgroundEffects2.default();
-				this.addChild(this.background);
+							this.levelNameLabel = new PIXI.Text("name", { font: '30px', fill: 0xFFFFFF, align: 'center', fontWeight: '800', fontFamily: 'round_popregular' });
 	
-				this.gameContainer = new PIXI.Container();
-				this.gridContainer = new PIXI.Container();
-				this.cardsContainer = new PIXI.Container();
-				this.UIContainer = new PIXI.Container();
-				this.topUIContainer = new PIXI.Container();
-				this.bottomUIContainer = new PIXI.Container();
-	
-				this.topCanvas = new PIXI.Graphics().beginFill(0xFF00FF).drawRect(0, 0, 1, 1);
-				this.topUIContainer.addChild(this.topCanvas);
-				this.topCanvas.alpha = alphas;
-	
-				this.bottomUICanvas = new PIXI.Graphics().beginFill(0x0000FF).drawRect(0, 0, 1, 1);
-				this.bottomUIContainer.addChild(this.bottomUICanvas);
-				this.bottomUICanvas.alpha = alphas;
-	
-				this.addChild(this.gameContainer);
-	
-				this.gameContainer.addChild(this.background);
-				this.gameContainer.addChild(this.gridContainer);
-				this.gameContainer.addChild(this.cardsContainer);
-				this.gameContainer.addChild(this.UIContainer);
-				this.gameContainer.addChild(this.topUIContainer);
-				this.gameContainer.addChild(this.bottomUIContainer);
-	
-				this.bottomUIContainer.y = _config2.default.height;
-	
-				this.gameCanvas = new PIXI.Graphics().beginFill(0xFF0000).drawRect(0, 0, 1, 1);
-				this.addChild(this.gameCanvas);
-				this.gameCanvas.alpha = alphas;
-	
-				this.mousePosID = GRID.i / 2;
-				// this.currentCard = this.createCard();
-				// this.cardsContainer.addChild(this.currentCard)
-				// utils.centerObject(this.currentCard, this.background)
+							//this.UIContainer.addChild(this.resetLabelBack)
 	
 	
-				this.grid.createGrid();
-				this.gridContainer.addChild(this.grid);
-				_utils2.default.centerObject(this.gridContainer, this.background.background);
-				this.gridContainer.x = this.innerResolution.width / 2 - (GRID.i + 1) * CARD.width / 2; // - this.gridContainer.width / 2;
-				// this.gridContainer.y -= CARD.height;
+							this.mainMenuContainer = new PIXI.Container();
+							this.UIInGame = new PIXI.Container();
+							this.bottomUINewContainer = new PIXI.Container();
 	
-				this.buildUI();
+							this.startScreenContainer = new _StartScreenContainer2.default(this);
+							this.mainMenuContainer.addChild(this.startScreenContainer);
 	
-				this.cardsContainer.x = this.gridContainer.x;
-				this.cardsContainer.y = this.gridContainer.y;
+							this.endGameScreenContainer = new _EndGameContainer2.default(this);
+							this.mainMenuContainer.addChild(this.endGameScreenContainer);
 	
-				this.trailMarker = new PIXI.Graphics().beginFill(0xFFFFFF).drawRoundedRect(0, 0, CARD.width, GRID.height, 0);
-				this.gridContainer.addChild(this.trailMarker);
+							this.topUIContainer.addChild(this.UIInGame);
+							this.bottomUIContainer.addChild(this.bottomUINewContainer);
 	
-				this.initGridY = this.gridContainer.y;
-				this.initGridAcc = 0;
+							this.startScreenContainer.addEvents();
 	
-				this.trailMarker.alpha = 0;
+							this.endGameScreenContainer.x = this.width / 2;
+							this.endGameScreenContainer.y = this.height / 2;
 	
-				var tempPosRandom = [];
-				for (var i = 0; i < GRID.i; i++) {
-					tempPosRandom.push(i);
-				}
-				_utils2.default.shuffle(tempPosRandom);
-			}
-		}, {
-			key: 'startNewLevel',
-			value: function startNewLevel(data, isEasy) {
-				this.currentLevelData = data;
-				this.startScreenContainer.newLevelStarted();
-				this.updateGridDimensions();
-				this.gridContainer.x = _config2.default.width / 2 - (GRID.i + 1) * CARD.width / 2;
-				this.cardsContainer.x = this.gridContainer.x;
-				this.cardsContainer.y = this.gridContainer.y;
-				this.grid.createGrid();
-				this.resetGame();
-				if (isEasy) {
-					this.board.addCrazyCards2(GRID.i * GRID.j);
-				}
-			}
-		}, {
-			key: 'resetGame',
-			value: function resetGame() {
-				var _this4 = this;
+							this.endGameScreenContainer.addEvents();
 	
-				this.cardQueueData = {
-					latest: -1,
-					counter: 0
-				};
+							this.UIContainer.addChild(this.mainMenuContainer);
 	
-				for (var index = this.cardsContainer.children.length - 1; index >= 0; index--) {
-					this.cardsContainer.removeChildAt(0);
-				}
+							this.containerQueue = new PIXI.Container();
+							this.bottomUINewContainer.addChild(this.containerQueue);
 	
-				this.gameState();
-				if (this.currentLevelID < 0) {
-					this.currentLevelID = 0;
-				}
-				this.currentTime = 0;
-				this.currentPoints = 0;
-				this.currentPointsLabel = 0;
-				this.currentRound = 0;
+							this.timerRect = new _UIRectLabel2.default(_config2.default.colors.yellow, './assets/images/time.png');
+							this.bottomUINewContainer.addChild(this.timerRect);
 	
-				this.board.newGameFinished = true;
-				this.board.destroyBoard();
-				this.board.resetBoard();
+							this.movesRect = new _UIRectLabel2.default(_config2.default.colors.green, './assets/images/time.png');
+							this.bottomUINewContainer.addChild(this.movesRect);
 	
-				for (var i = this.cardQueue.length - 1; i >= 0; i--) {
-					this.cardQueue[i].forceDestroy();
-				}
-				this.cardQueue = [];
-				if (this.currentCard) this.currentCard.forceDestroy();
-				this.currentCard = null;
+							this.scoreRect = new _UIRectLabel2.default(_config2.default.colors.red2, './assets/images/icons/icons8-star-48.png');
+							this.bottomUINewContainer.addChild(this.scoreRect);
 	
-				this.dataToSave.levelName = this.currentLevelData.levelName;
+							this.backButton = new _UIButton2.default(_config2.default.colors.white, './assets/images/icons/icons8-menu-48.png', _config2.default.colors.dark);
+							this.backButton.onClick.add(function () {
+									return _this2.mainmenuState();
+							});
 	
-				for (var i = 0; i < this.currentLevelData.pieces.length; i++) {
-					for (var j = 0; j < this.currentLevelData.pieces[i].length; j++) {
-						if (this.currentLevelData.pieces[i][j] >= 0) {
-							if (ENEMIES.list[this.currentLevelData.pieces[i][j]].isBlock) {
-								this.cardsContainer.addChild(this.placeBlock(j, i));
+							this.inGameMenu = new _InGameMenu2.default(_config2.default.colors.green);
+							this.UIInGame.addChild(this.inGameMenu);
+	
+							//this.UIInGame.addChild(this.backButton)
+							this.inGameMenu.onBack.add(function () {
+									return _this2.mainmenuState();
+							});
+							this.inGameMenu.onRestart.add(function () {
+									return _this2.resetGame();
+							});
+	
+							this.gridContainer.alpha = 0;
+							this.updateUI();
+	
+							this.endGameScreenContainer.hide(true);
+	
+							if (this.hasHash) {
+									if (this.currentLevelID < 0) {
+											this.endGameState();
+									} else {
+											this.resetGame();
+									}
 							} else {
-								this.cardsContainer.addChild(this.placeCard(j, i, ENEMIES.list[this.currentLevelData.pieces[i][j]].life));
+									this.mainmenuState();
 							}
-						} else if (this.currentLevelData.pieces[i][j] == -2) {
-							this.cardsContainer.addChild(this.placeBlock(j, i));
-						}
+	
+							// this.debugs = new PIXI.Graphics().beginFill(0xFF0000).drawCircle(0, 0, 20);
+							// //this.addChild(this.debugs);
+	
+							// this.debugs2 = new PIXI.Graphics().beginFill(0xFF55AA).drawCircle(0, 0, 20);
+							// //this.addChild(this.debugs2);
+	
+							// this.debugs3 = new PIXI.Graphics().beginFill(0x44FFAA).drawCircle(0, 0, 10);
+							// this.addChild(this.debugs3);
+	
+							// this.debugs.x = config.width / 2
+							// this.debugs.y = config.height / 2
 					}
-				}
+			}, {
+					key: 'updateLabelsPosition',
+					value: function updateLabelsPosition() {
 	
-				this.currentPoints = 0;
-				this.currentPointsLabel = 0;
-				this.currentRound = 0;
+							var nameLevelSize = { width: this.timeLabelStatic.x - this.pointsLabel.x, height: 40 };
+							nameLevelSize.width += this.timeLabelStatic.width;
 	
-				// this.board.debugBoard();
+							this.timerRect.scale.set(this.bottomUICanvas.height / this.timerRect.backShape.height * 0.3);
+							this.movesRect.scale.set(this.timerRect.scale.x);
+							this.scoreRect.scale.set(this.timerRect.scale.x);
 	
+							this.timerRect.x = this.bottomUICanvas.x + this.bottomUICanvas.width - this.timerRect.width - this.bottomUICanvas.height * 0.1;
+							this.movesRect.x = this.bottomUICanvas.x + this.bottomUICanvas.width - this.timerRect.width - this.bottomUICanvas.height * 0.1;
 	
-				this.newRound();
+							this.movesRect.y = this.bottomUICanvas.height - this.movesRect.height - this.bottomUICanvas.height * 0.1;
+							this.timerRect.y = this.movesRect.y - this.timerRect.height - this.bottomUICanvas.height * 0.025;
 	
-				_gsap2.default.to(this.cardsContainer, 0.1, { alpha: 1 });
-				_gsap2.default.to(this.gridContainer, 0.1, { alpha: 1, onComplete: function onComplete() {
-						_this4.gameState();
-					} });
-				//TweenMax.to(this.UIInGame, 0.75, { y: 0, ease: Cubic.easeOut, onComplete: () => { this.gameState() } })
+							this.scoreRect.y = this.timerRect.y;
+							this.scoreRect.x = this.bottomUICanvas.x + this.bottomUICanvas.width / 2 - this.timerRect.width / 2;
 	
-				this.startScreenContainer.hide();
+							this.containerQueue.scale.set(this.bottomUICanvas.height / CARD.height * 0.5);
+							this.containerQueue.x = this.bottomUICanvas.height * 0.1;
+							this.containerQueue.y = this.scoreRect.y; //this.movesRect.y + this.movesRect.height - this.containerQueue.height
 	
-				this.mousePosition = new PIXI.Point();
+							//console.log()
+							this.backButton.scale.set(this.topCanvas.height / (this.backButton.height / this.backButton.scale.y) * 0.7); // / this.backButton.scale.y)
+							this.backButton.x = this.topCanvas.x + this.topCanvas.width - this.backButton.width * 0.5 - this.backButton.width * 0.25;
+							this.backButton.y = this.backButton.height * 0.5 + this.backButton.width * 0.25;
 	
-				var toGrid = this.gridContainer.toLocal(this.innerResolution.width / 2);
-				this.mousePosID = Math.floor(toGrid.x / CARD.width);
-	
-				this.latestShoot.id = 2; //this.mousePosID;
-				this.latestShoot.x = this.mousePosition;
-	
-				//this.currentButtonLabel = 'RESET';
-			}
-		}, {
-			key: 'updateUI',
-			value: function updateUI() {
-				this.pointsLabel.text = _utils2.default.formatPointsLabel(Math.ceil(this.currentPointsLabel));
-				this.roundsLabel.text = _utils2.default.formatPointsLabel(Math.ceil(this.currentRound));
-				this.entitiesLabel.text = _utils2.default.formatPointsLabel(Math.ceil(this.board.totalCards));
-				this.timeLabel.text = _utils2.default.convertNumToTime(Math.ceil(this.currentTime));
-	
-				this.timerRect.updateLavel(_utils2.default.convertNumToTime(Math.ceil(this.currentTime)));
-				this.movesRect.updateLavel(_utils2.default.formatPointsLabel(Math.ceil(this.currentRound)));
-				this.scoreRect.updateLavel(_utils2.default.formatPointsLabel(Math.ceil(this.currentPointsLabel)));
-			}
-		}, {
-			key: 'addRandomPiece',
-			value: function addRandomPiece() {}
-		}, {
-			key: 'addPoints',
-			value: function addPoints(points) {
-				this.currentPoints += points;
-				_gsap2.default.to(this, 0.2, {
-					currentPointsLabel: this.currentPoints, onUpdate: function () {
-						this.currentPointsLabel = Math.ceil(this.currentPointsLabel);
-						this.updateUI();
-					}.bind(this)
-				});
-			}
-		}, {
-			key: 'updateQueue',
-			value: function updateQueue() {
-				while (this.cardQueue.length < this.cardQueueSize) {
-					var card = void 0;
-					if (CARD_POOL.length) {
-						card = CARD_POOL[0];
-						CARD_POOL.shift();
-					} else {
-						card = new _Card2.default(this);
+							var scaledWidth = this.inGameMenu.customWidth * this.inGameMenu.scale.x;
+							this.inGameMenu.scale.set(this.topCanvas.height / this.inGameMenu.customWidth * 0.5); // / this.inGameMenu.scale.y)
+							this.inGameMenu.x = this.topCanvas.x + this.topCanvas.width - scaledWidth * 0.5 - scaledWidth * 0.5;
+							this.inGameMenu.y = scaledWidth * 0.5 + scaledWidth * 0.5;
 					}
+			}, {
+					key: 'hideInGameElements',
+					value: function hideInGameElements() {
+							var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
 	
-					var nextLife = Math.random() < 1 - this.currentRound % 3 * 0.17 ? 0 : Math.random() < 0.5 ? 2 : 1;
+							_gsap2.default.killTweensOf(this.cardsContainer);
+							_gsap2.default.killTweensOf(this.gridContainer);
 	
-					//console.log(nextLife,this.cardQueueData.counter)
-					if (nextLife > 0) {
-						if (this.cardQueueData.counter <= 0) {
-							//change frequecy of high level cards
-							this.cardQueueData.counter = 3 + Math.floor(Math.random() * 3);
-						} else {
-							nextLife = 0;
-						}
-					}
+							_gsap2.default.to(this.cardsContainer, 0.5, { alpha: 0 });
+							_gsap2.default.to(this.gridContainer, 0.5, { delay: delay, alpha: 0 });
 	
-					if (this.cardQueueData.counter > 0) {
-						this.cardQueueData.counter--;
-					}
+							if (this.currentCard) {
 	
-					card.life = nextLife;
-					card.createCard();
-					card.updateSprite(card.life);
-					card.type = 0;
-					card.x = 0;
-					this.containerQueue.addChild(card);
-					this.cardQueue.push(card);
-					card.setOnQueue();
-				}
-				// for (var i = this.cardQueue.length - 1; i >= 0; i--) {
-				for (var i = 0; i < this.cardQueue.length; i++) {
-					_gsap2.default.to(this.cardQueue[i], 0.3, { x: CARD.width * (this.cardQueue.length - i - 1), ease: Back.easeOut });
-					this.cardQueue[i].y = 0;
-					// this.cardQueue[i].y = ;
-				}
-	
-				this.cardQueue[1].mark();
-			}
-		}, {
-			key: 'newRound',
-			value: function newRound() {
-				var _this5 = this;
-	
-				this.updateQueue();
-				this.currentCard = this.cardQueue[0];
-				this.cardQueue.shift();
-				this.mousePosID = this.latestShoot.id;
-				this.currentCard.x = this.latestShoot.x;
-				this.currentCard.scale.set(1);
-				this.currentCard.alpha = 0;
-				_gsap2.default.to(this.currentCard, 0.3, { alpha: 1, y: this.gridContainer.height + 20, ease: Elastic.easeOut });
-				this.currentCard.updateCard(true);
-				this.cardsContainer.addChild(this.currentCard);
-	
-				if (this.autoPlayTimeout) {
-					clearTimeout(this.autoPlayTimeout);
-				}
-				//FIND BEST OPTION TO SHOOT
-				if (window.AUTO_PLAY_HARD || window.AUTO_PLAY) {
-					this.autoPlayTimeout = setTimeout(function () {
-						_this5.playRandom();
-					}, 500 / window.TIME_SCALE);
-				}
-			}
-		}, {
-			key: 'playRandom',
-			value: function playRandom() {
-				this.mousePosID = this.board.findBestShoot(this.currentCard);
-				if (this.mousePosID == -1 || this.currentRound > 1500) {
-	
-					this.dataToSave.loses++;
-					console.log("playRandom resetGame", this.mousePosID, this.currentRound, this.dataToSave);
-					this.resetGame();
-					window.AUTO_PLAY = false;
-				} else {
-					this.onTapUp(null, this.mousePosID);
-				}
-			}
-		}, {
-			key: 'placeCard',
-			value: function placeCard(i, j) {
-				var level = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-	
-				var card = void 0;
-				if (CARD_POOL.length) {
-					card = CARD_POOL[0];
-					CARD_POOL.shift();
-				} else {
-					card = new _Card2.default(this);
-				}
-				card.life = level;
-				card.createCard();
-				card.updateSprite(level);
-				card.x = i * CARD.width;
-				card.y = j * CARD.height - CARD.height;
-				// card.cardContainer.scale.set(1.2 - j * 0.05)
-				card.alpha = 0;
-				_gsap2.default.to(card, 0.5, { alpha: 1, delay: i * 0.05, y: j * CARD.height, ease: Back.easeOut });
-	
-				card.show(0.5, i * 0.05 + 0.75);
-	
-				card.pos.i = i;
-				card.pos.j = j;
-				card.updateCard();
-				this.board.addCard(card);
-				// this.CARD_POOL.push(card);
-				return card;
-			}
-		}, {
-			key: 'placeBlock',
-			value: function placeBlock(i, j) {
-				var block = void 0;
-				block = new _Block2.default(this);
-				block.x = i * CARD.width;
-				block.y = j * CARD.height - CARD.height;
-				block.alpha = 0;
-				_gsap2.default.to(block, 0.5, { alpha: 1, delay: i * 0.05, y: j * CARD.height, ease: Back.easeOut });
-				block.pos.i = i;
-				block.pos.j = j;
-				this.board.addCard(block);
-				return block;
-			}
-		}, {
-			key: 'update',
-			value: function update(delta) {
-	
-				this.mouseDirty = false;
-				this.background.update(delta);
-				this.grid.update(delta);
-				this.startScreenContainer.update(delta);
-				this.endGameScreenContainer.update(delta);
-				this.inGameMenu.update(delta);
-	
-				if (!this.gameRunning) {
-					this.topUIContainer.x = this.gameCanvas.x;
-					this.topUIContainer.y = _utils2.default.lerp(this.topUIContainer.y, this.gameCanvas.y - 500, 0.2);
-					this.bottomUIContainer.x = this.gameCanvas.x;
-					this.bottomUIContainer.y = _utils2.default.lerp(this.bottomUIContainer.y, this.gameCanvas.y + this.gameCanvas.height - this.bottomUICanvas.height + 500, 0.2);
-	
-					if (this.currentCard) {
-						this.currentCard.alpha = 0;
-					}
-	
-					return;
-				}
-	
-				////console.log(this.mousePosition)
-				this.currentTime += delta * window.TIME_SCALE * window.TIME_SCALE;
-	
-				if (!this.board.newGameFinished && this.board.totalCards <= 0) {
-					this.endGameState();
-					this.gameRunning = false;
-					return;
-				}
-	
-				if (renderer.plugins.interaction.mouse.global) {
-					this.mousePosition = renderer.plugins.interaction.mouse.global;
-	
-					var toGrid = this.gridContainer.toLocal(this.mousePosition);
-					this.mousePosID = Math.floor(toGrid.x / CARD.width);
-	
-					this.latestShoot.id = this.mousePosID;
-					if (this.latestShoot.id < 0) {
-						this.latestShoot.id = Math.floor(GRID.i / 2);
-					}
-					this.latestShoot.x = this.mousePosition;
-				}
-	
-				this.initGridAcc += 0.05;
-	
-				if (this.board) {
-					this.board.update(delta);
-				}
-	
-				this.topUIContainer.x = this.gameCanvas.x;
-				this.topUIContainer.y = _utils2.default.lerp(this.topUIContainer.y, this.gameCanvas.y, 0.2);
-	
-				this.bottomUIContainer.x = this.gameCanvas.x;
-				this.bottomUIContainer.y = _utils2.default.lerp(this.bottomUIContainer.y, this.gameCanvas.y + this.gameCanvas.height - this.bottomUICanvas.height, 0.2);
-	
-				this.updateLabelsPosition();
-				this.updateUI();
-				this.updateMousePosition();
-			}
-		}, {
-			key: 'updateMousePosition',
-			value: function updateMousePosition() {
-				if (!this.currentCard) {
-					this.trailMarker.alpha = 0;
-					return;
-				}
-	
-				var toLocalMouse = this.toLocal(this.mousePosition);
-				var toGrid = this.gridContainer.toLocal(this.mousePosition);
-				this.mousePosID = Math.floor(toGrid.x / CARD.width);
-	
-				if (this.mousePosID < 0) {
-					this.mousePosID = this.latestShoot.id;
-				}
-	
-				// this.trailMarker.alpha = 0;
-				if (this.mousePosID >= 0 && this.mousePosID < GRID.i) {
-					_gsap2.default.to(this.trailMarker, 0.1, { x: this.mousePosID * CARD.width });
-					this.trailMarker.tint = this.currentCard.enemySprite.tint;
-					this.trailMarker.alpha = 0.15;
-					this.currentCard.alpha = 1;
-					if (this.currentCard) {
-						if (this.mousePosID * CARD.width >= 0) {
-							// console.log("MOUSE MOVE");
-							this.currentCard.moveX(this.mousePosID * CARD.width, 0.1);
-						}
-					}
-				}
-				// else {
-				// 	this.mousePosition = this.innerResolution.width / 2
-				// 	this.mousePosID = Math.floor(GRID.i / 2);
-	
-				// 	this.currentCard.moveX(this.mousePosID * CARD.width, 0.1);
-				// 	this.trailMarker.x = this.currentCard.x
-				// 	this.trailMarker.tint = this.currentCard.enemySprite.tint
-				// 	this.trailMarker.alpha = 0.15;
-	
-				// }
-			}
-		}, {
-			key: 'transitionOut',
-			value: function transitionOut(nextScreen) {
-				_get(TetraScreen.prototype.__proto__ || Object.getPrototypeOf(TetraScreen.prototype), 'transitionOut', this).call(this, nextScreen);
-			}
-		}, {
-			key: 'transitionIn',
-			value: function transitionIn() {
-	
-				_get(TetraScreen.prototype.__proto__ || Object.getPrototypeOf(TetraScreen.prototype), 'transitionIn', this).call(this);
-			}
-		}, {
-			key: 'destroy',
-			value: function destroy() {}
-		}, {
-			key: 'scaleMousePosition',
-			value: function scaleMousePosition() {
-				if (!this.mousePosition || this.mouseDirty) {
-					return;
-				}
-				if (this.mousePosition.x) this.mousePosition.x *= window.appScale.x;
-				if (this.mousePosition.y) this.mousePosition.y *= window.appScale.y;
-	
-				this.mouseDirty = true;
-			}
-		}, {
-			key: 'onTapUp',
-			value: function onTapUp(event, customID) {
-				if (!this.currentCard || !this.gameRunning) {
-	
-					console.log("NO");
-					return;
-				}
-				if (customID == undefined) {
-					if (renderer.plugins.interaction.activeInteractionData) {
-						for (var key in renderer.plugins.interaction.activeInteractionData) {
-							var element = renderer.plugins.interaction.activeInteractionData[key];
-							if (element.pointerType == "touch") {
-								this.mousePosition = element.global;
+									_gsap2.default.killTweensOf(this.currentCard);
+									_gsap2.default.to(this.currentCard, 0.5, { alpha: 0 });
 							}
-						}
-					} else {
-						this.mousePosition = renderer.plugins.interaction.mouse.global;
 					}
-					if (this.mousePosition.y < this.topUIContainer.position.y + _config2.default.height * 0.2) {
-						return;
+			}, {
+					key: 'showInGameElements',
+					value: function showInGameElements() {
+							_gsap2.default.killTweensOf(this.cardsContainer);
+							_gsap2.default.killTweensOf(this.gridContainer);
+	
+							_gsap2.default.to(this.cardsContainer, 0.1, { alpha: 1 });
+							_gsap2.default.to(this.gridContainer, 0.1, { alpha: 1 });
+							if (this.currentCard) {
+									_gsap2.default.killTweensOf(this.currentCard);
+									_gsap2.default.to(this.currentCard, 0.1, { alpha: 1 });
+							}
 					}
-					this.updateMousePosition();
-				} else {
-					this.mousePosID = customID;
-				}
+			}, {
+					key: 'mainmenuState',
+					value: function mainmenuState() {
+							var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 	
-				if (!this.board.isPossibleShot(this.mousePosID)) {
-					console.log("isPossibleShot");
-					return;
-				}
+							this.endGameScreenContainer.hide(force);
+							this.startScreenContainer.show(force, force ? 0.2 : 0.75);
+							this.gameRunning = false;
 	
-				this.currentRound++;
-				var nextRoundTimer = this.board.shootCard(this.mousePosID, this.currentCard);
-				var normalDist = (this.currentCard.y - this.currentCard.pos.j * CARD.height) / GRID.height;
-				this.currentCard.x = this.currentCard.pos.i * CARD.width;
-				this.latestShoot.x = this.currentCard.x;
-				this.latestShoot.id = this.mousePosID;
-				this.currentCard.move({
-					x: this.currentCard.pos.i * CARD.width,
-					y: this.currentCard.pos.j * CARD.height
-				}, 0.1 * normalDist);
+							this.startScreenContainer.showCloseButton();
+							this.hideInGameElements();
 	
-				this.currentCard = null;
-				this.updateUI();
-				// console.log(0.1 * normalDist * 100);
-				setTimeout(function () {
-					this.newRound();
-				}.bind(this), 0.1 * normalDist + nextRoundTimer / window.TIME_SCALE);
-	
-				// console.log(nextRoundTimer);
-			}
-		}, {
-			key: 'onTapDown',
-			value: function onTapDown() {
-				if (!this.currentCard || !this.gameRunning) {
-					return;
-				}
-				if (renderer.plugins.interaction.activeInteractionData[0]) {
-					this.mousePosition = renderer.plugins.interaction.activeInteractionData[0].global;
-				} else {
-					this.mousePosition = renderer.plugins.interaction.mouse.global;
-				}
-				this.updateMousePosition();
-			}
-		}, {
-			key: 'removeEvents',
-			value: function removeEvents() {
-				this.gameContainer.interactive = false;
-				this.gameContainer.off('mousedown', this.onTapDown.bind(this)).off('touchstart', this.onTapDown.bind(this));
-				this.gameContainer.off('mouseup', this.onTapUp.bind(this)).off('touchend', this.onTapUp.bind(this));
-				this.startScreenContainer.removeEvents();
-				this.endGameScreenContainer.removeEvents();
-			}
-		}, {
-			key: 'addEvents',
-			value: function addEvents() {
-				this.removeEvents();
-				this.gameContainer.interactive = true;
-				this.gameContainer.on('mousedown', this.onTapDown.bind(this)).on('touchstart', this.onTapDown.bind(this));
-				this.gameContainer.on('mouseup', this.onTapUp.bind(this)).on('touchend', this.onTapUp.bind(this));
-				this.startScreenContainer.addEvents();
-				this.endGameScreenContainer.addEvents();
-			}
-		}, {
-			key: 'resizeToFitAR',
-			value: function resizeToFitAR(size, element, res) {
-				if (!res) {
-					res = element;
-				}
-				var sclX = size.width / (res.width / res.scale.x);
-				var sclY = size.height / (res.height / res.scale.y);
-				var min = Math.min(sclX, sclY);
-				element.scale.set(min);
-			}
-		}, {
-			key: 'resizeToFit',
-			value: function resizeToFit(size, element) {
-				var sclX = size.width / (element.width / element.scale.x);
-				var sclY = size.height / (element.height / element.scale.y);
-				var min = Math.min(sclX, sclY);
-				element.scale.set(sclX, sclY);
-			}
-		}, {
-			key: 'resize',
-			value: function resize(scaledResolution, innerResolution) {
-				//console.log(resolution, innerResolution)
-				var offset = this.toLocal(new PIXI.Point());
-				this.innerResolution = innerResolution;
-	
-				this.background.resize(scaledResolution, innerResolution);
-				this.ratio = _config2.default.width / _config2.default.height;
-	
-				_utils2.default.scaleSize(this.gameCanvas, innerResolution, this.ratio);
-	
-				//this.resizeToFitAR({width:this.bottomUICanvas.width * 0.8, height:this.bottomUICanvas.height * 0.4},this.containerQueue)
-				this.resizeToFitAR({ width: this.gameCanvas.width * 0.9, height: this.gameCanvas.height * 0.75 }, this.gridContainer);
-				this.resizeToFit({ width: this.gameCanvas.width, height: this.gameCanvas.height * 0.08 }, this.topCanvas);
-				this.resizeToFit({ width: this.gameCanvas.width, height: this.gameCanvas.height * 0.125 }, this.bottomUICanvas);
-	
-				//console.log(this.bottomUICanvas.scale.y, this.bottomUICanvas.height)
-	
-				this.cardsContainer.scale.x = this.gridContainer.scale.x;
-				this.cardsContainer.scale.y = this.gridContainer.scale.y;
-	
-				this.gameCanvas.x = offset.x + innerResolution.width / 2 - this.gameCanvas.width / 2; //* window.appScale.x// (innerResolution.width / 2 * window.appScale.x)
-				this.gameCanvas.y = offset.y + innerResolution.height / 2 - this.gameCanvas.height / 2;
-	
-				this.background.x = innerResolution.width / 2 + offset.x; //* window.appScale.x// (innerResolution.width / 2 * window.appScale.x)
-				this.background.y = innerResolution.height / 2 + offset.y; // * window.appScale.y
-	
-	
-				this.gridContainer.x = this.gameCanvas.x + this.gameCanvas.width / 2 - this.gridContainer.width / 2;
-				this.gridContainer.y = this.gameCanvas.y + this.gameCanvas.height / 2 - this.gridContainer.height / 2 - this.topCanvas.height; //* 0.1125
-				//utils.centerObject(this.gridContainer, this.gameCanvas)
-	
-				this.cardsContainer.x = this.gridContainer.x;
-				this.cardsContainer.y = this.gridContainer.y;
-	
-				if (this.currentCard) {
-					//13 is the width of the border on the grid
-					this.currentCard.y = this.gridContainer.height / this.gridContainer.scale.y;
-				}
-	
-				//utils.centerObject(this.startScreenContainer, this)
-	
-				this.startScreenContainer.resize(innerResolution, this.ratio);
-				this.endGameScreenContainer.resize(innerResolution, this.ratio);
-	
-				// if(innerResolution.width < config.width){
-	
-	
-				// }else{
-				// 	this.startScreenContainer.scale.set(1)
-				// }
-				this.updateLabelsPosition();
-				//this.gameContainer.scale.set(window.ratio)
-	
-			}
-		}, {
-			key: 'shuffleText',
-			value: function shuffleText(label) {
-				var rnd1 = String.fromCharCode(Math.floor(Math.random() * 20) + 65);
-				var rnd2 = Math.floor(Math.random() * 9);
-				var rnd3 = String.fromCharCode(Math.floor(Math.random() * 20) + 65);
-				var tempLabel = label.split('');
-				var rndPause = Math.random();
-				if (rndPause < 0.2) {
-					var pos1 = Math.floor(Math.random() * tempLabel.length);
-					var pos2 = Math.floor(Math.random() * tempLabel.length);
-					if (tempLabel[pos1] != '\n') tempLabel[pos1] = rnd2;
-					if (tempLabel[pos2] != '\n') tempLabel[pos2] = rnd3;
-				} else if (rndPause < 0.5) {
-					var pos3 = Math.floor(Math.random() * tempLabel.length);
-					if (tempLabel[pos3] != '\n') tempLabel[pos3] = rnd3;
-				}
-				var returnLabel = '';
-				for (var i = 0; i < tempLabel.length; i++) {
-					returnLabel += tempLabel[i];
-				}
-				return returnLabel;
-			}
-		}, {
-			key: 'closeApplication',
-			value: function closeApplication() {
-				navigator.app.exitApp();
-			}
-		}, {
-			key: 'backKeyDown',
-			value: function backKeyDown() {
-				if (this.gameRunning) {
-					this.mainmenuState();
-				} else if (this.startScreenContainer.screenState == 2) {
-					if (this.startScreenContainer.chooseLevelPanel.currentUISection <= 0) {
-						this.startScreenContainer.startState(0);
-					} else {
-						this.startScreenContainer.chooseLevelPanel.onBack();
+							this.removeEvents();
 					}
-				} else {
-					navigator.app.exitApp();
-				}
-			}
-		}]);
+			}, {
+					key: 'mainmenuStateFromGame',
+					value: function mainmenuStateFromGame() {
+							var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 	
-		return TetraScreen;
+							this.endGameScreenContainer.hide(force);
+							this.startScreenContainer.showFromGame(force, force ? 0.2 : 0.75);
+							this.gameRunning = false;
+	
+							this.startScreenContainer.showCloseButton();
+							this.hideInGameElements();
+	
+							this.removeEvents();
+					}
+			}, {
+					key: 'endGameState',
+					value: function endGameState() {
+							this.gameRunning = false;
+							this.startScreenContainer.hide(true);
+							var tempid = this.currentLevelID >= 0 ? this.currentLevelID : 0;
+							this.endGameScreenContainer.setStats(this.currentPoints, this.currentRound, _utils2.default.convertNumToTime(Math.ceil(this.currentTime)), this.generateImage(this.currentLevelData.pieces), this.currentLevelData);
+							this.endGameScreenContainer.show(false, 1);
+							this.hideInGameElements(1);
+							this.removeEvents();
+	
+							if (window.AUTO_PLAY_HARD) {
+	
+									if (this.currentRound < this.dataToSave.bestMoves) {
+											this.dataToSave.bestMoves = this.currentRound;
+									}
+	
+									if (this.currentTime < this.dataToSave.bestTime) {
+											this.dataToSave.bestTime = this.currentTime;
+									}
+	
+									if (this.currentPoints > this.dataToSave.bestScore) {
+											this.dataToSave.bestScore = this.currentPoints;
+									}
+	
+									this.dataToSave.wins++;
+	
+									if (this.dataToSave.wins > 10) {
+											var toSave = this.dataToSave.levelName + "\n";
+											toSave += "bestMoves :" + this.dataToSave.bestMoves + "\n";
+											toSave += "bestTime :" + this.dataToSave.bestTime + "\n";
+											toSave += "bestScore :" + this.dataToSave.bestScore + "\n";
+											toSave += "wins :" + this.dataToSave.wins + "\n";
+											toSave += "loses :" + this.dataToSave.loses + "\n";
+	
+											window.SAVE_DATA(toSave, this.dataToSave.levelName, 'text/plain');
+	
+											this.dataToSave = {
+													levelName: "",
+													wins: 0,
+													loses: 0,
+													bestTime: 999999999,
+													bestMoves: 99999999,
+													bestScore: 0
+											};
+									}
+	
+									console.log("on Win Reset", this.currentRound, this.dataToSave);
+									this.resetGame();
+							}
+	
+							if (window.AUTO_PLAY) {
+									window.TIME_SCALE = 1;
+									window.AUTO_PLAY = false;
+							}
+							//console.log("endGameState")
+					}
+			}, {
+					key: 'gameState',
+					value: function gameState() {
+							var _this3 = this;
+	
+							setTimeout(function () {
+	
+									_this3.gameRunning = true;
+							}, 500 / window.TIME_SCALE);
+	
+							this.currentTime = 0;
+							this.showInGameElements();
+							this.addEvents();
+							this.endGameScreenContainer.hide();
+							this.startScreenContainer.hide();
+							this.board.startNewGame();
+	
+							//console.log("gameState")
+					}
+			}, {
+					key: 'build',
+					value: function build() {
+							_get(TetraScreen.prototype.__proto__ || Object.getPrototypeOf(TetraScreen.prototype), 'build', this).call(this);
+	
+							var alphas = 0;
+	
+							this.changeLabelTimer = 0.1;
+	
+							this.background = new _BackgroundEffects2.default();
+							this.addChild(this.background);
+	
+							this.gameContainer = new PIXI.Container();
+							this.gridContainer = new PIXI.Container();
+							this.cardsContainer = new PIXI.Container();
+							this.UIContainer = new PIXI.Container();
+							this.topUIContainer = new PIXI.Container();
+							this.bottomUIContainer = new PIXI.Container();
+	
+							this.topCanvas = new PIXI.Graphics().beginFill(0xFF00FF).drawRect(0, 0, 1, 1);
+							this.topUIContainer.addChild(this.topCanvas);
+							this.topCanvas.alpha = alphas;
+	
+							this.bottomUICanvas = new PIXI.Graphics().beginFill(0x0000FF).drawRect(0, 0, 1, 1);
+							this.bottomUIContainer.addChild(this.bottomUICanvas);
+							this.bottomUICanvas.alpha = alphas;
+	
+							this.addChild(this.gameContainer);
+	
+							this.gameContainer.addChild(this.background);
+							this.gameContainer.addChild(this.gridContainer);
+							this.gameContainer.addChild(this.cardsContainer);
+							this.gameContainer.addChild(this.UIContainer);
+							this.gameContainer.addChild(this.topUIContainer);
+							this.gameContainer.addChild(this.bottomUIContainer);
+	
+							this.bottomUIContainer.y = _config2.default.height;
+	
+							this.gameCanvas = new PIXI.Graphics().beginFill(0xFF0000).drawRect(0, 0, 1, 1);
+							this.addChild(this.gameCanvas);
+							this.gameCanvas.alpha = alphas;
+	
+							this.mousePosID = GRID.i / 2;
+							// this.currentCard = this.createCard();
+							// this.cardsContainer.addChild(this.currentCard)
+							// utils.centerObject(this.currentCard, this.background)
+	
+	
+							this.grid.createGrid();
+							this.gridContainer.addChild(this.grid);
+							_utils2.default.centerObject(this.gridContainer, this.background.background);
+							this.gridContainer.x = this.innerResolution.width / 2 - (GRID.i + 1) * CARD.width / 2; // - this.gridContainer.width / 2;
+							// this.gridContainer.y -= CARD.height;
+	
+							this.buildUI();
+	
+							this.cardsContainer.x = this.gridContainer.x;
+							this.cardsContainer.y = this.gridContainer.y;
+	
+							this.trailMarker = new PIXI.Graphics().beginFill(0xFFFFFF).drawRoundedRect(0, 0, CARD.width, GRID.height, 0);
+							this.gridContainer.addChild(this.trailMarker);
+	
+							this.initGridY = this.gridContainer.y;
+							this.initGridAcc = 0;
+	
+							this.trailMarker.alpha = 0;
+	
+							var tempPosRandom = [];
+							for (var i = 0; i < GRID.i; i++) {
+									tempPosRandom.push(i);
+							}
+							_utils2.default.shuffle(tempPosRandom);
+					}
+			}, {
+					key: 'startNewLevel',
+					value: function startNewLevel(data, isEasy) {
+							this.currentLevelData = data;
+							this.startScreenContainer.newLevelStarted();
+							this.updateGridDimensions();
+							this.gridContainer.x = _config2.default.width / 2 - (GRID.i + 1) * CARD.width / 2;
+							this.cardsContainer.x = this.gridContainer.x;
+							this.cardsContainer.y = this.gridContainer.y;
+							this.grid.createGrid();
+							this.resetGame();
+							if (isEasy) {
+									this.board.addCrazyCards2(GRID.i * GRID.j);
+							}
+					}
+			}, {
+					key: 'resetGame',
+					value: function resetGame() {
+							var _this4 = this;
+	
+							this.cardQueueData = {
+									latest: -1,
+									counter: 0
+							};
+	
+							for (var index = this.cardsContainer.children.length - 1; index >= 0; index--) {
+									this.cardsContainer.removeChildAt(0);
+							}
+	
+							this.gameState();
+							if (this.currentLevelID < 0) {
+									this.currentLevelID = 0;
+							}
+							this.currentTime = 0;
+							this.currentPoints = 0;
+							this.currentPointsLabel = 0;
+							this.currentRound = 0;
+	
+							this.board.newGameFinished = true;
+							this.board.destroyBoard();
+							this.board.resetBoard();
+	
+							for (var i = this.cardQueue.length - 1; i >= 0; i--) {
+									this.cardQueue[i].forceDestroy();
+							}
+							this.cardQueue = [];
+							if (this.currentCard) this.currentCard.forceDestroy();
+							this.currentCard = null;
+	
+							this.dataToSave.levelName = this.currentLevelData.levelName;
+	
+							for (var i = 0; i < this.currentLevelData.pieces.length; i++) {
+									for (var j = 0; j < this.currentLevelData.pieces[i].length; j++) {
+											if (this.currentLevelData.pieces[i][j] >= 0) {
+													if (ENEMIES.list[this.currentLevelData.pieces[i][j]].isBlock) {
+															this.cardsContainer.addChild(this.placeBlock(j, i));
+													} else {
+															this.cardsContainer.addChild(this.placeCard(j, i, ENEMIES.list[this.currentLevelData.pieces[i][j]].life));
+													}
+											} else if (this.currentLevelData.pieces[i][j] == -2) {
+													this.cardsContainer.addChild(this.placeBlock(j, i));
+											}
+									}
+							}
+	
+							this.currentPoints = 0;
+							this.currentPointsLabel = 0;
+							this.currentRound = 0;
+	
+							// this.board.debugBoard();
+	
+	
+							this.newRound();
+	
+							_gsap2.default.to(this.cardsContainer, 0.1, { alpha: 1 });
+							_gsap2.default.to(this.gridContainer, 0.1, { alpha: 1, onComplete: function onComplete() {
+											_this4.gameState();
+									} });
+							//TweenMax.to(this.UIInGame, 0.75, { y: 0, ease: Cubic.easeOut, onComplete: () => { this.gameState() } })
+	
+							this.startScreenContainer.hide();
+	
+							this.mousePosition = new PIXI.Point();
+	
+							var toGrid = this.gridContainer.toLocal(this.innerResolution.width / 2);
+							this.mousePosID = Math.floor(toGrid.x / CARD.width);
+	
+							this.latestShoot.id = 2; //this.mousePosID;
+							this.latestShoot.x = this.mousePosition;
+	
+							//this.currentButtonLabel = 'RESET';
+					}
+			}, {
+					key: 'updateUI',
+					value: function updateUI() {
+							this.pointsLabel.text = _utils2.default.formatPointsLabel(Math.ceil(this.currentPointsLabel));
+							this.roundsLabel.text = _utils2.default.formatPointsLabel(Math.ceil(this.currentRound));
+							this.entitiesLabel.text = _utils2.default.formatPointsLabel(Math.ceil(this.board.totalCards));
+							this.timeLabel.text = _utils2.default.convertNumToTime(Math.ceil(this.currentTime));
+	
+							this.timerRect.updateLavel(_utils2.default.convertNumToTime(Math.ceil(this.currentTime)));
+							this.movesRect.updateLavel(_utils2.default.formatPointsLabel(Math.ceil(this.currentRound)));
+							this.scoreRect.updateLavel(_utils2.default.formatPointsLabel(Math.ceil(this.currentPointsLabel)));
+					}
+			}, {
+					key: 'addRandomPiece',
+					value: function addRandomPiece() {}
+			}, {
+					key: 'addPoints',
+					value: function addPoints(points) {
+							this.currentPoints += points;
+							_gsap2.default.to(this, 0.2, {
+									currentPointsLabel: this.currentPoints, onUpdate: function () {
+											this.currentPointsLabel = Math.ceil(this.currentPointsLabel);
+											this.updateUI();
+									}.bind(this)
+							});
+					}
+			}, {
+					key: 'updateQueue',
+					value: function updateQueue() {
+							while (this.cardQueue.length < this.cardQueueSize) {
+									var card = void 0;
+									if (CARD_POOL.length) {
+											card = CARD_POOL[0];
+											CARD_POOL.shift();
+									} else {
+											card = new _Card2.default(this);
+									}
+	
+									var nextLife = Math.random() < 1 - this.currentRound % 3 * 0.17 ? 0 : Math.random() < 0.5 ? 2 : 1;
+	
+									//console.log(nextLife,this.cardQueueData.counter)
+									if (nextLife > 0) {
+											if (this.cardQueueData.counter <= 0) {
+													//change frequecy of high level cards
+													this.cardQueueData.counter = 3 + Math.floor(Math.random() * 3);
+											} else {
+													nextLife = 0;
+											}
+									}
+	
+									if (this.cardQueueData.counter > 0) {
+											this.cardQueueData.counter--;
+									}
+	
+									card.life = nextLife;
+									card.createCard();
+									card.updateSprite(card.life);
+									card.type = 0;
+									card.x = 0;
+									this.containerQueue.addChild(card);
+									this.cardQueue.push(card);
+									card.setOnQueue();
+							}
+							// for (var i = this.cardQueue.length - 1; i >= 0; i--) {
+							for (var i = 0; i < this.cardQueue.length; i++) {
+									_gsap2.default.to(this.cardQueue[i], 0.3, { x: CARD.width * (this.cardQueue.length - i - 1), ease: Back.easeOut });
+									this.cardQueue[i].y = 0;
+									// this.cardQueue[i].y = ;
+							}
+	
+							this.cardQueue[1].mark();
+					}
+			}, {
+					key: 'newRound',
+					value: function newRound() {
+							var _this5 = this;
+	
+							this.updateQueue();
+							this.currentCard = this.cardQueue[0];
+							this.cardQueue.shift();
+							this.mousePosID = this.latestShoot.id;
+							this.currentCard.x = this.latestShoot.x;
+							this.currentCard.scale.set(1);
+							this.currentCard.alpha = 0;
+							_gsap2.default.to(this.currentCard, 0.3, { alpha: 1, y: this.gridContainer.height + 20, ease: Elastic.easeOut });
+							this.currentCard.updateCard(true);
+							this.cardsContainer.addChild(this.currentCard);
+	
+							if (this.autoPlayTimeout) {
+									clearTimeout(this.autoPlayTimeout);
+							}
+							//FIND BEST OPTION TO SHOOT
+							if (window.AUTO_PLAY_HARD || window.AUTO_PLAY) {
+									this.autoPlayTimeout = setTimeout(function () {
+											_this5.playRandom();
+									}, 500 / window.TIME_SCALE);
+							}
+					}
+			}, {
+					key: 'playRandom',
+					value: function playRandom() {
+							this.mousePosID = this.board.findBestShoot(this.currentCard);
+							if (this.mousePosID == -1 || this.currentRound > 1500) {
+	
+									this.dataToSave.loses++;
+									console.log("playRandom resetGame", this.mousePosID, this.currentRound, this.dataToSave);
+									this.resetGame();
+									window.AUTO_PLAY = false;
+							} else {
+									this.onTapUp(null, this.mousePosID);
+							}
+					}
+			}, {
+					key: 'placeCard',
+					value: function placeCard(i, j) {
+							var level = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+	
+							var card = void 0;
+							if (CARD_POOL.length) {
+									card = CARD_POOL[0];
+									CARD_POOL.shift();
+							} else {
+									card = new _Card2.default(this);
+							}
+							card.life = level;
+							card.createCard();
+							card.updateSprite(level);
+							card.x = i * CARD.width;
+							card.y = j * CARD.height - CARD.height;
+							// card.cardContainer.scale.set(1.2 - j * 0.05)
+							card.alpha = 0;
+							_gsap2.default.to(card, 0.5, { alpha: 1, delay: i * 0.05, y: j * CARD.height, ease: Back.easeOut });
+	
+							card.show(0.5, i * 0.05 + 0.75);
+	
+							card.pos.i = i;
+							card.pos.j = j;
+							card.updateCard();
+							this.board.addCard(card);
+							// this.CARD_POOL.push(card);
+							return card;
+					}
+			}, {
+					key: 'placeBlock',
+					value: function placeBlock(i, j) {
+							var block = void 0;
+							block = new _Block2.default(this);
+							block.x = i * CARD.width;
+							block.y = j * CARD.height - CARD.height;
+							block.alpha = 0;
+							_gsap2.default.to(block, 0.5, { alpha: 1, delay: i * 0.05, y: j * CARD.height, ease: Back.easeOut });
+							block.pos.i = i;
+							block.pos.j = j;
+							this.board.addCard(block);
+							return block;
+					}
+			}, {
+					key: 'update',
+					value: function update(delta) {
+	
+							this.mouseDirty = false;
+							this.background.update(delta);
+							this.grid.update(delta);
+							this.startScreenContainer.update(delta);
+							this.endGameScreenContainer.update(delta);
+							this.inGameMenu.update(delta);
+	
+							if (!this.gameRunning) {
+									this.topUIContainer.x = this.gameCanvas.x;
+									this.topUIContainer.y = _utils2.default.lerp(this.topUIContainer.y, this.gameCanvas.y - 500, 0.2);
+									this.bottomUIContainer.x = this.gameCanvas.x;
+									this.bottomUIContainer.y = _utils2.default.lerp(this.bottomUIContainer.y, this.gameCanvas.y + this.gameCanvas.height - this.bottomUICanvas.height + 500, 0.2);
+	
+									if (this.currentCard) {
+											this.currentCard.alpha = 0;
+									}
+	
+									return;
+							}
+	
+							////console.log(this.mousePosition)
+							this.currentTime += delta * window.TIME_SCALE * window.TIME_SCALE;
+	
+							if (!this.board.newGameFinished && this.board.totalCards <= 0) {
+									this.endGameState();
+									this.gameRunning = false;
+									return;
+							}
+	
+							if (renderer.plugins.interaction.mouse.global) {
+									this.mousePosition = renderer.plugins.interaction.mouse.global;
+	
+									var toGrid = this.gridContainer.toLocal(this.mousePosition);
+									this.mousePosID = Math.floor(toGrid.x / CARD.width);
+	
+									this.latestShoot.id = this.mousePosID;
+									if (this.latestShoot.id < 0) {
+											this.latestShoot.id = Math.floor(GRID.i / 2);
+									}
+									this.latestShoot.x = this.mousePosition;
+							}
+	
+							this.initGridAcc += 0.05;
+	
+							if (this.board) {
+									this.board.update(delta);
+							}
+	
+							this.topUIContainer.x = this.gameCanvas.x;
+							this.topUIContainer.y = _utils2.default.lerp(this.topUIContainer.y, this.gameCanvas.y, 0.2);
+	
+							this.bottomUIContainer.x = this.gameCanvas.x;
+							this.bottomUIContainer.y = _utils2.default.lerp(this.bottomUIContainer.y, this.gameCanvas.y + this.gameCanvas.height - this.bottomUICanvas.height, 0.2);
+	
+							this.updateLabelsPosition();
+							this.updateUI();
+							this.updateMousePosition();
+					}
+			}, {
+					key: 'updateMousePosition',
+					value: function updateMousePosition() {
+							if (!this.currentCard) {
+									this.trailMarker.alpha = 0;
+									return;
+							}
+	
+							var toLocalMouse = this.toLocal(this.mousePosition);
+							var toGrid = this.gridContainer.toLocal(this.mousePosition);
+							this.mousePosID = Math.floor(toGrid.x / CARD.width);
+	
+							if (this.mousePosID < 0) {
+									this.mousePosID = this.latestShoot.id;
+							}
+	
+							// this.trailMarker.alpha = 0;
+							if (this.mousePosID >= 0 && this.mousePosID < GRID.i) {
+									_gsap2.default.to(this.trailMarker, 0.1, { x: this.mousePosID * CARD.width });
+									this.trailMarker.tint = this.currentCard.enemySprite.tint;
+									this.trailMarker.alpha = 0.15;
+									this.currentCard.alpha = 1;
+									if (this.currentCard) {
+											if (this.mousePosID * CARD.width >= 0) {
+													// console.log("MOUSE MOVE");
+													this.currentCard.moveX(this.mousePosID * CARD.width, 0.1);
+											}
+									}
+							}
+							// else {
+							// 	this.mousePosition = this.innerResolution.width / 2
+							// 	this.mousePosID = Math.floor(GRID.i / 2);
+	
+							// 	this.currentCard.moveX(this.mousePosID * CARD.width, 0.1);
+							// 	this.trailMarker.x = this.currentCard.x
+							// 	this.trailMarker.tint = this.currentCard.enemySprite.tint
+							// 	this.trailMarker.alpha = 0.15;
+	
+							// }
+					}
+			}, {
+					key: 'transitionOut',
+					value: function transitionOut(nextScreen) {
+							_get(TetraScreen.prototype.__proto__ || Object.getPrototypeOf(TetraScreen.prototype), 'transitionOut', this).call(this, nextScreen);
+					}
+			}, {
+					key: 'transitionIn',
+					value: function transitionIn() {
+	
+							_get(TetraScreen.prototype.__proto__ || Object.getPrototypeOf(TetraScreen.prototype), 'transitionIn', this).call(this);
+					}
+			}, {
+					key: 'destroy',
+					value: function destroy() {}
+			}, {
+					key: 'scaleMousePosition',
+					value: function scaleMousePosition() {
+							if (!this.mousePosition || this.mouseDirty) {
+									return;
+							}
+							if (this.mousePosition.x) this.mousePosition.x *= window.appScale.x;
+							if (this.mousePosition.y) this.mousePosition.y *= window.appScale.y;
+	
+							this.mouseDirty = true;
+					}
+			}, {
+					key: 'onTapUp',
+					value: function onTapUp(event, customID) {
+							if (!this.currentCard || !this.gameRunning) {
+	
+									console.log("NO");
+									return;
+							}
+							if (customID == undefined) {
+									if (renderer.plugins.interaction.activeInteractionData) {
+											for (var key in renderer.plugins.interaction.activeInteractionData) {
+													var element = renderer.plugins.interaction.activeInteractionData[key];
+													if (element.pointerType == "touch") {
+															this.mousePosition = element.global;
+													}
+											}
+									} else {
+											this.mousePosition = renderer.plugins.interaction.mouse.global;
+									}
+									if (this.mousePosition.y < this.topUIContainer.position.y + _config2.default.height * 0.2) {
+											return;
+									}
+									this.updateMousePosition();
+							} else {
+									this.mousePosID = customID;
+							}
+	
+							if (!this.board.isPossibleShot(this.mousePosID)) {
+									console.log("isPossibleShot");
+									return;
+							}
+	
+							this.currentRound++;
+							var nextRoundTimer = this.board.shootCard(this.mousePosID, this.currentCard);
+							var normalDist = (this.currentCard.y - this.currentCard.pos.j * CARD.height) / GRID.height;
+							this.currentCard.x = this.currentCard.pos.i * CARD.width;
+							this.latestShoot.x = this.currentCard.x;
+							this.latestShoot.id = this.mousePosID;
+							this.currentCard.move({
+									x: this.currentCard.pos.i * CARD.width,
+									y: this.currentCard.pos.j * CARD.height
+							}, 0.1 * normalDist);
+	
+							this.currentCard = null;
+							this.updateUI();
+							// console.log(0.1 * normalDist * 100);
+							setTimeout(function () {
+									this.newRound();
+							}.bind(this), 0.1 * normalDist + nextRoundTimer / window.TIME_SCALE);
+	
+							// console.log(nextRoundTimer);
+					}
+			}, {
+					key: 'onTapDown',
+					value: function onTapDown() {
+							if (!this.currentCard || !this.gameRunning) {
+									return;
+							}
+							if (renderer.plugins.interaction.activeInteractionData[0]) {
+									this.mousePosition = renderer.plugins.interaction.activeInteractionData[0].global;
+							} else {
+									this.mousePosition = renderer.plugins.interaction.mouse.global;
+							}
+							this.updateMousePosition();
+					}
+			}, {
+					key: 'removeEvents',
+					value: function removeEvents() {
+							this.gameContainer.interactive = false;
+							this.gameContainer.off('mousedown', this.onTapDown.bind(this)).off('touchstart', this.onTapDown.bind(this));
+							this.gameContainer.off('mouseup', this.onTapUp.bind(this)).off('touchend', this.onTapUp.bind(this));
+							this.startScreenContainer.removeEvents();
+							this.endGameScreenContainer.removeEvents();
+					}
+			}, {
+					key: 'addEvents',
+					value: function addEvents() {
+							this.removeEvents();
+							this.gameContainer.interactive = true;
+							this.gameContainer.on('mousedown', this.onTapDown.bind(this)).on('touchstart', this.onTapDown.bind(this));
+							this.gameContainer.on('mouseup', this.onTapUp.bind(this)).on('touchend', this.onTapUp.bind(this));
+							this.startScreenContainer.addEvents();
+							this.endGameScreenContainer.addEvents();
+					}
+			}, {
+					key: 'resizeToFitAR',
+					value: function resizeToFitAR(size, element, res) {
+							if (!res) {
+									res = element;
+							}
+							var sclX = size.width / (res.width / res.scale.x);
+							var sclY = size.height / (res.height / res.scale.y);
+							var min = Math.min(sclX, sclY);
+							element.scale.set(min);
+					}
+			}, {
+					key: 'resizeToFit',
+					value: function resizeToFit(size, element) {
+							var sclX = size.width / (element.width / element.scale.x);
+							var sclY = size.height / (element.height / element.scale.y);
+							var min = Math.min(sclX, sclY);
+							element.scale.set(sclX, sclY);
+					}
+			}, {
+					key: 'resize',
+					value: function resize(scaledResolution, innerResolution) {
+							//console.log(resolution, innerResolution)
+							var offset = this.toLocal(new PIXI.Point());
+							this.innerResolution = innerResolution;
+	
+							this.background.resize(scaledResolution, innerResolution);
+							this.ratio = _config2.default.width / _config2.default.height;
+	
+							_utils2.default.scaleSize(this.gameCanvas, innerResolution, this.ratio);
+	
+							//this.resizeToFitAR({width:this.bottomUICanvas.width * 0.8, height:this.bottomUICanvas.height * 0.4},this.containerQueue)
+							this.resizeToFitAR({ width: this.gameCanvas.width * 0.9, height: this.gameCanvas.height * 0.75 }, this.gridContainer);
+							this.resizeToFit({ width: this.gameCanvas.width, height: this.gameCanvas.height * 0.08 }, this.topCanvas);
+							this.resizeToFit({ width: this.gameCanvas.width, height: this.gameCanvas.height * 0.125 }, this.bottomUICanvas);
+	
+							//console.log(this.bottomUICanvas.scale.y, this.bottomUICanvas.height)
+	
+							this.cardsContainer.scale.x = this.gridContainer.scale.x;
+							this.cardsContainer.scale.y = this.gridContainer.scale.y;
+	
+							this.gameCanvas.x = offset.x + innerResolution.width / 2 - this.gameCanvas.width / 2; //* window.appScale.x// (innerResolution.width / 2 * window.appScale.x)
+							this.gameCanvas.y = offset.y + innerResolution.height / 2 - this.gameCanvas.height / 2;
+	
+							this.background.x = innerResolution.width / 2 + offset.x; //* window.appScale.x// (innerResolution.width / 2 * window.appScale.x)
+							this.background.y = innerResolution.height / 2 + offset.y; // * window.appScale.y
+	
+	
+							this.gridContainer.x = this.gameCanvas.x + this.gameCanvas.width / 2 - this.gridContainer.width / 2;
+							this.gridContainer.y = this.gameCanvas.y + this.gameCanvas.height / 2 - this.gridContainer.height / 2 - this.topCanvas.height; //* 0.1125
+							//utils.centerObject(this.gridContainer, this.gameCanvas)
+	
+							this.cardsContainer.x = this.gridContainer.x;
+							this.cardsContainer.y = this.gridContainer.y;
+	
+							if (this.currentCard) {
+									//13 is the width of the border on the grid
+									this.currentCard.y = this.gridContainer.height / this.gridContainer.scale.y;
+							}
+	
+							//utils.centerObject(this.startScreenContainer, this)
+	
+							this.startScreenContainer.resize(innerResolution, this.ratio);
+							this.endGameScreenContainer.resize(innerResolution, this.ratio);
+	
+							// if(innerResolution.width < config.width){
+	
+	
+							// }else{
+							// 	this.startScreenContainer.scale.set(1)
+							// }
+							this.updateLabelsPosition();
+							//this.gameContainer.scale.set(window.ratio)
+	
+					}
+			}, {
+					key: 'shuffleText',
+					value: function shuffleText(label) {
+							var rnd1 = String.fromCharCode(Math.floor(Math.random() * 20) + 65);
+							var rnd2 = Math.floor(Math.random() * 9);
+							var rnd3 = String.fromCharCode(Math.floor(Math.random() * 20) + 65);
+							var tempLabel = label.split('');
+							var rndPause = Math.random();
+							if (rndPause < 0.2) {
+									var pos1 = Math.floor(Math.random() * tempLabel.length);
+									var pos2 = Math.floor(Math.random() * tempLabel.length);
+									if (tempLabel[pos1] != '\n') tempLabel[pos1] = rnd2;
+									if (tempLabel[pos2] != '\n') tempLabel[pos2] = rnd3;
+							} else if (rndPause < 0.5) {
+									var pos3 = Math.floor(Math.random() * tempLabel.length);
+									if (tempLabel[pos3] != '\n') tempLabel[pos3] = rnd3;
+							}
+							var returnLabel = '';
+							for (var i = 0; i < tempLabel.length; i++) {
+									returnLabel += tempLabel[i];
+							}
+							return returnLabel;
+					}
+			}, {
+					key: 'closeApplication',
+					value: function closeApplication() {
+							navigator.app.exitApp();
+					}
+			}, {
+					key: 'backKeyDown',
+					value: function backKeyDown() {
+							if (this.gameRunning) {
+									this.mainmenuState();
+							} else if (this.startScreenContainer.screenState == 2) {
+									if (this.startScreenContainer.chooseLevelPanel.currentUISection <= 0) {
+											this.startScreenContainer.startState(0);
+									} else {
+											this.startScreenContainer.chooseLevelPanel.onBack();
+									}
+							} else {
+									navigator.app.exitApp();
+							}
+					}
+			}]);
+	
+			return TetraScreen;
 	}(_Screen3.default);
 	
 	exports.default = TetraScreen;
@@ -103802,7 +103804,7 @@
 					_this.playLabel.pivot.x = _this.playLabel.width / 2;
 					_this.playLabel.pivot.y = _this.playLabel.height / 2;
 	
-					_this.playLine.on('mousedown', _this.resetGame.bind(_this)).on('touchstart', _this.resetGame.bind(_this));
+					_this.playLine.on('mouseup', _this.resetGame.bind(_this)).on('touchend', _this.resetGame.bind(_this));
 	
 					_this.backButton = new _UIButton2.default(_config2.default.colors.red2, './assets/images/icons/icons8-close-100.png', _config2.default.colors.white);
 					_this.backButton.onClick.add(function () {
@@ -104768,18 +104770,110 @@
 	                // let center = new PIXI.Graphics().beginFill(0xFF00FF).drawCircle(0, 0, 20)
 	                // this.sectionsView.addChild(center)
 	
+	                _this.interactive = true;
+	                _this.on('mousemove', _this.onTouchMove.bind(_this)).on('touchmove', _this.onTouchMove.bind(_this));
+	                _this.on('mousedown', _this.onTouchStart.bind(_this)).on('touchstart', _this.onTouchStart.bind(_this));
+	                _this.on('mouseup', _this.onTouchEnd.bind(_this)).on('touchend', _this.onTouchEnd.bind(_this)).on('mouseupoutside', _this.onTouchEnd.bind(_this)).on('touchendoutside', _this.onTouchEnd.bind(_this));
+	
+	                _this.isHolding = false;
+	                _this.disableClickCounter = 0;
+	                _this.originTouch = { x: -9999, y: -9999 };
+	                _this.currentTouch = { x: -9999, y: -9999 };
+	                _this.endTouch = { x: -9999, y: -9999 };
+	                _this.dragSpeed = { x: 0, y: 0 };
+	
+	                _this.draggables = [_this.sectionsView, _this.tiersView, _this.levelsView];
+	                _this.draggables.forEach(function (element) {
+	                        element.dragPosition = { x: element.x, y: element.y };
+	                });
+	
+	                _this.resetDrags();
+	                // this.center1 = new PIXI.Graphics().beginFill(0xFF00FF).drawCircle(0, 0, 20)
+	                // this.levelsContainer.addChild(this.center1)
+	
+	                // this.center2 = new PIXI.Graphics().beginFill(0xF00FFF).drawCircle(0, 0, 20)
+	                // this.levelsContainer.addChild(this.center2)
+	
 	                return _this;
 	        }
 	
 	        _createClass(LevelSelectContainer, [{
+	                key: 'resetDrags',
+	                value: function resetDrags() {
+	                        this.draggables.forEach(function (element) {
+	                                element.y = 0;
+	                                element.dragPosition = { x: element.x, y: element.y };
+	                        });
+	                }
+	        }, {
+	                key: 'updateDrag',
+	                value: function updateDrag(element) {
+	                        //console.log(this.newContainer.getGlobalPosition())
+	                        var cElementH = element.height; //- this.newContainer.y;
+	                        var cCanvasH = this.mainCanvas.height - this.newContainer.getGlobalPosition().y; //+ this.newContainer.y;
+	                        if (cElementH > cCanvasH) {
+	                                element.y = element.dragPosition.y + this.dragSpeed.y;
+	                                element.y = Math.min(element.y, 0);
+	                                element.y = Math.max(element.y, cCanvasH - cElementH - 40);
+	                        } else {
+	                                element.y = 0;
+	                        }
+	                }
+	        }, {
+	                key: 'onTouchStart',
+	                value: function onTouchStart(evt) {
+	                        this.originTouch.x = evt.data.global.x;
+	                        this.originTouch.y = evt.data.global.y;
+	                        this.isHolding = true;
+	
+	                        this.draggables.forEach(function (element) {
+	                                element.dragPosition = { x: element.x, y: element.y };
+	                        });
+	                }
+	        }, {
+	                key: 'onTouchEnd',
+	                value: function onTouchEnd(evt) {
+	                        //console.log(evt)
+	                        this.endTouch.x = evt.data.global.x;
+	                        this.endTouch.y = evt.data.global.y;
+	
+	                        this.levelsView.dragPosition = { x: this.levelsView.x, y: this.levelsView.y };
+	                        this.dragSpeed = { x: 0, y: 0 };
+	
+	                        this.isHolding = false;
+	                }
+	        }, {
+	                key: 'onTouchMove',
+	                value: function onTouchMove(evt) {
+	                        if (!this.isHolding) {
+	                                return;
+	                        }
+	
+	                        this.currentTouch.x = evt.data.global.x;
+	                        this.currentTouch.y = evt.data.global.y;
+	
+	                        if (_utils2.default.distance(this.originTouch.x, this.originTouch.y, this.currentTouch.x, this.currentTouch.y) > 20) {
+	                                this.disableClickCounter = 5;
+	
+	                                this.dragSpeed.x = this.originTouch.x - this.currentTouch.x;
+	                                this.dragSpeed.y = this.currentTouch.y - this.originTouch.y;
+	                        } else {
+	                                this.dragSpeed = { x: 0, y: 0 };
+	                        }
+	                }
+	        }, {
 	                key: 'onBack',
 	                value: function onBack() {
+	                        if (this.disableClickCounter > 0) {
+	                                return;
+	                        }
 	                        if (this.currentUISection > 0) {
 	                                this.currentUISection--;
 	                        } else {
 	                                //ouch
 	                                this.gameScreen.startScreenContainer.startState(0);
 	                                this.currentUISection = 0;
+	                                this.resetDrags();
 	                        }
 	                }
 	        }, {
@@ -104793,7 +104887,6 @@
 	                        for (var index = 0; index < this.sections.length; index++) {
 	                                var _section = this.sections[index];
 	
-	                                console.log("BUIDDDD0, section", _section);
 	                                var navButton = this.buildSectionButton(_section);
 	                                this.sectionsView.addChild(navButton);
 	
@@ -104801,11 +104894,8 @@
 	
 	                                navButton.interactive = true;
 	                                navButton.buttonMode = true;
-	                                //navButton.on('mousedown', this.updateTier.bind(this, index)).on('touchstart', this.updateTier.bind(this, index));
-	
 	                                this.navButtons.push(navButton);
-	                                navButton.on('mousedown', this.openSection.bind(this, _section)).on('touchstart', this.openSection.bind(this, _section));
-	                                //this.sectionButtons.push(navButton);
+	                                navButton.on('mouseup', this.openSection.bind(this, _section)).on('touchend', this.openSection.bind(this, _section));
 	                        }
 	                }
 	        }, {
@@ -104828,7 +104918,7 @@
 	                        secButton.buttonMode = true;
 	                        secButton.interactive = true;
 	
-	                        secButton.on('mousedown', this.onBack.bind(this)).on('touchstart', this.onBack.bind(this));
+	                        secButton.on('mouseup', this.onBack.bind(this)).on('touchend', this.onBack.bind(this));
 	
 	                        return secButton;
 	                }
@@ -104873,11 +104963,10 @@
 	        }, {
 	                key: 'buildLevelTierButton',
 	                value: function buildLevelTierButton(level, index) {
-	                        //let levelTierButton = new PIXI.Graphics().beginFill(window.colorsOrder[index]).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
 	
 	                        var levelTierButton = PIXI.Sprite.fromImage('./assets/images/largeCard.png'); //new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
 	                        levelTierButton.scale.set(this.unscaledCardSize.width / levelTierButton.width);
-	                        levelTierButton.tint = window.colorsOrder[index];
+	                        levelTierButton.tint = level.customColor ? level.customColor : 0x333333;
 	
 	                        var label = new PIXI.Text(level.name, { font: '24px', fill: 0xFFFFFF, align: 'center', fontWeight: '200', fontFamily: 'round_popregular' });
 	                        label.pivot.x = label.width / 2;
@@ -104891,11 +104980,14 @@
 	        }, {
 	                key: 'openSection',
 	                value: function openSection(section) {
+	                        if (this.disableClickCounter > 0) {
+	                                return;
+	                        }
 	                        this.currentUISection = 1;
 	                        if (this.currentSection == section) {
 	                                return;
 	                        }
-	
+	                        this.resetDrags();
 	                        console.log("section", section);
 	                        this.currentSection = section;
 	                        this.sectionButtons.forEach(function (element) {
@@ -104919,7 +105011,7 @@
 	
 	                                levelTierButton.interactive = true;
 	                                levelTierButton.buttonMode = true;
-	                                levelTierButton.on('mousedown', this.openLevelTier.bind(this, level.data)).on('touchstart', this.openLevelTier.bind(this, level.data));
+	                                levelTierButton.on('mouseup', this.openLevelTier.bind(this, level.data)).on('touchend', this.openLevelTier.bind(this, level.data));
 	                                this.sectionButtons.push(levelTierButton);
 	                        }
 	                        this.resize(null, true);
@@ -104929,11 +105021,15 @@
 	                value: function openLevelTier(tier) {
 	                        var _this2 = this;
 	
+	                        if (this.disableClickCounter > 0) {
+	                                return;
+	                        }
 	                        this.currentUISection = 2;
 	                        if (this.currentTier == tier) {
 	                                return;
 	                        }
 	                        this.currentTier = tier;
+	                        this.resetDrags();
 	
 	                        this.levelCards.forEach(function (element) {
 	                                if (element.parent) {
@@ -104963,7 +105059,12 @@
 	                                //element.x = index * config.width - this.currentUISection* config.width;
 	                                element.x = _utils2.default.lerp(element.x, index * this.mainCanvas.width - this.currentUISection * this.mainCanvas.width, 0.5);
 	                        }
+	
 	                        this.centerLevels();
+	
+	                        if (!this.isHolding && this.disableClickCounter > 0) {
+	                                this.disableClickCounter--;
+	                        }
 	                }
 	        }, {
 	                key: 'addCard',
@@ -104984,8 +105085,13 @@
 	                        card.removeChild(card.background);
 	
 	                        var label = new PIXI.Text(data.levelName, { font: '30px', fill: 0xFFFFFF, align: 'center', fontWeight: '200', fontFamily: 'round_popregular' });
+	
+	                        if (label.width > levelCard.width * 0.8) {
+	                                label.scale.set(levelCard.width / label.width * 0.8);
+	                        }
+	
 	                        label.x = levelCard.width / 2 - label.width / 2;
-	                        label.y = levelCard.height - label.height * 1.5;
+	                        label.y = levelCard.height * 0.8;
 	
 	                        this.gameScreen.resizeToFitAR(this.unscaledCardSize, card);
 	                        _utils2.default.centerObject(card, levelCard);
@@ -104994,7 +105100,7 @@
 	                        levelCard.addChild(card);
 	                        levelCard.addChild(label);
 	
-	                        levelCard.on('mousedown', this.selectLevel.bind(this, data)).on('touchstart', this.selectLevel.bind(this, data));
+	                        levelCard.on('mouseup', this.selectLevel.bind(this, data)).on('touchend', this.selectLevel.bind(this, data));
 	                        levelCard.interactive = true;
 	                        levelCard.buttonMode = true;
 	
@@ -105016,9 +105122,12 @@
 	        }, {
 	                key: 'selectLevel',
 	                value: function selectLevel(data) {
-	                        console.log(data);
+	                        if (this.disableClickCounter > 0) {
+	                                return;
+	                        }
 	                        this.gameScreen.startNewLevel(data, false);
 	                        this.currentUISection = 0;
+	                        this.resetDrags();
 	                        this.resize(null, true);
 	                }
 	        }, {
@@ -105084,7 +105193,7 @@
 	                        var globalPos = this.toLocal({ x: 0, y: this.y });
 	                        this.mainCanvas.position = globalPos;
 	                        this.mainCanvas.width = this.currentResolution.width;
-	                        this.mainCanvas.height = this.currentResolution.height - this.y;
+	                        this.mainCanvas.height = this.currentResolution.height;
 	
 	                        this.centerLevels();
 	
@@ -105096,6 +105205,13 @@
 	                        this.drawGrid(this.sectionButtons, 20);
 	                        this.drawGrid(this.navButtons, 20);
 	                        this.drawGrid(this.levelCards, 20);
+	
+	                        this.updateDrag(this.draggables[this.currentUISection]);
+	                        // if(this.currentUISection == 2){
+	                        //     this.updateDrag(this.levelsView);
+	
+	                        // }
+	
 	                        this.levelsView.pivot.x = this.mainCanvas.width / 2;
 	                        this.levelsView.x = this.mainCanvas.x + this.mainCanvas.width;
 	

@@ -74,7 +74,7 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.playLabel.pivot.x = this.playLabel.width / 2
 		this.playLabel.pivot.y = this.playLabel.height / 2
 
-		this.playLine.on('mousedown', this.resetGame.bind(this)).on('touchstart', this.resetGame.bind(this));
+		this.playLine.on('mouseup', this.resetGame.bind(this)).on('touchend', this.resetGame.bind(this));
 
 
 
