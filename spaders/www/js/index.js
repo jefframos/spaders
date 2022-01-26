@@ -42995,7 +42995,7 @@
 	window.GAME_DATA = new _GameData2.default();
 	
 	window.ENEMIES = {
-		list: [{ isBlock: false, color: _config2.default.colors.blue, life: 0 }, { isBlock: false, color: _config2.default.colors.red, life: 1 }, { isBlock: false, color: _config2.default.colors.yellow, life: 2 }, { isBlock: false, color: _config2.default.colors.green, life: 3 }, { isBlock: false, color: _config2.default.colors.blue2, life: 4 }, { isBlock: false, color: _config2.default.colors.pink, life: 5 }, { isBlock: false, color: _config2.default.colors.red2, life: 6 }, { isBlock: false, color: _config2.default.colors.purple, life: 7 }, { isBlock: false, color: _config2.default.colors.white, life: 8 }, { isBlock: false, color: _config2.default.colors.dark, life: 9 }, { isBlock: true, color: _config2.default.colors.block }]
+		list: [{ isBlock: false, color: _config2.default.colors.blue, life: 0 }, { isBlock: false, color: _config2.default.colors.red, life: 1 }, { isBlock: false, color: _config2.default.colors.yellow, life: 2 }, { isBlock: false, color: _config2.default.colors.green, life: 3 }, { isBlock: false, color: _config2.default.colors.blue2, life: 4 }, { isBlock: false, color: _config2.default.colors.pink, life: 5 }, { isBlock: false, color: _config2.default.colors.red2, life: 6 }, { isBlock: false, color: _config2.default.colors.purple, life: 7 }, { isBlock: false, color: _config2.default.colors.white, life: 8 }, { isBlock: false, color: _config2.default.colors.dark, life: 9 }, { isBlock: false, color: _config2.default.colors.grey, life: 9.1 }, { isBlock: false, color: _config2.default.colors.whiteSkin, life: 9.2 }, { isBlock: false, color: _config2.default.colors.darkSkin, life: 9.3 }, { isBlock: true, color: _config2.default.colors.block }]
 	};
 	window.ACTION_ZONES = [{ label: "TOP_LEFT", pos: { x: 0, y: 0 }, dir: { x: -1, y: -1 } }, { label: "TOP_CENTER", pos: { x: 1, y: 0 }, dir: { x: 0, y: -1 } }, { label: "TOP_RIGHT", pos: { x: 2, y: 0 }, dir: { x: 1, y: -1 } }, { label: "CENTER_RIGHT", pos: { x: 2, y: 1 }, dir: { x: 1, y: 0 } }, { label: "BOTTOM_RIGHT", pos: { x: 2, y: 2 }, dir: { x: 1, y: 1 } }, { label: "BOTTOM_CENTER", pos: { x: 1, y: 2 }, dir: { x: 0, y: 1 } }, { label: "BOTTOM_LEFT", pos: { x: 0, y: 2 }, dir: { x: -1, y: 1 } }, { label: "CENTER_LEFT", pos: { x: 0, y: 1 }, dir: { x: -1, y: 0 } }];
 	
@@ -43081,7 +43081,7 @@
 		window.levelSections = PIXI.loader.resources[jsonPath + "levelSections.json"].data;
 	
 		window.levelSections.sections.forEach(function (section) {
-			console.log('./assets/' + section.imageSrc);
+			console.log(section);
 			PIXI.loader.add('./assets/' + section.imageSrc);
 			section.levels.forEach(function (level) {
 				PIXI.loader.add(jsonPath + level.dataPath);
@@ -43138,12 +43138,25 @@
 				var res = PIXI.loader.resources[jsonPath + level.dataPath].data;
 	
 				var sectionLevels = [];
+	
+				res.properties.forEach(function (property) {
+					if (property.name == "sectionName") {
+						//console.log(property.value)
+						level.name = property.value;
+					}
+	
+					if (property.name == "iconURL") {
+						level.iconURL = property.value;
+						console.log(property.value, level);
+					}
+				});
 				res.layers.forEach(function (layer) {
+	
 					var data = extractData(layer);
 	
 					if (data) {
 						sectionLevels.push(data);
-						console.log(data);
+						//console.log(data)
 					}
 				});
 				level.data = sectionLevels;
@@ -43761,7 +43774,10 @@
 			dark: 0x333333,
 			purple: 0x8957c7,
 			white: 0xDDDDDD,
-			block: 0x111111
+			block: 0x111111,
+			grey: 0x888888,
+			whiteSkin: 0xceb8ad,
+			darkSkin: 0x4f382a
 		},
 		rendererOptions: {
 			//pixi rendererOptions
@@ -60091,7 +60107,7 @@
 		}, {
 			key: 'updateSprite',
 			value: function updateSprite(level) {
-				this.enemySprite.setTexture(PIXI.Texture.fromImage(window.IMAGE_DATA.enemyImages[level]));
+				this.enemySprite.setTexture(PIXI.Texture.fromImage(window.IMAGE_DATA.enemyImages[Math.floor(level)]));
 			}
 		}, {
 			key: 'updateCard',
@@ -104804,6 +104820,7 @@
 	                                element.y = 0;
 	                                element.dragPosition = { x: element.x, y: element.y };
 	                        });
+	                        //this.dragSpeed = { x: 0, y: 0 }
 	                }
 	        }, {
 	                key: 'updateDrag',
@@ -104818,6 +104835,10 @@
 	                        } else {
 	                                element.y = 0;
 	                        }
+	
+	                        if (!this.isHolding) {
+	                                //this.dragSpeed.y = utils.lerp(this.dragSpeed.y, 0, 0.2)
+	                        }
 	                }
 	        }, {
 	                key: 'onTouchStart',
@@ -104826,6 +104847,7 @@
 	                        this.originTouch.y = evt.data.global.y;
 	                        this.isHolding = true;
 	
+	                        this.dragSpeed = { x: 0, y: 0 };
 	                        this.draggables.forEach(function (element) {
 	                                element.dragPosition = { x: element.x, y: element.y };
 	                        });
@@ -104837,10 +104859,10 @@
 	                        this.endTouch.x = evt.data.global.x;
 	                        this.endTouch.y = evt.data.global.y;
 	
-	                        this.levelsView.dragPosition = { x: this.levelsView.x, y: this.levelsView.y };
-	                        this.dragSpeed = { x: 0, y: 0 };
+	                        this.levelsView.dragPosition = { x: this.levelsView.x, y: this.levelsView.y
+	                                //this.dragSpeed = { x: 0, y: 0 }
 	
-	                        this.isHolding = false;
+	                        };this.isHolding = false;
 	                }
 	        }, {
 	                key: 'onTouchMove',
@@ -104968,13 +104990,42 @@
 	                        levelTierButton.scale.set(this.unscaledCardSize.width / levelTierButton.width);
 	                        levelTierButton.tint = level.customColor ? level.customColor : 0x333333;
 	
-	                        var label = new PIXI.Text(level.name, { font: '24px', fill: 0xFFFFFF, align: 'center', fontWeight: '200', fontFamily: 'round_popregular' });
+	                        console.log(level.data[0]);
+	
+	                        var dataFirstLevel = level.data[0];
+	                        var pieceSize = 16;
+	                        if (dataFirstLevel.pieces[0].length >= dataFirstLevel.pieces.length) {
+	                                pieceSize = this.unscaledCardSize.width / dataFirstLevel.pieces[0].length + 2;
+	                        } else {
+	                                pieceSize = this.unscaledCardSize.height / dataFirstLevel.pieces.length + 2;
+	                        }
+	
+	                        var secButtonMask = PIXI.Sprite.fromImage('./assets/images/largeCard.png');
+	                        var innerBorder = PIXI.Sprite.fromImage('./assets/images/innerBorder.png');
+	
+	                        var icon = this.gameScreen.generateImage(dataFirstLevel.pieces, pieceSize, 0);
+	                        //icon.pivot.x = icon.width / 2
+	                        //icon.pivot.y = icon.height / 2
+	                        icon.x = pieceSize; //this.unscaledCardSize.width / 2
+	                        icon.y = 0; //this.unscaledCardSize.width / 2
+	                        icon.scale.set(secButtonMask.width / icon.width);
+	                        //icon.y = levelTierButton.height / 2
+	                        icon.mask = secButtonMask;
+	
+	                        var label = new PIXI.Text(level.name, {
+	                                font: '24px', fill: 0xFFFFFF, align: 'center', fontWeight: '200', fontFamily: 'round_popregular',
+	                                stroke: 0x000000,
+	                                strokeThickness: 12
+	                        });
 	                        label.pivot.x = label.width / 2;
 	                        label.pivot.y = label.height / 2;
 	                        label.x = levelTierButton.width / 2 / levelTierButton.scale.x;
 	                        label.y = levelTierButton.height / 2 / levelTierButton.scale.y;
 	                        levelTierButton.label = label;
+	                        levelTierButton.addChild(icon);
+	                        levelTierButton.addChild(secButtonMask);
 	                        levelTierButton.addChild(label);
+	                        levelTierButton.addChild(innerBorder);
 	                        return levelTierButton;
 	                }
 	        }, {
@@ -105090,8 +105141,10 @@
 	                                label.scale.set(levelCard.width / label.width * 0.8);
 	                        }
 	
+	                        label.pivot.y = label.height / 2;
+	
 	                        label.x = levelCard.width / 2 - label.width / 2;
-	                        label.y = levelCard.height * 0.8;
+	                        label.y = levelCard.height * 0.85;
 	
 	                        this.gameScreen.resizeToFitAR(this.unscaledCardSize, card);
 	                        _utils2.default.centerObject(card, levelCard);
@@ -105135,7 +105188,7 @@
 	                value: function drawGrid(elements) {
 	                        var margin = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
 	
-	                        var maxPerLine = Math.floor(this.mainCanvas.width / (this.unscaledCardSize.width + margin * 2)) + 1;
+	                        var maxPerLine = Math.floor(this.mainCanvas.width / (this.unscaledCardSize.width + margin * 2.5)) + 1;
 	                        var fullWidth = this.mainCanvas.width - margin * 2;
 	                        var distance = fullWidth / maxPerLine;
 	                        var line = -1;

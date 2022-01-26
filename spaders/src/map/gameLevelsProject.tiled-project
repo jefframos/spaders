@@ -1,0 +1,11 @@
+{
+    "automappingRulesFile": "",
+    "commands": [
+    ],
+    "extensionsPath": "extensions",
+    "folders": [
+        "videogames",
+        "how-to-play"
+    ],
+    "objectTypesFile": ""
+}

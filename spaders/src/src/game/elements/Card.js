@@ -149,7 +149,7 @@ export default class Card extends PIXI.Container {
 		return null;
 	}
 	updateSprite(level) {
-		this.enemySprite.setTexture( PIXI.Texture.fromImage(window.IMAGE_DATA.enemyImages[level]));
+		this.enemySprite.setTexture( PIXI.Texture.fromImage(window.IMAGE_DATA.enemyImages[Math.floor(level)]));
 	}
 	updateCard(isCurrent = false) {
 

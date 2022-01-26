@@ -2,21 +2,21 @@
     "sections": [
         {
             "color": "0xDDDDDD",
-            "name": "How to\nPlay",
+            "name": "Level 1",
             "displayName": "Video Game History",
             "imageSrc": "levels/consoles3.png",
             "levels": [
                 {
-                    "name": "Small",
-                    "dataPath": "how-to-play/how-to-play-small.json"
+                    "name": "---",
+                    "dataPath": "how-to-play/creatures.json"
                 },
                 {
-                    "name": "Medium",
-                    "dataPath": "how-to-play/how-to-play-medium.json"
+                    "name": "---",
+                    "dataPath": "how-to-play/people-set-1.json"
                 },
                 {
-                    "name": "Large",
-                    "dataPath": "how-to-play/how-to-play-large.json"
+                    "name": "---",
+                    "dataPath": "how-to-play/things.json"
                 }
             ]
         },

@@ -1,0 +1,143 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "how-to-play/how-to-play-medium.tmx",
+    "expandedProjectPaths": [
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "D:/Projects/tetra/map/levels.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 276.66666666666663,
+                "y": 404
+            }
+        },
+        "D:/Projects/tetra/map/spadersTileset.tsx": {
+            "scaleInDock": 0.75,
+            "scaleInEditor": 1
+        },
+        "how-to-play/creatures.tmx": {
+            "scale": 1.0512073863636362,
+            "selectedLayer": -1,
+            "viewCenter": {
+                "x": 352.4518613607189,
+                "y": 384.31997837983926
+            }
+        },
+        "how-to-play/how-to-play-medium.tmx": {
+            "scale": 1.0512073863636362,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 352.92750489831775,
+                "y": 384.31997837983926
+            }
+        },
+        "how-to-play/how-to-play-small.tmx": {
+            "scale": 0.8201171875,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 352.9983329364134,
+                "y": 384.09145034532025
+            }
+        },
+        "how-to-play/people-set-1.tmx": {
+            "scale": 0.8201171875,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 289.59276018099547,
+                "y": 386.5301262205287
+            }
+        },
+        "how-to-play/spadersTileset.tsx": {
+            "scaleInDock": 1
+        },
+        "levels.tmx": {
+            "scale": 0.9681423611111112,
+            "selectedLayer": 7,
+            "viewCenter": {
+                "x": 407.9978481126154,
+                "y": 364.6157984398816
+            }
+        },
+        "levels2.tmx": {
+            "scale": 1.0266927083333333,
+            "selectedLayer": 12,
+            "viewCenter": {
+                "x": 320.4464172479392,
+                "y": 384.73050095117316
+            }
+        },
+        "levels3.tmx": {
+            "scale": 1.0266927083333333,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 320.4464172479392,
+                "y": 384.73050095117316
+            }
+        },
+        "movies1.tmx": {
+            "scale": 1.0266927083333333,
+            "selectedLayer": 5,
+            "viewCenter": {
+                "x": 320.4464172479392,
+                "y": 383.7564996829423
+            }
+        },
+        "spadersTileset.tsx": {
+            "scaleInDock": 1
+        },
+        "tilesets/spadersTileset.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "videogames/levels.tmx": {
+            "scale": 0.8201171875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 319.46653965229814,
+                "y": 384.7011193141224
+            }
+        },
+        "videogames/spadersTileset.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "last.exportedFilePath": "E:/projects/spaders/spaders/www/data/how-to-play",
+    "last.externalTilesetPath": "E:/projects/spaders/spaders/src/map/tilesets",
+    "last.imagePath": "D:/Projects/tetra/map",
+    "map.height": 10,
+    "map.lastUsedExportFilter": "JSON map files (*.json)",
+    "map.lastUsedFormat": "tmx",
+    "map.width": 7,
+    "openFiles": [
+        "how-to-play/how-to-play-small.tmx",
+        "how-to-play/how-to-play-medium.tmx"
+    ],
+    "project": "gameLevelsProject.tiled-project",
+    "property.type": "string",
+    "recentFiles": [
+        "how-to-play/how-to-play-small.tmx",
+        "how-to-play/how-to-play-medium.tmx",
+        "videogames/levels.tmx",
+        "tilesets/spadersTileset.tsx",
+        "videogames/spadersTileset.tsx",
+        "movies1.tmx",
+        "levels3.tmx",
+        "levels2.tmx",
+        "levels.tmx",
+        "D:/Projects/tetra/map/levels.tmx",
+        "D:/Projects/tetra/map/spadersTileset.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 64,
+        "width": 64
+    }
+}

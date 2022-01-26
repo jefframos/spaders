@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="11" height="12" tilewidth="64" tileheight="64" infinite="0" nextlayerid="71" nextobjectid="1">
+ <editorsettings>
+  <export target="../../../www/data/how-to-play/creatures.json" format="json"/>
+ </editorsettings>
+ <properties>
+  <property name="description" value="no description here"/>
+  <property name="sectionName" value="Creatures"/>
+ </properties>
+ <tileset firstgid="1" source="../tilesets/spadersTileset.tsx"/>
+ <layer id="40" name="Swamp Monster" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="8"/>
+   <property name="j" type="int" value="9"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,4,4,4,0,0,0,0,0,0,
+0,0,4,2,4,4,0,0,0,0,0,
+0,9,4,4,2,4,0,0,0,0,0,
+0,0,0,4,4,4,4,0,0,0,0,
+0,4,0,9,0,4,4,0,0,0,0,
+0,0,4,4,4,4,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="54" name="Ghost" width="11" height="12" visible="0" locked="1">
+  <properties>
+   <property name="i" type="int" value="7"/>
+   <property name="j" type="int" value="7"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,1,1,1,0,0,0,0,0,0,
+0,1,10,1,10,1,0,0,0,0,0,
+0,1,10,1,10,1,0,0,0,0,0,
+0,1,1,1,1,1,0,0,0,0,0,
+0,1,1,1,1,1,0,0,0,0,0,
+0,1,0,1,0,1,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="57" name="Dark Creature 1" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="8"/>
+   <property name="j" type="int" value="8"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,10,10,0,0,0,0,0,0,
+0,0,10,9,10,9,0,0,0,0,0,
+0,0,10,10,10,10,0,0,0,0,0,
+0,10,10,10,10,10,10,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="56" name="Dark Creature 2" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="8"/>
+   <property name="j" type="int" value="8"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,10,10,10,0,0,0,0,0,
+0,0,10,9,10,9,0,0,0,0,0,
+0,0,10,10,10,10,0,0,0,0,0,
+0,10,10,10,10,10,10,0,0,0,0,
+0,10,10,10,10,10,10,0,0,0,0,
+10,10,10,10,10,10,10,10,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="58" name="Skelleton" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="7"/>
+   <property name="j" type="int" value="9"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,11,11,11,0,0,0,0,0,
+0,0,11,10,11,10,0,0,0,0,0,
+0,0,0,11,11,11,0,0,0,0,0,
+0,0,9,11,9,0,0,0,0,0,0,
+0,11,11,11,11,11,0,0,0,0,0,
+11,0,9,11,9,0,11,0,0,0,0,
+0,0,11,11,11,0,0,0,0,0,0,
+0,0,11,0,11,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="59" name="Alien" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="7"/>
+   <property name="j" type="int" value="9"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,4,4,4,0,0,0,0,0,
+0,0,4,3,4,3,0,0,0,0,0,
+0,0,0,4,4,4,0,0,0,0,0,
+0,0,4,4,4,0,0,0,0,0,0,
+0,4,4,4,4,4,0,0,0,0,0,
+4,0,4,4,4,0,4,0,0,0,0,
+0,0,4,4,4,0,0,0,0,0,0,
+0,0,4,0,4,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="69" name="Devil" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="7"/>
+   <property name="j" type="int" value="9"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,2,0,2,0,0,0,0,0,0,
+0,2,0,0,0,2,0,0,0,0,0,
+0,0,2,2,2,0,0,0,0,0,0,
+0,2,3,2,3,2,0,0,0,0,0,
+0,0,2,2,2,0,0,0,0,0,0,
+0,2,2,2,2,2,0,0,0,0,0,
+2,0,2,2,2,0,2,0,0,0,0,
+0,0,2,0,2,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="60" name="Tiger" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="10"/>
+   <property name="j" type="int" value="8"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,3,0,0,0,7,0,0,7,0,
+0,3,0,0,0,0,7,7,7,7,0,
+3,0,0,3,10,3,7,10,7,10,0,
+3,3,10,3,10,3,7,7,7,7,0,
+0,3,10,3,3,3,3,7,7,0,0,
+0,3,3,3,3,3,3,3,0,0,0,
+0,3,0,3,0,3,0,0,3,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="62" name="Dog" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="10"/>
+   <property name="j" type="int" value="8"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,1,0,0,0,0,0,0,0,0,
+0,1,0,0,0,0,1,0,0,0,0,
+0,1,0,0,0,0,1,9,1,0,0,
+0,0,1,1,1,1,1,1,1,0,0,
+0,0,0,1,1,1,1,0,0,0,0,
+0,0,0,1,0,0,1,0,0,0,0,
+0,0,0,1,0,0,1,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="70" name="Rat" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="8"/>
+   <property name="j" type="int" value="6"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+13,0,0,0,0,7,0,0,0,0,0,
+0,13,0,7,7,7,10,7,0,0,0,
+0,0,13,7,7,7,7,0,0,0,0,
+0,0,0,7,0,7,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="61" name="Spider" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="7"/>
+   <property name="j" type="int" value="9"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,10,0,0,0,10,0,0,0,0,0,
+0,10,0,10,0,10,0,0,0,0,0,
+10,0,9,10,9,0,10,0,0,0,0,
+0,10,10,10,10,10,0,0,0,0,0,
+0,0,10,10,10,0,0,0,0,0,0,
+10,10,10,2,10,10,10,0,0,0,0,
+0,0,10,10,10,0,0,0,0,0,0,
+0,10,0,0,0,10,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+</map>

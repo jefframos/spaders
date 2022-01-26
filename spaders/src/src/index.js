@@ -33,6 +33,9 @@ window.ENEMIES = {
 		{ isBlock: false, color: config.colors.purple, life: 7 },
 		{ isBlock: false, color: config.colors.white, life: 8 },
 		{ isBlock: false, color: config.colors.dark, life: 9 },
+		{ isBlock: false, color: config.colors.grey, life: 9.1 },
+		{ isBlock: false, color: config.colors.whiteSkin, life: 9.2 },
+		{ isBlock: false, color: config.colors.darkSkin, life: 9.3 },
 		{ isBlock: true, color: config.colors.block }
 	]
 }
@@ -111,21 +114,21 @@ window.IMAGE_DATA.enemyBlockImages.forEach(element => {
 window.IMAGE_DATA.enemyImages.forEach(element => {
 	PIXI.loader.add(element)
 });
-window.SAVE_DATA = function(data, filename, type){
-	var file = new Blob([data], {type: type});
+window.SAVE_DATA = function (data, filename, type) {
+	var file = new Blob([data], { type: type });
 	if (window.navigator.msSaveOrOpenBlob) // IE10+
 		window.navigator.msSaveOrOpenBlob(file, filename);
 	else { // Others
 		var a = document.createElement("a"),
-				url = URL.createObjectURL(file);
+			url = URL.createObjectURL(file);
 		a.href = url;
 		a.download = filename;
 		document.body.appendChild(a);
 		a.click();
-		setTimeout(function() {
+		setTimeout(function () {
 			document.body.removeChild(a);
-			window.URL.revokeObjectURL(url);  
-		}, 0); 
+			window.URL.revokeObjectURL(url);
+		}, 0);
 	}
 
 }
@@ -174,7 +177,7 @@ function loadJsons() {
 	window.levelSections = PIXI.loader.resources[jsonPath + "levelSections.json"].data
 
 	window.levelSections.sections.forEach(section => {
-		console.log('./assets/' + section.imageSrc)
+		console.log(section)
 		PIXI.loader.add('./assets/' + section.imageSrc)
 		section.levels.forEach(level => {
 			PIXI.loader.add(jsonPath + level.dataPath)
@@ -232,16 +235,30 @@ function configGame() {
 	window.levelSections.sections.forEach(section => {
 
 		section.levels.forEach(level => {
-			
+
 			let res = PIXI.loader.resources[jsonPath + level.dataPath].data
-			
+
 			let sectionLevels = []
+
+			res.properties.forEach(property => {
+				if (property.name == "sectionName") {
+					//console.log(property.value)
+					level.name = property.value;
+				}
+
+				if (property.name == "iconURL") {
+					level.iconURL = property.value;
+					console.log(property.value, level)
+
+				}
+			});
 			res.layers.forEach(layer => {
+
 				let data = extractData(layer);
 
 				if (data) {
 					sectionLevels.push(data);
-					console.log(data)
+					//console.log(data)
 				}
 			});
 			level.data = sectionLevels
@@ -324,10 +341,10 @@ document.addEventListener("deviceready", onDeviceReady, true);
 
 
 window.isCordova = false;
-function onDeviceReady(){
+function onDeviceReady() {
 	window.isCordova = true;
 	document.addEventListener("backbutton", onBackKeyDown, false);
 }
-function onBackKeyDown(){
+function onBackKeyDown() {
 	window.game.screenManager.backKeyDown();
 }

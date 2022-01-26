@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="11" height="12" tilewidth="64" tileheight="64" infinite="0" nextlayerid="71" nextobjectid="1">
+ <editorsettings>
+  <export target="../../../www/data/how-to-play/things.json" format="json"/>
+ </editorsettings>
+ <properties>
+  <property name="description" value="no description here"/>
+  <property name="iconURL" value="sss"/>
+  <property name="sectionName" value="Things"/>
+ </properties>
+ <tileset firstgid="1" source="../tilesets/spadersTileset.tsx"/>
+ <layer id="43" name="Fire Blob" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="7"/>
+   <property name="j" type="int" value="9"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,2,0,0,0,0,0,0,0,
+0,0,8,7,2,0,0,0,0,0,0,
+0,8,7,2,2,2,0,0,0,0,0,
+0,2,10,2,10,2,0,0,0,0,0,
+0,2,2,2,2,8,0,0,0,0,0,
+0,0,8,8,8,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="47" name="Ice Blob" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="7"/>
+   <property name="j" type="int" value="9"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,5,0,0,0,0,0,0,0,
+0,0,1,4,5,0,0,0,0,0,0,
+0,1,4,5,5,5,0,0,0,0,0,
+0,5,10,5,10,5,0,0,0,0,0,
+0,5,5,5,5,1,0,0,0,0,0,
+0,0,1,1,1,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="48" name="Fire Ring" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="6"/>
+   <property name="j" type="int" value="7"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,2,3,2,2,0,0,0,0,0,0,
+0,2,2,7,7,0,0,0,0,0,0,
+0,0,9,9,0,0,0,0,0,0,0,
+0,9,0,0,9,0,0,0,0,0,0,
+0,9,0,0,9,0,0,0,0,0,0,
+0,0,9,9,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="49" name="Ice Ring" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="6"/>
+   <property name="j" type="int" value="7"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,5,4,5,5,0,0,0,0,0,0,
+0,5,5,1,1,0,0,0,0,0,0,
+0,0,9,9,0,0,0,0,0,0,0,
+0,9,0,0,9,0,0,0,0,0,0,
+0,9,0,0,9,0,0,0,0,0,0,
+0,0,9,9,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="50" name="Health Potion" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="7"/>
+   <property name="j" type="int" value="7"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,9,9,10,0,0,0,0,0,0,
+0,0,0,2,0,0,0,0,0,0,0,
+0,0,3,7,2,0,0,0,0,0,0,
+0,3,7,2,2,2,0,0,0,0,0,
+0,2,2,2,2,2,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="51" name="Mana Potion" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="7"/>
+   <property name="j" type="int" value="7"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,9,9,10,0,0,0,0,0,0,
+0,0,0,5,0,0,0,0,0,0,0,
+0,0,4,1,5,0,0,0,0,0,0,
+0,4,1,5,5,5,0,0,0,0,0,
+0,5,5,5,5,5,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="52" name="Heart" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="7"/>
+   <property name="j" type="int" value="9"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,2,2,0,2,2,0,0,0,0,0,
+2,2,2,2,2,9,2,0,0,0,0,
+2,2,2,2,2,2,2,0,0,0,0,
+0,2,2,2,2,2,0,0,0,0,0,
+0,0,2,2,2,0,0,0,0,0,0,
+0,0,0,2,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="55" name="Flower" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="8"/>
+   <property name="j" type="int" value="7"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,2,0,0,0,0,0,
+0,0,2,0,2,3,2,0,0,0,0,
+0,2,3,2,0,2,0,0,0,0,0,
+0,0,2,0,0,4,0,0,0,0,0,
+0,0,4,0,4,0,0,0,0,0,0,
+0,0,0,4,4,0,0,0,0,0,0,
+0,0,0,4,4,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="63" name="Plant" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="8"/>
+   <property name="j" type="int" value="8"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,3,3,0,0,0,0,
+0,0,0,0,3,8,3,0,0,0,0,
+4,0,0,0,4,3,0,0,0,0,0,
+0,4,4,4,4,0,0,0,0,0,0,
+0,0,4,1,4,0,4,0,0,0,0,
+0,4,0,4,4,1,4,4,0,0,0,
+0,0,4,4,4,4,4,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="64" name="Bush" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="7"/>
+   <property name="j" type="int" value="7"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,4,4,4,0,0,0,0,0,0,
+0,4,8,4,4,8,0,0,0,0,0,
+4,4,4,4,4,4,4,0,0,0,0,
+8,4,4,4,8,4,4,0,0,0,0,
+4,4,8,4,4,4,4,0,0,0,0,
+0,4,4,4,4,4,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="65" name="Apple" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="6"/>
+   <property name="j" type="int" value="9"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,4,0,0,0,0,0,0,
+0,0,0,4,0,0,0,0,0,0,0,
+0,2,2,2,2,0,0,0,0,0,0,
+2,2,9,2,2,2,0,0,0,0,0,
+2,9,2,2,2,2,0,0,0,0,0,
+2,2,2,2,2,2,0,0,0,0,0,
+0,2,2,2,2,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="66" name="Cherry" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="8"/>
+   <property name="j" type="int" value="9"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,4,4,0,0,0,0,0,
+0,0,0,4,4,0,0,0,0,0,0,
+0,0,4,0,0,4,0,0,0,0,0,
+0,2,2,0,0,4,0,0,0,0,0,
+2,2,9,2,0,4,0,0,0,0,0,
+0,2,2,0,0,2,2,0,0,0,0,
+0,0,0,0,2,2,9,2,0,0,0,
+0,0,0,0,0,2,2,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="46" name="Cactus" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="6"/>
+   <property name="j" type="int" value="8"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,1,4,0,0,0,0,0,0,0,
+0,0,4,4,0,4,0,0,0,0,0,
+4,0,4,1,4,1,0,0,0,0,0,
+1,4,4,4,0,0,0,0,0,0,0,
+0,0,1,4,0,0,0,0,0,0,0,
+0,0,4,4,0,0,0,0,0,0,0,
+0,0,4,4,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+</map>

@@ -18,6 +18,9 @@ export default {
 		purple: 0x8957c7,
 		white: 0xDDDDDD,
 		block: 0x111111,
+		grey: 0x888888,
+		whiteSkin: 0xceb8ad,
+		darkSkin: 0x4f382a,
 	},
 	rendererOptions: {
 		//pixi rendererOptions

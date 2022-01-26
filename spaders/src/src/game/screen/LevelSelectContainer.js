@@ -115,6 +115,7 @@ export default class LevelSelectContainer extends PIXI.Container {
             element.y = 0;
             element.dragPosition = { x: element.x, y: element.y }
         });
+        //this.dragSpeed = { x: 0, y: 0 }
     }
     updateDrag(element) {
         //console.log(this.newContainer.getGlobalPosition())
@@ -127,12 +128,17 @@ export default class LevelSelectContainer extends PIXI.Container {
         } else {
             element.y = 0;
         }
+
+        if(!this.isHolding){
+            //this.dragSpeed.y = utils.lerp(this.dragSpeed.y, 0, 0.2)
+        }
     }
     onTouchStart(evt) {
         this.originTouch.x = evt.data.global.x;
         this.originTouch.y = evt.data.global.y;
         this.isHolding = true;
 
+        this.dragSpeed = { x: 0, y: 0 }
         this.draggables.forEach(element => {
             element.dragPosition = { x: element.x, y: element.y }
         });
@@ -144,7 +150,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         this.endTouch.y = evt.data.global.y;
 
         this.levelsView.dragPosition = { x: this.levelsView.x, y: this.levelsView.y }
-        this.dragSpeed = { x: 0, y: 0 }
+        //this.dragSpeed = { x: 0, y: 0 }
 
         this.isHolding = false;
     }
@@ -267,13 +273,42 @@ export default class LevelSelectContainer extends PIXI.Container {
         levelTierButton.scale.set(this.unscaledCardSize.width / levelTierButton.width)
         levelTierButton.tint = level.customColor ? level.customColor : 0x333333
 
-        let label = new PIXI.Text(level.name, { font: '24px', fill: 0xFFFFFF, align: 'center', fontWeight: '200', fontFamily: 'round_popregular' });
+        console.log(level.data[0]);
+
+        let dataFirstLevel = level.data[0];
+        let pieceSize = 16;
+        if (dataFirstLevel.pieces[0].length >= dataFirstLevel.pieces.length) {
+            pieceSize = this.unscaledCardSize.width / dataFirstLevel.pieces[0].length + 2;
+        } else {
+            pieceSize = this.unscaledCardSize.height / dataFirstLevel.pieces.length + 2;
+        }
+
+        let secButtonMask = PIXI.Sprite.fromImage('./assets/images/largeCard.png');
+        let innerBorder = PIXI.Sprite.fromImage('./assets/images/innerBorder.png');
+   
+        let icon = this.gameScreen.generateImage(dataFirstLevel.pieces, pieceSize, 0)
+        //icon.pivot.x = icon.width / 2
+        //icon.pivot.y = icon.height / 2
+        icon.x = pieceSize//this.unscaledCardSize.width / 2
+        icon.y = 0//this.unscaledCardSize.width / 2
+        icon.scale.set(secButtonMask.width / icon.width)
+        //icon.y = levelTierButton.height / 2
+        icon.mask = secButtonMask
+
+        let label = new PIXI.Text(level.name, { 
+            font: '24px', fill: 0xFFFFFF, align: 'center', fontWeight: '200', fontFamily: 'round_popregular' ,
+            stroke: 0x000000,
+            strokeThickness: 12
+        });
         label.pivot.x = label.width / 2
         label.pivot.y = label.height / 2
         label.x = levelTierButton.width / 2 / levelTierButton.scale.x
         label.y = levelTierButton.height / 2 / levelTierButton.scale.y
         levelTierButton.label = label;
+        levelTierButton.addChild(icon)
+        levelTierButton.addChild(secButtonMask)
         levelTierButton.addChild(label)
+        levelTierButton.addChild(innerBorder)
         return levelTierButton
     }
     openSection(section) {
@@ -393,8 +428,10 @@ export default class LevelSelectContainer extends PIXI.Container {
             label.scale.set(levelCard.width / label.width * 0.8)
         }
 
+        label.pivot.y = label.height / 2
+
         label.x = levelCard.width / 2 - label.width / 2
-        label.y = levelCard.height * 0.8
+        label.y = levelCard.height * 0.85
 
         this.gameScreen.resizeToFitAR(this.unscaledCardSize, card)
         utils.centerObject(card, levelCard)
@@ -432,7 +469,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         this.resize(null, true)
     }
     drawGrid(elements, margin = 10) {
-        let maxPerLine = Math.floor(this.mainCanvas.width / (this.unscaledCardSize.width + margin * 2)) + 1
+        let maxPerLine = Math.floor(this.mainCanvas.width / (this.unscaledCardSize.width + margin *2.5)) + 1
         let fullWidth = this.mainCanvas.width - margin * 2
         let distance = fullWidth / maxPerLine
         let line = -1
