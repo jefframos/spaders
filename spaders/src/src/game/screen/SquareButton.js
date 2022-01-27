@@ -24,13 +24,13 @@ export default class SquareButton extends PIXI.Container {
             align: 'left',
             fontWeight: '200',
             fontFamily: 'round_popregular',
-            stroke: 0x000000,
-            strokeThickness: 12
+            // stroke: 0x000000,
+            // strokeThickness: 12
         });
         
         
         this.container.addChild(this.squareButtonShape)
-        this.container.addChild(this.buttonMask)
+        //this.container.addChild(this.buttonMask)
         this.container.addChild(this.label)
         this.container.addChild(this.innerBorder)
 
@@ -50,7 +50,7 @@ export default class SquareButton extends PIXI.Container {
         this.label.x = this.squareButtonShape.width / 2 // this.container.scale.x
         this.label.y = this.squareButtonShape.height * 0.9// this.container.scale.y
     }
-    updateIcon(graphic, offset = {x:0, y:0}){
+    updateIcon(graphic, scale = 0.5, offset = {x:0, y:0}){
         if(this.icon && this.icon.parent){
             this.icon.parent.removeChild(this.icon);
         }
@@ -59,13 +59,13 @@ export default class SquareButton extends PIXI.Container {
         this.icon.x = offset.x
         this.icon.y = offset.y
         if(graphic.width > graphic.height){
-            this.icon.scale.set(this.buttonMask.width / this.icon.width * 1.2);
+            this.icon.scale.set(this.buttonMask.width / this.icon.width * scale);
         }else{
-            this.icon.scale.set(this.buttonMask.height / this.icon.height * 1.2);            
+            this.icon.scale.set(this.buttonMask.height / this.icon.height * scale);            
         }
 
-        this.icon.x = this.squareButtonShape.width / 2 - this.icon.width / 2
-        this.icon.y = this.squareButtonShape.height / 2 - this.icon.height / 2
-        this.icon.mask = this.buttonMask
+        this.icon.x = this.squareButtonShape.width / 2 - this.icon.width / 2 + offset.x
+        this.icon.y = this.squareButtonShape.height / 2 - this.icon.height / 2 + offset.y
+        //this.icon.mask = this.buttonMask
     }
 }

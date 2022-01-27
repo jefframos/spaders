@@ -8,6 +8,10 @@
             "levels": [
                 {
                     "name": "---",
+                    "dataPath": "how-to-play/shapes.json"
+                },
+                {
+                    "name": "---",
                     "dataPath": "how-to-play/creatures.json"
                 },
                 {

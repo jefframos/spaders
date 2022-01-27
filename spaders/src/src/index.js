@@ -17,6 +17,21 @@ import BackgroundEffects from './game/effects/BackgroundEffects';
 import ChooseMatchScreen from './game/screen/ChooseMatchScreen';
 import Pool from './game/core/Pool';
 
+// import FPSMeter from '@thibka/fps-meter';
+
+// function loop() {
+//     requestAnimationFrame(loop);
+//     if (FPSMeter.isOn) FPSMeter.update();
+// }
+
+// function initFPSMeter() {
+//     FPSMeter.start();
+   
+// }
+
+// initFPSMeter();
+// loop();
+
 
 window.COOKIE_MANAGER = new CookieManager();
 window.GAME_DATA = new GameData();

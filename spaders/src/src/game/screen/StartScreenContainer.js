@@ -255,12 +255,12 @@ export default class StartScreenContainer extends PIXI.Container {
 		})
 	}
 	updateStartLabel() {
-		if (Math.random() < 0.2) return;
-		this.logoLabel.text = window.shuffleText(this.currentButtonLabel, true);
-		this.playLabel.text = window.shuffleText("PLAY", true);
-		//this.logoLabel.style.fill = ENEMIES.list[Math.floor(ENEMIES.list.length * Math.random())].color;
+		// if (Math.random() < 0.2) return;
+		// this.logoLabel.text = window.shuffleText(this.currentButtonLabel, true);
+		// this.playLabel.text = window.shuffleText("PLAY", true);
+		// //this.logoLabel.style.fill = ENEMIES.list[Math.floor(ENEMIES.list.length * Math.random())].color;
 
-		this.changeLabelTimer = 0.5;
+		// this.changeLabelTimer = 0.5;
 	}
 	show(force = false, delay = 0) {
 		TweenLite.killTweensOf(this.screenContainer)

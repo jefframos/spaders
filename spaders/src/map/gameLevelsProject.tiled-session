@@ -3,10 +3,11 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "videogames/levels2.tmx",
+    "activeFile": "how-to-play/simple-shapes.tmx",
     "expandedProjectPaths": [
         "videogames",
-        "how-to-play"
+        "how-to-play",
+        "movies"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -34,7 +35,7 @@
             "scale": 1.0512073863636362,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 353.4031484359166,
+                "x": 354.35443551111416,
                 "y": 384.31997837983926
             }
         },
@@ -50,8 +51,16 @@
             "scale": 0.8201171875,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 352.38866396761136,
-                "y": 384.0914503453203
+                "x": 352.9983329364134,
+                "y": 384.09145034532025
+            }
+        },
+        "how-to-play/simple-shapes.tmx": {
+            "scale": 1.0512073863636362,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 352.4518613607189,
+                "y": 384.31997837983926
             }
         },
         "how-to-play/spadersTileset.tsx": {
@@ -88,6 +97,17 @@
                 "x": 320.4464172479392,
                 "y": 384.73050095117316
             }
+        },
+        "movies/movies1.tmx": {
+            "scale": 0.8275390625,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 320.8307764928015,
+                "y": 551.031390134529
+            }
+        },
+        "movies/spadersTileset.tsx": {
+            "scaleInDock": 1
         },
         "movies1.tmx": {
             "scale": 1.0266927083333333,
@@ -135,7 +155,7 @@
             "scaleInEditor": 1
         }
     },
-    "last.exportedFilePath": "E:/projects/spaders/spaders/www/data/videogames",
+    "last.exportedFilePath": "E:/projects/spaders/spaders/www/assets",
     "last.externalTilesetPath": "E:/projects/spaders/spaders/src/map/tilesets",
     "last.imagePath": "D:/Projects/tetra/map",
     "map.height": 10,
@@ -149,7 +169,9 @@
         "how-to-play/things.tmx",
         "videogames/levels.tmx",
         "videogames/levels2.tmx",
-        "videogames/levels3.tmx"
+        "videogames/levels3.tmx",
+        "movies/movies1.tmx",
+        "how-to-play/simple-shapes.tmx"
     ],
     "project": "gameLevelsProject.tiled-project",
     "property.type": "string",
@@ -159,13 +181,13 @@
         "how-to-play/creatures.tmx",
         "how-to-play/things.tmx",
         "videogames/levels.tmx",
-        "videogames/levels3.tmx",
         "videogames/levels2.tmx",
+        "videogames/levels3.tmx",
+        "movies/movies1.tmx",
+        "how-to-play/simple-shapes.tmx",
         "how-to-play/how-to-play-small.tmx",
         "tilesets/spadersTileset.tsx",
-        "videogames/spadersTileset.tsx",
-        "movies1.tmx",
-        "levels3.tmx"
+        "videogames/spadersTileset.tsx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {

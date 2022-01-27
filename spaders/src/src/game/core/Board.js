@@ -1,10 +1,13 @@
+import TweenMax from 'gsap';
 import * as PIXI from 'pixi.js';
+import signals from 'signals';
 import { debug } from 'webpack';
 import config from '../../config';
 import utils from '../../utils';
 export default class Board {
 	constructor(game) {
 
+		window.LABEL_POOL = [];
 		this.game = game;
 		this.cards = [];
 		this.resetBoard();
@@ -13,6 +16,8 @@ export default class Board {
 
 		this.totalCards = 0;
 		this.newGameFinished = true;
+
+		this.onDestroyCard = new signals();
 	}
 	startNewGame() {
 		this.updateNumberOfEntities();
@@ -230,8 +235,8 @@ export default class Board {
 			//timeline.append(TweenMax.to(list[i].currentCard.getArrow(list[i].attackZone.label).scale, 0.1, {x:0, y:0}))
 
 			timeline.append(TweenMax.to(list[i].cardFound, 0.3, {
-				onStartParams: [list[i].currentCard.getArrow(list[i].attackZone.label), list[i].attackZone, (i + 1)],
-				onStart: function (arrow, zone, id) {
+				onStartParams: [list[i].currentCard.getArrow(list[i].attackZone.label), list[i].attackZone, (i + 1), list[i].cardFound],
+				onStart: function (arrow, zone, id, cardFound) {
 					if (arrow) {
 						TweenMax.to(arrow.scale, 0.3, { x: 0, y: 0, ease: Back.easeIn })
 						TweenMax.to(arrow.scale, 0.3, { delay: 0.3, x: 1, y: 1, ease: Back.easeOut })
@@ -243,11 +248,14 @@ export default class Board {
 							x: arrowGlobal.x / config.width,
 							y: arrowGlobal.y / config.height
 						}
-						window.EFFECTS.addShockwave(screenPos.x, screenPos.y, 2);
+
+
+						//window.EFFECTS.addShockwave(screenPos.x, screenPos.y, 2);
 						this.game.addPoints(10 * id);
 						//normal attack
+						this.popAttack(cardFound)
 						this.popLabel(this.game.toLocal(arrowGlobal), "+" + 10 * id, 0, 1, 0.5 + id * 0.15);
-						window.EFFECTS.shakeSplitter(0.2, 3, 0.5);
+
 					}
 				}.bind(this),
 				onCompleteParams: [card, list[i].cardFound],
@@ -258,7 +266,7 @@ export default class Board {
 						arrowGlobal2.y += 30;
 						if (cardFound.crazyMood) {
 							this.game.addPoints(100);
-
+							window.EFFECTS.shake(0.2, 5, 0.3, this.game.gameContainer);
 							//explosion
 							this.popLabel(this.game.toLocal(arrowGlobal2), "+" + 100, 0.25, 0.4, 0.8, 0xE2C756, Elastic.easeOut);
 							this.areaAttack(cardFound, card);
@@ -292,6 +300,7 @@ export default class Board {
 				this.game.addPoints(10 * counterHits);
 
 				this.popLabel(this.game.toLocal(arrowGlobal), "+" + 10 * counterHits + "\nCOUNTER", 0.2, 0, 0.4 + counterHits * 0.1, 0xD81639);
+				window.EFFECTS.shake(0.2, 5, 0.3, this.game.gameContainer);
 				// this.popLabel(arrowGlobal,10 * counterHits , 0.1, -0.5, 1 + counterHits * 0.15);
 
 
@@ -303,18 +312,42 @@ export default class Board {
 
 
 	}
+	popAttack(card) {
+
+		let cardGlobal = card.getGlobalPosition({ x: 0, y: 0 });
+		let convertedPosition = this.game.toLocal(cardGlobal)
+		let realRadius = CARD.width / 2 * this.game.gridContainer.scale.x;
+		let external = new PIXI.Graphics().lineStyle(3, 0xFFFFFF).drawCircle(0, 0, realRadius);
+		external.x = convertedPosition.x + realRadius;
+		external.y = convertedPosition.y + realRadius;
+		this.game.addChild(external);
+
+		external.scale.set(0.5)
+		TweenMax.to(external.scale, 0.2, {x:1.5, y:1.5, onComplete:()=>{
+			external.parent.removeChild(external);
+
+		}})
+	}
 	popLabel(pos, label, delay = 0, dir = 1, scale = 1, color = 0xFFFFFF, ease = Back.easeOut) {
 		//console.log(pos.x, pos.y);
 		let style = {
-			font: '50px',
+			font: '32px',
 			fill: color,
 			align: 'center',
 			fontFamily: 'round_popregular',
 			stroke: color == 0xFFFFFF ? 0x000000 : 0xFFFFFF,
-			strokeThickness: 8 * scale
+			strokeThickness: 6 * scale
 		}
+		let tempLabel = null;
+		if (window.LABEL_POOL.length > 0) {
+			tempLabel = window.LABEL_POOL[0];
+			window.LABEL_POOL.shift();
+		} else {
+			tempLabel = new PIXI.Text(label);
+		}
+		tempLabel.style = style;
+		tempLabel.text = label;
 
-		let tempLabel = new PIXI.Text(label, style);
 		this.game.addChild(tempLabel);
 		tempLabel.x = pos.x;
 		tempLabel.y = pos.y;
@@ -332,12 +365,16 @@ export default class Board {
 		TweenMax.to(tempLabel, 0.5, {
 			delay: 0.5 + delay, alpha: 0, onCompleteParams: [tempLabel], onComplete: function (temp) {
 				temp.parent.removeChild(temp);
+				window.LABEL_POOL.push(temp);
 			}
 		})
 	}
 	attackCard(card, hits) {
 		// console.log(card);
 		if (card.attacked && card.attacked(hits)) {
+
+			this.onDestroyCard.dispatch(card);
+
 			this.cards[card.pos.i][card.pos.j] = 0;
 			card.destroy();
 			card.convertCard();
@@ -370,7 +407,6 @@ export default class Board {
 				}
 			}
 		}
-
 
 		this.updateNumberOfEntities();
 	}

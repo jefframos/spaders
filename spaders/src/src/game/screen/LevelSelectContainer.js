@@ -232,84 +232,57 @@ export default class LevelSelectContainer extends PIXI.Container {
     }
 
     buildSectionButton(section) {
-        let secButton = PIXI.Sprite.fromImage('./assets/images/largeCard.png');//new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
-        secButton.tint = section.color
+        // let secButton = PIXI.Sprite.fromImage('./assets/images/largeCard.png');//new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
+        // secButton.tint = section.color
+
+        let secButton = new SquareButton(this.unscaledCardSize);
+        secButton.updateLabel(section.name);
+        secButton.updateIcon(PIXI.Sprite.fromImage('./assets/' + section.imageSrc));
+
+        this.gameScreen.resizeToFitAR(this.unscaledCardSize, secButton)
 
 
-        let secButtonMask = PIXI.Sprite.fromImage('./assets/images/largeCard.png');
-        let innerBorder = PIXI.Sprite.fromImage('./assets/images/innerBorder.png');
+        // //let secButtonMask = PIXI.Sprite.fromImage('./assets/images/largeCard.png');
+        // let innerBorder = PIXI.Sprite.fromImage('./assets/images/innerBorder.png');
 
-        let icon = PIXI.Sprite.fromImage('./assets/' + section.imageSrc);//new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
-        icon.scale.set(secButton.width / icon.width)
-        secButton.scale.set(this.unscaledCardSize.width / secButton.width)
-        icon.anchor.set(0, 1)
-        icon.x = 0
-        icon.y = secButton.height / secButton.scale.y
-        icon.mask = secButtonMask
+        // let icon = PIXI.Sprite.fromImage('./assets/' + section.imageSrc);//new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
+        // icon.scale.set(secButton.width / icon.width)
+        // secButton.scale.set(this.unscaledCardSize.width / secButton.width)
+        // icon.anchor.set(0, 1)
+        // icon.x = 0
+        // icon.y = secButton.height / secButton.scale.y
+        // //icon.mask = secButtonMask
 
-        let label = new PIXI.Text(section.name, {
-            font: '48px',
-            fill: 0xFFFFFF,
-            align: 'center',
-            fontWeight: '600',
-            fontFamily: 'round_popregular',
-            stroke: 0x000000,
-            strokeThickness: 12
-        });
-        label.pivot.x = label.width / 2
-        label.pivot.y = label.height / 2
-        label.x = secButton.width / 2 / secButton.scale.x
-        label.y = secButton.height / 2 / secButton.scale.y
-        label.scale.set(0.7)
-        secButton.label = label;
-        secButton.addChild(icon)
-        secButton.addChild(secButtonMask)
-        secButton.addChild(label)
-        secButton.addChild(innerBorder)
+        // let label = new PIXI.Text(section.name, {
+        //     font: '48px',
+        //     fill: 0xFFFFFF,
+        //     align: 'center',
+        //     fontWeight: '600',
+        //     fontFamily: 'round_popregular',
+        //     stroke: 0x000000,
+        //     strokeThickness: 12
+        // });
+        // label.pivot.x = label.width / 2
+        // label.pivot.y = label.height / 2
+        // label.x = secButton.width / 2 / secButton.scale.x
+        // label.y = secButton.height / 2 / secButton.scale.y
+        // label.scale.set(0.7)
+        // secButton.label = label;
+        // secButton.addChild(icon)
+        // //secButton.addChild(secButtonMask)
+        // secButton.addChild(label)
+        // secButton.addChild(innerBorder)
         return secButton
     }
     buildLevelTierButton(level, index) {
 
-        let levelTierButton = PIXI.Sprite.fromImage('./assets/images/largeCard.png');//new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
-        levelTierButton.scale.set(this.unscaledCardSize.width / levelTierButton.width)
-        levelTierButton.tint = level.customColor ? level.customColor : 0x333333
-
-        console.log(level.data[0]);
-
         let dataFirstLevel = level.data[0];
-        let pieceSize = 16;
-        if (dataFirstLevel.pieces[0].length >= dataFirstLevel.pieces.length) {
-            pieceSize = this.unscaledCardSize.width / dataFirstLevel.pieces[0].length + 2;
-        } else {
-            pieceSize = this.unscaledCardSize.height / dataFirstLevel.pieces.length + 2;
-        }
+        let levelTierButton = new SquareButton(this.unscaledCardSize);
+        levelTierButton.updateLabel(level.name);
+        levelTierButton.updateIcon(this.gameScreen.generateImage(dataFirstLevel.pieces));
 
-        let secButtonMask = PIXI.Sprite.fromImage('./assets/images/largeCard.png');
-        let innerBorder = PIXI.Sprite.fromImage('./assets/images/innerBorder.png');
-   
-        let icon = this.gameScreen.generateImage(dataFirstLevel.pieces, pieceSize, 0)
-        //icon.pivot.x = icon.width / 2
-        //icon.pivot.y = icon.height / 2
-        icon.x = pieceSize//this.unscaledCardSize.width / 2
-        icon.y = 0//this.unscaledCardSize.width / 2
-        icon.scale.set(secButtonMask.width / icon.width)
-        //icon.y = levelTierButton.height / 2
-        icon.mask = secButtonMask
+        this.gameScreen.resizeToFitAR(this.unscaledCardSize, levelTierButton)
 
-        let label = new PIXI.Text(level.name, { 
-            font: '24px', fill: 0xFFFFFF, align: 'center', fontWeight: '200', fontFamily: 'round_popregular' ,
-            stroke: 0x000000,
-            strokeThickness: 12
-        });
-        label.pivot.x = label.width / 2
-        label.pivot.y = label.height / 2
-        label.x = levelTierButton.width / 2 / levelTierButton.scale.x
-        label.y = levelTierButton.height / 2 / levelTierButton.scale.y + label.height / label.scale.y
-        levelTierButton.label = label;
-        levelTierButton.addChild(icon)
-        levelTierButton.addChild(secButtonMask)
-        levelTierButton.addChild(label)
-        levelTierButton.addChild(innerBorder)
         return levelTierButton
     }
     openSection(section) {
@@ -531,6 +504,11 @@ export default class LevelSelectContainer extends PIXI.Container {
         if (!force && (this.currentResolution.width == innerResolution.width && this.currentResolution.height == innerResolution.height)) {
             //return;
         }
+
+        // if (this.currentResolution.width != innerResolution.width || this.currentResolution.height != innerResolution.height) {
+        //     //return;
+        // }
+        
         if (innerResolution) {
             this.currentResolution = innerResolution
         }
@@ -543,6 +521,8 @@ export default class LevelSelectContainer extends PIXI.Container {
         this.centerLevels();
 
         this.newContainer.y = this.mainCanvas.y - 20;
+
+       
 
     }
     centerLevels() {

@@ -26,6 +26,8 @@
     "webpack": "^1.12.9"
   },
   "dependencies": {
+    "@thibka/fps-meter": "^1.0.0",
+    "fpscounter": "^1.0.0",
     "pixi-filters": "^2.5.1",
     "signals": "^1.0.0"
   }

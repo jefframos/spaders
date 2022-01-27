@@ -1,4 +1,6 @@
+import TweenMax from 'gsap';
 import * as PIXI from 'pixi.js';
+import signals from 'signals';
 import config from '../../config';
 import utils from '../../utils';
 export default class Grid extends PIXI.Container {
@@ -6,6 +8,8 @@ export default class Grid extends PIXI.Container {
 		super();
 		this.game = game;
 		this.grids = [];
+
+		this.onDestroyAllStartedCards = new signals();
 	}
 	start() {
 	}
@@ -19,15 +23,18 @@ export default class Grid extends PIXI.Container {
 		});
 	}
 	createGrid() {
+		this.cardsStartedOnGrid = 0;
 		for (let index = this.children.length - 1; index >= 0; index--) {
 			this.removeChildAt(index);
 		}
 		let gridContainer = new PIXI.Container();
 		// let gridBackground = new PIXI.Graphics().beginFill(0).drawRect(0,0,GRID.width, GRID.height);
 		// gridContainer.addChild(gridBackground)
+		this.gridsSquares = [];
 		this.grids = [];
 
 		for (var i = GRID.i - 1; i >= 0; i--) {
+			let gridLine = [];
 			for (var j = GRID.j - 1; j >= 0; j--) {
 				let gridSquare = PIXI.Sprite.fromImage('./assets/images/gridSquare.png')
 				gridSquare.scale.set(CARD.width / gridSquare.width);
@@ -42,7 +49,16 @@ export default class Grid extends PIXI.Container {
 				gridContainer.addChild(gridSquare)
 
 				this.grids.push(gridSquare);
+
+				let gridEffectSquare = PIXI.Sprite.fromImage('./assets/images/gridSquare.png')
+				gridEffectSquare.scale.set(CARD.width / gridEffectSquare.width);
+				gridEffectSquare.x = i * CARD.width;
+				gridEffectSquare.y = j * CARD.height;
+				gridEffectSquare.alpha = 0;
+				gridContainer.addChild(gridEffectSquare)
+				gridLine.unshift({shape:gridEffectSquare, card:null});
 			}
+			this.gridsSquares.unshift(gridLine);
 		}
 
 
@@ -78,5 +94,23 @@ export default class Grid extends PIXI.Container {
 		gridContainer.alpha = 1
 
 		this.addChild(gridContainer);
+	}
+	destroyCard(card){
+		if(this.gridsSquares[card.pos.i][card.pos.j].card){
+			this.gridsSquares[card.pos.i][card.pos.j].shape.alpha = 0;
+			this.cardsStartedOnGrid --;
+	
+			if(this.cardsStartedOnGrid <= 0){
+				console.log("All cards", this.cardsStartedOnGrid)
+
+				this.onDestroyAllStartedCards.dispatch();
+			}
+		}
+	}
+	paintTile(card){
+		this.gridsSquares[card.pos.i][card.pos.j].card = card;
+		this.gridsSquares[card.pos.i][card.pos.j].shape.tint = card.currentColor;
+		TweenMax.to(this.gridsSquares[card.pos.i][card.pos.j].shape, 0.5, {delay:0.5, alpha:0.25})
+		this.cardsStartedOnGrid ++;
 	}
 }

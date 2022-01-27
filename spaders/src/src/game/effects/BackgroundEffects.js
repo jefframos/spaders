@@ -8,13 +8,21 @@ export default class BackgroundEffects extends PIXI.Container {
 	constructor() {
 
 		super();
-		
+		this.stars = [];
 
-		this.background = new PIXI.Graphics().beginFill(0x151515).drawRect(0, 0, config.width, config.height);
+		this.background = new PIXI.Container();
 		this.addChild(this.background);
 
+		
 		this.backgroundImage = PIXI.Sprite.fromImage("./assets/images/background.png");
 		this.background.addChild(this.backgroundImage);
+		this.backgroundShape = new PIXI.Graphics().beginFill(0x151515).drawRect(0, 0, this.backgroundImage.width, this.backgroundImage.height);
+		this.background.addChildAt(this.backgroundShape, 0);
+		//this.backgroundImage.anchor.set(0.5)
+		
+		//this.backgroundImage.alpha = 0.5
+
+		this.backgroundImage.blendMode = PIXI.BLEND_MODES.ADD
 		
 		this.starsContainer = new PIXI.Container();
 		this.addChild(this.starsContainer);
@@ -23,7 +31,7 @@ export default class BackgroundEffects extends PIXI.Container {
 		this.innerResolution = { width: config.width, height: config.height }
 
 
-		this.addStars();
+		//this.addStars();
 	
 
 		this.starsMoveTimer = 0;
@@ -81,7 +89,7 @@ export default class BackgroundEffects extends PIXI.Container {
 	addStars() {
 		let totalStars = this.innerResolution.width * 0.08;
 		let l = this.innerResolution.width * 0.001
-		l = Math.max(l, 0.7)
+		l = Math.max(l, 1)
 		this.stars = [];
 		for (var i = 0; i < totalStars; i++) {
 			let dist = Math.random() * (l *2) + l;

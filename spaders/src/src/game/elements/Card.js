@@ -64,7 +64,7 @@ export default class Card extends PIXI.Container {
 		// cardContainer.addChild(this.label);
 		utils.centerObject(this.label, this.cardForeground);
 		// utils.centerObject(this.enemySprite, this.cardForeground);
-
+		this.currentColor = 0x000000;
 
 		card.addChild(this.cardForeground);
 		this.cardContainer = cardContainer;//card;
@@ -92,7 +92,7 @@ export default class Card extends PIXI.Container {
 		this.crazyMood = false;
 		this.circleBackground.alpha = 0.0
 	}
-	createCard() {
+	createCard(totalSides) {
 		this.alpha = 1;
 		this.crazyMood = false;
 		this.removeCrazyMood();
@@ -109,7 +109,7 @@ export default class Card extends PIXI.Container {
 
 		this.updateCard();
 
-		this.addActionZones();
+		this.addActionZones(totalSides);
 	}
 	attacked(hits = 1) {
 		this.life -= hits;
@@ -159,6 +159,7 @@ export default class Card extends PIXI.Container {
 				this.enemySprite.tint = ENEMIES.list[i].color;
 			}
 		}
+		this.currentColor = this.enemySprite.tint;
 		if (this.life < 1) {
 			this.lifeContainer.alpha = 0;
 		} else {
@@ -212,13 +213,21 @@ export default class Card extends PIXI.Container {
 		this.cardForeground.width = CARD.width
 		this.cardForeground.height = CARD.height
 	}
-	addActionZones() {
+	addActionZones(totalSides = 1) {
 		this.updateSize();
 		this.zones = [];
 		this.removeActionZones();
 		let orderArray = [0, 1, 2, 3, 4, 5, 6, 7]
 		utils.shuffle(orderArray);
-		let totalSides = Math.floor(Math.random() * ACTION_ZONES.length * 0.4) + 1;
+
+		//add another arrow if the first arrow is bottom center
+
+		
+		if(ACTION_ZONES[orderArray[0]].label == "BOTTOM_CENTER" && totalSides <= 1){
+			console.log("one here")
+			totalSides ++;
+		}
+
 		let arrowSize = 7*this.starterScale;
 		for (var i = totalSides - 1; i >= 0; i--) {
 
@@ -256,7 +265,7 @@ export default class Card extends PIXI.Container {
 
 			let arrowLine = new PIXI.Graphics().lineStyle(2, 0xFFFFFF);
 			arrowLine.moveTo(0, 0);
-			arrowLine.lineTo(0, this.enemySprite.width * this.starterScale);
+			arrowLine.lineTo(0, CARD.width / 2);
 			arrowContainer.addChild(arrowLine);
 		}
 		// console.log("ADD ACTION ZONES", this.zones, this.arrows);

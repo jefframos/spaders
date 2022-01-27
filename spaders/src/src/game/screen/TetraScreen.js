@@ -25,14 +25,14 @@ export default class TetraScreen extends Screen {
 		window.AUTO_PLAY = false;
 		////console.log(levels)
 		this.innerResolution = { width: config.width, height: config.height };
-		
+
 		let a = -1;
 		let b = -2;
 
 
 		this.levels = window.levelData;//window.levelsJson.levels;
 
-
+		console.log(this.levels)
 		//console.log(this.levels)
 		this.hasHash = false;
 		this.currentLevelID = 0;
@@ -64,7 +64,11 @@ export default class TetraScreen extends Screen {
 		window.CARD_NUMBER = 0;
 
 		this.grid = new Grid(this);
+		this.grid.onDestroyAllStartedCards.add(() => this.onDestroyAllStartedCards());
+
 		this.board = new Board(this);
+		this.board.onDestroyCard.add((card) => this.onDestroyCard(card));
+
 		this.totalLines = 6;
 
 		this.currentPoints = 0;
@@ -90,20 +94,39 @@ export default class TetraScreen extends Screen {
 			bestMoves: 99999999,
 			bestScore: 0
 		}
+
+		this.gameplayState = 0;
 		//console.log(utils.convertNumToTime(1231))
 	}
-
+	onDestroyAllStartedCards() {
+		console.log("add points");
+		console.log("onDestroyAllStartedCards");
+		this.gameplayState = 1;
+	}
+	onDestroyCard(card) {
+		this.grid.destroyCard(card);
+	}
 	updateGridDimensions() {
 		window.GRID = {
 			i: this.currentLevelData.pieces[0].length,
 			j: this.currentLevelData.pieces.length,
-			height: config.height * 0.75,
-			width: config.width * 0.92,
+			height: this.innerResolution.width,
+			width: this.innerResolution.height,
 		}
 
-		window.CARD = {
-			width: GRID.height / GRID.j,
-			height: GRID.height / GRID.j,//GRID.height / GRID.j
+		let min = this.innerResolution.width / 6
+
+		if(GRID.height > GRID.width){
+			window.CARD = {
+				width: Math.min(GRID.height / GRID.j , min),
+				height: Math.min(GRID.height / GRID.j , min)
+			}
+		}else{
+
+			window.CARD = {
+				width: Math.min(GRID.width / GRID.i , min),
+				height: Math.min(GRID.width / GRID.i , min)
+			}
 		}
 
 		// window.CARD = {
@@ -114,6 +137,8 @@ export default class TetraScreen extends Screen {
 
 		window.GRID.width = window.GRID.i * CARD.width;
 		window.GRID.height = window.GRID.j * CARD.height;
+
+		console.log( CARD.width)
 
 		if (this.gridContainer) {
 
@@ -154,29 +179,40 @@ export default class TetraScreen extends Screen {
 						tempRect = this.getRect(size, config.colors.dark)
 						container.addChild(tempRect)
 						tempRect.x = j * size + size * 0.5;
-						tempRect.y = i * size +size * 0.5;
+						tempRect.y = i * size + size * 0.5;
 					} else {
 						tempRect = this.getRect(size, ENEMIES.list[level[i][j]].color)
 						container.addChild(tempRect)
 						tempRect.x = j * size + size * 0.5;
-						tempRect.y = i * size +size * 0.5;
+						tempRect.y = i * size + size * 0.5;
 					}
 				} else if (level[i][j] == -2) {
 					tempRect = this.getRect(size, config.colors.dark)
 					container.addChild(tempRect)
 					tempRect.x = j * size + size * 0.5;
-					tempRect.y = i * size +size * 0.5;
+					tempRect.y = i * size + size * 0.5;
 				} else {
 					tempRect = this.getRect(size, 0x111111)
 					container.addChild(tempRect)
 					tempRect.x = j * size + size * 0.5;
-					tempRect.y = i * size +size * 0.5;
+					tempRect.y = i * size + size * 0.5;
 				}
 			}
 		}
-		container.background = background;
-		container.nodeSize = size;
-		return container;
+		//container.cacheAsBitmap = true
+
+		//let renderTexture = new PIXI.RenderTexture.create({ width: container.width, height: container.height });
+
+		let texture = renderer.generateTexture(container);
+
+		let sprite = new PIXI.Sprite()
+		sprite.setTexture(texture)
+
+		sprite.background = background;
+		sprite.nodeSize = size;
+		//window.game.renderer.render(container, {renderTexture});
+
+		return sprite;
 	}
 	buildUI() {
 		this.pointsLabel = new PIXI.Text(this.currentPoints, { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: 'round_popregular' });
@@ -241,7 +277,7 @@ export default class TetraScreen extends Screen {
 		this.backButton = new UIButton1(config.colors.white, './assets/images/icons/icons8-menu-48.png', config.colors.dark);
 		this.backButton.onClick.add(() => this.mainmenuState());
 
-		
+
 		this.inGameMenu = new InGameMenu(config.colors.green);
 		this.UIInGame.addChild(this.inGameMenu)
 
@@ -325,7 +361,7 @@ export default class TetraScreen extends Screen {
 		TweenMax.killTweensOf(this.gridContainer);
 
 		TweenMax.to(this.cardsContainer, 0.5, { alpha: 0 })
-		TweenMax.to(this.gridContainer, 0.5, { delay:delay, alpha: 0 })
+		TweenMax.to(this.gridContainer, 0.5, { delay: delay, alpha: 0 })
 
 		if (this.currentCard) {
 
@@ -471,7 +507,7 @@ export default class TetraScreen extends Screen {
 
 		this.addChild(this.gameContainer);
 
-		this.gameContainer.addChild(this.background);
+		//this.gameContainer.addChild(this.background);
 		this.gameContainer.addChild(this.gridContainer);
 		this.gameContainer.addChild(this.cardsContainer);
 		this.gameContainer.addChild(this.UIContainer);
@@ -517,9 +553,9 @@ export default class TetraScreen extends Screen {
 		for (var i = 0; i < GRID.i; i++) {
 			tempPosRandom.push(i);
 		}
-		utils.shuffle(tempPosRandom);
+		//utils.shuffle(tempPosRandom);
 
-		
+
 
 	}
 
@@ -538,6 +574,7 @@ export default class TetraScreen extends Screen {
 	}
 	resetGame() {
 
+		this.gameplayState = 0;
 		this.cardQueueData = {
 			latest: -1,
 			counter: 0
@@ -650,7 +687,8 @@ export default class TetraScreen extends Screen {
 			}
 
 			let nextLife = Math.random() < 1 - (this.currentRound % 3) * 0.17 ? 0 : Math.random() < 0.5 ? 2 : 1;
-
+			let totalSides = Math.floor(Math.random() * ACTION_ZONES.length * 0.4) + 1;
+			
 			//console.log(nextLife,this.cardQueueData.counter)
 			if (nextLife > 0) {
 				if (this.cardQueueData.counter <= 0) {
@@ -661,13 +699,18 @@ export default class TetraScreen extends Screen {
 				}
 			}
 
+			if(this.gameplayState == 1){
+				nextLife = 0;
+				totalSides ++;
+			}
+
 			if (this.cardQueueData.counter > 0) {
 				this.cardQueueData.counter--;
 			}
 
 
 			card.life = nextLife;
-			card.createCard();
+			card.createCard(totalSides);
 			card.updateSprite(card.life);
 			card.type = 0;
 			card.x = 0;
@@ -743,6 +786,7 @@ export default class TetraScreen extends Screen {
 		card.pos.j = j;
 		card.updateCard();
 		this.board.addCard(card);
+		this.grid.paintTile(card)
 		// this.CARD_POOL.push(card);
 		return card;
 	}
@@ -887,8 +931,6 @@ export default class TetraScreen extends Screen {
 	}
 	onTapUp(event, customID) {
 		if (!this.currentCard || !this.gameRunning) {
-
-			console.log("NO")
 			return;
 		}
 		if (customID == undefined) {
@@ -1000,11 +1042,17 @@ export default class TetraScreen extends Screen {
 		utils.scaleSize(this.gameCanvas, innerResolution, this.ratio)
 
 		//this.resizeToFitAR({width:this.bottomUICanvas.width * 0.8, height:this.bottomUICanvas.height * 0.4},this.containerQueue)
-		this.resizeToFitAR({ width: this.gameCanvas.width * 0.9, height: this.gameCanvas.height * 0.75 }, this.gridContainer)
+		this.resizeToFitAR({ width: this.gameCanvas.width * 0.9, height: this.gameCanvas.height * 0.78 }, this.gridContainer)
+
+		if(this.gridContainer.scale.x > 1){
+			this.gridContainer.scale.set(1)
+		}
+
+
 		this.resizeToFit({ width: this.gameCanvas.width, height: this.gameCanvas.height * 0.08 }, this.topCanvas)
 		this.resizeToFit({ width: this.gameCanvas.width, height: this.gameCanvas.height * 0.125 }, this.bottomUICanvas)
 
-
+		
 		//console.log(this.bottomUICanvas.scale.y, this.bottomUICanvas.height)
 
 		this.cardsContainer.scale.x = (this.gridContainer.scale.x)
@@ -1071,19 +1119,19 @@ export default class TetraScreen extends Screen {
 		return returnLabel
 	}
 
-	closeApplication(){
+	closeApplication() {
 		navigator.app.exitApp();
 	}
-	backKeyDown(){
-		if(this.gameRunning){
+	backKeyDown() {
+		if (this.gameRunning) {
 			this.mainmenuState();
-		}else if(this.startScreenContainer.screenState == 2){
-			if(this.startScreenContainer.chooseLevelPanel.currentUISection <= 0){
+		} else if (this.startScreenContainer.screenState == 2) {
+			if (this.startScreenContainer.chooseLevelPanel.currentUISection <= 0) {
 				this.startScreenContainer.startState(0);
-			}else{
+			} else {
 				this.startScreenContainer.chooseLevelPanel.onBack();
 			}
-		}else{
+		} else {
 			navigator.app.exitApp();
 		}
 	}

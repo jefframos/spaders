@@ -311,9 +311,9 @@ export default class EffectLayer extends PIXI.Container{
 			timelineSplitBlue.append(TweenLite.to(this.rgpSplit.blue, speed, {x:1, y:-1, ease:"easeNoneLinear"}));
 		}
 	}
-	shake(force, steps, time){
+	shake(force, steps, time, container){
 		if(config.isJuicy == 0){
-	      return;
+	      //return;
 	    }
 		if(!force){
 			force = 1;
@@ -329,10 +329,12 @@ export default class EffectLayer extends PIXI.Container{
 		let spliterForce = (force * 20);
 		let speed = time / steps;
 		for (var i = steps; i >= 0; i--) {
-			timelinePosition.append(TweenLite.to(this.screenManager.position, speed, {x: Math.random() * positionForce - positionForce/2, y: Math.random() * positionForce - positionForce/2, ease:"easeNoneLinear"}));
+			timelinePosition.append(TweenLite.to(container.position, speed, {x: Math.random() * positionForce - positionForce/2, y: Math.random() * positionForce - positionForce/2, ease:"easeNoneLinear"}));
 		};
 
-		timelinePosition.append(TweenLite.to(this.screenManager.position, speed, {x:0, y:0, ease:"easeeaseNoneLinear"}));		
+		console.log("SHAKASHKASHKAS")
+		timelinePosition.append(TweenLite.to(container.position, speed, {x:0, y:0, ease:"easeeaseNoneLinear"}));	
+		timelinePosition.play()	
 	}
 
 	shakeX(force, steps, time){
