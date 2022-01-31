@@ -6,7 +6,7 @@ import utils from '../../utils';
 
 
 export default class UIRectLabel extends PIXI.Container {
-	constructor(color, icon) {
+	constructor(color, icon, center = true) {
 		super();
 
 		this.mainContainer = new PIXI.Container();
@@ -21,7 +21,7 @@ export default class UIRectLabel extends PIXI.Container {
 		this.backShape.alpha = 0
 
 
-		this.label = new PIXI.Text("name", { font: '30px', fill: 0xFFFFFF, align: 'center', fontFamily: window.STANDARD_FONT1 });
+		this.label = new PIXI.Text("name", { font: '30px', fill: 0xFFFFFF, align: center?'center':'left', fontFamily: window.STANDARD_FONT1 });
 		this.title = new PIXI.Text("title", {
 			font: '20px',
 			fill: 0x000000,
@@ -42,7 +42,7 @@ export default class UIRectLabel extends PIXI.Container {
 
 		this.updateLavel("00000")
 	}
-	updateLavel(text, title) {
+	updateLavel(text, title, center = true) {
 		this.label.text = text;
 		this.title.text = title ? title : "";
 		//this.title.pivot.x = this.title.width * 0.5
@@ -50,8 +50,15 @@ export default class UIRectLabel extends PIXI.Container {
 		this.title.pivot.y = this.title.height * 0.5
 		utils.centerObject(this.icon, this.mainContainer);
 		this.icon.x = this.icon.y;
-		utils.centerObject(this.label, this.mainContainer);
-		this.label.x += this.icon.x + 10
-		this.label.y += -3
+
+		if(center){
+
+			utils.centerObject(this.label, this.mainContainer);
+			this.label.x += this.icon.x + 10
+			this.label.y += -3
+		}else{
+			this.label.x = this.icon.x + this.icon.width + 5;
+			this.label.y = 12;
+		}
 	}
 }

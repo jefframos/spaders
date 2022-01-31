@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="11" height="12" tilewidth="64" tileheight="64" infinite="0" nextlayerid="71" nextobjectid="1">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="11" height="12" tilewidth="64" tileheight="64" infinite="0" nextlayerid="75" nextobjectid="1">
  <editorsettings>
-  <export target="../../../www/assets/levelsRaw.json" format="json"/>
+  <export target="../../../www/data/how-to-play/shapes.json" format="json"/>
  </editorsettings>
  <properties>
   <property name="description" value="no description here"/>
-  <property name="iconURL" value="sss"/>
-  <property name="sectionName" value="Things"/>
+  <property name="iconURL" value=""/>
+  <property name="sectionName" value="Shapes"/>
  </properties>
  <tileset firstgid="1" source="../tilesets/spadersTileset.tsx"/>
  <layer id="43" name="Blue" width="11" height="12">
@@ -19,10 +19,102 @@
   </properties>
   <data encoding="csv">
 0,1,1,0,0,0,0,0,0,0,0,
-0,1,0,0,0,0,0,0,0,0,0,
+0,1,1,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="71" name="Shape1" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="7"/>
+   <property name="j" type="int" value="6"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,2,3,3,3,2,0,0,0,0,0,
+0,0,2,3,2,0,0,0,0,0,0,
+0,0,0,2,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="72" name="Shape2" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="5"/>
+   <property name="j" type="int" value="6"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,1,0,0,0,0,0,0,0,0,
+0,1,2,1,0,0,0,0,0,0,0,
+1,2,3,2,1,0,0,0,0,0,0,
+0,1,2,1,0,0,0,0,0,0,0,
+0,0,1,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="73" name="Shape3" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="5"/>
+   <property name="j" type="int" value="6"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,5,0,0,0,0,0,0,0,0,
+0,4,5,4,0,0,0,0,0,0,0,
+6,4,5,4,6,0,0,0,0,0,0,
+0,4,5,4,0,0,0,0,0,0,0,
+0,0,5,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="74" name="Shape4" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="5"/>
+   <property name="j" type="int" value="6"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,3,0,0,0,0,0,0,0,0,
+0,4,3,4,0,0,0,0,0,0,0,
+0,0,14,0,0,0,0,0,0,0,0,
+0,4,3,4,0,0,0,0,0,0,0,
+0,0,3,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,

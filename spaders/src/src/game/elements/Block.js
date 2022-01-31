@@ -8,6 +8,8 @@ export default class Card extends PIXI.Container{
 		this.game = game;		
 		this.pos = {i:-1, j:-1};
 		
+		this.realSpriteWidth = 72;
+
 		let card = new PIXI.Container();
 		this.counter = this.MAX_COUNTER;
 		this.cardBackground = new PIXI.Graphics().beginFill(0xFFFFFF).drawRoundedRect(0,0,CARD.width, CARD.height, 0);
@@ -20,7 +22,7 @@ export default class Card extends PIXI.Container{
 
 		this.sprite = PIXI.Sprite.fromImage(window.IMAGE_DATA.enemyBlockImages[0]);
 
-		this.sprite.scale.set(CARD.width / this.sprite.width * 0.6)
+		this.sprite.scale.set(CARD.width / this.realSpriteWidth * 0.6)
 		this.sprite.tint = 0x333333;
 		this.sprite.anchor.set(0.5);
 

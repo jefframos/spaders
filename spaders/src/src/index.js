@@ -171,6 +171,7 @@ PIXI.loader
 	.add('./assets/images/glitch1.jpg')
 	.add('./assets/images/glitch2.jpg')
 	.add('./assets/images/particle1.png')
+	.add('./assets/images/p1.png')
 	.add('./assets/images/screen_displacement.jpg')
 	.add('./assets/images/background.png')
 	.add('./assets/images/gridSquare.png')

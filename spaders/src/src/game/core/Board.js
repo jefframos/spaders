@@ -178,13 +178,18 @@ export default class Board {
 		}
 		console.log("-------------------------")
 		areaAttacksCards.forEach(element => {
-			console.log(element)
 			let cardGlobal = element.getGlobalPosition({ x: 0, y: 0 });
 			cardGlobal.x += CARD.width / 2;
 			cardGlobal.y += CARD.height / 2;
 			let points = (areaAttacksCards.length + 1) * 10
 			this.game.addPoints(points);
 
+			this.game.fxContainer.addParticlesToScore(
+				1,
+				this.game.toLocal(cardGlobal),
+				this.game.fxContainer.toLocal(this.game.scoreRect.getGlobalPosition()),
+				element.currentColor
+			)
 			////AREA ATTACK
 			this.popLabel(this.game.toLocal(cardGlobal), "+" + points, 0.1, 0.5, 0.5);
 			//cardsToDestroy.push({cardFound:cardFound, currentCard: card, attackZone:zones[i]});
@@ -261,6 +266,14 @@ export default class Board {
 						this.game.addPoints(10 * id);
 						//normal attack
 						this.popAttack(cardFound)
+
+						this.game.fxContainer.addParticlesToScore(
+							id,
+							this.game.toLocal(arrowGlobal),
+							this.game.fxContainer.toLocal(this.game.scoreRect.getGlobalPosition()),
+							cardFound.currentColor
+						)
+
 						this.popLabel(this.game.toLocal(arrowGlobal), "+" + 10 * id, 0, 1, 0.5 + id * 0.15);
 
 					}
@@ -273,6 +286,14 @@ export default class Board {
 						arrowGlobal2.y += 30;
 						if (cardFound.crazyMood) {
 							this.game.addPoints(100);
+
+							this.game.fxContainer.addParticlesToScore(
+								4,
+								this.game.toLocal(arrowGlobal2),
+								this.game.fxContainer.toLocal(this.game.scoreRect.getGlobalPosition()),
+								cardFound.currentColor
+							)
+
 							window.EFFECTS.shake(0.2, 5, 0.3, this.game.gameContainer);
 							//explosion
 							this.popLabel(this.game.toLocal(arrowGlobal2), "+" + 100, 0.25, 0.4, 0.8, 0xE2C756, Elastic.easeOut);
@@ -305,6 +326,13 @@ export default class Board {
 
 				let counterHits = (list.length + 1);
 				this.game.addPoints(10 * counterHits);
+
+				this.game.fxContainer.addParticlesToScore(
+					3,
+					this.game.toLocal(arrowGlobal),
+					this.game.fxContainer.toLocal(this.game.scoreRect.getGlobalPosition()),
+					card.currentColor
+				)
 
 				this.popLabel(this.game.toLocal(arrowGlobal), "+" + 10 * counterHits + "\nCOUNTER", 0.2, 0, 0.4 + counterHits * 0.1, 0xD81639);
 				window.EFFECTS.shake(0.2, 5, 0.3, this.game.gameContainer);

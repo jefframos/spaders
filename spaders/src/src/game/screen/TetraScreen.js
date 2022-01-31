@@ -17,6 +17,7 @@ import { debug } from 'webpack';
 import InGameMenu from './InGameMenu';
 import SquareButton from './SquareButton';
 import ColorTweens from '../effects/ColorTweens';
+import FXContainer from '../effects/FXContainer';
 
 export default class TetraScreen extends Screen {
 	constructor(label) {
@@ -104,11 +105,13 @@ export default class TetraScreen extends Screen {
 		this.gameplayState = 1;
 
 		//(pos, label, delay = 0, dir = 1, scale = 1, color = 0xFFFFFF, ease = Back.easeOut)
-			////AREA ATTACK
-			this.board.popLabel(
-				{x:this.gameCanvas.x + this.gameCanvas.width / 2,
-				y:this.gameCanvas.y + this.gameCanvas.height / 2},
-			 "FINISH THEM ALL", 0.1, 1, 1, config.colors.purple, Back.easeOut, 2);
+		////AREA ATTACK
+		this.board.popLabel(
+			{
+				x: this.gameCanvas.x + this.gameCanvas.width / 2,
+				y: this.gameCanvas.y + this.gameCanvas.height / 2
+			},
+			"FINISH THEM ALL", 0.1, 1, 1, config.colors.purple, Back.easeOut, 2);
 
 	}
 	onDestroyCard(card) {
@@ -122,18 +125,18 @@ export default class TetraScreen extends Screen {
 			width: this.innerResolution.height,
 		}
 
-		let min = 80//this.innerResolution.width / 6.5
+		let min = 60//this.innerResolution.width / 6.5
 
-		if(GRID.height > GRID.width){
+		if (GRID.height > GRID.width) {
 			window.CARD = {
-				width: Math.min(GRID.height / GRID.j , min),
-				height: Math.min(GRID.height / GRID.j , min)
+				width: Math.min(GRID.height / GRID.j, min),
+				height: Math.min(GRID.height / GRID.j, min)
 			}
-		}else{
+		} else {
 
 			window.CARD = {
-				width: Math.min(GRID.width / GRID.i , min),
-				height: Math.min(GRID.width / GRID.i , min)
+				width: Math.min(GRID.width / GRID.i, min),
+				height: Math.min(GRID.width / GRID.i, min)
 			}
 		}
 
@@ -146,7 +149,7 @@ export default class TetraScreen extends Screen {
 		window.GRID.width = window.GRID.i * CARD.width;
 		window.GRID.height = window.GRID.j * CARD.height;
 
-		console.log( CARD.width)
+		console.log(CARD.width)
 
 		if (this.gridContainer) {
 
@@ -275,8 +278,8 @@ export default class TetraScreen extends Screen {
 		this.movesRect = new UIRectLabel(config.colors.green, './assets/images/newEnemies/pixil-layer-0.png');
 		this.bottomUINewContainer.addChild(this.movesRect)
 
-		this.scoreRect = new UIRectLabel(config.colors.red2, './assets/images/icons/icons8-star-48.png');
-		this.bottomUINewContainer.addChild(this.scoreRect)
+		this.scoreRect = new UIRectLabel(config.colors.red2, './assets/images/icons/icons8-star-48.png', false);
+		this.UIInGame.addChild(this.scoreRect)
 
 
 		this.backButton = new UIButton1(config.colors.white, './assets/images/icons/icons8-menu-48.png', config.colors.dark);
@@ -315,7 +318,7 @@ export default class TetraScreen extends Screen {
 
 		this.timerRect.scale.set(this.bottomUICanvas.height / this.timerRect.backShape.height * 0.3)
 		this.movesRect.scale.set(this.timerRect.scale.x)
-		this.scoreRect.scale.set(this.timerRect.scale.x)
+		this.scoreRect.scale.set(this.timerRect.scale.x * 1.5)
 
 		this.timerRect.x = this.bottomUICanvas.x + this.bottomUICanvas.width - this.timerRect.width - this.bottomUICanvas.height * 0.1
 		this.movesRect.x = this.bottomUICanvas.x + this.bottomUICanvas.width - this.timerRect.width - this.bottomUICanvas.height * 0.1
@@ -326,12 +329,12 @@ export default class TetraScreen extends Screen {
 		this.timerRect.y = this.movesRect.y - this.timerRect.height - this.bottomUICanvas.height * 0.025
 
 
-		this.scoreRect.y = this.timerRect.y
-		this.scoreRect.x = this.bottomUICanvas.x + this.bottomUICanvas.width / 2 - this.timerRect.width / 2
+		//this.scoreRect.y = this.mainMenuContainer.y//this.movesRect.y + (this.movesRect.height / this.movesRect.scale.y) - (this.scoreRect.height / this.scoreRect.scale.y)
+		this.scoreRect.x = this.topCanvas.x + 20;
 
 		this.containerQueue.scale.set(this.bottomUICanvas.height / CARD.height * 0.5)
 		this.containerQueue.x = this.bottomUICanvas.height * 0.1
-		this.containerQueue.y = this.scoreRect.y//this.movesRect.y + this.movesRect.height - this.containerQueue.height
+		this.containerQueue.y = this.timerRect.y//this.movesRect.y + this.movesRect.height - this.containerQueue.height
 
 		//console.log()
 		this.backButton.scale.set(this.topCanvas.height / (this.backButton.height / this.backButton.scale.y) * 0.7)// / this.backButton.scale.y)
@@ -544,7 +547,8 @@ export default class TetraScreen extends Screen {
 		}
 		//utils.shuffle(tempPosRandom);
 
-
+		this.fxContainer = new FXContainer();
+		this.addChild(this.fxContainer);
 
 	}
 
@@ -650,7 +654,7 @@ export default class TetraScreen extends Screen {
 
 		this.timerRect.updateLavel(utils.convertNumToTime(Math.ceil(this.currentTime)))
 		this.movesRect.updateLavel(utils.formatPointsLabel(Math.ceil(this.currentRound)))
-		this.scoreRect.updateLavel(utils.formatPointsLabel(Math.ceil(this.currentPointsLabel)))
+		this.scoreRect.updateLavel(Math.ceil(this.currentPointsLabel), '', false)
 	}
 	addRandomPiece() {
 	}
@@ -677,7 +681,7 @@ export default class TetraScreen extends Screen {
 
 			let nextLife = Math.random() < 1 - (this.currentRound % 3) * 0.17 ? 0 : Math.random() < 0.5 ? 2 : 1;
 			let totalSides = Math.floor(Math.random() * ACTION_ZONES.length * 0.4) + 1;
-			
+
 			//console.log(nextLife,this.cardQueueData.counter)
 			if (nextLife > 0) {
 				if (this.cardQueueData.counter <= 0) {
@@ -688,9 +692,9 @@ export default class TetraScreen extends Screen {
 				}
 			}
 
-			if(this.gameplayState == 1){
+			if (this.gameplayState == 1) {
 				nextLife = 0;
-				totalSides ++;
+				totalSides++;
 			}
 
 			if (this.cardQueueData.counter > 0) {
@@ -800,10 +804,10 @@ export default class TetraScreen extends Screen {
 		this.startScreenContainer.update(delta)
 		this.endGameScreenContainer.update(delta)
 		this.inGameMenu.update(delta)
+		this.fxContainer.update(delta)
 
-		
 
-		
+
 		if (!this.gameRunning) {
 			this.topUIContainer.x = this.gameCanvas.x
 			this.topUIContainer.y = utils.lerp(this.topUIContainer.y, this.gameCanvas.y - 500, 0.2)
@@ -817,9 +821,9 @@ export default class TetraScreen extends Screen {
 			return;
 		}
 
-		if(this.colorTween.isActive){
+		if (this.colorTween.isActive) {
 			this.board.updateAllCardsColors(this.colorTween.currentColor)
-			if(this.currentCard){
+			if (this.currentCard) {
 				this.currentCard.forceNewColor(this.colorTween.currentColor);
 			}
 			this.cardQueue.forEach(element => {
@@ -827,7 +831,7 @@ export default class TetraScreen extends Screen {
 			});
 		}
 
-		if(this.currentCard){
+		if (this.currentCard) {
 			this.currentCard.update(delta)
 		}
 		////console.log(this.mousePosition)
@@ -964,6 +968,7 @@ export default class TetraScreen extends Screen {
 			return;
 		}
 
+		
 
 		this.currentRound++;
 		let nextRoundTimer = this.board.shootCard(this.mousePosID, this.currentCard);
@@ -1039,6 +1044,8 @@ export default class TetraScreen extends Screen {
 		let offset = this.toLocal(new PIXI.Point())
 		this.innerResolution = innerResolution;
 
+
+		this.fxContainer.resize(innerResolution);
 		this.background.resize(scaledResolution, innerResolution)
 		this.ratio = config.width / config.height;
 
@@ -1048,7 +1055,7 @@ export default class TetraScreen extends Screen {
 		//this.resizeToFitAR({width:this.bottomUICanvas.width * 0.8, height:this.bottomUICanvas.height * 0.4},this.containerQueue)
 		this.resizeToFitAR({ width: this.gameCanvas.width * 0.9, height: this.gameCanvas.height * 0.78 }, this.gridContainer)
 
-		if(this.gridContainer.scale.x > 1){
+		if (this.gridContainer.scale.x > 1) {
 			this.gridContainer.scale.set(1)
 		}
 
@@ -1056,7 +1063,7 @@ export default class TetraScreen extends Screen {
 		this.resizeToFit({ width: this.gameCanvas.width, height: this.gameCanvas.height * 0.08 }, this.topCanvas)
 		this.resizeToFit({ width: this.gameCanvas.width, height: this.gameCanvas.height * 0.125 }, this.bottomUICanvas)
 
-		
+
 		//console.log(this.bottomUICanvas.scale.y, this.bottomUICanvas.height)
 
 		this.cardsContainer.scale.x = (this.gridContainer.scale.x)

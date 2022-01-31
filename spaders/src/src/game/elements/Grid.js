@@ -42,8 +42,8 @@ export default class Grid extends PIXI.Container {
 				gridSquare.x = i * CARD.width;
 				gridSquare.y = j * CARD.height;
 
-				gridSquare.alphaMin = Math.random() * 0.05 + 0.05;
-				gridSquare.alpha = Math.random() * 0.15 + 0.075
+				gridSquare.alphaMin = Math.random() * 0.025 + 0.025;
+				gridSquare.alpha = Math.random() * 0.05 + 0.05
 				gridSquare.speed = 0.35;
 				gridSquare.startAlpha = gridSquare.alpha;
 				gridSquare.sin = Math.random() * Math.PI * 2;
@@ -83,8 +83,14 @@ export default class Grid extends PIXI.Container {
 	}
 	paintTile(card){
 		this.gridsSquares[card.pos.i][card.pos.j].card = card;
-		this.gridsSquares[card.pos.i][card.pos.j].shape.tint = card.currentColor;
-		TweenMax.to(this.gridsSquares[card.pos.i][card.pos.j].shape, 0.5, {delay:0.5, alpha:0.45})
+		let color = card.currentColor;
+		let alpha = 0.45;
+		if(color == config.colors.dark){
+			color = 0x000000;
+			alpha = 0.65
+		}
+		this.gridsSquares[card.pos.i][card.pos.j].shape.tint = color;
+		TweenMax.to(this.gridsSquares[card.pos.i][card.pos.j].shape, 0.5, {delay:0.5, alpha:alpha})
 		this.cardsStartedOnGrid ++;
 	}
 }

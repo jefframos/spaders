@@ -51,8 +51,8 @@
             "scale": 0.8201171875,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 351.16932603000714,
-                "y": 384.09145034532025
+                "x": 232.89354608240052,
+                "y": 382.8721124077161
             }
         },
         "how-to-play/simple-shapes.tmx": {
@@ -155,7 +155,7 @@
             "scaleInEditor": 1
         }
     },
-    "last.exportedFilePath": "E:/projects/spaders/spaders/www/assets",
+    "last.exportedFilePath": "C:/Users/jfbod/Documents/projects/spaders/spaders/www/data/how-to-play",
     "last.externalTilesetPath": "E:/projects/spaders/spaders/src/map/tilesets",
     "last.imagePath": "D:/Projects/tetra/map",
     "map.height": 10,

@@ -5,6 +5,9 @@ export default {
 	// height: window.innerHeight/2,
 	webgl: true,
 	effectsLayer: null,
+	textStyles:{
+
+	},
 	colors: {
 		blue: 0x61C6CE,
 		red: 0xD81639,
