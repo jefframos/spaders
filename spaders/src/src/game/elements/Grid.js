@@ -18,7 +18,7 @@ export default class Grid extends PIXI.Container {
 			element.sin += delta * element.speed;
 			element.alpha = element.startAlpha * Math.sin(element.sin);
 
-			element.alpha = Math.max(0, element.alpha);
+			element.alpha = Math.max(element.alphaMin, element.alpha);
 
 		});
 	}
@@ -36,11 +36,13 @@ export default class Grid extends PIXI.Container {
 		for (var i = GRID.i - 1; i >= 0; i--) {
 			let gridLine = [];
 			for (var j = GRID.j - 1; j >= 0; j--) {
-				let gridSquare = PIXI.Sprite.fromImage('./assets/images/gridSquare.png')
+				//let gridSquare = PIXI.Sprite.fromImage('./assets/images/gridSquare.png')
+				let gridSquare = PIXI.Sprite.fromImage('./assets/images/largeCard.png')
 				gridSquare.scale.set(CARD.width / gridSquare.width);
 				gridSquare.x = i * CARD.width;
 				gridSquare.y = j * CARD.height;
 
+				gridSquare.alphaMin = Math.random() * 0.05 + 0.05;
 				gridSquare.alpha = Math.random() * 0.15 + 0.075
 				gridSquare.speed = 0.35;
 				gridSquare.startAlpha = gridSquare.alpha;
@@ -50,7 +52,8 @@ export default class Grid extends PIXI.Container {
 
 				this.grids.push(gridSquare);
 
-				let gridEffectSquare = PIXI.Sprite.fromImage('./assets/images/gridSquare.png')
+				//let gridEffectSquare = PIXI.Sprite.fromImage('./assets/images/gridSquare.png')
+				let gridEffectSquare = PIXI.Sprite.fromImage('./assets/images/largeCard.png')
 				gridEffectSquare.scale.set(CARD.width / gridEffectSquare.width);
 				gridEffectSquare.x = i * CARD.width;
 				gridEffectSquare.y = j * CARD.height;
@@ -61,36 +64,6 @@ export default class Grid extends PIXI.Container {
 			this.gridsSquares.unshift(gridLine);
 		}
 
-
-
-
-		// for (var i = GRID.j-1; i >= 0; i--) {
-		// 	let line = new PIXI.Sprite.fromImage('./assets/images/lineBorder.png')
-		// 	line.y = i * CARD.width;
-		// 	line.x = - line.width
-		// 	line.height = CARD.height;
-		// 	gridContainer.addChild(line)
-		// }
-
-		// for (var i = GRID.j-1; i >= 0; i--) {
-		// 	let line = new PIXI.Sprite.fromImage('./assets/images/lineBorder.png')
-		// 	line.y = i * CARD.width + CARD.height;
-		// 	line.rotation = Math.PI;
-		// 	line.x = GRID.i * CARD.width + line.width
-		// 	line.height = CARD.height;
-		// 	gridContainer.addChild(line)
-		// }
-
-		// for (var i = GRID.i; i > 0; i--) {
-		// 	let line = new PIXI.Sprite.fromImage('./assets/images/lineBorder.png')
-		// 	line.y = - line.width;
-		// 	line.rotation = Math.PI * 0.5;
-		// 	line.x = i * CARD.width
-		// 	line.height = CARD.height;
-		// 	gridContainer.addChild(line)
-		// }
-
-		
 		gridContainer.alpha = 1
 
 		this.addChild(gridContainer);
@@ -99,10 +72,11 @@ export default class Grid extends PIXI.Container {
 		if(this.gridsSquares[card.pos.i][card.pos.j].card){
 			this.gridsSquares[card.pos.i][card.pos.j].shape.alpha = 0;
 			this.cardsStartedOnGrid --;
+
+			this.gridsSquares[card.pos.i][card.pos.j].card = null;
 	
 			if(this.cardsStartedOnGrid <= 0){
 				console.log("All cards", this.cardsStartedOnGrid)
-
 				this.onDestroyAllStartedCards.dispatch();
 			}
 		}
@@ -110,7 +84,7 @@ export default class Grid extends PIXI.Container {
 	paintTile(card){
 		this.gridsSquares[card.pos.i][card.pos.j].card = card;
 		this.gridsSquares[card.pos.i][card.pos.j].shape.tint = card.currentColor;
-		TweenMax.to(this.gridsSquares[card.pos.i][card.pos.j].shape, 0.5, {delay:0.5, alpha:0.25})
+		TweenMax.to(this.gridsSquares[card.pos.i][card.pos.j].shape, 0.5, {delay:0.5, alpha:0.45})
 		this.cardsStartedOnGrid ++;
 	}
 }

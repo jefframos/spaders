@@ -6,7 +6,6 @@ export default {
 	webgl: true,
 	effectsLayer: null,
 	colors: {
-		background: 0x222222,
 		blue: 0x61C6CE,
 		red: 0xD81639,
 		yellow: 0xE2C756,
@@ -21,6 +20,7 @@ export default {
 		grey: 0x888888,
 		whiteSkin: 0xceb8ad,
 		darkSkin: 0x4f382a,
+		background: 0x151515,
 	},
 	rendererOptions: {
 		//pixi rendererOptions

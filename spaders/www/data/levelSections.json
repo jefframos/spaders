@@ -4,7 +4,7 @@
             "color": "0xDDDDDD",
             "name": "Level 1",
             "displayName": "Video Game History",
-            "imageSrc": "levels/consoles3.png",
+            "imageSrc": "",
             "levels": [
                 {
                     "name": "---",
@@ -28,7 +28,7 @@
             "color": "0xDDDDDD",
             "name": "Video\nGames",
             "displayName": "Video Game History",
-            "imageSrc": "levels/consoles.png",
+            "imageSrc": "",
             "levels": [
                 {
                     "name": "2nd gen",
@@ -48,7 +48,7 @@
             "color": "0x8957c7",
             "name": "movies",
             "displayName": "Movies",
-            "imageSrc": "levels/consoles2.png",
+            "imageSrc": "",
             "levels": [
                 {
                     "name": "70s",

@@ -6,6 +6,8 @@ import ParticleSystem from '../effects/ParticleSystem';
 export default class Card extends PIXI.Container {
 	constructor(game) {
 		super();
+		window.CARD_ID ++;
+		this.cardID = window.CARD_ID;
 		window.CARD_NUMBER++;
 		this.isCard = true;
 		this.game = game;
@@ -17,14 +19,20 @@ export default class Card extends PIXI.Container {
 		this.life = 2;
 		this.cardNumber = CARD_NUMBER;
 
+		this.realSpriteWidth = 72;
+
 		let card = new PIXI.Container();
 		this.counter = this.MAX_COUNTER;
-		this.cardForeground = new PIXI.Graphics().beginFill(0xFFFFFF).drawRoundedRect(0, 0, CARD.width, CARD.height, 0);
+
+		// let gridEffectSquare = PIXI.Sprite.fromImage('./assets/images/largeCard.png')
+		// 		gridEffectSquare.scale.set(CARD.width / gridEffectSquare.width);
+
+		this.cardForeground = PIXI.Sprite.fromImage('./assets/images/largeCard.png')//new PIXI.Graphics().beginFill(0xFFFFFF).drawRoundedRect(0, 0, CARD.width, CARD.height, 0);
 		this.circleBackground = new PIXI.Graphics().beginFill(0xFFFFFF).drawCircle(0, 0, CARD.width / 2);
 		this.cardBack3 = new PIXI.Graphics().beginFill(0x000000).drawRect(CARD.width / 2 - 10, CARD.height / 2, 19, 10);
 		this.enemySprite = PIXI.Sprite.fromImage('./assets/images/enemy.png');
 
-		this.enemySprite.scale.set(72 / this.enemySprite.width * 0.55)
+		this.enemySprite.scale.set(this.realSpriteWidth / this.enemySprite.width * 0.65)
 		this.enemySprite.anchor.set(0.5);
 
 		this.cardForeground.alpha = 1;
@@ -47,7 +55,7 @@ export default class Card extends PIXI.Container {
 
 		this.lifeContainer = new PIXI.Container();
 		cardContainer.addChild(this.lifeContainer);
-		this.lifeLabel = new PIXI.Text(this.life, { font: '20px', fill: 0x000000,  fontFamily:'round_popregular' });
+		this.lifeLabel = new PIXI.Text(this.life, { font: '20px', fill: 0x000000,  fontFamily:window.STANDARD_FONT1 });
 		this.lifeLabel.pivot.x = this.lifeLabel.width / 2
 		this.lifeLabel.pivot.y = this.lifeLabel.height / 2
 		this.lifeContainerBackground = PIXI.Sprite.fromImage('./assets/images/backLabel.png')
@@ -81,6 +89,13 @@ export default class Card extends PIXI.Container {
 		// this.particleSystem = new ParticleSystem();
 		// this.particleSystem.createParticles({x:0, y:0},4, './assets/images/particle1.png')
 		// this.addChild(this.particleSystem)
+	}
+	forceNewColor(color){
+		this.enemySprite.tint = color;
+
+		if(this.backshape){
+			this.backshape.tint = color;
+		}
 	}
 	startCrazyMood() {
 		this.crazyMood = true;
@@ -153,7 +168,7 @@ export default class Card extends PIXI.Container {
 	}
 	updateCard(isCurrent = false) {
 
-		this.starterScale = CARD.width / this.enemySprite.width * 0.55 * this.enemySprite.scale.x
+		this.starterScale = CARD.width / this.realSpriteWidth * 0.55
 		for (var i = 0; i < ENEMIES.list.length; i++) {
 			if (ENEMIES.list[i].life == this.life) {
 				this.enemySprite.tint = ENEMIES.list[i].color;
@@ -176,12 +191,18 @@ export default class Card extends PIXI.Container {
 			if (this.backshape && this.backshape.parent) {
 				this.backshape.parent.removeChild(this.backshape)
 			}
-			this.backshape = new PIXI.Graphics();
-			this.backshape.lineStyle(3, this.enemySprite.tint, 1);
-			this.backshape.beginFill(this.enemySprite.tint);
-			//this.backshape.drawCircle(0, 0, CARD.width * 0.5);
-			this.backshape.drawRect(CARD.width * -0.5, CARD.width * -0.5, CARD.width, CARD.width);
-			this.backshape.endFill();
+			
+			// this.backshape = new PIXI.Graphics();
+			// this.backshape.lineStyle(3, this.enemySprite.tint, 1);
+			// this.backshape.beginFill(this.enemySprite.tint);
+			// //this.backshape.drawCircle(0, 0, CARD.width * 0.5);
+			// this.backshape.drawRect(CARD.width * -0.5, CARD.width * -0.5, CARD.width, CARD.width);
+			// this.backshape.endFill();
+
+			this.backshape = PIXI.Sprite.fromImage('./assets/images/largeCard.png')
+			this.backshape.scale.set(CARD.width / this.backshape.width);
+			this.backshape.tint = this.enemySprite.tint;
+			this.backshape.anchor.set(0.5)
 			this.addChildAt(this.backshape, 0);
 			this.backshape.x = this.enemySprite.x
 			this.backshape.y = this.enemySprite.y
@@ -202,7 +223,8 @@ export default class Card extends PIXI.Container {
 		}
 	}
 	updateSize() {
-		this.enemySprite.scale.set(CARD.width / this.enemySprite.width * 0.55 * this.enemySprite.scale.x)
+		//this.enemySprite.scale.set(CARD.width / this.enemySprite.width * 0.55 * this.enemySprite.scale.x)
+		this.enemySprite.scale.set(CARD.width / this.realSpriteWidth * 0.65)
 		this.starterScale = this.enemySprite.scale.x
 		this.enemySprite.x = CARD.width / 2;
 		this.enemySprite.y = CARD.height / 2;
@@ -228,7 +250,7 @@ export default class Card extends PIXI.Container {
 			totalSides ++;
 		}
 
-		let arrowSize = 7*this.starterScale;
+		let arrowSize = 12*this.starterScale;
 		for (var i = totalSides - 1; i >= 0; i--) {
 
 			let arrowContainer = new PIXI.Container();
@@ -294,11 +316,16 @@ export default class Card extends PIXI.Container {
 		TweenMax.to(this, time, { x: pos, delay: delay });
 	}
 	mark() {
-		this.backshape = new PIXI.Graphics();
-		this.backshape.lineStyle(3, this.enemySprite.tint, 1);
-		//this.backshape.beginFill(this.enemySprite.tint);
-		this.backshape.drawRect(-CARD.width / 2, -CARD.height / 2, CARD.width, CARD.height);
-		this.backshape.endFill();
+		// this.backshape = new PIXI.Graphics();
+		// this.backshape.lineStyle(3, this.enemySprite.tint, 1);
+		// this.backshape.beginFill(this.enemySprite.tint);
+		// this.backshape.drawRect(-CARD.width / 2, -CARD.height / 2, CARD.width, CARD.height);
+		// this.backshape.endFill();
+
+		this.backshape = PIXI.Sprite.fromImage('./assets/images/innerBorder.png')
+			this.backshape.scale.set(CARD.width / this.backshape.width);
+			this.backshape.tint = this.enemySprite.tint;
+			this.backshape.anchor.set(0.5)
 		this.addChildAt(this.backshape, 0);
 		this.backshape.x = this.enemySprite.x
 		this.backshape.y = this.enemySprite.y

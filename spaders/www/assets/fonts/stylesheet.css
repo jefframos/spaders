@@ -19,3 +19,21 @@
     font-style: normal;
 
 }
+
+@font-face {
+    font-family: 'neon_led_lightregular';
+    src: url('neonledlight-webfont.woff2') format('woff2'),
+         url('neonledlight-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'cozy_capsmedium';
+    src: url('cozy_caps-webfont.woff2') format('woff2'),
+         url('cozy_caps-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}

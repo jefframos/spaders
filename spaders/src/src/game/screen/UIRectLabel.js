@@ -18,16 +18,16 @@ export default class UIRectLabel extends PIXI.Container {
 		this.backShape.lineStyle(3, color, 1);
 		this.backShape.drawRect(0,0,224,60);
 		this.backShape.endFill();
-		this.backShape.alpha = 0.5
+		this.backShape.alpha = 0
 
 
-		this.label = new PIXI.Text("name", { font: '30px', fill: 0xFFFFFF, align: 'center', fontFamily: 'round_popregular' });
+		this.label = new PIXI.Text("name", { font: '30px', fill: 0xFFFFFF, align: 'center', fontFamily: window.STANDARD_FONT1 });
 		this.title = new PIXI.Text("title", {
 			font: '20px',
 			fill: 0x000000,
 			align: 'center',
 			wight: '800',
-			fontFamily: 'round_popregular',
+			fontFamily: window.STANDARD_FONT1,
 			stroke: color,
 			strokeThickness: 8
 		});
@@ -51,6 +51,7 @@ export default class UIRectLabel extends PIXI.Container {
 		utils.centerObject(this.icon, this.mainContainer);
 		this.icon.x = this.icon.y;
 		utils.centerObject(this.label, this.mainContainer);
-		this.label.x += this.icon.x
+		this.label.x += this.icon.x + 10
+		this.label.y += -3
 	}
 }

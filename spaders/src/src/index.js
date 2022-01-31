@@ -16,6 +16,7 @@ import EffectLayer from './game/effects/EffectLayer';
 import BackgroundEffects from './game/effects/BackgroundEffects';
 import ChooseMatchScreen from './game/screen/ChooseMatchScreen';
 import Pool from './game/core/Pool';
+import { utils } from 'pixi.js/lib/core';
 
 // import FPSMeter from '@thibka/fps-meter';
 
@@ -32,9 +33,15 @@ import Pool from './game/core/Pool';
 // initFPSMeter();
 // loop();
 
+//window.LOGO_FONT = "neon_led_lightregular"
 
+window.LOGO_FONT = "round_popregular"
+window.STANDARD_FONT1 = "round_popregular"
+window.STANDARD_FONT2 = "cozy_capsmedium"
 window.COOKIE_MANAGER = new CookieManager();
 window.GAME_DATA = new GameData();
+
+window.CARD_ID = 0;
 
 window.ENEMIES = {
 	list: [
@@ -76,7 +83,9 @@ window.colorsOrder = [
 	config.colors.purple,
 	config.colors.white,
 	config.colors.dark,
-],
+]
+
+
 
 	window.config = config;
 window.POOL = new Pool();
@@ -169,6 +178,7 @@ PIXI.loader
 	.add('./assets/images/rect.png')
 	.add('./assets/images/time.png')
 	.add('./assets/images/largeCard.png')
+	.add('./assets/images/largeCardBack.png')
 	.add('./assets/images/icons/icons8-menu-48.png')
 	.add('./assets/images/icons/icons8-star-48.png')
 	.add('./assets/images/icons/icons8-back-100.png')
@@ -193,7 +203,9 @@ function loadJsons() {
 
 	window.levelSections.sections.forEach(section => {
 		console.log(section)
-		PIXI.loader.add('./assets/' + section.imageSrc)
+		if(section.imageSrc){
+			PIXI.loader.add('./assets/' + section.imageSrc)
+		}
 		section.levels.forEach(level => {
 			PIXI.loader.add(jsonPath + level.dataPath)
 		});
@@ -244,6 +256,9 @@ function extractData(element) {
 	}
 
 }
+
+
+
 function configGame() {
 
 

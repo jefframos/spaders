@@ -9,34 +9,53 @@ export default class SquareButton extends PIXI.Container {
 
         this.unscaledCardSize = unscaledCardSize;
         this.container = new PIXI.Container();
+        this.squareButtonBackShape = PIXI.Sprite.fromImage('./assets/images/largeCardBack.png');
         this.squareButtonShape = PIXI.Sprite.fromImage('./assets/images/largeCard.png');//new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
         //this.squareButtonShape.scale.set(this.unscaledCardSize.width / this.squareButtonShape.width)
         this.squareButtonShape.tint = 0x333333
+        this.squareButtonBackShape.tint = 0x222222
 
 
         this.buttonMask = PIXI.Sprite.fromImage('./assets/images/largeCard.png');
         this.innerBorder = PIXI.Sprite.fromImage('./assets/images/innerBorder.png');
 
     
-        this.label = new PIXI.Text("level.name", {
+        this.label = new PIXI.Text("", {
             font: '24px',
             fill: 0xFFFFFF,
-            align: 'left',
+            align: 'center',
             fontWeight: '200',
-            fontFamily: 'round_popregular',
+            fontFamily: window.STANDARD_FONT1,
             // stroke: 0x000000,
             // strokeThickness: 12
         });
         
+        this.squareButtonBackShape.y = 20
         
+        this.container.addChild(this.squareButtonBackShape)
+        //this.container.addChild(this.innerBorder)
         this.container.addChild(this.squareButtonShape)
         //this.container.addChild(this.buttonMask)
-        this.container.addChild(this.label)
-        this.container.addChild(this.innerBorder)
+        this.squareButtonShape.addChild(this.label)
 
         this.addChild(this.container);
 
+        this.squareButtonBackShape.interactive = true;
+        this.squareButtonBackShape.on('pointerover', this.onPointerOver.bind(this));
+        this.squareButtonBackShape.on('pointerout', this.onPointerOut.bind(this));
+
+
         //this.updateLabel("round_ar rlar")
+    }
+    onPointerOver(){
+        this.squareButtonShape.y = 20;
+    }
+    onPointerOut(){
+        this.squareButtonShape.y = 0;
+    }
+    setColor(color){
+        this.squareButtonShape.tint = color
+        this.squareButtonBackShape.tint = color
     }
     updateLabel(text){
         this.label.text = text;
@@ -55,7 +74,7 @@ export default class SquareButton extends PIXI.Container {
             this.icon.parent.removeChild(this.icon);
         }
         this.icon = graphic
-        this.container.addChildAt(this.icon, 1)
+        this.squareButtonShape.addChildAt(this.icon, 0)
         this.icon.x = offset.x
         this.icon.y = offset.y
         if(graphic.width > graphic.height){

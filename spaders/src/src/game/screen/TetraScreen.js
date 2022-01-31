@@ -16,6 +16,7 @@ import UIButton1 from './UIButton1'
 import { debug } from 'webpack';
 import InGameMenu from './InGameMenu';
 import SquareButton from './SquareButton';
+import ColorTweens from '../effects/ColorTweens';
 
 export default class TetraScreen extends Screen {
 	constructor(label) {
@@ -29,7 +30,7 @@ export default class TetraScreen extends Screen {
 		let a = -1;
 		let b = -2;
 
-
+		this.colorTween = new ColorTweens();
 		this.levels = window.levelData;//window.levelsJson.levels;
 
 		console.log(this.levels)
@@ -99,9 +100,16 @@ export default class TetraScreen extends Screen {
 		//console.log(utils.convertNumToTime(1231))
 	}
 	onDestroyAllStartedCards() {
-		console.log("add points");
-		console.log("onDestroyAllStartedCards");
+		this.colorTween.startTween();
 		this.gameplayState = 1;
+
+		//(pos, label, delay = 0, dir = 1, scale = 1, color = 0xFFFFFF, ease = Back.easeOut)
+			////AREA ATTACK
+			this.board.popLabel(
+				{x:this.gameCanvas.x + this.gameCanvas.width / 2,
+				y:this.gameCanvas.y + this.gameCanvas.height / 2},
+			 "FINISH THEM ALL", 0.1, 1, 1, config.colors.purple, Back.easeOut, 2);
+
 	}
 	onDestroyCard(card) {
 		this.grid.destroyCard(card);
@@ -114,7 +122,7 @@ export default class TetraScreen extends Screen {
 			width: this.innerResolution.height,
 		}
 
-		let min = this.innerResolution.width / 6
+		let min = 80//this.innerResolution.width / 6.5
 
 		if(GRID.height > GRID.width){
 			window.CARD = {
@@ -215,17 +223,17 @@ export default class TetraScreen extends Screen {
 		return sprite;
 	}
 	buildUI() {
-		this.pointsLabel = new PIXI.Text(this.currentPoints, { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: 'round_popregular' });
-		this.roundsLabel = new PIXI.Text(0, { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: 'round_popregular' });
-		this.entitiesLabel = new PIXI.Text(0, { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: 'round_popregular' });
-		this.timeLabel = new PIXI.Text(0, { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: 'round_popregular' });
+		this.pointsLabel = new PIXI.Text(this.currentPoints, { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: window.STANDARD_FONT1 });
+		this.roundsLabel = new PIXI.Text(0, { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: window.STANDARD_FONT1 });
+		this.entitiesLabel = new PIXI.Text(0, { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: window.STANDARD_FONT1 });
+		this.timeLabel = new PIXI.Text(0, { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: window.STANDARD_FONT1 });
 
-		this.pointsLabelStatic = new PIXI.Text("SCORE", { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: 'round_popregular' });
-		this.roundsLabelStatic = new PIXI.Text("MOVES", { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: 'round_popregular' });
-		this.entitiesLabelStatic = new PIXI.Text("ENTITIES", { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: 'round_popregular' });
-		this.timeLabelStatic = new PIXI.Text("TIME", { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: 'round_popregular' });
+		this.pointsLabelStatic = new PIXI.Text("SCORE", { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: window.STANDARD_FONT1 });
+		this.roundsLabelStatic = new PIXI.Text("MOVES", { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: window.STANDARD_FONT1 });
+		this.entitiesLabelStatic = new PIXI.Text("ENTITIES", { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: window.STANDARD_FONT1 });
+		this.timeLabelStatic = new PIXI.Text("TIME", { font: '24px', fill: 0xFFFFFF, align: 'right', fontWeight: '500', fontFamily: window.STANDARD_FONT1 });
 
-		this.levelNameLabel = new PIXI.Text("name", { font: '30px', fill: 0xFFFFFF, align: 'center', fontWeight: '800', fontFamily: 'round_popregular' });
+		this.levelNameLabel = new PIXI.Text("name", { font: '30px', fill: 0xFFFFFF, align: 'center', fontWeight: '800', fontFamily: window.STANDARD_FONT1 });
 
 
 
@@ -256,9 +264,6 @@ export default class TetraScreen extends Screen {
 
 		this.endGameScreenContainer.addEvents();
 
-
-
-
 		this.UIContainer.addChild(this.mainMenuContainer)
 
 		this.containerQueue = new PIXI.Container();
@@ -267,7 +272,7 @@ export default class TetraScreen extends Screen {
 		this.timerRect = new UIRectLabel(config.colors.yellow, './assets/images/time.png');
 		this.bottomUINewContainer.addChild(this.timerRect)
 
-		this.movesRect = new UIRectLabel(config.colors.green, './assets/images/time.png');
+		this.movesRect = new UIRectLabel(config.colors.green, './assets/images/newEnemies/pixil-layer-0.png');
 		this.bottomUINewContainer.addChild(this.movesRect)
 
 		this.scoreRect = new UIRectLabel(config.colors.red2, './assets/images/icons/icons8-star-48.png');
@@ -301,23 +306,6 @@ export default class TetraScreen extends Screen {
 			this.mainmenuState();
 		}
 
-		// let square = new SquareButton({width:120, height:120});
-		// this.addChild(square)
-
-		// this.currentLevelData = this.levels[0];
-
-		// square.updateIcon(this.generateImage(this.currentLevelData.pieces))
-		// this.debugs = new PIXI.Graphics().beginFill(0xFF0000).drawCircle(0, 0, 20);
-		// //this.addChild(this.debugs);
-
-		// this.debugs2 = new PIXI.Graphics().beginFill(0xFF55AA).drawCircle(0, 0, 20);
-		// //this.addChild(this.debugs2);
-
-		// this.debugs3 = new PIXI.Graphics().beginFill(0x44FFAA).drawCircle(0, 0, 10);
-		// this.addChild(this.debugs3);
-
-		// this.debugs.x = config.width / 2
-		// this.debugs.y = config.height / 2
 	}
 	updateLabelsPosition() {
 
@@ -407,6 +395,7 @@ export default class TetraScreen extends Screen {
 
 	endGameState() {
 		this.gameRunning = false;
+		this.colorTween.stopTween();
 		this.startScreenContainer.hide(true);
 		let tempid = this.currentLevelID >= 0 ? this.currentLevelID : 0
 		this.endGameScreenContainer.setStats(this.currentPoints, this.currentRound, utils.convertNumToTime(Math.ceil(this.currentTime)), this.generateImage(this.currentLevelData.pieces), this.currentLevelData);
@@ -648,7 +637,7 @@ export default class TetraScreen extends Screen {
 		this.latestShoot.x = this.mousePosition
 
 
-
+		this.colorTween.stopTween();
 		//this.currentButtonLabel = 'RESET';
 
 	}
@@ -805,7 +794,6 @@ export default class TetraScreen extends Screen {
 	}
 
 	update(delta) {
-
 		this.mouseDirty = false;
 		this.background.update(delta)
 		this.grid.update(delta)
@@ -813,6 +801,9 @@ export default class TetraScreen extends Screen {
 		this.endGameScreenContainer.update(delta)
 		this.inGameMenu.update(delta)
 
+		
+
+		
 		if (!this.gameRunning) {
 			this.topUIContainer.x = this.gameCanvas.x
 			this.topUIContainer.y = utils.lerp(this.topUIContainer.y, this.gameCanvas.y - 500, 0.2)
@@ -826,6 +817,19 @@ export default class TetraScreen extends Screen {
 			return;
 		}
 
+		if(this.colorTween.isActive){
+			this.board.updateAllCardsColors(this.colorTween.currentColor)
+			if(this.currentCard){
+				this.currentCard.forceNewColor(this.colorTween.currentColor);
+			}
+			this.cardQueue.forEach(element => {
+				element.forceNewColor(this.colorTween.currentColor)
+			});
+		}
+
+		if(this.currentCard){
+			this.currentCard.update(delta)
+		}
 		////console.log(this.mousePosition)
 		this.currentTime += delta * window.TIME_SCALE * window.TIME_SCALE;
 

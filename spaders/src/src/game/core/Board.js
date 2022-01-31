@@ -10,6 +10,7 @@ export default class Board {
 		window.LABEL_POOL = [];
 		this.game = game;
 		this.cards = [];
+		this.allCards = [];
 		this.resetBoard();
 
 		window.board = this;
@@ -36,6 +37,7 @@ export default class Board {
 	}
 	resetBoard() {
 		this.cards = [];
+		this.allCards = [];
 		for (var i = window.GRID.i - 1; i >= 0; i--) {
 			let lane = [];
 			for (var j = window.GRID.j - 1; j >= 0; j--) {
@@ -47,6 +49,11 @@ export default class Board {
 	}
 	addCard(card) {
 		this.cards[card.pos.i][card.pos.j] = card;
+		if (card) {
+
+			this.allCards.push(card);
+		}
+
 		//console.log(card)
 	}
 
@@ -323,18 +330,20 @@ export default class Board {
 		this.game.addChild(external);
 
 		external.scale.set(0.5)
-		TweenMax.to(external.scale, 0.2, {x:1.5, y:1.5, onComplete:()=>{
-			external.parent.removeChild(external);
+		TweenMax.to(external.scale, 0.2, {
+			x: 1.5, y: 1.5, onComplete: () => {
+				external.parent.removeChild(external);
 
-		}})
+			}
+		})
 	}
-	popLabel(pos, label, delay = 0, dir = 1, scale = 1, color = 0xFFFFFF, ease = Back.easeOut) {
+	popLabel(pos, label, delay = 0, dir = 1, scale = 1, color = 0xFFFFFF, ease = Back.easeOut, time = 0.5) {
 		//console.log(pos.x, pos.y);
 		let style = {
 			font: '32px',
 			fill: color,
 			align: 'center',
-			fontFamily: 'round_popregular',
+			fontFamily: window.STANDARD_FONT1,
 			stroke: color == 0xFFFFFF ? 0x000000 : 0xFFFFFF,
 			strokeThickness: 6 * scale
 		}
@@ -362,8 +371,8 @@ export default class Board {
 				temp.parent.addChild(temp)
 			}
 		})
-		TweenMax.to(tempLabel, 0.5, {
-			delay: 0.5 + delay, alpha: 0, onCompleteParams: [tempLabel], onComplete: function (temp) {
+		TweenMax.to(tempLabel, time, {
+			delay: time + delay, alpha: 0, onCompleteParams: [tempLabel], onComplete: function (temp) {
 				temp.parent.removeChild(temp);
 				window.LABEL_POOL.push(temp);
 			}
@@ -376,6 +385,15 @@ export default class Board {
 			this.onDestroyCard.dispatch(card);
 
 			this.cards[card.pos.i][card.pos.j] = 0;
+
+			for (let index = 0; index < this.allCards.length; index++) {
+				const element = this.allCards[index];
+				if (element.cardID == card.cardID) {
+					this.allCards.splice(index, 1);
+					break;
+				}
+
+			}
 			card.destroy();
 			card.convertCard();
 
@@ -383,6 +401,12 @@ export default class Board {
 		}
 
 	}
+	updateAllCardsColors(color) {
+		this.allCards.forEach(element => {
+			element.forceNewColor(color)
+		});
+	}
+
 	delayedDestroy(card, hits) {
 		this.attackCard(card, hits);
 

@@ -21,7 +21,7 @@ export default class StartScreenContainer extends PIXI.Container {
 
 		this.chooseLevelPanel.x = 0;
 		this.chooseLevelPanel.y = 150;
-		this.logoLabel = new PIXI.Text(window.shuffleText(this.currentButtonLabel, true), { font: '90px', fill: 0xFFFFFF, align: 'center', fontWeight: '800', fontFamily: 'round_popregular' });
+		this.logoLabel = new PIXI.Text(this.currentButtonLabel, { font: '90px', fill: 0xFFFFFF, align: 'center', fontWeight: '800', fontFamily: window.LOGO_FONT });
 
 		this.addChild(this.levelSelectionContainer);
 		this.addChild(this.screenContainer);
@@ -66,7 +66,7 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.logoLabel.pivot.x = this.logoLabel.width / 2
 		this.logoLabel.pivot.y = this.logoLabel.height / 2
 
-		this.playLabel = new PIXI.Text("PLAY", { font: '60px', fill: 0x000000, align: 'center', fontWeight: '800', fontFamily: 'round_popregular' });
+		this.playLabel = new PIXI.Text("PLAY", { font: '60px', fill: config.colors.background, align: 'center', fontWeight: '800', fontFamily: window.STANDARD_FONT1 });
 		this.screenContainer.addChild(this.playLabel);
 		this.playLabel.rotation = Math.PI * -0.25;
 		this.playLabel.x = -config.width / 2 + 80 + Math.cos(this.playLabel.rotation) * 200

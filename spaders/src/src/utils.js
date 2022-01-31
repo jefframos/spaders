@@ -1,3 +1,4 @@
+import TweenMax from 'gsap';
 import config from './config';
 export default {
     horizontalListHelper(list){
@@ -301,6 +302,77 @@ export default {
     },
     distance(x1, y1, x2, y2) {
         return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+    },
+    killColorTween(target)
+    {
+        for (let i = this.tweenList.length - 1; i >= 0; i--)
+        {
+            if (this.tweenList[i].target == target)
+            {
+                this.tweenList[i].tween.kill();
+                this.tweenList.splice(i, 1);
+            }
+        }
+    },
+
+    addColorTween(currentColor, targetColor, time = 2, delay = 0, callback = null, onComplete = null)
+    {
+        if (!this.tweenList)
+        {
+            this.tweenList = [];
+        }
+        const currentColorData = this.toRGB(currentColor);
+        const targetColorData = this.toRGB(targetColor);
+        const black = this.toRGB(0x000000);
+        const tweenObj = {
+            tween: TweenMax.to(currentColorData, time,
+                {
+                    delay,
+                    r: targetColorData.r,
+                    g: targetColorData.g,
+                    b: targetColorData.b,
+                    onComplete:onComplete,
+                    ease: Linear.easeNone,
+                    onUpdate: function ()
+                    {
+                        currentColorData.r = Math.floor(currentColorData.r);
+                        currentColorData.g = Math.floor(currentColorData.g);
+                        currentColorData.b = Math.floor(currentColorData.b);
+
+                        callback(this.rgbToColor(currentColorData.r, currentColorData.g, currentColorData.b))
+                        //targ.tint = this.rgbToColor(currentColorData.r, currentColorData.g, currentColorData.b);
+                    }.bind(this),
+                }),
+                currentColor: this.rgbToColor(currentColorData.r, currentColorData.g, currentColorData.b),
+        };
+
+        this.tweenList.push(tweenObj);
+
+        return tweenObj;
+    },
+    invertColor(rgb)
+    {
+        const r = 255 - rgb >> 16 & 0xFF;
+        const g = 255 - rgb >> 8 & 0xFF;
+        const b = 255 - rgb & 0xFF;
+
+        return this.rgbToColor(r, g, b);
+    },
+    toRGB(rgb)
+    {
+        const r = rgb >> 16 & 0xFF;
+        const g = rgb >> 8 & 0xFF;
+        const b = rgb & 0xFF;
+
+        return {
+            r,
+            g,
+            b,
+        };
+    },
+    rgbToColor(r, g, b)
+    {
+        return r << 16 | g << 8 | b;
     },
 
     linear(t) { return t },

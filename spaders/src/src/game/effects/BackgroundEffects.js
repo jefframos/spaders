@@ -15,8 +15,8 @@ export default class BackgroundEffects extends PIXI.Container {
 
 		
 		this.backgroundImage = PIXI.Sprite.fromImage("./assets/images/background.png");
-		this.background.addChild(this.backgroundImage);
-		this.backgroundShape = new PIXI.Graphics().beginFill(0x151515).drawRect(0, 0, this.backgroundImage.width, this.backgroundImage.height);
+		//this.background.addChild(this.backgroundImage);
+		this.backgroundShape = new PIXI.Graphics().beginFill(config.colors.background).drawRect(0, 0, this.backgroundImage.width, this.backgroundImage.height);
 		this.background.addChildAt(this.backgroundShape, 0);
 		//this.backgroundImage.anchor.set(0.5)
 		

@@ -22,7 +22,7 @@ export default class EndGameContainer extends PIXI.Container {
 
 
         this.currentButtonLabel = "YOU WIN"
-        this.youWinLabel = new PIXI.Text(this.currentButtonLabel, { font: '80px', fill: 0xFFFFFF, align: 'center', fontWeight: '800', fontFamily: 'round_popregular' });
+        this.youWinLabel = new PIXI.Text(this.currentButtonLabel, { font: '80px', fill: 0xFFFFFF, align: 'center', fontWeight: '800', fontFamily: window.STANDARD_FONT1 });
 
         this.addChild(this.screenContainer);
         this.screenContainer.addChild(this.stripsContainer);
@@ -61,10 +61,10 @@ export default class EndGameContainer extends PIXI.Container {
         this.stripsContainer.rotation = -Math.PI * 0.25
 
 
-        this.levelName = new PIXI.Text("Level 1", { font: '64px', fill: 0x000, align: 'left', fontWeight: '300', fontFamily: 'round_popregular' });
+        this.levelName = new PIXI.Text("Level 1", { font: '64px', fill: 0x000, align: 'left', fontWeight: '300', fontFamily: window.STANDARD_FONT1 });
         this.screenContainer.addChild(this.levelName);
 
-        this.pointsLabel = new PIXI.Text("POINTS: 3450", { font: '30px', fill: 0xFFFFFF, align: 'left', fontWeight: '300', fontFamily: 'round_popregular' });
+        this.pointsLabel = new PIXI.Text("POINTS: 3450", { font: '30px', fill: 0xFFFFFF, align: 'left', fontWeight: '300', fontFamily: window.STANDARD_FONT1 });
         this.pointsLabel.pivot.x = this.pointsLabel.width / 2;
         this.pointsLabel.pivot.y = this.pointsLabel.height / 2;
         this.pointsLabel.rotation = -Math.PI * 0.25
@@ -73,7 +73,7 @@ export default class EndGameContainer extends PIXI.Container {
         this.pointsLabel.y += Math.sin(this.pointsLabel.rotation) * -12
         this.screenContainer.addChild(this.pointsLabel);
 
-        this.movesLabel = new PIXI.Text("MOVES: 34", { font: '30px', fill: 0xFFFFFF, align: 'left', fontWeight: '300', fontface: 'round_popregular', fontFamily: 'round_popregular' });
+        this.movesLabel = new PIXI.Text("MOVES: 34", { font: '30px', fill: 0xFFFFFF, align: 'left', fontWeight: '300', fontface: window.STANDARD_FONT1, fontFamily: window.STANDARD_FONT1 });
         this.movesLabel.pivot.x = this.movesLabel.width / 2;
         this.movesLabel.pivot.y = this.movesLabel.height / 2;
         this.movesLabel.rotation = -Math.PI * 0.25
@@ -82,7 +82,7 @@ export default class EndGameContainer extends PIXI.Container {
         this.movesLabel.y += 71
         this.screenContainer.addChild(this.movesLabel);
 
-        this.timeLabel = new PIXI.Text("TIME: 34", { font: '30px', fill: 0xFFFFFF, align: 'left', fontWeight: '300', fontface: 'round_popregular', fontFamily: 'round_popregular' });
+        this.timeLabel = new PIXI.Text("TIME: 34", { font: '30px', fill: 0xFFFFFF, align: 'left', fontWeight: '300', fontface: window.STANDARD_FONT1, fontFamily: window.STANDARD_FONT1 });
         this.timeLabel.pivot.x = this.timeLabel.width / 2;
         this.timeLabel.pivot.y = this.timeLabel.height / 2;
         this.timeLabel.rotation = -Math.PI * 0.25
