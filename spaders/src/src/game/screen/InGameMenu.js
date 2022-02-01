@@ -4,6 +4,7 @@ import TweenLite from 'gsap';
 import config from '../../config';
 import utils from '../../utils';
 import UIButton1 from './UIButton1';
+import Spring from '../effects/Spring';
 
 export default class InGameMenu extends PIXI.Container {
 	constructor(color, icon, iconColor) {
@@ -14,24 +15,24 @@ export default class InGameMenu extends PIXI.Container {
 
 		this.customWidth = 60;
 		this.backShape = new PIXI.Graphics();
-		this.backShape.lineStyle(2, color, 1);
-		this.backShape.beginFill(0x000000);
-		this.backShape.drawRect(0, 0, 290, 100);
+		this.backShape.beginFill(config.colors.white);
+		this.backShape.drawRoundedRect(0, 0, 290, 100 , 20);
 		this.backShape.endFill();
 		this.backShape.alpha = 1
 
+		this.positionSpring = new Spring();
 
 		this.openMenu = new UIButton1(config.colors.white, './assets/images/icons/icons8-menu-48.png', config.colors.dark);
 		this.openMenu.onClick.add(() => this.toggleState());
 
-		this.closeButton = new UIButton1(config.colors.red2, './assets/images/icons/icons8-back-128.png', config.colors.dark);
+		this.closeButton = new UIButton1(config.colors.background, './assets/images/icons/icons8-back-128.png', config.colors.white);
 		this.closeButton.onClick.add(() => {
 			this.state = 1;
 			this.onBack.dispatch()
 		});
 		this.closeButton.backShape.rotation = 0
 
-		this.refreshButton = new UIButton1(config.colors.blue, './assets/images/icons/icons8-refresh-64.png', config.colors.dark);
+		this.refreshButton = new UIButton1(config.colors.background, './assets/images/icons/icons8-refresh-64.png', config.colors.white);
 		this.refreshButton.onClick.add(() => {
 			this.state = 1;
 			this.onRestart.dispatch()
@@ -41,7 +42,7 @@ export default class InGameMenu extends PIXI.Container {
 		this.mainContainer.addChild(this.backShape);
 		this.mainContainer.scale.set(1.5)
 
-		this.autoPlayButton = new UIButton1(config.colors.purple, './assets/images/robot-antennas.png', config.colors.white);
+		this.autoPlayButton = new UIButton1(config.colors.background, './assets/images/robot-antennas.png', config.colors.white);
 		this.autoPlayButton.onClick.add(() => {
 			this.state = 1;
 			window.AUTO_PLAY = !window.AUTO_PLAY;
@@ -56,6 +57,8 @@ export default class InGameMenu extends PIXI.Container {
 		});
 		this.autoPlayButton.backShape.rotation = 0
 
+
+		this.positionSpring.x = -this.backShape.width;
 		this.mainContainer.x = -this.backShape.width;
 		this.addChild(this.mainContainer);
 		this.mainContainer.addChild(this.closeButton);
@@ -77,7 +80,6 @@ export default class InGameMenu extends PIXI.Container {
 		this.state = 1;
 	}
 	toggleState() {
-		console.log("STATE", this.state)
 		if (this.state == 1) {
 			this.state = 2;
 		} else {
@@ -85,13 +87,17 @@ export default class InGameMenu extends PIXI.Container {
 		}
 	}
 	update(delta) {
+
+		this.positionSpring.update();
 		if (this.state == 1) {
 			this.openMenu.updateTexture('./assets/images/icons/icons8-menu-48.png')
-			this.mainContainer.x = utils.lerp(this.mainContainer.x, this.backShape.width * this.mainContainer.scale.x + 50, 0.5);
+			this.positionSpring.tx = this.backShape.width * this.mainContainer.scale.x + 50;
+			this.mainContainer.x = this.positionSpring.x//utils.lerp(this.mainContainer.x, this.backShape.width * this.mainContainer.scale.x + 50, 0.5);
 			this.mainContainer.alpha = utils.lerp(this.mainContainer.alpha, 0, 0.5);
 		} else {
 			this.openMenu.updateTexture('./assets/images/icons/icons8-close-100.png')
-			this.mainContainer.x = utils.lerp(this.mainContainer.x, -this.backShape.width * this.mainContainer.scale.x, 0.5);
+			this.positionSpring.tx = -this.backShape.width * this.mainContainer.scale.x
+			this.mainContainer.x = this.positionSpring.x//utils.lerp(this.mainContainer.x, -this.backShape.width * this.mainContainer.scale.x, 0.5);
 			this.mainContainer.alpha = utils.lerp(this.mainContainer.alpha, 1, 0.5);
 		}
 	}

@@ -20,6 +20,7 @@ export default class Card extends PIXI.Container {
 		this.cardNumber = CARD_NUMBER;
 
 		this.realSpriteWidth = 72;
+		this.scaleRef = 0.75;
 
 		let card = new PIXI.Container();
 		this.counter = this.MAX_COUNTER;
@@ -32,7 +33,7 @@ export default class Card extends PIXI.Container {
 		this.cardBack3 = new PIXI.Graphics().beginFill(0x000000).drawRect(CARD.width / 2 - 10, CARD.height / 2, 19, 10);
 		this.enemySprite = PIXI.Sprite.fromImage('./assets/images/enemy.png');
 
-		this.enemySprite.scale.set(this.realSpriteWidth / this.enemySprite.width * 0.65)
+		this.enemySprite.scale.set(this.realSpriteWidth / this.enemySprite.width * this.scaleRef)
 		this.enemySprite.anchor.set(0.5);
 
 		this.cardForeground.alpha = 1;
@@ -224,7 +225,7 @@ export default class Card extends PIXI.Container {
 	}
 	updateSize() {
 		//this.enemySprite.scale.set(CARD.width / this.enemySprite.width * 0.55 * this.enemySprite.scale.x)
-		this.enemySprite.scale.set(CARD.width / this.realSpriteWidth * 0.65)
+		this.enemySprite.scale.set(CARD.width / this.realSpriteWidth * this.scaleRef)
 		this.starterScale = this.enemySprite.scale.x
 		this.enemySprite.x = CARD.width / 2;
 		this.enemySprite.y = CARD.height / 2;

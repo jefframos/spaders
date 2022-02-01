@@ -242,10 +242,10 @@ export default class Board {
 			}
 		}
 	}
-	addCrazyMoodParticles(target, color = 0xFFFFFF){
+	addCrazyMoodParticles(target, color = 0xFFFFFF) {
 		let cardGlobal = target.getGlobalPosition({ x: 0, y: 0 });
-		cardGlobal.x += CARD.width / 2
-		cardGlobal.y += CARD.width / 2
+		cardGlobal.x += target.width / 2 * this.game.cardsContainer.scale.x
+		cardGlobal.y += target.height/ 2 * this.game.cardsContainer.scale.y
 		this.game.fxContainer.addParticlesToScore(
 			8,
 			this.game.toLocal(cardGlobal),
@@ -349,17 +349,14 @@ export default class Board {
 				)
 
 
-				this.addCrazyMoodParticles(card, card.currentColor)
+				this.addCrazyMoodParticles(card, autoDestroyCardData.card.currentColor)
 				let spritePos = this.game.toLocal(arrowGlobal)
 				spritePos.y -= CARD.height
-				this.game.fxContainer.popSprite('./assets/images/finish/counter.png', spritePos, CARD.width * 2, card.currentColor)
+				this.game.fxContainer.popSprite('./assets/images/finish/counter.png', spritePos, CARD.width * 2, autoDestroyCardData.card.currentColor)
 				let style = window.textStyles.counter
-				style.fill = card.currentColor
+				style.fill = autoDestroyCardData.card.currentColor
 				this.popLabel(this.game.toLocal(arrowGlobal), "+" + 10 * counterHits, 0.2, 0, 0.3 + counterHits * 0.1, style);
 				window.EFFECTS.shake(0.2, 5, 0.3, this.game.gameContainer);
-
-				console.log(window.textStyles.counter)
-				// this.popLabel(arrowGlobal,10 * counterHits , 0.1, -0.5, 1 + counterHits * 0.15);
 
 
 			}.bind(this), list.length * 200 / window.TIME_SCALE);

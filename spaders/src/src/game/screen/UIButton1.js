@@ -5,7 +5,7 @@ import config from '../../config';
 import utils from '../../utils';
 
 export default class UIButton1 extends PIXI.Container {
-	constructor(color, icon, iconColor) {
+	constructor(color, icon, iconColor, width = 60) {
 		super();
 
 		this.mainContainer = new PIXI.Container();
@@ -13,7 +13,6 @@ export default class UIButton1 extends PIXI.Container {
 		this.icon = PIXI.Sprite.fromImage(icon);
 		this.icon.tint = iconColor;
 
-        let width = 60;
 		// this.backShape = new PIXI.Graphics();
 		// //this.backShape.lineStyle(3, color, 1);
 		// this.backShape.beginFill(color);
@@ -44,6 +43,14 @@ export default class UIButton1 extends PIXI.Container {
     click(){
         this.onClick.dispatch();
     }
+
+	addLabelLeft(label){
+        this.movesLabel = new PIXI.Text(label, { font: '18px', fill: this.backShape.tint, align: 'right', fontWeight: '300', fontFamily: window.STANDARD_FONT1 });
+		this.movesLabel.pivot.x = this.movesLabel.width;
+		this.movesLabel.pivot.y = this.movesLabel.height / 2;
+		this.movesLabel.x = -this.mainContainer.width * 0.75;
+		this.addChild(this.movesLabel);
+	}
 
     updateTexture(texture){
         this.icon.texture = PIXI.Texture.fromImage(texture);

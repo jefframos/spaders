@@ -96,7 +96,7 @@ window.textStyles = {
 	},
 	areaAttack: {
 		font: '52px',
-		fill: config.colors.yellow,//yellow
+		fill: config.colors.purple,//yellow
 		align: 'center',
 		fontFamily: window.STANDARD_FONT1,
 		stroke: 0xFFFFFF,
@@ -108,7 +108,7 @@ window.textStyles = {
 		align: 'center',
 		wight: '800',
 		fontFamily: window.STANDARD_FONT1,
-		stroke: 0xFFFFFF,
+		stroke: 0x000000,
 		strokeThickness: 6
 	}
 },
@@ -311,6 +311,7 @@ function configGame() {
 
 				}
 			});
+
 			res.layers.forEach(layer => {
 
 				let data = extractData(layer);
@@ -321,13 +322,30 @@ function configGame() {
 				}
 			});
 			level.data = sectionLevels
+
+			
+			for (let index = 0; index < level.data.length; index++) {
+				let next = index + 1
+				next %= level.data.length;
+				level.data[index].next = level.data[next];
+			}
+			
 		});
 	});
+
+	console.log("LEVEL", window.levelSections)
+	// for (let index = 0; index < tier.length; index++) {
+	// 	const element = tier[index];
+	// 	let next = index +1
+	// 	next %= tier.length;
+	// 	tier[index].next = tier[next];
+	// }
 
 
 
 	window.game = new Game(config);
-	window.levelsRawJson = PIXI.loader.resources["./assets/levelsRaw.json"].data
+	window.levelsRawJson = PIXI.loader.resources["./data/how-to-play/shapes.json"].data
+	//window.levelsRawJson = PIXI.loader.resources["./assets/levelsRaw.json"].data
 	window.levelsJson = PIXI.loader.resources["./assets/levels.json"].data
 
 

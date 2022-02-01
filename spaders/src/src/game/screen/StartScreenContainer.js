@@ -3,6 +3,7 @@ import TweenLite from 'gsap';
 import config from '../../config';
 import utils from '../../utils';
 import UIButton1 from './UIButton1';
+import Spring from '../effects/Spring';
 import LevelSelectContainer from './LevelSelectContainer'
 export default class StartScreenContainer extends PIXI.Container {
 	constructor(screen) {
@@ -25,6 +26,11 @@ export default class StartScreenContainer extends PIXI.Container {
 
 		this.addChild(this.levelSelectionContainer);
 		this.addChild(this.screenContainer);
+
+		this.screenContainer.positionSpringX = new Spring();
+		this.screenContainer.positionSpringY = new Spring();
+		this.screenContainer.rotationSpring = new Spring();
+
 
 		this.screenContainer.addChild(this.stripsContainer);
 		this.screenContainer.addChild(this.logoLabel);
@@ -66,7 +72,7 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.logoLabel.pivot.x = this.logoLabel.width / 2
 		this.logoLabel.pivot.y = this.logoLabel.height / 2
 
-		this.playLabel = new PIXI.Text("PLAY", { font: '60px', fill: config.colors.background, align: 'center', fontWeight: '800', fontFamily: window.STANDARD_FONT1 });
+		this.playLabel = new PIXI.Text("PLAY", { font: '60px', fill: config.colors.background, align: 'center', fontFamily: window.STANDARD_FONT1 });
 		this.screenContainer.addChild(this.playLabel);
 		this.playLabel.rotation = Math.PI * -0.25;
 		this.playLabel.x = -config.width / 2 + 80 + Math.cos(this.playLabel.rotation) * 200
@@ -114,6 +120,10 @@ export default class StartScreenContainer extends PIXI.Container {
 			this.addChild(this.closeApplicationButton);
 		}
 
+		this.screenContainer.positionSpringX.x = this.screenContainer.x
+		this.screenContainer.positionSpringY.x = this.screenContainer.y
+		this.screenContainer.rotationSpring.x = this.screenContainer.rotation
+
 	}
 	getRect(size = 4, color = 0xFFFFFF) {
 		return new PIXI.Graphics().beginFill(color).drawRect(0, 0, size, size);
@@ -146,8 +156,8 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.logoLabel.y = this.playLine.y - 350
 
 
-		this.playLabel.x = 50
-		this.playLabel.y = this.playLine.y - 85
+		this.playLabel.x = 55
+		this.playLabel.y = this.playLine.y - 105
 		this.playLabel.text = "PLAY"
 
 		////console.log(this.playLine.getGlobalPosition())
@@ -156,12 +166,22 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.levelSelectionContainer.y = this.mainCanvas.y
 		this.backButton.y = this.mainCanvas.y + this.backButton.height
 
+
+		this.screenContainer.positionSpringX.update()
+		this.screenContainer.positionSpringY.update()
+		this.screenContainer.rotationSpring.update()
 		if (this.screenState == 1) {
 
 			this.closeApplicationButton.alpha = utils.lerp(this.closeApplicationButton.alpha, 1, 0.5)
-			this.screenContainer.rotation = utils.lerp(this.screenContainer.rotation, 0, 0.5)
-			this.screenContainer.x = this.mainCanvas.width / 2 + this.mainCanvas.x
-			this.screenContainer.y = utils.lerp(this.screenContainer.y, this.mainCanvas.height / 2 + this.mainCanvas.y, 0.5)
+
+			this.screenContainer.rotationSpring.tx = 0;
+			this.screenContainer.rotation = this.screenContainer.rotationSpring.x;
+
+			this.screenContainer.positionSpringX.tx = this.mainCanvas.width / 2 + this.mainCanvas.x;
+			this.screenContainer.x = this.screenContainer.positionSpringX.x;
+
+			this.screenContainer.positionSpringY.tx = this.mainCanvas.height / 2 + this.mainCanvas.y;
+			this.screenContainer.y = this.screenContainer.positionSpringY.x;
 
 			this.levelSelectionContainer.x = utils.lerp(this.levelSelectionContainer.x, this.mainCanvas.width + this.mainCanvas.x + this.levelSelectionContainer.width / 2, 0.2)
 
@@ -176,10 +196,15 @@ export default class StartScreenContainer extends PIXI.Container {
 
 			
 			this.closeApplicationButton.alpha = utils.lerp(this.closeApplicationButton.alpha, 0, 0.2)
-			this.screenContainer.rotation = utils.lerp(this.screenContainer.rotation, Math.PI * 0.25, 0.5)
 
-			this.screenContainer.x = this.mainCanvas.width / 2 + this.mainCanvas.x
-			this.screenContainer.y = utils.lerp(this.screenContainer.y, this.mainCanvas.y, 0.5)
+			this.screenContainer.rotationSpring.tx = Math.PI * 0.25;
+			this.screenContainer.rotation = this.screenContainer.rotationSpring.x;
+
+			this.screenContainer.positionSpringX.tx = this.mainCanvas.width / 2 + this.mainCanvas.x;
+			this.screenContainer.x = this.screenContainer.positionSpringX.x;
+
+			this.screenContainer.positionSpringY.tx = this.mainCanvas.y;
+			this.screenContainer.y = this.screenContainer.positionSpringY.x;
 
 			this.backButton.scale.set(this.screenContainer.scale.x)
 			this.backButton.x = utils.lerp(this.backButton.x, this.mainCanvas.x + this.mainCanvas.width - this.backButton.width, 0.2)//this.mainCanvas.width / 2* this.screenContainer.scale.x//globalPosRightCorner.x//- this.mainCanvas.x;//globalPosRightCorner.x// - 80 * this.screenContainer.scale.x

@@ -311,16 +311,14 @@ export default class LevelSelectContainer extends PIXI.Container {
             }
         });
 
-        console.log("tier", tier)
         this.levelCards = [];
-
-
+        
+        
         let backButton = this.buildBackButton();
         this.levelsView.addChild(backButton);
         this.levelCards.push(backButton);
 
-
-
+        console.log("tier", tier)
         tier.forEach(element => {
             this.addCard(element);
         });
@@ -348,45 +346,6 @@ export default class LevelSelectContainer extends PIXI.Container {
 
     addCard(data) {
 
-        // let pieceSize = 16;
-        // if (data.pieces[0].length >= data.pieces.length) {
-        //     pieceSize = this.unscaledCardSize.width / data.pieces[0].length + 2;
-        // } else {
-        //     pieceSize = this.unscaledCardSize.height / data.pieces.length + 2;
-        // }
-
-        // let levelCard = PIXI.Sprite.fromImage('./assets/images/largeCard.png');//new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
-        // levelCard.tint = config.colors.dark
-
-        // let card = this.gameScreen.generateImage(data.pieces, pieceSize, 32)
-        // card.y = 0
-        // card.removeChild(card.background)
-
-        // let label = new PIXI.Text(data.levelName, { font: '30px', fill: 0xFFFFFF, align: 'center', fontWeight: '200', fontFamily: window.STANDARD_FONT1 });
-
-        // if (label.width > levelCard.width * 0.8) {
-        //     label.scale.set(levelCard.width / label.width * 0.8)
-        // }
-
-        // label.pivot.y = label.height / 2
-
-        // label.x = levelCard.width / 2 - label.width / 2
-        // label.y = levelCard.height * 0.85
-
-        // this.gameScreen.resizeToFitAR(this.unscaledCardSize, card)
-        // utils.centerObject(card, levelCard)
-        // card.y -= label.height * 0.5
-
-        // levelCard.addChild(card)
-        // levelCard.addChild(label)
-
-        // levelCard.on('mouseup', this.selectLevel.bind(this, data)).on('touchend', this.selectLevel.bind(this, data));
-        // levelCard.interactive = true;
-        // levelCard.buttonMode = true;
-
-        // levelCard.data = data;
-
-        // levelCard.scale.set(this.unscaledCardSize.width / levelCard.width)
 
         let levelButton = new SquareButton(this.unscaledCardSize);
         levelButton.updateLabel(data.levelName);

@@ -9,6 +9,7 @@ import Block from '../elements/Block'
 import Board from '../core/Board'
 import BackgroundEffects from '../effects/BackgroundEffects'
 import { debug } from 'webpack';
+import UIButton1 from './UIButton1';
 
 export default class EndGameContainer extends PIXI.Container {
     constructor(screen) {
@@ -50,84 +51,54 @@ export default class EndGameContainer extends PIXI.Container {
 
 
         let center = new PIXI.Graphics().beginFill(0xff0000).drawCircle(0, 0, 10)
-        //this.addChild(center);
 
-        this.stripsContainer.rotation = Math.PI * 0.5;
-
-        //this.interactive = true;
         this.buttonMode = true;
 
-
-        this.stripsContainer.rotation = -Math.PI * 0.25
-
-
-        this.levelName = new PIXI.Text("Level 1", { font: '64px', fill: 0x000, align: 'left', fontWeight: '300', fontFamily: window.STANDARD_FONT1 });
+        this.levelName = new PIXI.Text("Level 1", { font: '64px', fill: 0xFFFFFF, align: 'left', fontWeight: '300', fontFamily: window.STANDARD_FONT1 });
         this.screenContainer.addChild(this.levelName);
 
-        this.pointsLabel = new PIXI.Text("POINTS: 3450", { font: '30px', fill: 0xFFFFFF, align: 'left', fontWeight: '300', fontFamily: window.STANDARD_FONT1 });
-        this.pointsLabel.pivot.x = this.pointsLabel.width / 2;
-        this.pointsLabel.pivot.y = this.pointsLabel.height / 2;
-        this.pointsLabel.rotation = -Math.PI * 0.25
-        this.pointsLabel.y = 105
-        this.pointsLabel.x += Math.cos(this.pointsLabel.rotation) * -12
-        this.pointsLabel.y += Math.sin(this.pointsLabel.rotation) * -12
+        this.pointsLabel = new PIXI.Text("POINTS: 3450", { font: '30px', fill: 0xFFFFFF, align: 'center', fontWeight: '300', fontFamily: window.STANDARD_FONT1 });
         this.screenContainer.addChild(this.pointsLabel);
 
-        this.movesLabel = new PIXI.Text("MOVES: 34", { font: '30px', fill: 0xFFFFFF, align: 'left', fontWeight: '300', fontface: window.STANDARD_FONT1, fontFamily: window.STANDARD_FONT1 });
-        this.movesLabel.pivot.x = this.movesLabel.width / 2;
-        this.movesLabel.pivot.y = this.movesLabel.height / 2;
-        this.movesLabel.rotation = -Math.PI * 0.25
-        this.movesLabel.x = this.pointsLabel.x + Math.cos(this.pointsLabel.rotation) * 12
-        this.movesLabel.y = this.pointsLabel.y + Math.sin(this.pointsLabel.rotation) * 12
-        this.movesLabel.y += 71
+        this.movesLabel = new PIXI.Text("MOVES: 34", { font: '30px', fill: 0xFFFFFF, align: 'center', fontWeight: '300', fontface: window.STANDARD_FONT1, fontFamily: window.STANDARD_FONT1 });
+
         this.screenContainer.addChild(this.movesLabel);
 
-        this.timeLabel = new PIXI.Text("TIME: 34", { font: '30px', fill: 0xFFFFFF, align: 'left', fontWeight: '300', fontface: window.STANDARD_FONT1, fontFamily: window.STANDARD_FONT1 });
-        this.timeLabel.pivot.x = this.timeLabel.width / 2;
-        this.timeLabel.pivot.y = this.timeLabel.height / 2;
-        this.timeLabel.rotation = -Math.PI * 0.25
-        this.timeLabel.x = this.movesLabel.x + Math.cos(this.movesLabel.rotation) * 12
-        this.timeLabel.y = this.movesLabel.y + Math.sin(this.movesLabel.rotation) * 12
-        this.timeLabel.y += 71
+        this.timeLabel = new PIXI.Text("TIME: 34", { font: '30px', fill: 0xFFFFFF, align: 'center', fontWeight: '300', fontface: window.STANDARD_FONT1, fontFamily: window.STANDARD_FONT1 });
+
         this.screenContainer.addChild(this.timeLabel);
 
+        let pos = [this.pointsLabel, this.movesLabel, this.timeLabel]
 
-        this.backButton = new PIXI.Graphics().beginFill(window.config.colors.red).drawCircle(0, 0, 50);
-        this.backButton.x = 90
-        this.backButton.y = config.height - 90
+        for (let index = 0; index < pos.length; index++) {
+            const element = pos[index];
+            element.y = index * 50 + 55
+        }
+
+
+        this.backButton = new UIButton1(config.colors.background, './assets/images/icons/icons8-close-100.png', config.colors.white);
+        this.backButton.onClick.add(() => {
+            this.goBack(0)
+        });
+
         this.addChild(this.backButton);
-
-        //this.backButton.rotation = Math.PI * 0.25
-
-        let backIcon = PIXI.Sprite.fromImage('./assets/images/previous-button.png');
-        let sclb = this.backButton.height / backIcon.height;
-        sclb *= 0.5;
-        backIcon.tint = 0;
-        backIcon.anchor = { x: 0.5, y: 0.5 }
-        backIcon.scale = { x: sclb, y: sclb }
-        backIcon.rotation = -this.backButton.rotation;
-        this.backButton.addChild(backIcon);
 
         this.backButton.on('mousedown', this.goBack.bind(this)).on('touchstart', this.goBack.bind(this));
 
 
-        this.replayButton = new PIXI.Graphics().beginFill(window.config.colors.blue).drawCircle(0, 0, 50);
-        this.replayButton.x = config.width - 90
-        this.replayButton.y = config.height - 90
+        this.replayButton = new UIButton1(config.colors.background, './assets/images/icons/icons8-refresh-64.png', config.colors.white);
+        this.replayButton.onClick.add(() => {
+            this.restart()
+        });
         this.addChild(this.replayButton);
 
-        //this.replayButton.rotation = Math.PI * 0.25
 
-        let replayIcon = PIXI.Sprite.fromImage('./assets/images/cycle.png');
-        replayIcon.tint = 0;
-        let sclr = this.replayButton.height / replayIcon.height;
-        sclr *= 0.5;
-        replayIcon.anchor = { x: 0.5, y: 0.5 }
-        replayIcon.scale = { x: sclr, y: sclr }
-        replayIcon.rotation = -this.replayButton.rotation;
-        this.replayButton.addChild(replayIcon);
-
-        this.replayButton.on('mousedown', this.restart.bind(this)).on('touchstart', this.restart.bind(this));
+        this.nextLevel = new UIButton1(config.colors.white, './assets/images/icons/icons8-forward-100.png', config.colors.background);
+        this.nextLevel.onClick.add(() => {
+            this.playNextLevel()
+        });
+        this.addChild(this.nextLevel);
+        this.nextLevel.addLabelLeft("NEXT");
 
         this.mainCanvas = new PIXI.Graphics().beginFill(0xFF0000).drawRect(0, 0, config.width, config.height);
         this.addChild(this.mainCanvas)
@@ -148,16 +119,20 @@ export default class EndGameContainer extends PIXI.Container {
         this.screenContainer.x = this.mainCanvas.width / 2 + this.mainCanvas.x
         this.screenContainer.y = this.mainCanvas.height / 2 + this.mainCanvas.y
 
-        if(this.screenContainer.scale.x < 1){
+        if (this.screenContainer.scale.x < 1) {
             this.replayButton.scale.set(this.screenContainer.scale.x)
             this.backButton.scale.set(this.screenContainer.scale.x)
+            this.nextLevel.scale.set(this.screenContainer.scale.x)
         }
 
-        this.replayButton.x = this.mainCanvas.x+ this.mainCanvas.width - this.replayButton.width
-        this.replayButton.y = this.mainCanvas.y + this.mainCanvas.height - this.replayButton.height
+        this.nextLevel.x = this.mainCanvas.x + this.mainCanvas.width - this.backButton.width
+        this.nextLevel.y = this.mainCanvas.y + this.mainCanvas.height - this.backButton.height
 
-        this.backButton.x = this.mainCanvas.x+ this.backButton.width
-        this.backButton.y = this.mainCanvas.y + this.mainCanvas.height- this.backButton.height
+        this.backButton.x = this.mainCanvas.x + this.backButton.width
+        this.backButton.y = this.mainCanvas.y + this.mainCanvas.height - this.backButton.height
+
+        this.replayButton.x = this.backButton.x + this.replayButton.width
+        this.replayButton.y = this.backButton.y
     }
     getRect(size = 4, color = 0xFFFFFF) {
         return new PIXI.Graphics().beginFill(color).drawRect(0, 0, size, size);
@@ -167,6 +142,7 @@ export default class EndGameContainer extends PIXI.Container {
         TweenLite.killTweensOf(this.screenContainer)
         TweenLite.killTweensOf(this.backButton)
         TweenLite.killTweensOf(this.replayButton)
+        TweenLite.killTweensOf(this.nextLevel)
 
         TweenLite.to(this.screenContainer, 0.25, { delay: delay, alpha: 1, ease: Cubic.easeOut })
 
@@ -182,65 +158,86 @@ export default class EndGameContainer extends PIXI.Container {
         this.replayButton.buttonMode = true;
         this.replayButton.visible = true;
 
+        this.nextLevel.alpha = 0;
+        TweenLite.to(this.nextLevel, 0.5, { delay: delay, alpha: 1, ease: Cubic.easeOut })
+        this.nextLevel.interactive = true;
+        this.nextLevel.buttonMode = true;
+        this.nextLevel.visible = true;
+
     }
     hide(force = false) {
         TweenLite.killTweensOf(this.screenContainer)
         TweenLite.killTweensOf(this.backButton)
         TweenLite.killTweensOf(this.replayButton)
+        TweenLite.killTweensOf(this.nextLevel)
         TweenLite.to(this.screenContainer, force ? 0 : 0.5, { alpha: 0, ease: Cubic.easeIn })
         TweenLite.to(this.backButton, force ? 0 : 0.5, { alpha: 0, ease: Cubic.easeIn })
         TweenLite.to(this.replayButton, force ? 0 : 0.5, { alpha: 0, ease: Cubic.easeIn })
+        TweenLite.to(this.nextLevel, force ? 0 : 0.5, { alpha: 0, ease: Cubic.easeIn })
         this.backButton.interactive = false;
         this.replayButton.interactive = false;
+        this.nextLevel.interactive = false;
         //console.log("hide")
         //console.trace()
     }
-    setStats(points, rounds,time, image, data) {
-        
-        if(this.currentLevelImage && this.currentLevelImage.parent){
+    setStats(points, rounds, time, image, data) {
+
+        if (this.currentLevelImage && this.currentLevelImage.parent) {
             this.currentLevelImage.parent.removeChild(this.currentLevelImage);
         }
         this.currentLevelImage = image;
         this.movesLabel.text = "MOVES: " + rounds;
         this.pointsLabel.text = "POINTS: " + points;
         this.timeLabel.text = "TIME: " + time;
+
+        this.movesLabel.pivot.x = this.movesLabel.width / 2
+        this.pointsLabel.pivot.x = this.pointsLabel.width / 2
+        this.timeLabel.pivot.x = this.timeLabel.width / 2
+
+        this.levelName.scale.set(1);
         this.levelName.text = data.levelName;
+
+
+        this.levelName.pivot.x = this.levelName.width / 2;
+        this.levelName.pivot.y = this.levelName.height;
+        this.levelName.x = 0
+        this.levelName.y = -220
 
         if (this.levelName.width > 300) {
 
             this.levelName.scale.set(300 / this.levelName.width)
         }
         //this.currentLevelImage.rotation = Math.PI * -0.25
-        if(this.youWinLabel.parent){
+        if (this.youWinLabel.parent) {
             this.youWinLabel.parent.removeChild(this.youWinLabel);
         }
-        
-        this.levelName.x =this.currentLevelImage.width + 10
-        this.levelName.y = 0
-        
-        
-        this.youWinLabel.x = this.levelName.x
-        this.youWinLabel.y =  this.levelName.height
 
- 
+
+
+
+        this.youWinLabel.x = this.levelName.x
+        this.youWinLabel.y = this.levelName.height
+
+
         this.currentLevelImage.pivot.x = this.currentLevelImage.width / 2
         this.currentLevelImage.pivot.y = this.currentLevelImage.height / 2
         //let locStripe = this.screenContainer.toLocal(this.line1.getGlobalPosition())
-        this.currentLevelImage.x =  - 90//Math.cos(this.currentLevelImage.rotation) * -350
-        this.currentLevelImage.y = -65//locStripe.y//-imageAspect.height + Math.sin(this.currentLevelImage.rotation) * -350
-       
-        let imageAspect = {width:this.line1.width, height:this.line1.height * 0.8}
+        this.currentLevelImage.x = 0//Math.cos(this.currentLevelImage.rotation) * -350
+        this.currentLevelImage.y = -70//locStripe.y//-imageAspect.height + Math.sin(this.currentLevelImage.rotation) * -350
+
+        let imageAspect = { width: this.line1.width, height: this.line1.height * 0.8 }
         this.gameScreen.resizeToFitAR(imageAspect, this.currentLevelImage)
 
         this.line1.addChild(this.currentLevelImage);
+        this.line1.addChild(this.levelName);
 
-        this.currentLevelImage.addChild(this.youWinLabel)
-        this.currentLevelImage.addChild(this.levelName)
-        
-        
-        this.levelName.scale.set(1 + (1-this.currentLevelImage.scale.x))
-        this.youWinLabel.scale.set(1 + (1-this.currentLevelImage.scale.x))
-        
+        //this.currentLevelImage.addChild(this.youWinLabel)
+        //this.currentLevelImage.addChild(this.levelName)
+
+
+        this.levelName.scale.set(1 + (1 - this.currentLevelImage.scale.x))
+        this.youWinLabel.scale.set(1 + (1 - this.currentLevelImage.scale.x))
+
         //console.log( this.currentLevelImage.scale)
         //console.log( this.youWinLabel.scale)
 
@@ -279,6 +276,9 @@ export default class EndGameContainer extends PIXI.Container {
     }
     goBack() {
         this.gameScreen.mainmenuStateFromGame(true)
+    }
+    playNextLevel() {
+        this.gameScreen.playNextLevel()
     }
     removeEvents() {
         //console.log("removeEvents")
