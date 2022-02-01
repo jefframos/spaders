@@ -8,12 +8,36 @@ export default class Grid extends PIXI.Container {
 		super();
 		this.game = game;
 		this.grids = [];
+		this.dropTiles = [];
 
 		this.onDestroyAllStartedCards = new signals();
 	}
 	start() {
 	}
 	update(delta) {
+
+		for (let index = this.dropTiles.length - 1; index >= 0; index--) {
+			const element = this.dropTiles[index];
+
+			element.x += element.fallData.velocity.x * delta;
+			element.y += element.fallData.velocity.y * delta;
+
+			element.fallData.velocity.y += element.fallData.gravity * delta;
+
+			element.rotation += element.fallData.angularVelocity * delta
+
+			if (element.fallData.timeToDie > 0) {
+				element.fallData.timeToDie -= delta;
+
+				if (element.fallData.timeToDie <= 0) {
+					if (element.parent) {
+						element.parent.removeChild(element);
+						this.dropTiles.splice(index, 1);
+					}
+				}
+			}
+
+		}
 		this.grids.forEach(element => {
 			element.sin += delta * element.speed;
 			element.alpha = element.startAlpha * Math.sin(element.sin);
@@ -22,16 +46,33 @@ export default class Grid extends PIXI.Container {
 
 		});
 	}
-	createGrid() {
+	resetGrid() {
 		this.cardsStartedOnGrid = 0;
 		for (let index = this.children.length - 1; index >= 0; index--) {
 			this.removeChildAt(index);
 		}
-		let gridContainer = new PIXI.Container();
-		// let gridBackground = new PIXI.Graphics().beginFill(0).drawRect(0,0,GRID.width, GRID.height);
-		// gridContainer.addChild(gridBackground)
+		for (let index = this.game.backGridContainer.length - 1; index >= 0; index--) {
+			this.removeChildAt(index);
+		}
+
+		for (let index = this.dropTiles.length - 1; index >= 0; index--) {
+			const element = this.dropTiles[index];
+			if (element.parent) {
+				element.parent.removeChild(element);
+				this.dropTiles.splice(index, 1);
+			}
+		}
+
 		this.gridsSquares = [];
 		this.grids = [];
+		this.dropTiles = [];
+
+	}
+	createGrid() {
+		console.log("CREATING GRID")
+		
+		this.resetGrid();
+		let gridContainer = new PIXI.Container();
 
 		for (var i = GRID.i - 1; i >= 0; i--) {
 			let gridLine = [];
@@ -59,7 +100,7 @@ export default class Grid extends PIXI.Container {
 				gridEffectSquare.y = j * CARD.height;
 				gridEffectSquare.alpha = 0;
 				gridContainer.addChild(gridEffectSquare)
-				gridLine.unshift({shape:gridEffectSquare, card:null});
+				gridLine.unshift({ shape: gridEffectSquare, card: null });
 			}
 			this.gridsSquares.unshift(gridLine);
 		}
@@ -68,29 +109,43 @@ export default class Grid extends PIXI.Container {
 
 		this.addChild(gridContainer);
 	}
-	destroyCard(card){
-		if(this.gridsSquares[card.pos.i][card.pos.j].card){
-			this.gridsSquares[card.pos.i][card.pos.j].shape.alpha = 0;
-			this.cardsStartedOnGrid --;
+	destroyCard(card) {
+		if (this.gridsSquares[card.pos.i][card.pos.j].card) {
+			//this.gridsSquares[card.pos.i][card.pos.j].shape.alpha = 1;
+			this.cardsStartedOnGrid--;
 
+			let shape = this.gridsSquares[card.pos.i][card.pos.j].shape;
+			let fallData = {
+				gravity: 500,
+				timeToDie: 5,
+				velocity: { x: Math.random() * CARD.width, y: 0 },
+				angularVelocity: (Math.random() - 0.5) * Math.PI * 2
+			}
+			shape.fallData = fallData;
+			shape.anchor.set(0.5);
+			shape.x += shape.width / 2
+			shape.y += shape.height / 2
+
+			this.game.backGridContainer.addChild(shape);
+			this.dropTiles.push(shape);
 			this.gridsSquares[card.pos.i][card.pos.j].card = null;
-	
-			if(this.cardsStartedOnGrid <= 0){
+
+			if (this.cardsStartedOnGrid <= 0) {
 				console.log("All cards", this.cardsStartedOnGrid)
 				this.onDestroyAllStartedCards.dispatch();
 			}
 		}
 	}
-	paintTile(card){
+	paintTile(card) {
 		this.gridsSquares[card.pos.i][card.pos.j].card = card;
 		let color = card.currentColor;
 		let alpha = 0.45;
-		if(color == config.colors.dark){
+		if (color == config.colors.dark) {
 			color = 0x000000;
 			alpha = 0.65
 		}
 		this.gridsSquares[card.pos.i][card.pos.j].shape.tint = color;
-		TweenMax.to(this.gridsSquares[card.pos.i][card.pos.j].shape, 0.5, {delay:0.5, alpha:alpha})
-		this.cardsStartedOnGrid ++;
+		TweenMax.to(this.gridsSquares[card.pos.i][card.pos.j].shape, 0.5, { delay: 0.5, alpha: alpha })
+		this.cardsStartedOnGrid++;
 	}
 }

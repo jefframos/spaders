@@ -27,7 +27,7 @@ import { utils } from 'pixi.js/lib/core';
 
 // function initFPSMeter() {
 //     FPSMeter.start();
-   
+
 // }
 
 // initFPSMeter();
@@ -85,7 +85,33 @@ window.colorsOrder = [
 	config.colors.dark,
 ]
 
-
+window.textStyles = {
+	normalAttack: {
+		font: '32px',
+		fill: 0xFFFFFF,
+		align: 'center',
+		fontFamily: window.STANDARD_FONT1,
+		stroke: 0x000000,
+		strokeThickness: 6
+	},
+	areaAttack: {
+		font: '52px',
+		fill: config.colors.yellow,//yellow
+		align: 'center',
+		fontFamily: window.STANDARD_FONT1,
+		stroke: 0xFFFFFF,
+		strokeThickness: 6
+	},
+	counter: {
+		font: '48px',
+		fill: config.colors.purple,//red
+		align: 'center',
+		wight: '800',
+		fontFamily: window.STANDARD_FONT1,
+		stroke: 0xFFFFFF,
+		strokeThickness: 6
+	}
+},
 
 	window.config = config;
 window.POOL = new Pool();
@@ -179,6 +205,8 @@ PIXI.loader
 	.add('./assets/images/rect.png')
 	.add('./assets/images/time.png')
 	.add('./assets/images/largeCard.png')
+	.add('./assets/images/finish/counter.png')
+	.add('./assets/images/finish/finish-them-all.png')
 	.add('./assets/images/largeCardBack.png')
 	.add('./assets/images/icons/icons8-menu-48.png')
 	.add('./assets/images/icons/icons8-star-48.png')
@@ -204,7 +232,7 @@ function loadJsons() {
 
 	window.levelSections.sections.forEach(section => {
 		console.log(section)
-		if(section.imageSrc){
+		if (section.imageSrc) {
 			PIXI.loader.add('./assets/' + section.imageSrc)
 		}
 		section.levels.forEach(level => {

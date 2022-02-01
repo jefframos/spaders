@@ -2,6 +2,7 @@ import * as PIXI from 'pixi.js';
 import TweenLite from 'gsap';
 import config from '../../config';
 import utils from '../../utils';
+import TweenMax from 'gsap';
 
 
 
@@ -9,6 +10,7 @@ export default class UIRectLabel extends PIXI.Container {
 	constructor(color, icon, center = true) {
 		super();
 
+		this.iconSrc = icon;
 		this.mainContainer = new PIXI.Container();
 		//this.backShape = PIXI.Sprite.fromImage('./assets/images/rect.png');
 		this.icon = PIXI.Sprite.fromImage(icon);
@@ -48,7 +50,8 @@ export default class UIRectLabel extends PIXI.Container {
 		//this.title.pivot.x = this.title.width * 0.5
 		this.title.x = 20
 		this.title.pivot.y = this.title.height * 0.5
-		utils.centerObject(this.icon, this.mainContainer);
+		this.icon.anchor.set(0.5)
+		utils.centerObject2(this.icon, this.mainContainer);
 		this.icon.x = this.icon.y;
 
 		if(center){
@@ -60,5 +63,21 @@ export default class UIRectLabel extends PIXI.Container {
 			this.label.x = this.icon.x + this.icon.width + 5;
 			this.label.y = 12;
 		}
+	}
+	getParticles(particle){
+		TweenMax.killTweensOf(this.icon.scale);
+		
+		if(!this.colorIcon){
+			this.colorIcon = PIXI.Sprite.fromImage(this.iconSrc);
+			this.icon.addChild(this.colorIcon);
+			this.colorIcon.anchor.set(0.5);
+		}
+		TweenMax.killTweensOf(this.colorIcon);
+		this.icon.scale.set(this.backShape.height /this.icon.height * 0.7*this.icon.scale.y)
+		this.colorIcon.tint = particle.tint;
+
+		this.colorIcon.alpha = 1;
+		TweenMax.from(this.icon.scale, 0.5, {x:this.icon.scale.x*1.25, y:this.icon.scale.y*0.75, ease:Elastic.easeOut})
+		TweenMax.to(this.colorIcon, 0.5, {delay:0.1, alpha:0})
 	}
 }

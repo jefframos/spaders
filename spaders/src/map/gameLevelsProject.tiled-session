@@ -5,9 +5,9 @@
     },
     "activeFile": "how-to-play/simple-shapes.tmx",
     "expandedProjectPaths": [
+        "movies",
         "videogames",
-        "how-to-play",
-        "movies"
+        "how-to-play"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -28,7 +28,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 351.9762178231201,
-                "y": 384.31997837983926
+                "y": 383.36869130464163
             }
         },
         "how-to-play/how-to-play-medium.tmx": {
@@ -36,7 +36,7 @@
             "selectedLayer": 3,
             "viewCenter": {
                 "x": 351.9762178231201,
-                "y": 384.31997837983926
+                "y": 383.36869130464163
             }
         },
         "how-to-play/how-to-play-small.tmx": {
@@ -51,16 +51,16 @@
             "scale": 0.8201171875,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 232.89354608240052,
-                "y": 382.8721124077161
+                "x": 351.16932603000714,
+                "y": 382.87211240771614
             }
         },
         "how-to-play/simple-shapes.tmx": {
             "scale": 0.75,
-            "selectedLayer": 0,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 270.66666666666663,
-                "y": 319.99999999999994
+                "x": 269.33333333333337,
+                "y": 318.66666666666674
             }
         },
         "how-to-play/spadersTileset.tsx": {
@@ -71,7 +71,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 351.9762178231201,
-                "y": 384.31997837983926
+                "y": 383.36869130464163
             }
         },
         "levels.tmx": {
@@ -103,7 +103,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 319.01817323578007,
-                "y": 384.27189048855314
+                "y": 383.0634883172056
             }
         },
         "movies/spadersTileset.tsx": {
@@ -129,8 +129,8 @@
             "scale": 0.8201171875,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 319.4665396522982,
-                "y": 384.09145034532025
+                "x": 319.46653965229814,
+                "y": 382.87211240771614
             }
         },
         "videogames/levels2.tmx": {
@@ -138,7 +138,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 319.01817323578007,
-                "y": 384.27189048855314
+                "y": 383.0634883172056
             }
         },
         "videogames/levels3.tmx": {
@@ -146,7 +146,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 319.01817323578007,
-                "y": 384.27189048855314
+                "y": 383.0634883172056
             }
         },
         "videogames/spadersTileset.tsx": {
@@ -155,7 +155,7 @@
             "scaleInEditor": 1
         }
     },
-    "last.exportedFilePath": "C:/Users/jfbod/Documents/projects/spaders/spaders/www/data/how-to-play",
+    "last.exportedFilePath": "C:/Users/jfbod/Documents/projects/spaders/spaders/www/assets",
     "last.externalTilesetPath": "E:/projects/spaders/spaders/src/map/tilesets",
     "last.imagePath": "D:/Projects/tetra/map",
     "map.height": 10,

@@ -183,15 +183,14 @@ export default class Board {
 			cardGlobal.y += CARD.height / 2;
 			let points = (areaAttacksCards.length + 1) * 10
 			this.game.addPoints(points);
-
 			this.game.fxContainer.addParticlesToScore(
 				1,
 				this.game.toLocal(cardGlobal),
-				this.game.fxContainer.toLocal(this.game.scoreRect.getGlobalPosition()),
+				this.game.scoreRect,
 				element.currentColor
 			)
 			////AREA ATTACK
-			this.popLabel(this.game.toLocal(cardGlobal), "+" + points, 0.1, 0.5, 0.5);
+			this.popLabel(this.game.toLocal(cardGlobal), "+" + points, 0.1, 0.5, 0.5, window.textStyles.areaAttack);
 			//cardsToDestroy.push({cardFound:cardFound, currentCard: card, attackZone:zones[i]});
 			this.attackCard(element, 1);
 		});
@@ -212,6 +211,7 @@ export default class Board {
 
 				tempCardList[i].startCrazyMood();
 				numCards--;
+				this.addCrazyMoodParticles(tempCardList[i]);
 			}
 			if (numCards <= 0) {
 				return
@@ -233,13 +233,27 @@ export default class Board {
 			if (tempCardList[i] && tempCardList[i].startCrazyMood) {
 				tempCardList[i].startCrazyMood();
 				numCards--;
+
+				this.addCrazyMoodParticles(tempCardList[i]);
+
 			}
 			if (numCards <= 0) {
 				return
 			}
 		}
 	}
-
+	addCrazyMoodParticles(target, color = 0xFFFFFF){
+		let cardGlobal = target.getGlobalPosition({ x: 0, y: 0 });
+		cardGlobal.x += CARD.width / 2
+		cardGlobal.y += CARD.width / 2
+		this.game.fxContainer.addParticlesToScore(
+			8,
+			this.game.toLocal(cardGlobal),
+			null,
+			color,
+			0.5
+		)
+	}
 	destroyCards(list, card, autoDestroyCardData, hits) {
 		let timeline = new TimelineLite();
 		TweenMax.killTweensOf(card);
@@ -270,11 +284,11 @@ export default class Board {
 						this.game.fxContainer.addParticlesToScore(
 							id,
 							this.game.toLocal(arrowGlobal),
-							this.game.fxContainer.toLocal(this.game.scoreRect.getGlobalPosition()),
+							this.game.scoreRect,
 							cardFound.currentColor
 						)
 
-						this.popLabel(this.game.toLocal(arrowGlobal), "+" + 10 * id, 0, 1, 0.5 + id * 0.15);
+						this.popLabel(this.game.toLocal(arrowGlobal), "+" + 10 * id, 0, 1, 0.5 + id * 0.15, window.textStyles.normalAttack);
 
 					}
 				}.bind(this),
@@ -290,13 +304,13 @@ export default class Board {
 							this.game.fxContainer.addParticlesToScore(
 								4,
 								this.game.toLocal(arrowGlobal2),
-								this.game.fxContainer.toLocal(this.game.scoreRect.getGlobalPosition()),
+								this.game.scoreRect,
 								cardFound.currentColor
 							)
 
 							window.EFFECTS.shake(0.2, 5, 0.3, this.game.gameContainer);
 							//explosion
-							this.popLabel(this.game.toLocal(arrowGlobal2), "+" + 100, 0.25, 0.4, 0.8, 0xE2C756, Elastic.easeOut);
+							this.popLabel(this.game.toLocal(arrowGlobal2), "+" + 100, 0.25, 0.4, 0.8, window.textStyles.areaAttack, Elastic.easeOut);
 							this.areaAttack(cardFound, card);
 						}
 
@@ -330,12 +344,21 @@ export default class Board {
 				this.game.fxContainer.addParticlesToScore(
 					3,
 					this.game.toLocal(arrowGlobal),
-					this.game.fxContainer.toLocal(this.game.scoreRect.getGlobalPosition()),
+					this.game.scoreRect,
 					card.currentColor
 				)
 
-				this.popLabel(this.game.toLocal(arrowGlobal), "+" + 10 * counterHits + "\nCOUNTER", 0.2, 0, 0.4 + counterHits * 0.1, 0xD81639);
+
+				this.addCrazyMoodParticles(card, card.currentColor)
+				let spritePos = this.game.toLocal(arrowGlobal)
+				spritePos.y -= CARD.height
+				this.game.fxContainer.popSprite('./assets/images/finish/counter.png', spritePos, CARD.width * 2, card.currentColor)
+				let style = window.textStyles.counter
+				style.fill = card.currentColor
+				this.popLabel(this.game.toLocal(arrowGlobal), "+" + 10 * counterHits, 0.2, 0, 0.3 + counterHits * 0.1, style);
 				window.EFFECTS.shake(0.2, 5, 0.3, this.game.gameContainer);
+
+				console.log(window.textStyles.counter)
 				// this.popLabel(arrowGlobal,10 * counterHits , 0.1, -0.5, 1 + counterHits * 0.15);
 
 
@@ -348,6 +371,11 @@ export default class Board {
 
 	}
 	popAttack(card) {
+
+
+		this.addCrazyMoodParticles(card)
+
+		return;
 
 		let cardGlobal = card.getGlobalPosition({ x: 0, y: 0 });
 		let convertedPosition = this.game.toLocal(cardGlobal)
@@ -365,16 +393,17 @@ export default class Board {
 			}
 		})
 	}
-	popLabel(pos, label, delay = 0, dir = 1, scale = 1, color = 0xFFFFFF, ease = Back.easeOut, time = 0.5) {
+	popLabel(pos, label, delay = 0, dir = 1, scale = 1, style = {}, ease = Back.easeOut, time = 0.5) {
 		//console.log(pos.x, pos.y);
-		let style = {
-			font: '32px',
-			fill: color,
-			align: 'center',
-			fontFamily: window.STANDARD_FONT1,
-			stroke: color == 0xFFFFFF ? 0x000000 : 0xFFFFFF,
-			strokeThickness: 6 * scale
-		}
+		// let style = {
+		// 	font: '32px',
+		// 	fill: color,
+		// 	align: 'center',
+		// 	fontFamily: window.STANDARD_FONT1,
+		// 	stroke: color == 0xFFFFFF ? 0x000000 : 0xFFFFFF,
+		// 	strokeThickness: 6 * scale
+		// }
+		console.log(style)
 		let tempLabel = null;
 		if (window.LABEL_POOL.length > 0) {
 			tempLabel = window.LABEL_POOL[0];
@@ -384,6 +413,7 @@ export default class Board {
 		}
 		tempLabel.style = style;
 		tempLabel.text = label;
+		tempLabel.fill = style.color;
 
 		this.game.addChild(tempLabel);
 		tempLabel.x = pos.x;

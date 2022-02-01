@@ -43025,7 +43025,33 @@
 	
 	window.colorsOrder = [_config2.default.colors.blue, _config2.default.colors.red, _config2.default.colors.yellow, _config2.default.colors.green, _config2.default.colors.blue2, _config2.default.colors.pink, _config2.default.colors.red2, _config2.default.colors.purple, _config2.default.colors.white, _config2.default.colors.dark];
 	
-	window.config = _config2.default;
+	window.textStyles = {
+		normalAttack: {
+			font: '32px',
+			fill: 0xFFFFFF,
+			align: 'center',
+			fontFamily: window.STANDARD_FONT1,
+			stroke: 0x000000,
+			strokeThickness: 6
+		},
+		areaAttack: {
+			font: '52px',
+			fill: _config2.default.colors.yellow, //yellow
+			align: 'center',
+			fontFamily: window.STANDARD_FONT1,
+			stroke: 0xFFFFFF,
+			strokeThickness: 6
+		},
+		counter: {
+			font: '48px',
+			fill: _config2.default.colors.purple, //red
+			align: 'center',
+			wight: '800',
+			fontFamily: window.STANDARD_FONT1,
+			stroke: 0xFFFFFF,
+			strokeThickness: 6
+		}
+	}, window.config = _config2.default;
 	window.POOL = new _Pool2.default();
 	
 	window.console.warn = function () {};
@@ -43093,7 +43119,7 @@
 			}, 0);
 		}
 	};
-	PIXI.loader.add('./data/levelSections.json').add('./assets/fonts/stylesheet.css').add('./assets/images/tvlines.png').add('./assets/images/backLabel.png').add('./assets/levels.json').add('./assets/levelsRaw.json').add('./assets/images/cancel.png').add('./assets/images/cycle.png').add('./assets/images/previous-button.png').add('./assets/images/game_bg.png').add('./assets/images/enemy.png').add('./assets/images/glitch1.jpg').add('./assets/images/glitch2.jpg').add('./assets/images/particle1.png').add('./assets/images/p1.png').add('./assets/images/screen_displacement.jpg').add('./assets/images/background.png').add('./assets/images/gridSquare.png').add('./assets/images/block.jpg').add('./assets/images/rect.png').add('./assets/images/time.png').add('./assets/images/largeCard.png').add('./assets/images/largeCardBack.png').add('./assets/images/icons/icons8-menu-48.png').add('./assets/images/icons/icons8-star-48.png').add('./assets/images/icons/icons8-back-100.png').add('./assets/images/icons/icons8-close-100.png').add('./assets/images/icons/icons8-refresh-64.png').add('./assets/images/icons/icons8-back-128.png').add('./assets/images/icons/icons8-forward-100.png').add('./assets/images/lineBorder.png').add('./assets/images/innerBorder.png').add('./assets/images/robot-antennas.png')
+	PIXI.loader.add('./data/levelSections.json').add('./assets/fonts/stylesheet.css').add('./assets/images/tvlines.png').add('./assets/images/backLabel.png').add('./assets/levels.json').add('./assets/levelsRaw.json').add('./assets/images/cancel.png').add('./assets/images/cycle.png').add('./assets/images/previous-button.png').add('./assets/images/game_bg.png').add('./assets/images/enemy.png').add('./assets/images/glitch1.jpg').add('./assets/images/glitch2.jpg').add('./assets/images/particle1.png').add('./assets/images/p1.png').add('./assets/images/screen_displacement.jpg').add('./assets/images/background.png').add('./assets/images/gridSquare.png').add('./assets/images/block.jpg').add('./assets/images/rect.png').add('./assets/images/time.png').add('./assets/images/largeCard.png').add('./assets/images/finish/counter.png').add('./assets/images/finish/finish-them-all.png').add('./assets/images/largeCardBack.png').add('./assets/images/icons/icons8-menu-48.png').add('./assets/images/icons/icons8-star-48.png').add('./assets/images/icons/icons8-back-100.png').add('./assets/images/icons/icons8-close-100.png').add('./assets/images/icons/icons8-refresh-64.png').add('./assets/images/icons/icons8-back-128.png').add('./assets/images/icons/icons8-forward-100.png').add('./assets/images/lineBorder.png').add('./assets/images/innerBorder.png').add('./assets/images/robot-antennas.png')
 	// .add('./assets/images/map.jpg')
 	.load(loadJsons);
 	
@@ -43791,7 +43817,7 @@
 		// height: window.innerHeight/2,
 		webgl: true,
 		effectsLayer: null,
-		textStyles: {},
+	
 		colors: {
 			blue: 0x61C6CE,
 			red: 0xD81639,
@@ -58872,10 +58898,49 @@
 	
 							//(pos, label, delay = 0, dir = 1, scale = 1, color = 0xFFFFFF, ease = Back.easeOut)
 							////AREA ATTACK
-							this.board.popLabel({
-									x: this.gameCanvas.x + this.gameCanvas.width / 2,
-									y: this.gameCanvas.y + this.gameCanvas.height / 2
-							}, "FINISH THEM ALL", 0.1, 1, 1, _config2.default.colors.purple, Back.easeOut, 2);
+	
+							if (this.endGameLabel && this.endGameLabel.parent) {
+									this.endGameLabel.parent.removeChild(this.endGameLabel);
+	
+									_gsap2.default.killTweensOf(this.endGameLabel);
+							}
+	
+							this.endGameLabel = PIXI.Sprite.fromImage('./assets/images/finish/finish-them-all.png');
+							this.endGameLabel.anchor.set(0.5);
+							this.resizeToFitAR({ width: this.gridContainer.width * 1.2, height: this.gridContainer.height * 1.2 }, this.endGameLabel);
+	
+							var fallData = {
+									gravity: 500,
+									timeToDie: 5,
+									timeToFall: 1.5,
+									velocity: { x: Math.random() * CARD.width, y: 0 },
+									angularVelocity: (Math.random() - 0.5) * Math.PI * 2
+							};
+							this.endGameLabel.fallData = fallData;
+	
+							_gsap2.default.from(this.endGameLabel.scale, 0.5, {
+									x: this.endGameLabel.scale.x * 0.8,
+									y: this.endGameLabel.scale.y * 1.2,
+									ease: Elastic.easeOut
+							});
+	
+							// TweenMax.to(this.endGameLabel, 0.25, {
+							// 	delay: 2,
+							// 	alpha: 0,
+							// 	y: this.endGameLabel.y - 20,
+							// 	onComplete: () => {
+							// 		if (this.endGameLabel.parent) {
+							// 			this.endGameLabel.parent.removeChild(this.endGameLabel);
+							// 		}
+							// 	}
+							// })
+	
+							this.endGameLabel.x = this.gridContainer.width / 2;
+							this.endGameLabel.y = this.gridContainer.height / 2;
+							this.cardsContainer.addChild(this.endGameLabel);
+	
+							var global = this.endGameLabel.getGlobalPosition({ x: 0, y: 0 });
+							this.fxContainer.addParticlesToScore(8, this.toLocal(global), null, 0xffffff, 0.9);
 					}
 			}, {
 					key: 'onDestroyCard',
@@ -58923,9 +58988,12 @@
 									if (this.trailMarker && this.trailMarker.parent) {
 											this.trailMarker.parent.removeChild(this.trailMarker);
 									}
-									this.trailMarker = new PIXI.Graphics().beginFill(0xFFFFFF).drawRoundedRect(0, 0, CARD.width, GRID.height, 0);
-									this.gridContainer.addChild(this.trailMarker);
-									this.trailMarker.alpha = 0.15;
+	
+									if (this.trailHorizontal && this.trailHorizontal.parent) {
+											this.trailHorizontal.parent.removeChild(this.trailHorizontal);
+									}
+	
+									this.buildTrails();
 							}
 					}
 			}, {
@@ -59137,7 +59205,7 @@
 							_gsap2.default.killTweensOf(this.cardsContainer);
 							_gsap2.default.killTweensOf(this.gridContainer);
 	
-							_gsap2.default.to(this.cardsContainer, 0.5, { alpha: 0 });
+							_gsap2.default.to(this.cardsContainer, 0.5, { delay: delay, alpha: 0 });
 							_gsap2.default.to(this.gridContainer, 0.5, { delay: delay, alpha: 0 });
 	
 							if (this.currentCard) {
@@ -59195,8 +59263,8 @@
 							this.startScreenContainer.hide(true);
 							var tempid = this.currentLevelID >= 0 ? this.currentLevelID : 0;
 							this.endGameScreenContainer.setStats(this.currentPoints, this.currentRound, _utils2.default.convertNumToTime(Math.ceil(this.currentTime)), this.generateImage(this.currentLevelData.pieces), this.currentLevelData);
-							this.endGameScreenContainer.show(false, 1);
-							this.hideInGameElements(1);
+							this.endGameScreenContainer.show(false, 2);
+							this.hideInGameElements(2);
 							this.removeEvents();
 	
 							if (window.AUTO_PLAY_HARD) {
@@ -59277,6 +59345,7 @@
 							this.addChild(this.background);
 	
 							this.gameContainer = new PIXI.Container();
+							this.backGridContainer = new PIXI.Container();
 							this.gridContainer = new PIXI.Container();
 							this.cardsContainer = new PIXI.Container();
 							this.UIContainer = new PIXI.Container();
@@ -59294,6 +59363,7 @@
 							this.addChild(this.gameContainer);
 	
 							//this.gameContainer.addChild(this.background);
+							this.gameContainer.addChild(this.backGridContainer);
 							this.gameContainer.addChild(this.gridContainer);
 							this.gameContainer.addChild(this.cardsContainer);
 							this.gameContainer.addChild(this.UIContainer);
@@ -59323,13 +59393,10 @@
 							this.cardsContainer.x = this.gridContainer.x;
 							this.cardsContainer.y = this.gridContainer.y;
 	
-							this.trailMarker = new PIXI.Graphics().beginFill(0xFFFFFF).drawRoundedRect(0, 0, CARD.width, GRID.height, 0);
-							this.gridContainer.addChild(this.trailMarker);
+							this.buildTrails();
 	
 							this.initGridY = this.gridContainer.y;
 							this.initGridAcc = 0;
-	
-							this.trailMarker.alpha = 0;
 	
 							var tempPosRandom = [];
 							for (var i = 0; i < GRID.i; i++) {
@@ -59341,6 +59408,17 @@
 							this.addChild(this.fxContainer);
 					}
 			}, {
+					key: 'buildTrails',
+					value: function buildTrails() {
+							this.trailMarker = new PIXI.Graphics().beginFill(0xFFFFFF).drawRoundedRect(0, 0, CARD.width, GRID.height, 10);
+							this.gridContainer.addChild(this.trailMarker);
+							this.trailMarker.alpha = 0;
+	
+							this.trailHorizontal = new PIXI.Graphics().beginFill(0xFFFFFF).drawRoundedRect(0, 0, GRID.width, CARD.height, 10);
+							this.cardsContainer.addChild(this.trailHorizontal);
+							this.trailHorizontal.alpha = 0;
+					}
+			}, {
 					key: 'startNewLevel',
 					value: function startNewLevel(data, isEasy) {
 							this.currentLevelData = data;
@@ -59349,7 +59427,6 @@
 							this.gridContainer.x = _config2.default.width / 2 - (GRID.i + 1) * CARD.width / 2;
 							this.cardsContainer.x = this.gridContainer.x;
 							this.cardsContainer.y = this.gridContainer.y;
-							this.grid.createGrid();
 							this.resetGame();
 							if (isEasy) {
 									this.board.addCrazyCards2(GRID.i * GRID.j);
@@ -59359,6 +59436,8 @@
 					key: 'resetGame',
 					value: function resetGame() {
 							var _this4 = this;
+	
+							this.grid.createGrid();
 	
 							this.gameplayState = 0;
 							this.cardQueueData = {
@@ -59610,9 +59689,39 @@
 							this.inGameMenu.update(delta);
 							this.fxContainer.update(delta);
 	
+							if (this.colorTween.isActive) {
+									if (this.endGameLabel) {
+											this.endGameLabel.tint = this.colorTween.currentColor;
+									}
+	
+									if (this.endGameLabel.fallData.timeToFall > 0) {
+											this.endGameLabel.fallData.timeToFall -= delta;
+									} else if (this.endGameLabel.parent) {
+											this.endGameLabel.x += this.endGameLabel.fallData.velocity.x * delta;
+											this.endGameLabel.y += this.endGameLabel.fallData.velocity.y * delta;
+	
+											this.endGameLabel.fallData.velocity.y += this.endGameLabel.fallData.gravity * delta;
+											this.endGameLabel.rotation += this.endGameLabel.fallData.angularVelocity * delta;
+	
+											if (this.endGameLabel.fallData.timeToDie > 0) {
+													this.endGameLabel.fallData.timeToDie -= delta;
+													if (this.endGameLabel.fallData.timeToDie <= 0) {
+															this.endGameLabel.parent.removeChild(this.endGameLabel);
+													}
+											}
+									}
+									this.board.updateAllCardsColors(this.colorTween.currentColor);
+									if (this.currentCard) {
+											this.currentCard.forceNewColor(this.colorTween.currentColor);
+									}
+									this.cardQueue.forEach(function (element) {
+											element.forceNewColor(_this6.colorTween.currentColor);
+									});
+							}
+	
 							if (!this.gameRunning) {
 									this.topUIContainer.x = this.gameCanvas.x;
-									this.topUIContainer.y = _utils2.default.lerp(this.topUIContainer.y, this.gameCanvas.y - 500, 0.2);
+									this.topUIContainer.y = _utils2.default.lerp(this.topUIContainer.y, this.gameCanvas.y - 500, 0.1);
 									this.bottomUIContainer.x = this.gameCanvas.x;
 									this.bottomUIContainer.y = _utils2.default.lerp(this.bottomUIContainer.y, this.gameCanvas.y + this.gameCanvas.height - this.bottomUICanvas.height + 500, 0.2);
 	
@@ -59623,18 +59732,9 @@
 									return;
 							}
 	
-							if (this.colorTween.isActive) {
-									this.board.updateAllCardsColors(this.colorTween.currentColor);
-									if (this.currentCard) {
-											this.currentCard.forceNewColor(this.colorTween.currentColor);
-									}
-									this.cardQueue.forEach(function (element) {
-											element.forceNewColor(_this6.colorTween.currentColor);
-									});
-							}
-	
 							if (this.currentCard) {
 									this.currentCard.update(delta);
+									this.trailHorizontal.y = this.gridContainer.height;
 							}
 							////console.log(this.mousePosition)
 							this.currentTime += delta * window.TIME_SCALE * window.TIME_SCALE;
@@ -59678,7 +59778,8 @@
 					key: 'updateMousePosition',
 					value: function updateMousePosition() {
 							if (!this.currentCard) {
-									this.trailMarker.alpha = 0;
+									this.trailMarker.alpha = _utils2.default.lerp(this.trailMarker.alpha, 0, 0.1);
+									this.trailHorizontal.alpha = this.trailMarker.alpha;
 									return;
 							}
 	
@@ -59694,8 +59795,11 @@
 							if (this.mousePosID >= 0 && this.mousePosID < GRID.i) {
 									_gsap2.default.to(this.trailMarker, 0.1, { x: this.mousePosID * CARD.width });
 									this.trailMarker.tint = this.currentCard.enemySprite.tint;
-									this.trailMarker.alpha = 0.15;
+									this.trailMarker.alpha = _utils2.default.lerp(this.trailMarker.alpha, 0.15, 0.1);
+									this.trailHorizontal.tint = this.currentCard.enemySprite.tint;
+									this.trailHorizontal.alpha = this.trailMarker.alpha;
 									this.currentCard.alpha = 1;
+									//this.trailHorizontal.y = this.currentCard.y
 									if (this.currentCard) {
 											if (this.mousePosID * CARD.width >= 0) {
 													// console.log("MOUSE MOVE");
@@ -59882,6 +59986,12 @@
 							this.cardsContainer.x = this.gridContainer.x;
 							this.cardsContainer.y = this.gridContainer.y;
 	
+							this.backGridContainer.x = this.gridContainer.x;
+							this.backGridContainer.y = this.gridContainer.y;
+	
+							this.backGridContainer.scale.x = this.gridContainer.scale.x;
+							this.backGridContainer.scale.y = this.gridContainer.scale.y;
+	
 							if (this.currentCard) {
 									//13 is the width of the border on the grid
 									this.currentCard.y = this.gridContainer.height / this.gridContainer.scale.y;
@@ -60004,6 +60114,7 @@
 	
 			_this.game = game;
 			_this.grids = [];
+			_this.dropTiles = [];
 	
 			_this.onDestroyAllStartedCards = new _signals2.default();
 			return _this;
@@ -60015,6 +60126,28 @@
 		}, {
 			key: 'update',
 			value: function update(delta) {
+	
+				for (var index = this.dropTiles.length - 1; index >= 0; index--) {
+					var element = this.dropTiles[index];
+	
+					element.x += element.fallData.velocity.x * delta;
+					element.y += element.fallData.velocity.y * delta;
+	
+					element.fallData.velocity.y += element.fallData.gravity * delta;
+	
+					element.rotation += element.fallData.angularVelocity * delta;
+	
+					if (element.fallData.timeToDie > 0) {
+						element.fallData.timeToDie -= delta;
+	
+						if (element.fallData.timeToDie <= 0) {
+							if (element.parent) {
+								element.parent.removeChild(element);
+								this.dropTiles.splice(index, 1);
+							}
+						}
+					}
+				}
 				this.grids.forEach(function (element) {
 					element.sin += delta * element.speed;
 					element.alpha = element.startAlpha * Math.sin(element.sin);
@@ -60023,17 +60156,35 @@
 				});
 			}
 		}, {
-			key: 'createGrid',
-			value: function createGrid() {
+			key: 'resetGrid',
+			value: function resetGrid() {
 				this.cardsStartedOnGrid = 0;
 				for (var index = this.children.length - 1; index >= 0; index--) {
 					this.removeChildAt(index);
 				}
-				var gridContainer = new PIXI.Container();
-				// let gridBackground = new PIXI.Graphics().beginFill(0).drawRect(0,0,GRID.width, GRID.height);
-				// gridContainer.addChild(gridBackground)
+				for (var _index = this.game.backGridContainer.length - 1; _index >= 0; _index--) {
+					this.removeChildAt(_index);
+				}
+	
+				for (var _index2 = this.dropTiles.length - 1; _index2 >= 0; _index2--) {
+					var element = this.dropTiles[_index2];
+					if (element.parent) {
+						element.parent.removeChild(element);
+						this.dropTiles.splice(_index2, 1);
+					}
+				}
+	
 				this.gridsSquares = [];
 				this.grids = [];
+				this.dropTiles = [];
+			}
+		}, {
+			key: 'createGrid',
+			value: function createGrid() {
+				console.log("CREATING GRID");
+	
+				this.resetGrid();
+				var gridContainer = new PIXI.Container();
 	
 				for (var i = GRID.i - 1; i >= 0; i--) {
 					var gridLine = [];
@@ -60074,9 +60225,23 @@
 			key: 'destroyCard',
 			value: function destroyCard(card) {
 				if (this.gridsSquares[card.pos.i][card.pos.j].card) {
-					this.gridsSquares[card.pos.i][card.pos.j].shape.alpha = 0;
+					//this.gridsSquares[card.pos.i][card.pos.j].shape.alpha = 1;
 					this.cardsStartedOnGrid--;
 	
+					var shape = this.gridsSquares[card.pos.i][card.pos.j].shape;
+					var fallData = {
+						gravity: 500,
+						timeToDie: 5,
+						velocity: { x: Math.random() * CARD.width, y: 0 },
+						angularVelocity: (Math.random() - 0.5) * Math.PI * 2
+					};
+					shape.fallData = fallData;
+					shape.anchor.set(0.5);
+					shape.x += shape.width / 2;
+					shape.y += shape.height / 2;
+	
+					this.game.backGridContainer.addChild(shape);
+					this.dropTiles.push(shape);
 					this.gridsSquares[card.pos.i][card.pos.j].card = null;
 	
 					if (this.cardsStartedOnGrid <= 0) {
@@ -61610,10 +61775,9 @@
 					cardGlobal.y += CARD.height / 2;
 					var points = (areaAttacksCards.length + 1) * 10;
 					_this2.game.addPoints(points);
-	
-					_this2.game.fxContainer.addParticlesToScore(1, _this2.game.toLocal(cardGlobal), _this2.game.fxContainer.toLocal(_this2.game.scoreRect.getGlobalPosition()), element.currentColor);
+					_this2.game.fxContainer.addParticlesToScore(1, _this2.game.toLocal(cardGlobal), _this2.game.scoreRect, element.currentColor);
 					////AREA ATTACK
-					_this2.popLabel(_this2.game.toLocal(cardGlobal), "+" + points, 0.1, 0.5, 0.5);
+					_this2.popLabel(_this2.game.toLocal(cardGlobal), "+" + points, 0.1, 0.5, 0.5, window.textStyles.areaAttack);
 					//cardsToDestroy.push({cardFound:cardFound, currentCard: card, attackZone:zones[i]});
 					_this2.attackCard(element, 1);
 				});
@@ -61635,6 +61799,7 @@
 	
 						tempCardList[i].startCrazyMood();
 						numCards--;
+						this.addCrazyMoodParticles(tempCardList[i]);
 					}
 					if (numCards <= 0) {
 						return;
@@ -61657,11 +61822,23 @@
 					if (tempCardList[i] && tempCardList[i].startCrazyMood) {
 						tempCardList[i].startCrazyMood();
 						numCards--;
+	
+						this.addCrazyMoodParticles(tempCardList[i]);
 					}
 					if (numCards <= 0) {
 						return;
 					}
 				}
+			}
+		}, {
+			key: 'addCrazyMoodParticles',
+			value: function addCrazyMoodParticles(target) {
+				var color = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0xFFFFFF;
+	
+				var cardGlobal = target.getGlobalPosition({ x: 0, y: 0 });
+				cardGlobal.x += CARD.width / 2;
+				cardGlobal.y += CARD.width / 2;
+				this.game.fxContainer.addParticlesToScore(8, this.game.toLocal(cardGlobal), null, color, 0.5);
 			}
 		}, {
 			key: 'destroyCards',
@@ -61690,9 +61867,9 @@
 								//normal attack
 								this.popAttack(cardFound);
 	
-								this.game.fxContainer.addParticlesToScore(id, this.game.toLocal(arrowGlobal), this.game.fxContainer.toLocal(this.game.scoreRect.getGlobalPosition()), cardFound.currentColor);
+								this.game.fxContainer.addParticlesToScore(id, this.game.toLocal(arrowGlobal), this.game.scoreRect, cardFound.currentColor);
 	
-								this.popLabel(this.game.toLocal(arrowGlobal), "+" + 10 * id, 0, 1, 0.5 + id * 0.15);
+								this.popLabel(this.game.toLocal(arrowGlobal), "+" + 10 * id, 0, 1, 0.5 + id * 0.15, window.textStyles.normalAttack);
 							}
 						}.bind(this),
 						onCompleteParams: [card, list[i].cardFound],
@@ -61704,11 +61881,11 @@
 								if (cardFound.crazyMood) {
 									this.game.addPoints(100);
 	
-									this.game.fxContainer.addParticlesToScore(4, this.game.toLocal(arrowGlobal2), this.game.fxContainer.toLocal(this.game.scoreRect.getGlobalPosition()), cardFound.currentColor);
+									this.game.fxContainer.addParticlesToScore(4, this.game.toLocal(arrowGlobal2), this.game.scoreRect, cardFound.currentColor);
 	
 									window.EFFECTS.shake(0.2, 5, 0.3, this.game.gameContainer);
 									//explosion
-									this.popLabel(this.game.toLocal(arrowGlobal2), "+" + 100, 0.25, 0.4, 0.8, 0xE2C756, Elastic.easeOut);
+									this.popLabel(this.game.toLocal(arrowGlobal2), "+" + 100, 0.25, 0.4, 0.8, window.textStyles.areaAttack, Elastic.easeOut);
 									this.areaAttack(cardFound, card);
 								}
 							}
@@ -61734,10 +61911,18 @@
 						var counterHits = list.length + 1;
 						this.game.addPoints(10 * counterHits);
 	
-						this.game.fxContainer.addParticlesToScore(3, this.game.toLocal(arrowGlobal), this.game.fxContainer.toLocal(this.game.scoreRect.getGlobalPosition()), card.currentColor);
+						this.game.fxContainer.addParticlesToScore(3, this.game.toLocal(arrowGlobal), this.game.scoreRect, card.currentColor);
 	
-						this.popLabel(this.game.toLocal(arrowGlobal), "+" + 10 * counterHits + "\nCOUNTER", 0.2, 0, 0.4 + counterHits * 0.1, 0xD81639);
+						this.addCrazyMoodParticles(card, card.currentColor);
+						var spritePos = this.game.toLocal(arrowGlobal);
+						spritePos.y -= CARD.height;
+						this.game.fxContainer.popSprite('./assets/images/finish/counter.png', spritePos, CARD.width * 2, card.currentColor);
+						var style = window.textStyles.counter;
+						style.fill = card.currentColor;
+						this.popLabel(this.game.toLocal(arrowGlobal), "+" + 10 * counterHits, 0.2, 0, 0.3 + counterHits * 0.1, style);
 						window.EFFECTS.shake(0.2, 5, 0.3, this.game.gameContainer);
+	
+						console.log(window.textStyles.counter);
 						// this.popLabel(arrowGlobal,10 * counterHits , 0.1, -0.5, 1 + counterHits * 0.15);
 	
 					}.bind(this), list.length * 200 / window.TIME_SCALE);
@@ -61748,6 +61933,10 @@
 		}, {
 			key: 'popAttack',
 			value: function popAttack(card) {
+	
+				this.addCrazyMoodParticles(card);
+	
+				return;
 	
 				var cardGlobal = card.getGlobalPosition({ x: 0, y: 0 });
 				var convertedPosition = this.game.toLocal(cardGlobal);
@@ -61770,19 +61959,20 @@
 				var delay = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
 				var dir = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1;
 				var scale = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 1;
-				var color = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0xFFFFFF;
+				var style = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : {};
 				var ease = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : Back.easeOut;
 				var time = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 0.5;
 	
 				//console.log(pos.x, pos.y);
-				var style = {
-					font: '32px',
-					fill: color,
-					align: 'center',
-					fontFamily: window.STANDARD_FONT1,
-					stroke: color == 0xFFFFFF ? 0x000000 : 0xFFFFFF,
-					strokeThickness: 6 * scale
-				};
+				// let style = {
+				// 	font: '32px',
+				// 	fill: color,
+				// 	align: 'center',
+				// 	fontFamily: window.STANDARD_FONT1,
+				// 	stroke: color == 0xFFFFFF ? 0x000000 : 0xFFFFFF,
+				// 	strokeThickness: 6 * scale
+				// }
+				console.log(style);
 				var tempLabel = null;
 				if (window.LABEL_POOL.length > 0) {
 					tempLabel = window.LABEL_POOL[0];
@@ -61792,6 +61982,7 @@
 				}
 				tempLabel.style = style;
 				tempLabel.text = label;
+				tempLabel.fill = style.color;
 	
 				this.game.addChild(tempLabel);
 				tempLabel.x = pos.x;
@@ -106440,7 +106631,7 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-			value: true
+		value: true
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -106472,74 +106663,94 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var UIRectLabel = function (_PIXI$Container) {
-			_inherits(UIRectLabel, _PIXI$Container);
+		_inherits(UIRectLabel, _PIXI$Container);
 	
-			function UIRectLabel(color, icon) {
-					var center = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+		function UIRectLabel(color, icon) {
+			var center = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
 	
-					_classCallCheck(this, UIRectLabel);
+			_classCallCheck(this, UIRectLabel);
 	
-					var _this = _possibleConstructorReturn(this, (UIRectLabel.__proto__ || Object.getPrototypeOf(UIRectLabel)).call(this));
+			var _this = _possibleConstructorReturn(this, (UIRectLabel.__proto__ || Object.getPrototypeOf(UIRectLabel)).call(this));
 	
-					_this.mainContainer = new PIXI.Container();
-					//this.backShape = PIXI.Sprite.fromImage('./assets/images/rect.png');
-					_this.icon = PIXI.Sprite.fromImage(icon);
-					//this.backShape.tint = color;
+			_this.iconSrc = icon;
+			_this.mainContainer = new PIXI.Container();
+			//this.backShape = PIXI.Sprite.fromImage('./assets/images/rect.png');
+			_this.icon = PIXI.Sprite.fromImage(icon);
+			//this.backShape.tint = color;
 	
-					_this.backShape = new PIXI.Graphics();
-					_this.backShape.lineStyle(3, color, 1);
-					_this.backShape.drawRect(0, 0, 224, 60);
-					_this.backShape.endFill();
-					_this.backShape.alpha = 0;
+			_this.backShape = new PIXI.Graphics();
+			_this.backShape.lineStyle(3, color, 1);
+			_this.backShape.drawRect(0, 0, 224, 60);
+			_this.backShape.endFill();
+			_this.backShape.alpha = 0;
 	
-					_this.label = new PIXI.Text("name", { font: '30px', fill: 0xFFFFFF, align: center ? 'center' : 'left', fontFamily: window.STANDARD_FONT1 });
-					_this.title = new PIXI.Text("title", {
-							font: '20px',
-							fill: 0x000000,
-							align: 'center',
-							wight: '800',
-							fontFamily: window.STANDARD_FONT1,
-							stroke: color,
-							strokeThickness: 8
-					});
+			_this.label = new PIXI.Text("name", { font: '30px', fill: 0xFFFFFF, align: center ? 'center' : 'left', fontFamily: window.STANDARD_FONT1 });
+			_this.title = new PIXI.Text("title", {
+				font: '20px',
+				fill: 0x000000,
+				align: 'center',
+				wight: '800',
+				fontFamily: window.STANDARD_FONT1,
+				stroke: color,
+				strokeThickness: 8
+			});
 	
-					_this.icon.scale.set(_this.backShape.height / _this.icon.height * 0.7);
-					_this.mainContainer.addChild(_this.backShape);
-					_this.mainContainer.addChild(_this.icon);
-					_this.mainContainer.addChild(_this.label);
-					_this.addChild(_this.mainContainer);
-					//this.addChild(this.title);
+			_this.icon.scale.set(_this.backShape.height / _this.icon.height * 0.7);
+			_this.mainContainer.addChild(_this.backShape);
+			_this.mainContainer.addChild(_this.icon);
+			_this.mainContainer.addChild(_this.label);
+			_this.addChild(_this.mainContainer);
+			//this.addChild(this.title);
 	
-					_this.updateLavel("00000");
-					return _this;
+			_this.updateLavel("00000");
+			return _this;
+		}
+	
+		_createClass(UIRectLabel, [{
+			key: 'updateLavel',
+			value: function updateLavel(text, title) {
+				var center = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+	
+				this.label.text = text;
+				this.title.text = title ? title : "";
+				//this.title.pivot.x = this.title.width * 0.5
+				this.title.x = 20;
+				this.title.pivot.y = this.title.height * 0.5;
+				this.icon.anchor.set(0.5);
+				_utils2.default.centerObject2(this.icon, this.mainContainer);
+				this.icon.x = this.icon.y;
+	
+				if (center) {
+	
+					_utils2.default.centerObject(this.label, this.mainContainer);
+					this.label.x += this.icon.x + 10;
+					this.label.y += -3;
+				} else {
+					this.label.x = this.icon.x + this.icon.width + 5;
+					this.label.y = 12;
+				}
 			}
+		}, {
+			key: 'getParticles',
+			value: function getParticles(particle) {
+				_gsap2.default.killTweensOf(this.icon.scale);
 	
-			_createClass(UIRectLabel, [{
-					key: 'updateLavel',
-					value: function updateLavel(text, title) {
-							var center = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+				if (!this.colorIcon) {
+					this.colorIcon = PIXI.Sprite.fromImage(this.iconSrc);
+					this.icon.addChild(this.colorIcon);
+					this.colorIcon.anchor.set(0.5);
+				}
+				_gsap2.default.killTweensOf(this.colorIcon);
+				this.icon.scale.set(this.backShape.height / this.icon.height * 0.7 * this.icon.scale.y);
+				this.colorIcon.tint = particle.tint;
 	
-							this.label.text = text;
-							this.title.text = title ? title : "";
-							//this.title.pivot.x = this.title.width * 0.5
-							this.title.x = 20;
-							this.title.pivot.y = this.title.height * 0.5;
-							_utils2.default.centerObject(this.icon, this.mainContainer);
-							this.icon.x = this.icon.y;
+				this.colorIcon.alpha = 1;
+				_gsap2.default.from(this.icon.scale, 0.5, { x: this.icon.scale.x * 1.25, y: this.icon.scale.y * 0.75, ease: Elastic.easeOut });
+				_gsap2.default.to(this.colorIcon, 0.5, { delay: 0.1, alpha: 0 });
+			}
+		}]);
 	
-							if (center) {
-	
-									_utils2.default.centerObject(this.label, this.mainContainer);
-									this.label.x += this.icon.x + 10;
-									this.label.y += -3;
-							} else {
-									this.label.x = this.icon.x + this.icon.width + 5;
-									this.label.y = 12;
-							}
-					}
-			}]);
-	
-			return UIRectLabel;
+		return UIRectLabel;
 	}(PIXI.Container);
 	
 	exports.default = UIRectLabel;
@@ -106839,8 +107050,10 @@
 	
 	        var _this = _possibleConstructorReturn(this, (FXContainer.__proto__ || Object.getPrototypeOf(FXContainer)).call(this));
 	
+	        _this.sprites = [];
 	        _this.particles = [];
 	        _this.particlePool = [];
+	        _this.spritesPool = [];
 	
 	        _this.particleSpeed = 600;
 	        _this.particleSpeedTarget = 600;
@@ -106866,43 +107079,113 @@
 	            this.particleSpeedTarget = innerResolution.height * 0.4;
 	        }
 	    }, {
+	        key: 'popSprite',
+	        value: function popSprite(src, pos, width, color) {
+	            var sprite = PIXI.Sprite.fromImage(src);
+	            sprite.anchor.set(0.5);
+	            sprite.scale.set(width / sprite.width);
+	            sprite.tint = color;
+	            var fallData = {
+	                gravity: 500,
+	                timeToDie: 5,
+	                timeToFall: 0.75,
+	                velocity: { x: Math.random() * CARD.width, y: 0 },
+	                angularVelocity: (Math.random() - 0.5) * Math.PI * 2
+	            };
+	            sprite.fallData = fallData;
+	
+	            sprite.position = pos;
+	
+	            TweenMax.from(sprite.scale, 0.5, {
+	                x: sprite.scale.x * 0.8,
+	                y: sprite.scale.y * 1.2,
+	                ease: Elastic.easeOut
+	            });
+	
+	            this.addChild(sprite);
+	
+	            this.sprites.push(sprite);
+	        }
+	    }, {
 	        key: 'update',
 	        value: function update(delta) {
-	            for (var index = this.particles.length - 1; index >= 0; index--) {
-	                var element = this.particles[index];
-	                element.x += element.velocity.x * delta;
-	                element.y += element.velocity.y * delta;
+	            for (var index = this.sprites.length - 1; index >= 0; index--) {
+	                var element = this.sprites[index];
 	
-	                if (element.timeToStick > 0) {
-	                    element.timeToStick -= delta;
-	                    element.velocity.y += element.gravity;
+	                if (element.fallData.timeToFall > 0) {
+	                    element.fallData.timeToFall -= delta;
+	                } else if (element.parent) {
+	                    element.x += element.fallData.velocity.x * delta;
+	                    element.y += element.fallData.velocity.y * delta;
+	
+	                    element.fallData.velocity.y += element.fallData.gravity * delta;
+	                    element.rotation += element.fallData.angularVelocity * delta;
+	
+	                    if (element.fallData.timeToDie > 0) {
+	                        element.fallData.timeToDie -= delta;
+	                        if (element.fallData.timeToDie <= 0) {
+	                            element.parent.removeChild(element);
+	                            this.sprites.splice(index, 1);
+	                        }
+	                    }
+	                }
+	            }
+	            for (var _index = this.particles.length - 1; _index >= 0; _index--) {
+	                var _element = this.particles[_index];
+	                _element.x += _element.velocity.x * delta;
+	                _element.y += _element.velocity.y * delta;
+	
+	                _element.scale.x -= _element.scaleSpeed * delta;
+	                _element.scale.y -= _element.scaleSpeed * delta;
+	
+	                if (_element.scale.x < 0) {
+	                    _element.scale.set(0);
+	                }
+	
+	                if (_element.timeToLive <= 0) {
+	                    _element.parent.removeChild(_element);
+	                    this.particlePool.push(_element);
+	                    this.particles.splice(_index, 1);
 	                } else {
-	                    //let angle = Math.atan2(element.y - element.target.y,element.x - element.target.x);
+	                    _element.timeToLive -= delta;
+	                }
 	
-	                    var distance = _utils2.default.distance(element.x, element.y, element.target.x, element.target.y);
+	                if (_element.parent) {
+	                    if (_element.timeToStick > 0) {
+	                        _element.timeToStick -= delta;
+	                        _element.velocity.y += _element.gravity;
+	                    } else if (_element.target) {
+	                        //let angle = Math.atan2(element.y - element.target.y,element.x - element.target.x);
 	
-	                    var distanceScale = this.particleSpeedTarget * 0.2 / distance;
+	                        var distance = _utils2.default.distance(_element.x, _element.y, _element.targetPosition.x, _element.targetPosition.y);
 	
-	                    distanceScale = Math.min(distanceScale, 1);
+	                        var distanceScale = this.particleSpeedTarget * 0.2 / distance;
 	
-	                    var angle = Math.atan2(element.target.y - element.y, element.target.x - element.x);
-	                    element.angle = this.angleLerp(element.angle, angle, 0.1 + distanceScale * 0.9);
-	                    element.rotation = element.angle;
+	                        distanceScale = Math.min(distanceScale, 1);
 	
-	                    element.targetVelocity.x = Math.cos(element.angle) * element.speed;
-	                    element.targetVelocity.y = Math.sin(element.angle) * element.speed;
+	                        var angle = Math.atan2(_element.targetPosition.y - _element.y, _element.targetPosition.x - _element.x);
+	                        _element.angle = this.angleLerp(_element.angle, angle, 0.1 + distanceScale * 0.9);
+	                        _element.rotation = _element.angle;
 	
-	                    element.speed += element.acceleration * delta;
+	                        _element.targetVelocity.x = Math.cos(_element.angle) * _element.speed;
+	                        _element.targetVelocity.y = Math.sin(_element.angle) * _element.speed;
 	
-	                    element.velocity.x = _utils2.default.lerp(element.velocity.x, element.targetVelocity.x, 0.1 + distanceScale * 0.9);
-	                    element.velocity.y = _utils2.default.lerp(element.velocity.y, element.targetVelocity.y, 0.1 + distanceScale * 0.9);
+	                        _element.speed += _element.acceleration * delta;
 	
-	                    if (distance < 20 || element.timeToLive <= 0) {
-	                        element.parent.removeChild(element);
-	                        this.particlePool.push(element);
-	                        this.particles.splice(index, 1);
+	                        _element.velocity.x = _utils2.default.lerp(_element.velocity.x, _element.targetVelocity.x, 0.1 + distanceScale * 0.9);
+	                        _element.velocity.y = _utils2.default.lerp(_element.velocity.y, _element.targetVelocity.y, 0.1 + distanceScale * 0.9);
+	
+	                        if (distance < 20) {
+	                            _element.parent.removeChild(_element);
+	
+	                            if (_element.target.getParticles) {
+	                                _element.target.getParticles(_element);
+	                            }
+	                            this.particlePool.push(_element);
+	                            this.particles.splice(_index, 1);
+	                        }
 	                    } else {
-	                        element.timeToLive -= delta;
+	                        console.log(_element.scaleSpeed);
 	                    }
 	                }
 	            }
@@ -106923,23 +107206,35 @@
 	    }, {
 	        key: 'addParticlesToScore',
 	        value: function addParticlesToScore(totalParticles, from, target, color) {
+	            var speedScale = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 1;
+	
 	
 	            for (var index = 0; index < totalParticles; index++) {
 	                var particle = this.getParticle();
 	                particle.anchor.set(0.5);
 	                particle.scale.set(0.5);
 	                particle.target = target;
+	                particle.targetPosition = target ? this.toLocal(target.getGlobalPosition()) : null;;
 	                particle.position = from;
 	                particle.tint = color;
 	                particle.alpha = 1;
 	                particle.timeToLive = 4;
-	                particle.gravity = this.particleSpeed * 0.1;
+	                particle.scaleSpeed = target ? 0 : 1;
+	                particle.gravity = target ? this.particleSpeed * 0.1 : 0;
 	                particle.speed = this.particleSpeedTarget;
 	                particle.acceleration = this.particleSpeedTarget * 0.5;
-	                particle.timeToStick = Math.random() * 0.15 + 0.15;
-	                particle.angle = -Math.PI * Math.random();
+	                particle.timeToStick = target ? Math.random() * 0.15 + 0.15 : 5;
+	                particle.angle = target ? -Math.PI * Math.random() : -Math.PI * 2 * Math.random();
+	
+	                if (!target) {
+	                    particle.angle = Math.PI * 2 * (index + 1) / totalParticles;
+	                    particle.velocity = { x: Math.cos(particle.angle) * this.particleSpeed * speedScale, y: Math.sin(particle.angle) * this.particleSpeed * speedScale };
+	                } else {
+	
+	                    particle.velocity = { x: Math.cos(particle.angle) * this.particleSpeed * 1.5, y: Math.sin(particle.angle) * this.particleSpeed * 0.5 };
+	                }
+	
 	                particle.targetVelocity = { x: 0, y: 0 };
-	                particle.velocity = { x: Math.cos(particle.angle) * this.particleSpeed * 1.5, y: Math.sin(particle.angle) * this.particleSpeed * 0.5 };
 	                this.addChild(particle);
 	                this.particles.push(particle);
 	            }
