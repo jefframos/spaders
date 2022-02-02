@@ -92,6 +92,8 @@ export default class Board {
 			this.addCard(card);
 			// setTimeout(function() {
 			// console.log(card);
+
+			window.SOUND_MANAGER.play('place', {volume:0.05, speed:0.7})
 			return this.updateRound(card);
 			// }.bind(this), 50);
 		}
@@ -177,6 +179,10 @@ export default class Board {
 			}
 		}
 		console.log("-------------------------")
+
+		if(areaAttacksCards.length > 0){
+			window.SOUND_MANAGER.play('kill')
+		}
 		areaAttacksCards.forEach(element => {
 			let cardGlobal = element.getGlobalPosition({ x: 0, y: 0 });
 			cardGlobal.x += CARD.width / 2;
@@ -229,6 +235,9 @@ export default class Board {
 			}
 		}
 		utils.shuffle(tempCardList);
+
+		window.SOUND_MANAGER.play('revealSpecial', {volume:0.5, speed:0.9})
+
 		for (var i = 0; i < tempCardList.length; i++) {
 			if (tempCardList[i] && tempCardList[i].startCrazyMood) {
 				tempCardList[i].startCrazyMood();
@@ -278,6 +287,7 @@ export default class Board {
 
 						//window.EFFECTS.addShockwave(screenPos.x, screenPos.y, 2);
 						this.game.addPoints(10 * id);
+						window.SOUND_MANAGER.play('pop', {speed:Math.random() * 0.075 + 0.925 + 0.2 * id})
 						//normal attack
 						this.popAttack(cardFound)
 
@@ -300,7 +310,7 @@ export default class Board {
 						arrowGlobal2.y += 30;
 						if (cardFound.crazyMood) {
 							this.game.addPoints(100);
-
+							window.SOUND_MANAGER.play('magic')
 							this.game.fxContainer.addParticlesToScore(
 								4,
 								this.game.toLocal(arrowGlobal2),
@@ -341,6 +351,7 @@ export default class Board {
 				let counterHits = (list.length + 1);
 				this.game.addPoints(10 * counterHits);
 
+				window.SOUND_MANAGER.play('pop2', {speed:Math.random() * 0.075 + 0.925})
 				this.game.fxContainer.addParticlesToScore(
 					3,
 					this.game.toLocal(arrowGlobal),

@@ -129,6 +129,9 @@ export default class FXContainer extends PIXI.Container {
 
                         if (element.target.getParticles) {
                             element.target.getParticles(element);
+                            let max = Math.min(this.particles.length, 10);
+                            let extra = max / 10 * 0.025
+                            window.SOUND_MANAGER.play('coin', { speed: Math.random() * 0.1 + 1 + extra, volume: 0.05 })
                         }
                         this.particlePool.push(element);
                         this.particles.splice(index, 1);

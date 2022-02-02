@@ -118,6 +118,9 @@ export default class TetraScreen extends Screen {
 		this.endGameLabel.anchor.set(0.5)
 		this.resizeToFitAR({ width: this.gameCanvas.width, height: this.gameCanvas.height }, this.endGameLabel);
 
+
+		window.SOUND_MANAGER.play('getThemAll')
+
 		let fallData = {
 			gravity: 500,
 			timeToDie: 5,

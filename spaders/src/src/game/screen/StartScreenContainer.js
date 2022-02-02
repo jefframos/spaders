@@ -54,8 +54,8 @@ export default class StartScreenContainer extends PIXI.Container {
 			spadersContainer.addChild(sprite);
 			sprite.x += 80 * index;
 		}
-		spadersContainer.pivot.x = spadersContainer.width/2
-		spadersContainer.pivot.y = spadersContainer.height/2
+		spadersContainer.pivot.x = spadersContainer.width / 2
+		spadersContainer.pivot.y = spadersContainer.height / 2
 		spadersContainer.rotation = -Math.PI * 0.25
 		spadersContainer.scale.set(0.75)
 		spadersContainer.x = -60
@@ -132,7 +132,7 @@ export default class StartScreenContainer extends PIXI.Container {
 
 		this.closeApplicationButton = new UIButton1(config.colors.white, './assets/images/icons/icons8-close-100.png', config.colors.dark);
 		this.closeApplicationButton.onClick.add(() => this.gameScreen.closeApplication());
-		if( window.isCordova){
+		if (window.isCordova) {
 			this.addChild(this.closeApplicationButton);
 		}
 
@@ -210,7 +210,7 @@ export default class StartScreenContainer extends PIXI.Container {
 
 		} else if (this.screenState == 2) {
 
-			
+
 			this.closeApplicationButton.alpha = utils.lerp(this.closeApplicationButton.alpha, 0, 0.2)
 
 			this.screenContainer.rotationSpring.tx = Math.PI * 0.25;
@@ -244,9 +244,9 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.chooseLevelPanel.y = lineConvertedPosition.y + this.playLine.height
 		this.chooseLevelPanel.resize(innerResolution);
 
-		
 
-		this.closeApplicationButton.x = this.mainCanvas.x+ this.closeApplicationButton.height * 0.75;
+
+		this.closeApplicationButton.x = this.mainCanvas.x + this.closeApplicationButton.height * 0.75;
 		this.closeApplicationButton.y = this.mainCanvas.y + this.closeApplicationButton.height * 0.75;
 		this.closeApplicationButton.scale.set(0.75);
 
@@ -268,7 +268,9 @@ export default class StartScreenContainer extends PIXI.Container {
 		TweenLite.killTweensOf(this.screenContainer)
 		//TweenLite.killTweensOf(this.levelSelectionContainer)
 
-		TweenLite.to(this.screenContainer, 1, { delay: delay, alpha: 1 })
+		TweenLite.to(this.screenContainer, 1, { delay: delay, alpha: 1, onStart:()=>{
+			window.SOUND_MANAGER.play('shoosh', { volume: 0.1 })
+		} })
 		//TweenLite.to(this.levelSelectionContainer, 1, { delay: delay, alpha: 1, x: -this.x, ease: Back.easeOut.config(1.2) })
 		this.playLine.interactive = false;
 		this.backButton.interactive = true;
@@ -280,9 +282,11 @@ export default class StartScreenContainer extends PIXI.Container {
 	startState(delay = 1, force = false) {
 		if (force) {
 			this.screenState = 1;
-			this.backButton.visible = false;			
+			this.backButton.visible = false;
+			window.SOUND_MANAGER.play('shoosh', { volume: 0.1 })
+			//window.SOUND_MANAGER('shoosh')
 		}
-		
+
 		TweenLite.killTweensOf(this.screenContainer)
 		//TweenLite.killTweensOf(this.levelSelectionContainer)
 		this.playLine.interactive = true;
@@ -291,7 +295,9 @@ export default class StartScreenContainer extends PIXI.Container {
 		TweenLite.to(this.screenContainer, force ? 0 : 0.75, {
 			delay: delay, alpha: 1, onStart: () => {
 				this.screenState = 1;
-
+				if (!force) {
+					window.SOUND_MANAGER.play('shoosh', { volume: 0.1 })
+				}
 			}
 		})
 	}
@@ -318,7 +324,7 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.playButton.visible = true;
 		this.backButton.visible = false;
 	}
-	showCloseButton(){
+	showCloseButton() {
 		this.closeApplicationButton.visible = true;
 	}
 	showFromGame(force = false, delay = 0) {
@@ -353,9 +359,9 @@ export default class StartScreenContainer extends PIXI.Container {
 
 
 	}
-	newLevelStarted(){
+	newLevelStarted() {
 		this.closeApplicationButton.visible = false;
-    }
+	}
 	goToLevel() {
 		this.hide(true);
 		this.screenState = 1
@@ -363,13 +369,13 @@ export default class StartScreenContainer extends PIXI.Container {
 		console.log("GO TO LEVEL")
 		this.closeApplicationButton.visible = false;
 
-		
+
 	}
 	resetGame() {
 		this.gameScreen.mainMenuSettings.collapse();
 		this.startMenuState();
-		
-		
+
+
 	}
 	removeEvents() {
 

@@ -8,6 +8,16 @@ export default class SoundManager {
         this.soundData = []
         this.soundData.push({ id: 'ingame-soundtrack', src: './audio/dream2.mp3', sound: null })
         this.soundData.push({ id: 'main-soundtrack', src: './audio/dream1.mp3', sound: null })
+        this.soundData.push({ id: 'kill', src: './audio/fx/kill.mp3', sound: null })
+        this.soundData.push({ id: 'magic', src: './audio/fx/teleport.mp3', sound: null })
+        this.soundData.push({ id: 'pop', src: './audio/fx/pop.mp3', sound: null })
+        this.soundData.push({ id: 'pop2', src: './audio/fx/pop2.mp3', sound: null })
+        this.soundData.push({ id: 'revealSpecial', src: './audio/fx/getCrazyOne.mp3', sound: null })
+        this.soundData.push({ id: 'dropTile', src: './audio/fx/dropTile.mp3', sound: null })
+        this.soundData.push({ id: 'getThemAll', src: './audio/fx/getThemAll.mp3', sound: null })
+        this.soundData.push({ id: 'coin', src: './audio/fx/getstar.mp3', sound: null })
+        this.soundData.push({ id: 'place', src: './audio/fx/place.mp3', sound: null })
+        this.soundData.push({ id: 'shoosh', src: './audio/fx/shoosh.mp3', sound: null })
 
         this.soundData.forEach(element => {
             element.sound = sound.add(element.id, element.src)
@@ -24,6 +34,13 @@ export default class SoundManager {
         this.stopSound('main-soundtrack');
         this.playUnique('ingame-soundtrack', true, 2);
     }
+    play(id, data = {}) {
+        let soundData = this.findById(id)
+        if (!soundData) {
+            return;
+        }
+        soundData.sound.play(data)
+    }
     playUnique(id, loop = true, offset = 0) {
 
         let soundData = this.findById(id)
@@ -32,8 +49,11 @@ export default class SoundManager {
         }
         if (!soundData.sound.isPlaying) {
             soundData.sound.loop = loop;
-            console.log("PLAY", id)
+            soundData.sound.singleInstance = loop;
+            console.log("PLAY", soundData.sound)
             soundData.sound.play(offset);
+
+
         }
     }
     stopSound(id) {

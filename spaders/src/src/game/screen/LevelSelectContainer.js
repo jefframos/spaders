@@ -138,7 +138,7 @@ export default class LevelSelectContainer extends PIXI.Container {
             element.y = 0;
         }
 
-        if(!this.isHolding){
+        if (!this.isHolding) {
             //this.dragSpeed.y = utils.lerp(this.dragSpeed.y, 0, 0.2)
         }
     }
@@ -186,9 +186,12 @@ export default class LevelSelectContainer extends PIXI.Container {
         if (this.disableClickCounter > 0) {
             return;
         }
+
+        
         this.gameScreen.mainMenuSettings.collapse();
         if (this.currentUISection > 0) {
             this.currentUISection--
+            window.SOUND_MANAGER.play('shoosh', { volume: 0.1 })
         } else {
             //ouch
             this.gameScreen.startScreenContainer.startState(0);
@@ -202,6 +205,8 @@ export default class LevelSelectContainer extends PIXI.Container {
         this.sectionsView.addChild(backButton);
         this.navButtons.push(backButton);
         this.gameScreen.mainMenuSettings.collapse();
+
+
         for (let index = 0; index < this.sections.length; index++) {
             let section = this.sections[index];
 
@@ -214,7 +219,7 @@ export default class LevelSelectContainer extends PIXI.Container {
             navButton.buttonMode = true;
             this.navButtons.push(navButton);
 
-            navButton.setColor(window.colorsOrder[ this.navButtons.length % window.colorsOrder.length])
+            navButton.setColor(window.colorsOrder[this.navButtons.length % window.colorsOrder.length])
             navButton.on('mouseup', this.openSection.bind(this, section)).on('touchend', this.openSection.bind(this, section));
         }
     }
@@ -233,7 +238,7 @@ export default class LevelSelectContainer extends PIXI.Container {
     buildSectionButton(section) {
         let secButton = new SquareButton(this.unscaledCardSize);
         secButton.updateLabel(section.name);
-        if(section.imageSrc)
+        if (section.imageSrc)
             secButton.updateIcon(PIXI.Sprite.fromImage('./assets/' + section.imageSrc));
 
         this.gameScreen.resizeToFitAR(this.unscaledCardSize, secButton)
@@ -255,13 +260,16 @@ export default class LevelSelectContainer extends PIXI.Container {
         if (this.disableClickCounter > 0) {
             return;
         }
+        window.SOUND_MANAGER.play('shoosh', { volume: 0.1 })
+        this.gameScreen.mainMenuSettings.collapse();
         this.currentUISection = 1
         if (this.currentSection == section) {
             return;
         }
-        this.gameScreen.mainMenuSettings.collapse();
         this.resetDrags()
         console.log("section", section)
+
+
         this.currentSection = section;
         this.sectionButtons.forEach(element => {
             if (element.parent) {
@@ -299,11 +307,12 @@ export default class LevelSelectContainer extends PIXI.Container {
         if (this.disableClickCounter > 0) {
             return;
         }
+        window.SOUND_MANAGER.play('shoosh', { volume: 0.1 })
+        this.gameScreen.mainMenuSettings.collapse();
         this.currentUISection = 2
         if (this.currentTier == tier) {
             return;
         }
-        this.gameScreen.mainMenuSettings.collapse();
         this.currentTier = tier;
         this.resetDrags()
 
@@ -317,8 +326,8 @@ export default class LevelSelectContainer extends PIXI.Container {
         });
 
         this.levelCards = [];
-        
-        
+
+
         let backButton = this.buildBackButton();
         this.levelsView.addChild(backButton);
         this.levelCards.push(backButton);
@@ -384,7 +393,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         this.resize(null, true)
     }
     drawGrid(elements, margin = 10) {
-        let maxPerLine = Math.floor(this.mainCanvas.width / (this.unscaledCardSize.width + margin *2.5)) + 1
+        let maxPerLine = Math.floor(this.mainCanvas.width / (this.unscaledCardSize.width + margin * 2.5)) + 1
         let fullWidth = this.mainCanvas.width - margin * 2
         let distance = fullWidth / maxPerLine
         let line = -1
@@ -439,7 +448,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         // if (this.currentResolution.width != innerResolution.width || this.currentResolution.height != innerResolution.height) {
         //     //return;
         // }
-        
+
         if (innerResolution) {
             this.currentResolution = innerResolution
         }
@@ -453,7 +462,7 @@ export default class LevelSelectContainer extends PIXI.Container {
 
         this.newContainer.y = this.mainCanvas.y - 20;
 
-       
+
 
     }
     centerLevels() {
