@@ -4,7 +4,7 @@ import { sound } from '@pixi/sound';
 
 export default class SoundManager {
     constructor() {
-
+        this.sound = sound
         this.soundData = []
         this.soundData.push({ id: 'ingame-soundtrack', src: './audio/dream2.mp3', sound: null })
         this.soundData.push({ id: 'main-soundtrack', src: './audio/dream1.mp3', sound: null })
@@ -13,16 +13,18 @@ export default class SoundManager {
             element.sound = sound.add(element.id, element.src)
         });
     }
-
+    toggleMute(){
+        return this.sound.toggleMuteAll();
+    }
     playMainMenu() {
         this.stopSound('ingame-soundtrack');
         this.playUnique('main-soundtrack');
     }
     playInGame() {
         this.stopSound('main-soundtrack');
-        this.playUnique('ingame-soundtrack');
+        this.playUnique('ingame-soundtrack', true, 2);
     }
-    playUnique(id, loop = true) {
+    playUnique(id, loop = true, offset = 0) {
 
         let soundData = this.findById(id)
         if (!soundData) {
@@ -31,7 +33,7 @@ export default class SoundManager {
         if (!soundData.sound.isPlaying) {
             soundData.sound.loop = loop;
             console.log("PLAY", id)
-            soundData.sound.play();
+            soundData.sound.play(offset);
         }
     }
     stopSound(id) {

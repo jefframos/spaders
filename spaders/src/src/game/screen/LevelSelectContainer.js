@@ -81,6 +81,8 @@ export default class LevelSelectContainer extends PIXI.Container {
 
         this.panelOrder.forEach(element => {
             element.spring = new Spring();
+            element.spring.springiness = 0.085;
+            element.spring.damp = 0.7;
         });
 
         this.currentResolution = { width: config.width, height: config.height };
@@ -184,6 +186,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         if (this.disableClickCounter > 0) {
             return;
         }
+        this.gameScreen.mainMenuSettings.collapse();
         if (this.currentUISection > 0) {
             this.currentUISection--
         } else {
@@ -198,7 +201,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         let backButton = this.buildBackButton();
         this.sectionsView.addChild(backButton);
         this.navButtons.push(backButton);
-
+        this.gameScreen.mainMenuSettings.collapse();
         for (let index = 0; index < this.sections.length; index++) {
             let section = this.sections[index];
 
@@ -218,7 +221,7 @@ export default class LevelSelectContainer extends PIXI.Container {
 
     buildBackButton() {
         let secButton = new SquareButton(this.unscaledCardSize)
-        secButton.updateIcon(PIXI.Sprite.fromImage('./assets/images/icons/icons8-back-128.png'));
+        secButton.updateIcon(PIXI.Sprite.fromImage(window.iconsData.back));
         secButton.buttonMode = true;
         secButton.interactive = true;
         this.gameScreen.resizeToFitAR(this.unscaledCardSize, secButton)
@@ -256,6 +259,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         if (this.currentSection == section) {
             return;
         }
+        this.gameScreen.mainMenuSettings.collapse();
         this.resetDrags()
         console.log("section", section)
         this.currentSection = section;
@@ -299,6 +303,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         if (this.currentTier == tier) {
             return;
         }
+        this.gameScreen.mainMenuSettings.collapse();
         this.currentTier = tier;
         this.resetDrags()
 
@@ -372,6 +377,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         if (this.disableClickCounter > 0) {
             return;
         }
+        this.gameScreen.mainMenuSettings.collapse();
         this.gameScreen.startNewLevel(data, false);
         this.currentUISection = 0;
         this.resetDrags()

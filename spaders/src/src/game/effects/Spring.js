@@ -9,8 +9,8 @@ class Spring
 
         this.max			 = 300;
 
-        this.damp			 = 0.7;// 0.6;
-        this.springiness	 = 0.085;
+        this.damp			 = 0.8;// 0.6;
+        this.springiness	 = 0.1;
     }
 
     update()

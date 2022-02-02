@@ -76,7 +76,7 @@ export default class EndGameContainer extends PIXI.Container {
         }
 
 
-        this.backButton = new UIButton1(config.colors.background, './assets/images/icons/icons8-close-100.png', config.colors.white);
+        this.backButton = new UIButton1(config.colors.background,window.iconsData.home, config.colors.white);
         this.backButton.onClick.add(() => {
             this.goBack(0)
         });
@@ -86,14 +86,14 @@ export default class EndGameContainer extends PIXI.Container {
         this.backButton.on('mousedown', this.goBack.bind(this)).on('touchstart', this.goBack.bind(this));
 
 
-        this.replayButton = new UIButton1(config.colors.background, './assets/images/icons/icons8-refresh-64.png', config.colors.white);
+        this.replayButton = new UIButton1(config.colors.background, window.iconsData.reload, config.colors.white);
         this.replayButton.onClick.add(() => {
             this.restart()
         });
         this.addChild(this.replayButton);
 
 
-        this.nextLevel = new UIButton1(config.colors.white, './assets/images/icons/icons8-forward-100.png', config.colors.background);
+        this.nextLevel = new UIButton1(config.colors.white, window.iconsData.next, config.colors.background);
         this.nextLevel.onClick.add(() => {
             this.playNextLevel()
         });

@@ -18,6 +18,7 @@ import InGameMenu from './InGameMenu';
 import SquareButton from './SquareButton';
 import ColorTweens from '../effects/ColorTweens';
 import FXContainer from '../effects/FXContainer';
+import MainMenu from './MainMenu';
 
 export default class TetraScreen extends Screen {
 	constructor(label) {
@@ -144,7 +145,7 @@ export default class TetraScreen extends Screen {
 		// })
 
 		this.endGameLabel.x = this.gameCanvas.width / 2 + this.gameCanvas.x;
-		this.endGameLabel.y =  this.gridContainer.y + this.gridContainer.height / this.gridContainer.scale.y / 2;
+		this.endGameLabel.y = this.gridContainer.y + this.gridContainer.height / this.gridContainer.scale.y / 2;
 		this.addChild(this.endGameLabel);
 
 		let global = this.endGameLabel.getGlobalPosition({ x: 0, y: 0 });
@@ -329,6 +330,8 @@ export default class TetraScreen extends Screen {
 		this.inGameMenu = new InGameMenu(config.colors.green);
 		this.UIInGame.addChild(this.inGameMenu)
 
+		
+
 
 		//this.UIInGame.addChild(this.backButton)
 		this.inGameMenu.onBack.add(() => this.mainmenuState())
@@ -336,7 +339,9 @@ export default class TetraScreen extends Screen {
 
 		this.gridContainer.alpha = 0;
 		this.updateUI();
-
+		
+		this.mainMenuSettings = new MainMenu();
+		this.addChild(this.mainMenuSettings)
 		this.endGameScreenContainer.hide(true);
 
 		if (this.hasHash) {
@@ -348,6 +353,7 @@ export default class TetraScreen extends Screen {
 		} else {
 			this.mainmenuState();
 		}
+
 
 	}
 	updateLabelsPosition() {
@@ -386,6 +392,12 @@ export default class TetraScreen extends Screen {
 		this.inGameMenu.x = this.topCanvas.x + this.topCanvas.width - scaledWidth * 0.5 - scaledWidth * 0.5;
 		this.inGameMenu.y = scaledWidth * 0.5 + scaledWidth * 0.5
 
+	
+		this.mainMenuSettings.scale.set(this.inGameMenu.scale.x);
+		let toLoc = this.toLocal({x:0, y:0});
+		this.mainMenuSettings.x = toLoc.x + this.innerResolution.width - scaledWidth;
+		this.mainMenuSettings.y = toLoc.y + scaledWidth;
+
 	}
 	hideInGameElements(delay = 0) {
 		TweenMax.killTweensOf(this.cardsContainer);
@@ -404,35 +416,36 @@ export default class TetraScreen extends Screen {
 	showInGameElements() {
 		TweenMax.killTweensOf(this.cardsContainer);
 		TweenMax.killTweensOf(this.gridContainer);
-
+		this.mainMenuSettings.visible = false;
 		TweenMax.to(this.cardsContainer, 0.1, { alpha: 1 })
 		TweenMax.to(this.gridContainer, 0.1, { alpha: 1 })
 		if (this.currentCard) {
 			TweenMax.killTweensOf(this.currentCard);
 			TweenMax.to(this.currentCard, 0.1, { alpha: 1 })
 		}
-
+		this.mainMenuSettings.collapse();
 	}
 	mainmenuState(force = false) {
 		window.SOUND_MANAGER.playMainMenu();
 		this.endGameScreenContainer.hide(force);
 		this.startScreenContainer.show(force, force ? 0.2 : 0.75);
 		this.gameRunning = false;
-
+		this.mainMenuSettings.visible = true;
 		this.startScreenContainer.showCloseButton();
 		this.hideInGameElements();
 
+		this.mainMenuSettings.collapse();
 		this.removeEvents();
 
 	}
 	mainmenuStateFromGame(force = false) {
 
 		window.SOUND_MANAGER.playMainMenu();
-
+		this.mainMenuSettings.collapse();
 		this.endGameScreenContainer.hide(force);
 		this.startScreenContainer.showFromGame(force, force ? 0.2 : 0.75);
 		this.gameRunning = false;
-
+		this.mainMenuSettings.visible = true;
 		this.startScreenContainer.showCloseButton();
 		this.hideInGameElements();
 
@@ -449,7 +462,7 @@ export default class TetraScreen extends Screen {
 		this.endGameScreenContainer.show(false, 2);
 		this.hideInGameElements(2);
 		this.removeEvents();
-
+		this.mainMenuSettings.collapse();
 
 		if (window.AUTO_PLAY_HARD) {
 
@@ -499,7 +512,7 @@ export default class TetraScreen extends Screen {
 	}
 	gameState() {
 
-		
+
 
 		setTimeout(() => {
 
@@ -635,6 +648,7 @@ export default class TetraScreen extends Screen {
 	}
 	resetGame() {
 
+		this.mainMenuSettings.collapse();
 		this.grid.createGrid();
 
 		this.gameplayState = 0;
@@ -878,6 +892,7 @@ export default class TetraScreen extends Screen {
 		this.startScreenContainer.update(delta)
 		this.endGameScreenContainer.update(delta)
 		this.inGameMenu.update(delta)
+		this.mainMenuSettings.update(delta)
 		this.fxContainer.update(delta)
 
 		if (this.colorTween.isActive) {
@@ -1199,20 +1214,9 @@ export default class TetraScreen extends Screen {
 			this.currentCard.y = ((this.gridContainer.height) / this.gridContainer.scale.y);
 		}
 
-		//utils.centerObject(this.startScreenContainer, this)
-
 		this.startScreenContainer.resize(innerResolution, this.ratio)
 		this.endGameScreenContainer.resize(innerResolution, this.ratio)
-
-		// if(innerResolution.width < config.width){
-
-
-		// }else{
-		// 	this.startScreenContainer.scale.set(1)
-		// }
 		this.updateLabelsPosition();
-		//this.gameContainer.scale.set(window.ratio)
-
 
 	}
 	shuffleText(label) {

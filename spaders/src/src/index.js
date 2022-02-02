@@ -56,7 +56,17 @@ window.colorsOrder = [
 	config.colors.white,
 	config.colors.dark,
 ]
-
+let iconPath = './assets/images/newIcons/'
+window.iconsData = {
+	cancel:iconPath + 'cancel-96x96-1214345.png',
+	soundOn:iconPath + 'volume-up-96x96-1214272.png',
+	soundOff:iconPath + 'mute-96x96-1214309.png',
+	reload:iconPath + 'reload-96x96-1214298.png',
+	settings:iconPath + 'setting-96x96-1214292.png',
+	home:iconPath + 'home-96x96-1214326.png',
+	back:iconPath + 'back-arrow.png',
+	next:iconPath + 'next-arrow.png',
+}
 window.textStyles = {
 	normalAttack: {
 		font: '32px',
@@ -153,6 +163,10 @@ window.SAVE_DATA = function (data, filename, type) {
 		}, 0);
 	}
 
+}
+for (const key in window.iconsData) {
+		const element = window.iconsData[key];
+		PIXI.loader.add(element)
 }
 PIXI.loader
 	.add('./audio/dream1.mp3')
