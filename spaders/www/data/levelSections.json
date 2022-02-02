@@ -2,7 +2,7 @@
     "sections": [
         {
             "color": "0xDDDDDD",
-            "name": "Level 1",
+            "name": "Easy",
             "displayName": "Video Game History",
             "imageSrc": "",
             "levels": [
@@ -26,7 +26,7 @@
         },
         {
             "color": "0xDDDDDD",
-            "name": "Video\nGames",
+            "name": "Medium",
             "displayName": "Video Game History",
             "imageSrc": "",
             "levels": [
@@ -46,7 +46,7 @@
         },
         {
             "color": "0x8957c7",
-            "name": "movies",
+            "name": "Hard",
             "displayName": "Movies",
             "imageSrc": "",
             "levels": [

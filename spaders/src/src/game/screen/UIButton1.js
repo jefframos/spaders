@@ -42,6 +42,7 @@ export default class UIButton1 extends PIXI.Container {
 
     click(){
         this.onClick.dispatch();
+		window.SOUND_MANAGER.play('tap2', {volume:0.5})
     }
 
 	addLabelLeft(label){

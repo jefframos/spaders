@@ -24,7 +24,7 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.chooseLevelPanel.y = 150;
 
 
-		this.logoLabel = new PIXI.Text(this.currentButtonLabel, { font: '64px', fill: 0xFFFFFF, align: 'center', fontWeight: '800', fontFamily: window.LOGO_FONT });
+		this.logoLabel = new PIXI.Text(this.currentButtonLabel, { font: '64px', fill: config.colors.white, align: 'center', fontWeight: '800', fontFamily: window.LOGO_FONT });
 
 		this.logoLabel.rotation = -Math.PI * 0.25
 
@@ -33,6 +33,12 @@ export default class StartScreenContainer extends PIXI.Container {
 
 		this.logoLabel.pivot.x = this.logoLabel.width / 2
 		this.logoLabel.pivot.y = this.logoLabel.height / 2
+
+		this.gameBy = new PIXI.Text("by jeff ramos", { font: '16px', fill: config.colors.white, align: 'center', fontFamily: window.STANDARD_FONT1 });
+		this.gameBy.pivot.x = this.gameBy.width / 2;
+		this.gameBy.x = this.logoLabel.width / 2
+		this.gameBy.y = this.logoLabel.height
+		this.logoLabel.addChild(this.gameBy);
 
 		this.addChild(this.levelSelectionContainer);
 		this.addChild(this.screenContainer);
@@ -89,10 +95,11 @@ export default class StartScreenContainer extends PIXI.Container {
 
 
 		this.playLabel = new PIXI.Text("PLAY", { font: '60px', fill: config.colors.background, align: 'center', fontFamily: window.STANDARD_FONT1 });
-		this.screenContainer.addChild(this.playLabel);
-		this.playLabel.rotation = Math.PI * -0.25;
-		this.playLabel.x = -config.width / 2 + 80 + Math.cos(this.playLabel.rotation) * 200
-		this.playLabel.y = config.height / 2 - 170 + Math.sin(this.playLabel.rotation) * 200
+		this.playLine.addChild(this.playLabel);
+		this.playLabel.y = this.playLine.height / 2 - 5
+		//this.playLabel.rotation = Math.PI * -0.25;
+		//this.playLabel.x = -config.width / 2 + 80 + Math.cos(this.playLabel.rotation) * 200
+		//this.playLabel.y = config.height / 2 - 170 + Math.sin(this.playLabel.rotation) * 200
 		this.playLabel.pivot.x = this.playLabel.width / 2
 		this.playLabel.pivot.y = this.playLabel.height / 2
 
@@ -171,9 +178,6 @@ export default class StartScreenContainer extends PIXI.Container {
 		//this.logoLabel.x = -100;
 		//this.logoLabel.y = this.playLine.y - 350
 
-
-		this.playLabel.x = 55
-		this.playLabel.y = this.playLine.y - 105
 		this.playLabel.text = "PLAY"
 
 		////console.log(this.playLine.getGlobalPosition())
@@ -372,6 +376,9 @@ export default class StartScreenContainer extends PIXI.Container {
 
 	}
 	resetGame() {
+
+		window.SOUND_MANAGER.play('tapPlay', {volume:0.65})
+
 		this.gameScreen.mainMenuSettings.collapse();
 		this.startMenuState();
 

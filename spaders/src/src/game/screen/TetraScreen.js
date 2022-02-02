@@ -120,6 +120,7 @@ export default class TetraScreen extends Screen {
 
 
 		window.SOUND_MANAGER.play('getThemAll')
+		window.SOUND_MANAGER.speedUpSoundTrack(1.1);
 
 		let fallData = {
 			gravity: 500,
@@ -135,17 +136,6 @@ export default class TetraScreen extends Screen {
 			y: this.endGameLabel.scale.y * 1.2,
 			ease: Elastic.easeOut
 		})
-
-		// TweenMax.to(this.endGameLabel, 0.25, {
-		// 	delay: 2,
-		// 	alpha: 0,
-		// 	y: this.endGameLabel.y - 20,
-		// 	onComplete: () => {
-		// 		if (this.endGameLabel.parent) {
-		// 			this.endGameLabel.parent.removeChild(this.endGameLabel);
-		// 		}
-		// 	}
-		// })
 
 		this.endGameLabel.x = this.gameCanvas.width / 2 + this.gameCanvas.x;
 		this.endGameLabel.y = this.gridContainer.y + this.gridContainer.height / this.gridContainer.scale.y / 2;
@@ -457,6 +447,10 @@ export default class TetraScreen extends Screen {
 	}
 
 	endGameState() {
+
+		if(this.endGameLabel && this.endGameLabel.parent){
+			this.endGameLabel.parent.removeChild(this.endGameLabel);
+		}
 		this.gameRunning = false;
 		this.colorTween.stopTween();
 		this.startScreenContainer.hide(true);
@@ -511,6 +505,9 @@ export default class TetraScreen extends Screen {
 			window.TIME_SCALE = 1;
 			window.AUTO_PLAY = false;
 		}
+
+		window.SOUND_MANAGER.speedUpSoundTrack(1);
+		window.SOUND_MANAGER.play('endLevel');
 		//console.log("endGameState")
 	}
 	gameState() {
@@ -735,6 +732,7 @@ export default class TetraScreen extends Screen {
 		//window.SOUND_MANAGER.volume('main-soundtrack', 1)
 
 		window.SOUND_MANAGER.playInGame();
+		window.SOUND_MANAGER.play('startLevel');
 
 	}
 
@@ -915,7 +913,9 @@ export default class TetraScreen extends Screen {
 				if (this.endGameLabel.fallData.timeToDie > 0) {
 					this.endGameLabel.fallData.timeToDie -= delta;
 					if (this.endGameLabel.fallData.timeToDie <= 0) {
-						this.endGameLabel.parent.removeChild(this.endGameLabel);
+						if(this.endGameLabel.parent){
+							this.endGameLabel.parent.removeChild(this.endGameLabel);
+						}
 					}
 				}
 

@@ -2,6 +2,7 @@ import * as PIXI from 'pixi.js';
 import ScreenManager from './screenManager/ScreenManager';
 import config from './config';
 import TweenLite from 'gsap';
+import TweenMax from 'gsap';
 export default class Game {
 
 	constructor() {
@@ -53,6 +54,32 @@ export default class Game {
 
 		window.ASSET_URL = 'assets/';
 
+		const newFont = document.createElement('style');
+
+		//newFont.appendChild(document.createTextNode(this.addFont('pressstart2p', 'pressstart2p-webfont')));
+
+		//document.head.appendChild(newFont);
+		this.updateRes();
+
+		let targetRes = !window.isMobile ? 3 : Math.min(window.devicePixelRatio, 2)
+		this.app = new PIXI.Application(
+			{
+				width: this.desktopResolution.width,
+				height: this.desktopResolution.height,
+				resolution: targetRes,
+				autoResize: false,
+				backgroundColor: 0xFFFFFF,
+			}
+		);
+
+		this.app.stage.addChild(this.stage);
+		this.renderer = this.app.renderer;
+		window.renderer = this.renderer
+		document.body.appendChild(this.app.renderer.view);
+		this.disableContextMenu(this.app.renderer.view);
+		document.body.style.margin = 0;
+
+		this.addLoading();
 	}
 	// 	addFont(fontFace = 'londrina_solidregular', fontsrc = 'londrinasolid-regular-webfont') {
 	// 		// console.log(`${window.ASSET_URL}font/${fontsrc}.woff2`);
@@ -93,32 +120,66 @@ export default class Game {
 		// // console.log(progress.progress);
 	}
 	onCompleteLoad() {
-		const newFont = document.createElement('style');
 
-		//newFont.appendChild(document.createTextNode(this.addFont('pressstart2p', 'pressstart2p-webfont')));
-
-		//document.head.appendChild(newFont);
-		this.updateRes();
-
-		let targetRes = !window.isMobile ? 3 : Math.min(window.devicePixelRatio, 2)
-		this.app = new PIXI.Application(
-			{
-				width: this.desktopResolution.width,
-				height: this.desktopResolution.height,
-				resolution: targetRes,
-				autoResize: false,
-				backgroundColor: 0xFFFFFF,
-			}
-		);
-		
-		this.app.stage.addChild(this.stage);
-		this.renderer = this.app.renderer;
-		window.renderer = this.renderer
-		document.body.appendChild(this.app.renderer.view);
-		this.disableContextMenu(this.app.renderer.view);
-		document.body.style.margin = 0;
 		this.resize2()
 		this.buildApplication();
+	}
+	addLoading() {
+		this.tapToStart = new PIXI.Container();
+		this.backTapShape = new PIXI.Graphics().beginFill(config.colors.background).drawRect(0, 0, 4000, 4000);
+		this.tapToStart.addChild(this.backTapShape);
+		this.stage.addChild(this.tapToStart);
+		this.infoLabel = new PIXI.Text('Loading...', { font: '16px', fill: config.colors.white, fontFamily: window.STANDARD_FONT1 });
+		this.infoLabel.pivot.x = this.infoLabel.width / 2
+		this.infoLabel.pivot.y = this.infoLabel.height / 2
+		this.tapToStart.addChild(this.infoLabel)
+		
+		this.infoLabel.x = 125
+		this.infoLabel.y = 19
+
+		this.loadingBar = new PIXI.Graphics().beginFill(config.colors.white).drawRoundedRect(0,0,250, 40, 20);
+		this.loadingBarFillBack = new PIXI.Graphics().beginFill(config.colors.background).drawRoundedRect(0,0,240, 30, 15);
+		this.loadingBarFillBack.x = 5
+		this.loadingBarFillBack.y = 5
+
+		this.loadingBarFill = new PIXI.Graphics().beginFill(config.colors.red).drawRoundedRect(0,0,240, 30, 15);
+		this.loadingBarFill.x = 5
+		this.loadingBarFill.y = 5
+
+		this.loadingBarFill.scale.x = 0;
+		TweenMax.to(this.loadingBarFill.scale, 0.5, {x:0.78})
+
+		this.infoLabel.visible = false;
+
+		this.tapToStart.addChild(this.loadingBar)
+		this.loadingBar.addChild(this.loadingBarFillBack)
+		this.loadingBar.addChild(this.loadingBarFill)
+		this.loadingBar.addChild(this.infoLabel)
+		
+		this.resize2();
+
+	}
+	addTapToStart() {
+		this.tapToStart.interactive = true;
+		this.tapToStart.buttonMode = true;
+		this.tapToStart.on('mouseup', this.onTapUp.bind(this)).on('touchend', this.onTapUp.bind(this));
+
+		this.infoLabel.text = 'Tap to Start'
+		this.infoLabel.pivot.x = this.infoLabel.width / 2
+		this.infoLabel.pivot.y = this.infoLabel.height / 2
+
+		this.infoLabel.visible = true;
+
+		TweenMax.killTweensOf(this.loadingBarFill.scale);
+		this.loadingBarFill.scale.x = 1;
+
+		this.resize2()
+	}
+	onTapUp() {
+		if (this.tapToStart && this.tapToStart.parent) {
+			this.stage.removeChild(this.tapToStart);
+			this.update();
+		}
 	}
 	buildApplication() {
 		if (this.builded) {
@@ -130,7 +191,7 @@ export default class Game {
 		this.resize2();
 		this.addScreenManager();
 		this.stage.addChild(this.screenManager);
-
+		this.stage.addChild(this.tapToStart);
 
 		//this.buildScreens();
 		this.fixedFPS = 60;
@@ -145,7 +206,7 @@ export default class Game {
 		this.frameDuration = this.fixedFPS;
 		// this.frameDuration = 1 / this.fixedFPS;
 
-		this.update();
+		//this.update();
 		//this.resize();
 	}
 
@@ -176,23 +237,23 @@ export default class Game {
 
 
 
+		let sclX = config.width / this.innerResolution.width
+		let sclY = config.height / this.innerResolution.height
+
+		//let sclX = this.innerResolution.width / config.width
+		//let sclY = this.innerResolution.height / config.height
+
+		this.renderer.view.style.width = `${this.innerResolution.width}px`;
+		this.renderer.view.style.height = `${this.innerResolution.height}px`;
+
+		window.appScale = { x: sclX, y: sclY };
+
+
+		window.ratio = Math.min(sclX, sclY);
+
+		this.resolution = { width: window.innerWidth / sclX, height: window.innerHeight / sclY };
+
 		if (this.screenManager) {
-			 let sclX = config.width / this.innerResolution.width
-			 let sclY = config.height / this.innerResolution.height
-
-			//let sclX = this.innerResolution.width / config.width
-			//let sclY = this.innerResolution.height / config.height
-
-			this.renderer.view.style.width = `${this.innerResolution.width}px`;
-			this.renderer.view.style.height = `${this.innerResolution.height}px`;
-
-			window.appScale = { x: sclX, y: sclY };
-
-			
-			window.ratio = Math.min(sclX, sclY);
-
-			this.resolution = { width: window.innerWidth / sclX, height: window.innerHeight / sclY };
-
 			this.screenManager.scale.x = sclX//this.ratio
 			this.screenManager.scale.y = sclY//this.ratio
 
@@ -207,6 +268,22 @@ export default class Game {
 
 			this.screenManager.resize(this.resolution, this.innerResolution);
 		}
+		if (this.tapToStart) {
+			this.backTapShape.width = this.innerResolution.width
+			this.backTapShape.height = this.innerResolution.height
+			this.tapToStart.scale.x = sclX//this.ratio
+			this.tapToStart.scale.y = sclY//this.ratio
+
+
+			this.loadingBar.x = this.backTapShape.width / 2 - this.loadingBar.width / 2// sclX
+			this.loadingBar.y = this.backTapShape.height - this.loadingBar.height * 2 // sclY
+			//this.tapToStart.pivot.x = this.tapToStart.width / 2 // this.tapToStart.scale.x
+			//this.tapToStart.pivot.y = this.tapToStart.height / 2 // this.tapToStart.scale.y
+
+			//this.tapToStart.x = this.innerResolution.width / 2 // this.tapToStart.scale.x
+			//this.tapToStart.y = this.innerResolution.height / 2
+		}
+
 	}
 	resize() {
 		// return;

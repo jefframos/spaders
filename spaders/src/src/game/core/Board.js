@@ -189,6 +189,8 @@ export default class Board {
 			cardGlobal.y += CARD.height / 2;
 			let points = (areaAttacksCards.length + 1) * 10
 			this.game.addPoints(points);
+
+			this.playDelayedCoins(1);
 			this.game.fxContainer.addParticlesToScore(
 				1,
 				this.game.toLocal(cardGlobal),
@@ -266,9 +268,9 @@ export default class Board {
 	destroyCards(list, card, autoDestroyCardData, hits) {
 		let timeline = new TimelineLite();
 		TweenMax.killTweensOf(card);
+		this.playDelayedCoins(list.length);
 		for (var i = 0; i < list.length; i++) {
 			//timeline.append(TweenMax.to(list[i].currentCard.getArrow(list[i].attackZone.label).scale, 0.1, {x:0, y:0}))
-
 			timeline.append(TweenMax.to(list[i].cardFound, 0.3, {
 				onStartParams: [list[i].currentCard.getArrow(list[i].attackZone.label), list[i].attackZone, (i + 1), list[i].cardFound],
 				onStart: function (arrow, zone, id, cardFound) {
@@ -291,6 +293,7 @@ export default class Board {
 						//normal attack
 						this.popAttack(cardFound)
 
+
 						this.game.fxContainer.addParticlesToScore(
 							id,
 							this.game.toLocal(arrowGlobal),
@@ -310,7 +313,8 @@ export default class Board {
 						arrowGlobal2.y += 30;
 						if (cardFound.crazyMood) {
 							this.game.addPoints(100);
-							window.SOUND_MANAGER.play('magic')
+							window.SOUND_MANAGER.play('explosion')
+							this.playDelayedCoins(4);
 							this.game.fxContainer.addParticlesToScore(
 								4,
 								this.game.toLocal(arrowGlobal2),
@@ -352,6 +356,9 @@ export default class Board {
 				this.game.addPoints(10 * counterHits);
 
 				window.SOUND_MANAGER.play('pop2', {speed:Math.random() * 0.075 + 0.925})
+
+				this.playDelayedCoins(3);
+
 				this.game.fxContainer.addParticlesToScore(
 					3,
 					this.game.toLocal(arrowGlobal),
@@ -378,10 +385,22 @@ export default class Board {
 
 
 	}
+
+	playDelayedCoins(total){
+		for (let index = 0; index < total; index++) {
+			setTimeout(() => {
+								
+				window.SOUND_MANAGER.play('coin', {volume:0.1, speed:1 + 0.1 * index})
+			}, 80 * index + 50);
+			
+		}
+	}
 	popAttack(card) {
 
 
 		this.addCrazyMoodParticles(card)
+
+		
 
 		return;
 

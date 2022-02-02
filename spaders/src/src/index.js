@@ -95,7 +95,7 @@ window.textStyles = {
 	}
 },
 
-	window.config = config;
+window.config = config;
 window.POOL = new Pool();
 
 window.console.warn = function () { }
@@ -168,9 +168,14 @@ for (const key in window.iconsData) {
 		const element = window.iconsData[key];
 		PIXI.loader.add(element)
 }
+
+const sManager = new SoundManager();
+window.SOUND_MANAGER = sManager;
+
+sManager.soundData.forEach(element => {
+	PIXI.loader.add(element.src);
+});
 PIXI.loader
-	.add('./audio/dream1.mp3')
-	.add('./audio/dream2.mp3')
 	.add('./data/levelSections.json')
 	.add('./assets/fonts/stylesheet.css')
 	.add('./assets/images/tvlines.png')
@@ -213,12 +218,6 @@ window.levelsJson = ""
 
 window.TIME_SCALE = 1;
 const jsonPath = "./data/"
-
-const sManager = new SoundManager();
-window.SOUND_MANAGER = sManager;
-
-
-
 
 function loadJsons() {
 
@@ -327,17 +326,6 @@ function configGame() {
 		});
 	});
 
-	console.log("LEVEL", window.levelSections)
-	// for (let index = 0; index < tier.length; index++) {
-	// 	const element = tier[index];
-	// 	let next = index +1
-	// 	next %= tier.length;
-	// 	tier[index].next = tier[next];
-	// }
-
-
-
-	window.game = new Game(config);
 	window.levelsRawJson = PIXI.loader.resources["./data/how-to-play/shapes.json"].data
 	//window.levelsRawJson = PIXI.loader.resources["./assets/levelsRaw.json"].data
 	window.levelsJson = PIXI.loader.resources["./assets/levels.json"].data
@@ -406,10 +394,22 @@ function configGame() {
 	window.EFFECTS = new EffectLayer(screenManager);
 	game.stage.addChild(EFFECTS);
 
+
+	
+	game.addTapToStart();
+	//game.update()
+
 }
+
+window.game = new Game(config);
 
 document.addEventListener("deviceready", onDeviceReady, true);
 
+window.addEventListener('resize', function(event) {
+    if(window.game){
+		window.game.resize2();
+	}
+}, true);
 
 window.isCordova = false;
 function onDeviceReady() {

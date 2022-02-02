@@ -129,7 +129,7 @@ export default class Grid extends PIXI.Container {
 			this.game.backGridContainer.addChild(shape);
 			this.dropTiles.push(shape);
 			this.gridsSquares[card.pos.i][card.pos.j].card = null;
-			window.SOUND_MANAGER.play('dropTile', {volume:0.15})
+			window.SOUND_MANAGER.play('dropTile', {volume:0.35})
 			if (this.cardsStartedOnGrid <= 0) {
 				console.log("All cards", this.cardsStartedOnGrid)
 				this.onDestroyAllStartedCards.dispatch();

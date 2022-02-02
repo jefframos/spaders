@@ -29,6 +29,16 @@ export default class SquareButton extends PIXI.Container {
             // stroke: 0x000000,
             // strokeThickness: 12
         });
+
+        this.labelTop = new PIXI.Text("", {
+            font: '24px',
+            fill: 0xFFFFFF,
+            align: 'center',
+            fontWeight: '200',
+            fontFamily: window.STANDARD_FONT1,
+            // stroke: 0x000000,
+            // strokeThickness: 12
+        });
         
         this.squareButtonBackShape.y = 20
         
@@ -37,18 +47,24 @@ export default class SquareButton extends PIXI.Container {
         this.container.addChild(this.squareButtonShape)
         //this.container.addChild(this.buttonMask)
         this.squareButtonShape.addChild(this.label)
+        this.squareButtonShape.addChild(this.labelTop)
 
         this.addChild(this.container);
 
         this.squareButtonBackShape.interactive = true;
         this.squareButtonBackShape.on('pointerover', this.onPointerOver.bind(this));
         this.squareButtonBackShape.on('pointerout', this.onPointerOut.bind(this));
+        this.squareButtonBackShape.on('pointerup', this.onPointerUp.bind(this));
 
 
         //this.updateLabel("round_ar rlar")
     }
+    onPointerUp(){
+        window.SOUND_MANAGER.play('tap', {volume:0.5})
+    }
     onPointerOver(){
         this.squareButtonShape.y = 20;
+
     }
     onPointerOut(){
         this.squareButtonShape.y = 0;
@@ -56,6 +72,18 @@ export default class SquareButton extends PIXI.Container {
     setColor(color){
         this.squareButtonShape.tint = color
         this.squareButtonBackShape.tint = color
+    }
+    updateLabelTop(text){
+        this.labelTop.text = text;
+
+        if (this.labelTop.width > this.squareButtonShape.width * 0.9) {
+            this.labelTop.scale.set(this.squareButtonShape.width / this.labelTop.width * 0.9)
+        }
+
+        this.labelTop.pivot.x = this.labelTop.width / 2 / this.labelTop.scale.x
+        this.labelTop.pivot.y = this.labelTop.height / this.labelTop.scale.y;
+        this.labelTop.x = this.squareButtonShape.width / 2 // this.container.scale.x
+        this.labelTop.y = this.squareButtonShape.height * 0.1 + this.labelTop.height / this.labelTop.scale.y// this.container.scale.y
     }
     updateLabel(text){
         this.label.text = text;

@@ -249,7 +249,8 @@ export default class LevelSelectContainer extends PIXI.Container {
 
         let dataFirstLevel = level.data[0];
         let levelTierButton = new SquareButton(this.unscaledCardSize);
-        levelTierButton.updateLabel(level.name);
+        levelTierButton.updateLabel('('+level.data.length+')' );
+        levelTierButton.updateLabelTop(level.name);
         levelTierButton.updateIcon(this.gameScreen.generateImage(dataFirstLevel.pieces));
 
         this.gameScreen.resizeToFitAR(this.unscaledCardSize, levelTierButton)

@@ -272,7 +272,10 @@ export default class EndGameContainer extends PIXI.Container {
     }
     restart() {
         this.hide(true);
-        this.gameScreen.resetGame()
+
+        setTimeout(() => {            
+            this.gameScreen.resetGame()
+        }, 750);
     }
     goBack() {
         this.gameScreen.mainmenuStateFromGame(true)

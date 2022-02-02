@@ -18,10 +18,19 @@ export default class SoundManager {
         this.soundData.push({ id: 'coin', src: './audio/fx/getstar.mp3', sound: null })
         this.soundData.push({ id: 'place', src: './audio/fx/place.mp3', sound: null })
         this.soundData.push({ id: 'shoosh', src: './audio/fx/shoosh.mp3', sound: null })
+        this.soundData.push({ id: 'coins_04', src: './audio/fx/coins_04.mp3', sound: null })
+        this.soundData.push({ id: 'tap', src: './audio/fx/Tap-01.wav', sound: null })
+        this.soundData.push({ id: 'tap2', src: './audio/fx/Pop-Tone.wav', sound: null })
+        this.soundData.push({ id: 'tapPlay', src: './audio/fx/Pop-Musical.wav', sound: null })
+        this.soundData.push({ id: 'explosion', src: './audio/fx/Fire-Burst-Small-01.m4a', sound: null })
+        this.soundData.push({ id: 'startLevel', src: './audio/fx/Harp-Flutter-02.wav', sound: null })
+        this.soundData.push({ id: 'endLevel', src: './audio/fx/Musical-Beep-Loop-02.wav', sound: null })
 
         this.soundData.forEach(element => {
             element.sound = sound.add(element.id, element.src)
         });
+
+        this.currentSoundtrack = null;
     }
     toggleMute(){
         return this.sound.toggleMuteAll();
@@ -29,6 +38,12 @@ export default class SoundManager {
     playMainMenu() {
         this.stopSound('ingame-soundtrack');
         this.playUnique('main-soundtrack');
+    }
+  
+    speedUpSoundTrack(speed = 1.15) {
+        if(this.currentSoundtrack){
+            this.currentSoundtrack.speed = speed;
+        }
     }
     playInGame() {
         this.stopSound('main-soundtrack');
@@ -50,10 +65,9 @@ export default class SoundManager {
         if (!soundData.sound.isPlaying) {
             soundData.sound.loop = loop;
             soundData.sound.singleInstance = loop;
-            console.log("PLAY", soundData.sound)
             soundData.sound.play(offset);
 
-
+            this.currentSoundtrack = soundData.sound;
         }
     }
     stopSound(id) {
