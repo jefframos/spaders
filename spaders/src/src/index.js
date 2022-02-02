@@ -1,39 +1,11 @@
-import plugins from './plugins';
 import config from './config';
 import Game from './Game';
 import GameData from './game/GameData';
 import CookieManager from './game/CookieManager';
-import GlobalGameView from './game/GlobalGameView';
-import ScreenManager from './screenManager/ScreenManager';
-import GameScreen from './game/screen/GameScreen';
-import LoadScreen from './game/screen/LoadScreen';
-import StartScreen from './game/screen/StartScreen';
-import ChooseTeamScreen from './game/screen/ChooseTeamScreen';
-import ChooseFieldScreen from './game/screen/ChooseFieldScreen';
-import GameOverScreen from './game/screen/GameOverScreen';
 import TetraScreen from './game/screen/TetraScreen';
 import EffectLayer from './game/effects/EffectLayer';
-import BackgroundEffects from './game/effects/BackgroundEffects';
-import ChooseMatchScreen from './game/screen/ChooseMatchScreen';
 import Pool from './game/core/Pool';
-import { utils } from 'pixi.js/lib/core';
-
-// import FPSMeter from '@thibka/fps-meter';
-
-// function loop() {
-//     requestAnimationFrame(loop);
-//     if (FPSMeter.isOn) FPSMeter.update();
-// }
-
-// function initFPSMeter() {
-//     FPSMeter.start();
-
-// }
-
-// initFPSMeter();
-// loop();
-
-//window.LOGO_FONT = "neon_led_lightregular"
+import SoundManager from './game/SoundManager';
 
 window.LOGO_FONT = "round_popregular"
 window.STANDARD_FONT1 = "round_popregular"
@@ -183,6 +155,8 @@ window.SAVE_DATA = function (data, filename, type) {
 
 }
 PIXI.loader
+	.add('./audio/dream1.mp3')
+	.add('./audio/dream2.mp3')
 	.add('./data/levelSections.json')
 	.add('./assets/fonts/stylesheet.css')
 	.add('./assets/images/tvlines.png')
@@ -225,6 +199,12 @@ window.levelsJson = ""
 
 window.TIME_SCALE = 1;
 const jsonPath = "./data/"
+
+const sManager = new SoundManager();
+window.SOUND_MANAGER = sManager;
+
+
+
 
 function loadJsons() {
 
@@ -323,13 +303,13 @@ function configGame() {
 			});
 			level.data = sectionLevels
 
-			
+
 			for (let index = 0; index < level.data.length; index++) {
 				let next = index + 1
 				next %= level.data.length;
 				level.data[index].next = level.data[next];
 			}
-			
+
 		});
 	});
 

@@ -366,7 +366,7 @@ export default class TetraScreen extends Screen {
 
 
 		this.movesRect.y = this.bottomUICanvas.height - this.movesRect.height - this.bottomUICanvas.height * 0.1
-		this.timerRect.y = this.movesRect.y - this.timerRect.height - this.bottomUICanvas.height * 0.025
+		this.timerRect.y = this.movesRect.y - this.timerRect.height //- this.bottomUICanvas.height * 0.05
 
 
 		//this.scoreRect.y = this.mainMenuContainer.y//this.movesRect.y + (this.movesRect.height / this.movesRect.scale.y) - (this.scoreRect.height / this.scoreRect.scale.y)
@@ -374,7 +374,7 @@ export default class TetraScreen extends Screen {
 
 		this.containerQueue.scale.set(this.bottomUICanvas.height / CARD.height * 0.5)
 		this.containerQueue.x = this.bottomUICanvas.height * 0.1
-		this.containerQueue.y = this.timerRect.y//this.movesRect.y + this.movesRect.height - this.containerQueue.height
+		this.containerQueue.y = this.timerRect.y + 8//this.movesRect.y + this.movesRect.height - this.containerQueue.height
 
 		//console.log()
 		this.backButton.scale.set(this.topCanvas.height / (this.backButton.height / this.backButton.scale.y) * 0.7)// / this.backButton.scale.y)
@@ -414,6 +414,7 @@ export default class TetraScreen extends Screen {
 
 	}
 	mainmenuState(force = false) {
+		window.SOUND_MANAGER.playMainMenu();
 		this.endGameScreenContainer.hide(force);
 		this.startScreenContainer.show(force, force ? 0.2 : 0.75);
 		this.gameRunning = false;
@@ -425,6 +426,9 @@ export default class TetraScreen extends Screen {
 
 	}
 	mainmenuStateFromGame(force = false) {
+
+		window.SOUND_MANAGER.playMainMenu();
+
 		this.endGameScreenContainer.hide(force);
 		this.startScreenContainer.showFromGame(force, force ? 0.2 : 0.75);
 		this.gameRunning = false;
@@ -494,6 +498,9 @@ export default class TetraScreen extends Screen {
 		//console.log("endGameState")
 	}
 	gameState() {
+
+		
+
 		setTimeout(() => {
 
 			this.gameRunning = true;
@@ -708,6 +715,9 @@ export default class TetraScreen extends Screen {
 
 		this.buildTrails();
 		//this.currentButtonLabel = 'RESET';
+		//window.SOUND_MANAGER.volume('main-soundtrack', 1)
+
+		window.SOUND_MANAGER.playInGame();
 
 	}
 
