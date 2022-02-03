@@ -182,6 +182,7 @@ export default class EndGameContainer extends PIXI.Container {
     }
     setStats(points, rounds, time, image, data) {
 
+        console.log(image.scale)
         if (this.currentLevelImage && this.currentLevelImage.parent) {
             this.currentLevelImage.parent.removeChild(this.currentLevelImage);
         }
@@ -225,7 +226,7 @@ export default class EndGameContainer extends PIXI.Container {
         this.currentLevelImage.x = 0//Math.cos(this.currentLevelImage.rotation) * -350
         this.currentLevelImage.y = -70//locStripe.y//-imageAspect.height + Math.sin(this.currentLevelImage.rotation) * -350
 
-        let imageAspect = { width: this.line1.width, height: this.line1.height * 0.8 }
+        let imageAspect = { width: 250, height: 200 }
         this.gameScreen.resizeToFitAR(imageAspect, this.currentLevelImage)
 
         this.line1.addChild(this.currentLevelImage);

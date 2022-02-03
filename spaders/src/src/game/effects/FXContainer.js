@@ -4,10 +4,11 @@ import utils from '../../utils';
 import StarParticle from './StarParticle';
 import TweenLite from 'gsap';
 
-export default class FXContainer extends PIXI.Container {
-    constructor() {
-        super();
 
+export default class FXContainer extends PIXI.Container {
+    constructor(backContainer) {
+        super();
+        this.backContainer = backContainer;
         this.sprites = [];
         this.particles = [];
         this.particlePool = [];
@@ -29,6 +30,46 @@ export default class FXContainer extends PIXI.Container {
         this.particleSpeed = innerResolution.height * 0.3;
         this.particleSpeedTarget = innerResolution.height * 0.4;
     }
+
+    startFireworks(position, xVelocity, color) {
+        let particle = this.getParticle();
+        particle.anchor.set(0.5)
+        particle.scale.set(0.15)
+        particle.target = null;
+        particle.targetPosition = null
+        particle.position = position;
+        particle.tint = color;
+        particle.alpha = 1;
+        particle.timeToLive = 2 + Math.random() * 2;
+        particle.scaleSpeed = 0;
+        particle.gravity = this.particleSpeed * 0.01 + this.particleSpeed * 0.01 * Math.random();
+        particle.speed = this.particleSpeedTarget;
+        particle.acceleration = this.particleSpeedTarget * 0.5;
+        particle.timeToStick = 50;
+        particle.angle = -Math.PI * Math.random();
+        particle.isFireworks = true;
+
+
+        let speedScale = 1;
+        particle.velocity = { x: xVelocity, y: -300 };
+
+
+        particle.targetVelocity = { x: 0, y: 0 }
+        this.backContainer.addChild(particle);
+        this.particles.push(particle)
+
+        particle.callback = () => {
+            this.addParticlesToScoreGravity(
+                8,
+                particle.position,
+                null,
+                particle.tint,
+                0.5
+            )
+        }
+    }
+
+
     popSprite(src, pos, width, color) {
         let sprite = PIXI.Sprite.fromImage(src)
         sprite.anchor.set(0.5);
@@ -89,8 +130,14 @@ export default class FXContainer extends PIXI.Container {
             if (element.scale.x < 0) {
                 element.scale.set(0);
             }
-
+            if( element.isFireworks && (element.y < 150 || element.velocity.y > 100)){
+                element.timeToLive = 0;
+            }
             if (element.timeToLive <= 0) {
+                if (element.callback) {
+                    element.callback();
+                }
+                element.callback = null;
                 element.parent.removeChild(element);
                 this.particlePool.push(element);
                 this.particles.splice(index, 1);
@@ -127,6 +174,9 @@ export default class FXContainer extends PIXI.Container {
                     if (distance < 20) {
                         element.parent.removeChild(element);
 
+                        if (element.callback) {
+                            element.callback();
+                        }
                         if (element.target.getParticles) {
                             element.target.getParticles(element);
                             let max = Math.min(this.particles.length, 10);
@@ -137,7 +187,7 @@ export default class FXContainer extends PIXI.Container {
                         this.particles.splice(index, 1);
                     }
                 } else {
-                    console.log(element.scaleSpeed)
+                    //console.log(element.scaleSpeed)
 
                 }
             }
@@ -173,6 +223,41 @@ export default class FXContainer extends PIXI.Container {
             particle.acceleration = this.particleSpeedTarget * 0.5;
             particle.timeToStick = target ? Math.random() * 0.15 + 0.15 : 5;
             particle.angle = target ? -Math.PI * Math.random() : -Math.PI * 2 * Math.random();
+            particle.isFireworks = false;
+            if (!target) {
+                particle.angle = (Math.PI * 2) * (index + 1) / totalParticles
+                particle.velocity = { x: Math.cos(particle.angle) * this.particleSpeed * speedScale, y: Math.sin(particle.angle) * this.particleSpeed * speedScale };
+            } else {
+
+                particle.velocity = { x: Math.cos(particle.angle) * this.particleSpeed * 1.5, y: Math.sin(particle.angle) * this.particleSpeed * 0.5 };
+            }
+
+            particle.targetVelocity = { x: 0, y: 0 }
+            this.addChild(particle);
+            this.particles.push(particle)
+        }
+
+    }
+
+    addParticlesToScoreGravity(totalParticles, from, target, color, speedScale = 1) {
+
+        for (let index = 0; index < totalParticles; index++) {
+            let particle = this.getParticle();
+            particle.anchor.set(0.5)
+            particle.scale.set(0.5)
+            particle.target = target;
+            particle.targetPosition = target ? this.toLocal(target.getGlobalPosition()) : null;;
+            particle.position = from;
+            particle.tint = color;
+            particle.alpha = 1;
+            particle.timeToLive = 4 + 2 * Math.random();
+            particle.scaleSpeed = target ? 0 : 1;
+            particle.gravity = this.particleSpeed * 0.01 + Math.random() * -this.particleSpeed * 0.005;
+            particle.speed = this.particleSpeedTarget;
+            particle.acceleration = this.particleSpeedTarget * 0.5;
+            particle.timeToStick = target ? Math.random() * 0.15 + 0.15 : 5;
+            particle.angle = target ? -Math.PI * Math.random() : -Math.PI * 2 * Math.random();
+            particle.isFireworks = false;
 
             if (!target) {
                 particle.angle = (Math.PI * 2) * (index + 1) / totalParticles

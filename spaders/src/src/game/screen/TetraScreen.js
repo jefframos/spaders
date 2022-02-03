@@ -19,6 +19,7 @@ import SquareButton from './SquareButton';
 import ColorTweens from '../effects/ColorTweens';
 import FXContainer from '../effects/FXContainer';
 import MainMenu from './MainMenu';
+import Trail from '../effects/Trail';
 
 export default class TetraScreen extends Screen {
 	constructor(label) {
@@ -107,12 +108,24 @@ export default class TetraScreen extends Screen {
 
 		//(pos, label, delay = 0, dir = 1, scale = 1, color = 0xFFFFFF, ease = Back.easeOut)
 		////AREA ATTACK
+		this.board.setFinalState();
+
+		if (this.currentCard) {
+			this.currentCard.setZeroLife();
+		}
+		this.cardQueue.forEach(element => {
+
+			element.setZeroLife();
+		});
 
 		if (this.endGameLabel && this.endGameLabel.parent) {
 			this.endGameLabel.parent.removeChild(this.endGameLabel);
 
 			TweenMax.killTweensOf(this.endGameLabel);
 		}
+
+
+		this.spawnFireworks();
 
 		this.endGameLabel = PIXI.Sprite.fromImage('./assets/images/finish/finish-them-all.png');
 		this.endGameLabel.anchor.set(0.5)
@@ -399,6 +412,8 @@ export default class TetraScreen extends Screen {
 		TweenMax.to(this.cardsContainer, 0.5, { delay: delay, alpha: 0 })
 		TweenMax.to(this.gridContainer, 0.5, { delay: delay, alpha: 0 })
 
+		this.colorTween.stopTween();
+
 		if (this.currentCard) {
 
 			TweenMax.killTweensOf(this.currentCard);
@@ -426,7 +441,7 @@ export default class TetraScreen extends Screen {
 		this.mainMenuSettings.visible = true;
 		this.startScreenContainer.showCloseButton();
 		this.hideInGameElements();
-
+		window.SOUND_MANAGER.speedUpSoundTrack(1);
 		this.mainMenuSettings.collapse();
 		this.removeEvents();
 
@@ -441,6 +456,7 @@ export default class TetraScreen extends Screen {
 		this.mainMenuSettings.visible = true;
 		this.startScreenContainer.showCloseButton();
 		this.hideInGameElements();
+		window.SOUND_MANAGER.speedUpSoundTrack(1);
 
 		this.removeEvents();
 
@@ -460,6 +476,10 @@ export default class TetraScreen extends Screen {
 		this.hideInGameElements(2);
 		this.removeEvents();
 		this.mainMenuSettings.collapse();
+
+		window.SOUND_MANAGER.speedUpSoundTrack(1);
+		window.SOUND_MANAGER.play('endLevel');
+
 
 		if (window.AUTO_PLAY_HARD) {
 
@@ -506,8 +526,6 @@ export default class TetraScreen extends Screen {
 			window.AUTO_PLAY = false;
 		}
 
-		window.SOUND_MANAGER.speedUpSoundTrack(1);
-		window.SOUND_MANAGER.play('endLevel');
 		//console.log("endGameState")
 	}
 	gameState() {
@@ -606,7 +624,7 @@ export default class TetraScreen extends Screen {
 		}
 		//utils.shuffle(tempPosRandom);
 
-		this.fxContainer = new FXContainer();
+		this.fxContainer = new FXContainer(this.backGridContainer);
 		this.gameContainer.addChild(this.fxContainer);
 
 	}
@@ -629,7 +647,6 @@ export default class TetraScreen extends Screen {
 		this.cardsContainer.addChild(this.trailHorizontal);
 		this.trailHorizontal.alpha = 0;
 
-		console.log("BUILD TRAILS")
 	}
 	startNewLevel(data, isEasy) {
 		this.currentLevelData = data;
@@ -650,8 +667,28 @@ export default class TetraScreen extends Screen {
 			this.resetGame()
 		}
 	}
+	spawnFireworks() {
+		let w = this.innerResolution.width * 0.2;
+		if (Math.random() < 0.5) {
+
+			this.fxContainer.startFireworks(
+				this.toLocal({ x: Math.random() * this.innerResolution.width, y: this.innerResolution.height }),
+				Math.random() * this.innerResolution.width * 0.1, this.colorTween.currentColor)
+		} else {
+			this.fxContainer.startFireworks(
+				this.toLocal({ x: Math.random() * this.innerResolution.width + this.innerResolution.width * 0.8, y: this.innerResolution.height }),
+				Math.random() * -this.innerResolution.width * 0.1, this.colorTween.currentColor)
+
+		}
+
+		if (Math.random() < 0.5) {
+			window.SOUND_MANAGER.play('fireworks', { volume: 0.005 + Math.random() * 0.01, speed: Math.random() * 0.3 + 0.6 })
+		}
+		this.fireworksTimer = Math.random() * 0.25 + 0.25
+	}
 	resetGame() {
 
+		this.fireworksTimer = 0;
 		this.mainMenuSettings.collapse();
 		this.grid.createGrid();
 
@@ -901,6 +938,11 @@ export default class TetraScreen extends Screen {
 		this.fxContainer.update(delta)
 
 		if (this.colorTween.isActive) {
+			if (this.fireworksTimer <= 0) {
+				this.spawnFireworks();
+			} else {
+				this.fireworksTimer -= delta;
+			}
 			if (this.endGameLabel) {
 				this.endGameLabel.tint = this.colorTween.currentColor;
 			}
@@ -1004,7 +1046,9 @@ export default class TetraScreen extends Screen {
 			return;
 		}
 
+
 		let toLocalMouse = this.toLocal(this.mousePosition)
+
 		let toGrid = this.gridContainer.toLocal(this.mousePosition)
 		this.mousePosID = Math.floor((toGrid.x) / CARD.width);
 

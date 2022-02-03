@@ -189,6 +189,7 @@ PIXI.loader
 	.add('./assets/fonts/stylesheet.css')
 	.add('./assets/images/tvlines.png')
 	.add('./assets/images/backLabel.png')
+	.add('./assets/images/trail1.jpg')
 	.add('./assets/levels.json')
 	.add('./assets/levelsRaw.json')
 	.add('./assets/images/cancel.png')

@@ -316,6 +316,12 @@ export default class Card extends PIXI.Container {
 		// console.log(	'moveX', pos);
 		TweenMax.to(this, time, { x: pos, delay: delay });
 	}
+	setZeroLife(){
+		this.life = 0;
+		if (this.life < 1) {
+			this.lifeContainer.alpha = 0;
+		}
+	}
 	mark() {
 		// this.backshape = new PIXI.Graphics();
 		// this.backshape.lineStyle(3, this.enemySprite.tint, 1);

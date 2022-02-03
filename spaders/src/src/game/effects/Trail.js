@@ -3,7 +3,7 @@ import TweenLite from 'gsap';
 
 export default class Trail
 {
-    constructor(trailContainer, points = 30, texture = 'assets/image/textures/trail1.jpg')
+    constructor(trailContainer, points = 30, texture = './assets/images/trail1.jpg')
     {
         this.trailPoints = [];
         this.nextPointTimer = 0;
@@ -30,7 +30,7 @@ export default class Trail
             this.polyIndicies[i] = i;
         }
 
-        this.mesh = new PIXI.SimpleMesh(PIXI.Texture.from(texture), this.polyVerts, this.polyUvs, this.polyIndicies, PIXI.DRAW_MODES.TRIANGLE_STRIP);
+        this.mesh = new PIXI.mesh.Mesh(PIXI.Texture.from(texture), this.polyVerts, this.polyUvs, this.polyIndicies, PIXI.DRAW_MODES.TRIANGLE_STRIP);
         this.trailContainer.addChild(this.mesh);
 
         this.trailTickDistance = 5;

@@ -47,6 +47,17 @@ export default class Board {
 		}
 		this.updateNumberOfEntities()
 	}
+
+	setFinalState(){
+		console.log("FINAL STATE")
+		for (var i = 0; i < this.allCards.length; i++) {
+			if (this.allCards[i] && this.allCards[i].startCrazyMood) {
+
+				this.allCards[i].startCrazyMood();
+				this.addCrazyMoodParticles(this.allCards[i]);
+			}
+		}
+	}
 	addCard(card) {
 		this.cards[card.pos.i][card.pos.j] = card;
 		if (card) {
@@ -205,7 +216,7 @@ export default class Board {
 				this.popLabel(this.game.toLocal(cardGlobal), "+" + points, 0.1, 0.5, 0.5, window.textStyles.areaAttack);
 				//cardsToDestroy.push({cardFound:cardFound, currentCard: card, attackZone:zones[i]});
 				this.attackCard(element, 1);
-			}, 50 * index);
+			}, 100 * index);
 		}
 
 	}
@@ -427,16 +438,7 @@ export default class Board {
 		})
 	}
 	popLabel(pos, label, delay = 0, dir = 1, scale = 1, style = {}, ease = Back.easeOut, time = 0.5) {
-		//console.log(pos.x, pos.y);
-		// let style = {
-		// 	font: '32px',
-		// 	fill: color,
-		// 	align: 'center',
-		// 	fontFamily: window.STANDARD_FONT1,
-		// 	stroke: color == 0xFFFFFF ? 0x000000 : 0xFFFFFF,
-		// 	strokeThickness: 6 * scale
-		// }
-		console.log(style)
+
 		let tempLabel = null;
 		if (window.LABEL_POOL.length > 0) {
 			tempLabel = window.LABEL_POOL[0];

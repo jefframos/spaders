@@ -18,6 +18,7 @@ export default class SoundManager {
         this.soundData.push({ id: 'coin', src: './audio/fx/getstar.mp3', sound: null })
         //this.soundData.push({ id: 'place', src: './audio/fx/place.mp3', sound: null })
         this.soundData.push({ id: 'place', src: './audio/fx/Pop-Low-Pitch-Up-02.mp3', sound: null })
+        this.soundData.push({ id: 'fireworks', src: './audio/fx/Ping-Slide-Down.mp3', sound: null })
         this.soundData.push({ id: 'shoosh', src: './audio/fx/shoosh.mp3', sound: null })
         this.soundData.push({ id: 'coins_04', src: './audio/fx/coins_04.mp3', sound: null })
         this.soundData.push({ id: 'tap', src: './audio/fx/Tap-01.mp3', sound: null })
@@ -32,6 +33,9 @@ export default class SoundManager {
         });
 
         this.currentSoundtrack = null;
+
+        this.fxMasterVolume = 0.2;
+        this.soundtrackMasterVolume = 0.8;
     }
     toggleMute(){
         return this.sound.toggleMuteAll();
@@ -56,7 +60,11 @@ export default class SoundManager {
             return;
         }
 
-
+        if(data.volume){
+            data.volume *= this.fxMasterVolume;
+        }else{
+            data.volume = this.fxMasterVolume;
+        }
         let playPromise = soundData.sound.play(data);
 
         if(playPromise.then){
@@ -77,6 +85,7 @@ export default class SoundManager {
         if (!soundData.sound.isPlaying) {
             soundData.sound.loop = loop;
             soundData.sound.singleInstance = loop;
+            soundData.sound.volume = this.soundtrackMasterVolume;
             soundData.sound.play(offset);
 
             this.currentSoundtrack = soundData.sound;

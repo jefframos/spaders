@@ -332,7 +332,6 @@ export default class EffectLayer extends PIXI.Container{
 			timelinePosition.append(TweenLite.to(container.position, speed, {x: Math.random() * positionForce - positionForce/2, y: Math.random() * positionForce - positionForce/2, ease:"easeNoneLinear"}));
 		};
 
-		console.log("SHAKASHKASHKAS")
 		timelinePosition.append(TweenLite.to(container.position, speed, {x:0, y:0, ease:"easeeaseNoneLinear"}));	
 		timelinePosition.play()	
 	}
