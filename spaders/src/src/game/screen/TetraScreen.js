@@ -323,7 +323,7 @@ export default class TetraScreen extends Screen {
 		this.inGameMenu = new InGameMenu(config.colors.green);
 		this.UIInGame.addChild(this.inGameMenu)
 
-		
+
 
 
 		//this.UIInGame.addChild(this.backButton)
@@ -332,7 +332,7 @@ export default class TetraScreen extends Screen {
 
 		this.gridContainer.alpha = 0;
 		this.updateUI();
-		
+
 		this.mainMenuSettings = new MainMenu();
 		this.addChild(this.mainMenuSettings)
 		this.endGameScreenContainer.hide(true);
@@ -385,9 +385,9 @@ export default class TetraScreen extends Screen {
 		this.inGameMenu.x = this.topCanvas.x + this.topCanvas.width - scaledWidth * 0.5 - scaledWidth * 0.5;
 		this.inGameMenu.y = scaledWidth * 0.5 + scaledWidth * 0.5
 
-	
+
 		this.mainMenuSettings.scale.set(this.inGameMenu.scale.x);
-		let toLoc = this.toLocal({x:0, y:0});
+		let toLoc = this.toLocal({ x: 0, y: 0 });
 		this.mainMenuSettings.x = toLoc.x + this.innerResolution.width - scaledWidth;
 		this.mainMenuSettings.y = toLoc.y + scaledWidth;
 
@@ -448,7 +448,7 @@ export default class TetraScreen extends Screen {
 
 	endGameState() {
 
-		if(this.endGameLabel && this.endGameLabel.parent){
+		if (this.endGameLabel && this.endGameLabel.parent) {
 			this.endGameLabel.parent.removeChild(this.endGameLabel);
 		}
 		this.gameRunning = false;
@@ -644,7 +644,11 @@ export default class TetraScreen extends Screen {
 		}
 	}
 	playNextLevel() {
-		this.startNewLevel(this.currentLevelData.next)
+		if (this.currentLevelData.next) {
+			this.startNewLevel(this.currentLevelData.next)
+		} else {
+			this.resetGame()
+		}
 	}
 	resetGame() {
 
@@ -913,7 +917,7 @@ export default class TetraScreen extends Screen {
 				if (this.endGameLabel.fallData.timeToDie > 0) {
 					this.endGameLabel.fallData.timeToDie -= delta;
 					if (this.endGameLabel.fallData.timeToDie <= 0) {
-						if(this.endGameLabel.parent){
+						if (this.endGameLabel.parent) {
 							this.endGameLabel.parent.removeChild(this.endGameLabel);
 						}
 					}
