@@ -55,7 +55,18 @@ export default class SoundManager {
         if (!soundData) {
             return;
         }
-        soundData.sound.play(data)
+
+
+        let playPromise = soundData.sound.play(data);
+
+        if(playPromise.then){
+            playPromise.then(function() {
+                // carregou
+              }, function(error) {
+                console.log(error)
+              });
+        }
+       
     }
     playUnique(id, loop = true, offset = 0) {
 

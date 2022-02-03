@@ -330,7 +330,7 @@ export default class Board {
 
 							window.EFFECTS.shake(0.2, 5, 0.3, this.game.gameContainer);
 							//explosion
-							this.popLabel(this.game.toLocal(arrowGlobal2), "+" + 100, 0.25, 0.4, 0.8, window.textStyles.areaAttack, Elastic.easeOut);
+							this.popLabel(this.game.toLocal(arrowGlobal2), "+" + 100, 0.25, 0.4, 0.8, window.textStyles.explosion, Elastic.easeOut);
 							this.areaAttack(cardFound, card);
 						}
 

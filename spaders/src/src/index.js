@@ -77,7 +77,7 @@ window.textStyles = {
 		strokeThickness: 6
 	},
 	areaAttack: {
-		font: '52px',
+		font: '48px',
 		fill: config.colors.purple,//yellow
 		align: 'center',
 		fontFamily: window.STANDARD_FONT1,
@@ -87,6 +87,15 @@ window.textStyles = {
 	counter: {
 		font: '48px',
 		fill: config.colors.purple,//red
+		align: 'center',
+		wight: '800',
+		fontFamily: window.STANDARD_FONT1,
+		stroke: 0x000000,
+		strokeThickness: 6
+	},
+	explosion: {
+		font: '52px',
+		fill: config.colors.red,//red
 		align: 'center',
 		wight: '800',
 		fontFamily: window.STANDARD_FONT1,
