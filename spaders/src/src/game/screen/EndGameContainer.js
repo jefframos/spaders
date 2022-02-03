@@ -46,7 +46,7 @@ export default class EndGameContainer extends PIXI.Container {
         line4.y = height * 3;
 
         let line5 = new PIXI.Graphics().beginFill(window.config.colors.pink).drawRect(-width / 2, 0, width, height);
-        this.stripsContainer.addChild(line5);
+        //this.stripsContainer.addChild(line5);
         line5.y = height * 4;
 
 
@@ -68,7 +68,30 @@ export default class EndGameContainer extends PIXI.Container {
 
         this.screenContainer.addChild(this.timeLabel);
 
-        let pos = [this.pointsLabel, this.movesLabel, this.timeLabel]
+        this.scoreLabelStatic = new PIXI.Text("SCORE", { font: '30px', fill: 0xFFFFFF, align: 'center', fontWeight: '300', fontface: window.STANDARD_FONT1, fontFamily: window.STANDARD_FONT1 });
+
+        this.screenContainer.addChild(this.scoreLabelStatic);
+        this.scoreLabel = new PIXI.Text("TIME: 34", { font: '72px', fill: 0xFFFFFF, align: 'center', fontWeight: '300', fontface: window.STANDARD_FONT1, fontFamily: window.STANDARD_FONT1 });
+        this.scoreLabel.x = this.scoreLabelStatic.width / 2;
+        this.scoreLabel.y = 30;
+        this.scoreLabelStatic.addChild(this.scoreLabel);
+
+        this.newHighscore = new PIXI.Text("NEW HIGHSCORE", { font: '38px', fill: 0xFFFFFF, align: 'center', fontWeight: '300', fontface: window.STANDARD_FONT1, fontFamily: window.STANDARD_FONT1 });
+
+        let highscoreIcon = new PIXI.Sprite.fromImage(window.iconsData.highscore)
+        highscoreIcon.anchor.set(0.5);
+        highscoreIcon.scale.set(0.5);
+        highscoreIcon.tint = config.colors.red2;
+        highscoreIcon.x = this.newHighscore.width / 2;
+        highscoreIcon.y = -30;
+        this.newHighscore.addChild(highscoreIcon);
+        this.screenContainer.addChild(this.newHighscore);
+        //this.newHighscore.rotation = Math.PI * 0.1
+        this.newHighscore.scale.set(0.75)
+
+        this.newHighscore.sin = 0;
+
+        let pos = [this.movesLabel, this.pointsLabel, this.timeLabel]
 
         for (let index = 0; index < pos.length; index++) {
             const element = pos[index];
@@ -76,7 +99,7 @@ export default class EndGameContainer extends PIXI.Container {
         }
 
 
-        this.backButton = new UIButton1(config.colors.background,window.iconsData.home, config.colors.white);
+        this.backButton = new UIButton1(config.colors.background, window.iconsData.home, config.colors.white);
         this.backButton.onClick.add(() => {
             this.goBack(0)
         });
@@ -117,7 +140,7 @@ export default class EndGameContainer extends PIXI.Container {
         this.gameScreen.resizeToFitAR({ width: this.mainCanvas.width, height: this.mainCanvas.height }, this.screenContainer, this.mainCanvas)
 
         this.screenContainer.x = this.mainCanvas.width / 2 + this.mainCanvas.x
-        this.screenContainer.y = this.mainCanvas.height / 2 + this.mainCanvas.y
+        this.screenContainer.y = this.mainCanvas.height / 2 + this.mainCanvas.y - 100
 
         if (this.screenContainer.scale.x < 1) {
             this.replayButton.scale.set(this.screenContainer.scale.x)
@@ -190,10 +213,21 @@ export default class EndGameContainer extends PIXI.Container {
         this.movesLabel.text = "MOVES: " + rounds;
         this.pointsLabel.text = "POINTS: " + points;
         this.timeLabel.text = "TIME: " + time;
+        this.scoreLabel.text = Math.round(points / rounds);
 
         this.movesLabel.pivot.x = this.movesLabel.width / 2
         this.pointsLabel.pivot.x = this.pointsLabel.width / 2
         this.timeLabel.pivot.x = this.timeLabel.width / 2
+        this.scoreLabelStatic.pivot.x = this.scoreLabelStatic.width / 2
+        this.scoreLabel.pivot.x = this.scoreLabel.width / 2
+
+        this.newHighscore.pivot.x = this.newHighscore.width / 2 / this.newHighscore.scale.x
+        this.newHighscore.pivot.y = this.newHighscore.height / 2 / this.newHighscore.scale.y
+
+        this.scoreLabelStatic.y = 220;
+
+        this.newHighscore.y = 400;
+        this.newHighscore.x = 0;
 
         this.levelName.scale.set(1);
         this.levelName.text = data.levelName;
@@ -244,6 +278,12 @@ export default class EndGameContainer extends PIXI.Container {
 
         //this.screenContainer.addChild(s);
     }
+    showHighscore() {
+        this.newHighscore.visible = true;
+    }
+    hideHighscore() {
+        this.newHighscore.visible = false;
+    }
     getMask() {
         this.currentMask = new PIXI.Graphics().beginFill(0xFF0000).drawRect(0, 0, this.stripsContainer.width, this.stripsContainer.height);
         this.currentMask.rotation = this.stripsContainer.rotation;
@@ -256,6 +296,14 @@ export default class EndGameContainer extends PIXI.Container {
 
     update(delta) {
 
+        if (this.newHighscore.visible) {
+            if (delta) {
+
+                this.newHighscore.sin += delta * 2;
+            }
+
+            this.newHighscore.rotation = Math.sin(this.newHighscore.sin) * 0.15;
+        }
         if (this.changeLabelTimer <= 0) {
             //this.updateStartLabel();
 
@@ -274,7 +322,7 @@ export default class EndGameContainer extends PIXI.Container {
     restart() {
         this.hide(true);
 
-        setTimeout(() => {            
+        setTimeout(() => {
             this.gameScreen.resetGame()
         }, 900);
     }

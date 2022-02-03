@@ -55,11 +55,19 @@
                 "y": 382.87211240771614
             }
         },
-        "how-to-play/simple-shapes.tmx": {
-            "scale": 0.75,
+        "how-to-play/question-mark.tmx": {
+            "scale": 0.7475852272727272,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 270.66666666666663,
+                "x": 353.1369941098233,
+                "y": 385.24035721071635
+            }
+        },
+        "how-to-play/simple-shapes.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 314.66666666666663,
                 "y": 319.99999999999994
             }
         },
@@ -155,7 +163,7 @@
             "scaleInEditor": 1
         }
     },
-    "last.exportedFilePath": "C:/Users/jfbod/Documents/projects/spaders/spaders/www/data/how-to-play",
+    "last.exportedFilePath": "C:/Users/jfbod/Documents/projects/spaders/spaders/www/data",
     "last.externalTilesetPath": "E:/projects/spaders/spaders/src/map/tilesets",
     "last.imagePath": "D:/Projects/tetra/map",
     "map.height": 10,

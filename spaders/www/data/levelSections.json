@@ -1,4 +1,7 @@
 {
+    "question":{
+        "dataPath": "question.json"
+    },
     "sections": [
         {
             "color": "0xDDDDDD",

@@ -130,14 +130,14 @@ export default class FXContainer extends PIXI.Container {
             if (element.scale.x < 0) {
                 element.scale.set(0);
             }
-            if( element.isFireworks && (element.y < 150 || element.velocity.y > 100)){
+            if( element.isFireworks && (element.y < 150 || element.velocity.y > 20)){
                 element.timeToLive = 0;
             }
             if (element.timeToLive <= 0) {
                 if (element.callback) {
                     element.callback();
+                    element.callback = null;
                 }
-                element.callback = null;
                 element.parent.removeChild(element);
                 this.particlePool.push(element);
                 this.particles.splice(index, 1);
