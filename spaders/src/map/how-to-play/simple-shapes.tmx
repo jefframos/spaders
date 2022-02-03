@@ -18,9 +18,9 @@
    <property name="tier" type="int" value="0"/>
   </properties>
   <data encoding="csv">
-1,1,1,1,1,0,0,0,0,0,0,
-1,1,1,1,1,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,
+0,0,1,0,0,0,0,0,0,0,0,
+0,1,1,0,0,0,0,0,0,0,0,
+0,0,1,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,
@@ -55,7 +55,7 @@
 0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="71" name="Shape1" width="11" height="12">
+ <layer id="71" name="Shape1" width="11" height="12" visible="0">
   <properties>
    <property name="i" type="int" value="7"/>
    <property name="j" type="int" value="6"/>
@@ -78,7 +78,7 @@
 0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="72" name="Shape2" width="11" height="12">
+ <layer id="72" name="Shape2" width="11" height="12" visible="0">
   <properties>
    <property name="i" type="int" value="5"/>
    <property name="j" type="int" value="6"/>
@@ -101,7 +101,7 @@
 0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="73" name="Shape3" width="11" height="12">
+ <layer id="73" name="Shape3" width="11" height="12" visible="0">
   <properties>
    <property name="i" type="int" value="5"/>
    <property name="j" type="int" value="6"/>
@@ -124,7 +124,7 @@
 0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="74" name="Shape4" width="11" height="12">
+ <layer id="74" name="Shape4" width="11" height="12" visible="0">
   <properties>
    <property name="i" type="int" value="5"/>
    <property name="j" type="int" value="6"/>

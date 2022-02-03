@@ -93,7 +93,7 @@ export default class Board {
 			// setTimeout(function() {
 			// console.log(card);
 
-			window.SOUND_MANAGER.play('place', {volume:0.05, speed:0.7})
+			window.SOUND_MANAGER.play('place', {volume:0.2, speed:0.7 + Math.random() * 0.3})
 			return this.updateRound(card);
 			// }.bind(this), 50);
 		}
@@ -183,25 +183,31 @@ export default class Board {
 		if(areaAttacksCards.length > 0){
 			window.SOUND_MANAGER.play('kill')
 		}
-		areaAttacksCards.forEach(element => {
-			let cardGlobal = element.getGlobalPosition({ x: 0, y: 0 });
-			cardGlobal.x += CARD.width / 2;
-			cardGlobal.y += CARD.height / 2;
-			let points = (areaAttacksCards.length + 1) * 10
-			this.game.addPoints(points);
+		for (let index = 0; index < areaAttacksCards.length; index++) {
+			const element = areaAttacksCards[index];
 
-			this.playDelayedCoins(1);
-			this.game.fxContainer.addParticlesToScore(
-				1,
-				this.game.toLocal(cardGlobal),
-				this.game.scoreRect,
-				element.currentColor
-			)
-			////AREA ATTACK
-			this.popLabel(this.game.toLocal(cardGlobal), "+" + points, 0.1, 0.5, 0.5, window.textStyles.areaAttack);
-			//cardsToDestroy.push({cardFound:cardFound, currentCard: card, attackZone:zones[i]});
-			this.attackCard(element, 1);
-		});
+			setTimeout(() => {
+				
+				let cardGlobal = element.getGlobalPosition({ x: 0, y: 0 });
+				cardGlobal.x += CARD.width / 2;
+				cardGlobal.y += CARD.height / 2;
+				let points = (areaAttacksCards.length + 1) * 10
+				this.game.addPoints(points);
+	
+				this.playDelayedCoins(1);
+				this.game.fxContainer.addParticlesToScore(
+					1,
+					this.game.toLocal(cardGlobal),
+					this.game.scoreRect,
+					element.currentColor
+				)
+				////AREA ATTACK
+				this.popLabel(this.game.toLocal(cardGlobal), "+" + points, 0.1, 0.5, 0.5, window.textStyles.areaAttack);
+				//cardsToDestroy.push({cardFound:cardFound, currentCard: card, attackZone:zones[i]});
+				this.attackCard(element, 1);
+			}, 50 * index);
+		}
+
 	}
 
 	addCrazyCards2(numCards, cardToIgnore) {

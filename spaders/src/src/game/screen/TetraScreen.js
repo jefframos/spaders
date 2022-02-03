@@ -120,7 +120,7 @@ export default class TetraScreen extends Screen {
 
 
 		window.SOUND_MANAGER.play('getThemAll')
-		window.SOUND_MANAGER.speedUpSoundTrack(1.1);
+		window.SOUND_MANAGER.speedUpSoundTrack(1.05);
 
 		let fallData = {
 			gravity: 500,
