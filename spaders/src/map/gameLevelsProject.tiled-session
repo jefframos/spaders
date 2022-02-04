@@ -23,20 +23,23 @@
             "scaleInDock": 0.75,
             "scaleInEditor": 1
         },
+        "E:/projects/spaders/spaders/src/tilesets/spadersTileset.tsx": {
+            "scaleInDock": 1
+        },
         "how-to-play/creatures.tmx": {
             "scale": 1.0512073863636362,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 351.9762178231201,
-                "y": 383.36869130464163
+                "x": 352.92750489831775,
+                "y": 384.31997837983926
             }
         },
         "how-to-play/how-to-play-medium.tmx": {
             "scale": 1.0512073863636362,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 351.9762178231201,
-                "y": 383.36869130464163
+                "x": 352.92750489831775,
+                "y": 384.31997837983926
             }
         },
         "how-to-play/how-to-play-small.tmx": {
@@ -59,8 +62,8 @@
             "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 270.66666666666663,
-                "y": 319.99999999999994
+                "x": 271.3333333333333,
+                "y": 320
             }
         },
         "how-to-play/spadersTileset.tsx": {
@@ -70,8 +73,8 @@
             "scale": 1.0512073863636362,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 351.9762178231201,
-                "y": 383.36869130464163
+                "x": 352.92750489831775,
+                "y": 384.31997837983926
             }
         },
         "levels.tmx": {
@@ -98,12 +101,31 @@
                 "y": 384.73050095117316
             }
         },
+        "main/mainSectionsConfig.tmx": {
+            "scale": 0.8275390625,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 252.5560538116592,
+                "y": 546.1977814491385
+            }
+        },
+        "main/tilesets/spadersTileset.tsx": {
+            "scaleInDock": 1
+        },
+        "mainSectionsConfig.tmx": {
+            "scale": 0.8275390625,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 320.8307764928015,
+                "y": 549.8229879631814
+            }
+        },
         "movies/movies1.tmx": {
             "scale": 0.8275390625,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 319.01817323578007,
-                "y": 383.0634883172056
+                "x": 320.22657540712765,
+                "y": 384.2718904885532
             }
         },
         "movies/spadersTileset.tsx": {
@@ -129,24 +151,24 @@
             "scale": 0.8201171875,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 319.46653965229814,
-                "y": 382.87211240771614
+                "x": 320.68587758990236,
+                "y": 384.0914503453203
             }
         },
         "videogames/levels2.tmx": {
             "scale": 0.8275390625,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 319.01817323578007,
-                "y": 383.0634883172056
+                "x": 320.22657540712765,
+                "y": 384.2718904885532
             }
         },
         "videogames/levels3.tmx": {
             "scale": 0.8275390625,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 319.01817323578007,
-                "y": 383.0634883172056
+                "x": 320.22657540712765,
+                "y": 384.2718904885532
             }
         },
         "videogames/spadersTileset.tsx": {
@@ -155,7 +177,7 @@
             "scaleInEditor": 1
         }
     },
-    "last.exportedFilePath": "C:/Users/jfbod/Documents/projects/spaders/spaders/www/data/how-to-play",
+    "last.exportedFilePath": "E:/projects/spaders/spaders/www/data",
     "last.externalTilesetPath": "E:/projects/spaders/spaders/src/map/tilesets",
     "last.imagePath": "D:/Projects/tetra/map",
     "map.height": 10,
@@ -176,6 +198,8 @@
     "project": "gameLevelsProject.tiled-project",
     "property.type": "string",
     "recentFiles": [
+        "main/mainSectionsConfig.tmx",
+        "mainSectionsConfig.tmx",
         "how-to-play/people-set-1.tmx",
         "how-to-play/how-to-play-medium.tmx",
         "how-to-play/creatures.tmx",
@@ -185,9 +209,7 @@
         "videogames/levels3.tmx",
         "movies/movies1.tmx",
         "how-to-play/simple-shapes.tmx",
-        "how-to-play/how-to-play-small.tmx",
-        "tilesets/spadersTileset.tsx",
-        "videogames/spadersTileset.tsx"
+        "how-to-play/how-to-play-small.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {

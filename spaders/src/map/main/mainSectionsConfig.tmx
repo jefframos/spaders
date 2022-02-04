@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="11" height="12" tilewidth="64" tileheight="64" infinite="0" nextlayerid="24" nextobjectid="1">
+ <editorsettings>
+  <export target="../../../www/data/mainLevelSections.json" format="json"/>
+ </editorsettings>
+ <properties>
+  <property name="description" value="no description here"/>
+  <property name="sectionName" value=""/>
+ </properties>
+ <tileset firstgid="1" source="../tilesets/spadersTileset.tsx"/>
+ <layer id="23" name="-Shapes" width="11" height="12">
+  <properties>
+   <property name="category" value="Easy"/>
+   <property name="dataPath" value="how-to-play/shapes.json"/>
+   <property name="name" value="Shapes"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="9" name="Easy" width="11" height="12">
+  <properties>
+   <property name="color" value=""/>
+   <property name="imageSrc" value=""/>
+   <property name="name" value="Easy"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+</map>

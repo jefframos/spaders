@@ -6,7 +6,8 @@
     "folders": [
         "videogames",
         "how-to-play",
-        "movies"
+        "movies",
+        "main"
     ],
     "objectTypesFile": ""
 }
