@@ -3,6 +3,82 @@
  "infinite":false,
  "layers":[
         {
+         "data":[0, 2, 3, 3, 3, 2, 0, 0, 0, 0, 0, 0, 0, 2, 3, 2, 0, 0, 0, 0, 0, 0, 0, 5, 0, 2, 0, 5, 0, 0, 0, 0, 0, 0, 5, 5, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "height":12,
+         "id":71,
+         "name":"Shape1",
+         "opacity":1,
+         "properties":[
+                {
+                 "name":"i",
+                 "type":"int",
+                 "value":7
+                }, 
+                {
+                 "name":"j",
+                 "type":"int",
+                 "value":6
+                }, 
+                {
+                 "name":"startI",
+                 "type":"int",
+                 "value":0
+                }, 
+                {
+                 "name":"startJ",
+                 "type":"int",
+                 "value":0
+                }, 
+                {
+                 "name":"tier",
+                 "type":"int",
+                 "value":0
+                }],
+         "type":"tilelayer",
+         "visible":false,
+         "width":11,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "data":[0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 2, 10, 0, 10, 2, 0, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "height":12,
+         "id":78,
+         "name":"Copy of Shape1",
+         "opacity":1,
+         "properties":[
+                {
+                 "name":"i",
+                 "type":"int",
+                 "value":7
+                }, 
+                {
+                 "name":"j",
+                 "type":"int",
+                 "value":6
+                }, 
+                {
+                 "name":"startI",
+                 "type":"int",
+                 "value":0
+                }, 
+                {
+                 "name":"startJ",
+                 "type":"int",
+                 "value":0
+                }, 
+                {
+                 "name":"tier",
+                 "type":"int",
+                 "value":0
+                }],
+         "type":"tilelayer",
+         "visible":true,
+         "width":11,
+         "x":0,
+         "y":0
+        }, 
+        {
          "data":[0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":12,
          "id":43,
@@ -35,45 +111,7 @@
                  "value":0
                 }],
          "type":"tilelayer",
-         "visible":true,
-         "width":11,
-         "x":0,
-         "y":0
-        }, 
-        {
-         "data":[0, 2, 3, 3, 3, 2, 0, 0, 0, 0, 0, 0, 0, 2, 3, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-         "height":12,
-         "id":71,
-         "name":"Shape1",
-         "opacity":1,
-         "properties":[
-                {
-                 "name":"i",
-                 "type":"int",
-                 "value":7
-                }, 
-                {
-                 "name":"j",
-                 "type":"int",
-                 "value":6
-                }, 
-                {
-                 "name":"startI",
-                 "type":"int",
-                 "value":0
-                }, 
-                {
-                 "name":"startJ",
-                 "type":"int",
-                 "value":0
-                }, 
-                {
-                 "name":"tier",
-                 "type":"int",
-                 "value":0
-                }],
-         "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":11,
          "x":0,
          "y":0
@@ -111,7 +149,7 @@
                  "value":0
                 }],
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":11,
          "x":0,
          "y":0
@@ -149,7 +187,7 @@
                  "value":0
                 }],
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":11,
          "x":0,
          "y":0
@@ -187,7 +225,7 @@
                  "value":0
                 }],
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":11,
          "x":0,
          "y":0
@@ -225,7 +263,7 @@
                  "value":0
                 }],
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":11,
          "x":0,
          "y":0
@@ -263,12 +301,12 @@
                  "value":0
                 }],
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":11,
          "x":0,
          "y":0
         }],
- "nextlayerid":78,
+ "nextlayerid":79,
  "nextobjectid":1,
  "orientation":"orthogonal",
  "properties":[

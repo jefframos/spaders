@@ -1,4 +1,189 @@
 {
+    "activeFile": "how-to-play/simple-shapes.tmx",
+    "expandedProjectPaths": [
+        "movies",
+        "how-to-play",
+        "videogames"
+    ],
+    "fileStates": {
+        "D:/Projects/tetra/map/levels.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 276.66666666666663,
+                "y": 404
+            }
+        },
+        "D:/Projects/tetra/map/spadersTileset.tsx": {
+            "scaleInDock": 0.75,
+            "scaleInEditor": 1
+        },
+        "E:/projects/spaders/spaders/src/tilesets/spadersTileset.tsx": {
+            "scaleInDock": 1
+        },
+        "how-to-play/creatures.tmx": {
+            "scale": 1.0512073863636362,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 159.81622863320047,
+                "y": 383.3686913046417
+            }
+        },
+        "how-to-play/how-to-play-medium.tmx": {
+            "scale": 1.0512073863636362,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 352.92750489831775,
+                "y": 384.31997837983926
+            }
+        },
+        "how-to-play/how-to-play-small.tmx": {
+            "scale": 0.8201171875,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 352.9983329364134,
+                "y": 384.09145034532025
+            }
+        },
+        "how-to-play/people-set-1.tmx": {
+            "scale": 0.8201171875,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 351.16932603000714,
+                "y": 382.87211240771614
+            }
+        },
+        "how-to-play/simple-shapes.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 312,
+                "y": 318.66666666666663
+            }
+        },
+        "how-to-play/spadersTileset.tsx": {
+            "scaleInDock": 1
+        },
+        "how-to-play/things.tmx": {
+            "scale": 1.0512073863636362,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 352.92750489831775,
+                "y": 384.31997837983926
+            }
+        },
+        "levels.tmx": {
+            "scale": 0.9681423611111112,
+            "selectedLayer": 7,
+            "viewCenter": {
+                "x": 407.9978481126154,
+                "y": 364.6157984398816
+            }
+        },
+        "levels2.tmx": {
+            "scale": 1.0266927083333333,
+            "selectedLayer": 12,
+            "viewCenter": {
+                "x": 320.4464172479392,
+                "y": 384.73050095117316
+            }
+        },
+        "levels3.tmx": {
+            "scale": 1.0266927083333333,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 320.4464172479392,
+                "y": 384.73050095117316
+            }
+        },
+        "main/mainSectionsConfig.tmx": {
+            "scale": 0.8275390625,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 252.5560538116592,
+                "y": 546.1977814491385
+            }
+        },
+        "main/tilesets/spadersTileset.tsx": {
+            "scaleInDock": 1
+        },
+        "mainSectionsConfig.tmx": {
+            "scale": 0.8275390625,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 320.8307764928015,
+                "y": 549.8229879631814
+            }
+        },
+        "movies/movies1.tmx": {
+            "scale": 0.8275390625,
+            "selectedLayer": 5,
+            "viewCenter": {
+                "x": 319.01817323578007,
+                "y": 383.0634883172055
+            }
+        },
+        "movies/spadersTileset.tsx": {
+            "scaleInDock": 1
+        },
+        "movies1.tmx": {
+            "scale": 1.0266927083333333,
+            "selectedLayer": 5,
+            "viewCenter": {
+                "x": 320.4464172479392,
+                "y": 383.7564996829423
+            }
+        },
+        "spadersTileset.tsx": {
+            "scaleInDock": 1
+        },
+        "tilesets/spadersTileset.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "videogames/levels.tmx": {
+            "scale": 0.8201171875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 320.68587758990236,
+                "y": 384.0914503453203
+            }
+        },
+        "videogames/levels2.tmx": {
+            "scale": 0.8275390625,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 320.22657540712765,
+                "y": 384.2718904885532
+            }
+        },
+        "videogames/levels3.tmx": {
+            "scale": 0.8275390625,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 320.22657540712765,
+                "y": 384.2718904885532
+            }
+        },
+        "videogames/spadersTileset.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "openFiles": [
+        "how-to-play/people-set-1.tmx",
+        "how-to-play/how-to-play-medium.tmx",
+        "how-to-play/creatures.tmx",
+        "how-to-play/things.tmx",
+        "videogames/levels.tmx",
+        "videogames/levels2.tmx",
+        "videogames/levels3.tmx",
+        "movies/movies1.tmx",
+        "how-to-play/simple-shapes.tmx"
+    ],
+    "project": "gameLevelsProject.tiled-project",
     "recentFiles": [
         "how-to-play/simple-shapes.tmx",
         "main/mainSectionsConfig.tmx",

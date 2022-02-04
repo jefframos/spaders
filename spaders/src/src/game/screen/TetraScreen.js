@@ -350,17 +350,12 @@ export default class TetraScreen extends Screen {
 		this.addChild(this.mainMenuSettings)
 		this.endGameScreenContainer.hide(true);
 
-		if (this.hasHash) {
-			if (this.currentLevelID < 0) {
-				this.endGameState();
-			} else {
-				this.resetGame();
-			}
-		} else {
+		this.hashUsed = false;
+		if(!this.hasHash){
 			this.mainmenuState();
+
 		}
-
-
+		
 	}
 	updateLabelsPosition() {
 
@@ -957,6 +952,18 @@ export default class TetraScreen extends Screen {
 		this.inGameMenu.update(delta)
 		this.mainMenuSettings.update(delta)
 		this.fxContainer.update(delta)
+
+
+		///sort hash when load
+		if (this.hasHash && !this.hashUsed) {
+			if (this.currentLevelID < 0) {
+				this.endGameState();
+			} else {
+				this.resetGame();
+			}
+
+			this.hashUsed = true;
+		}
 
 		if (this.colorTween.isActive) {
 			if (this.fireworksTimer <= 0) {
