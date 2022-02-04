@@ -13,6 +13,7 @@ window.STANDARD_FONT2 = "cozy_capsmedium"
 window.COOKIE_MANAGER = new CookieManager();
 window.GAME_DATA = new GameData();
 
+
 window.CARD_ID = 0;
 
 window.ENEMIES = {
@@ -66,6 +67,8 @@ window.iconsData = {
 	home:iconPath + 'home-96x96-1214326.png',
 	back:iconPath + 'back-arrow.png',
 	next:iconPath + 'next-arrow.png',
+	highscore:iconPath + 'fire-96x96-1408702.png',
+	wipeData:iconPath + 'recycle-bin-96x96-1214299.png',
 }
 window.textStyles = {
 	normalAttack: {
@@ -233,6 +236,10 @@ function loadJsons() {
 
 	window.levelSections = PIXI.loader.resources[jsonPath + "levelSections.json"].data
 
+	//window.questionMark = PIXI.loader.resources[jsonPath + "levelSections.json"].data.question
+
+	PIXI.loader.add(jsonPath + window.levelSections.question.dataPath)
+
 	window.levelSections.sections.forEach(section => {
 		console.log(section)
 		if (section.imageSrc) {
@@ -293,6 +300,7 @@ function extractData(element) {
 
 function configGame() {
 
+window.questionMark = extractData(PIXI.loader.resources[jsonPath + window.levelSections.question.dataPath].data.layers[0])
 
 	window.levelSections.sections.forEach(section => {
 

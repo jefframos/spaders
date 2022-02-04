@@ -36,9 +36,19 @@ export default class SoundManager {
 
         this.fxMasterVolume = 0.2;
         this.soundtrackMasterVolume = 0.8;
+
+        if(!window.COOKIE_MANAGER.settings.sound){
+            this.mute();
+        }
+    }
+    mute(){
+        this.sound.muteAll();
     }
     toggleMute(){
-        return this.sound.toggleMuteAll();
+        let mute = this.sound.toggleMuteAll();
+        window.COOKIE_MANAGER.updateSettings({sound:!mute})
+
+        return mute;
     }
     playMainMenu() {
         this.stopSound('ingame-soundtrack');

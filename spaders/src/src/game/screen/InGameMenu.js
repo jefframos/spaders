@@ -67,7 +67,9 @@ export default class InGameMenu extends PIXI.Container {
             }
         });
         this.toggleSound.backShape.rotation = 0
-
+		if(!window.COOKIE_MANAGER.settings.sound){
+            this.toggleSound.updateTexture(window.iconsData.soundOff);
+        }
 
 		this.positionSpring.x = -this.backShape.width;
 		this.mainContainer.x = -this.backShape.width;

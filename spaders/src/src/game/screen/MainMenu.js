@@ -16,7 +16,7 @@ export default class MainMenu extends PIXI.Container {
         this.customWidth = 60;
         this.backShape = new PIXI.Graphics();
         this.backShape.beginFill(config.colors.white);
-        this.backShape.drawRoundedRect(0, 0, 120, 100, 20);
+        this.backShape.drawRoundedRect(0, 0, 210, 100, 20);
         // this.backShape.drawRoundedRect(0, 0, 290, 100, 20);
         this.backShape.endFill();
         this.backShape.alpha = 1
@@ -26,12 +26,11 @@ export default class MainMenu extends PIXI.Container {
         this.openMenu = new UIButton1(config.colors.white, window.iconsData.settings, config.colors.dark);
         this.openMenu.onClick.add(() => this.toggleState());
 
-        this.closeButton = new UIButton1(config.colors.background, window.iconsData.cancel, config.colors.white);
-        this.closeButton.onClick.add(() => {
-            this.state = 1;
-            this.onBack.dispatch()
+        this.wipeDataButton = new UIButton1(config.colors.background, window.iconsData.wipeData, config.colors.white);
+        this.wipeDataButton.onClick.add(() => {
+            window.COOKIE_MANAGER.wipeData();
         });
-        this.closeButton.backShape.rotation = 0
+        this.wipeDataButton.backShape.rotation = 0
 
         this.refreshButton = new UIButton1(config.colors.background, window.iconsData.reload, config.colors.white);
         this.refreshButton.onClick.add(() => {
@@ -54,25 +53,27 @@ export default class MainMenu extends PIXI.Container {
         });
         this.toggleSound.backShape.rotation = 0
 
-
+        if(!window.COOKIE_MANAGER.settings.sound){
+            this.toggleSound.updateTexture(window.iconsData.soundOff);
+        }
         this.positionSpring.x = -this.backShape.width;
         this.mainContainer.x = -this.backShape.width;
         this.addChild(this.mainContainer);
-        //this.mainContainer.addChild(this.closeButton);
+        this.mainContainer.addChild(this.wipeDataButton);
         //this.mainContainer.addChild(this.refreshButton);
         //this.mainContainer.addChild(this.autoPlayButton);
         this.mainContainer.addChild(this.toggleSound);
         this.toggleSound.x = this.backShape.width - 60
         this.toggleSound.y = 50;
         // this.refreshButton.x = this.backShape.width - 60
-        // this.closeButton.x = this.refreshButton.x - 90
+        this.wipeDataButton.x = this.toggleSound.x - 90
+        this.wipeDataButton.y = this.toggleSound.y;
         // this.refreshButton.y = 50
-        // this.closeButton.y = this.refreshButton.y;
 
-        // this.autoPlayButton.x = this.closeButton.x - 90;
+        // this.autoPlayButton.x = this.wipeDataButton.x - 90;
         // this.autoPlayButton.y = this.refreshButton.y;
 
-        // this.toggleSound.x = this.closeButton.x - 90;
+        // this.toggleSound.x = this.wipeDataButton.x - 90;
         // this.toggleSound.y = this.refreshButton.y;
 
         this.addChild(this.openMenu);

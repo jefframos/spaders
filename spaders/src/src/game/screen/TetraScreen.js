@@ -412,7 +412,7 @@ export default class TetraScreen extends Screen {
 		TweenMax.to(this.cardsContainer, 0.5, { delay: delay, alpha: 0 })
 		TweenMax.to(this.gridContainer, 0.5, { delay: delay, alpha: 0 })
 
-		this.colorTween.stopTween();
+
 
 		if (this.currentCard) {
 
@@ -444,6 +444,7 @@ export default class TetraScreen extends Screen {
 		window.SOUND_MANAGER.speedUpSoundTrack(1);
 		this.mainMenuSettings.collapse();
 		this.removeEvents();
+		this.colorTween.stopTween();
 
 	}
 	mainmenuStateFromGame(force = false) {
@@ -458,6 +459,7 @@ export default class TetraScreen extends Screen {
 		this.hideInGameElements();
 		window.SOUND_MANAGER.speedUpSoundTrack(1);
 
+		this.colorTween.stopTween();
 		this.removeEvents();
 
 	}
@@ -468,7 +470,6 @@ export default class TetraScreen extends Screen {
 			this.endGameLabel.parent.removeChild(this.endGameLabel);
 		}
 		this.gameRunning = false;
-		this.colorTween.stopTween();
 		this.startScreenContainer.hide(true);
 		let tempid = this.currentLevelID >= 0 ? this.currentLevelID : 0
 		this.endGameScreenContainer.setStats(this.currentPoints, this.currentRound, utils.convertNumToTime(Math.ceil(this.currentTime)), this.generateImage(this.currentLevelData.pieces), this.currentLevelData);
@@ -480,6 +481,24 @@ export default class TetraScreen extends Screen {
 		window.SOUND_MANAGER.speedUpSoundTrack(1);
 		window.SOUND_MANAGER.play('endLevel');
 
+		let mps = Math.ceil(this.currentTime) / this.currentRound;
+		let cp =  this.currentPoints / mps
+		let actualScore =  Math.round(this.currentPoints / this.currentRound)
+		console.log('moves per sec', mps, cp, actualScore)
+
+
+		let isHighscore = window.COOKIE_MANAGER.saveLevel(
+			this.dataToSave.levelName,
+			Math.ceil(this.currentTime),
+			this.currentPoints,
+			this.currentRound,
+			actualScore)
+
+			if(isHighscore){
+				this.endGameScreenContainer.showHighscore();
+			}else{
+				this.endGameScreenContainer.hideHighscore();
+			}
 
 		if (window.AUTO_PLAY_HARD) {
 
@@ -560,6 +579,7 @@ export default class TetraScreen extends Screen {
 
 
 		this.gameContainer = new PIXI.Container();
+		this.backFXContainer = new PIXI.Container();
 		this.backGridContainer = new PIXI.Container();
 		this.gridContainer = new PIXI.Container();
 		this.cardsContainer = new PIXI.Container();
@@ -579,6 +599,7 @@ export default class TetraScreen extends Screen {
 		this.addChild(this.gameContainer);
 
 		//this.gameContainer.addChild(this.background);
+		this.gameContainer.addChild(this.backFXContainer);
 		this.gameContainer.addChild(this.backGridContainer);
 		this.gameContainer.addChild(this.gridContainer);
 		this.gameContainer.addChild(this.cardsContainer);
@@ -624,7 +645,7 @@ export default class TetraScreen extends Screen {
 		}
 		//utils.shuffle(tempPosRandom);
 
-		this.fxContainer = new FXContainer(this.backGridContainer);
+		this.fxContainer = new FXContainer(this.backFXContainer);
 		this.gameContainer.addChild(this.fxContainer);
 
 	}
@@ -1215,6 +1236,11 @@ export default class TetraScreen extends Screen {
 
 
 		this.fxContainer.resize(innerResolution);
+		this.backFXContainer.x = this.fxContainer.x
+		this.backFXContainer.y = this.fxContainer.y
+		this.backFXContainer.scale.x = this.fxContainer.scale.x
+		this.backFXContainer.scale.y = this.fxContainer.scale.y
+
 		this.background.resize(scaledResolution, innerResolution)
 		this.ratio = config.width / config.height;
 

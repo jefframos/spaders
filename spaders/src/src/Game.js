@@ -147,7 +147,7 @@ export default class Game {
 		this.loadingBarFill.y = 5
 
 		this.loadingBarFill.scale.x = 0;
-		TweenMax.to(this.loadingBarFill.scale, 0.5, {x:0.78})
+		TweenMax.to(this.loadingBarFill.scale, 1 + Math.random(), {x:0.6 + Math.random() * 0.3})
 
 		this.infoLabel.visible = false;
 
@@ -171,7 +171,7 @@ export default class Game {
 		this.infoLabel.visible = true;
 
 		TweenMax.killTweensOf(this.loadingBarFill.scale);
-		this.loadingBarFill.scale.x = 1;
+		TweenMax.to(this.loadingBarFill.scale, 0.3, {x:1})
 
 		this.resize2()
 	}

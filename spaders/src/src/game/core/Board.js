@@ -52,7 +52,7 @@ export default class Board {
 		console.log("FINAL STATE")
 		for (var i = 0; i < this.allCards.length; i++) {
 			if (this.allCards[i] && this.allCards[i].startCrazyMood) {
-
+				this.allCards[i].setZeroLife();
 				this.allCards[i].startCrazyMood();
 				this.addCrazyMoodParticles(this.allCards[i]);
 			}

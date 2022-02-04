@@ -19,7 +19,7 @@ export default class SquareButton extends PIXI.Container {
         this.buttonMask = PIXI.Sprite.fromImage('./assets/images/largeCard.png');
         this.innerBorder = PIXI.Sprite.fromImage('./assets/images/innerBorder.png');
 
-    
+
         this.label = new PIXI.Text("", {
             font: '24px',
             fill: 0xFFFFFF,
@@ -39,9 +39,9 @@ export default class SquareButton extends PIXI.Container {
             // stroke: 0x000000,
             // strokeThickness: 12
         });
-        
+
         this.squareButtonBackShape.y = 20
-        
+
         this.container.addChild(this.squareButtonBackShape)
         //this.container.addChild(this.innerBorder)
         this.container.addChild(this.squareButtonShape)
@@ -59,22 +59,36 @@ export default class SquareButton extends PIXI.Container {
 
         //this.updateLabel("round_ar rlar")
     }
-    onPointerUp(){
-        window.SOUND_MANAGER.play('tap', {volume:0.5})
+    onPointerUp() {
+        window.SOUND_MANAGER.play('tap', { volume: 0.5 })
     }
-    onPointerOver(){
+    onPointerOver() {
         this.squareButtonShape.y = 20;
 
     }
-    onPointerOut(){
+    onPointerOut() {
         this.squareButtonShape.y = 0;
     }
-    setColor(color){
+    setColor(color) {
         this.squareButtonShape.tint = color
         this.squareButtonBackShape.tint = color
     }
-    updateLabelTop(text){
+    updateLabelTop(text, icon) {
         this.labelTop.text = text;
+
+        if (icon) {
+            if (this.labelTop.icon) {
+                this.labelTop.icon.parent.removeChild(this.labelTop.icon)
+            }
+            this.labelTop.icon = icon;
+
+            icon.scale.set(1);
+            icon.scale.set(this.labelTop.height / icon.height);
+            icon.anchor.x = 1.1;
+            icon.anchor.y = 0;
+            
+            this.labelTop.addChild(icon);
+        }
 
         if (this.labelTop.width > this.squareButtonShape.width * 0.9) {
             this.labelTop.scale.set(this.squareButtonShape.width / this.labelTop.width * 0.9)
@@ -83,9 +97,12 @@ export default class SquareButton extends PIXI.Container {
         this.labelTop.pivot.x = this.labelTop.width / 2 / this.labelTop.scale.x
         this.labelTop.pivot.y = this.labelTop.height / this.labelTop.scale.y;
         this.labelTop.x = this.squareButtonShape.width / 2 // this.container.scale.x
-        this.labelTop.y = this.squareButtonShape.height * 0.1 + this.labelTop.height / this.labelTop.scale.y// this.container.scale.y
+        this.labelTop.y = this.squareButtonShape.height * 0.07 + this.labelTop.height / this.labelTop.scale.y// this.container.scale.y
+        if (icon){
+            this.labelTop.x += icon.width / 2//icon.scale.x;
+        }
     }
-    updateLabel(text){
+    updateLabel(text) {
         this.label.text = text;
 
         if (this.label.width > this.squareButtonShape.width * 0.9) {
@@ -95,20 +112,20 @@ export default class SquareButton extends PIXI.Container {
         this.label.pivot.x = this.label.width / 2 / this.label.scale.x
         this.label.pivot.y = this.label.height / this.label.scale.y;
         this.label.x = this.squareButtonShape.width / 2 // this.container.scale.x
-        this.label.y = this.squareButtonShape.height * 0.9// this.container.scale.y
+        this.label.y = this.squareButtonShape.height * 0.93// this.container.scale.y
     }
-    updateIcon(graphic, scale = 0.5, offset = {x:0, y:0}){
-        if(this.icon && this.icon.parent){
+    updateIcon(graphic, scale = 0.5, offset = { x: 0, y: 0 }) {
+        if (this.icon && this.icon.parent) {
             this.icon.parent.removeChild(this.icon);
         }
         this.icon = graphic
         this.squareButtonShape.addChildAt(this.icon, 0)
         this.icon.x = offset.x
         this.icon.y = offset.y
-        if(graphic.width > graphic.height){
+        if (graphic.width > graphic.height) {
             this.icon.scale.set(this.buttonMask.width / this.icon.width * scale);
-        }else{
-            this.icon.scale.set(this.buttonMask.height / this.icon.height * scale);            
+        } else {
+            this.icon.scale.set(this.buttonMask.height / this.icon.height * scale);
         }
 
         this.icon.x = this.squareButtonShape.width / 2 - this.icon.width / 2 + offset.x

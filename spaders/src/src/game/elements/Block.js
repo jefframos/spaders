@@ -49,7 +49,14 @@ export default class Card extends PIXI.Container{
 		cardContainer.x = CARD.width / 2;
 
 	}
+	setZeroLife(){
+
+	}
+	forceNewColor(){
+
+	}
 	forceDestroy(){
+		if(this.parent)
 		this.parent.removeChild(this);
 		//this.removeActionZones();
 		//window.CARD_POOL.push(this);
