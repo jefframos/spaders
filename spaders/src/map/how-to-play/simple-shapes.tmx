@@ -150,7 +150,7 @@
  <layer id="77" name="Red Dot" width="11" height="12">
   <properties>
    <property name="i" type="int" value="6"/>
-   <property name="j" type="int" value="8"/>
+   <property name="j" type="int" value="9"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
