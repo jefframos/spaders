@@ -74,7 +74,7 @@ export default class LevelSelectContainer extends PIXI.Container {
             this.addChild(this.dragPanel)
             this.dragPanel.interactive = true;
             this.dragPanel.visible = false;
-            this.dragPanel.alpha = 0.3;
+            this.dragPanel.alpha = 0;
 
         }, 100);
 

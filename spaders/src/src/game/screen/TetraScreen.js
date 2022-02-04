@@ -20,6 +20,7 @@ import ColorTweens from '../effects/ColorTweens';
 import FXContainer from '../effects/FXContainer';
 import MainMenu from './MainMenu';
 import Trail from '../effects/Trail';
+import TutorialOverlay from './TutorialOverlay';
 
 export default class TetraScreen extends Screen {
 	constructor(label) {
@@ -41,16 +42,22 @@ export default class TetraScreen extends Screen {
 		this.hasHash = false;
 		this.currentLevelID = 0;
 		this.currentLevelData = this.levels[this.currentLevelID];
+
+		this.isTutorial = false;
+
 		if (window.location.hash) {
 			var hash = window.location.hash.substring(1); //Puts hash in variable, and removes the # character
 			//console.log(hash)
-			this.hasHash = true;
-			if (hash == "a") {
-
+			if (hash == "t") {
+				this.isTutorial = true;
+			} else if (hash == "a") {
+				
+				this.hasHash = true;
 				this.currentLevelID = -1;
 			} else {
 				if (hash < this.levels.length) {
-
+					
+					this.hasHash = true;
 					this.currentLevelID = hash;
 
 					this.currentLevelData = this.levels[hash];
@@ -101,6 +108,8 @@ export default class TetraScreen extends Screen {
 
 		this.gameplayState = 0;
 		//console.log(utils.convertNumToTime(1231))
+
+
 	}
 	onDestroyAllStartedCards() {
 		this.colorTween.startTween();
@@ -351,11 +360,48 @@ export default class TetraScreen extends Screen {
 		this.endGameScreenContainer.hide(true);
 
 		this.hashUsed = false;
-		if(!this.hasHash){
+		if (!this.hasHash) {
 			this.mainmenuState();
 
 		}
-		
+		this.tutorialOverlay = new TutorialOverlay();
+		this.addChild(this.tutorialOverlay);
+		this.tutorialOverlay.visible = false;
+		this.currentTutorial = 0;
+		this.tutorial = [
+			{
+				position: { x: 200, y: 200 },
+				text: 'Tea a la la',
+				callback: null,
+				target: null
+			},
+			{
+				position: { x: 200, y: 200 },
+				text: 'Test la lala a la la',
+				callback: null,
+				target: null
+			}, {
+				position: { x: 200, y: 300 },
+				text: 'Test 2',
+				callback: null,
+				target: null
+			}]
+
+		if (this.isTutorial) {
+			setTimeout(() => {
+
+				this.nextTutorial();
+			}, 2000);
+		}
+	}
+	nextTutorial() {
+		if (this.currentTutorial >= this.tutorial.length) {
+			this.tutorialOverlay.visible = false;
+			return;
+		}
+		this.tutorialOverlay.visible = true;
+		this.tutorialOverlay.popLabel(this.tutorial[this.currentTutorial], this.nextTutorial.bind(this));
+		this.currentTutorial++;
 	}
 	updateLabelsPosition() {
 
@@ -477,8 +523,8 @@ export default class TetraScreen extends Screen {
 		window.SOUND_MANAGER.play('endLevel');
 
 		let mps = Math.ceil(this.currentTime) / this.currentRound;
-		let cp =  this.currentPoints / mps
-		let actualScore =  Math.round(this.currentPoints / this.currentRound)
+		let cp = this.currentPoints / mps
+		let actualScore = Math.round(this.currentPoints / this.currentRound)
 		console.log('moves per sec', mps, cp, actualScore)
 
 
@@ -489,11 +535,11 @@ export default class TetraScreen extends Screen {
 			this.currentRound,
 			actualScore)
 
-			if(isHighscore){
-				this.endGameScreenContainer.showHighscore();
-			}else{
-				this.endGameScreenContainer.hideHighscore();
-			}
+		if (isHighscore) {
+			this.endGameScreenContainer.showHighscore();
+		} else {
+			this.endGameScreenContainer.hideHighscore();
+		}
 
 		if (window.AUTO_PLAY_HARD) {
 

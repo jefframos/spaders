@@ -1,9 +1,6 @@
 {
     "activeFile": "how-to-play/simple-shapes.tmx",
     "expandedProjectPaths": [
-        "movies",
-        "how-to-play",
-        "videogames"
     ],
     "fileStates": {
         "D:/Projects/tetra/map/levels.tmx": {
@@ -25,15 +22,15 @@
             "scale": 1.0512073863636362,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 159.81622863320047,
-                "y": 383.3686913046417
+                "x": 351.97621782312007,
+                "y": 384.31997837983926
             }
         },
         "how-to-play/how-to-play-medium.tmx": {
             "scale": 1.0512073863636362,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 352.92750489831775,
+                "x": 351.97621782312007,
                 "y": 384.31997837983926
             }
         },
@@ -49,8 +46,8 @@
             "scale": 0.8201171875,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 351.16932603000714,
-                "y": 382.87211240771614
+                "x": 352.38866396761136,
+                "y": 384.0914503453203
             }
         },
         "how-to-play/simple-shapes.tmx": {
@@ -68,7 +65,7 @@
             "scale": 1.0512073863636362,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 352.92750489831775,
+                "x": 351.97621782312007,
                 "y": 384.31997837983926
             }
         },
@@ -119,8 +116,8 @@
             "scale": 0.8275390625,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 319.01817323578007,
-                "y": 383.0634883172055
+                "x": 320.22657540712765,
+                "y": 384.2718904885532
             }
         },
         "movies/spadersTileset.tsx": {
@@ -146,7 +143,7 @@
             "scale": 0.8201171875,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 320.68587758990236,
+                "x": 320.6858775899024,
                 "y": 384.0914503453203
             }
         },
@@ -185,9 +182,6 @@
     ],
     "project": "gameLevelsProject.tiled-project",
     "recentFiles": [
-        "how-to-play/simple-shapes.tmx",
-        "main/mainSectionsConfig.tmx",
-        "mainSectionsConfig.tmx",
         "how-to-play/people-set-1.tmx",
         "how-to-play/how-to-play-medium.tmx",
         "how-to-play/creatures.tmx",
@@ -196,6 +190,9 @@
         "videogames/levels2.tmx",
         "videogames/levels3.tmx",
         "movies/movies1.tmx",
+        "how-to-play/simple-shapes.tmx",
+        "main/mainSectionsConfig.tmx",
+        "mainSectionsConfig.tmx",
         "how-to-play/how-to-play-small.tmx"
     ]
 }
