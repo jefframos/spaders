@@ -967,9 +967,9 @@ export default class TetraScreen extends Screen {
 		this.cardsContainer.addChild(this.currentCard);
 
 
-		this.availableSlots = this.board.availableSlots();
+		this.firstLineShots = this.board.firstLineShots();
 
-		if(this.availableSlots <= 1){
+		if(this.firstLineShots == 1){
 			this.currentCard.isABomb();
 		}
 

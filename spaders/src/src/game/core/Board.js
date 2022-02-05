@@ -35,18 +35,31 @@ export default class Board {
 		});
 
 	}
-	availableSlots() {
+	firstLineShots() {
 
 		let availableSpaces = 0
 		for (let index = 0; index < this.cards.length; index++) {
-			const element = this.cards[index];
+			const line = this.cards[index];
 
-			if (!element[element.length - 1]) {
+			if (!line[line.length - 1]) {
 				availableSpaces++
 			}
 
 		}
-		return availableSpaces
+		let firstLineShots = 0
+		if (availableSpaces <= 1) {
+			for (let index = 0; index < this.cards.length; index++) {
+				const line = this.cards[index];
+
+				if (!line[line.length - 1] && line[line.length - 2]) {
+					firstLineShots++
+				}
+
+			}
+			console.log('firstLineShots', firstLineShots)
+		}
+
+		return firstLineShots
 	}
 	resetBoard() {
 		this.cards = [];
