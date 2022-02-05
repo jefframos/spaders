@@ -174,6 +174,11 @@ export default class Game {
 		TweenMax.to(this.loadingBarFill.scale, 0.3, {x:1})
 
 		this.resize2()
+
+		if (window.location.hash) {
+			var hash = window.location.hash.substring(1);
+			this.onTapUp();
+		}
 	}
 	onTapUp() {
 		if (this.tapToStart && this.tapToStart.parent) {

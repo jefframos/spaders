@@ -108,7 +108,7 @@ export default class Card extends PIXI.Container {
 		this.crazyMood = false;
 		this.circleBackground.alpha = 0.0
 	}
-	createCard(totalSides) {
+	createCard(totalSides = 0, customData) {
 		this.alpha = 1;
 		this.crazyMood = false;
 		this.removeCrazyMood();
@@ -125,7 +125,15 @@ export default class Card extends PIXI.Container {
 
 		this.updateCard();
 
-		this.addActionZones(totalSides);
+		if(totalSides == 0){
+			totalSides = Math.ceil(Math.random() * 2)
+		}
+		console.log(totalSides)
+		let order = null;
+		if(customData && customData.order){
+			order = customData.order;
+		}
+		this.addActionZones(totalSides, order);
 	}
 	attacked(hits = 1) {
 		this.life -= hits;
@@ -236,19 +244,20 @@ export default class Card extends PIXI.Container {
 		this.cardForeground.width = CARD.width
 		this.cardForeground.height = CARD.height
 	}
-	addActionZones(totalSides = 1) {
+	addActionZones(totalSides = 1, customOrder = null) {
 		this.updateSize();
 		this.zones = [];
 		this.removeActionZones();
-		let orderArray = [0, 1, 2, 3, 4, 5, 6, 7]
-		utils.shuffle(orderArray);
+		let orderArray = customOrder?customOrder:[0, 1, 2, 3, 4, 5, 6, 7]
 
-		//add another arrow if the first arrow is bottom center
-
-		
-		if(ACTION_ZONES[orderArray[0]].label == "BOTTOM_CENTER" && totalSides <= 1){
-			console.log("one here")
-			totalSides ++;
+		if(!customOrder){
+			utils.shuffle(orderArray);
+			if(ACTION_ZONES[orderArray[0]].label == "BOTTOM_CENTER" && totalSides <= 1){
+				console.log("one here")
+				totalSides ++;
+			}
+		}else{
+			totalSides = customOrder.length;
 		}
 
 		let arrowSize = 12*this.starterScale;

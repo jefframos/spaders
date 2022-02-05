@@ -54,7 +54,7 @@ export default class EndGameContainer extends PIXI.Container {
 
         this.buttonMode = true;
 
-        this.levelName = new PIXI.Text("Level 1", { font: '64px', fill: 0xFFFFFF, align: 'left', fontWeight: '300', fontFamily: window.STANDARD_FONT1 });
+        this.levelName = new PIXI.Text("Level 1", { font: '54px', fill: 0xFFFFFF, align: 'left', fontWeight: '300', fontFamily: window.STANDARD_FONT1 });
         this.screenContainer.addChild(this.levelName);
 
         this.pointsLabel = new PIXI.Text("POINTS: 3450", { font: '30px', fill: 0xFFFFFF, align: 'center', fontWeight: '300', fontFamily: window.STANDARD_FONT1 });
@@ -236,7 +236,7 @@ export default class EndGameContainer extends PIXI.Container {
         this.levelName.pivot.x = this.levelName.width / 2;
         this.levelName.pivot.y = this.levelName.height;
         this.levelName.x = 0
-        this.levelName.y = -220
+        this.levelName.y = -210
 
         if (this.levelName.width > 300) {
 

@@ -37,18 +37,20 @@ export default class SoundManager {
         this.fxMasterVolume = 0.2;
         this.soundtrackMasterVolume = 0.8;
 
+            this.isMute = false;
         if(!window.COOKIE_MANAGER.settings.sound){
             this.mute();
         }
     }
     mute(){
         this.sound.muteAll();
+        this.isMute = true;
     }
     toggleMute(){
-        let mute = this.sound.toggleMuteAll();
-        window.COOKIE_MANAGER.updateSettings({sound:!mute})
+        this.isMute = this.sound.toggleMuteAll();
+        window.COOKIE_MANAGER.updateSettings({sound:!this.isMute})
 
-        return mute;
+        return this.isMute;
     }
     playMainMenu() {
         this.stopSound('ingame-soundtrack');
@@ -81,7 +83,7 @@ export default class SoundManager {
             playPromise.then(function() {
                 // carregou
               }, function(error) {
-                console.log(error)
+                console.log(soundData, error)
               });
         }
        

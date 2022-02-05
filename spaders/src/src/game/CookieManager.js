@@ -2,11 +2,38 @@ export default class CookieManager {
 	constructor() {
 		//this.resetCookie();
 		// window.localStorage.clear();
-
+		let defaultStats = {
+			totalMatchesPlayed: 0,
+			totalLevelsFinished: 0,
+			totalMoves: 0,
+			totalLevelsPlayTime: 0,
+			totalShardsCollected: 0,
+			totalBombsExploded: 0,
+			totalCombos: 0,
+		}
 		let defaultSettings = {
 			sound: true,
 			tutorial: false
 		}
+
+		let stats = this.getCookie("stats");
+		if (stats) {
+			this.stats = stats;
+
+			for (const key in defaultStats) {
+				const element = defaultStats[key];
+				if (this.stats[key] === undefined) {
+					this.stats[key] = element;
+					this.storeObject("stats", this.stats)
+				}
+			}
+		} else {
+			this.stats = defaultStats
+
+			this.storeObject("stats", this.stats)
+		}
+
+
 		let settings = this.getCookie("settings");
 		if (settings) {
 			this.settings = settings;
@@ -33,6 +60,14 @@ export default class CookieManager {
 
 		this.storeObject("levelsCompleted", this.levelsCompleted)
 	}
+	addCombo() {
+		this.stats.totalCombos ++
+		this.storeObject("stats", this.stats)
+	}
+	addExplosion() {
+		this.stats.totalBombsExploded ++
+		this.storeObject("stats", this.stats)
+	}
 	findLevel(name) {
 		for (let index = 0; index < this.levelsCompleted.levels.length; index++) {
 			const element = this.levelsCompleted.levels[index];
@@ -56,20 +91,20 @@ export default class CookieManager {
 		for (let index = 0; index < this.levelsCompleted.levels.length; index++) {
 			const element = this.levelsCompleted.levels[index];
 			if (element.name == name) {
-				if(element.bestTime > bestTime){
+				if (element.bestTime > bestTime) {
 					element.bestTime = bestTime;
 				}
-		
-				if(element.highscore < highscore){
+
+				if (element.highscore < highscore) {
 					element.highscore = highscore;
 					isHighscore = true;
 				}
-		
-				if(element.bestMoves > bestMoves){
+
+				if (element.bestMoves > bestMoves) {
 					element.bestMoves = bestMoves;
 				}
 
-				if(element.bestNormalScore > normalScore){
+				if (element.bestNormalScore > normalScore) {
 					element.bestNormalScore = normalScore;
 				}
 
@@ -77,17 +112,27 @@ export default class CookieManager {
 				break;
 			}
 		}
-		if(!found){
+		if (!found) {
 			this.levelsCompleted.levels.push(levelsCompleted);
 			isHighscore = true;
 		}
 
 		this.storeObject("levelsCompleted", this.levelsCompleted);
 
+
+		this.stats.totalMoves += bestMoves
+		this.stats.totalLevelsPlayTime += bestTime
+		this.stats.totalShardsCollected += highscore
+
+		this.stats.totalMatchesPlayed++;
+		this.stats.totalLevelsFinished = this.levelsCompleted.levels.length;
+
+		this.storeObject("stats", this.stats)
+
 		return isHighscore;
-		
+
 	}
-	wipeData(){
+	wipeData() {
 		this.resetCookie();
 		window.localStorage.clear();
 

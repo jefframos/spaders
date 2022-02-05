@@ -101,8 +101,15 @@ export default class InGameMenu extends PIXI.Container {
 	toggleState() {
 		if (this.state == 1) {
 			this.state = 2;
+
+            if (window.SOUND_MANAGER.isMute) {
+                this.toggleSound.updateTexture(window.iconsData.soundOff);
+            } else {
+                this.toggleSound.updateTexture(window.iconsData.soundOn);
+            }
+
 		} else {
-			this.state = 1;
+			this.state = 1;			
 		}
 	}
 	update(delta) {

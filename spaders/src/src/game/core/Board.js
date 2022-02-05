@@ -48,7 +48,7 @@ export default class Board {
 		this.updateNumberOfEntities()
 	}
 
-	setFinalState(){
+	setFinalState() {
 		console.log("FINAL STATE")
 		for (var i = 0; i < this.allCards.length; i++) {
 			if (this.allCards[i] && this.allCards[i].startCrazyMood) {
@@ -104,7 +104,7 @@ export default class Board {
 			// setTimeout(function() {
 			// console.log(card);
 
-			window.SOUND_MANAGER.play('place', {volume:0.2, speed:0.7 + Math.random() * 0.3})
+			window.SOUND_MANAGER.play('place', { volume: 0.5, speed: 0.7 + Math.random() * 0.3 })
 			return this.updateRound(card);
 			// }.bind(this), 50);
 		}
@@ -188,23 +188,24 @@ export default class Board {
 					cardFound = null;
 				}
 			}
+
 		}
 		console.log("-------------------------")
 
-		if(areaAttacksCards.length > 0){
+		if (areaAttacksCards.length > 0) {
 			window.SOUND_MANAGER.play('kill')
 		}
 		for (let index = 0; index < areaAttacksCards.length; index++) {
 			const element = areaAttacksCards[index];
 
 			setTimeout(() => {
-				
+
 				let cardGlobal = element.getGlobalPosition({ x: 0, y: 0 });
 				cardGlobal.x += CARD.width / 2;
 				cardGlobal.y += CARD.height / 2;
 				let points = (areaAttacksCards.length + 1) * 10
 				this.game.addPoints(points);
-	
+
 				this.playDelayedCoins(1);
 				this.game.fxContainer.addParticlesToScore(
 					1,
@@ -215,7 +216,15 @@ export default class Board {
 				////AREA ATTACK
 				this.popLabel(this.game.toLocal(cardGlobal), "+" + points, 0.1, 0.5, 0.5, window.textStyles.areaAttack);
 				//cardsToDestroy.push({cardFound:cardFound, currentCard: card, attackZone:zones[i]});
+
+				let globalPosTemp = element.getGlobalPosition({ x: 0, y: 0 })
 				this.attackCard(element, 1);
+
+				if (element.dead && element.crazyMood) {
+					setTimeout(() => {
+						this.explodeCard(element, globalPosTemp)
+					}, 100 * areaAttacksCards[index] * 100);
+				}
 			}, 100 * index);
 		}
 
@@ -243,7 +252,30 @@ export default class Board {
 			}
 		}
 	}
+	addCrazyCards3(numCards, cardToIgnore) {
+		let tempCardList = [];
+		for (var i = 0; i < this.cards.length; i++) {
+			for (var j = 0; j < this.cards[i].length; j++) {
+				if (this.cards[i][j] && !this.cards[i][j].crazyMood && cardToIgnore != this.cards[i][j]) {
+					if(this.cards[i][j].life < 1){
+						tempCardList.push(this.cards[i][j]);
+					}
+				}
+			}
+		}
+		//utils.shuffle(tempCardList);
+		for (var i = 0; i < tempCardList.length; i++) {
+			if (tempCardList[i] && tempCardList[i].startCrazyMood) {
 
+				tempCardList[i].startCrazyMood();
+				numCards--;
+				this.addCrazyMoodParticles(tempCardList[i]);
+			}
+			if (numCards <= 0) {
+				return
+			}
+		}
+	}
 	addCrazyCards(numCards, cardToIgnore) {
 		let tempCardList = [];
 		for (var i = 0; i < this.cards.length; i++) {
@@ -255,13 +287,13 @@ export default class Board {
 		}
 		utils.shuffle(tempCardList);
 
-		window.SOUND_MANAGER.play('revealSpecial', {volume:0.5, speed:0.9})
+		window.SOUND_MANAGER.play('revealSpecial', { volume: 0.5, speed: 0.9 })
+		window.COOKIE_MANAGER.addCombo();
 
 		for (var i = 0; i < tempCardList.length; i++) {
 			if (tempCardList[i] && tempCardList[i].startCrazyMood) {
 				tempCardList[i].startCrazyMood();
 				numCards--;
-
 				this.addCrazyMoodParticles(tempCardList[i]);
 
 			}
@@ -273,7 +305,7 @@ export default class Board {
 	addCrazyMoodParticles(target, color = 0xFFFFFF) {
 		let cardGlobal = target.getGlobalPosition({ x: 0, y: 0 });
 		cardGlobal.x += target.width / 2 * this.game.cardsContainer.scale.x
-		cardGlobal.y += target.height/ 2 * this.game.cardsContainer.scale.y
+		cardGlobal.y += target.height / 2 * this.game.cardsContainer.scale.y
 		this.game.fxContainer.addParticlesToScore(
 			8,
 			this.game.toLocal(cardGlobal),
@@ -282,9 +314,31 @@ export default class Board {
 			0.5
 		)
 	}
+	explodeCard(cardFound, customPosition) {
+		let cardGlobal = customPosition ? customPosition : cardFound.getGlobalPosition({ x: 0, y: 0 });
+		cardGlobal.x += 20;
+		cardGlobal.y += 30;
+		this.game.addPoints(100);
+		window.SOUND_MANAGER.play('explosion', {singleInstance:true})
+		window.COOKIE_MANAGER.addExplosion();
+		this.playDelayedCoins(4);
+		this.game.fxContainer.addParticlesToScore(
+			4,
+			this.game.toLocal(cardGlobal),
+			this.game.scoreRect,
+			cardFound.currentColor
+		)
+
+		window.EFFECTS.shake(0.2, 5, 0.3, this.game.gameContainer);
+		//explosion
+		this.popLabel(this.game.toLocal(cardGlobal), "+" + 100, 0.25, 0.4, 0.8, window.textStyles.explosion, Elastic.easeOut);
+		this.areaAttack(cardFound);
+	}
 	destroyCards(list, card, autoDestroyCardData, hits) {
 		let timeline = new TimelineLite();
 		TweenMax.killTweensOf(card);
+		TweenMax.killTweensOf(card.position);
+		TweenMax.killTweensOf(card.scale);
 		this.playDelayedCoins(list.length);
 		for (var i = 0; i < list.length; i++) {
 			//timeline.append(TweenMax.to(list[i].currentCard.getArrow(list[i].attackZone.label).scale, 0.1, {x:0, y:0}))
@@ -306,7 +360,7 @@ export default class Board {
 
 						//window.EFFECTS.addShockwave(screenPos.x, screenPos.y, 2);
 						this.game.addPoints(10 * id);
-						window.SOUND_MANAGER.play('pop', {speed:Math.random() * 0.075 + 0.925 + 0.2 * id})
+						window.SOUND_MANAGER.play('pop', { speed: Math.random() * 0.075 + 0.925 + 0.2 * id })
 						//normal attack
 						this.popAttack(cardFound)
 
@@ -325,24 +379,8 @@ export default class Board {
 				onCompleteParams: [card, list[i].cardFound],
 				onComplete: function (card, cardFound) {
 					if (this.attackCard(cardFound, hits)) {
-						let arrowGlobal2 = cardFound.getGlobalPosition({ x: 0, y: 0 });
-						arrowGlobal2.x += 20;
-						arrowGlobal2.y += 30;
 						if (cardFound.crazyMood) {
-							this.game.addPoints(100);
-							window.SOUND_MANAGER.play('explosion')
-							this.playDelayedCoins(4);
-							this.game.fxContainer.addParticlesToScore(
-								4,
-								this.game.toLocal(arrowGlobal2),
-								this.game.scoreRect,
-								cardFound.currentColor
-							)
-
-							window.EFFECTS.shake(0.2, 5, 0.3, this.game.gameContainer);
-							//explosion
-							this.popLabel(this.game.toLocal(arrowGlobal2), "+" + 100, 0.25, 0.4, 0.8, window.textStyles.explosion, Elastic.easeOut);
-							this.areaAttack(cardFound, card);
+							this.explodeCard(cardFound);
 						}
 
 					}
@@ -372,7 +410,7 @@ export default class Board {
 				let counterHits = (list.length + 1);
 				this.game.addPoints(10 * counterHits);
 
-				window.SOUND_MANAGER.play('pop2', {speed:Math.random() * 0.075 + 0.925})
+				window.SOUND_MANAGER.play('pop2', { speed: Math.random() * 0.075 + 0.925 })
 
 				this.playDelayedCoins(3);
 
@@ -403,13 +441,13 @@ export default class Board {
 
 	}
 
-	playDelayedCoins(total){
+	playDelayedCoins(total) {
 		for (let index = 0; index < total; index++) {
 			setTimeout(() => {
-								
-				window.SOUND_MANAGER.play('coin', {volume:0.1, speed:1 + 0.1 * index})
+
+				window.SOUND_MANAGER.play('coin', { volume: 0.1, speed: 1 + 0.1 * index })
 			}, 80 * index + 50);
-			
+
 		}
 	}
 	popAttack(card) {
@@ -417,7 +455,7 @@ export default class Board {
 
 		this.addCrazyMoodParticles(card)
 
-		
+
 
 		return;
 

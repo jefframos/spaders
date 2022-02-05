@@ -51,12 +51,12 @@ export default class TetraScreen extends Screen {
 			if (hash == "t") {
 				this.isTutorial = true;
 			} else if (hash == "a") {
-				
+
 				this.hasHash = true;
 				this.currentLevelID = -1;
 			} else {
 				if (hash < this.levels.length) {
-					
+
 					this.hasHash = true;
 					this.currentLevelID = hash;
 
@@ -117,7 +117,10 @@ export default class TetraScreen extends Screen {
 
 		//(pos, label, delay = 0, dir = 1, scale = 1, color = 0xFFFFFF, ease = Back.easeOut)
 		////AREA ATTACK
-		this.board.setFinalState();
+		setTimeout(() => {
+
+			this.board.setFinalState();
+		}, 500);
 
 		if (this.currentCard) {
 			this.currentCard.setZeroLife();
@@ -527,7 +530,6 @@ export default class TetraScreen extends Screen {
 		let actualScore = Math.round(this.currentPoints / this.currentRound)
 		console.log('moves per sec', mps, cp, actualScore)
 
-
 		let isHighscore = window.COOKIE_MANAGER.saveLevel(
 			this.dataToSave.levelName,
 			Math.ceil(this.currentTime),
@@ -748,6 +750,20 @@ export default class TetraScreen extends Screen {
 		}
 		this.fireworksTimer = Math.random() * 0.25 + 0.25
 	}
+	forceBottomArrow() {
+		let rnd = Math.random() * 4;
+		let toReturn = [5,6];
+		if (rnd < 1) {
+			toReturn = [4];
+		} else if (rnd < 2) {
+			toReturn = [5];
+		} else if (rnd < 3) {
+			toReturn = [6];
+		} else{
+			toReturn = [4, 6];
+		}
+		return toReturn;
+	}
 	resetGame() {
 
 		this.fireworksTimer = 0;
@@ -788,13 +804,37 @@ export default class TetraScreen extends Screen {
 
 		this.dataToSave.levelName = this.currentLevelData.levelName;
 
+		let lastRow = [];
+		let r = this.currentLevelData.pieces.length - 2;
+		for (var kk = 0; kk < this.currentLevelData.pieces[r].length; kk++) {
+			if (this.currentLevelData.pieces[r][kk] >= 0) {
+				if (!this.currentLevelData.pieces[r][kk].isBlock) {
+					lastRow.push({ i: r, j: kk })
+				}
+			}
+		}
+		utils.shuffle(lastRow);
+		for (let index = Math.ceil(lastRow.length * 0.3); index >= 0; index--) {
+			lastRow.shift();
+		}
+		
 		for (var i = 0; i < this.currentLevelData.pieces.length; i++) {
 			for (var j = 0; j < this.currentLevelData.pieces[i].length; j++) {
 				if (this.currentLevelData.pieces[i][j] >= 0) {
 					if (ENEMIES.list[this.currentLevelData.pieces[i][j]].isBlock) {
 						this.cardsContainer.addChild(this.placeBlock(j, i));
 					} else {
-						this.cardsContainer.addChild(this.placeCard(j, i, ENEMIES.list[this.currentLevelData.pieces[i][j]].life));
+						let customData = null;
+						//if theres a piece on last row, force arrows to point down
+						lastRow.forEach(lastRow => {
+							if (lastRow.i == i && lastRow.j == j) {
+								console.log("force bottom", lastRow)
+								customData = {
+									order: this.forceBottomArrow()
+								}
+							}
+						});
+						this.cardsContainer.addChild(this.placeCard(j, i, ENEMIES.list[this.currentLevelData.pieces[i][j]].life, customData));
 					}
 				} else if (this.currentLevelData.pieces[i][j] == -2) {
 					this.cardsContainer.addChild(this.placeBlock(j, i));
@@ -948,7 +988,7 @@ export default class TetraScreen extends Screen {
 			this.onTapUp(null, this.mousePosID)
 		}
 	}
-	placeCard(i, j, level = 0) {
+	placeCard(i, j, level = 0, customData = {}) {
 		let card;
 		if (CARD_POOL.length) {
 			card = CARD_POOL[0];
@@ -957,7 +997,7 @@ export default class TetraScreen extends Screen {
 			card = new Card(this);
 		}
 		card.life = level;
-		card.createCard();
+		card.createCard(0, customData);
 		card.updateSprite(level);
 		card.x = i * CARD.width;
 		card.y = j * CARD.height - CARD.height;
