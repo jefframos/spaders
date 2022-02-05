@@ -86,7 +86,7 @@ export default class Card extends PIXI.Container {
 		// this.crazyMood = Math.random() < 0.5;
 
 		this.starterScale = this.enemySprite.scale.x;
-
+		this.isBomb = false;
 		// this.particleSystem = new ParticleSystem();
 		// this.particleSystem.createParticles({x:0, y:0},4, './assets/images/particle1.png')
 		// this.addChild(this.particleSystem)
@@ -128,7 +128,7 @@ export default class Card extends PIXI.Container {
 		if(totalSides == 0){
 			totalSides = Math.ceil(Math.random() * 2)
 		}
-		console.log(totalSides)
+		//console.log(totalSides)
 		let order = null;
 		if(customData && customData.order){
 			order = customData.order;
@@ -253,7 +253,7 @@ export default class Card extends PIXI.Container {
 		if(!customOrder){
 			utils.shuffle(orderArray);
 			if(ACTION_ZONES[orderArray[0]].label == "BOTTOM_CENTER" && totalSides <= 1){
-				console.log("one here")
+				//console.log("one here")
 				totalSides ++;
 			}
 		}else{
@@ -301,6 +301,14 @@ export default class Card extends PIXI.Container {
 			arrowContainer.addChild(arrowLine);
 		}
 		// console.log("ADD ACTION ZONES", this.zones, this.arrows);
+	}
+	isABomb(){
+		this.isBomb = true;
+		this.enemySprite.setTexture( PIXI.Texture.fromImage(window.IMAGE_DATA.enemyBombImages[0]));
+		this.startCrazyMood();
+		this.removeActionZones();
+
+		this.enemySprite.tint = config.colors.red;
 	}
 	move(pos, time = 0.3, delay = 0) {
 		// console.log(	pos);

@@ -145,6 +145,7 @@ window.shuffleText = function shuffleText(label, keepfirstandlast = false) {
 window.IMAGE_DATA = {}
 
 window.IMAGE_DATA.enemyBlockImages = ['./assets/images/newEnemies/block.png']
+window.IMAGE_DATA.enemyBombImages = ['./assets/images/newEnemies/bomb.png']
 
 window.IMAGE_DATA.enemyImages = []
 
@@ -152,6 +153,9 @@ for (let index = 0; index < 10; index++) {
 	window.IMAGE_DATA.enemyImages.push('./assets/images/newEnemies/pixil-layer-' + index + '.png');
 
 }
+window.IMAGE_DATA.enemyBombImages.forEach(element => {
+	PIXI.loader.add(element)
+});
 window.IMAGE_DATA.enemyBlockImages.forEach(element => {
 	PIXI.loader.add(element)
 });
@@ -326,8 +330,8 @@ window.questionMark = extractData(PIXI.loader.resources[jsonPath + window.levelS
 			res.layers.forEach(layer => {
 
 				let data = extractData(layer);
-
 				if (data) {
+					data.idSaveData = level.name + ' - '+data.levelName;
 					sectionLevels.push(data);
 					//console.log(data)
 				}

@@ -15,7 +15,9 @@ export default class CookieManager {
 			sound: true,
 			tutorial: false
 		}
-
+		let defaultDebug = {
+			showAllThumbs: false
+		}
 		let stats = this.getCookie("stats");
 		if (stats) {
 			this.stats = stats;
@@ -33,6 +35,22 @@ export default class CookieManager {
 			this.storeObject("stats", this.stats)
 		}
 
+		let debug = this.getCookie("debug");
+		if (debug) {
+			this.debug = debug;
+
+			for (const key in defaultDebug) {
+				const element = defaultDebug[key];
+				if (this.debug[key] === undefined) {
+					this.debug[key] = element;
+					this.storeObject("debug", this.debug)
+				}
+			}
+		} else {
+			this.debug = defaultDebug
+
+			this.storeObject("debug", this.debug)
+		}
 
 		let settings = this.getCookie("settings");
 		if (settings) {

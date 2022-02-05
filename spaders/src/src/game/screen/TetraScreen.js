@@ -531,7 +531,7 @@ export default class TetraScreen extends Screen {
 		console.log('moves per sec', mps, cp, actualScore)
 
 		let isHighscore = window.COOKIE_MANAGER.saveLevel(
-			this.dataToSave.levelName,
+			this.dataToSave.idSaveData,
 			Math.ceil(this.currentTime),
 			this.currentPoints,
 			this.currentRound,
@@ -803,6 +803,7 @@ export default class TetraScreen extends Screen {
 		this.currentCard = null;
 
 		this.dataToSave.levelName = this.currentLevelData.levelName;
+		this.dataToSave.idSaveData = this.currentLevelData.idSaveData;
 
 		let lastRow = [];
 		let r = this.currentLevelData.pieces.length - 2;
@@ -828,7 +829,6 @@ export default class TetraScreen extends Screen {
 						//if theres a piece on last row, force arrows to point down
 						lastRow.forEach(lastRow => {
 							if (lastRow.i == i && lastRow.j == j) {
-								console.log("force bottom", lastRow)
 								customData = {
 									order: this.forceBottomArrow()
 								}
@@ -966,6 +966,12 @@ export default class TetraScreen extends Screen {
 		this.currentCard.updateCard(true);
 		this.cardsContainer.addChild(this.currentCard);
 
+
+		this.availableSlots = this.board.availableSlots();
+
+		if(this.availableSlots <= 1){
+			this.currentCard.isABomb();
+		}
 
 		if (this.autoPlayTimeout) {
 			clearTimeout(this.autoPlayTimeout);

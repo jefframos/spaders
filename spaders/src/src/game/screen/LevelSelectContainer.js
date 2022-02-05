@@ -402,7 +402,7 @@ export default class LevelSelectContainer extends PIXI.Container {
     refreshTier(levelTierButton, data) {
         let count = 0;
         data.forEach(element => {
-            if (window.COOKIE_MANAGER.findLevel(element.levelName)) {
+            if (window.COOKIE_MANAGER.findLevel(element.idSaveData)) {
                 count++
             }
         });
@@ -415,11 +415,14 @@ export default class LevelSelectContainer extends PIXI.Container {
         }
     }
     refreshCard(levelButton, data) {
-        let levelStored = window.COOKIE_MANAGER.findLevel(data.levelName);
-        if (levelStored) {
+        let levelStored = window.COOKIE_MANAGER.findLevel(data.idSaveData);
+        let debugThumb = window.COOKIE_MANAGER.debug.showAllThumbs;
+        if (levelStored || debugThumb) {
             levelButton.updateIcon(this.gameScreen.generateImage(data.pieces));
-            levelButton.updateLabelTop(levelStored.highscore,
+            if(!debugThumb){
+                levelButton.updateLabelTop(levelStored.highscore,
                 new PIXI.Sprite.fromImage(window.iconsData.highscore))
+            }
             levelButton.setColor(config.colors.blue2)
         } else {
             levelButton.updateIcon(this.gameScreen.generateImage(window.questionMark.pieces));

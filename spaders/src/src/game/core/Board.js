@@ -35,6 +35,19 @@ export default class Board {
 		});
 
 	}
+	availableSlots() {
+
+		let availableSpaces = 0
+		for (let index = 0; index < this.cards.length; index++) {
+			const element = this.cards[index];
+
+			if (!element[element.length - 1]) {
+				availableSpaces++
+			}
+
+		}
+		return availableSpaces
+	}
 	resetBoard() {
 		this.cards = [];
 		this.allCards = [];
@@ -118,6 +131,14 @@ export default class Board {
 		let cardsToDestroy = [];
 		let autoDestroyCardData = null;
 		let starterLife = card.life;
+
+		if (card.isBomb) {
+			setTimeout(() => {
+				this.areaAttack(card)
+				this.attackCard(card, 1000);
+			}, 300);
+			return 1000 / window.TIME_SCALE
+		}
 		for (var i = 0; i < zones.length; i++) {
 			let actionPosId = {
 				i: card.pos.i + zones[i].dir.x,
@@ -218,7 +239,12 @@ export default class Board {
 				//cardsToDestroy.push({cardFound:cardFound, currentCard: card, attackZone:zones[i]});
 
 				let globalPosTemp = element.getGlobalPosition({ x: 0, y: 0 })
-				this.attackCard(element, 1);
+
+				if (card.isBomb) {
+					this.attackCard(element, 100);
+				} else {
+					this.attackCard(element, 1);
+				}
 
 				if (element.dead && element.crazyMood) {
 					setTimeout(() => {
@@ -257,7 +283,7 @@ export default class Board {
 		for (var i = 0; i < this.cards.length; i++) {
 			for (var j = 0; j < this.cards[i].length; j++) {
 				if (this.cards[i][j] && !this.cards[i][j].crazyMood && cardToIgnore != this.cards[i][j]) {
-					if(this.cards[i][j].life < 1){
+					if (this.cards[i][j].life < 1) {
 						tempCardList.push(this.cards[i][j]);
 					}
 				}
@@ -319,7 +345,7 @@ export default class Board {
 		cardGlobal.x += 20;
 		cardGlobal.y += 30;
 		this.game.addPoints(100);
-		window.SOUND_MANAGER.play('explosion', {singleInstance:true})
+		window.SOUND_MANAGER.play('explosion', { singleInstance: true })
 		window.COOKIE_MANAGER.addExplosion();
 		this.playDelayedCoins(4);
 		this.game.fxContainer.addParticlesToScore(
