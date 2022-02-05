@@ -10,6 +10,7 @@ export default class CookieManager {
 			totalShardsCollected: 0,
 			totalBombsExploded: 0,
 			totalCombos: 0,
+			timesLoaded: 0
 		}
 		let defaultSettings = {
 			sound: true,
@@ -77,13 +78,16 @@ export default class CookieManager {
 		}
 
 		this.storeObject("levelsCompleted", this.levelsCompleted)
+
+		this.stats.timesLoaded++
+		this.storeObject("stats", this.stats)
 	}
 	addCombo() {
-		this.stats.totalCombos ++
+		this.stats.totalCombos++
 		this.storeObject("stats", this.stats)
 	}
 	addExplosion() {
-		this.stats.totalBombsExploded ++
+		this.stats.totalBombsExploded++
 		this.storeObject("stats", this.stats)
 	}
 	findLevel(name) {

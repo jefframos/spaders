@@ -142,7 +142,22 @@ export default class Game {
 		this.loadingBarFillBack.x = 5
 		this.loadingBarFillBack.y = 5
 
-		this.loadingBarFill = new PIXI.Graphics().beginFill(config.colors.red).drawRoundedRect(0,0,240, 30, 15);
+		let loaderColors = [
+			config.colors.red,
+			config.colors.purple,
+			config.colors.blue,
+			config.colors.pink,
+			config.colors.green,
+			config.colors.blue2,
+			config.colors.red2,
+		]
+
+		console.log("TIMES LOADED", window.COOKIE_MANAGER.stats.timesLoaded)
+		let timesLoaded = window.COOKIE_MANAGER.stats.timesLoaded || 1;
+		timesLoaded %= loaderColors.length;
+		
+
+		this.loadingBarFill = new PIXI.Graphics().beginFill(loaderColors[timesLoaded]).drawRoundedRect(0,0,240, 30, 15);
 		this.loadingBarFill.x = 5
 		this.loadingBarFill.y = 5
 
