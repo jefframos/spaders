@@ -79,6 +79,7 @@ export default class TetraScreen extends Screen {
 
 		this.board = new Board(this);
 		this.board.onDestroyCard.add((card) => this.onDestroyCard(card));
+		this.board.OnStartNextRound.add((card) => this.OnStartNextRound(card));
 
 		this.totalLines = 6;
 
@@ -954,6 +955,9 @@ export default class TetraScreen extends Screen {
 		this.cardQueue[1].mark();
 
 	}
+	OnStartNextRound(){
+		this.newRound();
+	}
 	newRound() {
 		this.updateQueue();
 		this.currentCard = this.cardQueue[0];
@@ -1273,9 +1277,11 @@ export default class TetraScreen extends Screen {
 		this.currentCard = null;
 		this.updateUI();
 		// console.log(0.1 * normalDist * 100);
-		setTimeout(function () {
-			this.newRound();
-		}.bind(this), 0.1 * normalDist + nextRoundTimer / window.TIME_SCALE);
+
+
+		// setTimeout(function () {
+		// 	this.newRound();
+		// }.bind(this), 0.1 * normalDist + nextRoundTimer / window.TIME_SCALE);
 
 		// console.log(nextRoundTimer);
 	}

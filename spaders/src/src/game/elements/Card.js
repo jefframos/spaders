@@ -417,7 +417,9 @@ export default class Card extends PIXI.Container {
 		// }
 		if (this.dead) {
 			TweenMax.killTweensOf(this);
-			console.log("FORCE THIS CARD TO DIE");
+			TweenMax.killTweensOf(this.position);
+			TweenMax.killTweensOf(this.scale);
+			//console.log("FORCE THIS CARD TO DIE");
 			if(this.parent){			
 				this.parent.removeChild(this);
 			}
@@ -426,8 +428,10 @@ export default class Card extends PIXI.Container {
 			this.forceDestroy();
 		}
 		// this.removeCrazyMood();
-		this.shake(0.2, 6, 0.2);
 		TweenMax.killTweensOf(this);
+		TweenMax.killTweensOf(this.position);
+		TweenMax.killTweensOf(this.scale);
+		this.shake(0.2, 6, 0.2);
 
 		this.dead = true;
 

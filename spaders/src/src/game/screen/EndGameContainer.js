@@ -70,7 +70,7 @@ export default class EndGameContainer extends PIXI.Container {
 
         this.scoreLabelStatic = new PIXI.Text("SCORE", { font: '30px', fill: 0xFFFFFF, align: 'center', fontWeight: '300', fontface: window.STANDARD_FONT1, fontFamily: window.STANDARD_FONT1 });
 
-        this.screenContainer.addChild(this.scoreLabelStatic);
+        //this.screenContainer.addChild(this.scoreLabelStatic);
         this.scoreLabel = new PIXI.Text("TIME: 34", { font: '72px', fill: 0xFFFFFF, align: 'center', fontWeight: '300', fontface: window.STANDARD_FONT1, fontFamily: window.STANDARD_FONT1 });
         this.scoreLabel.x = this.scoreLabelStatic.width / 2;
         this.scoreLabel.y = 30;
@@ -85,7 +85,7 @@ export default class EndGameContainer extends PIXI.Container {
         highscoreIcon.x = this.newHighscore.width / 2;
         highscoreIcon.y = -30;
         this.newHighscore.addChild(highscoreIcon);
-        this.screenContainer.addChild(this.newHighscore);
+        //this.screenContainer.addChild(this.newHighscore);
         //this.newHighscore.rotation = Math.PI * 0.1
         this.newHighscore.scale.set(0.75)
 
@@ -140,7 +140,7 @@ export default class EndGameContainer extends PIXI.Container {
         this.gameScreen.resizeToFitAR({ width: this.mainCanvas.width, height: this.mainCanvas.height }, this.screenContainer, this.mainCanvas)
 
         this.screenContainer.x = this.mainCanvas.width / 2 + this.mainCanvas.x
-        this.screenContainer.y = this.mainCanvas.height / 2 + this.mainCanvas.y - 100
+        this.screenContainer.y = this.mainCanvas.height / 2 + this.mainCanvas.y - 50
 
         if (this.screenContainer.scale.x < 1) {
             this.replayButton.scale.set(this.screenContainer.scale.x)
