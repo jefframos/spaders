@@ -9,7 +9,7 @@
   <property name="sectionName" value="Shapes"/>
  </properties>
  <tileset firstgid="1" source="../tilesets/synt.tsx"/>
- <layer id="71" name="OutrunSun" width="11" height="12">
+ <layer id="71" name="Outrun Sun" width="11" height="12">
   <properties>
    <property name="i" type="int" value="9"/>
    <property name="j" type="int" value="9"/>
@@ -32,44 +32,44 @@
 0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="78" name="Copy of Shape1" width="11" height="12" visible="0">
+ <layer id="78" name="Road 1" width="11" height="12">
   <properties>
-   <property name="i" type="int" value="7"/>
-   <property name="j" type="int" value="6"/>
+   <property name="i" type="int" value="6"/>
+   <property name="j" type="int" value="9"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
   </properties>
   <data encoding="csv">
-0,0,0,9,0,0,0,0,0,0,0,
-0,2,2,0,2,2,0,0,0,0,0,
-0,2,10,0,10,2,0,0,0,0,0,
-0,2,2,0,2,2,0,0,0,0,0,
-0,0,2,2,2,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,
+1,1,1,1,1,1,0,0,0,0,0,
+2,2,2,2,2,2,0,0,0,0,0,
+0,4,10,10,4,0,0,0,0,0,0,
+0,10,6,6,10,0,0,0,0,0,0,
+0,10,6,6,10,0,0,0,0,0,0,
+10,10,10,10,10,10,0,0,0,0,0,
+10,10,6,6,10,10,0,0,0,0,0,
+10,6,6,6,6,10,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="43" name="Blue" width="11" height="12">
+ <layer id="43" name="Mountain 1" width="11" height="12">
   <properties>
-   <property name="i" type="int" value="5"/>
-   <property name="j" type="int" value="6"/>
+   <property name="i" type="int" value="9"/>
+   <property name="j" type="int" value="7"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
   </properties>
   <data encoding="csv">
-0,0,1,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,
+0,0,6,0,0,0,0,0,0,0,0,
+0,6,0,6,0,0,6,0,0,0,0,
+6,0,6,0,6,6,0,6,0,0,0,
+0,6,0,0,6,0,0,0,6,0,0,
+6,0,0,0,0,6,0,0,6,0,0,
+0,0,0,0,0,6,0,0,6,0,0,
 0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,

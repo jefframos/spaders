@@ -16,7 +16,7 @@ export default class MainMenu extends PIXI.Container {
         this.customWidth = 60;
         this.backShape = new PIXI.Graphics();
         this.backShape.beginFill(config.colors.white);
-        this.backShape.drawRoundedRect(0, 0, 210, 100, 20);
+        this.backShape.drawRoundedRect(0, 0, 400, 400, 20);
         // this.backShape.drawRoundedRect(0, 0, 290, 100, 20);
         this.backShape.endFill();
         this.backShape.alpha = 1
@@ -53,7 +53,7 @@ export default class MainMenu extends PIXI.Container {
         });
         this.toggleSound.backShape.rotation = 0
 
-        if(!window.COOKIE_MANAGER.settings.sound){
+        if (!window.COOKIE_MANAGER.settings.sound) {
             this.toggleSound.updateTexture(window.iconsData.soundOff);
         }
         this.positionSpring.x = -this.backShape.width;
@@ -66,7 +66,7 @@ export default class MainMenu extends PIXI.Container {
         this.toggleSound.x = this.backShape.width - 60
         this.toggleSound.y = 50;
         // this.refreshButton.x = this.backShape.width - 60
-        this.wipeDataButton.x = this.toggleSound.x - 90
+        this.wipeDataButton.x = this.wipeDataButton.width * 0.5 + 30
         this.wipeDataButton.y = this.toggleSound.y;
         // this.refreshButton.y = 50
 
@@ -81,23 +81,69 @@ export default class MainMenu extends PIXI.Container {
         this.onBack = new signals.Signal()
         this.onRestart = new signals.Signal()
 
+
+        this.statsContainer = new PIXI.Container();
+        this.stats = new PIXI.Text("Stats", this.fontStyle('26px', config.colors.dark));
+        this.totalCombos = new PIXI.Text("",  this.fontStyle('22px', config.colors.blue2));
+        this.levelsFinished = new PIXI.Text("",  this.fontStyle('22px', config.colors.red));
+        this.totalPlayTime = new PIXI.Text("",  this.fontStyle('22px', config.colors.red2));
+        this.totalMoves = new PIXI.Text("",  this.fontStyle('22px', config.colors.pink));
+        this.totalShards = new PIXI.Text("",  this.fontStyle('22px', config.colors.purple));
+
+        let dist = 40;
+        this.statsOrder = [this.stats, this.totalPlayTime, this.totalMoves, this.totalCombos, this.totalShards, this.levelsFinished];
+
+        for (let index = 0; index < this.statsOrder.length; index++) {
+            const element = this.statsOrder[index];
+            this.statsContainer.addChild(element);
+            element.y = dist * index;
+        }
+
+        this.statsContainer.x = this.backShape.width / 2;
+        this.statsContainer.y = 120;
+        this.mainContainer.addChild(this.statsContainer)
+
         this.state = 1;
 
     }
+    fontStyle(size, color){
+        let style = {
+            font: size,
+            fill: color,
+            align: 'center',
+            fontFamily: window.STANDARD_FONT1
+        }
+        return style;
+    }
     toggleState() {
         if (this.state == 1) {
-            this.state = 2;
-            if (window.SOUND_MANAGER.isMute) {
-                this.toggleSound.updateTexture(window.iconsData.soundOff);
-            } else {
-                this.toggleSound.updateTexture(window.iconsData.soundOn);
-            }
+            this.open();
         } else {
-            this.state = 1;
+            this.collapse()
         }
     }
-    collapse(){
+    collapse() {
         this.state = 1;
+    }
+    open() {
+        this.state = 2;
+        if (window.SOUND_MANAGER.isMute) {
+            this.toggleSound.updateTexture(window.iconsData.soundOff);
+        } else {
+            this.toggleSound.updateTexture(window.iconsData.soundOn);
+        }
+
+        this.totalCombos.text = 'Total Combos: '+window.COOKIE_MANAGER.stats.totalCombos
+        this.levelsFinished.text = 'Levels Completed: '+window.COOKIE_MANAGER.stats.totalLevelsFinished
+        this.totalPlayTime.text = 'Play time: '+utils.convertNumToTime(window.COOKIE_MANAGER.stats.totalLevelsPlayTime)
+        this.totalMoves.text = 'Total Moves: '+window.COOKIE_MANAGER.stats.totalMoves
+        this.totalShards.text = 'Total Shards: '+window.COOKIE_MANAGER.stats.totalShardsCollected
+
+        for (let index = 0; index < this.statsOrder.length; index++) {
+            const element = this.statsOrder[index];
+            element.pivot.x = element.width / 2;
+        }
+
     }
     update(delta) {
 

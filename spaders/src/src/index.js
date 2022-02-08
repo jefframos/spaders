@@ -59,17 +59,17 @@ window.colorsOrder = [
 ]
 let iconPath = './assets/images/newIcons/'
 window.iconsData = {
-	cancel:iconPath + 'cancel-96x96-1214345.png',
-	soundOn:iconPath + 'volume-up-96x96-1214272.png',
-	soundOff:iconPath + 'mute-96x96-1214309.png',
-	reload:iconPath + 'reload-96x96-1214298.png',
-	settings:iconPath + 'setting-96x96-1214292.png',
-	home:iconPath + 'home-96x96-1214326.png',
-	back:iconPath + 'back-arrow.png',
-	next:iconPath + 'next-arrow.png',
-	highscore:iconPath + 'fire-96x96-1408702.png',
-	wipeData:iconPath + 'recycle-bin-96x96-1214299.png',
-	time:iconPath + 'time.png',
+	cancel: iconPath + 'cancel-96x96-1214345.png',
+	soundOn: iconPath + 'volume-up-96x96-1214272.png',
+	soundOff: iconPath + 'mute-96x96-1214309.png',
+	reload: iconPath + 'reload-96x96-1214298.png',
+	settings: iconPath + 'setting-96x96-1214292.png',
+	home: iconPath + 'home-96x96-1214326.png',
+	back: iconPath + 'back-arrow.png',
+	next: iconPath + 'next-arrow.png',
+	highscore: iconPath + 'fire-96x96-1408702.png',
+	wipeData: iconPath + 'recycle-bin-96x96-1214299.png',
+	time: iconPath + 'time.png',
 }
 window.textStyles = {
 	normalAttack: {
@@ -108,7 +108,7 @@ window.textStyles = {
 	}
 },
 
-window.config = config;
+	window.config = config;
 window.POOL = new Pool();
 
 window.console.warn = function () { }
@@ -182,8 +182,8 @@ window.SAVE_DATA = function (data, filename, type) {
 
 }
 for (const key in window.iconsData) {
-		const element = window.iconsData[key];
-		PIXI.loader.add(element)
+	const element = window.iconsData[key];
+	PIXI.loader.add(element)
 }
 
 const sManager = new SoundManager();
@@ -246,7 +246,7 @@ function loadJsons() {
 	PIXI.loader.add(jsonPath + window.levelSections.question.dataPath)
 
 	window.levelSections.sections.forEach(section => {
-		console.log(section)
+		//console.log(section)
 		if (section.imageSrc) {
 			PIXI.loader.add('./assets/' + section.imageSrc)
 		}
@@ -305,15 +305,16 @@ function extractData(element) {
 
 function configGame() {
 
-window.questionMark = extractData(PIXI.loader.resources[jsonPath + window.levelSections.question.dataPath].data.layers[0])
+	window.questionMark = extractData(PIXI.loader.resources[jsonPath + window.levelSections.question.dataPath].data.layers[0])
 
 	window.levelSections.sections.forEach(section => {
 
-		console.log("section",section)
+		//show the main sections
+		//console.log("section", section)
 
 		let palletID = section.colorPalletId;
 
-		if(palletID === undefined){
+		if (palletID === undefined) {
 			palletID = 0;
 		}
 		section.levels.forEach(level => {
@@ -324,25 +325,28 @@ window.questionMark = extractData(PIXI.loader.resources[jsonPath + window.levelS
 
 			res.properties.forEach(property => {
 				if (property.name == "sectionName") {
-					//console.log(property.value)
 					level.name = property.value;
 				}
 
 				if (property.name == "iconURL") {
 					level.iconURL = property.value;
-					console.log(property.value, level)
-
 				}
 			});
 
+			level.sectionName = section.name;
 			res.layers.forEach(layer => {
 
 				let data = extractData(layer);
 				if (data) {
-					data.idSaveData = level.name + ' - '+data.levelName;
+					let idToSave = section.name + '-' + level.name + '-' + data.levelName;
+					idToSave = idToSave.toLowerCase();
+					idToSave = idToSave.split(' ').join('')
+					idToSave = idToSave.replace(/\s/g, '')
+					data.idSaveData = idToSave;
+					data.sectionName = section.name;
+					data.tierName = level.name;
 					data.colorPalletId = palletID
 					sectionLevels.push(data);
-					//console.log(data)
 				}
 			});
 			level.colorPalletId = palletID
@@ -407,7 +411,7 @@ window.questionMark = extractData(PIXI.loader.resources[jsonPath + window.levelS
 		}
 
 	});
-	console.log("ALL DATA", window.levelSections)
+	//console.log("ALL DATA", window.levelSections)
 	//create screen manager
 
 	game.onCompleteLoad();
@@ -427,7 +431,7 @@ window.questionMark = extractData(PIXI.loader.resources[jsonPath + window.levelS
 	game.stage.addChild(EFFECTS);
 
 
-	
+
 	game.addTapToStart();
 	//game.update()
 
@@ -437,8 +441,8 @@ window.game = new Game(config);
 
 document.addEventListener("deviceready", onDeviceReady, true);
 
-window.addEventListener('resize', function(event) {
-    if(window.game){
+window.addEventListener('resize', function (event) {
+	if (window.game) {
 		window.game.resize2();
 	}
 }, true);
