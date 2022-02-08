@@ -151,9 +151,12 @@ export default class LevelSelectContainer extends PIXI.Container {
             }
 
             navButton.setProgressBar(finishedLevels / countLevels);
+            // console.log('SECTION',colorSchemes.colorSchemes[navButton.section.colorPalletId].list[3].color)
+            if (finishedLevels >= countLevels) {
 
-            if(finishedLevels >= countLevels){
-                navButton.setColor(config.colors.purple)
+
+                navButton.setColor(config.colors.blue2)
+                //navButton.setColor(colorSchemes.colorSchemes[navButton.section.colorPalletId].list[3].color)
                 navButton.updateLabel('COMPLETED');
                 navButton.hideProgressBar();
             }
@@ -265,7 +268,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         if (this.currentUISection > 0) {
             this.currentUISection--
             window.SOUND_MANAGER.play('shoosh', { volume: 0.1 })
-            if(this.currentUISection <= 0){
+            if (this.currentUISection <= 0) {
                 this.refreshNavButtons();
             }
         } else {
@@ -332,11 +335,11 @@ export default class LevelSelectContainer extends PIXI.Container {
         let dataFirstLevel = level.data[0];
         let levelTierButton = new SquareButton(this.unscaledCardSize);
 
-        
+
         levelTierButton.updateLabelTop(level.name);
         levelTierButton.updateIcon(this.gameScreen.generateImage(dataFirstLevel.pieces, 24, 0, dataFirstLevel.colorPalletId));
         this.gameScreen.resizeToFitAR(this.unscaledCardSize, levelTierButton)
-        
+
         this.refreshTier(levelTierButton, level.data)
         //levelTierButton.setProgressBar();
 
@@ -346,6 +349,10 @@ export default class LevelSelectContainer extends PIXI.Container {
         if (this.disableClickCounter > 0) {
             return;
         }
+
+        console.log(section," 000000")
+        window.COOKIE_MANAGER.updateColorPallete(section.colorPalletId);
+        this.gameScreen.startScreenContainer.updateLinesColor();
         window.SOUND_MANAGER.play('shoosh', { volume: 0.1 })
         this.gameScreen.mainMenuSettings.collapse();
         this.currentUISection = 1
@@ -479,7 +486,7 @@ export default class LevelSelectContainer extends PIXI.Container {
             levelTierButton.hideProgressBar();
         } else {
             levelTierButton.setProgressBar(count / data.length);
-            console.log("UPDATE STUFF HERE",data.length,  count)
+            console.log("UPDATE STUFF HERE", data.length, count)
             //levelTierButton.updateLabel('(' + count + '/' + data.length + ')');
         }
     }
@@ -492,7 +499,8 @@ export default class LevelSelectContainer extends PIXI.Container {
                 levelButton.updateLabelTop(utils.convertNumToTime(Math.ceil(levelStored.bestTime)),
                     new PIXI.Sprite.fromImage(window.iconsData.time))
             }
-            levelButton.setColor(config.colors.blue2)
+
+            levelButton.setColor(colorSchemes.colorSchemes[data.colorPalletId].list[4].color)
         } else {
             levelButton.updateIcon(this.gameScreen.generateImage(window.questionMark.pieces));
         }
@@ -505,7 +513,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         levelButton.updateLabel(data.levelName);
         //
         this.refreshCard(levelButton, data);
-        
+
         this.gameScreen.resizeToFitAR(this.unscaledCardSize, levelButton)
         levelButton.data = data;
 

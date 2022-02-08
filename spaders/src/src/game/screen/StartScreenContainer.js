@@ -5,6 +5,7 @@ import utils from '../../utils';
 import UIButton1 from './UIButton1';
 import Spring from '../effects/Spring';
 import LevelSelectContainer from './LevelSelectContainer'
+import colorSchemes from '../../colorSchemes';
 export default class StartScreenContainer extends PIXI.Container {
 	constructor(screen) {
 		super();
@@ -53,12 +54,14 @@ export default class StartScreenContainer extends PIXI.Container {
 		let height = 50;
 		let width = 3000;
 		let spadersContainer = new PIXI.Container();
+		this.spadersList = [];
 		for (let index = 0; index < window.IMAGE_DATA.enemyImages.length; index++) {
 			const element = window.IMAGE_DATA.enemyImages[index];
 			let sprite = new PIXI.Sprite.fromImage(element);
 			sprite.tint = window.colorsOrder[index]
 			spadersContainer.addChild(sprite);
 			sprite.x += 80 * index;
+			this.spadersList.push(sprite);
 		}
 		spadersContainer.pivot.x = spadersContainer.width / 2
 		spadersContainer.pivot.y = spadersContainer.height / 2
@@ -67,21 +70,28 @@ export default class StartScreenContainer extends PIXI.Container {
 		spadersContainer.x = -60
 		spadersContainer.y = -200
 		this.screenContainer.addChild(spadersContainer);
-		let line1 = new PIXI.Graphics().beginFill(window.config.colors.blue2).drawRect(-width / 2, 0, width, height);
+
+		this.lines = [];
+
+		let line1 = new PIXI.Graphics().beginFill(0xffffff).drawRect(-width / 2, 0, width, height);
 		this.stripsContainer.addChild(line1);
 
-		let line2 = new PIXI.Graphics().beginFill(window.config.colors.red).drawRect(-width / 2, 0, width, height);
+		let line2 = new PIXI.Graphics().beginFill(0xffffff).drawRect(-width / 2, 0, width, height);
 		this.stripsContainer.addChild(line2);
 		line2.y = height;
 
-		let line3 = new PIXI.Graphics().beginFill(window.config.colors.yellow).drawRect(-width / 2, 0, width, height);
+		let line3 = new PIXI.Graphics().beginFill(0xffffff).drawRect(-width / 2, 0, width, height);
 		this.stripsContainer.addChild(line3);
 		line3.y = height * 2;
 
-		this.playLine = new PIXI.Graphics().beginFill(window.config.colors.green).drawRect(-width / 2, 0, width, height * 3);
+		this.playLine = new PIXI.Graphics().beginFill(0xffffff).drawRect(-width / 2, 0, width, height * 3);
 		this.stripsContainer.addChild(this.playLine);
 		this.playLine.y = height * 3;
-
+		
+		this.lines.push(line1)
+		this.lines.push(line2)
+		this.lines.push(line3)
+		this.lines.push(this.playLine)
 
 		this.stripsContainer.pivot.x = 0//this.stripsContainer.width / 2;
 		this.stripsContainer.pivot.y = this.stripsContainer.height / 2;
@@ -146,6 +156,23 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.screenContainer.positionSpringX.x = this.screenContainer.x
 		this.screenContainer.positionSpringY.x = this.screenContainer.y
 		this.screenContainer.rotationSpring.x = this.screenContainer.rotation
+
+		this.updateLinesColor();
+
+	}
+	updateLinesColor(){
+		console.log(window.COOKIE_MANAGER.stats.latestColorPallete)
+		let colors = colorSchemes.colorSchemes[window.COOKIE_MANAGER.stats.latestColorPallete]
+		for (let index = 0; index < this.lines.length; index++) {
+			const element = this.lines[index];
+
+			element.tint = colors.list[index].color;
+		}
+		for (let index = 0; index < this.spadersList.length; index++) {
+			const element = this.spadersList[index];
+
+			element.tint = colors.list[index].color;
+		}
 
 	}
 	getRect(size = 4, color = 0xFFFFFF) {

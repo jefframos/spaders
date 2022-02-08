@@ -10,6 +10,7 @@ import Board from '../core/Board'
 import BackgroundEffects from '../effects/BackgroundEffects'
 import { debug } from 'webpack';
 import UIButton1 from './UIButton1';
+import colorSchemes from '../../colorSchemes';
 
 export default class EndGameContainer extends PIXI.Container {
     constructor(screen) {
@@ -30,26 +31,32 @@ export default class EndGameContainer extends PIXI.Container {
         this.screenContainer.addChild(this.youWinLabel);
         let height = 50;
         let width = 3000;
-        this.line1 = new PIXI.Graphics().beginFill(window.config.colors.blue2).drawRect(-width / 2, -height * 4, width, height * 5);
+
+        this.lines = []
+        this.line1 = new PIXI.Graphics().beginFill(0xFFFFFF).drawRect(-width / 2, -height * 4, width, height * 5);
         this.stripsContainer.addChild(this.line1);
 
-        let line2 = new PIXI.Graphics().beginFill(window.config.colors.red).drawRect(-width / 2, 0, width, height);
+        let line2 = new PIXI.Graphics().beginFill(0xFFFFFF).drawRect(-width / 2, 0, width, height);
         this.stripsContainer.addChild(line2);
         line2.y = height;
 
-        let line3 = new PIXI.Graphics().beginFill(window.config.colors.yellow).drawRect(-width / 2, 0, width, height);
+        let line3 = new PIXI.Graphics().beginFill(0xFFFFFF).drawRect(-width / 2, 0, width, height);
         this.stripsContainer.addChild(line3);
         line3.y = height * 2;
 
-        let line4 = new PIXI.Graphics().beginFill(window.config.colors.green).drawRect(-width / 2, 0, width, height);
+        let line4 = new PIXI.Graphics().beginFill(0xFFFFFF).drawRect(-width / 2, 0, width, height);
         this.stripsContainer.addChild(line4);
         line4.y = height * 3;
 
-        let line5 = new PIXI.Graphics().beginFill(window.config.colors.pink).drawRect(-width / 2, 0, width, height);
+        let line5 = new PIXI.Graphics().beginFill(0xFFFFFF).drawRect(-width / 2, 0, width, height);
         //this.stripsContainer.addChild(line5);
         line5.y = height * 4;
 
-
+        this.lines.push(this.line1);
+        this.lines.push(line2);
+        this.lines.push(line3);
+        this.lines.push(line4);
+        this.lines.push(line5);
         let center = new PIXI.Graphics().beginFill(0xff0000).drawCircle(0, 0, 10)
 
         this.buttonMode = true;
@@ -127,6 +134,15 @@ export default class EndGameContainer extends PIXI.Container {
         this.addChild(this.mainCanvas)
         this.mainCanvas.alpha = 0
     }
+    updateLinesColor(){
+		let colors = colorSchemes.colorSchemes[window.COOKIE_MANAGER.stats.latestColorPallete]
+		for (let index = 0; index < this.lines.length; index++) {
+			const element = this.lines[index];
+
+			element.tint = colors.list[index].color;
+		}
+
+	}
     resize(innerResolution) {
         this.mainCanvas.width = innerResolution.width;
         this.mainCanvas.height = innerResolution.height;
@@ -136,7 +152,7 @@ export default class EndGameContainer extends PIXI.Container {
 
         this.stripsContainer.x = 0
         this.stripsContainer.y = 0
-
+        
         this.gameScreen.resizeToFitAR({ width: this.mainCanvas.width, height: this.mainCanvas.height }, this.screenContainer, this.mainCanvas)
 
         this.screenContainer.x = this.mainCanvas.width / 2 + this.mainCanvas.x
@@ -166,6 +182,8 @@ export default class EndGameContainer extends PIXI.Container {
         TweenLite.killTweensOf(this.backButton)
         TweenLite.killTweensOf(this.replayButton)
         TweenLite.killTweensOf(this.nextLevel)
+
+        this.updateLinesColor();
 
         TweenLite.to(this.screenContainer, 0.25, { delay: delay, alpha: 1, ease: Cubic.easeOut })
 

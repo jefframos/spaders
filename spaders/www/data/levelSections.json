@@ -1,21 +1,8 @@
 {
-    "question":{
+    "question": {
         "dataPath": "question.json"
     },
     "sections": [
-        {
-            "color": "0xDDDDDD",
-            "name": "Synthwave",
-            "displayName": "Video Game History",
-            "imageSrc": "",
-            "colorPalletId": 1,
-            "levels": [
-                {
-                    "name": "---",
-                    "dataPath": "how-to-play/shapes-synt.json"
-                }                
-            ]
-        },
         {
             "color": "0xDDDDDD",
             "name": "Easy",
@@ -59,6 +46,19 @@
                 {
                     "name": "3nd gen",
                     "dataPath": "videogames/videogamesLevels3.json"
+                }
+            ]
+        },
+        {
+            "color": "0xDDDDDD",
+            "name": "Synthwave",
+            "displayName": "Video Game History",
+            "imageSrc": "",
+            "colorPalletId": 1,
+            "levels": [
+                {
+                    "name": "---",
+                    "dataPath": "how-to-play/shapes-synt.json"
                 }
             ]
         },
