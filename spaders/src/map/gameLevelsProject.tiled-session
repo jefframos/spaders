@@ -1,9 +1,9 @@
 {
-    "activeFile": "how-to-play/simple-shapes.tmx",
+    "activeFile": "how-to-play/simple-shapes-synt.tmx",
     "expandedProjectPaths": [
+        "movies",
         "main",
         "videogames",
-        "movies",
         "how-to-play"
     ],
     "fileStates": {
@@ -56,7 +56,7 @@
         },
         "how-to-play/simple-shapes-synt.tmx": {
             "scale": 0.9014204545454545,
-            "selectedLayer": 2,
+            "selectedLayer": 7,
             "viewCenter": {
                 "x": 324.48786637251817,
                 "y": 387.1667191931926
@@ -211,8 +211,8 @@
         "videogames/levels2.tmx",
         "videogames/levels3.tmx",
         "movies/movies1.tmx",
-        "how-to-play/simple-shapes-synt.tmx",
         "how-to-play/simple-shapes.tmx",
+        "how-to-play/simple-shapes-synt.tmx",
         "tilesets/synt.tsx",
         "main/mainSectionsConfig.tmx"
     ],
