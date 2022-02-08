@@ -21,6 +21,7 @@ import FXContainer from '../effects/FXContainer';
 import MainMenu from './MainMenu';
 import Trail from '../effects/Trail';
 import TutorialOverlay from './TutorialOverlay';
+import colorSchemes from '../../colorSchemes';
 
 export default class TetraScreen extends Screen {
 	constructor(label) {
@@ -37,7 +38,7 @@ export default class TetraScreen extends Screen {
 		this.colorTween = new ColorTweens();
 		this.levels = window.levelData;//window.levelsJson.levels;
 
-		console.log(this.levels)
+		//console.log(this.levels)
 		//console.log(this.levels)
 		this.hasHash = false;
 		this.currentLevelID = 0;
@@ -113,7 +114,7 @@ export default class TetraScreen extends Screen {
 
 	}
 	onDestroyAllStartedCards() {
-		this.colorTween.startTween();
+		this.colorTween.startTween(this.currentLevelData.colorPalletId);
 		this.gameplayState = 1;
 
 		//(pos, label, delay = 0, dir = 1, scale = 1, color = 0xFFFFFF, ease = Back.easeOut)
@@ -213,7 +214,7 @@ export default class TetraScreen extends Screen {
 		window.GRID.width = window.GRID.i * CARD.width;
 		window.GRID.height = window.GRID.j * CARD.height;
 
-		console.log(CARD.width)
+		//console.log(CARD.width)
 
 		if (this.gridContainer) {
 			this.buildTrails();
@@ -231,39 +232,40 @@ export default class TetraScreen extends Screen {
 	getCircle(size = 4, color = 0xFFFFFF) {
 		return new PIXI.Graphics().beginFill(color).drawCircle(0, 0, size * 0.5);
 	}
-	generateImage(level, size = 24, paddingBottom = 0) {
+	generateImage(level, size = 24, paddingBottom = 0, schemeID = 0) {
 		let container = new PIXI.Container();
 		let tempRect = null;
 
-
+		let colors = colorSchemes.colorSchemes[schemeID]
 
 		let background = this.getRoundRect2(level[0].length * size + size, (level.length - 1) * size + size + paddingBottom, 0x222222)
 		//background.x = size * 0.5
 		//background.y -= size * 0.5
+		//console.log(colors)
 		container.addChild(background)
 		for (var i = 0; i < level.length - 1; i++) {
 			for (var j = 0; j < level[i].length; j++) {
 				if (level[i][j] >= 0) {
 					// this.cardsContainer.addChild(this.placeCard(j, i, ENEMIES.list[level[i][j]].life));
 
-					if (ENEMIES.list[level[i][j]].isBlock) {
-						tempRect = this.getRect(size, config.colors.dark)
+					if (colors.list[level[i][j]].isBlock) {
+						tempRect = this.getRect(size, colors.dark)
 						container.addChild(tempRect)
 						tempRect.x = j * size + size * 0.5;
 						tempRect.y = i * size + size * 0.5;
 					} else {
-						tempRect = this.getRect(size, ENEMIES.list[level[i][j]].color)
+						tempRect = this.getRect(size, colors.list[level[i][j]].color)
 						container.addChild(tempRect)
 						tempRect.x = j * size + size * 0.5;
 						tempRect.y = i * size + size * 0.5;
 					}
 				} else if (level[i][j] == -2) {
-					tempRect = this.getRect(size, config.colors.dark)
+					tempRect = this.getRect(size, colors.dark)
 					container.addChild(tempRect)
 					tempRect.x = j * size + size * 0.5;
 					tempRect.y = i * size + size * 0.5;
 				} else {
-					tempRect = this.getRect(size, 0x111111)
+					tempRect = this.getRect(size, colors.dark)
 					container.addChild(tempRect)
 					tempRect.x = j * size + size * 0.5;
 					tempRect.y = i * size + size * 0.5;
@@ -517,7 +519,7 @@ export default class TetraScreen extends Screen {
 		this.gameRunning = false;
 		this.startScreenContainer.hide(true);
 		let tempid = this.currentLevelID >= 0 ? this.currentLevelID : 0
-		this.endGameScreenContainer.setStats(this.currentPoints, this.currentRound, utils.convertNumToTime(Math.ceil(this.currentTime)), this.generateImage(this.currentLevelData.pieces), this.currentLevelData);
+		this.endGameScreenContainer.setStats(this.currentPoints, this.currentRound, utils.convertNumToTime(Math.ceil(this.currentTime)), this.generateImage(this.currentLevelData.pieces, 24, 0, this.currentLevelData.colorPalletId), this.currentLevelData);
 		this.endGameScreenContainer.show(false, 2);
 		this.hideInGameElements(2);
 		this.removeEvents();
@@ -589,6 +591,7 @@ export default class TetraScreen extends Screen {
 			window.AUTO_PLAY = false;
 		}
 
+			this.startScreenContainer.chooseLevelPanel.refreshNavButtons();
 		//console.log("endGameState")
 	}
 	gameState() {
@@ -753,20 +756,22 @@ export default class TetraScreen extends Screen {
 	}
 	forceBottomArrow() {
 		let rnd = Math.random() * 4;
-		let toReturn = [5,6];
+		let toReturn = [5, 6];
 		if (rnd < 1) {
 			toReturn = [4];
 		} else if (rnd < 2) {
 			toReturn = [5];
 		} else if (rnd < 3) {
 			toReturn = [6];
-		} else{
+		} else {
 			toReturn = [4, 6];
 		}
 		return toReturn;
 	}
 	resetGame() {
 
+
+		window.ENEMIES = colorSchemes.colorSchemes[this.currentLevelData.colorPalletId];
 		this.fireworksTimer = 0;
 		this.mainMenuSettings.collapse();
 		this.grid.createGrid();
@@ -819,7 +824,7 @@ export default class TetraScreen extends Screen {
 		for (let index = Math.ceil(lastRow.length * 0.3); index >= 0; index--) {
 			lastRow.shift();
 		}
-		
+
 		for (var i = 0; i < this.currentLevelData.pieces.length; i++) {
 			for (var j = 0; j < this.currentLevelData.pieces[i].length; j++) {
 				if (this.currentLevelData.pieces[i][j] >= 0) {
@@ -955,7 +960,7 @@ export default class TetraScreen extends Screen {
 		this.cardQueue[1].mark();
 
 	}
-	OnStartNextRound(){
+	OnStartNextRound() {
 		this.newRound();
 	}
 	newRound() {
@@ -973,7 +978,7 @@ export default class TetraScreen extends Screen {
 
 		this.firstLineShots = this.board.firstLineShots();
 
-		if(this.firstLineShots == 1){
+		if (this.firstLineShots == 1) {
 			this.currentCard.isABomb();
 		}
 

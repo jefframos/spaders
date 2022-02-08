@@ -69,6 +69,7 @@ window.iconsData = {
 	next:iconPath + 'next-arrow.png',
 	highscore:iconPath + 'fire-96x96-1408702.png',
 	wipeData:iconPath + 'recycle-bin-96x96-1214299.png',
+	time:iconPath + 'time.png',
 }
 window.textStyles = {
 	normalAttack: {
@@ -308,6 +309,13 @@ window.questionMark = extractData(PIXI.loader.resources[jsonPath + window.levelS
 
 	window.levelSections.sections.forEach(section => {
 
+		console.log("section",section)
+
+		let palletID = section.colorPalletId;
+
+		if(palletID === undefined){
+			palletID = 0;
+		}
 		section.levels.forEach(level => {
 
 			let res = PIXI.loader.resources[jsonPath + level.dataPath].data
@@ -332,10 +340,12 @@ window.questionMark = extractData(PIXI.loader.resources[jsonPath + window.levelS
 				let data = extractData(layer);
 				if (data) {
 					data.idSaveData = level.name + ' - '+data.levelName;
+					data.colorPalletId = palletID
 					sectionLevels.push(data);
 					//console.log(data)
 				}
 			});
+			level.colorPalletId = palletID
 			level.data = sectionLevels
 
 
@@ -397,7 +407,7 @@ window.questionMark = extractData(PIXI.loader.resources[jsonPath + window.levelS
 		}
 
 	});
-	console.log(window.levelTiersData)
+	console.log("ALL DATA", window.levelSections)
 	//create screen manager
 
 	game.onCompleteLoad();

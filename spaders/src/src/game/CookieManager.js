@@ -98,7 +98,7 @@ export default class CookieManager {
 			}
 		}
 	}
-	saveLevel(name, bestTime, highscore, bestMoves, normalScore) {
+	saveLevel(name, bestTime = 50, highscore = 50, bestMoves = 60, normalScore = 100) {
 
 		let levelsCompleted = {
 			name: name,

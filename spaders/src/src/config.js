@@ -6,6 +6,7 @@ export default {
 	webgl: true,
 	effectsLayer: null,
 
+	//main pallete
 	colors: {
 		blue: 0x61C6CE,
 		red: 0xD81639,

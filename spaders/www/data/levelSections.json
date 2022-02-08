@@ -5,9 +5,23 @@
     "sections": [
         {
             "color": "0xDDDDDD",
+            "name": "Synthwave",
+            "displayName": "Video Game History",
+            "imageSrc": "",
+            "colorPalletId": 1,
+            "levels": [
+                {
+                    "name": "---",
+                    "dataPath": "how-to-play/shapes-synt.json"
+                }                
+            ]
+        },
+        {
+            "color": "0xDDDDDD",
             "name": "Easy",
             "displayName": "Video Game History",
             "imageSrc": "",
+            "colorPalletId": 0,
             "levels": [
                 {
                     "name": "---",
@@ -32,6 +46,7 @@
             "name": "Medium",
             "displayName": "Video Game History",
             "imageSrc": "",
+            "colorPalletId": 0,
             "levels": [
                 {
                     "name": "2nd gen",
@@ -52,6 +67,7 @@
             "name": "Hard",
             "displayName": "Movies",
             "imageSrc": "",
+            "colorPalletId": 0,
             "levels": [
                 {
                     "name": "70s",

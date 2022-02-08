@@ -5,7 +5,8 @@ import utils from '../../utils';
 import { debug } from 'webpack';
 import SquareButton from './SquareButton';
 import Spring from '../effects/Spring';
-//import { utils } from 'pixi.js/lib/core';
+import colorSchemes from '../../colorSchemes';
+
 
 export default class LevelSelectContainer extends PIXI.Container {
     constructor(screen) {
@@ -65,7 +66,7 @@ export default class LevelSelectContainer extends PIXI.Container {
             this.newContainer.addChild(this.levelsContainer)
 
             this.buildSections();
-
+            this.refreshNavButtons();
 
             this.resize({ width: window.innerWidth, height: window.innerHeight }, true)
 
@@ -129,6 +130,51 @@ export default class LevelSelectContainer extends PIXI.Container {
         // this.levelsContainer.addChild(this.center2)
 
     }
+    refreshNavButtons() {
+        for (let index = 1; index < this.navButtons.length; index++) {
+            let navButton = this.navButtons[index];
+
+            let countLevels = 0;
+            let finishedLevels = 0;
+            for (let index = 0; index < navButton.section.levels.length; index++) {
+                const element = navButton.section.levels[index];
+                console.log(element)
+                countLevels += element.data.length;
+
+                element.data.forEach(element2 => {
+
+                    if (window.COOKIE_MANAGER.findLevel(element2.idSaveData)) {
+                        finishedLevels++
+                    }
+                });
+
+            }
+
+            navButton.setProgressBar(finishedLevels / countLevels);
+
+            if(finishedLevels >= countLevels){
+                navButton.setColor(config.colors.purple)
+                navButton.updateLabel('COMPLETED');
+                navButton.hideProgressBar();
+            }
+        }
+
+    }
+    getRect(size = 4, color = 0xFFFFFF) {
+        return new PIXI.Graphics().beginFill(color).drawRect(0, 0, size, size);
+    }
+    drawColorPallet(id) {
+        let colors = colorSchemes.colorSchemes[id]
+        let size = 10;
+        let container = new PIXI.Container();
+        for (let index = 0; index < 9; index++) {
+            let tempRect = this.getRect(size, colors.list[index].color)
+            container.addChild(tempRect);
+            tempRect.x = size * index;
+        }
+        return container
+    }
+
     resetDrags() {
         this.draggables.forEach(element => {
             element.y = 0;
@@ -155,7 +201,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         element.y = element.spring.x
 
         if (!this.isHolding) {
-            
+
         }
     }
     onTouchStart(evt) {
@@ -219,10 +265,14 @@ export default class LevelSelectContainer extends PIXI.Container {
         if (this.currentUISection > 0) {
             this.currentUISection--
             window.SOUND_MANAGER.play('shoosh', { volume: 0.1 })
+            if(this.currentUISection <= 0){
+                this.refreshNavButtons();
+            }
         } else {
             //ouch
             this.gameScreen.startScreenContainer.startState(0);
             this.currentUISection = 0;
+            this.refreshNavButtons();
             this.resetDrags();
         }
     }
@@ -239,17 +289,20 @@ export default class LevelSelectContainer extends PIXI.Container {
 
             let navButton = this.buildSectionButton(section);
             this.sectionsView.addChild(navButton)
-
+            navButton.section = section;
             navButton.y = index * navButton.height
 
             navButton.interactive = true;
             navButton.buttonMode = true;
             this.navButtons.push(navButton);
 
-            navButton.setColor(window.colorsOrder[this.navButtons.length % window.colorsOrder.length])
+            navButton.setPallet(this.drawColorPallet(section.colorPalletId));
+            //navButton.setColor(window.colorsOrder[this.navButtons.length % window.colorsOrder.length])
             navButton.on('mouseup', this.openSection.bind(this, section)).on('touchend', this.openSection.bind(this, section));
         }
     }
+
+
 
     buildBackButton() {
         let secButton = new SquareButton(this.unscaledCardSize)
@@ -264,11 +317,13 @@ export default class LevelSelectContainer extends PIXI.Container {
 
     buildSectionButton(section) {
         let secButton = new SquareButton(this.unscaledCardSize);
-        secButton.updateLabel(section.name);
+        secButton.updateLabelTop(section.name);
         if (section.imageSrc)
             secButton.updateIcon(PIXI.Sprite.fromImage('./assets/' + section.imageSrc));
 
         this.gameScreen.resizeToFitAR(this.unscaledCardSize, secButton)
+
+
 
         return secButton
     }
@@ -277,11 +332,13 @@ export default class LevelSelectContainer extends PIXI.Container {
         let dataFirstLevel = level.data[0];
         let levelTierButton = new SquareButton(this.unscaledCardSize);
 
-        this.refreshTier(levelTierButton, level.data)
-
+        
         levelTierButton.updateLabelTop(level.name);
-        levelTierButton.updateIcon(this.gameScreen.generateImage(dataFirstLevel.pieces));
+        levelTierButton.updateIcon(this.gameScreen.generateImage(dataFirstLevel.pieces, 24, 0, dataFirstLevel.colorPalletId));
         this.gameScreen.resizeToFitAR(this.unscaledCardSize, levelTierButton)
+        
+        this.refreshTier(levelTierButton, level.data)
+        //levelTierButton.setProgressBar();
 
         return levelTierButton
     }
@@ -335,8 +392,17 @@ export default class LevelSelectContainer extends PIXI.Container {
             levelTierButton.buttonMode = true;
             levelTierButton.on('mouseup', this.openLevelTier.bind(this, level.data)).on('touchend', this.openLevelTier.bind(this, level.data));
             this.sectionButtons.push(levelTierButton);
+
+            //this.refreshTier(levelTierButton, levelTierButton.data);
         }
         this.resize(null, true);
+
+
+        this.sectionButtons.forEach(element => {
+            if (element.data) {
+                this.refreshTier(element, element.data);
+            }
+        });
     }
 
     openLevelTier(tier) {
@@ -409,19 +475,22 @@ export default class LevelSelectContainer extends PIXI.Container {
 
         if (count >= data.length) {
             levelTierButton.setColor(config.colors.purple)
-            levelTierButton.updateLabel('COMPLETE');
+            levelTierButton.updateLabel('COMPLETED');
+            levelTierButton.hideProgressBar();
         } else {
-            levelTierButton.updateLabel('(' + count + '/' + data.length + ')');
+            levelTierButton.setProgressBar(count / data.length);
+            console.log("UPDATE STUFF HERE",data.length,  count)
+            //levelTierButton.updateLabel('(' + count + '/' + data.length + ')');
         }
     }
     refreshCard(levelButton, data) {
         let levelStored = window.COOKIE_MANAGER.findLevel(data.idSaveData);
         let debugThumb = window.COOKIE_MANAGER.debug.showAllThumbs;
         if (levelStored || debugThumb) {
-            levelButton.updateIcon(this.gameScreen.generateImage(data.pieces));
-            if(!debugThumb){
-                levelButton.updateLabelTop(levelStored.highscore,
-                new PIXI.Sprite.fromImage(window.iconsData.highscore))
+            levelButton.updateIcon(this.gameScreen.generateImage(data.pieces, 24, 0, data.colorPalletId));
+            if (!debugThumb) {
+                levelButton.updateLabelTop(utils.convertNumToTime(Math.ceil(levelStored.bestTime)),
+                    new PIXI.Sprite.fromImage(window.iconsData.time))
             }
             levelButton.setColor(config.colors.blue2)
         } else {
@@ -436,16 +505,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         levelButton.updateLabel(data.levelName);
         //
         this.refreshCard(levelButton, data);
-        // let levelStored = window.COOKIE_MANAGER.findLevel(data.levelName);
-        // if (levelStored) {
-        //     levelButton.updateIcon(this.gameScreen.generateImage(data.pieces));
-        //     levelButton.updateLabelTop(levelStored.highscore,
-        //         new PIXI.Sprite.fromImage(window.iconsData.highscore))
-        //     levelButton.setColor(config.colors.blue2)
-        // } else {
-        //     levelButton.updateIcon(this.gameScreen.generateImage(window.questionMark.pieces));
-        // }
-
+        
         this.gameScreen.resizeToFitAR(this.unscaledCardSize, levelButton)
         levelButton.data = data;
 

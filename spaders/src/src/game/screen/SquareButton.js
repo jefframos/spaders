@@ -3,6 +3,7 @@ import * as PIXI from 'pixi.js';
 import config from '../../config';
 import utils from '../../utils';
 import ParticleSystem from '../effects/ParticleSystem';
+import ProgressBar from './ProgressBar';
 export default class SquareButton extends PIXI.Container {
     constructor(unscaledCardSize) {
         super();
@@ -21,10 +22,10 @@ export default class SquareButton extends PIXI.Container {
 
 
         this.label = new PIXI.Text("", {
-            font: '24px',
+            font: '22px',
             fill: 0xFFFFFF,
             align: 'center',
-            fontWeight: '200',
+            //fontWeight: '200',
             fontFamily: window.STANDARD_FONT1,
             // stroke: 0x000000,
             // strokeThickness: 12
@@ -56,8 +57,15 @@ export default class SquareButton extends PIXI.Container {
         this.squareButtonBackShape.on('pointerout', this.onPointerOut.bind(this));
         this.squareButtonBackShape.on('pointerup', this.onPointerUp.bind(this));
 
+        let sizeBar = {width:this.squareButtonShape.width * 0.8, height:this.squareButtonShape.height * 0.12}
+        this.progressBar = new ProgressBar(sizeBar);
+       // this.progressBar.scale.set(0.5)
+        this.progressBar.visible = false;
 
+        this.progressBar.x = this.squareButtonShape.width / 2 - sizeBar.width / 2
+        this.progressBar.y = this.squareButtonShape.height  - sizeBar.height * 1.5
         //this.updateLabel("round_ar rlar")
+        this.squareButtonShape.addChild(this.progressBar)
     }
     onPointerUp() {
         window.SOUND_MANAGER.play('tap', { volume: 0.5 })
@@ -68,6 +76,13 @@ export default class SquareButton extends PIXI.Container {
     }
     onPointerOut() {
         this.squareButtonShape.y = 0;
+    }
+    hideProgressBar(progression = 0) {
+        this.progressBar.visible = false;
+    }
+    setProgressBar(progression = 0) {
+        this.progressBar.visible = true;
+        this.progressBar.setProgressBar(progression)
     }
     setColor(color) {
         this.squareButtonShape.tint = color
@@ -86,7 +101,7 @@ export default class SquareButton extends PIXI.Container {
             icon.scale.set(this.labelTop.height / icon.height);
             icon.anchor.x = 1.1;
             icon.anchor.y = 0;
-            
+
             this.labelTop.addChild(icon);
         }
 
@@ -98,12 +113,34 @@ export default class SquareButton extends PIXI.Container {
         this.labelTop.pivot.y = this.labelTop.height / this.labelTop.scale.y;
         this.labelTop.x = this.squareButtonShape.width / 2 // this.container.scale.x
         this.labelTop.y = this.squareButtonShape.height * 0.07 + this.labelTop.height / this.labelTop.scale.y// this.container.scale.y
-        if (icon){
+        if (icon) {
             this.labelTop.x += icon.width / 2//icon.scale.x;
         }
     }
+    setPallet(colors) {
+        if (this.pallet && this.pallet.parent) {
+            this.pallet.parent.removeChild(this.pallet);
+        }
+
+        this.pallet = colors;
+        this.pallet.scale.set(1);
+        this.pallet.pivot.x = this.pallet.width / 2
+        this.pallet.pivot.y = this.pallet.height / 2
+        this.pallet.scale.set(this.squareButtonShape.width / this.pallet.width);
+
+
+        this.pallet.x = this.squareButtonShape.width / 2;
+        this.pallet.y = this.squareButtonShape.height / 2;
+
+        this.squareButtonShape.addChild(this.pallet);
+
+        this.label.visible = false;
+
+
+    }
     updateLabel(text) {
         this.label.text = text;
+        this.label.visible = true;
 
         if (this.label.width > this.squareButtonShape.width * 0.9) {
             this.label.scale.set(this.squareButtonShape.width / this.label.width * 0.9)

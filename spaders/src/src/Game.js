@@ -138,6 +138,8 @@ export default class Game {
 		this.infoLabel.y = 19
 
 		this.loadingBar = new PIXI.Graphics().beginFill(config.colors.white).drawRoundedRect(0,0,250, 40, 20);
+		//this.loadingBar.cacheAsBitmap = true;
+
 		this.loadingBarFillBack = new PIXI.Graphics().beginFill(config.colors.background).drawRoundedRect(0,0,240, 30, 15);
 		this.loadingBarFillBack.x = 5
 		this.loadingBarFillBack.y = 5
