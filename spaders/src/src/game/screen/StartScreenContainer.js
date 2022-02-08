@@ -104,7 +104,9 @@ export default class StartScreenContainer extends PIXI.Container {
 
 
 
-		this.playLabel = new PIXI.Text("PLAY", { font: '60px', fill: config.colors.background, align: 'center', fontFamily: window.STANDARD_FONT1 });
+		this.playLabel = new PIXI.Text("PLAY", { font: '60px', fill: config.colors.background, align: 'center', fontFamily: window.STANDARD_FONT1,
+		stroke: 0xFFFFFF,
+		strokeThickness: 8 });
 		this.playLine.addChild(this.playLabel);
 		this.playLabel.y = this.playLine.height / 2 - 5
 		//this.playLabel.rotation = Math.PI * -0.25;
