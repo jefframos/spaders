@@ -10,7 +10,7 @@ export default class CookieManager {
 			totalShardsCollected: 0,
 			totalBombsExploded: 0,
 			totalCombos: 0, 
-			latestColorPallete: 0, 
+			colorPalletID: 0, 
 			timesLoaded: 0
 		}
 		let defaultSettings = {
@@ -84,7 +84,7 @@ export default class CookieManager {
 		this.storeObject("stats", this.stats)
 	}
 	updateColorPallete(id){
-		this.stats.latestColorPallete = id;
+		this.stats.colorPalletID = id;
 		this.storeObject("stats", this.stats);
 	}
 	addCombo() {

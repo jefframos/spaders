@@ -2,6 +2,7 @@ import TweenMax from 'gsap';
 import * as PIXI from 'pixi.js';
 import signals from 'signals';
 import { debug } from 'webpack';
+import colorSchemes from '../../colorSchemes';
 import config from '../../config';
 import utils from '../../utils';
 export default class Board {
@@ -310,8 +311,10 @@ export default class Board {
 					this.game.scoreRect,
 					element.currentColor
 				)
-				////AREA ATTACK
-				this.popLabel(this.game.toLocal(cardGlobal), "+" + points, 0.1, 0.5, 0.5, window.textStyles.areaAttack);
+				
+				let style = window.getStyle('areaAttack', colorSchemes.colorSchemes[window.COOKIE_MANAGER.stats.colorPalletID].list[4].color)
+
+				this.popLabel(this.game.toLocal(cardGlobal), "+" + points, 0.1, 0.5, 0.5, style);
 				//cardsToDestroy.push({cardFound:cardFound, currentCard: card, attackZone:zones[i]});
 
 				let globalPosTemp = element.getGlobalPosition({ x: 0, y: 0 })
@@ -560,6 +563,7 @@ export default class Board {
 				spritePos.y -= CARD.height
 				this.game.fxContainer.popSprite('./assets/images/finish/counter.png', spritePos, CARD.width * 2, autoDestroyCardData.card.currentColor)
 				let style = window.textStyles.counter
+				
 				style.fill = autoDestroyCardData.card.currentColor
 				this.popLabel(this.game.toLocal(arrowGlobal), "+" + 10 * counterHits, 0.2, 0, 0.3 + counterHits * 0.1, style);
 				window.EFFECTS.shake(0.2, 5, 0.3, this.game.gameContainer);

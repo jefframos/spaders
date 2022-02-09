@@ -163,8 +163,8 @@ export default class StartScreenContainer extends PIXI.Container {
 
 	}
 	updateLinesColor(){
-		console.log(window.COOKIE_MANAGER.stats.latestColorPallete)
-		let colors = colorSchemes.colorSchemes[window.COOKIE_MANAGER.stats.latestColorPallete]
+		console.log(window.COOKIE_MANAGER.stats.colorPalletID)
+		let colors = colorSchemes.colorSchemes[window.COOKIE_MANAGER.stats.colorPalletID]
 		for (let index = 0; index < this.lines.length; index++) {
 			const element = this.lines[index];
 

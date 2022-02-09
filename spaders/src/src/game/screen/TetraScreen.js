@@ -38,6 +38,10 @@ export default class TetraScreen extends Screen {
 		this.colorTween = new ColorTweens();
 		this.levels = window.levelData;//window.levelsJson.levels;
 
+
+		this.trailHorizontal = new PIXI.Graphics().beginFill(0xFFFFFF).drawRoundedRect(0, 0,20, 20, 10);
+		this.trailHorizontal.alpha = 0;
+
 		//console.log(this.levels)
 		//console.log(this.levels)
 		this.hasHash = false;
@@ -776,9 +780,10 @@ export default class TetraScreen extends Screen {
 		this.isFirstClick = true;
 		//window.COOKIE_MANAGER.stats.latestColorPallete
 
+		if(this.currentLevelData.colorPalletId!=undefined)
 		window.COOKIE_MANAGER.updateColorPallete(this.currentLevelData.colorPalletId);
-		let scheme = window.COOKIE_MANAGER.stats.latestColorPallete;
-		scheme = scheme == undefined ? 0 : scheme
+		let scheme = window.COOKIE_MANAGER.stats.colorPalletID;
+		//scheme = scheme == undefined ? 0 : scheme
 
 		window.ENEMIES = colorSchemes.colorSchemes[scheme];
 
@@ -1213,10 +1218,11 @@ export default class TetraScreen extends Screen {
 		this.mousePosID = Math.floor((toGrid.x) / CARD.width);
 
 		//this is weird
-		if (this.isFirstClick && this.mousePosID < 0) {
-			if (this.latestShoot.id < 0) {
-				this.latestShoot.id = Math.floor(GRID.i / 2)
-			}
+		// if (this.isFirstClick && this.mousePosID < 0) {
+		// 	if (this.latestShoot.id < 0) {
+		// 		this.latestShoot.id = Math.floor(GRID.i / 2)
+		// 	}
+		if(this.mousePosID < 0){
 			this.mousePosID = this.latestShoot.id
 
 			//this.isFirstClick = false;
@@ -1350,18 +1356,28 @@ export default class TetraScreen extends Screen {
 	}
 
 	removeEvents() {
-		this.gameContainer.interactive = false;
-		this.gameContainer.off('mousedown', this.onTapDown.bind(this)).off('touchstart', this.onTapDown.bind(this));
-		this.gameContainer.off('mouseup', this.onTapUp.bind(this)).off('touchend', this.onTapUp.bind(this));
+		this.gridContainer.interactive = false;
+		this.gridContainer.off('mousedown', this.onTapDown.bind(this)).off('touchstart', this.onTapDown.bind(this));
+		this.gridContainer.off('mouseup', this.onTapUp.bind(this)).off('touchend', this.onTapUp.bind(this));
+
+		this.trailHorizontal.interactive = false;
+		this.trailHorizontal.off('mousedown', this.onTapDown.bind(this)).off('touchstart', this.onTapDown.bind(this));
+		this.trailHorizontal.off('mouseup', this.onTapUp.bind(this)).off('touchend', this.onTapUp.bind(this));
+
 		this.startScreenContainer.removeEvents();
 		this.endGameScreenContainer.removeEvents();
 
 	}
 	addEvents() {
 		this.removeEvents();
-		this.gameContainer.interactive = true;
-		this.gameContainer.on('mousedown', this.onTapDown.bind(this)).on('touchstart', this.onTapDown.bind(this));
-		this.gameContainer.on('mouseup', this.onTapUp.bind(this)).on('touchend', this.onTapUp.bind(this));
+		this.gridContainer.interactive = true;
+		this.gridContainer.on('mousedown', this.onTapDown.bind(this)).on('touchstart', this.onTapDown.bind(this));
+		this.gridContainer.on('mouseup', this.onTapUp.bind(this)).on('touchend', this.onTapUp.bind(this));
+
+		this.trailHorizontal.interactive = true;
+		this.trailHorizontal.on('mousedown', this.onTapDown.bind(this)).on('touchstart', this.onTapDown.bind(this));
+		this.trailHorizontal.on('mouseup', this.onTapUp.bind(this)).on('touchend', this.onTapUp.bind(this));
+
 		this.startScreenContainer.addEvents();
 		this.endGameScreenContainer.addEvents();
 

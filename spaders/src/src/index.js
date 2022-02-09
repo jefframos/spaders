@@ -71,6 +71,13 @@ window.iconsData = {
 	wipeData: iconPath + 'recycle-bin-96x96-1214299.png',
 	time: iconPath + 'time.png',
 }
+window.getStyle = function(type, color){
+	let style = window.textStyles[type];
+	if(color){
+		style.fill = color;
+	}
+	return style;
+}
 window.textStyles = {
 	normalAttack: {
 		font: '32px',
