@@ -773,6 +773,7 @@ export default class TetraScreen extends Screen {
 
 
 		this.isFinalState = false;
+		this.isFirstClick = true;
 		//window.COOKIE_MANAGER.stats.latestColorPallete
 
 		window.COOKIE_MANAGER.updateColorPallete(this.currentLevelData.colorPalletId);
@@ -867,7 +868,7 @@ export default class TetraScreen extends Screen {
 					hasAddon = true;
 					this.board.setCardToCrazy(j, i, 900 + countAdd * 100);
 
-					countAdd ++;
+					countAdd++;
 				}
 			}
 		}
@@ -1211,9 +1212,21 @@ export default class TetraScreen extends Screen {
 		let toGrid = this.gridContainer.toLocal(this.mousePosition)
 		this.mousePosID = Math.floor((toGrid.x) / CARD.width);
 
-		if (this.mousePosID < 0) {
+		//this is weird
+		if (this.isFirstClick && this.mousePosID < 0) {
+			if (this.latestShoot.id < 0) {
+				this.latestShoot.id = Math.floor(GRID.i / 2)
+			}
 			this.mousePosID = this.latestShoot.id
+
+			//this.isFirstClick = false;
+		} else {
+
+			this.mousePosID = Math.min(Math.max(this.mousePosID, 0), GRID.i - 1);
 		}
+		// if (this.mousePosID < 0) {
+		// 	this.mousePosID = this.latestShoot.id
+		// }
 
 		// this.trailMarker.alpha = 0;
 		if (this.mousePosID >= 0 && this.mousePosID < GRID.i) {
@@ -1297,7 +1310,7 @@ export default class TetraScreen extends Screen {
 		}
 
 
-
+		this.isFirstClick = false;
 		this.currentRound++;
 		let nextRoundTimer = this.board.shootCard(this.mousePosID, this.currentCard);
 		let normalDist = (this.currentCard.y - this.currentCard.pos.j * CARD.height) / GRID.height;
