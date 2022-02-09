@@ -82,13 +82,36 @@ export default class Board {
 		//let tm = 1000 / this.allCards.length;
 		this.isFinalState = true;
 
+		let movers = 0;
 		for (var i = 0; i < this.allCards.length; i++) {
 			if (this.allCards[i] && this.allCards[i].startCrazyMood) {
 				if (this.allCards[i]) {
-
 					this.allCards[i].setZeroLife();
 					this.allCards[i].startCrazyMood();
 					this.addCrazyMoodParticles(this.allCards[i]);
+
+					let card = this.allCards[i];
+					if (card.pos.j > 0) {
+
+						for (let totalMoves = card.pos.j; totalMoves >= 0; totalMoves--) {
+							if (!this.cards[card.pos.i][card.pos.j - totalMoves]) {
+								this.cards[card.pos.i][card.pos.j] = 0;
+								card.pos.j-= totalMoves;
+								this.addCard(card);
+								card.moveAndGoCrazy({
+									x: card.pos.i * CARD.width,
+									y: card.pos.j * CARD.height
+								}, 0.05 * movers + 0.2);
+								movers ++;
+								break;
+							}
+							
+							// if (!this.cards[card.pos.i][card.pos.j - 1]) {
+								
+							// }
+						}
+					}
+					
 				}
 			}
 		}
@@ -212,7 +235,7 @@ export default class Board {
 			card.type = 0;
 			card.updateCard();
 
-			if(this.isFinalState){
+			if (this.isFinalState) {
 				this.setCardToCrazy(card.pos.i, card.pos.j, 100);
 			}
 			//when nothing happens
@@ -313,8 +336,8 @@ export default class Board {
 
 	setCardToCrazy(i, j, timeout) {
 		console.log(this.cards)
-		setTimeout(() => {			
-			if(this.cards[i][j]){
+		setTimeout(() => {
+			if (this.cards[i][j]) {
 				this.cards[i][j].startCrazyMood();
 				this.addCrazyMoodParticles(this.cards[i][j]);
 			}

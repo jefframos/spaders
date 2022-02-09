@@ -312,8 +312,26 @@ export default class Card extends PIXI.Container {
 
 		this.enemySprite.tint = ENEMIES.list[9].color;
 	}
+	moveAndGoCrazy(pos, time = 0.3, delay = 0) {
+		// console.log(	pos);
+
+		TweenMax.killTweensOf(this)
+		TweenMax.killTweensOf(this.position)
+		TweenMax.killTweensOf(this.scale)
+		if (this.backshape && this.backshape.parent) {
+			this.backshape.parent.removeChild(this.backshape)
+		}
+
+		TweenMax.to(this, time, { x: pos.x, y: pos.y, delay: delay , onComplete:()=>{
+			this.startCrazyMood();
+		}});
+	}
 	move(pos, time = 0.3, delay = 0) {
 		// console.log(	pos);
+
+		TweenMax.killTweensOf(this)
+		TweenMax.killTweensOf(this.position)
+		TweenMax.killTweensOf(this.scale)
 		if (this.backshape && this.backshape.parent) {
 			this.backshape.parent.removeChild(this.backshape)
 		}

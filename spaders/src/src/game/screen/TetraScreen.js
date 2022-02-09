@@ -774,8 +774,12 @@ export default class TetraScreen extends Screen {
 
 		this.isFinalState = false;
 		//window.COOKIE_MANAGER.stats.latestColorPallete
+
 		window.COOKIE_MANAGER.updateColorPallete(this.currentLevelData.colorPalletId);
-		window.ENEMIES = colorSchemes.colorSchemes[this.currentLevelData.colorPalletId || 1];
+		let scheme = window.COOKIE_MANAGER.stats.latestColorPallete;
+		scheme = scheme == undefined ? 0 : scheme
+
+		window.ENEMIES = colorSchemes.colorSchemes[scheme];
 
 
 		this.fireworksTimer = 0;

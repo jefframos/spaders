@@ -135,7 +135,8 @@ export default class EndGameContainer extends PIXI.Container {
         this.mainCanvas.alpha = 0
     }
     updateLinesColor(){
-		let colors = colorSchemes.colorSchemes[window.COOKIE_MANAGER.stats.latestColorPallete || 1]
+        let scheme = window.COOKIE_MANAGER.stats.latestColorPallete;
+		let colors = colorSchemes.colorSchemes[scheme == undefined ? 0 : scheme]
 		for (let index = 0; index < this.lines.length; index++) {
 			const element = this.lines[index];
 

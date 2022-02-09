@@ -349,12 +349,11 @@ function configGame() {
 			});
 
 			level.sectionName = section.name;
-			let count = 0;
 			res.layers.forEach(layer => {
 
 				let data = extractData(layer);
-				if (count > 0 && layer.name.search("_ADDON") >= 0) {
-					sectionLevels[count - 1].addOn = data.addOn;
+				if (sectionLevels.length > 1 && layer.name.search("_ADDON") >= 0) {
+					sectionLevels[sectionLevels.length - 1].addOn = data.addOn;
 				} else if (data) {
 					let idToSave = section.name + '-' + level.name + '-' + data.levelName;
 					idToSave = idToSave.toLowerCase();
@@ -364,7 +363,6 @@ function configGame() {
 					data.sectionName = section.name;
 					data.tierName = level.name;
 					data.colorPalletId = palletID
-					count++;
 					sectionLevels.push(data);
 
 
@@ -396,7 +394,7 @@ function configGame() {
 	window.levelsRawJson.layers.forEach(element => {
 
 		let data = extractData(element);
-		if (window.levelData.length > 0 && element.name.search("_ADDON") >= 0) {
+		if (window.levelData.length > 1 && element.name.search("_ADDON") >= 0) {
 			window.levelData[window.levelData.length - 1].addOn = data.addOn;
 		} else if (data) {
 			window.levelData.push(data)
