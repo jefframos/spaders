@@ -9,6 +9,7 @@
   <property name="sectionName" value="Shapes"/>
  </properties>
  <tileset firstgid="1" source="../tilesets/synt.tsx"/>
+ <tileset firstgid="65" source="../tilesets/gb.tsx"/>
  <layer id="84" name="Copy of Outrun Sun" width="11" height="12" visible="0">
   <properties>
    <property name="i" type="int" value="9"/>

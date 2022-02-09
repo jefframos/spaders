@@ -22,7 +22,7 @@ export default {
             dark:0x111111
         },
         {
-            list: [
+            list: [//syinth
                 { isBlock: false, color: 0xffd319, life: 0 },
                 { isBlock: false, color: 0xff901f, life: 1 },
                 { isBlock: false, color: 0xff2975, life: 2 },
@@ -39,6 +39,25 @@ export default {
                 { isBlock: true, color: config.colors.block }
             ],
             dark:0x111111
+        },
+        {
+            list: [//gb
+                { isBlock: false, color: 0x85cd6e, life: 0 },
+                { isBlock: false, color: 0x89c077, life: 1 },
+                { isBlock: false, color: 0x4da350, life: 2 },
+                { isBlock: false, color: 0x65b26f, life: 3 },
+                { isBlock: false, color: 0x3f7e5d, life: 4 },
+                { isBlock: false, color: 0x37764a, life: 5 },
+                { isBlock: false, color: 0x224939, life: 6 },
+                { isBlock: false, color: 0x285746, life: 7 },
+                { isBlock: false, color: 0xbad1b8, life: 8 },
+                { isBlock: false, color: 0x252b25, life: 9 },
+                { isBlock: false, color: 0x555a56, life: 9.1 },
+                { isBlock: false, color: 0xddd3ab, life: 9.2 },
+                { isBlock: false, color: 0x3b3c2e, life: 9.3 },
+                { isBlock: true, color: config.colors.block }
+            ],
+            dark:0x182018
         }
     ]
 

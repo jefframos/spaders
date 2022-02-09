@@ -146,6 +146,10 @@
         "spadersTileset.tsx": {
             "scaleInDock": 1
         },
+        "tilesets/gb.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
         "tilesets/spadersTileset.tsx": {
             "dynamicWrapping": false,
             "scaleInDock": 1,
@@ -203,6 +207,7 @@
     ],
     "project": "gameLevelsProject.tiled-project",
     "recentFiles": [
+        "tilesets/gb.tsx",
         "how-to-play/people-set-1.tmx",
         "how-to-play/how-to-play-medium.tmx",
         "how-to-play/creatures.tmx",
@@ -213,8 +218,7 @@
         "movies/movies1.tmx",
         "how-to-play/simple-shapes.tmx",
         "how-to-play/simple-shapes-synt.tmx",
-        "tilesets/synt.tsx",
-        "main/mainSectionsConfig.tmx"
+        "tilesets/synt.tsx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",

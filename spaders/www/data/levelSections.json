@@ -33,7 +33,7 @@
             "name": "Medium",
             "displayName": "Video Game History",
             "imageSrc": "",
-            "colorPalletId": 0,
+            "colorPalletId": 2,
             "levels": [
                 {
                     "name": "2nd gen",
