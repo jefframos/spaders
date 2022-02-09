@@ -282,19 +282,34 @@ function extractData(element) {
 		}
 		let tempArr = [];
 		let levelMatrix = [];
+
+		let tempArrAddOn = [];
+		let levelMatrixAddOn = [];
+
 		for (let index = 0; index < element.data.length; index++) {
 			const id = element.data[index];
-			tempArr.push(id - 1)
+			if (id < 32) {
+
+				tempArr.push(id - 1)
+				tempArrAddOn.push(- 1)
+			} else {
+				tempArr.push(- 1)
+				tempArrAddOn.push(id - 1)
+
+			}
 			if (tempArr.length >= i) {
 				index += element.width - i
 				levelMatrix.push(tempArr)
+				levelMatrixAddOn.push(tempArrAddOn)
 				if (levelMatrix.length >= j) {
 					break;
 				}
+				tempArrAddOn = []
 				tempArr = []
 			}
 		}
 
+		data.addOn = levelMatrixAddOn;
 		data.pieces = levelMatrix;
 		return data
 	}
@@ -334,10 +349,13 @@ function configGame() {
 			});
 
 			level.sectionName = section.name;
+			let count = 0;
 			res.layers.forEach(layer => {
 
 				let data = extractData(layer);
-				if (data) {
+				if (count > 0 && layer.name.search("_ADDON") >= 0) {
+					sectionLevels[count - 1].addOn = data.addOn;
+				} else if (data) {
 					let idToSave = section.name + '-' + level.name + '-' + data.levelName;
 					idToSave = idToSave.toLowerCase();
 					idToSave = idToSave.split(' ').join('')
@@ -346,7 +364,10 @@ function configGame() {
 					data.sectionName = section.name;
 					data.tierName = level.name;
 					data.colorPalletId = palletID
+					count++;
 					sectionLevels.push(data);
+
+
 				}
 			});
 			level.colorPalletId = palletID
@@ -362,7 +383,7 @@ function configGame() {
 		});
 	});
 
-	window.levelsRawJson = PIXI.loader.resources["./data/how-to-play/shapes.json"].data
+	window.levelsRawJson = PIXI.loader.resources["./data/how-to-play/shapes-synt.json"].data
 	//window.levelsRawJson = PIXI.loader.resources["./assets/levelsRaw.json"].data
 	window.levelsJson = PIXI.loader.resources["./assets/levels.json"].data
 
@@ -373,44 +394,17 @@ function configGame() {
 	}
 	window.levelData = [];
 	window.levelsRawJson.layers.forEach(element => {
-		if (element.visible) {
 
-			let data = {}
-			data.levelName = element.name;
-			let i = element.width;
-			let j = element.height;
-			data.tier = 0;
-			if (element.properties[0].name == "i") {
-				i = element.properties[0].value;
-			}
-			if (element.properties[1].name == "j") {
-				j = element.properties[1].value;
-			}
-			if (element.properties[2].name == "tier") {
-				data.tier = element.properties[2].value;
-			}
-			let tempArr = [];
-			let levelMatrix = [];
-			for (let index = 0; index < element.data.length; index++) {
-				const id = element.data[index];
-				tempArr.push(id - 1)
-				if (tempArr.length >= i) {
-					index += element.width - i
-					levelMatrix.push(tempArr)
-					if (levelMatrix.length >= j) {
-						break;
-					}
-					tempArr = []
-				}
-			}
-
-			data.pieces = levelMatrix;
-
+		let data = extractData(element);
+		if (window.levelData.length > 0 && element.name.search("_ADDON") >= 0) {
+			window.levelData[window.levelData.length - 1].addOn = data.addOn;
+		} else if (data) {
 			window.levelData.push(data)
-			window.levelTiersData[data.tier].push(data);
+			window.levelTiersData[data.tier].push(data)
 		}
 
 	});
+	console.log("ALL DATA", window.levelData)
 	//console.log("ALL DATA", window.levelSections)
 	//create screen manager
 

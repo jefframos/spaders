@@ -305,11 +305,12 @@ export default class Card extends PIXI.Container {
 	}
 	isABomb(){
 		this.isBomb = true;
-		this.enemySprite.setTexture( PIXI.Texture.fromImage(window.IMAGE_DATA.enemyBombImages[0]));
+		//this.enemySprite.setTexture( PIXI.Texture.fromImage(window.IMAGE_DATA.enemyBombImages[0]));
+		this.enemySprite.setTexture(PIXI.Texture.fromImage(window.IMAGE_DATA.enemyImages[Math.floor(0)]));
 		this.startCrazyMood();
 		this.removeActionZones();
 
-		this.enemySprite.tint = config.colors.red;
+		this.enemySprite.tint = ENEMIES.list[9].color;
 	}
 	move(pos, time = 0.3, delay = 0) {
 		// console.log(	pos);

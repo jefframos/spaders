@@ -119,6 +119,7 @@ export default class TetraScreen extends Screen {
 
 		//(pos, label, delay = 0, dir = 1, scale = 1, color = 0xFFFFFF, ease = Back.easeOut)
 		////AREA ATTACK
+		this.isFinalState = true;
 		setTimeout(() => {
 
 			this.board.setFinalState();
@@ -591,7 +592,7 @@ export default class TetraScreen extends Screen {
 			window.AUTO_PLAY = false;
 		}
 
-			this.startScreenContainer.chooseLevelPanel.refreshNavButtons();
+		this.startScreenContainer.chooseLevelPanel.refreshNavButtons();
 		//console.log("endGameState")
 	}
 	gameState() {
@@ -771,9 +772,11 @@ export default class TetraScreen extends Screen {
 	resetGame() {
 
 
-		window.ENEMIES = colorSchemes.colorSchemes[this.currentLevelData.colorPalletId];
-
+		this.isFinalState = false;
+		//window.COOKIE_MANAGER.stats.latestColorPallete
 		window.COOKIE_MANAGER.updateColorPallete(this.currentLevelData.colorPalletId);
+		window.ENEMIES = colorSchemes.colorSchemes[this.currentLevelData.colorPalletId || 1];
+
 
 		this.fireworksTimer = 0;
 		this.mainMenuSettings.collapse();
@@ -851,14 +854,34 @@ export default class TetraScreen extends Screen {
 			}
 		}
 
+		///ADD ONS
+		let hasAddon = false;
+		let countAdd = 0;
+		for (var i = 0; i < this.currentLevelData.addOn.length; i++) {
+			for (var j = 0; j < this.currentLevelData.addOn[i].length; j++) {
+				if (this.currentLevelData.addOn[i][j] >= 0) {
+					hasAddon = true;
+					this.board.setCardToCrazy(j, i, 900 + countAdd * 100);
+
+					countAdd ++;
+				}
+			}
+		}
+
 		this.currentPoints = 0;
 		this.currentPointsLabel = 0;
 		this.currentRound = 0;
 
 		// this.board.debugBoard();
 
+		if (hasAddon) {
+			setTimeout(() => {
+				this.newRound();
+			}, 900 + countAdd * 100);
+		} else {
+			this.newRound();
+		}
 
-		this.newRound();
 
 		TweenMax.to(this.cardsContainer, 0.1, { alpha: 1 })
 		TweenMax.to(this.gridContainer, 0.1, { alpha: 1, onComplete: () => { this.gameState() } })

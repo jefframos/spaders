@@ -72,6 +72,7 @@ export default class Board {
 			}
 			this.cards.push(lane);
 		}
+		this.isFinalState = false;
 		this.updateNumberOfEntities()
 	}
 
@@ -79,6 +80,7 @@ export default class Board {
 		//console.log("FINAL STATE")
 		//utils.shuffle(this.allCards);
 		//let tm = 1000 / this.allCards.length;
+		this.isFinalState = true;
 
 		for (var i = 0; i < this.allCards.length; i++) {
 			if (this.allCards[i] && this.allCards[i].startCrazyMood) {
@@ -210,6 +212,9 @@ export default class Board {
 			card.type = 0;
 			card.updateCard();
 
+			if(this.isFinalState){
+				this.setCardToCrazy(card.pos.i, card.pos.j, 100);
+			}
 			//when nothing happens
 			console.log("nothi explode", tempBombDelay)
 			setTimeout(() => {
@@ -306,6 +311,15 @@ export default class Board {
 
 	}
 
+	setCardToCrazy(i, j, timeout) {
+		console.log(this.cards)
+		setTimeout(() => {			
+			if(this.cards[i][j]){
+				this.cards[i][j].startCrazyMood();
+				this.addCrazyMoodParticles(this.cards[i][j]);
+			}
+		}, timeout);
+	}
 	addCrazyCards2(numCards, cardToIgnore) {
 		let tempCardList = [];
 		for (var i = 0; i < this.cards.length; i++) {
@@ -379,9 +393,7 @@ export default class Board {
 		}
 	}
 	addCrazyMoodParticles(target, color = 0xFFFFFF) {
-		let cardGlobal = target.getGlobalPosition({ x: 0, y: 0 });
-		cardGlobal.x += target.width / 2 * this.game.cardsContainer.scale.x
-		cardGlobal.y += target.height / 2 * this.game.cardsContainer.scale.y
+		let cardGlobal = target.enemySprite.getGlobalPosition({ x: 0, y: 0 });
 		this.game.fxContainer.addParticlesToScore(
 			8,
 			this.game.toLocal(cardGlobal),
