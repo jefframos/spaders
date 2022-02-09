@@ -20,7 +20,7 @@ export default class Card extends PIXI.Container{
 		// this.sprite.width = CARD.width;
 		// this.sprite.height = CARD.height;
 
-		this.sprite = PIXI.Sprite.fromImage(window.IMAGE_DATA.enemyBlockImages[0]);
+		this.sprite = PIXI.Sprite.fromFrame(window.IMAGE_DATA.enemyBlockImages[0]);
 
 		this.sprite.scale.set(CARD.width / this.realSpriteWidth * 0.6)
 		this.sprite.tint = 0x333333;

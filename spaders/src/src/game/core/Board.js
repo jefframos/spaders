@@ -561,7 +561,7 @@ export default class Board {
 				this.addCrazyMoodParticles(card, autoDestroyCardData.card.currentColor)
 				let spritePos = this.game.toLocal(arrowGlobal)
 				spritePos.y -= CARD.height
-				this.game.fxContainer.popSprite('./assets/images/finish/counter.png', spritePos, CARD.width * 2, autoDestroyCardData.card.currentColor)
+				this.game.fxContainer.popSprite('counter.png', spritePos, CARD.width * 2, autoDestroyCardData.card.currentColor)
 				let style = window.textStyles.counter
 				
 				style.fill = autoDestroyCardData.card.currentColor

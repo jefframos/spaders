@@ -28,10 +28,10 @@ export default class Card extends PIXI.Container {
 		// let gridEffectSquare = PIXI.Sprite.fromImage('./assets/images/largeCard.png')
 		// 		gridEffectSquare.scale.set(CARD.width / gridEffectSquare.width);
 
-		this.cardForeground = PIXI.Sprite.fromImage('./assets/images/largeCard.png')//new PIXI.Graphics().beginFill(0xFFFFFF).drawRoundedRect(0, 0, CARD.width, CARD.height, 0);
+		this.cardForeground = PIXI.Sprite.fromFrame('largeCard.png')//new PIXI.Graphics().beginFill(0xFFFFFF).drawRoundedRect(0, 0, CARD.width, CARD.height, 0);
 		this.circleBackground = new PIXI.Graphics().beginFill(0xFFFFFF).drawCircle(0, 0, CARD.width / 2);
 		this.cardBack3 = new PIXI.Graphics().beginFill(0x000000).drawRect(CARD.width / 2 - 10, CARD.height / 2, 19, 10);
-		this.enemySprite = PIXI.Sprite.fromImage('./assets/images/enemy.png');
+		this.enemySprite = PIXI.Sprite.fromFrame('enemy.png');
 
 		this.enemySprite.scale.set(this.realSpriteWidth / this.enemySprite.width * this.scaleRef)
 		this.enemySprite.anchor.set(0.5);
@@ -59,7 +59,7 @@ export default class Card extends PIXI.Container {
 		this.lifeLabel = new PIXI.Text(this.life, { font: '20px', fill: 0x000000,  fontFamily:window.STANDARD_FONT1 });
 		this.lifeLabel.pivot.x = this.lifeLabel.width / 2
 		this.lifeLabel.pivot.y = this.lifeLabel.height / 2
-		this.lifeContainerBackground = PIXI.Sprite.fromImage('./assets/images/backLabel.png')
+		this.lifeContainerBackground = PIXI.Sprite.fromFrame('backLabel.png')
 		this.lifeContainerBackground.anchor.x = 0.5
 		this.lifeContainerBackground.anchor.y = 0.5
 		this.lifeContainerBackground.scale.set(1.4)
@@ -174,7 +174,7 @@ export default class Card extends PIXI.Container {
 	}
 	updateSprite(level) {
 		this.isBomb = false;
-		this.enemySprite.setTexture( PIXI.Texture.fromImage(window.IMAGE_DATA.enemyImages[Math.floor(level)]));
+		this.enemySprite.setTexture( PIXI.Texture.fromFrame(window.IMAGE_DATA.enemyImagesFrame[Math.floor(level)]));
 	}
 	updateCard(isCurrent = false) {
 
@@ -209,7 +209,7 @@ export default class Card extends PIXI.Container {
 			// this.backshape.drawRect(CARD.width * -0.5, CARD.width * -0.5, CARD.width, CARD.width);
 			// this.backshape.endFill();
 
-			this.backshape = PIXI.Sprite.fromImage('./assets/images/largeCard.png')
+			this.backshape = PIXI.Sprite.fromFrame('largeCard.png')
 			this.backshape.scale.set(CARD.width / this.backshape.width);
 			this.backshape.tint = this.enemySprite.tint;
 			this.backshape.anchor.set(0.5)
@@ -306,7 +306,8 @@ export default class Card extends PIXI.Container {
 	isABomb(){
 		this.isBomb = true;
 		//this.enemySprite.setTexture( PIXI.Texture.fromImage(window.IMAGE_DATA.enemyBombImages[0]));
-		this.enemySprite.setTexture(PIXI.Texture.fromImage(window.IMAGE_DATA.enemyImages[Math.floor(0)]));
+		this.enemySprite.setTexture(PIXI.Texture.fromFrame(window.IMAGE_DATA.enemyImagesFrame[Math.floor(0)]));
+		
 		this.startCrazyMood();
 		this.removeActionZones();
 
@@ -366,7 +367,7 @@ export default class Card extends PIXI.Container {
 		// this.backshape.drawRect(-CARD.width / 2, -CARD.height / 2, CARD.width, CARD.height);
 		// this.backshape.endFill();
 
-		this.backshape = PIXI.Sprite.fromImage('./assets/images/innerBorder.png')
+		this.backshape = PIXI.Sprite.fromFrame('innerBorder.png')
 			this.backshape.scale.set(CARD.width / this.backshape.width);
 			this.backshape.tint = this.enemySprite.tint;
 			this.backshape.anchor.set(0.5)

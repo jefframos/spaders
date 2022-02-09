@@ -14,15 +14,15 @@ export default class BackgroundEffects extends PIXI.Container {
 		this.addChild(this.background);
 
 		
-		this.backgroundImage = PIXI.Sprite.fromImage("./assets/images/background.png");
+		//this.backgroundImage = PIXI.Sprite.fromImage("./assets/images/background.png");
 		//this.background.addChild(this.backgroundImage);
-		this.backgroundShape = new PIXI.Graphics().beginFill(config.colors.background).drawRect(0, 0, this.backgroundImage.width, this.backgroundImage.height);
+		this.backgroundShape = new PIXI.Graphics().beginFill(config.colors.background).drawRect(0, 0, 10, 10);
 		this.background.addChildAt(this.backgroundShape, 0);
 		//this.backgroundImage.anchor.set(0.5)
 		
 		//this.backgroundImage.alpha = 0.5
 
-		this.backgroundImage.blendMode = PIXI.BLEND_MODES.ADD
+		//this.backgroundImage.blendMode = PIXI.BLEND_MODES.ADD
 		
 		this.starsContainer = new PIXI.Container();
 		this.addChild(this.starsContainer);

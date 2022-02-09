@@ -77,8 +77,8 @@ export default class Grid extends PIXI.Container {
 		for (var i = GRID.i - 1; i >= 0; i--) {
 			let gridLine = [];
 			for (var j = GRID.j - 1; j >= 0; j--) {
-				//let gridSquare = PIXI.Sprite.fromImage('./assets/images/gridSquare.png')
-				let gridSquare = PIXI.Sprite.fromImage('./assets/images/largeCard.png')
+				//let gridSquare = PIXI.Sprite.fromFrame('gridSquare.png')
+				let gridSquare = PIXI.Sprite.fromFrame('largeCard.png')
 				gridSquare.scale.set(CARD.width / gridSquare.width);
 				gridSquare.x = i * CARD.width;
 				gridSquare.y = j * CARD.height;
@@ -93,8 +93,8 @@ export default class Grid extends PIXI.Container {
 
 				this.grids.push(gridSquare);
 
-				//let gridEffectSquare = PIXI.Sprite.fromImage('./assets/images/gridSquare.png')
-				let gridEffectSquare = PIXI.Sprite.fromImage('./assets/images/largeCard.png')
+				//let gridEffectSquare = PIXI.Sprite.fromFrame('gridSquare.png')
+				let gridEffectSquare = PIXI.Sprite.fromFrame('largeCard.png')
 				gridEffectSquare.scale.set(CARD.width / gridEffectSquare.width);
 				gridEffectSquare.x = i * CARD.width;
 				gridEffectSquare.y = j * CARD.height;

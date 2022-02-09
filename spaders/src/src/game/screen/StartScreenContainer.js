@@ -55,9 +55,9 @@ export default class StartScreenContainer extends PIXI.Container {
 		let width = 3000;
 		let spadersContainer = new PIXI.Container();
 		this.spadersList = [];
-		for (let index = 0; index < window.IMAGE_DATA.enemyImages.length; index++) {
-			const element = window.IMAGE_DATA.enemyImages[index];
-			let sprite = new PIXI.Sprite.fromImage(element);
+		for (let index = 0; index < window.IMAGE_DATA.enemyImagesFrame.length; index++) {
+			const element = window.IMAGE_DATA.enemyImagesFrame[index];
+			let sprite = new PIXI.Sprite.fromFrame(element);
 			sprite.tint = window.colorsOrder[index]
 			spadersContainer.addChild(sprite);
 			sprite.x += 80 * index;
@@ -119,7 +119,7 @@ export default class StartScreenContainer extends PIXI.Container {
 
 
 
-		this.backButton = new UIButton1(config.colors.red2, './assets/images/icons/icons8-close-100.png', config.colors.white);
+		this.backButton = new UIButton1(config.colors.red2, 'icons8-close-100.png', config.colors.white);
 		this.backButton.onClick.add(() => {
 			//console.log("TO START")
 			this.startState(0)
@@ -149,7 +149,7 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.center.alpha = 0
 		this.screenState = 1
 
-		this.closeApplicationButton = new UIButton1(config.colors.white, './assets/images/icons/icons8-close-100.png', config.colors.dark);
+		this.closeApplicationButton = new UIButton1(config.colors.white, 'icons8-close-100.png', config.colors.dark);
 		this.closeApplicationButton.onClick.add(() => this.gameScreen.closeApplication());
 		if (window.isCordova) {
 			this.addChild(this.closeApplicationButton);

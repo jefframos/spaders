@@ -22,7 +22,7 @@ export default class InGameMenu extends PIXI.Container {
 
 		this.positionSpring = new Spring();
 
-		this.openMenu = new UIButton1(config.colors.white, './assets/images/icons/icons8-menu-48.png', config.colors.dark);
+		this.openMenu = new UIButton1(config.colors.white, 'icons8-menu-48.png', config.colors.dark);
 		this.openMenu.onClick.add(() => this.toggleState());
 
 		this.closeButton = new UIButton1(config.colors.background, window.iconsData.home, config.colors.white);

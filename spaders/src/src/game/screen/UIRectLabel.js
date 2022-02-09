@@ -13,7 +13,7 @@ export default class UIRectLabel extends PIXI.Container {
 		this.iconSrc = icon;
 		this.mainContainer = new PIXI.Container();
 		//this.backShape = PIXI.Sprite.fromImage('./assets/images/rect.png');
-		this.icon = PIXI.Sprite.fromImage(icon);
+		this.icon = PIXI.Sprite.fromFrame(icon);
 		//this.backShape.tint = color;
 
 		this.backShape = new PIXI.Graphics();

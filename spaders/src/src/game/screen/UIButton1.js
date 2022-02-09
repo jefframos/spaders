@@ -10,7 +10,7 @@ export default class UIButton1 extends PIXI.Container {
 
 		this.mainContainer = new PIXI.Container();
 		//this.backShape = PIXI.Sprite.fromImage('./assets/images/rect.png');
-		this.icon = PIXI.Sprite.fromImage(icon);
+		this.icon = PIXI.Sprite.fromFrame(icon);
 		this.icon.tint = iconColor;
 
 		// this.backShape = new PIXI.Graphics();
@@ -20,7 +20,7 @@ export default class UIButton1 extends PIXI.Container {
 		// this.backShape.endFill();
 		// this.backShape.alpha = 1
 
-		this.backShape = PIXI.Sprite.fromImage('./assets/images/largeCard.png')
+		this.backShape = PIXI.Sprite.fromFrame('largeCard.png')
 		this.backShape.scale.set(width / this.backShape.width);
 		this.backShape.anchor.set(0.5)
 		this.backShape.tint = color;
@@ -54,7 +54,7 @@ export default class UIButton1 extends PIXI.Container {
 	}
 
     updateTexture(texture){
-        this.icon.texture = PIXI.Texture.fromImage(texture);
+        this.icon.texture = PIXI.Texture.fromFrame(texture);
         this.icon.scale.set(this.backShape.height /this.icon.height * 0.7 * this.icon.scale.x);
     }
 }

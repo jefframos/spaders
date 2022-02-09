@@ -146,7 +146,7 @@ export default class TetraScreen extends Screen {
 
 		this.spawnFireworks();
 
-		this.endGameLabel = PIXI.Sprite.fromImage('./assets/images/finish/finish-them-all.png');
+		this.endGameLabel = PIXI.Sprite.fromFrame('finish-them-all.png');
 		this.endGameLabel.anchor.set(0.5)
 		this.resizeToFitAR({ width: this.gameCanvas.width, height: this.gameCanvas.height }, this.endGameLabel);
 
@@ -339,17 +339,17 @@ export default class TetraScreen extends Screen {
 		this.containerQueue = new PIXI.Container();
 		this.bottomUINewContainer.addChild(this.containerQueue)
 
-		this.timerRect = new UIRectLabel(config.colors.yellow, './assets/images/time.png');
+		this.timerRect = new UIRectLabel(config.colors.yellow, 'time.png');
 		this.bottomUINewContainer.addChild(this.timerRect)
 
-		this.movesRect = new UIRectLabel(config.colors.green, './assets/images/newEnemies/pixil-layer-0.png');
+		this.movesRect = new UIRectLabel(config.colors.green, 'pixil-layer-0.png');
 		this.bottomUINewContainer.addChild(this.movesRect)
 
-		this.scoreRect = new UIRectLabel(config.colors.red2, './assets/images/icons/icons8-star-48.png', false);
+		this.scoreRect = new UIRectLabel(config.colors.red2, 'icons8-star-48.png', false);
 		this.UIInGame.addChild(this.scoreRect)
 
 
-		this.backButton = new UIButton1(config.colors.white, './assets/images/icons/icons8-menu-48.png', config.colors.dark);
+		this.backButton = new UIButton1(config.colors.white, 'icons8-menu-48.png', config.colors.dark);
 		this.backButton.onClick.add(() => this.mainmenuState());
 
 

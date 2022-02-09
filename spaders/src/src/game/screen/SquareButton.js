@@ -10,15 +10,15 @@ export default class SquareButton extends PIXI.Container {
 
         this.unscaledCardSize = unscaledCardSize;
         this.container = new PIXI.Container();
-        this.squareButtonBackShape = PIXI.Sprite.fromImage('./assets/images/largeCardBack.png');
-        this.squareButtonShape = PIXI.Sprite.fromImage('./assets/images/largeCard.png');//new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
+        this.squareButtonBackShape = PIXI.Sprite.fromFrame('largeCardBack.png');
+        this.squareButtonShape = PIXI.Sprite.fromFrame('largeCard.png');//new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
         //this.squareButtonShape.scale.set(this.unscaledCardSize.width / this.squareButtonShape.width)
         this.squareButtonShape.tint = 0x333333
         this.squareButtonBackShape.tint = 0x222222
 
 
-        this.buttonMask = PIXI.Sprite.fromImage('./assets/images/largeCard.png');
-        this.innerBorder = PIXI.Sprite.fromImage('./assets/images/innerBorder.png');
+        this.buttonMask = PIXI.Sprite.fromFrame('largeCard.png');
+        this.innerBorder = PIXI.Sprite.fromFrame('innerBorder.png');
 
 
         this.label = new PIXI.Text("", {

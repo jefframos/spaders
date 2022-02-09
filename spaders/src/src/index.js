@@ -57,7 +57,7 @@ window.colorsOrder = [
 	config.colors.white,
 	config.colors.dark,
 ]
-let iconPath = './assets/images/newIcons/'
+let iconPath = ''//'./assets/images/newIcons/'
 window.iconsData = {
 	cancel: iconPath + 'cancel-96x96-1214345.png',
 	soundOn: iconPath + 'volume-up-96x96-1214272.png',
@@ -152,24 +152,16 @@ window.shuffleText = function shuffleText(label, keepfirstandlast = false) {
 
 window.IMAGE_DATA = {}
 
-window.IMAGE_DATA.enemyBlockImages = ['./assets/images/newEnemies/block.png']
-window.IMAGE_DATA.enemyBombImages = ['./assets/images/newEnemies/bomb.png']
+window.IMAGE_DATA.enemyBlockImages = ['block.png']
+window.IMAGE_DATA.enemyBombImages = ['bomb.png']
 
-window.IMAGE_DATA.enemyImages = []
+window.IMAGE_DATA.enemyImagesFrame = []
 
-for (let index = 0; index < 10; index++) {
-	window.IMAGE_DATA.enemyImages.push('./assets/images/newEnemies/pixil-layer-' + index + '.png');
+for (let index = 0; index < 10; index++) {	
+	window.IMAGE_DATA.enemyImagesFrame.push('pixil-layer-' + index + '.png');
 
 }
-window.IMAGE_DATA.enemyBombImages.forEach(element => {
-	PIXI.loader.add(element)
-});
-window.IMAGE_DATA.enemyBlockImages.forEach(element => {
-	PIXI.loader.add(element)
-});
-window.IMAGE_DATA.enemyImages.forEach(element => {
-	PIXI.loader.add(element)
-});
+
 window.SAVE_DATA = function (data, filename, type) {
 	var file = new Blob([data], { type: type });
 	if (window.navigator.msSaveOrOpenBlob) // IE10+
@@ -188,10 +180,6 @@ window.SAVE_DATA = function (data, filename, type) {
 	}
 
 }
-for (const key in window.iconsData) {
-	const element = window.iconsData[key];
-	PIXI.loader.add(element)
-}
 
 const sManager = new SoundManager();
 window.SOUND_MANAGER = sManager;
@@ -200,43 +188,11 @@ sManager.soundData.forEach(element => {
 	PIXI.loader.add(element.src);
 });
 PIXI.loader
+	.add('./assets/images/game.json')
 	.add('./data/levelSections.json')
 	.add('./assets/fonts/stylesheet.css')
-	.add('./assets/images/tvlines.png')
-	.add('./assets/images/backLabel.png')
-	.add('./assets/images/trail1.jpg')
 	.add('./assets/levels.json')
 	.add('./assets/levelsRaw.json')
-	.add('./assets/images/cancel.png')
-	.add('./assets/images/cycle.png')
-	.add('./assets/images/previous-button.png')
-	.add('./assets/images/game_bg.png')
-	.add('./assets/images/enemy.png')
-	.add('./assets/images/glitch1.jpg')
-	.add('./assets/images/glitch2.jpg')
-	.add('./assets/images/particle1.png')
-	.add('./assets/images/p1.png')
-	.add('./assets/images/screen_displacement.jpg')
-	.add('./assets/images/background.png')
-	.add('./assets/images/gridSquare.png')
-	.add('./assets/images/block.jpg')
-	.add('./assets/images/rect.png')
-	.add('./assets/images/time.png')
-	.add('./assets/images/largeCard.png')
-	.add('./assets/images/finish/counter.png')
-	.add('./assets/images/finish/finish-them-all.png')
-	.add('./assets/images/largeCardBack.png')
-	.add('./assets/images/icons/icons8-menu-48.png')
-	.add('./assets/images/icons/icons8-star-48.png')
-	.add('./assets/images/icons/icons8-back-100.png')
-	.add('./assets/images/icons/icons8-close-100.png')
-	.add('./assets/images/icons/icons8-refresh-64.png')
-	.add('./assets/images/icons/icons8-back-128.png')
-	.add('./assets/images/icons/icons8-forward-100.png')
-	.add('./assets/images/lineBorder.png')
-	.add('./assets/images/innerBorder.png')
-	.add('./assets/images/robot-antennas.png')
-	// .add('./assets/images/map.jpg')
 	.load(loadJsons);
 
 window.levelsJson = ""

@@ -21,11 +21,11 @@ export default class EffectLayer extends PIXI.Container{
 	    this.grey.alpha = 0;
 		this.addChild(this.grey);
 
-		this.tvLines = new PIXI.extras.TilingSprite(PIXI.Texture.fromImage('./assets/images/tvlines.png', config.width, config.height))
-		//this.addChild(this.tvLines)
-		this.tvLines.width = config.width;
-		this.tvLines.height = config.height;
-		this.tvLines.blendMode = PIXI.BLEND_MODES.ADD;
+		// this.tvLines = new PIXI.extras.TilingSprite(PIXI.Texture.fromImage('./assets/images/tvlines.png', config.width, config.height))
+		// //this.addChild(this.tvLines)
+		// this.tvLines.width = config.width;
+		// this.tvLines.height = config.height;
+		// this.tvLines.blendMode = PIXI.BLEND_MODES.ADD;
 
 
 		// this.tvShape = new PIXI.Sprite(PIXI.Texture.fromImage('./assets/frontTVsoft.png'))
@@ -83,11 +83,11 @@ export default class EffectLayer extends PIXI.Container{
 		// this.displacementFilterGlitch2 = new PIXI.filters.DisplacementFilter(this.glitch2);
 
 		//GLITCH 1
-		this.screenDisplacement = new PIXI.Sprite(PIXI.Texture.fromImage('./assets/images/screen_displacement.jpg'))
-		this.addChild(this.screenDisplacement)
-		this.screenDisplacement.width = config.width;
-		this.screenDisplacement.height = config.height;
-		this.displacementFilterscreenDisplacement = new PIXI.filters.DisplacementFilter(this.screenDisplacement);
+		// this.screenDisplacement = new PIXI.Sprite(PIXI.Texture.fromImage('./assets/images/screen_displacement.jpg'))
+		// this.addChild(this.screenDisplacement)
+		// this.screenDisplacement.width = config.width;
+		// this.screenDisplacement.height = config.height;
+		// this.displacementFilterscreenDisplacement = new PIXI.filters.DisplacementFilter(this.screenDisplacement);
 
 		//BLOOM
 		this.bloom = new FILTERS.AdvancedBloomFilter();
@@ -409,10 +409,10 @@ export default class EffectLayer extends PIXI.Container{
 
 	update(delta){
 		this.blackShape.alpha =  Math.random() * 0.1;
-		this.tvLines.tilePosition.y += 1;
-		if(this.tvLines.tilePosition.y > 40){
-			this.tvLines.tilePosition.y = 0;
-		}
+		// this.tvLines.tilePosition.y += 1;
+		// if(this.tvLines.tilePosition.y > 40){
+		// 	this.tvLines.tilePosition.y = 0;
+		// }
 		//this.glitch1.tilePosition.y += 1;
 	}
 }

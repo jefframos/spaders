@@ -71,7 +71,7 @@ export default class FXContainer extends PIXI.Container {
 
 
     popSprite(src, pos, width, color) {
-        let sprite = PIXI.Sprite.fromImage(src)
+        let sprite = PIXI.Sprite.fromFrame(src)
         sprite.anchor.set(0.5);
         sprite.scale.set(width / sprite.width);
         sprite.tint = color;
@@ -200,7 +200,7 @@ export default class FXContainer extends PIXI.Container {
             toReturn = this.particlePool[0];
             this.particlePool.shift();
         } else {
-            toReturn = new PIXI.Sprite.fromImage('./assets/images/p1.png')
+            toReturn = new PIXI.Sprite.fromFrame('p1.png')
         }
 
         return toReturn;
