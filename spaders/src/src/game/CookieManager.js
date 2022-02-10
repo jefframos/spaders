@@ -83,6 +83,10 @@ export default class CookieManager {
 		this.stats.timesLoaded++
 		this.storeObject("stats", this.stats)
 	}
+	toogleDebug(id){
+		this.debug.showAllThumbs = !this.debug.showAllThumbs;
+		this.storeObject("debug", this.debug);
+	}
 	updateColorPallete(id){
 		this.stats.colorPalletID = id;
 		this.storeObject("stats", this.stats);

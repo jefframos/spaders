@@ -53,6 +53,13 @@ export default class MainMenu extends PIXI.Container {
         });
         this.toggleSound.backShape.rotation = 0
 
+
+        this.toggleDebug = new UIButton1(config.colors.background, window.iconsData.reload, config.colors.white);
+        this.toggleDebug.onClick.add(() => {
+            window.COOKIE_MANAGER.toogleDebug();
+        });
+        this.toggleDebug.backShape.rotation = 0
+
         if (!window.COOKIE_MANAGER.settings.sound) {
             this.toggleSound.updateTexture(window.iconsData.soundOff);
         }
@@ -65,6 +72,11 @@ export default class MainMenu extends PIXI.Container {
         this.mainContainer.addChild(this.toggleSound);
         this.toggleSound.x = this.backShape.width - 60
         this.toggleSound.y = 50;
+
+        this.mainContainer.addChild(this.toggleDebug);
+        this.toggleDebug.x = this.backShape.width - 60
+        this.toggleDebug.y = 350;
+
         // this.refreshButton.x = this.backShape.width - 60
         this.wipeDataButton.x = this.wipeDataButton.width * 0.5 + 30
         this.wipeDataButton.y = this.toggleSound.y;
@@ -90,7 +102,7 @@ export default class MainMenu extends PIXI.Container {
         this.totalMoves = new PIXI.Text("",  this.fontStyle('22px', config.colors.pink));
         this.totalShards = new PIXI.Text("",  this.fontStyle('22px', config.colors.purple));
 
-        let dist = 40;
+        let dist = 30;
         this.statsOrder = [this.stats, this.totalPlayTime, this.totalMoves, this.totalCombos, this.totalShards, this.levelsFinished];
 
         for (let index = 0; index < this.statsOrder.length; index++) {

@@ -149,7 +149,7 @@ export default class LevelSelectContainer extends PIXI.Container {
                 });
 
             }
-
+            navButton.updateLabel(finishedLevels + "/"+countLevels, {x:0, y:-35})
             navButton.setProgressBar(finishedLevels / countLevels);
             // console.log('SECTION',colorSchemes.colorSchemes[navButton.section.colorPalletId].list[3].color)
             if (finishedLevels >= countLevels) {

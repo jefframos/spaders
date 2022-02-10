@@ -138,7 +138,7 @@ export default class SquareButton extends PIXI.Container {
 
 
     }
-    updateLabel(text) {
+    updateLabel(text, offset = {x:0, y:0}) {
         this.label.text = text;
         this.label.visible = true;
 
@@ -148,8 +148,8 @@ export default class SquareButton extends PIXI.Container {
 
         this.label.pivot.x = this.label.width / 2 / this.label.scale.x
         this.label.pivot.y = this.label.height / this.label.scale.y;
-        this.label.x = this.squareButtonShape.width / 2 // this.container.scale.x
-        this.label.y = this.squareButtonShape.height * 0.93// this.container.scale.y
+        this.label.x = this.squareButtonShape.width / 2 +offset.x// this.container.scale.x
+        this.label.y = this.squareButtonShape.height * 0.93 + offset.y// this.container.scale.y
     }
     updateIcon(graphic, scale = 0.5, offset = { x: 0, y: 0 }) {
         if (this.icon && this.icon.parent) {

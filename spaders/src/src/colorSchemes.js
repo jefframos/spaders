@@ -95,7 +95,7 @@ export default {
                 { isBlock: false, color: 0x37b05b, life: 5.3 },
                 { isBlock: false, color: 0x7552cf, life: 6.3 },
                 { isBlock: false, color: 0x7b7caf, life: 7.3 },
-                { isBlock: false, color: 0x786048, life: 8.3 },
+                { isBlock: false, color: 0xeee19b, life: 8.3 },
                 { isBlock: false, color: 0x786048, life: 4.3 },
                 { isBlock: false, color: 0x786048, life: 3.3 },
                 { isBlock: true, color: config.colors.block }
