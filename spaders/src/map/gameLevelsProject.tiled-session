@@ -1,10 +1,10 @@
 {
-    "activeFile": "how-to-play/pokemon2.tmx",
+    "activeFile": "how-to-play/pokemon22.tmx",
     "expandedProjectPaths": [
         "how-to-play",
-        "movies",
         "main",
-        "videogames"
+        "videogames",
+        "movies"
     ],
     "fileStates": {
         "D:/Projects/tetra/map/levels.tmx": {
@@ -56,9 +56,17 @@
         },
         "how-to-play/pokemon2.tmx": {
             "scale": 0.8325994318181819,
-            "selectedLayer": 8,
+            "selectedLayer": 18,
             "viewCenter": {
-                "x": 354.9125650430777,
+                "x": 353.1109784184936,
+                "y": 384.3384799112855
+            }
+        },
+        "how-to-play/pokemon22.tmx": {
+            "scale": 0.8325994318181819,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 353.711507293355,
                 "y": 384.3384799112855
             }
         },
@@ -226,7 +234,8 @@
         "how-to-play/simple-shapes.tmx",
         "how-to-play/simple-shapes-synt.tmx",
         "how-to-play/pokemons.tmx",
-        "how-to-play/pokemon2.tmx"
+        "how-to-play/pokemon2.tmx",
+        "how-to-play/pokemon22.tmx"
     ],
     "project": "gameLevelsProject.tiled-project",
     "recentFiles": [

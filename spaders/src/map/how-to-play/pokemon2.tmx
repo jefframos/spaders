@@ -55,7 +55,7 @@
 0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="81" name="Venosaur" width="11" height="12">
+ <layer id="81" name="Venusaur" width="11" height="12">
   <properties>
    <property name="i" type="int" value="8"/>
    <property name="j" type="int" value="10"/>
@@ -423,7 +423,7 @@
 0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="97" name="Ratatta" width="11" height="12">
+ <layer id="97" name="Rattata" width="11" height="12">
   <properties>
    <property name="i" type="int" value="7"/>
    <property name="j" type="int" value="7"/>
@@ -469,7 +469,7 @@
 0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="99" name="Sperow" width="11" height="12">
+ <layer id="99" name="Spearow" width="11" height="12">
   <properties>
    <property name="i" type="int" value="8"/>
    <property name="j" type="int" value="7"/>
