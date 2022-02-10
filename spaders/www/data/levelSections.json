@@ -38,6 +38,10 @@
                 {
                     "name": "pokemon",
                     "dataPath": "how-to-play/pokemon.json"
+                },
+                {
+                    "name": "pokemon",
+                    "dataPath": "how-to-play/pokemon2.json"
                 }
             ]
         },
