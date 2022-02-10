@@ -30,6 +30,19 @@
         },
         {
             "color": "0xDDDDDD",
+            "name": "pokemon",
+            "displayName": "Video Game History",
+            "imageSrc": "",
+            "colorPalletId": 3,
+            "levels": [
+                {
+                    "name": "pokemon",
+                    "dataPath": "how-to-play/pokemon.json"
+                }
+            ]
+        },
+        {
+            "color": "0xDDDDDD",
             "name": "Medium",
             "displayName": "Video Game History",
             "imageSrc": "",

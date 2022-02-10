@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="11" height="12" tilewidth="64" tileheight="64" infinite="0" nextlayerid="72" nextobjectid="1">
+ <editorsettings>
+  <export target="../../../www/data/how-to-play/pokemon.json" format="json"/>
+ </editorsettings>
+ <properties>
+  <property name="description" value="no description here"/>
+  <property name="iconURL" value="sss"/>
+  <property name="sectionName" value="Pokemon"/>
+ </properties>
+ <tileset firstgid="1" source="../tilesets/spadersTileset.tsx"/>
+ <tileset firstgid="65" source="../tilesets/poke.tsx"/>
+ <layer id="43" name="Bulbasaur" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="7"/>
+   <property name="j" type="int" value="9"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,65,65,0,0,0,0,0,0,
+0,0,66,65,65,0,0,0,0,0,0,
+0,66,66,65,65,66,0,0,0,0,0,
+66,66,66,66,66,66,0,0,0,0,0,
+66,66,66,66,66,66,0,0,0,0,0,
+0,0,66,66,66,66,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="71" name="Copy of Bulbasaur" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="7"/>
+   <property name="j" type="int" value="9"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,65,65,0,0,0,0,0,0,
+0,0,66,65,65,0,0,0,0,0,0,
+0,66,66,65,65,66,0,0,0,0,0,
+66,66,66,66,66,66,0,0,0,0,0,
+66,66,66,66,66,66,0,0,0,0,0,
+0,0,66,66,66,66,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+</map>

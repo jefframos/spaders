@@ -1,10 +1,10 @@
 {
-    "activeFile": "how-to-play/simple-shapes-synt.tmx",
+    "activeFile": "how-to-play/pokemon2.tmx",
     "expandedProjectPaths": [
-        "movies",
         "main",
-        "videogames",
-        "how-to-play"
+        "movies",
+        "how-to-play",
+        "videogames"
     ],
     "fileStates": {
         "D:/Projects/tetra/map/levels.tmx": {
@@ -54,12 +54,28 @@
                 "y": 384.0914503453203
             }
         },
+        "how-to-play/pokemon2.tmx": {
+            "scale": 0.8325994318181819,
+            "selectedLayer": 8,
+            "viewCenter": {
+                "x": 352.5104495436322,
+                "y": 384.3384799112855
+            }
+        },
+        "how-to-play/pokemons.tmx": {
+            "scale": 0.8325994318181819,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 353.1109784184936,
+                "y": 384.3384799112855
+            }
+        },
         "how-to-play/simple-shapes-synt.tmx": {
             "scale": 0.9014204545454545,
-            "selectedLayer": 7,
+            "selectedLayer": 9,
             "viewCenter": {
-                "x": 324.48786637251817,
-                "y": 387.1667191931926
+                "x": 352.7765521588402,
+                "y": 384.9479987393634
             }
         },
         "how-to-play/simple-shapes.tmx": {
@@ -150,6 +166,10 @@
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
+        "tilesets/poke.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
         "tilesets/spadersTileset.tsx": {
             "dynamicWrapping": false,
             "scaleInDock": 1,
@@ -193,6 +213,7 @@
     "last.externalTilesetPath": "E:/projects/spaders/spaders/src/map/tilesets",
     "last.imagePath": "E:/projects/spaders/spaders/src/map/tilesets",
     "map.lastUsedExportFilter": "All Files (*)",
+    "map.lastUsedFormat": "tmx",
     "openFiles": [
         "how-to-play/people-set-1.tmx",
         "how-to-play/how-to-play-medium.tmx",
@@ -203,11 +224,12 @@
         "videogames/levels3.tmx",
         "movies/movies1.tmx",
         "how-to-play/simple-shapes.tmx",
-        "how-to-play/simple-shapes-synt.tmx"
+        "how-to-play/simple-shapes-synt.tmx",
+        "how-to-play/pokemons.tmx",
+        "how-to-play/pokemon2.tmx"
     ],
     "project": "gameLevelsProject.tiled-project",
     "recentFiles": [
-        "tilesets/gb.tsx",
         "how-to-play/people-set-1.tmx",
         "how-to-play/how-to-play-medium.tmx",
         "how-to-play/creatures.tmx",
@@ -218,7 +240,8 @@
         "movies/movies1.tmx",
         "how-to-play/simple-shapes.tmx",
         "how-to-play/simple-shapes-synt.tmx",
-        "tilesets/synt.tsx"
+        "how-to-play/pokemons.tmx",
+        "how-to-play/pokemon2.tmx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",

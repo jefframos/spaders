@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="11" height="12" tilewidth="64" tileheight="64" infinite="0" nextlayerid="88" nextobjectid="1">
+ <editorsettings>
+  <export target="../../../www/data/how-to-play/pokemon.json" format="json"/>
+ </editorsettings>
+ <properties>
+  <property name="description" value="no description here"/>
+  <property name="sectionName" value="Pokemon"/>
+ </properties>
+ <tileset firstgid="1" source="../tilesets/spadersTileset.tsx"/>
+ <tileset firstgid="65" source="../tilesets/poke.tsx"/>
+ <layer id="46" name="Bulbasaur" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="6"/>
+   <property name="j" type="int" value="6"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,68,68,0,0,0,0,0,0,
+0,68,65,68,68,0,0,0,0,0,0,
+0,65,65,65,65,0,0,0,0,0,0,
+0,0,65,0,65,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="80" name="Ivysaur" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="6"/>
+   <property name="j" type="int" value="8"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,70,66,0,0,0,0,0,0,0,
+68,0,66,66,0,68,0,0,0,0,0,
+68,68,68,68,68,68,0,0,0,0,0,
+0,69,65,65,69,0,0,0,0,0,0,
+0,65,65,65,65,0,0,0,0,0,0,
+65,0,65,65,0,65,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="81" name="Venosaur" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="8"/>
+   <property name="j" type="int" value="10"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,66,66,0,0,66,66,0,0,0,0,
+71,71,66,67,67,66,71,71,0,0,0,
+66,66,66,71,71,66,66,66,0,0,0,
+0,66,66,66,66,66,66,0,0,0,0,
+0,68,68,68,68,68,68,0,0,0,0,
+68,68,68,68,68,68,68,68,0,0,0,
+0,65,65,65,65,69,69,0,0,0,0,
+65,0,65,65,69,69,0,69,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="82" name="Charmander" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="5"/>
+   <property name="j" type="int" value="8"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,71,71,0,0,0,0,0,0,0,0,
+0,71,66,0,0,0,0,0,0,0,0,
+71,67,67,71,66,0,0,0,0,0,0,
+0,67,67,0,71,0,0,0,0,0,0,
+71,67,67,71,71,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="83" name="Charmeleon" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="6"/>
+   <property name="j" type="int" value="8"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+67,0,0,66,66,0,0,0,0,0,0,
+71,0,0,0,66,66,0,0,0,0,0,
+66,0,66,71,0,0,0,0,0,0,0,
+0,66,66,71,66,0,0,0,0,0,0,
+0,66,71,71,66,0,0,0,0,0,0,
+0,66,0,0,66,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="84" name="Charizard" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="8"/>
+   <property name="j" type="int" value="9"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,67,0,0,0,0,
+0,0,71,0,0,71,66,0,0,0,0,
+0,71,69,71,71,69,71,0,0,0,0,
+0,69,71,71,71,71,69,0,0,0,0,
+0,71,0,67,67,0,71,0,0,0,0,
+0,0,71,67,67,71,0,0,0,0,0,
+0,0,71,0,0,71,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="85" name="Squirtle" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="7"/>
+   <property name="j" type="int" value="7"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,65,65,0,0,0,0,0,0,0,
+0,69,65,65,69,0,0,0,0,0,0,
+0,0,76,76,0,65,65,0,0,0,0,
+0,65,76,76,65,65,65,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="86" name="Wartortle" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="7"/>
+   <property name="j" type="int" value="7"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,69,69,0,0,0,0,0,0,0,
+0,0,69,69,0,0,0,0,0,0,0,
+0,69,76,76,69,73,0,0,0,0,0,
+0,0,76,76,0,73,73,0,0,0,0,
+0,69,77,77,69,73,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="87" name="Blastoise" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="8"/>
+   <property name="j" type="int" value="10"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,69,69,0,0,0,0,0,0,0,
+0,0,76,76,76,77,0,0,0,0,0,
+0,69,77,77,69,77,77,0,0,0,0,
+69,0,77,69,77,77,77,0,0,0,0,
+0,0,76,76,77,77,77,0,0,0,0,
+0,69,76,76,76,69,77,69,0,0,0,
+0,69,0,0,0,69,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+</map>

@@ -58,6 +58,25 @@ export default {
                 { isBlock: true, color: config.colors.block }
             ],
             dark:0x182018
+        },
+        {
+            list: [//poke
+                { isBlock: false, color: 0x4890a8, life: 0 },
+                { isBlock: false, color: 0xf06060, life: 1 },
+                { isBlock: false, color: 0xf0d818, life: 2 },
+                { isBlock: false, color: 0x75bf8b, life: 3 },
+                { isBlock: false, color: 0x1471b0, life: 4 },
+                { isBlock: false, color: 0xe9bbe9, life: 5 },
+                { isBlock: false, color: 0xf07848, life: 6 },
+                { isBlock: false, color: 0xc078d8, life: 7 },
+                { isBlock: false, color: 0xd8d8d8, life: 8 },
+                { isBlock: false, color: 0x333333, life: 9 },
+                { isBlock: false, color: 0x888888, life: 9.1 },
+                { isBlock: false, color: 0xcfbda9, life: 9.2 },
+                { isBlock: false, color: 0x786048, life: 9.3 },
+                { isBlock: true, color: config.colors.block }
+            ],
+            dark:0x333333
         }
     ]
 

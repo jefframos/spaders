@@ -71,9 +71,9 @@ window.iconsData = {
 	wipeData: iconPath + 'recycle-bin-96x96-1214299.png',
 	time: iconPath + 'time.png',
 }
-window.getStyle = function(type, color){
+window.getStyle = function (type, color) {
 	let style = window.textStyles[type];
-	if(color){
+	if (color) {
 		style.fill = color;
 	}
 	return style;
@@ -157,7 +157,7 @@ window.IMAGE_DATA.enemyBombImages = ['bomb.png']
 
 window.IMAGE_DATA.enemyImagesFrame = []
 
-for (let index = 0; index < 10; index++) {	
+for (let index = 0; index < 10; index++) {
 	window.IMAGE_DATA.enemyImagesFrame.push('pixil-layer-' + index + '.png');
 
 }
@@ -250,7 +250,8 @@ function extractData(element) {
 		let levelMatrixAddOn = [];
 
 		for (let index = 0; index < element.data.length; index++) {
-			const id = element.data[index];
+			let id = element.data[index];
+			id %= 64;
 			if (id < 32) {
 
 				tempArr.push(id - 1)

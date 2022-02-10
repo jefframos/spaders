@@ -170,7 +170,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         let colors = colorSchemes.colorSchemes[id]
         let size = 10;
         let container = new PIXI.Container();
-        for (let index = 0; index < 9; index++) {
+        for (let index = 0; index < 8; index++) {
             let tempRect = this.getRect(size, colors.list[index].color)
             container.addChild(tempRect);
             tempRect.x = size * index;
