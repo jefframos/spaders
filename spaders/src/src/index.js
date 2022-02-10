@@ -67,6 +67,7 @@ window.colorsOrder = [
 let iconPath = ''//'./assets/images/newIcons/'
 window.iconsData = {
 	cancel: iconPath + 'cancel-96x96-1214345.png',
+	debugging: iconPath + 'debugging2.png',
 	soundOn: iconPath + 'volume-up-96x96-1214272.png',
 	soundOff: iconPath + 'mute-96x96-1214309.png',
 	reload: iconPath + 'reload-96x96-1214298.png',

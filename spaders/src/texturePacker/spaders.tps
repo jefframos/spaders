@@ -32,7 +32,7 @@
         <key>dpi</key>
         <uint>72</uint>
         <key>dataFormat</key>
-        <string>pixijs</string>
+        <string>pixijs4</string>
         <key>textureFileName</key>
         <filename></filename>
         <key>flipPVR</key>
@@ -74,7 +74,7 @@
             </struct>
         </struct>
         <key>shapePadding</key>
-        <uint>1</uint>
+        <uint>2</uint>
         <key>jpgQuality</key>
         <uint>80</uint>
         <key>pngOptimizationLevel</key>
@@ -181,7 +181,7 @@
             <key>defaultPivotPoint</key>
             <point_f>0,0</point_f>
             <key>writePivotPoints</key>
-            <false/>
+            <true/>
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
@@ -485,6 +485,7 @@
             <key type="filename">newIcons/cancel-96x96-1214345.png</key>
             <key type="filename">newIcons/close-96x96-1214340.png</key>
             <key type="filename">newIcons/close-96x96-1214342.png</key>
+            <key type="filename">newIcons/debugging2.png</key>
             <key type="filename">newIcons/exclamation-mark-96x96-2194196.png</key>
             <key type="filename">newIcons/fire-96x96-1408702.png</key>
             <key type="filename">newIcons/home-96x96-1214326.png</key>

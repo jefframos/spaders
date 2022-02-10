@@ -54,7 +54,7 @@ export default class MainMenu extends PIXI.Container {
         this.toggleSound.backShape.rotation = 0
 
 
-        this.toggleDebug = new UIButton1(config.colors.background, window.iconsData.reload, config.colors.white);
+        this.toggleDebug = new UIButton1(config.colors.background, window.iconsData.debugging, config.colors.white);
         this.toggleDebug.onClick.add(() => {
             window.COOKIE_MANAGER.toogleDebug();
         });
