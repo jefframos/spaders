@@ -1,9 +1,9 @@
 {
     "activeFile": "how-to-play/pokemon2.tmx",
     "expandedProjectPaths": [
-        "main",
-        "movies",
         "how-to-play",
+        "movies",
+        "main",
         "videogames"
     ],
     "fileStates": {
@@ -56,9 +56,9 @@
         },
         "how-to-play/pokemon2.tmx": {
             "scale": 0.8325994318181819,
-            "selectedLayer": 8,
+            "selectedLayer": 10,
             "viewCenter": {
-                "x": 352.5104495436322,
+                "x": 353.711507293355,
                 "y": 384.3384799112855
             }
         },
@@ -72,7 +72,7 @@
         },
         "how-to-play/simple-shapes-synt.tmx": {
             "scale": 0.9014204545454545,
-            "selectedLayer": 9,
+            "selectedLayer": 1,
             "viewCenter": {
                 "x": 352.7765521588402,
                 "y": 384.9479987393634

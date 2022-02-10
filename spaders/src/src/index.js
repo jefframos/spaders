@@ -30,7 +30,14 @@ window.ENEMIES = {
 		{ isBlock: false, color: config.colors.dark, life: 9 },
 		{ isBlock: false, color: config.colors.grey, life: 9.1 },
 		{ isBlock: false, color: config.colors.whiteSkin, life: 9.2 },
-		{ isBlock: false, color: config.colors.darkSkin, life: 9.3 },
+		{ isBlock: false, color: config.colors.darkSkin, life: 9.31 },
+		{ isBlock: false, color: config.colors.darkSkin, life: 9.32 },
+		{ isBlock: false, color: config.colors.darkSkin, life: 9.33 },
+		{ isBlock: false, color: config.colors.darkSkin, life: 9.34 },
+		{ isBlock: false, color: config.colors.darkSkin, life: 9.35 },
+		{ isBlock: false, color: config.colors.darkSkin, life: 9.36 },
+		{ isBlock: false, color: config.colors.darkSkin, life: 9.37 },
+		{ isBlock: false, color: config.colors.darkSkin, life: 9.38 },
 		{ isBlock: true, color: config.colors.block }
 	]
 }

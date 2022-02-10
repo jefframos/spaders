@@ -484,6 +484,14 @@
         {
          "firstgid":1,
          "source":"..\/..\/..\/src\/map\/tilesets\/synt.tsx"
+        }, 
+        {
+         "firstgid":65,
+         "source":"..\/..\/..\/src\/map\/tilesets\/gb.tsx"
+        }, 
+        {
+         "firstgid":129,
+         "source":"..\/..\/..\/src\/map\/tilesets\/poke.tsx"
         }],
  "tilewidth":64,
  "type":"map",

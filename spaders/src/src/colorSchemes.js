@@ -17,6 +17,12 @@ export default {
                 { isBlock: false, color: config.colors.grey, life: 9.1 },
                 { isBlock: false, color: config.colors.whiteSkin, life: 9.2 },
                 { isBlock: false, color: config.colors.darkSkin, life: 9.3 },
+                { isBlock: false, color: config.colors.darkSkin, life: 5.3 },
+                { isBlock: false, color: config.colors.darkSkin, life: 6.3 },
+                { isBlock: false, color: config.colors.darkSkin, life: 7.3 },
+                { isBlock: false, color: config.colors.darkSkin, life: 8.3 },
+                { isBlock: false, color: config.colors.darkSkin, life: 4.3 },
+                { isBlock: false, color: config.colors.darkSkin, life: 3.3 },
                 { isBlock: true, color: config.colors.block }
             ],
             dark:0x111111
@@ -36,6 +42,12 @@ export default {
                 { isBlock: false, color: 0xb8aec8, life: 9.1 },
                 { isBlock: false, color: 0x5da4a6, life: 9.2 },
                 { isBlock: false, color: 0xd30cb8, life: 9.3 },
+                { isBlock: false, color: 0xd30cb8, life: 5.3 },
+                { isBlock: false, color: 0xd30cb8, life: 6.3 },
+                { isBlock: false, color: 0xd30cb8, life: 7.3 },
+                { isBlock: false, color: 0xd30cb8, life: 8.3 },
+                { isBlock: false, color: 0xd30cb8, life: 4.3 },
+                { isBlock: false, color: 0xd30cb8, life: 3.3 },
                 { isBlock: true, color: config.colors.block }
             ],
             dark:0x111111
@@ -55,6 +67,12 @@ export default {
                 { isBlock: false, color: 0x555a56, life: 9.1 },
                 { isBlock: false, color: 0xddd3ab, life: 9.2 },
                 { isBlock: false, color: 0x3b3c2e, life: 9.3 },
+                { isBlock: false, color: 0x37b05b, life: 5.3 },
+                { isBlock: false, color: 0x7552cf, life: 6.3 },
+                { isBlock: false, color: 0x3b3c2e, life: 7.3 },
+                { isBlock: false, color: 0x3b3c2e, life: 8.3 },
+                { isBlock: false, color: 0x3b3c2e, life: 4.3 },
+                { isBlock: false, color: 0x3b3c2e, life: 3.3 },
                 { isBlock: true, color: config.colors.block }
             ],
             dark:0x182018
@@ -74,6 +92,12 @@ export default {
                 { isBlock: false, color: 0x888888, life: 9.1 },
                 { isBlock: false, color: 0xcfbda9, life: 9.2 },
                 { isBlock: false, color: 0x786048, life: 9.3 },
+                { isBlock: false, color: 0x37b05b, life: 5.3 },
+                { isBlock: false, color: 0x7552cf, life: 6.3 },
+                { isBlock: false, color: 0x7b7caf, life: 7.3 },
+                { isBlock: false, color: 0x786048, life: 8.3 },
+                { isBlock: false, color: 0x786048, life: 4.3 },
+                { isBlock: false, color: 0x786048, life: 3.3 },
                 { isBlock: true, color: config.colors.block }
             ],
             dark:0x333333
