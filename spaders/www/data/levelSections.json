@@ -3,6 +3,7 @@
         "dataPath": "question.json"
     },
     "sections": [
+        
         {
             "color": "0xDDDDDD",
             "name": "Easy",
@@ -80,16 +81,16 @@
             ]
         },
         {
-            "color": "0x8957c7",
-            "name": "Hard",
-            "displayName": "Movies",
+            "color": "0xDDDDDD",
+            "name": "Bossa",
+            "displayName": "Video Game History",
             "imageSrc": "",
-            "colorPalletId": 0,
+            "colorPalletId": 1,
             "levels": [
                 {
-                    "name": "70s",
-                    "dataPath": "movies/moviesLevels1.json"
-                }
+                    "name": "---",
+                    "dataPath": "how-to-play/bossa.json"
+                }                
             ]
         }
     ]

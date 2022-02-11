@@ -4,10 +4,10 @@ export default class StarParticle extends PIXI.Container {
     constructor(size) {
         super();
 
-        let listParticles = ['./assets/images/gridSquare.png']
+        let listParticles = ['gridSquare.png']
         let p = listParticles[Math.floor(Math.random() * listParticles.length)];
         // console.log(p);
-        this.graphics = new PIXI.Sprite(PIXI.Texture.from(p)); // new PIXI.Graphics().beginFill(0xFFFFFF).drawRect(0,0,size,size);
+        this.graphics = new PIXI.Sprite.fromFrame(p)//(PIXI.Texture.fromFrame(p)); // new PIXI.Graphics().beginFill(0xFFFFFF).drawRect(0,0,size,size);
         this.graphics.anchor.set(0.5);
 
         //if (p == listParticles[listParticles.length - 1]) {
@@ -24,8 +24,6 @@ export default class StarParticle extends PIXI.Container {
     }
     update(velY, size) {
 
-        //console.log(this.velocity)
-        //this.x += this.velocity.x
         this.y += velY * this.alpha
 
         if (this.y > size.height / 2) {

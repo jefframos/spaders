@@ -1,5 +1,7 @@
 export default {
 	// width: window.innerWidth/2,
+	// width:1024,
+	// height:768,
 	width: 500 * 1.2,
 	height: 736 * 1.2,
 	// height: window.innerHeight/2,

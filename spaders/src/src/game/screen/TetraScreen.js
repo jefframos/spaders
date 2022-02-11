@@ -783,9 +783,12 @@ export default class TetraScreen extends Screen {
 		if(this.currentLevelData.colorPalletId!=undefined)
 		window.COOKIE_MANAGER.updateColorPallete(this.currentLevelData.colorPalletId);
 		let scheme = window.COOKIE_MANAGER.stats.colorPalletID;
-		//scheme = scheme == undefined ? 0 : scheme
 
+		//scheme = scheme == undefined ? 0 : scheme
+		
 		window.ENEMIES = colorSchemes.colorSchemes[scheme];
+
+		this.background.updateColors(colorSchemes.colorSchemes[scheme].list)
 
 
 		this.fireworksTimer = 0;
@@ -1319,6 +1322,9 @@ export default class TetraScreen extends Screen {
 		this.isFirstClick = false;
 		this.currentRound++;
 		let nextRoundTimer = this.board.shootCard(this.mousePosID, this.currentCard);
+
+		window.fxSpeed = 5;
+
 		let normalDist = (this.currentCard.y - this.currentCard.pos.j * CARD.height) / GRID.height;
 		this.currentCard.x = this.currentCard.pos.i * CARD.width
 		this.latestShoot.x = this.currentCard.x

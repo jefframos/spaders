@@ -31,7 +31,7 @@ export default class BackgroundEffects extends PIXI.Container {
 		this.innerResolution = { width: config.width, height: config.height }
 
 
-		//this.addStars();
+		this.addStars();
 	
 
 		this.starsMoveTimer = 0;
@@ -43,6 +43,8 @@ export default class BackgroundEffects extends PIXI.Container {
 			y: 200
 		}
 
+
+		window.fxSpeed = 1;
 		// let center = new PIXI.Graphics().beginFill(0xFF0000).drawCircle(0,0,10);
 		// this.starsContainer.addChild(center)
 
@@ -64,6 +66,11 @@ export default class BackgroundEffects extends PIXI.Container {
 		//this.starsContainer.y = -innerResolution.height / 2
 
 	}
+	updateColors(colorList){
+		for (var i = 0; i < this.stars.length; i++) {
+			this.stars[i].graphics.tint = colorList[ Math.floor(Math.random() * colorList.length * 0.5)].color;
+		}
+	}
 	changeStates(type = 'start') {
 		return
 		if (type == 'start') {
@@ -81,20 +88,34 @@ export default class BackgroundEffects extends PIXI.Container {
 	}
 	update(delta) {
 
-		this.currentSpeed.y = this.innerResolution.height * 0.2
-		for (var i = 0; i < this.stars.length; i++) {
-			this.stars[i].update(this.currentSpeed.y * delta, this.innerResolution);
+		//console.log(this.stars)
+		if(window.fxSpeed > 1){
+			window.fxSpeed -= delta * 5;
+			if(window.fxSpeed < 1){
+				window.fxSpeed = 1;
+			}
+		}
+		this.currentSpeed.y = this.innerResolution.height * 0.05 * window.fxSpeed
+
+		//console.log(this.currentSpeed.y, delta)
+		let spd = this.currentSpeed.y * delta;
+		if(spd){
+			for (var i = 0; i < this.stars.length; i++) {
+				this.stars[i].update(this.currentSpeed.y * delta, this.innerResolution);
+			}
 		}
 	}
 	addStars() {
 		let totalStars = this.innerResolution.width * 0.08;
+
+		totalStars = Math.min(40, totalStars);
 		let l = this.innerResolution.width * 0.001
 		l = Math.max(l, 1)
 		this.stars = [];
 		for (var i = 0; i < totalStars; i++) {
 			let dist = Math.random() * (l *2) + l;
 			let tempStar = new StarParticle(dist);
-			tempStar.alpha = (dist / 3 * 0.6) + 0.2
+			tempStar.alpha = (Math.min(dist, 3) / 3 * 0.4) + 0.2
 			let toClose = true;
 			let acc = 5;
 			while (toClose || acc > 0) {

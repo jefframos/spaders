@@ -22,6 +22,14 @@
         "E:/projects/spaders/spaders/src/tilesets/spadersTileset.tsx": {
             "scaleInDock": 1
         },
+        "how-to-play/bossa.tmx": {
+            "scale": 0.9014204545454545,
+            "selectedLayer": 8,
+            "viewCenter": {
+                "x": 324.48786637251817,
+                "y": 386.057358966278
+            }
+        },
         "how-to-play/creatures.tmx": {
             "scale": 1.0512073863636362,
             "selectedLayer": 3,
@@ -66,8 +74,8 @@
             "scale": 0.8325994318181819,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 353.711507293355,
-                "y": 384.3384799112855
+                "x": 384.33847991128556,
+                "y": 379.53424891239445
             }
         },
         "how-to-play/pokemons.tmx": {

@@ -165,6 +165,9 @@ export default class StartScreenContainer extends PIXI.Container {
 	updateLinesColor(){
 		console.log(window.COOKIE_MANAGER.stats.colorPalletID)
 		let colors = colorSchemes.colorSchemes[window.COOKIE_MANAGER.stats.colorPalletID]
+
+		this.gameScreen.background.updateColors(colors.list)
+
 		for (let index = 0; index < this.lines.length; index++) {
 			const element = this.lines[index];
 

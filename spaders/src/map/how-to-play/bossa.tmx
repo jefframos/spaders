@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="11" height="12" tilewidth="64" tileheight="64" infinite="0" nextlayerid="97" nextobjectid="1">
+ <editorsettings>
+  <export target="../../../www/data/how-to-play/bossa.json" format="json"/>
+ </editorsettings>
+ <properties>
+  <property name="description" value="no description here"/>
+  <property name="iconURL" value=""/>
+  <property name="sectionName" value="Bossa"/>
+ </properties>
+ <tileset firstgid="1" source="../tilesets/synt.tsx"/>
+ <tileset firstgid="65" source="../tilesets/gb.tsx"/>
+ <tileset firstgid="129" source="../tilesets/poke.tsx"/>
+ <tileset firstgid="193" source="../tilesets/spadersTileset.tsx"/>
+ <layer id="71" name="B" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="7"/>
+   <property name="j" type="int" value="11"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,2,2,2,2,2,2,0,0,0,0,
+0,2,201,201,201,2,2,0,0,0,0,
+0,2,201,2,201,2,2,0,0,0,0,
+0,2,201,201,2,2,0,0,0,0,0,
+0,2,201,2,201,2,0,0,0,0,0,
+0,2,201,201,2,2,0,0,0,0,0,
+0,2,201,2,201,2,0,0,0,0,0,
+0,2,201,201,201,2,0,0,0,0,0,
+0,2,2,2,2,2,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="93" name="_ADDON" width="11" height="12" visible="0">
+  <properties>
+   <property name="i" type="int" value="9"/>
+   <property name="j" type="int" value="9"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,225,0,0,0,0,0,0,0,
+0,199,0,0,0,0,0,0,0,0,0,
+0,199,0,225,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,225,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,199,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="87" name="O" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="7"/>
+   <property name="j" type="int" value="11"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,2,2,2,2,2,0,0,0,0,0,
+0,2,201,201,201,2,0,0,0,0,0,
+0,2,201,2,201,2,0,0,0,0,0,
+0,2,201,2,201,2,0,0,0,0,0,
+0,2,201,2,201,2,0,0,0,0,0,
+0,2,201,2,201,2,0,0,0,0,0,
+0,2,201,2,201,2,0,0,0,0,0,
+0,2,201,201,201,2,0,0,0,0,0,
+0,2,2,2,2,2,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="96" name="_ADDON" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="9"/>
+   <property name="j" type="int" value="9"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,225,0,0,0,0,0,0,0,
+0,0,0,225,0,0,0,0,0,0,0,
+0,0,0,225,0,0,0,0,0,0,0,
+0,0,0,225,0,0,0,0,0,0,0,
+0,0,0,225,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="89" name="S" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="7"/>
+   <property name="j" type="int" value="11"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,2,2,0,0,0,0,0,
+0,2,2,201,201,2,0,0,0,0,0,
+0,2,201,2,201,2,0,0,0,0,0,
+0,2,201,2,2,2,0,0,0,0,0,
+0,2,201,201,2,2,0,0,0,0,0,
+0,2,2,2,201,2,0,0,0,0,0,
+0,2,201,2,201,2,0,0,0,0,0,
+0,2,201,201,201,2,0,0,0,0,0,
+0,2,2,2,2,2,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="95" name="_ADDON" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="9"/>
+   <property name="j" type="int" value="9"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,225,0,0,0,0,0,0,0,
+0,0,0,225,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,225,0,0,0,0,0,0,0,
+0,0,0,225,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="90" name="S%" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="7"/>
+   <property name="j" type="int" value="11"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,2,2,2,2,0,0,0,0,0,
+0,2,2,201,201,2,0,0,0,0,0,
+0,2,201,2,201,2,0,0,0,0,0,
+0,2,201,2,2,2,0,0,0,0,0,
+0,2,201,201,2,2,0,0,0,0,0,
+0,2,2,2,201,2,0,0,0,0,0,
+0,2,201,2,201,2,0,0,0,0,0,
+0,2,201,201,2,2,0,0,0,0,0,
+0,2,2,2,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="94" name="_ADDON" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="9"/>
+   <property name="j" type="int" value="9"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,225,0,0,0,0,0,0,0,
+0,0,0,225,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,225,0,0,0,0,0,0,0,
+0,0,0,225,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="91" name="A" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="7"/>
+   <property name="j" type="int" value="11"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,2,2,2,2,0,0,0,0,0,
+0,2,2,201,201,2,0,0,0,0,0,
+0,2,201,2,201,2,0,0,0,0,0,
+0,2,201,2,201,2,0,0,0,0,0,
+0,2,201,201,201,2,0,0,0,0,0,
+0,2,201,2,201,2,0,0,0,0,0,
+0,2,201,2,201,2,0,0,0,0,0,
+0,2,201,2,201,2,0,0,0,0,0,
+0,2,2,2,2,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="92" name="_ADDON" width="11" height="12">
+  <properties>
+   <property name="i" type="int" value="9"/>
+   <property name="j" type="int" value="9"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,225,0,0,0,0,0,0,0,
+0,0,0,225,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,225,0,0,0,0,0,0,0,
+0,0,0,225,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+</map>
