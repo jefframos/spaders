@@ -348,7 +348,11 @@ function configGame() {
 							const element = data.pieces[index][j];
 							if (element >= 0) {
 								data.totalPieces ++;
-								data.totalBoardLife += Math.floor(colorSchemes.colorSchemes[palletID].list[element].life) + 1;
+
+								let life = Math.floor(colorSchemes.colorSchemes[palletID].list[element].life) + 1;
+								if(life){
+									data.totalBoardLife += life;
+								}
 							}else{
 								data.totalEmptySpaces ++;
 							}

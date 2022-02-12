@@ -43,6 +43,7 @@ export default class Card extends PIXI.Container{
 		cardContainer.addChild(this.sprite);
 		
 		this.isCard = false;
+		this.isBlock = true;
 		this.cardContainer = cardContainer;//card;
 		this.addChild(card);
 		cardContainer.pivot.x = CARD.width / 2;
