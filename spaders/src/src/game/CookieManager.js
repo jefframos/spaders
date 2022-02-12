@@ -9,8 +9,8 @@ export default class CookieManager {
 			totalLevelsPlayTime: 0,
 			totalShardsCollected: 0,
 			totalBombsExploded: 0,
-			totalCombos: 0, 
-			colorPalletID: 0, 
+			totalCombos: 0,
+			colorPalletID: 0,
 			timesLoaded: 0
 		}
 		let defaultSettings = {
@@ -83,11 +83,11 @@ export default class CookieManager {
 		this.stats.timesLoaded++
 		this.storeObject("stats", this.stats)
 	}
-	toogleDebug(id){
+	toogleDebug(id) {
 		this.debug.showAllThumbs = !this.debug.showAllThumbs;
 		this.storeObject("debug", this.debug);
 	}
-	updateColorPallete(id){
+	updateColorPallete(id) {
 		this.stats.colorPalletID = id;
 		this.storeObject("stats", this.stats);
 	}
@@ -107,14 +107,17 @@ export default class CookieManager {
 			}
 		}
 	}
-	saveLevel(name, bestTime = 50, highscore = 50, bestMoves = 60, normalScore = 100) {
+	saveLevel(name, bestTime = 50, highscore = 50, bestMoves = 60, normalScore = 100, totalPoints = 0) {
 
+		let averageTimePoints = totalPoints / bestTime;
 		let levelsCompleted = {
 			name: name,
 			bestTime: bestTime,
 			highscore: highscore,
 			bestMoves: bestMoves,
-			bestNormalScore: normalScore
+			bestNormalScore: normalScore,
+			totalPoints: totalPoints,
+			averageTimePoints:averageTimePoints
 		}
 		let isHighscore = false;
 		let found = false;
@@ -125,6 +128,9 @@ export default class CookieManager {
 				if (element.bestTime > bestTime) {
 					element.bestTime = bestTime;
 				}
+
+				element.averageTimePoints = averageTimePoints;
+				element.totalPoints = totalPoints;
 
 				if (element.highscore < highscore) {
 					element.highscore = highscore;

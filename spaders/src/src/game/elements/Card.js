@@ -6,7 +6,7 @@ import ParticleSystem from '../effects/ParticleSystem';
 export default class Card extends PIXI.Container {
 	constructor(game) {
 		super();
-		window.CARD_ID ++;
+		window.CARD_ID++;
 		this.cardID = window.CARD_ID;
 		window.CARD_NUMBER++;
 		this.isCard = true;
@@ -56,7 +56,7 @@ export default class Card extends PIXI.Container {
 
 		this.lifeContainer = new PIXI.Container();
 		cardContainer.addChild(this.lifeContainer);
-		this.lifeLabel = new PIXI.Text(this.life, { font: '20px', fill: 0x000000,  fontFamily:window.STANDARD_FONT1 });
+		this.lifeLabel = new PIXI.Text(this.life, { font: '20px', fill: 0x000000, fontFamily: window.STANDARD_FONT1 });
 		this.lifeLabel.pivot.x = this.lifeLabel.width / 2
 		this.lifeLabel.pivot.y = this.lifeLabel.height / 2
 		this.lifeContainerBackground = PIXI.Sprite.fromFrame('backLabel.png')
@@ -91,10 +91,10 @@ export default class Card extends PIXI.Container {
 		// this.particleSystem.createParticles({x:0, y:0},4, './assets/images/particle1.png')
 		// this.addChild(this.particleSystem)
 	}
-	forceNewColor(color){
+	forceNewColor(color) {
 		this.enemySprite.tint = color;
 
-		if(this.backshape){
+		if (this.backshape) {
 			this.backshape.tint = color;
 		}
 	}
@@ -125,12 +125,12 @@ export default class Card extends PIXI.Container {
 
 		this.updateCard();
 
-		if(totalSides == 0){
+		if (totalSides == 0) {
 			totalSides = Math.ceil(Math.random() * 2)
 		}
 		//console.log(totalSides)
 		let order = null;
-		if(customData && customData.order){
+		if (customData && customData.order) {
 			order = customData.order;
 		}
 		this.addActionZones(totalSides, order);
@@ -174,7 +174,7 @@ export default class Card extends PIXI.Container {
 	}
 	updateSprite(level) {
 		this.isBomb = false;
-		this.enemySprite.setTexture( PIXI.Texture.fromFrame(window.IMAGE_DATA.enemyImagesFrame[Math.floor(level)]));
+		this.enemySprite.setTexture(PIXI.Texture.fromFrame(window.IMAGE_DATA.enemyImagesFrame[Math.floor(level)]));
 	}
 	updateCard(isCurrent = false) {
 
@@ -201,7 +201,7 @@ export default class Card extends PIXI.Container {
 			if (this.backshape && this.backshape.parent) {
 				this.backshape.parent.removeChild(this.backshape)
 			}
-			
+
 			// this.backshape = new PIXI.Graphics();
 			// this.backshape.lineStyle(3, this.enemySprite.tint, 1);
 			// this.backshape.beginFill(this.enemySprite.tint);
@@ -245,23 +245,43 @@ export default class Card extends PIXI.Container {
 		this.cardForeground.width = CARD.width
 		this.cardForeground.height = CARD.height
 	}
+	addExtraZone(ids) {
+		let currentZones = [];;
+		for (let index = 0; index < this.zonesID.length; index++) {
+			currentZones.push(this.zonesID[index]);
+
+		}
+
+		for (let index = 0; index < ids.length; index++) {
+			const element = ids[index];
+
+			if(currentZones.indexOf(element) < 0){
+				currentZones.push(element);
+			}
+			
+		}
+
+		this.addActionZones(1, currentZones);
+
+	}
 	addActionZones(totalSides = 1, customOrder = null) {
 		this.updateSize();
 		this.zones = [];
 		this.removeActionZones();
-		let orderArray = customOrder?customOrder:[0, 1, 2, 3, 4, 5, 6, 7]
+		this.zonesID = [];
+		let orderArray = customOrder ? customOrder : [0, 1, 2, 3, 4, 5, 6, 7]
 
-		if(!customOrder){
+		if (!customOrder) {
 			utils.shuffle(orderArray);
-			if(ACTION_ZONES[orderArray[0]].label == "BOTTOM_CENTER" && totalSides <= 1){
+			if (ACTION_ZONES[orderArray[0]].label == "BOTTOM_CENTER" && totalSides <= 1) {
 				//console.log("one here")
-				totalSides ++;
+				totalSides++;
 			}
-		}else{
+		} else {
 			totalSides = customOrder.length;
 		}
 
-		let arrowSize = 12*this.starterScale;
+		let arrowSize = 12 * this.starterScale;
 		for (var i = totalSides - 1; i >= 0; i--) {
 
 			let arrowContainer = new PIXI.Container();
@@ -270,11 +290,12 @@ export default class Card extends PIXI.Container {
 			arrow.lineTo(arrowSize, 0);
 			arrow.lineTo(0, -arrowSize);
 
-			
+
 			arrowContainer.addChild(arrow);
-			
+
 			// arrow.lineTo(0,-5);
 
+			this.zonesID.push(orderArray[i]);
 			let zone = ACTION_ZONES[orderArray[i]];
 
 			this.zones.push(zone);
@@ -303,11 +324,11 @@ export default class Card extends PIXI.Container {
 		}
 		// console.log("ADD ACTION ZONES", this.zones, this.arrows);
 	}
-	isABomb(){
+	isABomb() {
 		this.isBomb = true;
 		//this.enemySprite.setTexture( PIXI.Texture.fromImage(window.IMAGE_DATA.enemyBombImages[0]));
 		this.enemySprite.setTexture(PIXI.Texture.fromFrame(window.IMAGE_DATA.enemyImagesFrame[Math.floor(0)]));
-		
+
 		this.startCrazyMood();
 		this.removeActionZones();
 
@@ -323,9 +344,11 @@ export default class Card extends PIXI.Container {
 			this.backshape.parent.removeChild(this.backshape)
 		}
 
-		TweenMax.to(this, time, { x: pos.x, y: pos.y, delay: delay , onComplete:()=>{
-			this.startCrazyMood();
-		}});
+		TweenMax.to(this, time, {
+			x: pos.x, y: pos.y, delay: delay, onComplete: () => {
+				this.startCrazyMood();
+			}
+		});
 	}
 	move(pos, time = 0.3, delay = 0) {
 		// console.log(	pos);
@@ -345,16 +368,18 @@ export default class Card extends PIXI.Container {
 		this.cardForeground.tint = this.enemySprite.tint
 		this.cardForeground.alpha = 1
 		this.cardContainer.alpha = 0;
-		TweenMax.to(this.cardForeground, time, { alpha: 0, delay: delay , onStart:()=>{
-			this.cardContainer.alpha = 1;
-		}});
+		TweenMax.to(this.cardForeground, time, {
+			alpha: 0, delay: delay, onStart: () => {
+				this.cardContainer.alpha = 1;
+			}
+		});
 	}
 
 	moveX(pos, time = 0.3, delay = 0) {
 		// console.log(	'moveX', pos);
 		TweenMax.to(this, time, { x: pos, delay: delay });
 	}
-	setZeroLife(){
+	setZeroLife() {
 		this.life = 0;
 		if (this.life < 1) {
 			this.lifeContainer.alpha = 0;
@@ -368,9 +393,9 @@ export default class Card extends PIXI.Container {
 		// this.backshape.endFill();
 
 		this.backshape = PIXI.Sprite.fromFrame('innerBorder.png')
-			this.backshape.scale.set(CARD.width / this.backshape.width);
-			this.backshape.tint = this.enemySprite.tint;
-			this.backshape.anchor.set(0.5)
+		this.backshape.scale.set(CARD.width / this.backshape.width);
+		this.backshape.tint = this.enemySprite.tint;
+		this.backshape.anchor.set(0.5)
 		this.addChildAt(this.backshape, 0);
 		this.backshape.x = this.enemySprite.x
 		this.backshape.y = this.enemySprite.y
@@ -392,7 +417,7 @@ export default class Card extends PIXI.Container {
 		this.updateSize();
 	}
 	forceDestroy(returnToPool = true) {
-		if(this.parent){			
+		if (this.parent) {
 			this.parent.removeChild(this);
 		}
 		if (this.isCard)
@@ -401,7 +426,7 @@ export default class Card extends PIXI.Container {
 		if (this.backshape && this.backshape.parent) {
 			this.backshape.parent.removeChild(this.backshape)
 		}
-		if(returnToPool){
+		if (returnToPool) {
 			window.CARD_POOL.push(this);
 		}
 	}
@@ -440,7 +465,7 @@ export default class Card extends PIXI.Container {
 			TweenMax.killTweensOf(this.position);
 			TweenMax.killTweensOf(this.scale);
 			//console.log("FORCE THIS CARD TO DIE");
-			if(this.parent){			
+			if (this.parent) {
 				this.parent.removeChild(this);
 			}
 			this.forceDestroy(false);

@@ -6,6 +6,7 @@ import TetraScreen from './game/screen/TetraScreen';
 import EffectLayer from './game/effects/EffectLayer';
 import Pool from './game/core/Pool';
 import SoundManager from './game/SoundManager';
+import colorSchemes from './colorSchemes';
 
 window.LOGO_FONT = "round_popregular"
 window.STANDARD_FONT1 = "round_popregular"
@@ -236,7 +237,6 @@ function loadJsons() {
 
 function extractData(element) {
 	if (element.visible) {
-
 		let data = {}
 		data.levelName = element.name;
 		let i = element.width;
@@ -331,13 +331,23 @@ function configGame() {
 					idToSave = idToSave.toLowerCase();
 					idToSave = idToSave.split(' ').join('')
 					idToSave = idToSave.replace(/\s/g, '')
+					data.totalBoardLife = 0;
 					data.idSaveData = idToSave;
 					data.sectionName = section.name;
 					data.tierName = level.name;
 					data.colorPalletId = palletID
+
+					for (let index = 0; index < data.pieces.length; index++) {
+						for (let j = 0; j < data.pieces[index].length; j++) {
+							const element = data.pieces[index][j];
+							if (element >= 0) {
+								data.totalBoardLife += Math.floor(colorSchemes.colorSchemes[palletID].list[element].life) + 1;
+							}
+						}
+
+					}
+
 					sectionLevels.push(data);
-
-
 				}
 			});
 			level.colorPalletId = palletID

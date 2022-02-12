@@ -34,16 +34,16 @@
             "scale": 1.0512073863636362,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 351.97621782312007,
-                "y": 384.31997837983926
+                "x": 351.9762178231201,
+                "y": 383.36869130464163
             }
         },
         "how-to-play/how-to-play-medium.tmx": {
             "scale": 1.0512073863636362,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 351.97621782312007,
-                "y": 384.31997837983926
+                "x": 351.9762178231201,
+                "y": 383.36869130464163
             }
         },
         "how-to-play/how-to-play-small.tmx": {
@@ -58,24 +58,24 @@
             "scale": 0.8201171875,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 352.38866396761136,
-                "y": 384.0914503453203
+                "x": 351.16932603000714,
+                "y": 382.87211240771614
             }
         },
         "how-to-play/pokemon2.tmx": {
             "scale": 0.8325994318181819,
             "selectedLayer": 18,
             "viewCenter": {
-                "x": 353.1109784184936,
-                "y": 384.3384799112855
+                "x": 351.90992066877084,
+                "y": 383.13742216156277
             }
         },
         "how-to-play/pokemon22.tmx": {
             "scale": 0.8325994318181819,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 384.33847991128556,
-                "y": 379.53424891239445
+                "x": 384.3384799112855,
+                "y": 379.5342489123945
             }
         },
         "how-to-play/pokemons.tmx": {
@@ -83,7 +83,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 353.1109784184936,
-                "y": 384.3384799112855
+                "y": 384.33847991128556
             }
         },
         "how-to-play/simple-shapes-synt.tmx": {
@@ -109,8 +109,8 @@
             "scale": 1.0512073863636362,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 351.97621782312007,
-                "y": 384.31997837983926
+                "x": 351.9762178231201,
+                "y": 383.36869130464163
             }
         },
         "levels.tmx": {
@@ -160,8 +160,8 @@
             "scale": 0.8275390625,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 320.22657540712765,
-                "y": 384.2718904885532
+                "x": 319.01817323578007,
+                "y": 383.0634883172056
             }
         },
         "movies/spadersTileset.tsx": {
@@ -199,24 +199,24 @@
             "scale": 0.8201171875,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 320.6858775899024,
-                "y": 384.0914503453203
+                "x": 319.46653965229814,
+                "y": 382.87211240771614
             }
         },
         "videogames/levels2.tmx": {
             "scale": 0.8275390625,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 320.22657540712765,
-                "y": 384.2718904885532
+                "x": 319.01817323578007,
+                "y": 383.0634883172056
             }
         },
         "videogames/levels3.tmx": {
             "scale": 0.8275390625,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 320.22657540712765,
-                "y": 384.2718904885532
+                "x": 319.01817323578007,
+                "y": 383.0634883172056
             }
         },
         "videogames/spadersTileset.tsx": {
@@ -225,7 +225,7 @@
             "scaleInEditor": 1
         }
     },
-    "last.exportedFilePath": "E:/projects/spaders/spaders/www/data/how-to-play",
+    "last.exportedFilePath": "C:/Users/jfbod/Documents/projects/spaders/spaders/www/data/how-to-play",
     "last.externalTilesetPath": "E:/projects/spaders/spaders/src/map/tilesets",
     "last.imagePath": "E:/projects/spaders/spaders/src/map/tilesets",
     "map.lastUsedExportFilter": "All Files (*)",

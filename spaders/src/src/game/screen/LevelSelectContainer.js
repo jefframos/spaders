@@ -138,7 +138,7 @@ export default class LevelSelectContainer extends PIXI.Container {
             let finishedLevels = 0;
             for (let index = 0; index < navButton.section.levels.length; index++) {
                 const element = navButton.section.levels[index];
-                console.log(element)
+                //console.log(element)
                 countLevels += element.data.length;
 
                 element.data.forEach(element2 => {
@@ -149,7 +149,7 @@ export default class LevelSelectContainer extends PIXI.Container {
                 });
 
             }
-            navButton.updateLabel(finishedLevels + "/"+countLevels, {x:0, y:-35})
+            navButton.updateLabel(finishedLevels + "/" + countLevels, { x: 0, y: -35 })
             navButton.setProgressBar(finishedLevels / countLevels);
             // console.log('SECTION',colorSchemes.colorSchemes[navButton.section.colorPalletId].list[3].color)
             if (finishedLevels >= countLevels) {
@@ -223,7 +223,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         this.endTouch.x = evt.data.global.x;
         this.endTouch.y = evt.data.global.y;
 
-        this.levelsView.dragPosition = { x: this.levelsView.x, y: this.levelsView.y }
+        //this.levelsView.dragPosition = { x: this.levelsView.x, y: this.levelsView.y }
         //this.dragSpeed = { x: 0, y: 0 }
 
         this.isHolding = false;
@@ -350,7 +350,7 @@ export default class LevelSelectContainer extends PIXI.Container {
             return;
         }
 
-        console.log(section," 000000")
+        //console.log(section, " 000000")
         window.COOKIE_MANAGER.updateColorPallete(section.colorPalletId);
         this.gameScreen.startScreenContainer.updateLinesColor();
         window.SOUND_MANAGER.play('shoosh', { volume: 0.1 })
@@ -474,8 +474,12 @@ export default class LevelSelectContainer extends PIXI.Container {
     }
     refreshTier(levelTierButton, data) {
         let count = 0;
+        let totalTime = 0;
         data.forEach(element => {
-            if (window.COOKIE_MANAGER.findLevel(element.idSaveData)) {
+
+            let levelFound = window.COOKIE_MANAGER.findLevel(element.idSaveData)
+            if (levelFound) {
+                totalTime += levelFound.bestTime;
                 count++
             }
         });
@@ -485,7 +489,14 @@ export default class LevelSelectContainer extends PIXI.Container {
             levelTierButton.updateLabel('COMPLETED');
             levelTierButton.hideProgressBar();
         } else {
+
+            // finishedLevels + "/" + countLevels
             levelTierButton.setProgressBar(count / data.length);
+            if (totalTime > 0) {
+                levelTierButton.updateLabel(utils.convertNumToTime(totalTime), { x: 0, y: -25 });
+            } else {
+                levelTierButton.updateLabel('');
+            }
             console.log("UPDATE STUFF HERE", data.length, count)
             //levelTierButton.updateLabel('(' + count + '/' + data.length + ')');
         }
@@ -508,6 +519,7 @@ export default class LevelSelectContainer extends PIXI.Container {
 
     addCard(data) {
 
+console.log(data);
 
         let levelButton = new SquareButton(this.unscaledCardSize);
         levelButton.updateLabel(data.levelName);
