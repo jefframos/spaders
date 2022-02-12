@@ -337,7 +337,7 @@ export default class LevelSelectContainer extends PIXI.Container {
 
 
         levelTierButton.updateLabelTop(level.name);
-        levelTierButton.updateIcon(this.gameScreen.generateImage(dataFirstLevel.pieces, 24, 0, dataFirstLevel.colorPalletId));
+        levelTierButton.updateIcon(this.gameScreen.generateImage(dataFirstLevel.pieces, 12, 0, dataFirstLevel.colorPalletId), 0.35,{ x: 0, y: -10 });
         this.gameScreen.resizeToFitAR(this.unscaledCardSize, levelTierButton)
 
         this.refreshTier(levelTierButton, level.data)
@@ -492,11 +492,14 @@ export default class LevelSelectContainer extends PIXI.Container {
 
             // finishedLevels + "/" + countLevels
             levelTierButton.setProgressBar(count / data.length);
-            if (totalTime > 0) {
-                levelTierButton.updateLabel(utils.convertNumToTime(totalTime), { x: 0, y: -25 });
-            } else {
-                levelTierButton.updateLabel('');
-            }
+            levelTierButton.updateLabel(count + "/"+data.length, { x: 0, y: -35 });
+
+            // if (totalTime > 0) {
+            //     //levelTierButton.updateLabel(utils.convertNumToTime(totalTime), { x: 0, y: -25 });
+            // } else {
+            //     levelTierButton.updateLabel('');
+            // }
+
             console.log("UPDATE STUFF HERE", data.length, count)
             //levelTierButton.updateLabel('(' + count + '/' + data.length + ')');
         }
@@ -513,13 +516,15 @@ export default class LevelSelectContainer extends PIXI.Container {
 
             levelButton.setColor(colorSchemes.colorSchemes[data.colorPalletId].list[4].color)
         } else {
+            levelButton.updateLabelTop("~" + data.estimateTime2,
+                new PIXI.Sprite.fromImage(window.iconsData.time));
             levelButton.updateIcon(this.gameScreen.generateImage(window.questionMark.pieces));
         }
     }
 
     addCard(data) {
 
-console.log(data);
+        console.log(data);
 
         let levelButton = new SquareButton(this.unscaledCardSize);
         levelButton.updateLabel(data.levelName);

@@ -35,7 +35,7 @@
 0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="93" name="_ADDON" width="11" height="12" visible="0">
+ <layer id="93" name="_ADDON" width="11" height="12">
   <properties>
    <property name="i" type="int" value="9"/>
    <property name="j" type="int" value="9"/>

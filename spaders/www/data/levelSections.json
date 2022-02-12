@@ -91,6 +91,19 @@
                     "dataPath": "how-to-play/bossa.json"
                 }                
             ]
+        },
+        {
+            "color": "0xDDDDDD",
+            "name": "Large",
+            "displayName": "Video Game History",
+            "imageSrc": "",
+            "colorPalletId": 0,
+            "levels": [
+                {
+                    "name": "---",
+                    "dataPath": "movies/moviesLevels1.json"
+                }                
+            ]
         }
     ]
 }

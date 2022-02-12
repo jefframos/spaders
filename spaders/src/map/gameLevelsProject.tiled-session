@@ -160,8 +160,8 @@
             "scale": 0.8275390625,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 319.01817323578007,
-                "y": 383.0634883172056
+                "x": 320.22657540712765,
+                "y": 384.27189048855325
             }
         },
         "movies/spadersTileset.tsx": {
@@ -197,18 +197,18 @@
         },
         "videogames/levels.tmx": {
             "scale": 0.8201171875,
-            "selectedLayer": 0,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 319.46653965229814,
-                "y": 382.87211240771614
+                "x": 321.9052155275066,
+                "y": 384.0914503453203
             }
         },
         "videogames/levels2.tmx": {
             "scale": 0.8275390625,
-            "selectedLayer": 0,
+            "selectedLayer": 16,
             "viewCenter": {
-                "x": 319.01817323578007,
-                "y": 383.0634883172056
+                "x": 320.22657540712765,
+                "y": 384.27189048855325
             }
         },
         "videogames/levels3.tmx": {
@@ -225,7 +225,7 @@
             "scaleInEditor": 1
         }
     },
-    "last.exportedFilePath": "C:/Users/jfbod/Documents/projects/spaders/spaders/www/data/how-to-play",
+    "last.exportedFilePath": "C:/Users/jfbod/Documents/projects/spaders/spaders/www/data/videogames",
     "last.externalTilesetPath": "E:/projects/spaders/spaders/src/map/tilesets",
     "last.imagePath": "E:/projects/spaders/spaders/src/map/tilesets",
     "map.lastUsedExportFilter": "All Files (*)",
