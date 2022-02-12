@@ -186,6 +186,7 @@ export default class TetraScreen extends Screen {
 	}
 	onDestroyCard(card) {
 		this.grid.destroyCard(card);
+		this.currentSectionPiecesKilled ++;
 	}
 	updateGridDimensions() {
 		window.GRID = {
@@ -524,7 +525,16 @@ export default class TetraScreen extends Screen {
 		this.gameRunning = false;
 		this.startScreenContainer.hide(true);
 		let tempid = this.currentLevelID >= 0 ? this.currentLevelID : 0
-		this.endGameScreenContainer.setStats(this.currentPoints, this.currentRound, utils.convertNumToTime(Math.ceil(this.currentTime)), this.generateImage(this.currentLevelData.pieces, 24, 0, this.currentLevelData.colorPalletId), this.currentLevelData);
+		this.endGameScreenContainer.setStats(
+			this.currentPoints,
+			this.currentRound,
+			utils.convertNumToTime(Math.ceil(this.currentTime)),
+			this.generateImage(this.currentLevelData.pieces,
+				24,
+				0,
+				this.currentLevelData.colorPalletId),
+				this.currentLevelData);
+
 		this.endGameScreenContainer.show(false, 2);
 		this.hideInGameElements(2);
 		this.removeEvents();
@@ -544,7 +554,8 @@ export default class TetraScreen extends Screen {
 			this.currentPoints,
 			this.currentRound,
 			actualScore,
-			this.currentLevelData.totalBoardLife)
+			this.currentLevelData.totalBoardLife,
+			this.currentSectionPiecesKilled)
 
 		if (isHighscore) {
 			this.endGameScreenContainer.showHighscore();
@@ -766,7 +777,7 @@ export default class TetraScreen extends Screen {
 	}
 	resetGame() {
 
-
+		this.currentSectionPiecesKilled = 0;
 		this.isFinalState = false;
 		this.isFirstClick = true;
 		//window.COOKIE_MANAGER.stats.latestColorPallete
