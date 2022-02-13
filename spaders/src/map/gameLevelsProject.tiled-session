@@ -1,5 +1,5 @@
 {
-    "activeFile": "how-to-play/pokemon22.tmx",
+    "activeFile": "how-to-play/pokemon2.tmx",
     "expandedProjectPaths": [
         "how-to-play",
         "main",
@@ -64,9 +64,9 @@
         },
         "how-to-play/pokemon2.tmx": {
             "scale": 0.8325994318181819,
-            "selectedLayer": 18,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 353.1109784184936,
+                "x": 353.711507293355,
                 "y": 384.3384799112855
             }
         },
@@ -243,7 +243,8 @@
         "how-to-play/simple-shapes-synt.tmx",
         "how-to-play/pokemons.tmx",
         "how-to-play/pokemon2.tmx",
-        "how-to-play/pokemon22.tmx"
+        "how-to-play/pokemon22.tmx",
+        "how-to-play/bossa.tmx"
     ],
     "project": "gameLevelsProject.tiled-project",
     "recentFiles": [
@@ -258,7 +259,7 @@
         "how-to-play/simple-shapes.tmx",
         "how-to-play/simple-shapes-synt.tmx",
         "how-to-play/pokemons.tmx",
-        "how-to-play/pokemon2.tmx"
+        "how-to-play/bossa.tmx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",

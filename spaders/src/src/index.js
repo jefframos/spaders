@@ -8,7 +8,7 @@ import Pool from './game/core/Pool';
 import SoundManager from './game/SoundManager';
 
 window.LOGO_FONT = "round_popregular"
-window.STANDARD_FONT1 = "round_popregular"
+window.STANDARD_FONT1 = "retro_gamingregular"
 window.STANDARD_FONT2 = "cozy_capsmedium"
 window.COOKIE_MANAGER = new CookieManager();
 window.GAME_DATA = new GameData();
