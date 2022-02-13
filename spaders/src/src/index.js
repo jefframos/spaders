@@ -10,8 +10,8 @@ import SoundManager from './game/SoundManager';
 import colorSchemes from './colorSchemes';
 
 window.LOGO_FONT = "round_popregular"
-window.STANDARD_FONT1 = "retro_gamingregular"
-window.STANDARD_FONT2 = "cozy_capsmedium"
+window.STANDARD_FONT1 = "pixolletta8pxmedium"
+window.STANDARD_FONT2 = "round_popregular"
 window.COOKIE_MANAGER = new CookieManager();
 window.GAME_DATA = new GameData();
 
@@ -93,35 +93,37 @@ window.textStyles = {
 		font: '32px',
 		fill: 0xFFFFFF,
 		align: 'center',
+		fontWeight: '800',
 		fontFamily: window.STANDARD_FONT1,
 		stroke: 0x000000,
-		strokeThickness: 6
+		strokeThickness: 4
 	},
 	areaAttack: {
 		font: '48px',
 		fill: config.colors.purple,//yellow
 		align: 'center',
+		fontWeight: '800',
 		fontFamily: window.STANDARD_FONT1,
 		stroke: 0xFFFFFF,
-		strokeThickness: 6
+		strokeThickness: 5
 	},
 	counter: {
 		font: '48px',
 		fill: config.colors.purple,//red
 		align: 'center',
-		wight: '800',
+		fontWeight: '800',
 		fontFamily: window.STANDARD_FONT1,
 		stroke: 0x000000,
-		strokeThickness: 6
+		strokeThickness: 5
 	},
 	explosion: {
 		font: '52px',
 		fill: config.colors.red,//red
 		align: 'center',
-		wight: '800',
+		fontWeight: '800',
 		fontFamily: window.STANDARD_FONT1,
 		stroke: 0x000000,
-		strokeThickness: 6
+		strokeThickness: 5
 	}
 },
 

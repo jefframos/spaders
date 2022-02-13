@@ -112,6 +112,9 @@ export default class InGameMenu extends PIXI.Container {
 			this.state = 1;			
 		}
 	}
+	collapse(){
+		this.state = 1;	
+	}
 	update(delta) {
 
 		this.positionSpring.update();

@@ -485,12 +485,30 @@ export default class Board {
 				onStartParams: [list[i].currentCard.getArrow(list[i].attackZone.label), list[i].attackZone, (i + 1), list[i].cardFound],
 				onStart: function (arrow, zone, id, cardFound) {
 					if (arrow) {
-						TweenMax.to(arrow.scale, 0.3, { x: 0, y: 0, ease: Back.easeIn })
-						TweenMax.to(arrow.scale, 0.3, { delay: 0.3, x: 1, y: 1, ease: Back.easeOut })
 
-						TweenMax.to(arrow, 0.05, { x: arrow.x + 10 * zone.dir.x, y: arrow.y + 10 * zone.dir.y, ease: Back.easeIn })
-						TweenMax.to(arrow, 0.2, { delay: 0.2, x: arrow.x, y: arrow.y, ease: Back.easeIn })
 						let arrowGlobal = arrow.getGlobalPosition({ x: 0, y: 0 });
+
+						//this.popCircle(arrowGlobal);
+
+						arrow.tint = card.currentColor;
+
+						TweenMax.to(arrow.scale, 0.3, { x: 0, y: 0, ease: Back.easeIn })
+						TweenMax.to(arrow.scale, 0.3, { delay: 0.3, x: 1, y: 1, ease: Back.easeOut, onStart:()=>{
+
+
+						} })
+
+						TweenMax.to(arrow, 0.05, { x: arrow.x + 10 * zone.dir.x, y: arrow.y + 10 * zone.dir.y,
+							ease: Back.easeIn, onComplete:()=>{
+								let arrowGlobal2 = arrow.getGlobalPosition({ x: 0, y: 0 });
+
+								this.popCircle(arrowGlobal2, card.currentColor);
+		
+
+							} })
+						TweenMax.to(arrow, 0.2, { delay: 0.2, x: arrow.x, y: arrow.y, ease: Back.easeIn, onComplete:()=>{
+							arrow.tint = 0xFFFFFF;
+						} })
 						let screenPos = {
 							x: arrowGlobal.x / config.width,
 							y: arrowGlobal.y / config.height
@@ -603,6 +621,22 @@ export default class Board {
 			}, 80 * index + 50);
 
 		}
+	}
+	popCircle(pos, color = 0xFFFFFF){
+		let convertedPosition = this.game.toLocal(pos)
+		let realRadius = CARD.width / 2 * this.game.gridContainer.scale.x * 0.25;
+		let external = new PIXI.Graphics().lineStyle(3, color).drawCircle(0, 0, realRadius);
+		external.x = convertedPosition.x;
+		external.y = convertedPosition.y;
+		this.game.addChild(external);
+
+		external.scale.set(0.5)
+		TweenMax.to(external.scale, 0.2, {
+			x: 1.5, y: 1.5, onComplete: () => {
+				external.parent.removeChild(external);
+
+			}
+		})
 	}
 	popAttack(card) {
 

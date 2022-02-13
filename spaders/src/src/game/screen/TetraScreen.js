@@ -29,6 +29,8 @@ export default class TetraScreen extends Screen {
 
 		window.AUTO_PLAY_HARD = false;
 		window.AUTO_PLAY = false;
+
+		this.blockGameTimer = 0;
 		////console.log(levels)
 		this.innerResolution = { width: config.width, height: config.height };
 
@@ -118,6 +120,7 @@ export default class TetraScreen extends Screen {
 
 	}
 	onDestroyAllStartedCards() {
+		this.blockGameTimer = 1;
 		this.colorTween.startTween(this.currentLevelData.colorPalletId);
 		this.gameplayState = 1;
 
@@ -777,6 +780,7 @@ export default class TetraScreen extends Screen {
 	}
 	resetGame() {
 
+		this.blockGameTimer = 0;
 		this.currentSectionPiecesKilled = 0;
 		this.isFinalState = false;
 		this.isFirstClick = true;
@@ -1036,6 +1040,7 @@ export default class TetraScreen extends Screen {
 		this.newRound();
 	}
 	newRound() {
+		this.blockGameTimer = 0.2;
 		this.updateQueue();
 		this.currentCard = this.cardQueue[0];
 		this.cardQueue.shift();
@@ -1127,6 +1132,9 @@ export default class TetraScreen extends Screen {
 		this.fxContainer.update(delta)
 
 
+		if(this.blockGameTimer > 0){
+			this.blockGameTimer -= delta;
+		}
 		///sort hash when load
 		if (this.hasHash && !this.hashUsed) {
 			if (this.currentLevelID < 0) {
@@ -1320,7 +1328,7 @@ export default class TetraScreen extends Screen {
 		this.mouseDirty = true;
 	}
 	onTapUp(event, customID) {
-		if (!this.currentCard || !this.gameRunning) {
+		if (!this.currentCard || !this.gameRunning || this.blockGameTimer > 0) {
 			return;
 		}
 		if (customID == undefined) {
@@ -1357,7 +1365,7 @@ export default class TetraScreen extends Screen {
 		let nextRoundTimer = this.board.shootCard(this.mousePosID, this.currentCard);
 
 		window.fxSpeed = 5;
-
+		this.inGameMenu.collapse();
 		let normalDist = (this.currentCard.y - this.currentCard.pos.j * CARD.height) / GRID.height;
 		this.currentCard.x = this.currentCard.pos.i * CARD.width
 		this.latestShoot.x = this.currentCard.x

@@ -104,7 +104,7 @@ export default class StartScreenContainer extends PIXI.Container {
 
 
 
-		this.playLabel = new PIXI.Text("PLAY", { font: '60px', fill: config.colors.background, align: 'center', fontFamily: window.STANDARD_FONT1,
+		this.playLabel = new PIXI.Text("PLAY", { font: '60px',  fill: config.colors.background, align: 'center', fontFamily: window.LOGO_FONT,
 		stroke: 0xFFFFFF,
 		strokeThickness: 8 });
 		this.playLine.addChild(this.playLabel);
@@ -349,7 +349,7 @@ export default class StartScreenContainer extends PIXI.Container {
 		TweenLite.killTweensOf(this.screenContainer)
 
 		this.gameScreen.mainMenuSettings.collapse();
-		this.startState(delay, force);
+		//this.startState(delay, force);
 		//this.startMenuState(delay, force);
 
 		this.playLine.interactive = true;
@@ -366,7 +366,7 @@ export default class StartScreenContainer extends PIXI.Container {
 	showFromGame(force = false, delay = 0) {
 		TweenLite.killTweensOf(this.screenContainer)
 
-		this.startMenuState(delay, force);
+		//this.startMenuState(delay, force);
 		this.gameScreen.mainMenuSettings.collapse();
 		this.playLine.interactive = true;
 		this.playButton.interactive = true;

@@ -554,7 +554,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         }
         this.gameScreen.mainMenuSettings.collapse();
         this.gameScreen.startNewLevel(data, false);
-        this.currentUISection = 0;
+        //this.currentUISection = 0;
         this.resetDrags()
         this.resize(null, true)
     }

@@ -219,6 +219,11 @@ export default class EndGameContainer extends PIXI.Container {
         this.backButton.interactive = false;
         this.replayButton.interactive = false;
         this.nextLevel.interactive = false;
+
+        this.backButton.visible = false;
+        this.replayButton.visible = false;
+        this.nextLevel.visible = false;
+
         //console.log("hide")
         //console.trace()
     }

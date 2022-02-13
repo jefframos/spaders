@@ -56,7 +56,7 @@ export default class Card extends PIXI.Container {
 
 		this.lifeContainer = new PIXI.Container();
 		cardContainer.addChild(this.lifeContainer);
-		this.lifeLabel = new PIXI.Text(this.life, { font: '20px', fill: 0x000000, fontFamily: window.STANDARD_FONT1 });
+		this.lifeLabel = new PIXI.Text(this.life, { font: '20px',fontWeight: '800', fill: 0x000000, fontFamily: window.STANDARD_FONT2 });
 		this.lifeLabel.pivot.x = this.lifeLabel.width / 2
 		this.lifeLabel.pivot.y = this.lifeLabel.height / 2
 		this.lifeContainerBackground = PIXI.Sprite.fromFrame('backLabel.png')
