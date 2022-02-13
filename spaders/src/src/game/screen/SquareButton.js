@@ -151,7 +151,7 @@ export default class SquareButton extends PIXI.Container {
         this.label.x = this.squareButtonShape.width / 2 +offset.x// this.container.scale.x
         this.label.y = this.squareButtonShape.height * 0.93 + offset.y// this.container.scale.y
     }
-    updateIcon(graphic, scale = 0.5, offset = { x: 0, y: 0 }) {
+    updateIcon(graphic, scale = 0.45, offset = { x: 0, y: 0 }) {
         if (this.icon && this.icon.parent) {
             this.icon.parent.removeChild(this.icon);
         }

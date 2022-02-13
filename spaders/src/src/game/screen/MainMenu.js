@@ -96,14 +96,15 @@ export default class MainMenu extends PIXI.Container {
 
         this.statsContainer = new PIXI.Container();
         this.stats = new PIXI.Text("Stats", this.fontStyle('26px', config.colors.dark));
-        this.totalCombos = new PIXI.Text("",  this.fontStyle('22px', config.colors.blue2));
-        this.levelsFinished = new PIXI.Text("",  this.fontStyle('22px', config.colors.red));
-        this.totalPlayTime = new PIXI.Text("",  this.fontStyle('22px', config.colors.red2));
-        this.totalMoves = new PIXI.Text("",  this.fontStyle('22px', config.colors.pink));
-        this.totalShards = new PIXI.Text("",  this.fontStyle('22px', config.colors.purple));
+        this.totalCombos = new PIXI.Text("", this.fontStyle('22px', config.colors.blue2));
+        this.levelsFinished = new PIXI.Text("", this.fontStyle('22px', config.colors.red));
+        this.totalPlayTime = new PIXI.Text("", this.fontStyle('22px', config.colors.red2));
+        this.totalMoves = new PIXI.Text("", this.fontStyle('22px', config.colors.pink));
+        this.totalShards = new PIXI.Text("", this.fontStyle('22px', config.colors.purple));
+        this.totalPIeces = new PIXI.Text("", this.fontStyle('22px', config.colors.background));
 
         let dist = 30;
-        this.statsOrder = [this.stats, this.totalPlayTime, this.totalMoves, this.totalCombos, this.totalShards, this.levelsFinished];
+        this.statsOrder = [this.stats, this.totalPlayTime, this.totalMoves, this.totalCombos, this.totalShards, this.levelsFinished, this.totalPIeces];
 
         for (let index = 0; index < this.statsOrder.length; index++) {
             const element = this.statsOrder[index];
@@ -112,13 +113,13 @@ export default class MainMenu extends PIXI.Container {
         }
 
         this.statsContainer.x = this.backShape.width / 2;
-        this.statsContainer.y = 120;
+        this.statsContainer.y = 80;
         this.mainContainer.addChild(this.statsContainer)
 
         this.state = 1;
 
     }
-    fontStyle(size, color){
+    fontStyle(size, color) {
         let style = {
             font: size,
             fill: color,
@@ -145,11 +146,12 @@ export default class MainMenu extends PIXI.Container {
             this.toggleSound.updateTexture(window.iconsData.soundOn);
         }
 
-        this.totalCombos.text = 'Total Combos: '+window.COOKIE_MANAGER.stats.totalCombos
-        this.levelsFinished.text = 'Levels Completed: '+window.COOKIE_MANAGER.stats.totalLevelsFinished
-        this.totalPlayTime.text = 'Play time: '+utils.convertNumToTime(window.COOKIE_MANAGER.stats.totalLevelsPlayTime)
-        this.totalMoves.text = 'Total Moves: '+window.COOKIE_MANAGER.stats.totalMoves
-        this.totalShards.text = 'Total Shards: '+window.COOKIE_MANAGER.stats.totalShardsCollected
+        this.totalCombos.text = 'Total Combos: ' + window.COOKIE_MANAGER.stats.totalCombos
+        this.levelsFinished.text = 'Levels Completed: ' + window.COOKIE_MANAGER.stats.totalLevelsFinished
+        this.totalPlayTime.text = 'Play time: ' + utils.convertNumToTime(window.COOKIE_MANAGER.stats.totalLevelsPlayTime)
+        this.totalMoves.text = 'Total Moves: ' + window.COOKIE_MANAGER.stats.totalMoves
+        this.totalShards.text = 'Total Shards: ' + window.COOKIE_MANAGER.stats.totalShardsCollected
+        this.totalPIeces.text = 'Pieces Destroyed: ' + window.COOKIE_MANAGER.stats.totalPiecesDestroyed
 
         for (let index = 0; index < this.statsOrder.length; index++) {
             const element = this.statsOrder[index];

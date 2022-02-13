@@ -9,9 +9,10 @@ export default class CookieManager {
 			totalLevelsPlayTime: 0,
 			totalShardsCollected: 0,
 			totalBombsExploded: 0,
-			totalCombos: 0, 
-			colorPalletID: 0, 
-			timesLoaded: 0
+			totalCombos: 0,
+			colorPalletID: 0,
+			timesLoaded: 0,
+			totalPiecesDestroyed: 0
 		}
 		let defaultSettings = {
 			sound: true,
@@ -83,11 +84,11 @@ export default class CookieManager {
 		this.stats.timesLoaded++
 		this.storeObject("stats", this.stats)
 	}
-	toogleDebug(id){
+	toogleDebug(id) {
 		this.debug.showAllThumbs = !this.debug.showAllThumbs;
 		this.storeObject("debug", this.debug);
 	}
-	updateColorPallete(id){
+	updateColorPallete(id) {
 		this.stats.colorPalletID = id;
 		this.storeObject("stats", this.stats);
 	}
@@ -107,14 +108,18 @@ export default class CookieManager {
 			}
 		}
 	}
-	saveLevel(name, bestTime = 50, highscore = 50, bestMoves = 60, normalScore = 100) {
+	saveLevel(name, bestTime = 50, highscore = 50, bestMoves = 60, normalScore = 100, totalPoints = 0, currentSectionPiecesKilled = 0) {
 
+		let averageTimePoints = totalPoints / bestTime;
 		let levelsCompleted = {
 			name: name,
 			bestTime: bestTime,
 			highscore: highscore,
 			bestMoves: bestMoves,
-			bestNormalScore: normalScore
+			bestNormalScore: normalScore,
+			totalPoints: totalPoints,
+			averageTimePoints: averageTimePoints,
+			currentSectionPiecesKilled: currentSectionPiecesKilled
 		}
 		let isHighscore = false;
 		let found = false;
@@ -126,9 +131,18 @@ export default class CookieManager {
 					element.bestTime = bestTime;
 				}
 
+				if (element.averageTimePoints > averageTimePoints) {
+					element.averageTimePoints = averageTimePoints;
+				}
+
+				element.totalPoints = totalPoints;
+
 				if (element.highscore < highscore) {
 					element.highscore = highscore;
 					isHighscore = true;
+				}
+				if (element.currentSectionPiecesKilled < currentSectionPiecesKilled) {
+					element.currentSectionPiecesKilled = currentSectionPiecesKilled;
 				}
 
 				if (element.bestMoves > bestMoves) {
@@ -154,6 +168,8 @@ export default class CookieManager {
 		this.stats.totalMoves += bestMoves
 		this.stats.totalLevelsPlayTime += bestTime
 		this.stats.totalShardsCollected += highscore
+
+		this.stats.totalPiecesDestroyed += currentSectionPiecesKilled;
 
 		this.stats.totalMatchesPlayed++;
 		this.stats.totalLevelsFinished = this.levelsCompleted.levels.length;

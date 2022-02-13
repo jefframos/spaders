@@ -39,7 +39,7 @@ export default class TetraScreen extends Screen {
 		this.levels = window.levelData;//window.levelsJson.levels;
 
 
-		this.trailHorizontal = new PIXI.Graphics().beginFill(0xFFFFFF).drawRoundedRect(0, 0,20, 20, 10);
+		this.trailHorizontal = new PIXI.Graphics().beginFill(0xFFFFFF).drawRoundedRect(0, 0, 20, 20, 10);
 		this.trailHorizontal.alpha = 0;
 
 		//console.log(this.levels)
@@ -186,6 +186,7 @@ export default class TetraScreen extends Screen {
 	}
 	onDestroyCard(card) {
 		this.grid.destroyCard(card);
+		this.currentSectionPiecesKilled ++;
 	}
 	updateGridDimensions() {
 		window.GRID = {
@@ -524,7 +525,16 @@ export default class TetraScreen extends Screen {
 		this.gameRunning = false;
 		this.startScreenContainer.hide(true);
 		let tempid = this.currentLevelID >= 0 ? this.currentLevelID : 0
-		this.endGameScreenContainer.setStats(this.currentPoints, this.currentRound, utils.convertNumToTime(Math.ceil(this.currentTime)), this.generateImage(this.currentLevelData.pieces, 24, 0, this.currentLevelData.colorPalletId), this.currentLevelData);
+		this.endGameScreenContainer.setStats(
+			this.currentPoints,
+			this.currentRound,
+			utils.convertNumToTime(Math.ceil(this.currentTime)),
+			this.generateImage(this.currentLevelData.pieces,
+				24,
+				0,
+				this.currentLevelData.colorPalletId),
+				this.currentLevelData);
+
 		this.endGameScreenContainer.show(false, 2);
 		this.hideInGameElements(2);
 		this.removeEvents();
@@ -543,7 +553,9 @@ export default class TetraScreen extends Screen {
 			Math.ceil(this.currentTime),
 			this.currentPoints,
 			this.currentRound,
-			actualScore)
+			actualScore,
+			this.currentLevelData.totalBoardLife,
+			this.currentSectionPiecesKilled)
 
 		if (isHighscore) {
 			this.endGameScreenContainer.showHighscore();
@@ -760,32 +772,22 @@ export default class TetraScreen extends Screen {
 		this.fireworksTimer = Math.random() * 0.25 + 0.25
 	}
 	forceBottomArrow() {
-		let rnd = Math.random() * 4;
-		let toReturn = [5, 6];
-		if (rnd < 1) {
-			toReturn = [4];
-		} else if (rnd < 2) {
-			toReturn = [5];
-		} else if (rnd < 3) {
-			toReturn = [6];
-		} else {
-			toReturn = [4, 6];
-		}
-		return toReturn;
+		let toReturn = [[4, 5, 6],[4, 5, 6],[5, 6],[4, 6], [4,5]];
+		return toReturn[Math.floor(Math.random() * toReturn.length)];
 	}
 	resetGame() {
 
-
+		this.currentSectionPiecesKilled = 0;
 		this.isFinalState = false;
 		this.isFirstClick = true;
 		//window.COOKIE_MANAGER.stats.latestColorPallete
 
-		if(this.currentLevelData.colorPalletId!=undefined)
-		window.COOKIE_MANAGER.updateColorPallete(this.currentLevelData.colorPalletId);
+		if (this.currentLevelData.colorPalletId != undefined)
+			window.COOKIE_MANAGER.updateColorPallete(this.currentLevelData.colorPalletId);
 		let scheme = window.COOKIE_MANAGER.stats.colorPalletID;
 
 		//scheme = scheme == undefined ? 0 : scheme
-		
+
 		window.ENEMIES = colorSchemes.colorSchemes[scheme];
 
 		this.background.updateColors(colorSchemes.colorSchemes[scheme].list)
@@ -831,18 +833,36 @@ export default class TetraScreen extends Screen {
 		this.dataToSave.idSaveData = this.currentLevelData.idSaveData;
 
 		let lastRow = [];
-		let r = this.currentLevelData.pieces.length - 2;
-		for (var kk = 0; kk < this.currentLevelData.pieces[r].length; kk++) {
-			if (this.currentLevelData.pieces[r][kk] >= 0) {
-				if (!this.currentLevelData.pieces[r][kk].isBlock) {
-					lastRow.push({ i: r, j: kk })
+
+		let rows = [];
+
+		console.log(this.currentLevelData.pieces)
+
+		for (let index = 0; index < GRID.i; index++) {
+			rows.push(-1);
+		}
+
+		for (let index = 0; index < rows.length; index++) {
+			for (let line = GRID.j - 1; line >= 0; line--) {
+
+				if (this.currentLevelData.pieces[line][index] >= 0 && rows[index] < 0) {
+					rows[index] = line
 				}
 			}
+
 		}
-		utils.shuffle(lastRow);
-		for (let index = Math.ceil(lastRow.length * 0.3); index >= 0; index--) {
-			lastRow.shift();
+		for (let index = 0; index < rows.length; index++) {
+			const element = rows[index];
+			if (element > 0) {
+				lastRow.push({ j: index, i: element })
+			}
+
 		}
+		//console.log('lastRow', rows, lastRow)
+		// utils.shuffle(lastRow);
+		// for (let index = Math.ceil(lastRow.length * 0.8); index >= 0; index--) {
+		// 	lastRow.shift();
+		// }
 
 		for (var i = 0; i < this.currentLevelData.pieces.length; i++) {
 			for (var j = 0; j < this.currentLevelData.pieces[i].length; j++) {
@@ -857,6 +877,7 @@ export default class TetraScreen extends Screen {
 								customData = {
 									order: this.forceBottomArrow()
 								}
+								console.log(customData)
 							}
 						});
 						this.cardsContainer.addChild(this.placeCard(j, i, ENEMIES.list[this.currentLevelData.pieces[i][j]].life, customData));
@@ -959,12 +980,16 @@ export default class TetraScreen extends Screen {
 
 			let nextLife = Math.random() < 1 - (this.currentRound % 3) * 0.17 ? 0 : Math.random() < 0.5 ? 2 : 1;
 			let totalSides = Math.floor(Math.random() * ACTION_ZONES.length * 0.4) + 1;
-
+			
+			//try again to add more sides if is one
+			if(totalSides <= 1){
+				totalSides = Math.floor(Math.random() * ACTION_ZONES.length * 0.4) + 1;
+			}
 			//console.log(nextLife,this.cardQueueData.counter)
 			if (nextLife > 0) {
 				if (this.cardQueueData.counter <= 0) {
 					//change frequecy of high level cards
-					this.cardQueueData.counter = 3 + Math.floor(Math.random() * 3)
+					this.cardQueueData.counter = 2 + Math.floor(Math.random() * 2)
 				} else {
 					nextLife = 0;
 				}
@@ -982,7 +1007,15 @@ export default class TetraScreen extends Screen {
 
 			card.life = nextLife;
 			card.createCard(totalSides);
+
+
+			//add extra up zones if life is more than 0
+			if(nextLife > 0){
+				let extraZones = [[0],[1],[2],[0],[1],[2],[0,1,2]]
+				card.addExtraZone(extraZones[Math.floor(Math.random() * extraZones.length)]);
+			}
 			card.updateSprite(card.life);
+
 			card.type = 0;
 			card.x = 0;
 			this.containerQueue.addChild(card);
@@ -1225,7 +1258,7 @@ export default class TetraScreen extends Screen {
 		// 	if (this.latestShoot.id < 0) {
 		// 		this.latestShoot.id = Math.floor(GRID.i / 2)
 		// 	}
-		if(this.mousePosID < 0){
+		if (this.mousePosID < 0) {
 			this.mousePosID = this.latestShoot.id
 
 			//this.isFirstClick = false;

@@ -5,7 +5,7 @@
  </editorsettings>
  <properties>
   <property name="description" value="no description here"/>
-  <property name="sectionName" value="Generation 2"/>
+  <property name="sectionName" value="Movies"/>
  </properties>
  <tileset firstgid="1" source="../tilesets/spadersTileset.tsx"/>
  <layer id="13" name="1952 - OXO" width="11" height="12" visible="0">

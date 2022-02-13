@@ -40,7 +40,7 @@
                 {
                  "name":"i",
                  "type":"int",
-                 "value":11
+                 "value":9
                 }, 
                 {
                  "name":"j",
@@ -221,7 +221,7 @@
                  "value":0
                 }],
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":11,
          "x":0,
          "y":0
@@ -249,7 +249,7 @@
                  "value":0
                 }],
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":11,
          "x":0,
          "y":0

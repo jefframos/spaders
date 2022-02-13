@@ -1,3 +1,4 @@
+import utils from './utils';
 import config from './config';
 import Game from './Game';
 import GameData from './game/GameData';
@@ -6,6 +7,7 @@ import TetraScreen from './game/screen/TetraScreen';
 import EffectLayer from './game/effects/EffectLayer';
 import Pool from './game/core/Pool';
 import SoundManager from './game/SoundManager';
+import colorSchemes from './colorSchemes';
 
 window.LOGO_FONT = "round_popregular"
 window.STANDARD_FONT1 = "retro_gamingregular"
@@ -236,7 +238,6 @@ function loadJsons() {
 
 function extractData(element) {
 	if (element.visible) {
-
 		let data = {}
 		data.levelName = element.name;
 		let i = element.width;
@@ -324,20 +325,56 @@ function configGame() {
 			res.layers.forEach(layer => {
 
 				let data = extractData(layer);
-				if (sectionLevels.length > 1 && layer.name.search("_ADDON") >= 0) {
+				if (sectionLevels.length == 1 && layer.name.search("_ADDON") >= 0) {
+					sectionLevels[0].addOn = data.addOn;
+				}
+				else if (sectionLevels.length > 1 && layer.name.search("_ADDON") >= 0) {
 					sectionLevels[sectionLevels.length - 1].addOn = data.addOn;
 				} else if (data) {
 					let idToSave = section.name + '-' + level.name + '-' + data.levelName;
 					idToSave = idToSave.toLowerCase();
 					idToSave = idToSave.split(' ').join('')
 					idToSave = idToSave.replace(/\s/g, '')
+					data.totalBoardLife = 0;
 					data.idSaveData = idToSave;
 					data.sectionName = section.name;
 					data.tierName = level.name;
 					data.colorPalletId = palletID
+
+					data.totalPieces = 0;
+					data.totalEmptySpaces = 0;
+					for (let index = 0; index < data.pieces.length; index++) {
+						for (let j = 0; j < data.pieces[index].length; j++) {
+							const element = data.pieces[index][j];
+							if (element >= 0) {
+								data.totalPieces ++;
+
+								let life = Math.floor(colorSchemes.colorSchemes[palletID].list[element].life) + 1;
+								if(life){
+									data.totalBoardLife += life;
+								}
+							}else{
+								data.totalEmptySpaces ++;
+							}
+						}
+
+					}
+					data.estimateTime = data.totalBoardLife / 0.45 + 30;
+					data.emptySpaceByPieces = data.totalEmptySpaces / data.totalPieces;
+
+					if(data.emptySpaceByPieces < 1){
+						data.estimateTime /= Math.max(0.5, data.emptySpaceByPieces);
+					}
+					if(data.estimateTime > 1200){
+						data.estimateTime = Math.floor(data.estimateTime / 300) * 300;
+					}else{
+
+						data.estimateTime = Math.floor(data.estimateTime / 30) * 30;
+					}
+					data.estimateTime = Math.max(data.estimateTime, 60);
+					data.estimateTime2 = utils.convertNumToTime(data.estimateTime);
+
 					sectionLevels.push(data);
-
-
 				}
 			});
 			level.colorPalletId = palletID
@@ -366,7 +403,10 @@ function configGame() {
 	window.levelsRawJson.layers.forEach(element => {
 
 		let data = extractData(element);
-		if (window.levelData.length > 1 && element.name.search("_ADDON") >= 0) {
+		if (window.levelData.length == 1 && element.name.search("_ADDON") >= 0) {
+			window.levelData[0].addOn = data.addOn;
+		}
+		else if (window.levelData.length > 1 && element.name.search("_ADDON") >= 0) {
 			window.levelData[window.levelData.length - 1].addOn = data.addOn;
 		} else if (data) {
 			window.levelData.push(data)

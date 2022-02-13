@@ -3,7 +3,23 @@
         "dataPath": "question.json"
     },
     "sections": [
-        
+        {
+            "color": "0xDDDDDD",
+            "name": "pokemon",
+            "displayName": "Video Game History",
+            "imageSrc": "",
+            "colorPalletId": 3,
+            "levels": [
+                {
+                    "name": "pokemon",
+                    "dataPath": "how-to-play/pokemon.json"
+                },
+                {
+                    "name": "pokemon",
+                    "dataPath": "how-to-play/pokemon2.json"
+                }
+            ]
+        },
         {
             "color": "0xDDDDDD",
             "name": "Easy",
@@ -28,24 +44,7 @@
                     "dataPath": "how-to-play/things.json"
                 }
             ]
-        },
-        {
-            "color": "0xDDDDDD",
-            "name": "pokemon",
-            "displayName": "Video Game History",
-            "imageSrc": "",
-            "colorPalletId": 3,
-            "levels": [
-                {
-                    "name": "pokemon",
-                    "dataPath": "how-to-play/pokemon.json"
-                },
-                {
-                    "name": "pokemon",
-                    "dataPath": "how-to-play/pokemon2.json"
-                }
-            ]
-        },
+        },        
         {
             "color": "0xDDDDDD",
             "name": "Medium",
@@ -90,6 +89,19 @@
                 {
                     "name": "---",
                     "dataPath": "how-to-play/bossa.json"
+                }                
+            ]
+        },
+        {
+            "color": "0xDDDDDD",
+            "name": "Large",
+            "displayName": "Video Game History",
+            "imageSrc": "",
+            "colorPalletId": 0,
+            "levels": [
+                {
+                    "name": "---",
+                    "dataPath": "movies/moviesLevels1.json"
                 }                
             ]
         }

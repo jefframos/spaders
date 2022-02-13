@@ -34,7 +34,7 @@
 0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="71" name="Outrun Sun" width="11" height="12">
+ <layer id="71" name="Outrun Sun" width="11" height="12" visible="0">
   <properties>
    <property name="i" type="int" value="9"/>
    <property name="j" type="int" value="9"/>
@@ -57,7 +57,7 @@
 0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="78" name="Road 1" width="11" height="12">
+ <layer id="78" name="Road 1" width="11" height="12" visible="0">
   <properties>
    <property name="i" type="int" value="7"/>
    <property name="j" type="int" value="9"/>

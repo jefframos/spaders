@@ -85,6 +85,12 @@ export default class Board {
 
 		let movers = 0;
 		for (var i = 0; i < this.allCards.length; i++) {
+			if (this.allCards[i] && this.allCards[i].isBlock) {
+				this.allCards[i].forceDestroy();
+				this.cards[this.allCards[i].pos.i][this.allCards[i].pos.j] = 0;
+			}
+		}
+		for (var i = 0; i < this.allCards.length; i++) {
 			if (this.allCards[i] && this.allCards[i].startCrazyMood) {
 				if (this.allCards[i]) {
 					this.allCards[i].setZeroLife();
