@@ -76,6 +76,7 @@ export default class LevelSelectContainer extends PIXI.Container {
             this.dragPanel.interactive = true;
             this.dragPanel.visible = false;
             this.dragPanel.alpha = 0;
+            window.COOKIE_MANAGER.onAddNewLevel.add(()=>{this.refreshAll()});
 
         }, 100);
 
@@ -129,6 +130,20 @@ export default class LevelSelectContainer extends PIXI.Container {
         // this.center2 = new PIXI.Graphics().beginFill(0xF00FFF).drawCircle(0, 0, 20)
         // this.levelsContainer.addChild(this.center2)
 
+
+    }
+    refreshAll(){
+        this.refreshNavButtons();
+        this.sectionButtons.forEach(element => {
+            if (element.data) {
+                this.refreshTier(element, element.data);
+            }
+        });
+        this.levelCards.forEach(element => {
+            if (element.data) {
+                this.refreshCard(element, element.data);
+            }
+        });
     }
     refreshNavButtons() {
         for (let index = 1; index < this.navButtons.length; index++) {

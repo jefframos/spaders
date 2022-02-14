@@ -18,12 +18,14 @@
     "babel-preset-stage-0": "^6.3.13",
     "babel-runtime": "^6.3.13",
     "brfs": "^1.4.1",
+    "execa": "^6.1.0",
     "gsap": "^1.18.4",
     "http-server": "^14.1.0",
     "json-loader": "^0.5.7",
     "pixi.js": "^4.3.3",
     "transform-loader": "^0.2.3",
-    "webpack": "^1.12.9"
+    "webpack": "^1.12.9",
+    "webpack-version-file-plugin": "^0.4.0"
   },
   "dependencies": {
     "@pixi/gif": "^1.0.1",
@@ -31,6 +33,7 @@
     "@thibka/fps-meter": "^1.0.0",
     "fpscounter": "^1.0.0",
     "pixi-filters": "^2.5.1",
-    "signals": "^1.0.0"
+    "signals": "^1.0.0",
+    "webpack-auto-inject-version": "^1.2.2"
   }
 }

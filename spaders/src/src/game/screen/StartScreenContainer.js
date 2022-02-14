@@ -365,7 +365,7 @@ export default class StartScreenContainer extends PIXI.Container {
 	}
 	showFromGame(force = false, delay = 0) {
 		TweenLite.killTweensOf(this.screenContainer)
-
+		this.screenState = 2
 		//this.startMenuState(delay, force);
 		this.gameScreen.mainMenuSettings.collapse();
 		this.playLine.interactive = true;
@@ -375,6 +375,8 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.playLine.visible = true;
 		this.playButton.visible = true;
 		this.backButton.visible = true;
+
+		TweenLite.to(this.screenContainer, force ? 0 : 0.2, { alpha: 1 })
 	}
 	hide(force = false) {
 		TweenLite.killTweensOf(this.screenContainer)

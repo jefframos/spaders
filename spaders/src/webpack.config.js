@@ -3,6 +3,9 @@
 var webpack = require('webpack');
 var path = require('path');
 
+
+var WebpackAutoInject = require('webpack-auto-inject-version');
+
 var plugins = [];
 if (process.env.NODE_ENV === "production") {
 	plugins.push(
@@ -13,8 +16,12 @@ if (process.env.NODE_ENV === "production") {
 			},
 			output: { comments: false }
 		})
+	)
+	plugins.push(
+		new WebpackAutoInject()
 	);
 }
+
 
 module.exports = {
 	devtool: 'source-map',
@@ -25,7 +32,7 @@ module.exports = {
 	resolve: {
 		extensions: ["", ".js"]
 	},
-	plugins: plugins,
+	plugins: [new WebpackAutoInject()],
 	module: {
 		postLoaders: [
 			{
@@ -49,3 +56,26 @@ module.exports = {
 		]
 	}
 };
+
+
+
+
+
+// const WebpackVersionFilePlugin = require('webpack-version-file-plugin');
+// const execa = require('execa');
+
+// const gitHash = execa.sync('git', ['rev-parse', '--short', 'HEAD']).stdout;
+// const gitNumCommits = Number(execa.sync('git', ['rev-list', 'HEAD', '--count']).stdout);
+// const gitDirty = execa.sync('git', ['status', '-s', '-uall']).stdout.length > 0;
+
+// plugins = [new WebpackVersionFilePlugin({
+// 	packageFile: path.join(__dirname, 'package.json'),
+// 	template: path.join(__dirname, 'version.ejs'),
+// 	outputFile: path.join('build/ts/', 'version.json'),
+// 	extras: {
+// 		'githash': gitHash,
+// 		'gitNumCommits': gitNumCommits,
+// 		'timestamp': Date.now(),
+// 		'dirty': gitDirty
+// 	}
+// }),];

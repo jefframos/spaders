@@ -15,7 +15,8 @@ window.STANDARD_FONT2 = "round_popregular"
 window.COOKIE_MANAGER = new CookieManager();
 window.GAME_DATA = new GameData();
 
-
+var version = '[AIV]{version}[/AIV]';
+console.log('version', version);
 window.CARD_ID = 0;
 
 window.ENEMIES = {
@@ -365,7 +366,7 @@ function configGame() {
 					data.emptySpaceByPieces = data.totalEmptySpaces / data.totalPieces;
 
 					if(data.emptySpaceByPieces < 1){
-						data.estimateTime /= Math.max(0.5, data.emptySpaceByPieces);
+						//data.estimateTime /= Math.max(0.5, data.emptySpaceByPieces);
 					}
 					if(data.estimateTime > 1200){
 						data.estimateTime = Math.floor(data.estimateTime / 300) * 300;

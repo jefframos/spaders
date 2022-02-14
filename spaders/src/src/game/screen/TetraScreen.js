@@ -364,7 +364,8 @@ export default class TetraScreen extends Screen {
 
 
 		//this.UIInGame.addChild(this.backButton)
-		this.inGameMenu.onBack.add(() => this.mainmenuState())
+		//this.inGameMenu.onBack.add(() => this.mainmenuState())
+		this.inGameMenu.onBack.add(() => this.mainmenuStateFromGame())
 		this.inGameMenu.onRestart.add(() => this.resetGame())
 
 		this.gridContainer.alpha = 0;
@@ -505,6 +506,8 @@ export default class TetraScreen extends Screen {
 	}
 	mainmenuStateFromGame(force = false) {
 
+
+		console.log("TO MAIN MENU")
 		window.SOUND_MANAGER.playMainMenu();
 		this.mainMenuSettings.collapse();
 		this.endGameScreenContainer.hide(force);
@@ -627,7 +630,7 @@ export default class TetraScreen extends Screen {
 		this.showInGameElements();
 		this.addEvents();
 		this.endGameScreenContainer.hide();
-		this.startScreenContainer.hide()
+		this.startScreenContainer.hide(true)
 		this.board.startNewGame();
 
 		//console.log("gameState")

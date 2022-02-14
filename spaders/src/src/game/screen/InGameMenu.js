@@ -113,7 +113,7 @@ export default class InGameMenu extends PIXI.Container {
 		}
 	}
 	collapse(){
-		this.state = 1;	
+		this.state = 1;
 	}
 	update(delta) {
 

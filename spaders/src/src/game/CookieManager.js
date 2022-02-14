@@ -1,3 +1,5 @@
+import signals from "signals";
+
 export default class CookieManager {
 	constructor() {
 		//this.resetCookie();
@@ -83,6 +85,8 @@ export default class CookieManager {
 
 		this.stats.timesLoaded++
 		this.storeObject("stats", this.stats)
+
+		this.onAddNewLevel = new signals.Signal()
 	}
 	toogleDebug(id) {
 		this.debug.showAllThumbs = !this.debug.showAllThumbs;
@@ -175,6 +179,8 @@ export default class CookieManager {
 		this.stats.totalLevelsFinished = this.levelsCompleted.levels.length;
 
 		this.storeObject("stats", this.stats)
+
+		this.onAddNewLevel.dispatch();
 
 		return isHighscore;
 
