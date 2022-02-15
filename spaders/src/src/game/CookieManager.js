@@ -87,10 +87,12 @@ export default class CookieManager {
 		this.storeObject("stats", this.stats)
 
 		this.onAddNewLevel = new signals.Signal()
+		this.onToggleDebug = new signals.Signal()
 	}
 	toogleDebug(id) {
 		this.debug.showAllThumbs = !this.debug.showAllThumbs;
 		this.storeObject("debug", this.debug);
+		this.onToggleDebug.dispatch();
 	}
 	updateColorPallete(id) {
 		this.stats.colorPalletID = id;

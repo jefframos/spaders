@@ -293,10 +293,12 @@ function extractData(element) {
 }
 
 
-
+window.allEstimate = 0;
+window.allEstimateHard = 0;
 function configGame() {
 
 	window.questionMark = extractData(PIXI.loader.resources[jsonPath + window.levelSections.question.dataPath].data.layers[0])
+
 
 	window.levelSections.sections.forEach(section => {
 
@@ -363,11 +365,20 @@ function configGame() {
 
 					}
 					data.estimateTime = data.totalBoardLife / 0.45 + 30;
+					data.estimateTimeHard = data.totalBoardLife / 0.4 + 30;
 					data.emptySpaceByPieces = data.totalEmptySpaces / data.totalPieces;
 
 					if(data.emptySpaceByPieces < 1){
-						//data.estimateTime /= Math.max(0.5, data.emptySpaceByPieces);
+						data.estimateTimeHard /= Math.max(0.45, data.emptySpaceByPieces);
 					}
+					if(data.estimateTimeHard > 1200){
+						data.estimateTimeHard = Math.floor(data.estimateTimeHard / 300) * 300;
+					}else{
+
+						data.estimateTimeHard = Math.floor(data.estimateTimeHard / 30) * 30;
+					}
+
+
 					if(data.estimateTime > 1200){
 						data.estimateTime = Math.floor(data.estimateTime / 300) * 300;
 					}else{
@@ -376,7 +387,8 @@ function configGame() {
 					}
 					data.estimateTime = Math.max(data.estimateTime, 60);
 					data.estimateTime2 = utils.convertNumToTime(data.estimateTime);
-
+					window.allEstimate += data.estimateTime;
+					window.allEstimateHard += data.estimateTimeHard;
 					sectionLevels.push(data);
 				}
 			});

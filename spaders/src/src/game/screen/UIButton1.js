@@ -25,36 +25,38 @@ export default class UIButton1 extends PIXI.Container {
 		this.backShape.anchor.set(0.5)
 		this.backShape.tint = color;
 
-        this.backShape.rotation = Math.PI * 0.25
+		this.backShape.rotation = Math.PI * 0.25
 		this.icon.anchor.set(0.5);
 
-		this.icon.scale.set(this.backShape.height /this.icon.height * 0.7)
+		this.icon.scale.set(this.backShape.height / this.icon.height * 0.7)
 		this.mainContainer.addChild(this.backShape);
 		this.mainContainer.addChild(this.icon);
 		this.addChild(this.mainContainer);
 
-        this.onClick = new signals.Signal()
+		this.onClick = new signals.Signal()
 
-        this.on('touchstart', this.click.bind(this));
+		this.on('touchstart', this.click.bind(this));
 		this.interactive = true;
 		this.buttonMode = true;
 	}
+	setColor(color) {
+		this.backShape.tint = color;
+	}
+	click() {
+		this.onClick.dispatch();
+		window.SOUND_MANAGER.play('tap2', { volume: 0.5 })
+	}
 
-    click(){
-        this.onClick.dispatch();
-		window.SOUND_MANAGER.play('tap2', {volume:0.5})
-    }
-
-	addLabelLeft(label){
-        this.movesLabel = new PIXI.Text(label, { font: '18px', fill: this.backShape.tint, align: 'right', fontWeight: '300', fontFamily: window.STANDARD_FONT1 });
+	addLabelLeft(label) {
+		this.movesLabel = new PIXI.Text(label, { font: '18px', fill: this.backShape.tint, align: 'right', fontWeight: '300', fontFamily: window.STANDARD_FONT1 });
 		this.movesLabel.pivot.x = this.movesLabel.width;
 		this.movesLabel.pivot.y = this.movesLabel.height / 2;
 		this.movesLabel.x = -this.mainContainer.width * 0.75;
 		this.addChild(this.movesLabel);
 	}
 
-    updateTexture(texture){
-        this.icon.texture = PIXI.Texture.fromFrame(texture);
-        this.icon.scale.set(this.backShape.height /this.icon.height * 0.7 * this.icon.scale.x);
-    }
+	updateTexture(texture) {
+		this.icon.texture = PIXI.Texture.fromFrame(texture);
+		this.icon.scale.set(this.backShape.height / this.icon.height * 0.7 * this.icon.scale.x);
+	}
 }

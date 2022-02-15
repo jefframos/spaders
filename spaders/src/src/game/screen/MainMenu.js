@@ -28,7 +28,9 @@ export default class MainMenu extends PIXI.Container {
 
         this.wipeDataButton = new UIButton1(config.colors.background, window.iconsData.wipeData, config.colors.white);
         this.wipeDataButton.onClick.add(() => {
-            window.COOKIE_MANAGER.wipeData();
+
+            window.popUpOverlay.show({text: 'Do you want to clean your data?'}, ()=>{window.COOKIE_MANAGER.wipeData()})
+            //window.COOKIE_MANAGER.wipeData();
         });
         this.wipeDataButton.backShape.rotation = 0
 
@@ -54,10 +56,22 @@ export default class MainMenu extends PIXI.Container {
         this.toggleSound.backShape.rotation = 0
 
 
-        this.toggleDebug = new UIButton1(config.colors.background, window.iconsData.debugging, config.colors.white);
+        this.toggleDebug = new UIButton1(config.colors.green, window.iconsData.debugging, config.colors.white);
         this.toggleDebug.onClick.add(() => {
-            window.COOKIE_MANAGER.toogleDebug();
+
+            let data = {text: 'Do you want to ACTIVATE debug mode?'}
+            if(window.COOKIE_MANAGER.debug.showAllThumbs){
+                data.text = 'Do you want to REMOVE debug mode?'
+            }
+            window.popUpOverlay.show(data, ()=>{ 
+                window.COOKIE_MANAGER.toogleDebug();
+                this.updateDebugColor()
+            })
+
+           
         });
+        this.updateDebugColor()
+
         this.toggleDebug.backShape.rotation = 0
 
         if (!window.COOKIE_MANAGER.settings.sound) {
@@ -73,14 +87,14 @@ export default class MainMenu extends PIXI.Container {
         this.toggleSound.x = this.backShape.width - 60
         this.toggleSound.y = 50;
 
-        this.mainContainer.addChild(this.toggleDebug);
-        this.toggleDebug.x = this.backShape.width - 60
-        this.toggleDebug.y = 350;
-
+        
         // this.refreshButton.x = this.backShape.width - 60
         this.wipeDataButton.x = this.wipeDataButton.width * 0.5 + 30
         this.wipeDataButton.y = this.toggleSound.y;
         // this.refreshButton.y = 50
+        this.mainContainer.addChild(this.toggleDebug);
+        this.toggleDebug.x = this.wipeDataButton.x +this.toggleDebug.width * 0.5 + 60
+        this.toggleDebug.y = this.toggleSound.y;
 
         // this.autoPlayButton.x = this.wipeDataButton.x - 90;
         // this.autoPlayButton.y = this.refreshButton.y;
@@ -118,6 +132,13 @@ export default class MainMenu extends PIXI.Container {
 
         this.state = 1;
 
+    }
+    updateDebugColor(){
+        if(!window.COOKIE_MANAGER.debug.showAllThumbs){
+            this.toggleDebug.setColor(config.colors.red)
+        }else{
+            this.toggleDebug.setColor(config.colors.green)
+        }
     }
     fontStyle(size, color) {
         let style = {

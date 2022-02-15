@@ -129,20 +129,27 @@ export default class Game {
 		this.backTapShape = new PIXI.Graphics().beginFill(config.colors.background).drawRect(0, 0, 4000, 4000);
 		this.tapToStart.addChild(this.backTapShape);
 		this.stage.addChild(this.tapToStart);
-		this.infoLabel = new PIXI.Text('Loading...', { font: '16px', fill: config.colors.white, fontFamily: window.STANDARD_FONT1 });
+		this.infoLabel = new PIXI.Text('', { font: '16px', fill: config.colors.white, fontFamily: window.STANDARD_FONT1, stroke: 0x000000,
+		strokeThickness: 5 });
 		this.infoLabel.pivot.x = this.infoLabel.width / 2
 		this.infoLabel.pivot.y = this.infoLabel.height / 2
 		this.tapToStart.addChild(this.infoLabel)
 		
-		this.infoLabel.x = 125
-		this.infoLabel.y = 19
+		this.barSize = {width : 230, height:30}
 
-		this.loadingBar = new PIXI.Graphics().beginFill(config.colors.white).drawRoundedRect(0,0,250, 40, 20);
+		this.round = this.barSize.height / 2
+        this.sizeHeight = this.barSize.height
+        this.sizeWidth = this.barSize.width
+
+		this.infoLabel.x = this.barSize.width /2//- this.infoLabel.width / 2
+		this.infoLabel.y =this.barSize.height /2 - 40//- this.infoLabel.height / 2
+
+		this.loadingBar = new PIXI.Graphics().beginFill(config.colors.white).drawRoundedRect(0, 0, this.sizeWidth, this.sizeHeight, this.round);
 		//this.loadingBar.cacheAsBitmap = true;
 
-		this.loadingBarFillBack = new PIXI.Graphics().beginFill(config.colors.background).drawRoundedRect(0,0,240, 30, 15);
-		this.loadingBarFillBack.x = 5
-		this.loadingBarFillBack.y = 5
+		this.loadingBarFillBack = new PIXI.Graphics().beginFill(config.colors.background).drawRoundedRect(0, 0, this.sizeWidth - this.round / 2, this.sizeHeight * 0.75, this.round * 0.75);
+		this.loadingBarFillBack.x = this.round / 4
+		this.loadingBarFillBack.y = this.round / 4
 
 		let loaderColors = [
 			config.colors.red,
@@ -159,14 +166,14 @@ export default class Game {
 		timesLoaded %= loaderColors.length;
 		
 
-		this.loadingBarFill = new PIXI.Graphics().beginFill(loaderColors[timesLoaded]).drawRoundedRect(0,0,240, 30, 15);
-		this.loadingBarFill.x = 5
-		this.loadingBarFill.y = 5
+		this.loadingBarFill = new PIXI.Graphics().beginFill(loaderColors[timesLoaded]).drawRoundedRect(0, 0, this.sizeWidth - this.round / 2, this.sizeHeight * 0.75, this.round * 0.75);
+		this.loadingBarFill.x = this.round / 4
+		this.loadingBarFill.y = this.round / 4
 
-		this.loadingBarFill.scale.x = 0;
+		this.loadingBarFill.scale.x = 0.2;
 		TweenMax.to(this.loadingBarFill.scale, 1 + Math.random(), {x:0.6 + Math.random() * 0.3})
 
-		this.infoLabel.visible = false;
+		this.infoLabel.visible = true;
 
 		this.tapToStart.addChild(this.loadingBar)
 		this.loadingBar.addChild(this.loadingBarFillBack)
@@ -184,7 +191,6 @@ export default class Game {
 		this.infoLabel.text = 'Tap to Start'
 		this.infoLabel.pivot.x = this.infoLabel.width / 2
 		this.infoLabel.pivot.y = this.infoLabel.height / 2
-
 		this.infoLabel.visible = true;
 
 		TweenMax.killTweensOf(this.loadingBarFill.scale);
@@ -298,7 +304,7 @@ export default class Game {
 
 
 			this.loadingBar.x = this.backTapShape.width / 2 - this.loadingBar.width / 2// sclX
-			this.loadingBar.y = this.backTapShape.height - this.loadingBar.height * 2 // sclY
+			this.loadingBar.y = this.backTapShape.height - this.loadingBar.height * 2 + 40// sclY
 			//this.tapToStart.pivot.x = this.tapToStart.width / 2 // this.tapToStart.scale.x
 			//this.tapToStart.pivot.y = this.tapToStart.height / 2 // this.tapToStart.scale.y
 

@@ -22,6 +22,7 @@ import MainMenu from './MainMenu';
 import Trail from '../effects/Trail';
 import TutorialOverlay from './TutorialOverlay';
 import colorSchemes from '../../colorSchemes';
+import PopUpOverlay from './PopUpOverlay';
 
 export default class TetraScreen extends Screen {
 	constructor(label) {
@@ -189,7 +190,7 @@ export default class TetraScreen extends Screen {
 	}
 	onDestroyCard(card) {
 		this.grid.destroyCard(card);
-		this.currentSectionPiecesKilled ++;
+		this.currentSectionPiecesKilled++;
 	}
 	updateGridDimensions() {
 		window.GRID = {
@@ -539,7 +540,7 @@ export default class TetraScreen extends Screen {
 				24,
 				0,
 				this.currentLevelData.colorPalletId),
-				this.currentLevelData);
+			this.currentLevelData);
 
 		this.endGameScreenContainer.show(false, 2);
 		this.hideInGameElements(2);
@@ -718,6 +719,37 @@ export default class TetraScreen extends Screen {
 		this.fxContainer = new FXContainer(this.backFXContainer);
 		this.gameContainer.addChild(this.fxContainer);
 
+
+		this.popUpOverlay = new PopUpOverlay();
+		this.addChild(this.popUpOverlay);
+		//this.popUpOverlay.show({text:'this is a test of the modal'})
+
+		window.popUpOverlay = this.popUpOverlay;
+
+
+		window.COOKIE_MANAGER.onToggleDebug.add(() => { this.toggleDebug() });
+
+
+		this.debugLabel = new PIXI.Text("DEBUG", { font: '14px', fill: 0xFFFFFF, align: 'right', fontWeight: '300', fontFamily: window.STANDARD_FONT1 });
+		this.toggleDebug();
+		this.addChild(this.debugLabel)
+
+
+	}
+	toggleDebug() {
+		let debugThumb = window.COOKIE_MANAGER.debug.showAllThumbs;
+
+		if (debugThumb) {
+			this.debugLabel.visible = true;
+			this.debugLabel.text = (
+				'Normal: ~' + utils.convertNumToTime(Math.ceil(window.allEstimate)) +
+				' Hard: ~' + utils.convertNumToTime(Math.ceil(window.allEstimateHard)) +
+				' Total: ~' + utils.convertNumToTime(Math.ceil(window.allEstimate + window.allEstimateHard))
+			);
+
+		} else {
+			this.debugLabel.visible = false;
+		}
 	}
 	buildTrails() {
 
@@ -778,7 +810,7 @@ export default class TetraScreen extends Screen {
 		this.fireworksTimer = Math.random() * 0.25 + 0.25
 	}
 	forceBottomArrow() {
-		let toReturn = [[4, 5, 6],[4, 5, 6],[5, 6],[4, 6], [4,5]];
+		let toReturn = [[4, 5, 6], [4, 5, 6], [5, 6], [4, 6], [4, 5]];
 		return toReturn[Math.floor(Math.random() * toReturn.length)];
 	}
 	resetGame() {
@@ -987,9 +1019,9 @@ export default class TetraScreen extends Screen {
 
 			let nextLife = Math.random() < 1 - (this.currentRound % 3) * 0.17 ? 0 : Math.random() < 0.5 ? 2 : 1;
 			let totalSides = Math.floor(Math.random() * ACTION_ZONES.length * 0.4) + 1;
-			
+
 			//try again to add more sides if is one
-			if(totalSides <= 1){
+			if (totalSides <= 1) {
 				totalSides = Math.floor(Math.random() * ACTION_ZONES.length * 0.4) + 1;
 			}
 			//console.log(nextLife,this.cardQueueData.counter)
@@ -1017,8 +1049,8 @@ export default class TetraScreen extends Screen {
 
 
 			//add extra up zones if life is more than 0
-			if(nextLife > 0){
-				let extraZones = [[0],[1],[2],[0],[1],[2],[0,1,2]]
+			if (nextLife > 0) {
+				let extraZones = [[0], [1], [2], [0], [1], [2], [0, 1, 2]]
 				card.addExtraZone(extraZones[Math.floor(Math.random() * extraZones.length)]);
 			}
 			card.updateSprite(card.life);
@@ -1135,7 +1167,7 @@ export default class TetraScreen extends Screen {
 		this.fxContainer.update(delta)
 
 
-		if(this.blockGameTimer > 0){
+		if (this.blockGameTimer > 0) {
 			this.blockGameTimer -= delta;
 		}
 		///sort hash when load
@@ -1467,6 +1499,7 @@ export default class TetraScreen extends Screen {
 
 		utils.scaleSize(this.gameCanvas, innerResolution, this.ratio)
 
+
 		//this.resizeToFitAR({width:this.bottomUICanvas.width * 0.8, height:this.bottomUICanvas.height * 0.4},this.containerQueue)
 		this.resizeToFitAR({ width: this.gameCanvas.width * 0.9, height: this.gameCanvas.height * 0.73 }, this.gridContainer)
 
@@ -1510,8 +1543,17 @@ export default class TetraScreen extends Screen {
 			this.currentCard.y = ((this.gridContainer.height) / this.gridContainer.scale.y);
 		}
 
+
+		this.popUpOverlay.resize(scaledResolution, innerResolution)
+		this.popUpOverlay.scale.set(this.inGameMenu.scale.x)
+		this.popUpOverlay.x = this.gameCanvas.x + this.gameCanvas.width / 2
+		this.popUpOverlay.y = this.gameCanvas.y + this.gameCanvas.height / 2
+
 		this.startScreenContainer.resize(innerResolution, this.ratio)
 		this.endGameScreenContainer.resize(innerResolution, this.ratio)
+
+		this.debugLabel.x = this.gameCanvas.x + 20
+		this.debugLabel.y = this.gameCanvas.y + this.gameCanvas.height - this.debugLabel.height - 20
 		this.updateLabelsPosition();
 
 	}

@@ -87,7 +87,7 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.playLine = new PIXI.Graphics().beginFill(0xffffff).drawRect(-width / 2, 0, width, height * 3);
 		this.stripsContainer.addChild(this.playLine);
 		this.playLine.y = height * 3;
-		
+
 		this.lines.push(line1)
 		this.lines.push(line2)
 		this.lines.push(line3)
@@ -104,9 +104,11 @@ export default class StartScreenContainer extends PIXI.Container {
 
 
 
-		this.playLabel = new PIXI.Text("PLAY", { font: '60px',  fill: config.colors.background, align: 'center', fontFamily: window.LOGO_FONT,
-		stroke: 0xFFFFFF,
-		strokeThickness: 8 });
+		this.playLabel = new PIXI.Text("PLAY", {
+			font: '60px', fill: config.colors.background, align: 'center', fontFamily: window.LOGO_FONT,
+			stroke: 0xFFFFFF,
+			strokeThickness: 8
+		});
 		this.playLine.addChild(this.playLabel);
 		this.playLabel.y = this.playLine.height / 2 - 5
 		//this.playLabel.rotation = Math.PI * -0.25;
@@ -162,7 +164,7 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.updateLinesColor();
 
 	}
-	updateLinesColor(){
+	updateLinesColor() {
 		console.log(window.COOKIE_MANAGER.stats.colorPalletID)
 		let colors = colorSchemes.colorSchemes[window.COOKIE_MANAGER.stats.colorPalletID]
 
@@ -304,9 +306,11 @@ export default class StartScreenContainer extends PIXI.Container {
 		TweenLite.killTweensOf(this.screenContainer)
 		//TweenLite.killTweensOf(this.levelSelectionContainer)
 
-		TweenLite.to(this.screenContainer, 1, { delay: delay, alpha: 1, onStart:()=>{
-			window.SOUND_MANAGER.play('shoosh', { volume: 0.1 })
-		} })
+		TweenLite.to(this.screenContainer, 1, {
+			delay: delay, alpha: 1, onStart: () => {
+				window.SOUND_MANAGER.play('shoosh', { volume: 0.1 })
+			}
+		})
 		//TweenLite.to(this.levelSelectionContainer, 1, { delay: delay, alpha: 1, x: -this.x, ease: Back.easeOut.config(1.2) })
 		this.playLine.interactive = false;
 		this.backButton.interactive = true;
@@ -376,6 +380,7 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.playButton.visible = true;
 		this.backButton.visible = true;
 
+		this.chooseLevelPanel.showingBlockTime = 0.5;
 		TweenLite.to(this.screenContainer, force ? 0 : 0.2, { alpha: 1 })
 	}
 	hide(force = false) {
@@ -411,7 +416,7 @@ export default class StartScreenContainer extends PIXI.Container {
 	}
 	resetGame() {
 
-		window.SOUND_MANAGER.play('tapPlay', {volume:0.65})
+		window.SOUND_MANAGER.play('tapPlay', { volume: 0.65 })
 
 		this.gameScreen.mainMenuSettings.collapse();
 		this.startMenuState();
