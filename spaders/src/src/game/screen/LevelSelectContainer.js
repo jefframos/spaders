@@ -45,6 +45,10 @@ export default class LevelSelectContainer extends PIXI.Container {
         this.levelCards = [];
 
         this.showingBlockTime = 0;
+
+        this.tempBlockPanel = new PIXI.Graphics().beginFill(0x000099).drawRect(-5000, -5000, 10000, 10000);
+
+
         setTimeout(() => {
             this.addChild(this.newContainer)
 
@@ -79,7 +83,6 @@ export default class LevelSelectContainer extends PIXI.Container {
             this.dragPanel.visible = false;
             this.dragPanel.alpha = 0;
 
-            this.tempBlockPanel = new PIXI.Graphics().beginFill(0x000099).drawRect(-5000, -5000, 10000, 10000);
 
             this.addChild(this.tempBlockPanel)
             this.tempBlockPanel.interactive = true;
@@ -377,7 +380,7 @@ export default class LevelSelectContainer extends PIXI.Container {
 
 
         levelTierButton.updateLabelTop(level.name);
-        levelTierButton.updateIcon(this.gameScreen.generateImage(dataFirstLevel.pieces, 12, 0, dataFirstLevel.colorPalletId), 0.35,{ x: 0, y: -10 });
+        levelTierButton.updateIcon(this.gameScreen.generateImage(dataFirstLevel, 24, 0, dataFirstLevel.colorPalletId), 0.35,{ x: 0, y: -10 });
         this.gameScreen.resizeToFitAR(this.unscaledCardSize, levelTierButton)
 
         this.refreshTier(levelTierButton, level.data)
@@ -555,7 +558,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         let levelStored = window.COOKIE_MANAGER.findLevel(data.idSaveData);
         let debugThumb = window.COOKIE_MANAGER.debug.showAllThumbs;
         if (levelStored || debugThumb) {
-            levelButton.updateIcon(this.gameScreen.generateImage(data.pieces, 24, 0, data.colorPalletId));
+            levelButton.updateIcon(this.gameScreen.generateImage(data, 24, 0, data.colorPalletId));
             if (!debugThumb) {
                 levelButton.updateLabelTop(utils.convertNumToTime(Math.ceil(levelStored.bestTime)),
                     new PIXI.Sprite.fromImage(window.iconsData.time))
@@ -568,7 +571,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         } else {
             levelButton.updateLabelTop("~" + data.estimateTime2,
                 new PIXI.Sprite.fromImage(window.iconsData.time));
-            levelButton.updateIcon(this.gameScreen.generateImage(window.questionMark.pieces));
+            levelButton.updateIcon(this.gameScreen.generateImage(window.questionMark));
         }
     }
 

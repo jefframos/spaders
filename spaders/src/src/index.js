@@ -19,6 +19,8 @@ var version = '[AIV]{version}[/AIV]';
 console.log('version', version);
 window.CARD_ID = 0;
 
+window.imageThumbs = {};
+
 window.ENEMIES = {
 	list: [
 		{ isBlock: false, color: config.colors.blue, life: 0 },
@@ -330,10 +332,11 @@ function configGame() {
 			res.layers.forEach(layer => {
 
 				let data = extractData(layer);
-				if (sectionLevels.length == 1 && layer.name.search("_ADDON") >= 0) {
+				let isAddon = layer.visible &&  layer.name.search("_ADDON") >= 0
+				if (layer.visible && sectionLevels.length == 1 && isAddon) {
 					sectionLevels[0].addOn = data.addOn;
 				}
-				else if (sectionLevels.length > 1 && layer.name.search("_ADDON") >= 0) {
+				else if (sectionLevels.length > 1 && isAddon) {
 					sectionLevels[sectionLevels.length - 1].addOn = data.addOn;
 				} else if (data) {
 					let idToSave = section.name + '-' + level.name + '-' + data.levelName;
@@ -405,7 +408,7 @@ function configGame() {
 		});
 	});
 
-	window.levelsRawJson = PIXI.loader.resources["./data/how-to-play/shapes-synt.json"].data
+	window.levelsRawJson = PIXI.loader.resources["./data/gameboy/gameboy1.json"].data
 	//window.levelsRawJson = PIXI.loader.resources["./assets/levelsRaw.json"].data
 	window.levelsJson = PIXI.loader.resources["./assets/levels.json"].data
 
@@ -418,10 +421,12 @@ function configGame() {
 	window.levelsRawJson.layers.forEach(element => {
 
 		let data = extractData(element);
-		if (window.levelData.length == 1 && element.name.search("_ADDON") >= 0) {
+		let isAddon = element.visible &&  element.name.search("_ADDON") >= 0
+
+		if (window.levelData.length == 1 && isAddon) {
 			window.levelData[0].addOn = data.addOn;
 		}
-		else if (window.levelData.length > 1 && element.name.search("_ADDON") >= 0) {
+		else if (window.levelData.length > 1 && isAddon) {
 			window.levelData[window.levelData.length - 1].addOn = data.addOn;
 		} else if (data) {
 			window.levelData.push(data)

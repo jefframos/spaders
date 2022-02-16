@@ -26,24 +26,24 @@
             "scale": 0.9014204545454545,
             "selectedLayer": 8,
             "viewCenter": {
-                "x": 324.48786637251817,
-                "y": 386.057358966278
+                "x": 351.6671919319257,
+                "y": 383.2839583989915
             }
         },
         "how-to-play/creatures.tmx": {
             "scale": 1.0512073863636362,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 351.97621782312007,
-                "y": 384.31997837983926
+                "x": 351.9762178231201,
+                "y": 383.8443348422404
             }
         },
         "how-to-play/how-to-play-medium.tmx": {
             "scale": 1.0512073863636362,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 351.97621782312007,
-                "y": 384.31997837983926
+                "x": 351.9762178231201,
+                "y": 383.8443348422404
             }
         },
         "how-to-play/how-to-play-small.tmx": {
@@ -58,40 +58,40 @@
             "scale": 0.8201171875,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 352.38866396761136,
-                "y": 384.0914503453203
+                "x": 351.16932603000714,
+                "y": 382.26244343891403
             }
         },
         "how-to-play/pokemon2.tmx": {
             "scale": 0.8325994318181819,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 353.711507293355,
-                "y": 384.3384799112855
+                "x": 1169.830248229975,
+                "y": 790.2959993175808
             }
         },
         "how-to-play/pokemon22.tmx": {
             "scale": 0.8325994318181819,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 384.33847991128556,
-                "y": 379.53424891239445
+                "x": 351.90992066877084,
+                "y": 383.7379510364242
             }
         },
         "how-to-play/pokemons.tmx": {
             "scale": 0.8325994318181819,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 353.1109784184936,
-                "y": 384.3384799112855
+                "x": 351.90992066877084,
+                "y": 383.7379510364242
             }
         },
         "how-to-play/simple-shapes-synt.tmx": {
             "scale": 0.9014204545454545,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 352.7765521588402,
-                "y": 384.9479987393634
+                "x": 351.6671919319257,
+                "y": 383.2839583989915
             }
         },
         "how-to-play/simple-shapes.tmx": {
@@ -99,7 +99,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 352,
-                "y": 384
+                "y": 383.33333333333337
             }
         },
         "how-to-play/spadersTileset.tsx": {
@@ -109,8 +109,8 @@
             "scale": 1.0512073863636362,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 351.97621782312007,
-                "y": 384.31997837983926
+                "x": 156.01108033241002,
+                "y": 384.3199783798392
             }
         },
         "levels.tmx": {
@@ -160,8 +160,8 @@
             "scale": 0.8275390625,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 320.22657540712765,
-                "y": 384.2718904885532
+                "x": 319.01817323578007,
+                "y": 383.66768940287943
             }
         },
         "movies/spadersTileset.tsx": {
@@ -199,24 +199,24 @@
             "scale": 0.8201171875,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 320.6858775899024,
-                "y": 384.0914503453203
+                "x": 319.4665396522982,
+                "y": 383.48178137651826
             }
         },
         "videogames/levels2.tmx": {
             "scale": 0.8275390625,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 320.22657540712765,
-                "y": 384.2718904885532
+                "x": 319.01817323578007,
+                "y": 383.66768940287943
             }
         },
         "videogames/levels3.tmx": {
             "scale": 0.8275390625,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 320.22657540712765,
-                "y": 384.2718904885532
+                "x": 319.01817323578007,
+                "y": 383.66768940287943
             }
         },
         "videogames/spadersTileset.tsx": {
@@ -225,10 +225,10 @@
             "scaleInEditor": 1
         }
     },
-    "last.exportedFilePath": "E:/projects/spaders/spaders/www/data/how-to-play",
+    "last.exportedFilePath": "D:/projects/spaders/spaders/www/data/gameboy",
     "last.externalTilesetPath": "E:/projects/spaders/spaders/src/map/tilesets",
     "last.imagePath": "E:/projects/spaders/spaders/src/map/tilesets",
-    "map.lastUsedExportFilter": "All Files (*)",
+    "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
     "map.lastUsedFormat": "tmx",
     "openFiles": [
         "how-to-play/people-set-1.tmx",

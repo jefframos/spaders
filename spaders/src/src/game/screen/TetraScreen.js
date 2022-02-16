@@ -242,46 +242,84 @@ export default class TetraScreen extends Screen {
 	getCircle(size = 4, color = 0xFFFFFF) {
 		return new PIXI.Graphics().beginFill(color).drawCircle(0, 0, size * 0.5);
 	}
-	generateImage(level, size = 24, paddingBottom = 0, schemeID = 0) {
+	generateImage(levelData, size = 24, paddingBottom = 0, schemeID = 0) {
+
+		console.log(levelData.idSaveData)
+		if(window.imageThumbs[levelData.idSaveData]){
+			console.log('cached')
+			let sprite = window.imageThumbs[levelData.idSaveData]
+			sprite.scale.set(1);
+			let copy = new PIXI.Sprite();
+			copy.setTexture(sprite.texture);
+			return copy;
+		}
+
 		let container = new PIXI.Container();
+		let level = levelData.pieces;
 		let tempRect = null;
 
 		let colors = colorSchemes.colorSchemes[schemeID]
 
-		let background = this.getRoundRect2(level[0].length * size + size, (level.length - 1) * size + size + paddingBottom, 0x222222)
-		//background.x = size * 0.5
-		//background.y -= size * 0.5
-		//console.log(colors)
-		container.addChild(background)
-		for (var i = 0; i < level.length - 1; i++) {
-			for (var j = 0; j < level[i].length; j++) {
-				if (level[i][j] >= 0) {
-					// this.cardsContainer.addChild(this.placeCard(j, i, ENEMIES.list[level[i][j]].life));
+		
+		let skip = 0;
+		let firstSkip = 0;
+		let didOnce = false;
+		for (var i = level.length-1; i >= 0; i--) {
 
-					if (colors.list[level[i][j]].isBlock) {
+			for (var k= 0; k < level[i].length; k++) {
+				if (level[i][k] >= 0){
+					skip = i;
+				}
+			}
+		}
+		for (var i = level.length-1; i >= 0; i--) {
+
+			let canDo = false;
+
+			for (var k= 0; k < level[i].length; k++) {
+				if (level[i][k] >= 0){
+					canDo = true;
+				}
+			}
+
+			if(canDo || didOnce){
+				didOnce = true;
+				for (var j = 0; j < level[i].length; j++) {
+					if (level[i][j] >= 0) {
+						// this.cardsContainer.addChild(this.placeCard(j, i, ENEMIES.list[level[i][j]].life));
+
+						if (colors.list[level[i][j]].isBlock) {
+							tempRect = this.getRect(size, colors.dark)
+							container.addChild(tempRect)
+							tempRect.x = j * size + size * 0.5;
+							tempRect.y = i * size + size * 0.5;
+						} else {
+							tempRect = this.getRect(size, colors.list[level[i][j]].color)
+							container.addChild(tempRect)
+							tempRect.x = j * size + size * 0.5;
+							tempRect.y = i * size + size * 0.5;
+						}
+					} else if (level[i][j] == -2) {
 						tempRect = this.getRect(size, colors.dark)
 						container.addChild(tempRect)
 						tempRect.x = j * size + size * 0.5;
 						tempRect.y = i * size + size * 0.5;
 					} else {
-						tempRect = this.getRect(size, colors.list[level[i][j]].color)
+						tempRect = this.getRect(size, colors.dark)
 						container.addChild(tempRect)
 						tempRect.x = j * size + size * 0.5;
 						tempRect.y = i * size + size * 0.5;
 					}
-				} else if (level[i][j] == -2) {
-					tempRect = this.getRect(size, colors.dark)
-					container.addChild(tempRect)
-					tempRect.x = j * size + size * 0.5;
-					tempRect.y = i * size + size * 0.5;
-				} else {
-					tempRect = this.getRect(size, colors.dark)
-					container.addChild(tempRect)
-					tempRect.x = j * size + size * 0.5;
-					tempRect.y = i * size + size * 0.5;
 				}
 			}
 		}
+
+		//let background = this.getRoundRect2(level[0].length * size + size, (level.length - 1) * size + size + paddingBottom, 0x222222)
+		let background = this.getRoundRect2(level[0].length * size + size, container.height + size + paddingBottom, 0x222222)
+		//background.x = size * 0.5
+		//background.y -= size * 0.5
+		//console.log(colors)
+		container.addChildAt(background, 0)
 		//container.cacheAsBitmap = true
 
 		//let renderTexture = new PIXI.RenderTexture.create({ width: container.width, height: container.height });
@@ -294,6 +332,7 @@ export default class TetraScreen extends Screen {
 		sprite.background = background;
 		sprite.nodeSize = size;
 		//window.game.renderer.render(container, {renderTexture});
+		window.imageThumbs[levelData.idSaveData] = sprite;
 
 		return sprite;
 	}
@@ -536,7 +575,7 @@ export default class TetraScreen extends Screen {
 			this.currentPoints,
 			this.currentRound,
 			utils.convertNumToTime(Math.ceil(this.currentTime)),
-			this.generateImage(this.currentLevelData.pieces,
+			this.generateImage(this.currentLevelData,
 				24,
 				0,
 				this.currentLevelData.colorPalletId),

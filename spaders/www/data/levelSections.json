@@ -5,6 +5,19 @@
     "sections": [
         {
             "color": "0xDDDDDD",
+            "name": "Game Boy",
+            "displayName": "Video Game History",
+            "imageSrc": "",
+            "colorPalletId": 2,
+            "levels": [
+                {
+                    "name": "gameboy",
+                    "dataPath": "gameboy/gameboy1.json"
+                }
+            ]
+        },
+        {
+            "color": "0xDDDDDD",
             "name": "pokemon",
             "displayName": "Video Game History",
             "imageSrc": "",
@@ -50,7 +63,7 @@
             "name": "Medium",
             "displayName": "Video Game History",
             "imageSrc": "",
-            "colorPalletId": 2,
+            "colorPalletId": 0,
             "levels": [
                 {
                     "name": "2nd gen",
