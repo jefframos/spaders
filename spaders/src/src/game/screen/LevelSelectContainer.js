@@ -572,6 +572,7 @@ export default class LevelSelectContainer extends PIXI.Container {
             levelButton.updateLabelTop("~" + data.estimateTime2,
                 new PIXI.Sprite.fromImage(window.iconsData.time));
             levelButton.updateIcon(this.gameScreen.generateImage(window.questionMark));
+            levelButton.updateIcon(this.gameScreen.generateImage(window.questionMark));
         }
     }
 
