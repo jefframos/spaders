@@ -229,7 +229,7 @@ export default class EndGameContainer extends PIXI.Container {
     }
     setStats(points, rounds, time, image, data) {
 
-        console.log(image.scale)
+        //console.log(image.scale)
         if (this.currentLevelImage && this.currentLevelImage.parent) {
             this.currentLevelImage.parent.removeChild(this.currentLevelImage);
         }
@@ -264,8 +264,11 @@ export default class EndGameContainer extends PIXI.Container {
 
         if (this.levelName.width > 300) {
 
-            this.levelName.scale.set(300 / this.levelName.width)
+            this.levelName.scale.set(300 / this.levelName.width / this.levelName.scale.x)
+
+            console.log("AHAYASHAS")
         }
+        console.log(this.levelName.scale)
         //this.currentLevelImage.rotation = Math.PI * -0.25
         if (this.youWinLabel.parent) {
             this.youWinLabel.parent.removeChild(this.youWinLabel);
@@ -288,13 +291,13 @@ export default class EndGameContainer extends PIXI.Container {
         this.gameScreen.resizeToFitAR(imageAspect, this.currentLevelImage)
 
         this.line1.addChild(this.currentLevelImage);
-        this.line1.addChild(this.levelName);
+        //this.line1.addChild(this.levelName);
 
         //this.currentLevelImage.addChild(this.youWinLabel)
         //this.currentLevelImage.addChild(this.levelName)
 
 
-        this.levelName.scale.set(1 + (1 - this.currentLevelImage.scale.x))
+        //this.levelName.scale.set(1 + (1 - this.currentLevelImage.scale.x))
         this.youWinLabel.scale.set(1 + (1 - this.currentLevelImage.scale.x))
 
         //console.log( this.currentLevelImage.scale)

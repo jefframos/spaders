@@ -312,8 +312,13 @@ export default class LevelSelectContainer extends PIXI.Container {
             this.currentUISection--
             window.SOUND_MANAGER.play('shoosh', { volume: 0.1 })
             if (this.currentUISection <= 0) {
-                this.refreshNavButtons();
+                this.refreshNavButtons()
             }
+            this.sectionButtons.forEach(element => {
+                if (element.data) {
+                    this.refreshTier(element, element.data);
+                }
+            });
         } else {
             //ouch
             this.gameScreen.startScreenContainer.startState(0);
@@ -537,6 +542,12 @@ export default class LevelSelectContainer extends PIXI.Container {
             totalEstimatedTime += element.estimateTime;
             totalEstimatedTimeHard += element.estimateTimeHard;
         });
+
+        //let dataFirstLevel = data[Math.floor(Math.random() * data.length)];
+        let dataFirstLevel = data[0];
+
+        levelTierButton.updateIcon(this.gameScreen.generateImage(dataFirstLevel, 24, 0, dataFirstLevel.colorPalletId), 0.35,{ x: 0, y: -10 });
+        
         if (count >= data.length) {
             levelTierButton.setColor(config.colors.purple)
             levelTierButton.updateLabel('COMPLETED');

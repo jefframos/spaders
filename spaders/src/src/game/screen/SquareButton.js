@@ -98,7 +98,7 @@ export default class SquareButton extends PIXI.Container {
             this.labelTop.icon = icon;
 
             icon.scale.set(1);
-            icon.scale.set(this.labelTop.height / icon.height);
+            icon.scale.set(this.labelTop.height / icon.height / icon.scale.y);
             icon.anchor.x = 1.1;
             icon.anchor.y = 0;
 
@@ -160,11 +160,11 @@ export default class SquareButton extends PIXI.Container {
         this.icon.x = offset.x
         this.icon.y = offset.y
         if (graphic.width > graphic.height) {
-            this.icon.scale.set(this.buttonMask.width / this.icon.width * scale);
+            this.icon.scale.set(this.buttonMask.width / (this.icon.width / this.icon.scale.x) * scale);
         } else {
-            this.icon.scale.set(this.buttonMask.height / this.icon.height * scale);
+            this.icon.scale.set(this.buttonMask.height / (this.icon.height/ this.icon.scale.y )* scale);
         }
-
+        
         this.icon.x = this.squareButtonShape.width / 2 - this.icon.width / 2 + offset.x
         this.icon.y = this.squareButtonShape.height / 2 - this.icon.height / 2 + offset.y
         //this.icon.mask = this.buttonMask

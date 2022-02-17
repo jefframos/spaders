@@ -13,6 +13,10 @@
                 {
                     "name": "gameboy",
                     "dataPath": "gameboy/gameboy1.json"
+                },
+                {
+                    "name": "gameboy",
+                    "dataPath": "gameboy/gameboyMisc.json"
                 }
             ]
         },

@@ -7,7 +7,11 @@
         "videogames",
         "how-to-play",
         "movies",
-        "main"
+        "main",
+        "gb",
+        "templates"
     ],
-    "objectTypesFile": ""
+    "objectTypesFile": "",
+    "propertyTypes": [
+    ]
 }
