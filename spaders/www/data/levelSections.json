@@ -16,7 +16,15 @@
                 },
                 {
                     "name": "gameboy",
+                    "dataPath": "gameboy/gameboyWeapons2.json"
+                },
+                {
+                    "name": "gameboy",
                     "dataPath": "gameboy/gameboyMisc.json"
+                },
+                {
+                    "name": "gameboy",
+                    "dataPath": "gameboy/gameboyMisc2.json"
                 }
             ]
         },

@@ -63,7 +63,7 @@ export default {
                 { isBlock: false, color: 0x224939, life: 6 },
                 { isBlock: false, color: 0x285746, life: 7 },
                 { isBlock: false, color: 0xbad1b8, life: 8 },
-                { isBlock: false, color: 0x252b25, life: 9 },
+                { isBlock: false, color: 0x252b25, life: 5.1 },
                 { isBlock: false, color: 0x555a56, life: 9.1 },
                 { isBlock: false, color: 0xddd3ab, life: 9.2 },
                 { isBlock: false, color: 0x3b3c2e, life: 9.3 },
