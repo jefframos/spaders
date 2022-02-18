@@ -245,7 +245,7 @@ export default class TetraScreen extends Screen {
 	generateImage(levelData, size = 24, paddingBottom = 0, schemeID = 0) {
 
 		console.log(levelData.idSaveData)
-		if(window.imageThumbs[levelData.idSaveData]){
+		if (window.imageThumbs[levelData.idSaveData]) {
 			console.log('cached')
 			let sprite = window.imageThumbs[levelData.idSaveData]
 			sprite.scale.set(1);
@@ -255,74 +255,56 @@ export default class TetraScreen extends Screen {
 		}
 
 		let container = new PIXI.Container();
-		let level = levelData.pieces;
+		let level = [];
+
+		for (let i = 0; i < levelData.pieces.length; i++) {
+			let temp = []
+			for (let j = 0; j < levelData.pieces[i].length; j++) {
+				temp.push(levelData.pieces[i][j]);
+
+			}
+			level.push(temp);
+		}
+		utils.trimMatrix(level, true)
+		utils.paddingMatrix(level, { left: 1, right: 1, top: 1, bottom: 1 })
+
+
 		let tempRect = null;
 
 		let colors = colorSchemes.colorSchemes[schemeID]
 
-		
-		let skip = 0;
-		let firstSkip = 0;
-		let didOnce = false;
-		for (var i = level.length-1; i >= 0; i--) {
+		for (var i = level.length - 1; i >= 0; i--) {
+			for (var j = 0; j < level[i].length; j++) {
+				if (level[i][j] >= 0) {
 
-			for (var k= 0; k < level[i].length; k++) {
-				if (level[i][k] >= 0){
-					skip = i;
-				}
-			}
-		}
-		for (var i = level.length-1; i >= 0; i--) {
-
-			let canDo = false;
-
-			for (var k= 0; k < level[i].length; k++) {
-				if (level[i][k] >= 0){
-					canDo = true;
-				}
-			}
-
-			if(canDo || didOnce){
-				didOnce = true;
-				for (var j = 0; j < level[i].length; j++) {
-					if (level[i][j] >= 0) {
-						// this.cardsContainer.addChild(this.placeCard(j, i, ENEMIES.list[level[i][j]].life));
-
-						if (colors.list[level[i][j]].isBlock) {
-							tempRect = this.getRect(size, colors.dark)
-							container.addChild(tempRect)
-							tempRect.x = j * size + size * 0.5;
-							tempRect.y = i * size + size * 0.5;
-						} else {
-							tempRect = this.getRect(size, colors.list[level[i][j]].color)
-							container.addChild(tempRect)
-							tempRect.x = j * size + size * 0.5;
-							tempRect.y = i * size + size * 0.5;
-						}
-					} else if (level[i][j] == -2) {
+					if (colors.list[level[i][j]].isBlock) {
 						tempRect = this.getRect(size, colors.dark)
 						container.addChild(tempRect)
 						tempRect.x = j * size + size * 0.5;
 						tempRect.y = i * size + size * 0.5;
 					} else {
-						tempRect = this.getRect(size, colors.dark)
+						tempRect = this.getRect(size, colors.list[level[i][j]].color)
 						container.addChild(tempRect)
 						tempRect.x = j * size + size * 0.5;
 						tempRect.y = i * size + size * 0.5;
 					}
+				} else if (level[i][j] == -2) {
+					tempRect = this.getRect(size, colors.dark)
+					container.addChild(tempRect)
+					tempRect.x = j * size + size * 0.5;
+					tempRect.y = i * size + size * 0.5;
+				} else {
+					tempRect = this.getRect(size, colors.dark)
+					container.addChild(tempRect)
+					tempRect.x = j * size + size * 0.5;
+					tempRect.y = i * size + size * 0.5;
 				}
 			}
 		}
 
-		//let background = this.getRoundRect2(level[0].length * size + size, (level.length - 1) * size + size + paddingBottom, 0x222222)
 		let background = this.getRoundRect2(level[0].length * size + size, container.height + size + paddingBottom, 0x222222)
-		//background.x = size * 0.5
-		//background.y -= size * 0.5
-		//console.log(colors)
-		container.addChildAt(background, 0)
-		//container.cacheAsBitmap = true
 
-		//let renderTexture = new PIXI.RenderTexture.create({ width: container.width, height: container.height });
+		container.addChildAt(background, 0)
 
 		let texture = renderer.generateTexture(container);
 
@@ -331,7 +313,6 @@ export default class TetraScreen extends Screen {
 
 		sprite.background = background;
 		sprite.nodeSize = size;
-		//window.game.renderer.render(container, {renderTexture});
 		window.imageThumbs[levelData.idSaveData] = sprite;
 
 		return sprite;

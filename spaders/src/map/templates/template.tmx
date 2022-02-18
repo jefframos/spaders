@@ -17,6 +17,11 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,74,74,74,74,74,74,74,74,0,0,0,0,0,0,0,
@@ -44,6 +49,11 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -71,17 +81,22 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -98,6 +113,11 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -125,17 +145,22 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -152,6 +177,11 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -179,17 +209,22 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -206,6 +241,11 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -233,17 +273,22 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -260,6 +305,11 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -287,17 +337,22 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -314,6 +369,11 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -341,17 +401,22 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -368,6 +433,11 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -395,17 +465,22 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -422,6 +497,11 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -449,17 +529,22 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -476,6 +561,11 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -503,17 +593,22 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -530,6 +625,11 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -557,17 +657,22 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -584,6 +689,11 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -611,17 +721,22 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -638,6 +753,11 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -665,17 +785,22 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -692,6 +817,11 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -719,17 +849,22 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -746,6 +881,11 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -773,17 +913,22 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -800,6 +945,11 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -827,17 +977,22 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -854,6 +1009,11 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -881,17 +1041,22 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -908,6 +1073,11 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -935,17 +1105,22 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -962,6 +1137,11 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -989,17 +1169,22 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -1016,6 +1201,11 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -1043,17 +1233,22 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -1070,6 +1265,11 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -1097,17 +1297,22 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -1124,6 +1329,11 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -1151,17 +1361,22 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -1178,6 +1393,11 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -1205,17 +1425,22 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -1232,6 +1457,11 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -1259,17 +1489,22 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -1286,6 +1521,11 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -1313,17 +1553,22 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -1340,6 +1585,11 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -1367,17 +1617,22 @@
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
+    <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

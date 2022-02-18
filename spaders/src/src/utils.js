@@ -1,63 +1,231 @@
 import TweenMax from 'gsap';
 import config from './config';
 export default {
-    horizontalListHelper(list){
+    horizontalListHelper(list) {
         let scales = []
-		list.forEach(element => {
-			if (element.customLength) {
-				scales.push(element.customLength);
-			} else {
-				scales.push(1 / list.length)
-			}
+        list.forEach(element => {
+            if (element.customLength) {
+                scales.push(element.customLength);
+            } else {
+                scales.push(1 / list.length)
+            }
 
-		});
-		let margin = 2;
-		let length = config.width * scales[0] - margin * 2;
-		let nextPosition = 0;
-		let doDebug = false;
+        });
+        let margin = 2;
+        let length = config.width * scales[0] - margin * 2;
+        let nextPosition = 0;
+        let doDebug = false;
 
         for (let index = 0; index < list.length; index++) {
-			length = config.width * scales[index] - margin * 2;
-			//console.log(length)
+            length = config.width * scales[index] - margin * 2;
+            //console.log(length)
 
-			const element = list[index];
-			element.x = nextPosition; //+ length*0.5
-			element.scale.set(1)
-			if (doDebug && !element.debugShape) {
-				//element.debugShape = new PIXI.Graphics().beginFill(0x005566).drawRect(-length/2, -this.topCanvas.height / 2, length, this.topCanvas.height);
-				element.debugShape = new PIXI.Graphics().beginFill(0xFFFFFF * Math.random()).drawRect(0, 0, length, element.height);
-				if (element.parent) {
-					element.parent.addChild(element.debugShape);
-				}
-				element.debugShape.alpha = 0.8
-				element.debugShape.x = element.x
-			}
-			if (element.margin) {
-				let scl = (length - element.margin * 2) / (element.width / element.scale.x)
-				element.scale.set(scl)
-				element.x += element.margin
-				if (element.debug) {
-					console.log(element.width, length)
-				}
-			}
-			nextPosition += length
-		}
+            const element = list[index];
+            element.x = nextPosition; //+ length*0.5
+            element.scale.set(1)
+            if (doDebug && !element.debugShape) {
+                //element.debugShape = new PIXI.Graphics().beginFill(0x005566).drawRect(-length/2, -this.topCanvas.height / 2, length, this.topCanvas.height);
+                element.debugShape = new PIXI.Graphics().beginFill(0xFFFFFF * Math.random()).drawRect(0, 0, length, element.height);
+                if (element.parent) {
+                    element.parent.addChild(element.debugShape);
+                }
+                element.debugShape.alpha = 0.8
+                element.debugShape.x = element.x
+            }
+            if (element.margin) {
+                let scl = (length - element.margin * 2) / (element.width / element.scale.x)
+                element.scale.set(scl)
+                element.x += element.margin
+                if (element.debug) {
+                    console.log(element.width, length)
+                }
+            }
+            nextPosition += length
+        }
+    },
+    trimMatrix(pieces, ignoreBlocker = false) {
+        if (pieces.length <= 0) {
+            return;
+        }
+        let colCounters = [];
+        let lineCounters = [];
+        for (let i = 0; i < pieces.length; i++) {
+            colCounters.push(0);
+        }
+        for (let i = 0; i < pieces[0].length; i++) {
+            lineCounters.push(0);
+        }
+        for (let i = 0; i < pieces.length; i++) {
+            for (let j = 0; j < pieces[i].length; j++) {
+                const element = pieces[i][j];
+                if (element >= 0) {
+                    if (!ignoreBlocker || (ignoreBlocker && element != 19)) {
+                        lineCounters[j]++;
+                        colCounters[i]++;
+                    }
+                }
+            }
+        }
+
+
+        let padding = { left: 0, right: 0, top: 0, bottom: 0 }
+
+        for (let i = 0; i < lineCounters.length; i++) {
+            const element = lineCounters[i];
+            if (element == 0) {
+                padding.left++;
+            } else {
+                break;
+            }
+        }
+        for (let i = lineCounters.length - 1; i >= 0; i--) {
+            const element = lineCounters[i];
+            if (element == 0) {
+                padding.right++;
+            } else {
+                break;
+            }
+        }
+
+        for (let i = 0; i < colCounters.length; i++) {
+            const element = colCounters[i];
+            if (element == 0) {
+                padding.top++;
+            } else {
+                break;
+            }
+        }
+        for (let i = colCounters.length - 1; i >= 0; i--) {
+            const element = colCounters[i];
+            if (element == 0) {
+                padding.bottom++;
+            } else {
+                break;
+            }
+        }
+
+        pieces.splice(0, padding.top);
+        pieces.splice(pieces.length - padding.bottom, padding.bottom);
+
+        for (let i = 0; i < pieces.length; i++) {
+            pieces[i].splice(0, padding.left);
+            pieces[i].splice(pieces[i].length - padding.right, padding.right);
+        }
+
+        // console.log(lineCounters);
+        // console.log(colCounters);
+        // console.log(padding);
+    },
+    paddingMatrix(pieces, padding = { left: 0, right: 0, top: 0, bottom: 0 }) {
+
+        if (pieces.length <= 0) {
+            return;
+        }
+        let totPadding = 0;
+        for (const key in padding) {
+            totPadding += padding[key];
+        }
+        if (totPadding == 0) {
+            return;
+        }
+        //console.log(pieces)
+        for (let i = 0; i < pieces.length; i++) {
+            for (let p = 0; p < padding.left; p++) {
+                pieces[i].unshift(-1);
+            }
+            for (let p = 0; p < padding.right; p++) {
+                pieces[i].push(-1);
+            }
+        }
+        for (let i = 0; i < padding.top; i++) {
+            let colCounters = [];
+            for (let index = 0; index < pieces[0].length; index++) {
+                colCounters.push(-1);
+            }
+            pieces.unshift(colCounters);
+        }
+        for (let i = 0; i < padding.bottom; i++) {
+            let colCounters = [];
+            for (let index = 0; index < pieces[0].length; index++) {
+                colCounters.push(-1);
+            }
+            pieces.push(colCounters);
+        }
+    },
+    addBlockers(pieces, distance = 2, id = 19) {
+        if (pieces.length <= 0) {
+            return;
+        }
+
+        let colCounters = [];
+        let lineCounters = [];
+        for (let i = 0; i < pieces.length; i++) {
+            colCounters.push(0);
+        }
+        for (let i = 0; i < pieces[0].length; i++) {
+            lineCounters.push(0);
+        }
+        for (let i = 0; i < pieces.length; i++) {
+            for (let j = 0; j < pieces[i].length; j++) {
+                const element = pieces[i][j];
+                if (element >= 0 && lineCounters[j] == 0) {
+                    lineCounters[j] = i;
+                }
+            }
+        }
+
+        for (let index = 0; index < lineCounters.length; index++) {
+            if (lineCounters[index] == 0) {
+                if (index < lineCounters.length / 2) {
+
+                    for (let j = 0; j < lineCounters.length; j++) {
+                        if (lineCounters[j] > 0) {
+                            lineCounters[index] = lineCounters[j];
+                            break;
+                        }
+
+                    }
+                } else {
+                    for (let j = lineCounters.length - 1; j >= 0; j--) {
+                        if (lineCounters[j] > 0) {
+                            lineCounters[index] = lineCounters[j];
+                            break;
+                        }
+
+                    }
+                }
+            }
+        }
+
+        for (let i = 0; i < pieces.length; i++) {
+            for (let j = 0; j < pieces[i].length; j++) {
+                const element = pieces[i][j];
+                if (i < lineCounters[j] - distance) {
+                    pieces[i][j] = id;
+                }
+            }
+        }
+
+        //console.log(lineCounters)
+        //console.log(colCounters)
+
+
     },
     formatPointsLabel(tempPoints) {
-		if (tempPoints < 10) {
-			return "00000" + tempPoints
-		} else if (tempPoints < 100) {
-			return "0000" + tempPoints
-		} else if (tempPoints < 1000) {
-			return "000" + tempPoints
-		} else if (tempPoints < 10000) {
-			return "00" + tempPoints
-		} else if (tempPoints < 100000) {
-			return "0" + tempPoints
-		} else {
-			return tempPoints
-		}
-	},
+        if (tempPoints < 10) {
+            return "00000" + tempPoints
+        } else if (tempPoints < 100) {
+            return "0000" + tempPoints
+        } else if (tempPoints < 1000) {
+            return "000" + tempPoints
+        } else if (tempPoints < 10000) {
+            return "00" + tempPoints
+        } else if (tempPoints < 100000) {
+            return "0" + tempPoints
+        } else {
+            return tempPoints
+        }
+    },
     convertNumToTime(number) {
         var sec_num = parseInt(number, 10); // don't forget the second param
         var hours = Math.floor(sec_num / 3600);
@@ -303,22 +471,17 @@ export default {
     distance(x1, y1, x2, y2) {
         return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
     },
-    killColorTween(target)
-    {
-        for (let i = this.tweenList.length - 1; i >= 0; i--)
-        {
-            if (this.tweenList[i].target == target)
-            {
+    killColorTween(target) {
+        for (let i = this.tweenList.length - 1; i >= 0; i--) {
+            if (this.tweenList[i].target == target) {
                 this.tweenList[i].tween.kill();
                 this.tweenList.splice(i, 1);
             }
         }
     },
 
-    addColorTween(currentColor, targetColor, time = 2, delay = 0, callback = null, onComplete = null)
-    {
-        if (!this.tweenList)
-        {
+    addColorTween(currentColor, targetColor, time = 2, delay = 0, callback = null, onComplete = null) {
+        if (!this.tweenList) {
             this.tweenList = [];
         }
         const currentColorData = this.toRGB(currentColor);
@@ -331,10 +494,9 @@ export default {
                     r: targetColorData.r,
                     g: targetColorData.g,
                     b: targetColorData.b,
-                    onComplete:onComplete,
+                    onComplete: onComplete,
                     ease: Linear.easeNone,
-                    onUpdate: function ()
-                    {
+                    onUpdate: function () {
                         currentColorData.r = Math.floor(currentColorData.r);
                         currentColorData.g = Math.floor(currentColorData.g);
                         currentColorData.b = Math.floor(currentColorData.b);
@@ -343,23 +505,21 @@ export default {
                         //targ.tint = this.rgbToColor(currentColorData.r, currentColorData.g, currentColorData.b);
                     }.bind(this),
                 }),
-                currentColor: this.rgbToColor(currentColorData.r, currentColorData.g, currentColorData.b),
+            currentColor: this.rgbToColor(currentColorData.r, currentColorData.g, currentColorData.b),
         };
 
         this.tweenList.push(tweenObj);
 
         return tweenObj;
     },
-    invertColor(rgb)
-    {
+    invertColor(rgb) {
         const r = 255 - rgb >> 16 & 0xFF;
         const g = 255 - rgb >> 8 & 0xFF;
         const b = 255 - rgb & 0xFF;
 
         return this.rgbToColor(r, g, b);
     },
-    toRGB(rgb)
-    {
+    toRGB(rgb) {
         const r = rgb >> 16 & 0xFF;
         const g = rgb >> 8 & 0xFF;
         const b = rgb & 0xFF;
@@ -370,8 +530,7 @@ export default {
             b,
         };
     },
-    rgbToColor(r, g, b)
-    {
+    rgbToColor(r, g, b) {
         return r << 16 | g << 8 | b;
     },
 

@@ -344,9 +344,8 @@ export default class Board {
 	}
 
 	setCardToCrazy(i, j, timeout) {
-		console.log(this.cards)
 		setTimeout(() => {
-			if (this.cards[i][j]) {
+			if (this.cards[i][j] && this.cards[i][j].startCrazyMood) {
 				this.cards[i][j].startCrazyMood();
 				this.addCrazyMoodParticles(this.cards[i][j]);
 			}

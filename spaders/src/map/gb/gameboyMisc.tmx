@@ -10,10 +10,15 @@
  </properties>
  <tileset firstgid="1" source="../tilesets/spadersTileset.tsx"/>
  <tileset firstgid="65" source="../tilesets/gb.tsx"/>
- <layer id="43" name="Game Boy" width="16" height="16" visible="0">
+ <layer id="43" name="Game Boy" width="16" height="16">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="10"/>
    <property name="j" type="int" value="11"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
@@ -39,8 +44,13 @@
  </layer>
  <layer id="74" name="Potion" width="16" height="16">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="9"/>
    <property name="j" type="int" value="12"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
@@ -66,8 +76,13 @@
  </layer>
  <layer id="106" name="_ADDONPotion" width="16" height="16">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="9"/>
    <property name="j" type="int" value="12"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
@@ -93,8 +108,13 @@
  </layer>
  <layer id="74" name="Hearth" width="16" height="16">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="9"/>
    <property name="j" type="int" value="10"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
@@ -120,8 +140,13 @@
  </layer>
  <layer id="106" name="_ADDONHearth" width="16" height="16">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="11"/>
    <property name="j" type="int" value="11"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
@@ -147,8 +172,13 @@
  </layer>
  <layer id="74" name="Torch" width="16" height="16">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="10"/>
    <property name="j" type="int" value="12"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
@@ -174,8 +204,13 @@
  </layer>
  <layer id="106" name="_ADDONTorch" width="16" height="16">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="11"/>
    <property name="j" type="int" value="11"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
@@ -201,8 +236,13 @@
  </layer>
  <layer id="74" name="Bat" width="16" height="16" visible="0">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="11"/>
    <property name="j" type="int" value="8"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
@@ -228,8 +268,13 @@
  </layer>
  <layer id="106" name="_ADDONBat" width="16" height="16" visible="0">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="11"/>
    <property name="j" type="int" value="11"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
@@ -255,8 +300,13 @@
  </layer>
  <layer id="74" name="Letter" width="16" height="16">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="10"/>
    <property name="j" type="int" value="10"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
@@ -282,8 +332,13 @@
  </layer>
  <layer id="106" name="_ADDONLetter" width="16" height="16">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="11"/>
    <property name="j" type="int" value="11"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
@@ -309,8 +364,13 @@
  </layer>
  <layer id="74" name="Fish Hook" width="16" height="16">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="10"/>
    <property name="j" type="int" value="12"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
@@ -336,8 +396,13 @@
  </layer>
  <layer id="106" name="_ADDONFish" width="16" height="16">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="11"/>
    <property name="j" type="int" value="11"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
@@ -363,8 +428,13 @@
  </layer>
  <layer id="74" name="Key" width="16" height="16">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="9"/>
    <property name="j" type="int" value="12"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
@@ -390,8 +460,13 @@
  </layer>
  <layer id="106" name="_ADDONKey" width="16" height="16">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="11"/>
    <property name="j" type="int" value="11"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
@@ -417,8 +492,13 @@
  </layer>
  <layer id="74" name="Pot" width="16" height="16">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="9"/>
    <property name="j" type="int" value="11"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
@@ -444,8 +524,13 @@
  </layer>
  <layer id="106" name="_ADDONPot" width="16" height="16">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="11"/>
    <property name="j" type="int" value="11"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
@@ -471,8 +556,13 @@
  </layer>
  <layer id="74" name="Skull" width="16" height="16">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="11"/>
    <property name="j" type="int" value="12"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
@@ -498,8 +588,13 @@
  </layer>
  <layer id="106" name="_ADDONSkull" width="16" height="16">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="11"/>
    <property name="j" type="int" value="11"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
@@ -525,8 +620,13 @@
  </layer>
  <layer id="74" name="Chest" width="16" height="16">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="11"/>
    <property name="j" type="int" value="12"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
@@ -552,8 +652,13 @@
  </layer>
  <layer id="106" name="_ADDONChest" width="16" height="16">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="11"/>
    <property name="j" type="int" value="11"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
@@ -571,33 +676,6 @@
 0,0,97,97,97,97,97,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
- <layer id="74" name="Bush" width="16" height="16">
-  <properties>
-   <property name="i" type="int" value="11"/>
-   <property name="j" type="int" value="13"/>
-   <property name="startI" type="int" value="0"/>
-   <property name="startJ" type="int" value="0"/>
-   <property name="tier" type="int" value="0"/>
-  </properties>
-  <data encoding="csv">
-74,0,0,0,74,74,74,0,0,0,74,0,0,0,0,0,
-74,74,0,74,68,68,68,74,0,74,74,0,0,0,0,0,
-74,68,74,68,68,71,68,68,74,68,74,0,0,0,0,0,
-74,71,68,74,74,74,74,74,68,71,74,0,0,0,0,0,
-74,67,71,68,74,68,74,68,71,67,74,0,0,0,0,0,
-0,74,67,71,74,68,74,71,67,74,0,0,0,0,0,0,
-0,0,74,74,74,71,74,74,74,0,0,0,0,0,0,0,
-0,0,74,71,74,71,74,71,67,74,0,0,0,0,0,0,
-0,74,71,67,74,74,74,67,71,67,74,0,0,0,0,0,
-74,67,67,74,67,71,67,74,67,71,74,0,0,0,0,0,
-74,74,74,74,67,71,74,74,74,74,74,0,0,0,0,0,
-0,0,0,0,74,74,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

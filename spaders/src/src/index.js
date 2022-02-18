@@ -240,23 +240,36 @@ function loadJsons() {
 	// .add('./data/levelSections.json')
 	// .load(configGame);
 }
+function findPropertyValue(data, propertyName) {
+	let valueToReturn = 0;
 
+	for (let index = 0; index < data.length; index++) {
+		const element = data[index];
+		if (element.name == propertyName) {
+
+			valueToReturn = element.value;
+			break;
+		}
+	}
+
+	return valueToReturn;
+
+}
 function extractData(element) {
 	if (element.visible) {
 		let data = {}
 		data.levelName = element.name;
-		let i = element.width;
-		let j = element.height;
-		data.tier = 0;
-		if (element.properties[0].name == "i") {
-			i = element.properties[0].value;
+		let i = element.width - 1;
+		let j = element.height - 1;
+		data.tier = findPropertyValue(element.properties, "tier");
+		data.padding = {
+			left: findPropertyValue(element.properties, "padding-left"), //| 0,
+			right: findPropertyValue(element.properties, "padding-right"), //| 0,
+			top: findPropertyValue(element.properties, "padding-top"), //| 0,
+			bottom: findPropertyValue(element.properties, "padding-bottom") //| 0,
 		}
-		if (element.properties[1].name == "j") {
-			j = element.properties[1].value;
-		}
-		if (element.properties[2].name == "tier") {
-			data.tier = element.properties[2].value;
-		}
+		data.setAutoBlocker = findPropertyValue(element.properties, "autoPlaceBlockers")
+
 		let tempArr = [];
 		let levelMatrix = [];
 
@@ -289,6 +302,17 @@ function extractData(element) {
 
 		data.addOn = levelMatrixAddOn;
 		data.pieces = levelMatrix;
+
+		if (!element.isAddon) {
+
+			utils.trimMatrix(data.pieces)
+			utils.paddingMatrix(data.pieces, data.padding)
+		}
+
+		if (!element.isAddon && data.setAutoBlocker > 0) {
+			utils.addBlockers(data.pieces, data.setAutoBlocker)
+		}
+
 		return data
 	}
 
@@ -331,8 +355,10 @@ function configGame() {
 			level.sectionName = section.name;
 			res.layers.forEach(layer => {
 
+				let isAddon = layer.visible && layer.name.search("_ADDON") >= 0
+				layer.isAddon = isAddon;
 				let data = extractData(layer);
-				let isAddon = layer.visible &&  layer.name.search("_ADDON") >= 0
+		
 				if (layer.visible && sectionLevels.length == 1 && isAddon) {
 					sectionLevels[0].addOn = data.addOn;
 				}
@@ -355,14 +381,14 @@ function configGame() {
 						for (let j = 0; j < data.pieces[index].length; j++) {
 							const element = data.pieces[index][j];
 							if (element >= 0) {
-								data.totalPieces ++;
+								data.totalPieces++;
 
 								let life = Math.floor(colorSchemes.colorSchemes[palletID].list[element].life) + 1;
-								if(life){
+								if (life) {
 									data.totalBoardLife += life;
 								}
-							}else{
-								data.totalEmptySpaces ++;
+							} else {
+								data.totalEmptySpaces++;
 							}
 						}
 
@@ -371,20 +397,20 @@ function configGame() {
 					data.estimateTimeHard = data.totalBoardLife / 0.4 + 30;
 					data.emptySpaceByPieces = data.totalEmptySpaces / data.totalPieces;
 
-					if(data.emptySpaceByPieces < 1){
+					if (data.emptySpaceByPieces < 1) {
 						data.estimateTimeHard /= Math.max(0.45, data.emptySpaceByPieces);
 					}
-					if(data.estimateTimeHard > 1200){
+					if (data.estimateTimeHard > 1200) {
 						data.estimateTimeHard = Math.floor(data.estimateTimeHard / 300) * 300;
-					}else{
+					} else {
 
 						data.estimateTimeHard = Math.floor(data.estimateTimeHard / 30) * 30;
 					}
 
 
-					if(data.estimateTime > 1200){
+					if (data.estimateTime > 1200) {
 						data.estimateTime = Math.floor(data.estimateTime / 300) * 300;
-					}else{
+					} else {
 
 						data.estimateTime = Math.floor(data.estimateTime / 30) * 30;
 					}
@@ -393,6 +419,10 @@ function configGame() {
 					window.allEstimate += data.estimateTime;
 					window.allEstimateHard += data.estimateTimeHard;
 					sectionLevels.push(data);
+				}
+
+				if (isAddon) {
+					utils.paddingMatrix(data.addOn, data.padding);
 				}
 			});
 			level.colorPalletId = palletID
@@ -412,28 +442,37 @@ function configGame() {
 	//window.levelsRawJson = PIXI.loader.resources["./assets/levelsRaw.json"].data
 	window.levelsJson = PIXI.loader.resources["./assets/levels.json"].data
 
-
-	window.levelTiersData = [];
-	for (let index = 0; index < 10; index++) {
-		window.levelTiersData.push([]);
-	}
 	window.levelData = [];
 	window.levelsRawJson.layers.forEach(element => {
 
-		let data = extractData(element);
-		let isAddon = element.visible &&  element.name.search("_ADDON") >= 0
+		let isAddon = element.visible && element.name.search("_ADDON") >= 0
+		element.isAddon = isAddon;
 
+		let data = extractData(element);
+
+		
+let dataa = null;
 		if (window.levelData.length == 1 && isAddon) {
 			window.levelData[0].addOn = data.addOn;
+			dataa = window.levelData[0];
 		}
 		else if (window.levelData.length > 1 && isAddon) {
 			window.levelData[window.levelData.length - 1].addOn = data.addOn;
+			dataa = window.levelData[window.levelData.length - 1];
 		} else if (data) {
 			window.levelData.push(data)
-			window.levelTiersData[data.tier].push(data)
 		}
-
+		
+		if (isAddon) {
+			utils.paddingMatrix(data.addOn, dataa.padding);
+		}
 	});
+
+
+	// utils.trimMatrix(window.levelData[0].pieces)
+	// utils.paddingMatrix(window.levelData[0].pieces, { left: 3, right: 3, top: 2, bottom: 2 })
+	// utils.addBlockers(window.levelData[0].pieces, 2)
+
 	console.log("ALL DATA", window.levelData)
 	//console.log("ALL DATA", window.levelSections)
 	//create screen manager
