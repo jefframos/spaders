@@ -133,6 +133,21 @@ export default class EndGameContainer extends PIXI.Container {
         this.mainCanvas = new PIXI.Graphics().beginFill(0xFF0000).drawRect(0, 0, config.width, config.height);
         this.addChild(this.mainCanvas)
         this.mainCanvas.alpha = 0
+        window.COOKIE_MANAGER.onChangeColors.add(() => {
+            this.updateColorScheme();
+        })
+
+        this.updateColorScheme();
+    }
+    updateColorScheme() {
+        let colorScheme = colorSchemes.getCurrentColorScheme();
+
+        this.movesLabel.style.fill = colorScheme.fontColor;
+        this.pointsLabel.style.fill = colorScheme.fontColor;
+        this.timeLabel.style.fill = colorScheme.fontColor;
+        this.levelName.style.fill = colorScheme.fontColor;
+
+        this.nextLevel.updateTextColor(colorScheme.fontColor);
     }
     updateLinesColor(){
         let scheme = window.COOKIE_MANAGER.stats.colorPalletID;

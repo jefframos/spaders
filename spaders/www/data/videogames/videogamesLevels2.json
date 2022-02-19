@@ -714,9 +714,29 @@
                  "value":11
                 }, 
                 {
+                 "name":"padding-bottom",
+                 "type":"int",
+                 "value":4
+                }, 
+                {
+                 "name":"padding-left",
+                 "type":"int",
+                 "value":0
+                }, 
+                {
+                 "name":"padding-right",
+                 "type":"int",
+                 "value":0
+                }, 
+                {
+                 "name":"padding-top",
+                 "type":"int",
+                 "value":0
+                }, 
+                {
                  "name":"tier",
                  "type":"int",
-                 "value":1
+                 "value":0
                 }],
          "type":"tilelayer",
          "visible":true,
@@ -798,6 +818,26 @@
                  "name":"j",
                  "type":"int",
                  "value":12
+                }, 
+                {
+                 "name":"padding-bottom",
+                 "type":"int",
+                 "value":2
+                }, 
+                {
+                 "name":"padding-left",
+                 "type":"int",
+                 "value":1
+                }, 
+                {
+                 "name":"padding-right",
+                 "type":"int",
+                 "value":1
+                }, 
+                {
+                 "name":"padding-top",
+                 "type":"int",
+                 "value":0
                 }, 
                 {
                  "name":"tier",
@@ -886,6 +926,26 @@
                  "value":12
                 }, 
                 {
+                 "name":"padding-bottom",
+                 "type":"int",
+                 "value":2
+                }, 
+                {
+                 "name":"padding-left",
+                 "type":"int",
+                 "value":1
+                }, 
+                {
+                 "name":"padding-right",
+                 "type":"int",
+                 "value":1
+                }, 
+                {
+                 "name":"padding-top",
+                 "type":"int",
+                 "value":0
+                }, 
+                {
                  "name":"tier",
                  "type":"int",
                  "value":3
@@ -917,6 +977,26 @@
                  "name":"j",
                  "type":"int",
                  "value":12
+                }, 
+                {
+                 "name":"padding-bottom",
+                 "type":"int",
+                 "value":2
+                }, 
+                {
+                 "name":"padding-left",
+                 "type":"int",
+                 "value":1
+                }, 
+                {
+                 "name":"padding-right",
+                 "type":"int",
+                 "value":1
+                }, 
+                {
+                 "name":"padding-top",
+                 "type":"int",
+                 "value":0
                 }, 
                 {
                  "name":"tier",
@@ -952,6 +1032,26 @@
                  "value":12
                 }, 
                 {
+                 "name":"padding-bottom",
+                 "type":"int",
+                 "value":2
+                }, 
+                {
+                 "name":"padding-left",
+                 "type":"int",
+                 "value":1
+                }, 
+                {
+                 "name":"padding-right",
+                 "type":"int",
+                 "value":1
+                }, 
+                {
+                 "name":"padding-top",
+                 "type":"int",
+                 "value":0
+                }, 
+                {
                  "name":"tier",
                  "type":"int",
                  "value":3
@@ -985,6 +1085,26 @@
                  "value":12
                 }, 
                 {
+                 "name":"padding-bottom",
+                 "type":"int",
+                 "value":2
+                }, 
+                {
+                 "name":"padding-left",
+                 "type":"int",
+                 "value":1
+                }, 
+                {
+                 "name":"padding-right",
+                 "type":"int",
+                 "value":1
+                }, 
+                {
+                 "name":"padding-top",
+                 "type":"int",
+                 "value":0
+                }, 
+                {
                  "name":"tier",
                  "type":"int",
                  "value":3
@@ -1010,7 +1130,7 @@
          "value":""
         }],
  "renderorder":"right-down",
- "tiledversion":"1.8.1",
+ "tiledversion":"1.7.2",
  "tileheight":64,
  "tilesets":[
         {
@@ -1019,6 +1139,6 @@
         }],
  "tilewidth":64,
  "type":"map",
- "version":"1.8",
+ "version":"1.6",
  "width":11
 }

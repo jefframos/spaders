@@ -3,7 +3,7 @@
  "infinite":false,
  "layers":[
         {
-         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 66, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 66, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 66, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 66, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 66, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 66, 66, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":16,
          "id":115,
          "name":"Copy of Dagger",
@@ -27,7 +27,7 @@
                 {
                  "name":"padding-bottom",
                  "type":"int",
-                 "value":2
+                 "value":1
                 }, 
                 {
                  "name":"padding-left",
@@ -60,7 +60,7 @@
                  "value":0
                 }],
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":16,
          "x":0,
          "y":0
@@ -123,7 +123,7 @@
                  "value":0
                 }],
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":16,
          "x":0,
          "y":0
@@ -186,7 +186,7 @@
                  "value":0
                 }],
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":16,
          "x":0,
          "y":0
@@ -249,7 +249,7 @@
                  "value":0
                 }],
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":16,
          "x":0,
          "y":0
@@ -312,7 +312,7 @@
                  "value":0
                 }],
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":16,
          "x":0,
          "y":0
@@ -375,7 +375,7 @@
                  "value":0
                 }],
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":16,
          "x":0,
          "y":0
@@ -438,7 +438,7 @@
                  "value":0
                 }],
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":16,
          "x":0,
          "y":0
@@ -501,7 +501,7 @@
                  "value":0
                 }],
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":16,
          "x":0,
          "y":0
@@ -564,7 +564,7 @@
                  "value":0
                 }],
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":16,
          "x":0,
          "y":0
@@ -627,7 +627,7 @@
                  "value":0
                 }],
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":16,
          "x":0,
          "y":0
@@ -690,7 +690,7 @@
                  "value":0
                 }],
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":16,
          "x":0,
          "y":0
@@ -753,7 +753,7 @@
                  "value":0
                 }],
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":16,
          "x":0,
          "y":0
@@ -816,7 +816,7 @@
                  "value":0
                 }],
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":16,
          "x":0,
          "y":0
@@ -879,7 +879,7 @@
                  "value":0
                 }],
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":16,
          "x":0,
          "y":0
@@ -942,7 +942,7 @@
                  "value":0
                 }],
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":16,
          "x":0,
          "y":0
@@ -1005,12 +1005,12 @@
                  "value":0
                 }],
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":16,
          "x":0,
          "y":0
         }],
- "nextlayerid":116,
+ "nextlayerid":117,
  "nextobjectid":1,
  "orientation":"orthogonal",
  "properties":[
@@ -1030,7 +1030,7 @@
          "value":"Weapons 1"
         }],
  "renderorder":"right-down",
- "tiledversion":"1.8.1",
+ "tiledversion":"1.7.2",
  "tileheight":64,
  "tilesets":[
         {
@@ -1043,6 +1043,6 @@
         }],
  "tilewidth":64,
  "type":"map",
- "version":"1.8",
+ "version":"1.6",
  "width":16
 }

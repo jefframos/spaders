@@ -25,7 +25,21 @@ export default {
                 { isBlock: false, color: config.colors.darkSkin, life: 3.3 },
                 { isBlock: true, color: config.colors.block }
             ],
-            dark:0x111111
+            dark: 0x111111,
+            fillBarColor: config.colors.green,
+            background: 0x111111,
+            fontColor: 0xFFFFFF,
+            buttonData:{
+                fontColor: 0xFFFFFF,
+                levelCompleteColor:config.colors.blue2,
+                tierCompleteColor:config.colors.purple,
+                buttonStandardColor:0x333333
+            },
+            grid: {
+                color: 0xFFFFFF,
+                sprite: "largeCard.png",
+                minAlpha: 0
+            }
         },
         {
             list: [//syinth
@@ -50,7 +64,21 @@ export default {
                 { isBlock: false, color: 0xd30cb8, life: 3.3 },
                 { isBlock: true, color: config.colors.block }
             ],
-            dark:0x111111
+            dark: 0x111111,
+            fillBarColor: 0xffd319,
+            background: 0x111111,
+            fontColor: 0xFFFFFF,
+            buttonData:{
+                fontColor: 0xFFFFFF,
+                levelCompleteColor:config.colors.blue2,
+                tierCompleteColor:config.colors.purple,
+                buttonStandardColor:0x333333
+            },
+            grid: {
+                color: 0xFFFFFF,
+                sprite: "largeCard.png",
+                minAlpha: 0
+            }
         },
         {
             list: [//gb
@@ -75,7 +103,21 @@ export default {
                 { isBlock: false, color: 0x3b3c2e, life: 3.3 },
                 { isBlock: true, color: config.colors.block }
             ],
-            dark:0x182018
+            dark: 0x182018,
+            fillBarColor: 0x85cd6e,
+            background: 0xCADCA0,
+            fontColor: 0x182018,
+            buttonData:{
+                fontColor: 0xFFFFFF,
+                levelCompleteColor:0x89c077,
+                tierCompleteColor:0x65b26f,
+                buttonStandardColor:0x3f7e5d
+            },
+            grid: {
+                color: 0x182018,
+                sprite: "innerBorder.png",
+                minAlpha: 0.5
+            }
         },
         {
             list: [//poke
@@ -100,8 +142,29 @@ export default {
                 { isBlock: false, color: 0x786048, life: 3.3 },
                 { isBlock: true, color: config.colors.block }
             ],
-            dark:0x333333
+            dark: 0x333333,
+            fillBarColor: 0x4890a8,
+            background: 0x333333,
+            fontColor: 0xFFFFFF,
+            buttonData:{
+                fontColor: 0xFFFFFF,
+                levelCompleteColor:config.colors.blue2,
+                tierCompleteColor:config.colors.purple,
+                buttonStandardColor:0x444444
+            },
+            grid: {
+                color: 0xFFFFFF,
+                sprite: "largeCard.png",
+                minAlpha: 0
+            }
         }
-    ]
+    ],
+
+    getCurrentColorScheme() {
+        let scheme = window.COOKIE_MANAGER.stats.colorPalletID;
+
+        return this.colorSchemes[scheme];
+
+    },
 
 }

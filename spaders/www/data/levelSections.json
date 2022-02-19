@@ -5,6 +5,7 @@
     "sections": [
         {
             "color": "0xDDDDDD",
+            "ignore": false,
             "name": "Game Boy",
             "displayName": "Video Game History",
             "imageSrc": "",
@@ -30,6 +31,7 @@
         },
         {
             "color": "0xDDDDDD",
+            "ignore": false,
             "name": "pokemon",
             "displayName": "Video Game History",
             "imageSrc": "",
@@ -47,6 +49,7 @@
         },
         {
             "color": "0xDDDDDD",
+            "ignore": false,
             "name": "Easy",
             "displayName": "Video Game History",
             "imageSrc": "",
@@ -69,9 +72,10 @@
                     "dataPath": "how-to-play/things.json"
                 }
             ]
-        },        
+        },
         {
             "color": "0xDDDDDD",
+            "ignore": false,
             "name": "Medium",
             "displayName": "Video Game History",
             "imageSrc": "",
@@ -93,6 +97,7 @@
         },
         {
             "color": "0xDDDDDD",
+            "ignore": false,
             "name": "Synthwave",
             "displayName": "Video Game History",
             "imageSrc": "",
@@ -106,19 +111,7 @@
         },
         {
             "color": "0xDDDDDD",
-            "name": "Bossa",
-            "displayName": "Video Game History",
-            "imageSrc": "",
-            "colorPalletId": 1,
-            "levels": [
-                {
-                    "name": "---",
-                    "dataPath": "how-to-play/bossa.json"
-                }                
-            ]
-        },
-        {
-            "color": "0xDDDDDD",
+            "ignore": false,
             "name": "Large",
             "displayName": "Video Game History",
             "imageSrc": "",
@@ -127,7 +120,21 @@
                 {
                     "name": "---",
                     "dataPath": "movies/moviesLevels1.json"
-                }                
+                }
+            ]
+        },
+        {
+            "color": "0xDDDDDD",
+            "ignore": true,
+            "name": "Bossa",
+            "displayName": "Video Game History",
+            "imageSrc": "",
+            "colorPalletId": 1,
+            "levels": [
+                {
+                    "name": "---",
+                    "dataPath": "how-to-play/bossa.json"
+                }
             ]
         }
     ]

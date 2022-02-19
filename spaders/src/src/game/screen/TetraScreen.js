@@ -244,9 +244,7 @@ export default class TetraScreen extends Screen {
 	}
 	generateImage(levelData, size = 24, paddingBottom = 0, schemeID = 0) {
 
-		console.log(levelData.idSaveData)
 		if (window.imageThumbs[levelData.idSaveData]) {
-			console.log('cached')
 			let sprite = window.imageThumbs[levelData.idSaveData]
 			sprite.scale.set(1);
 			let copy = new PIXI.Sprite();
@@ -430,7 +428,22 @@ export default class TetraScreen extends Screen {
 				this.nextTutorial();
 			}, 2000);
 		}
+
+
+		window.COOKIE_MANAGER.onChangeColors.add(() => {
+			this.updateColorScheme();
+		})
+
+		this.updateColorScheme();
 	}
+
+	updateColorScheme() {
+		let colorScheme = colorSchemes.getCurrentColorScheme();
+		this.timerRect.updateColor(colorScheme.fontColor);
+		this.movesRect.updateColor(colorScheme.fontColor);
+		this.scoreRect.updateColor(colorScheme.fontColor);
+	}
+
 	nextTutorial() {
 		if (this.currentTutorial >= this.tutorial.length) {
 			this.tutorialOverlay.visible = false;

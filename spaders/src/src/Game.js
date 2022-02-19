@@ -3,6 +3,7 @@ import ScreenManager from './screenManager/ScreenManager';
 import config from './config';
 import TweenLite from 'gsap';
 import TweenMax from 'gsap';
+import colorSchemes from './colorSchemes';
 export default class Game {
 
 	constructor() {
@@ -119,32 +120,45 @@ export default class Game {
 	onProgress(progress) {
 		// // console.log(progress.progress);
 	}
+	updateProgress(progress) {
+		if (progress > 0.05) {
+			this.infoLabel.text = Math.floor(progress) + "%";
+			this.infoLabel.visible = true;
+			this.infoLabel.pivot.x = this.infoLabel.width / 2
+			this.infoLabel.x = this.barSize.width / 2
+			let scale = Math.max(0.2, progress / 100)
+			this.loadingBarFill.scale.x = scale;
+		}
+	}
 	onCompleteLoad() {
 
 		this.resize2()
 		this.buildApplication();
 	}
 	addLoading() {
+
+		let colors = colorSchemes.getCurrentColorScheme();
+
 		this.tapToStart = new PIXI.Container();
-		this.backTapShape = new PIXI.Graphics().beginFill(config.colors.background).drawRect(0, 0, 4000, 4000);
+		this.backTapShape = new PIXI.Graphics().beginFill(colors.background).drawRect(0, 0, 4000, 4000);
 		this.tapToStart.addChild(this.backTapShape);
 		this.stage.addChild(this.tapToStart);
-		this.infoLabel = new PIXI.Text('', { font: '16px', fill: config.colors.white, fontFamily: window.STANDARD_FONT1, stroke: 0x000000,
-		strokeThickness: 5 });
+		this.infoLabel = new PIXI.Text('', { font: '16px', fill: colors.fontColor, fontFamily: window.STANDARD_FONT1 });
+		// , stroke: 0x000000,		strokeThickness: 5 });
 		this.infoLabel.pivot.x = this.infoLabel.width / 2
 		this.infoLabel.pivot.y = this.infoLabel.height / 2
 		this.tapToStart.addChild(this.infoLabel)
-		
-		this.barSize = {width : 230, height:30}
+
+		this.barSize = { width: 230, height: 30 }
 
 		this.round = this.barSize.height / 2
-        this.sizeHeight = this.barSize.height
-        this.sizeWidth = this.barSize.width
+		this.sizeHeight = this.barSize.height
+		this.sizeWidth = this.barSize.width
 
-		this.infoLabel.x = this.barSize.width /2//- this.infoLabel.width / 2
-		this.infoLabel.y =this.barSize.height /2 - 40//- this.infoLabel.height / 2
+		this.infoLabel.x = this.barSize.width / 2//- this.infoLabel.width / 2
+		this.infoLabel.y = this.barSize.height / 2 - 40//- this.infoLabel.height / 2
 
-		this.loadingBar = new PIXI.Graphics().beginFill(config.colors.white).drawRoundedRect(0, 0, this.sizeWidth, this.sizeHeight, this.round);
+		this.loadingBar = new PIXI.Graphics().beginFill(colors.fontColor).drawRoundedRect(0, 0, this.sizeWidth, this.sizeHeight, this.round);
 		//this.loadingBar.cacheAsBitmap = true;
 
 		this.loadingBarFillBack = new PIXI.Graphics().beginFill(config.colors.background).drawRoundedRect(0, 0, this.sizeWidth - this.round / 2, this.sizeHeight * 0.75, this.round * 0.75);
@@ -152,26 +166,25 @@ export default class Game {
 		this.loadingBarFillBack.y = this.round / 4
 
 		let loaderColors = [
-			config.colors.red,
-			config.colors.purple,
-			config.colors.blue,
-			config.colors.pink,
-			config.colors.green,
-			config.colors.blue2,
-			config.colors.red2,
+			colors.list[0].color,
+			colors.list[1].color,
+			colors.list[2].color,
+			colors.list[3].color,
+			colors.list[4].color,
+			colors.list[5].color
 		]
 
 		console.log("TIMES LOADED", window.COOKIE_MANAGER.stats.timesLoaded)
 		let timesLoaded = window.COOKIE_MANAGER.stats.timesLoaded || 1;
 		timesLoaded %= loaderColors.length;
-		
+
 
 		this.loadingBarFill = new PIXI.Graphics().beginFill(loaderColors[timesLoaded]).drawRoundedRect(0, 0, this.sizeWidth - this.round / 2, this.sizeHeight * 0.75, this.round * 0.75);
 		this.loadingBarFill.x = this.round / 4
 		this.loadingBarFill.y = this.round / 4
 
 		this.loadingBarFill.scale.x = 0.2;
-		TweenMax.to(this.loadingBarFill.scale, 1 + Math.random(), {x:0.6 + Math.random() * 0.3})
+		//TweenMax.to(this.loadingBarFill.scale, 1 + Math.random(), {x:0.6 + Math.random() * 0.3})
 
 		this.infoLabel.visible = true;
 
@@ -179,7 +192,7 @@ export default class Game {
 		this.loadingBar.addChild(this.loadingBarFillBack)
 		this.loadingBar.addChild(this.loadingBarFill)
 		this.loadingBar.addChild(this.infoLabel)
-		
+
 		this.resize2();
 
 	}
@@ -194,7 +207,7 @@ export default class Game {
 		this.infoLabel.visible = true;
 
 		TweenMax.killTweensOf(this.loadingBarFill.scale);
-		TweenMax.to(this.loadingBarFill.scale, 0.3, {x:1})
+		TweenMax.to(this.loadingBarFill.scale, 0.3, { x: 1 })
 
 		this.resize2()
 

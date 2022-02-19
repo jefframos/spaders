@@ -46,7 +46,11 @@ export default class UIButton1 extends PIXI.Container {
 		this.onClick.dispatch();
 		window.SOUND_MANAGER.play('tap2', { volume: 0.5 })
 	}
-
+	updateTextColor(color) {
+		if(this.movesLabel){
+			this.movesLabel.style.fill = color;
+		}
+	}
 	addLabelLeft(label) {
 		this.movesLabel = new PIXI.Text(label, { font: '18px', fill: this.backShape.tint, align: 'right', fontWeight: '300', fontFamily: window.STANDARD_FONT1 });
 		this.movesLabel.pivot.x = this.movesLabel.width;

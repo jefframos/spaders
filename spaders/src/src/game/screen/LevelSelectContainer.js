@@ -145,8 +145,15 @@ export default class LevelSelectContainer extends PIXI.Container {
 
         // this.center2 = new PIXI.Graphics().beginFill(0xF00FFF).drawCircle(0, 0, 20)
         // this.levelsContainer.addChild(this.center2)
+        window.COOKIE_MANAGER.onChangeColors.add(() => {
+			this.updateColorScheme();
+		})
 
+		this.updateColorScheme();
 
+    }
+    updateColorScheme(){
+        let colorScheme = colorSchemes.getCurrentColorScheme();
     }
     refreshAll(){
         this.refreshNavButtons();
@@ -193,10 +200,13 @@ export default class LevelSelectContainer extends PIXI.Container {
             if (finishedLevels >= countLevels) {
 
 
-                navButton.setColor(config.colors.blue2)
+                navButton.setCompleteState()
+                //navButton.setColor(config.colors.blue2)
                 //navButton.setColor(colorSchemes.colorSchemes[navButton.section.colorPalletId].list[3].color)
                 navButton.updateLabel('COMPLETED');
                 navButton.hideProgressBar();
+            }else{
+                navButton.setStandardState();
             }
             if(debugThumb){
                 navButton.updateLabelTop('~'+utils.convertNumToTime(Math.ceil(estimatedTime)) + '\n' +'~'+utils.convertNumToTime(Math.ceil(estimatedTimeHard)));
@@ -549,7 +559,9 @@ export default class LevelSelectContainer extends PIXI.Container {
         levelTierButton.updateIcon(this.gameScreen.generateImage(dataFirstLevel, 24, 0, dataFirstLevel.colorPalletId), 0.35,{ x: 0, y: -10 });
         
         if (count >= data.length) {
-            levelTierButton.setColor(config.colors.purple)
+
+            levelTierButton.setCompleteState()
+            //levelTierButton.setColor(config.colors.purple)
             levelTierButton.updateLabel('COMPLETED');
             levelTierButton.hideProgressBar();
         } else {
@@ -558,6 +570,8 @@ export default class LevelSelectContainer extends PIXI.Container {
             levelTierButton.setProgressBar(count / data.length);
             levelTierButton.updateLabel(count + "/"+data.length, { x: 0, y: -35 });
             console.log("UPDATE STUFF HERE", data.length, count)
+
+            levelTierButton.setStandardState()
         }
 
         let debugThumb = window.COOKIE_MANAGER.debug.showAllThumbs;
@@ -578,18 +592,20 @@ export default class LevelSelectContainer extends PIXI.Container {
                 new PIXI.Sprite.fromImage(window.iconsData.time));
             }
 
-            levelButton.setColor(colorSchemes.colorSchemes[data.colorPalletId].list[4].color)
+            levelButton.setCompleteStateLevel()
+            //levelButton.setColor(colorSchemes.colorSchemes[data.colorPalletId].list[4].color)
         } else {
             levelButton.updateLabelTop("~" + data.estimateTime2,
                 new PIXI.Sprite.fromImage(window.iconsData.time));
             levelButton.updateIcon(this.gameScreen.generateImage(window.questionMark));
             levelButton.updateIcon(this.gameScreen.generateImage(window.questionMark));
+            levelButton.setStandardState()
         }
     }
 
     addCard(data) {
 
-        console.log(data);
+        //console.log(data);
 
         let levelButton = new SquareButton(this.unscaledCardSize);
         levelButton.updateLabel(data.levelName);

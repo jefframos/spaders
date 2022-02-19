@@ -1,8 +1,11 @@
 import * as PIXI from 'pixi.js';
 import config from '../../config';
 import utils from '../../utils';
+import color from '../../color';
 import StarParticle from './StarParticle';
 import TweenLite from 'gsap';
+import colorSchemes from '../../colorSchemes';
+import ColorTweens from './ColorTweens';
 
 export default class BackgroundEffects extends PIXI.Container {
 	constructor() {
@@ -13,17 +16,17 @@ export default class BackgroundEffects extends PIXI.Container {
 		this.background = new PIXI.Container();
 		this.addChild(this.background);
 
-		
+
 		//this.backgroundImage = PIXI.Sprite.fromImage("./assets/images/background.png");
 		//this.background.addChild(this.backgroundImage);
-		this.backgroundShape = new PIXI.Graphics().beginFill(config.colors.background).drawRect(0, 0, 10, 10);
+		this.backgroundShape = new PIXI.Graphics().beginFill(0xFFFFFF).drawRect(0, 0, 10, 10);
 		this.background.addChildAt(this.backgroundShape, 0);
 		//this.backgroundImage.anchor.set(0.5)
-		
+
 		//this.backgroundImage.alpha = 0.5
 
 		//this.backgroundImage.blendMode = PIXI.BLEND_MODES.ADD
-		
+
 		this.starsContainer = new PIXI.Container();
 		this.addChild(this.starsContainer);
 
@@ -32,7 +35,7 @@ export default class BackgroundEffects extends PIXI.Container {
 
 
 		this.addStars();
-	
+
 
 		this.starsMoveTimer = 0;
 
@@ -45,9 +48,24 @@ export default class BackgroundEffects extends PIXI.Container {
 
 
 		window.fxSpeed = 1;
+
+
+
+		window.COOKIE_MANAGER.onChangeColors.add(() => {
+			this.updateBackgroundColor();
+		})
+		this.updateBackgroundColor();
 		// let center = new PIXI.Graphics().beginFill(0xFF0000).drawCircle(0,0,10);
 		// this.starsContainer.addChild(center)
 
+	}
+	updateBackgroundColor() {
+		window.colorTweenManager.killColorTween(this.backgroundShape);
+		window.colorTweenManager.addColorTween(
+			this.backgroundShape,
+			this.backgroundShape.tint,
+			colorSchemes.getCurrentColorScheme().background)
+		//this.backgroundShape.tint = colorSchemes.getCurrentColorScheme().background;
 	}
 	resize(scaledResolution, innerResolution) {
 
@@ -66,9 +84,9 @@ export default class BackgroundEffects extends PIXI.Container {
 		//this.starsContainer.y = -innerResolution.height / 2
 
 	}
-	updateColors(colorList){
+	updateColors(colorList) {
 		for (var i = 0; i < this.stars.length; i++) {
-			this.stars[i].graphics.tint = colorList[ Math.floor(Math.random() * colorList.length * 0.5)].color;
+			this.stars[i].graphics.tint = colorList[Math.floor(Math.random() * colorList.length * 0.5)].color;
 		}
 	}
 	changeStates(type = 'start') {
@@ -89,9 +107,9 @@ export default class BackgroundEffects extends PIXI.Container {
 	update(delta) {
 
 		//console.log(this.stars)
-		if(window.fxSpeed > 1){
+		if (window.fxSpeed > 1) {
 			window.fxSpeed -= delta * 5;
-			if(window.fxSpeed < 1){
+			if (window.fxSpeed < 1) {
 				window.fxSpeed = 1;
 			}
 		}
@@ -99,7 +117,7 @@ export default class BackgroundEffects extends PIXI.Container {
 
 		//console.log(this.currentSpeed.y, delta)
 		let spd = this.currentSpeed.y * delta;
-		if(spd){
+		if (spd) {
 			for (var i = 0; i < this.stars.length; i++) {
 				this.stars[i].update(this.currentSpeed.y * delta, this.innerResolution);
 			}
@@ -113,7 +131,7 @@ export default class BackgroundEffects extends PIXI.Container {
 		l = Math.max(l, 1)
 		this.stars = [];
 		for (var i = 0; i < totalStars; i++) {
-			let dist = Math.random() * (l *2) + l;
+			let dist = Math.random() * (l * 2) + l;
 			let tempStar = new StarParticle(dist);
 			tempStar.alpha = (Math.min(dist, 3) / 3 * 0.4) + 0.2
 			let toClose = true;

@@ -1,4 +1,5 @@
 import utils from './utils';
+import ColorTweenManager from './color';
 import config from './config';
 import Game from './Game';
 import GameData from './game/GameData';
@@ -20,6 +21,8 @@ console.log('version', version);
 window.CARD_ID = 0;
 
 window.imageThumbs = {};
+
+window.colorTweenManager = new ColorTweenManager();
 
 window.ENEMIES = {
 	list: [
@@ -208,7 +211,13 @@ PIXI.loader
 	.add('./assets/fonts/stylesheet.css')
 	.add('./assets/levels.json')
 	.add('./assets/levelsRaw.json')
-	.load(loadJsons);
+	.load(loadJsons)
+	.onProgress.add(() => {
+		//console.log(PIXI.loader.progress);
+		if (window.game) {
+			window.game.updateProgress(PIXI.loader.progress * 0.75);
+		}
+	});
 
 window.levelsJson = ""
 
@@ -223,6 +232,17 @@ function loadJsons() {
 
 	PIXI.loader.add(jsonPath + window.levelSections.question.dataPath)
 
+
+	for (let index = window.levelSections.sections.length-1; index >= 0 ; index--) {
+		const element = window.levelSections.sections[index];
+		console.log(element)
+		if(element.ignore){
+			window.levelSections.sections.splice(index, 1)
+		}
+		
+	}
+
+	console.log("--",window.levelSections)
 	window.levelSections.sections.forEach(section => {
 		//console.log(section)
 		if (section.imageSrc) {
@@ -236,7 +256,12 @@ function loadJsons() {
 
 
 
-	PIXI.loader.load(configGame);
+	PIXI.loader.load(configGame).onProgress.add(() => {
+		//console.log(PIXI.loader.progress);
+		if (window.game) {
+			window.game.updateProgress(75 + PIXI.loader.progress * 0.25);
+		}
+	});
 	// .add('./data/levelSections.json')
 	// .load(configGame);
 }
@@ -261,7 +286,7 @@ function extractData(element) {
 		data.levelName = element.name;
 		let i = element.width - 1;
 		let j = element.height - 1;
-		data.tier = findPropertyValue(element.properties, "tier");
+		data.tier = 0//findPropertyValue(element.properties, "tier");
 		data.padding = {
 			left: findPropertyValue(element.properties, "padding-left"), //| 0,
 			right: findPropertyValue(element.properties, "padding-right"), //| 0,
@@ -329,7 +354,8 @@ function configGame() {
 	window.levelSections.sections.forEach(section => {
 
 		//show the main sections
-		//console.log("section", section)
+
+
 
 		let palletID = section.colorPalletId;
 
@@ -358,7 +384,7 @@ function configGame() {
 				let isAddon = layer.visible && layer.name.search("_ADDON") >= 0
 				layer.isAddon = isAddon;
 				let data = extractData(layer);
-		
+
 				if (layer.visible && sectionLevels.length == 1 && isAddon) {
 					sectionLevels[0].addOn = data.addOn;
 				}
@@ -436,6 +462,8 @@ function configGame() {
 			}
 
 		});
+
+
 	});
 
 	window.levelsRawJson = PIXI.loader.resources["./data/gameboy/gameboy1.json"].data
@@ -450,8 +478,8 @@ function configGame() {
 
 		let data = extractData(element);
 
-		
-let dataa = null;
+
+		let dataa = null;
 		if (window.levelData.length == 1 && isAddon) {
 			window.levelData[0].addOn = data.addOn;
 			dataa = window.levelData[0];
@@ -462,7 +490,7 @@ let dataa = null;
 		} else if (data) {
 			window.levelData.push(data)
 		}
-		
+
 		if (isAddon) {
 			utils.paddingMatrix(data.addOn, dataa.padding);
 		}

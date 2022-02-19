@@ -163,7 +163,19 @@ export default class StartScreenContainer extends PIXI.Container {
 
 		this.updateLinesColor();
 
-	}
+		window.COOKIE_MANAGER.onChangeColors.add(() => {
+			this.updateColorScheme();
+		})
+
+		this.updateColorScheme();
+
+    }
+    updateColorScheme(){
+        let colorScheme = colorSchemes.getCurrentColorScheme();
+
+		this.gameBy.style.fill = colorScheme.fontColor
+		this.logoLabel.style.fill = colorScheme.fontColor
+    }
 	updateLinesColor() {
 		console.log(window.COOKIE_MANAGER.stats.colorPalletID)
 		let colors = colorSchemes.colorSchemes[window.COOKIE_MANAGER.stats.colorPalletID]

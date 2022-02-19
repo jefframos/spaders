@@ -1,5 +1,6 @@
 import TweenMax from 'gsap';
 import * as PIXI from 'pixi.js';
+import colorSchemes from '../../colorSchemes';
 import config from '../../config';
 import utils from '../../utils';
 
@@ -43,19 +44,35 @@ export default class ProgressBar extends PIXI.Container {
         this.tapToStart.addChild(this.loadingBarFill)
 
         //this.setProgressBar(Math.random())
+        this.currentValue = 0;
 
+        window.COOKIE_MANAGER.onChangeColors.add(() => {
+            this.updateColorScheme();
+        })
+
+        this.updateColorScheme();
+        this.currentColor
     }
-    setProgressBar(value = 0) {
+    updateColorScheme() {
+        let colorScheme = colorSchemes.getCurrentColorScheme();
+        this.currentColor = colorScheme.fillBarColor;
+        this.setProgressBar(this.currentValue, colorScheme.fillBarColor)
+    }
+    setProgressBar(value = 0, color = null) {
         if (value <= 0) {
             return;
         }
+        if(color === null){
+            color = this.currentColor;
+        }
         this.loadingBarFill.visible = true;
         this.loadingBarFill.clear()
-        value = Math.max(value, 0.075);
-        this.loadingBarFill.beginFill(config.colors.blue).drawRoundedRect(0, 0, (this.sizeWidth - this.round / 2) * value, this.sizeHeight * 0.75, this.round * 0.75);
+        value = Math.max(value, 0.1);
+        this.currentValue = value;
+        this.loadingBarFill.beginFill(color).drawRoundedRect(0, 0, (this.sizeWidth - this.round / 2) * value, this.sizeHeight * 0.75, this.round * 0.75);
         this.loadingBarFill.endFill();
 
-        console.log("UPDATE STUFF NEW PROGRESS BAR", this.loadingBarFill)
+        //console.log("UPDATE STUFF NEW PROGRESS BAR", this.loadingBarFill)
 
     }
 }

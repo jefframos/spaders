@@ -1,6 +1,7 @@
 import TweenMax from 'gsap';
 import * as PIXI from 'pixi.js';
 import signals from 'signals';
+import colorSchemes from '../../colorSchemes';
 import config from '../../config';
 import utils from '../../utils';
 export default class Grid extends PIXI.Container {
@@ -74,21 +75,23 @@ export default class Grid extends PIXI.Container {
 		this.resetGrid();
 		let gridContainer = new PIXI.Container();
 
+		let colorScheme = colorSchemes.getCurrentColorScheme().grid;
+
 		for (var i = GRID.i - 1; i >= 0; i--) {
 			let gridLine = [];
 			for (var j = GRID.j - 1; j >= 0; j--) {
 				//let gridSquare = PIXI.Sprite.fromFrame('gridSquare.png')
-				let gridSquare = PIXI.Sprite.fromFrame('largeCard.png')
+				let gridSquare = PIXI.Sprite.fromFrame(colorScheme.sprite)
 				gridSquare.scale.set(CARD.width / gridSquare.width);
 				gridSquare.x = i * CARD.width;
 				gridSquare.y = j * CARD.height;
 
-				gridSquare.alphaMin = Math.random() * 0.025 + 0.025;
-				gridSquare.alpha = Math.random() * 0.05 + 0.05
+				gridSquare.alphaMin = Math.random() * 0.025 + 0.025 + colorScheme.minAlpha;
+				gridSquare.alpha = Math.random() * 0.05 + 0.05 + colorScheme.minAlpha
 				gridSquare.speed = 0.35;
 				gridSquare.startAlpha = gridSquare.alpha;
 				gridSquare.sin = Math.random() * Math.PI * 2;
-
+				gridSquare.tint = colorScheme.color;
 				gridContainer.addChild(gridSquare)
 
 				this.grids.push(gridSquare);

@@ -1,5 +1,6 @@
 import TweenMax from 'gsap';
 import * as PIXI from 'pixi.js';
+import colorSchemes from '../../colorSchemes';
 import config from '../../config';
 import utils from '../../utils';
 import ParticleSystem from '../effects/ParticleSystem';
@@ -57,15 +58,43 @@ export default class SquareButton extends PIXI.Container {
         this.squareButtonBackShape.on('pointerout', this.onPointerOut.bind(this));
         this.squareButtonBackShape.on('pointerup', this.onPointerUp.bind(this));
 
-        let sizeBar = {width:this.squareButtonShape.width * 0.8, height:this.squareButtonShape.height * 0.12}
+        let sizeBar = { width: this.squareButtonShape.width * 0.8, height: this.squareButtonShape.height * 0.12 }
         this.progressBar = new ProgressBar(sizeBar);
-       // this.progressBar.scale.set(0.5)
+        // this.progressBar.scale.set(0.5)
         this.progressBar.visible = false;
 
         this.progressBar.x = this.squareButtonShape.width / 2 - sizeBar.width / 2
-        this.progressBar.y = this.squareButtonShape.height  - sizeBar.height * 1.5
+        this.progressBar.y = this.squareButtonShape.height - sizeBar.height * 1.5
         //this.updateLabel("round_ar rlar")
         this.squareButtonShape.addChild(this.progressBar)
+
+        this.currentState = 0;
+
+        window.COOKIE_MANAGER.onChangeColors.add(() => {
+            this.updateColorScheme();
+        })
+
+        this.updateColorScheme();
+    }
+    updateColorScheme() {
+        let colorScheme = colorSchemes.getCurrentColorScheme().buttonData;
+
+        this.label.style.fill = colorScheme.fontColor;
+        this.labelTop.style.fill = colorScheme.fontColor;
+
+        switch (this.currentState) {
+            case 0:
+                this.setColor(colorScheme.buttonStandardColor);
+                break;
+            case 1:
+                this.setColor(colorScheme.tierCompleteColor);
+                break;
+            case 2:
+                this.setColor(colorScheme.levelCompleteColor);
+                break;
+            default:
+                break;
+        }
     }
     onPointerUp() {
         window.SOUND_MANAGER.play('tap', { volume: 0.5 })
@@ -138,7 +167,7 @@ export default class SquareButton extends PIXI.Container {
 
 
     }
-    updateLabel(text, offset = {x:0, y:0}) {
+    updateLabel(text, offset = { x: 0, y: 0 }) {
         this.label.text = text;
         this.label.visible = true;
 
@@ -148,23 +177,36 @@ export default class SquareButton extends PIXI.Container {
 
         this.label.pivot.x = this.label.width / 2 / this.label.scale.x
         this.label.pivot.y = this.label.height / this.label.scale.y;
-        this.label.x = this.squareButtonShape.width / 2 +offset.x// this.container.scale.x
+        this.label.x = this.squareButtonShape.width / 2 + offset.x// this.container.scale.x
         this.label.y = this.squareButtonShape.height * 0.93 + offset.y// this.container.scale.y
+    }
+    setStandardState() {
+        this.currentState = 0;
+        this.updateColorScheme();
+    }
+    setCompleteStateLevel() {
+        this.currentState = 2;
+        this.updateColorScheme();
+    }
+    setCompleteState() {
+        this.currentState = 1;
+        this.updateColorScheme();
     }
     updateIcon(graphic, scale = 0.45, offset = { x: 0, y: 0 }) {
         if (this.icon && this.icon.parent) {
             this.icon.parent.removeChild(this.icon);
         }
         this.icon = graphic
+        this.icon.scale.set(1)
         this.squareButtonShape.addChildAt(this.icon, 0)
         this.icon.x = offset.x
         this.icon.y = offset.y
         if (graphic.width > graphic.height) {
             this.icon.scale.set(this.buttonMask.width / (this.icon.width / this.icon.scale.x) * scale);
         } else {
-            this.icon.scale.set(this.buttonMask.height / (this.icon.height/ this.icon.scale.y )* scale);
+            this.icon.scale.set(this.buttonMask.height / (this.icon.height / this.icon.scale.y) * scale);
         }
-        
+
         this.icon.x = this.squareButtonShape.width / 2 - this.icon.width / 2 + offset.x
         this.icon.y = this.squareButtonShape.height / 2 - this.icon.height / 2 + offset.y
         //this.icon.mask = this.buttonMask

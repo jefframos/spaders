@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.1" orientation="orthogonal" renderorder="right-down" width="11" height="12" tilewidth="64" tileheight="64" infinite="0" nextlayerid="23" nextobjectid="1">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="11" height="12" tilewidth="64" tileheight="64" infinite="0" nextlayerid="23" nextobjectid="1">
  <editorsettings>
   <export target="../../../www/data/videogames/videogamesLevels2.json" format="json"/>
  </editorsettings>
@@ -10,6 +10,7 @@
  <tileset firstgid="1" source="../tilesets/spadersTileset.tsx"/>
  <layer id="9" name="Tetris" width="11" height="12" visible="0">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="7"/>
    <property name="j" type="int" value="8"/>
    <property name="padding-bottom" type="int" value="2"/>
@@ -17,7 +18,6 @@
    <property name="padding-right" type="int" value="1"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 4,4,1,1,1,0,2,0,0,0,0,
@@ -36,6 +36,7 @@
  </layer>
  <layer id="13" name="1952 - OXO" width="11" height="12" visible="0">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="11"/>
    <property name="j" type="int" value="12"/>
    <property name="padding-bottom" type="int" value="2"/>
@@ -43,7 +44,6 @@
    <property name="padding-right" type="int" value="1"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 1,0,1,2,0,0,0,2,0,0,0,
@@ -62,6 +62,7 @@
  </layer>
  <layer id="22" name="Mouse Trap" width="11" height="12" visible="0">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="11"/>
    <property name="j" type="int" value="12"/>
    <property name="padding-bottom" type="int" value="2"/>
@@ -69,7 +70,6 @@
    <property name="padding-right" type="int" value="1"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,1,0,0,0,1,0,0,0,
@@ -88,6 +88,7 @@
  </layer>
  <layer id="14" name="Template" width="11" height="12" visible="0">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="8"/>
    <property name="j" type="int" value="11"/>
    <property name="padding-bottom" type="int" value="2"/>
@@ -95,7 +96,6 @@
    <property name="padding-right" type="int" value="1"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,
@@ -114,6 +114,7 @@
  </layer>
  <layer id="19" name="Pitfall" width="11" height="12" visible="0">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="8"/>
    <property name="j" type="int" value="11"/>
    <property name="padding-bottom" type="int" value="2"/>
@@ -121,7 +122,6 @@
    <property name="padding-right" type="int" value="1"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,1,0,0,0,0,
@@ -140,6 +140,7 @@
  </layer>
  <layer id="20" name="Duck Hunt" width="11" height="12" visible="0">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="9"/>
    <property name="j" type="int" value="9"/>
    <property name="padding-bottom" type="int" value="2"/>
@@ -147,7 +148,6 @@
    <property name="padding-right" type="int" value="1"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 4,4,4,4,0,0,0,0,0,0,0,
@@ -166,6 +166,7 @@
  </layer>
  <layer id="21" name="Asteroid" width="11" height="12" visible="0">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="5"/>
    <property name="j" type="int" value="9"/>
    <property name="padding-bottom" type="int" value="2"/>
@@ -173,7 +174,6 @@
    <property name="padding-right" type="int" value="1"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 9,10,10,10,9,0,0,0,0,0,0,
@@ -192,6 +192,7 @@
  </layer>
  <layer id="16" name="Pong" width="11" height="12" visible="0">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="7"/>
    <property name="j" type="int" value="9"/>
    <property name="padding-bottom" type="int" value="2"/>
@@ -199,7 +200,6 @@
    <property name="padding-right" type="int" value="1"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,1,0,0,5,0,0,0,0,
@@ -218,6 +218,7 @@
  </layer>
  <layer id="17" name="Maze" width="11" height="12">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="9"/>
    <property name="j" type="int" value="9"/>
    <property name="padding-bottom" type="int" value="2"/>
@@ -225,7 +226,6 @@
    <property name="padding-right" type="int" value="1"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,4,0,0,0,4,0,0,0,0,
@@ -244,6 +244,7 @@
  </layer>
  <layer id="15" name="Spacewar" width="11" height="12">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="7"/>
    <property name="j" type="int" value="10"/>
    <property name="padding-bottom" type="int" value="2"/>
@@ -251,7 +252,6 @@
    <property name="padding-right" type="int" value="1"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,2,2,2,0,0,0,0,0,0,
@@ -270,6 +270,7 @@
  </layer>
  <layer id="10" name="E.T." width="11" height="12">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="7"/>
    <property name="j" type="int" value="12"/>
    <property name="padding-bottom" type="int" value="2"/>
@@ -277,7 +278,6 @@
    <property name="padding-right" type="int" value="1"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 4,4,4,4,4,4,0,0,0,0,0,
@@ -296,6 +296,7 @@
  </layer>
  <layer id="11" name="Arrow" width="11" height="12" visible="0">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="7"/>
    <property name="j" type="int" value="8"/>
    <property name="padding-bottom" type="int" value="2"/>
@@ -303,7 +304,6 @@
    <property name="padding-right" type="int" value="1"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,9,0,0,0,0,0,0,0,
@@ -322,6 +322,7 @@
  </layer>
  <layer id="12" name="Copy of Tetris" width="11" height="12" visible="0">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="7"/>
    <property name="j" type="int" value="8"/>
    <property name="padding-bottom" type="int" value="2"/>
@@ -329,7 +330,6 @@
    <property name="padding-right" type="int" value="1"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 4,4,1,1,1,0,2,0,0,0,0,
@@ -348,10 +348,14 @@
  </layer>
  <layer id="6" name="Rainbow" width="11" height="12">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="7"/>
    <property name="j" type="int" value="11"/>
-   <property name="tier" type="int" value="1"/>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="padding-bottom" type="int" value="4"/>
+   <property name="padding-left" type="int" value="0"/>
+   <property name="padding-right" type="int" value="0"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
   </properties>
   <data encoding="csv">
 8,8,8,8,8,8,8,8,8,0,0,
@@ -370,6 +374,7 @@
  </layer>
  <layer id="3" name="Invader" width="11" height="12">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="6"/>
    <property name="j" type="int" value="10"/>
    <property name="padding-bottom" type="int" value="2"/>
@@ -377,7 +382,6 @@
    <property name="padding-right" type="int" value="1"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 8,8,8,8,8,8,0,0,0,0,0,
@@ -396,10 +400,14 @@
  </layer>
  <layer id="2" name="It's a me" width="11" height="12">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="8"/>
    <property name="j" type="int" value="12"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
    <property name="tier" type="int" value="2"/>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 7,7,7,0,0,0,0,0,0,0,0,
@@ -418,6 +426,7 @@
  </layer>
  <layer id="18" name="Jump Bug" width="11" height="12">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="9"/>
    <property name="j" type="int" value="11"/>
    <property name="padding-bottom" type="int" value="2"/>
@@ -425,7 +434,6 @@
    <property name="padding-right" type="int" value="1"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 2,2,2,0,0,0,0,0,0,0,0,
@@ -444,10 +452,14 @@
  </layer>
  <layer id="5" name="Skull" width="11" height="12" visible="0">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="9"/>
    <property name="j" type="int" value="12"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
    <property name="tier" type="int" value="3"/>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,7,7,7,7,7,0,0,0,0,
@@ -466,10 +478,14 @@
  </layer>
  <layer id="7" name="Superhard" width="11" height="12" visible="0">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="9"/>
    <property name="j" type="int" value="12"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
    <property name="tier" type="int" value="3"/>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 9,2,7,7,7,7,7,2,9,0,0,
@@ -488,10 +504,14 @@
  </layer>
  <layer id="8" name="Pac" width="11" height="12" visible="0">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="9"/>
    <property name="j" type="int" value="12"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
    <property name="tier" type="int" value="3"/>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 0,0,0,8,8,8,8,8,8,0,0,
@@ -510,10 +530,14 @@
  </layer>
  <layer id="4" name="Blue one" width="11" height="12" visible="0">
   <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="8"/>
    <property name="j" type="int" value="12"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
    <property name="tier" type="int" value="3"/>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
   </properties>
   <data encoding="csv">
 1,1,0,0,0,0,0,5,0,0,0,

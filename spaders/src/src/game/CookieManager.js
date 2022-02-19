@@ -88,6 +88,7 @@ export default class CookieManager {
 
 		this.onAddNewLevel = new signals.Signal()
 		this.onToggleDebug = new signals.Signal()
+		this.onChangeColors = new signals.Signal()
 	}
 	toogleDebug(id) {
 		this.debug.showAllThumbs = !this.debug.showAllThumbs;
@@ -95,8 +96,12 @@ export default class CookieManager {
 		this.onToggleDebug.dispatch();
 	}
 	updateColorPallete(id) {
+		if(this.stats.colorPalletID == id){
+			return;
+		}
 		this.stats.colorPalletID = id;
 		this.storeObject("stats", this.stats);
+		this.onChangeColors.dispatch();
 	}
 	addCombo() {
 		this.stats.totalCombos++

@@ -44,6 +44,13 @@ export default class UIRectLabel extends PIXI.Container {
 
 		this.updateLavel("00000")
 	}
+	updateColor(fontColor){
+		if(this.label){
+			this.label.style.fill = fontColor;
+			this.icon.tint = fontColor;
+		}
+
+	}
 	updateLavel(text, title, center = true) {
 		this.label.text = text;
 		this.title.text = title ? title : "";
