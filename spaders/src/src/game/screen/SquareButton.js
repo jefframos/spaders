@@ -11,8 +11,10 @@ export default class SquareButton extends PIXI.Container {
 
         this.unscaledCardSize = unscaledCardSize;
         this.container = new PIXI.Container();
-        this.squareButtonBackShape = PIXI.Sprite.fromFrame('largeCardBack.png');
-        this.squareButtonShape = PIXI.Sprite.fromFrame('largeCard.png');//new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
+        this.squareButtonBackShape = new PIXI.mesh.NineSlicePlane(
+            PIXI.Texture.fromFrame('largeCardBackPixel.png'), 20, 20, 20, 20)//= PIXI.Sprite.fromFrame('largeCardBack.png');
+        this.squareButtonShape = new PIXI.mesh.NineSlicePlane(
+            PIXI.Texture.fromFrame('largeCardPixel.png'), 20, 20, 20, 20)//new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
         //this.squareButtonShape.scale.set(this.unscaledCardSize.width / this.squareButtonShape.width)
         this.squareButtonShape.tint = 0x333333
         this.squareButtonBackShape.tint = 0x222222
@@ -82,6 +84,10 @@ export default class SquareButton extends PIXI.Container {
         this.label.style.fill = colorScheme.fontColor;
         this.labelTop.style.fill = colorScheme.fontColor;
 
+
+        if(this.iconBackground){
+            this.iconBackground.tint = colorScheme.buttonStandardDarkColor;
+        }
         switch (this.currentState) {
             case 0:
                 this.setColor(colorScheme.buttonStandardColor);
@@ -192,23 +198,39 @@ export default class SquareButton extends PIXI.Container {
         this.currentState = 1;
         this.updateColorScheme();
     }
-    updateIcon(graphic, scale = 0.45, offset = { x: 0, y: 0 }) {
+    updateIcon(graphic, scale = 0.45, offset = { x: 0, y: 0 }, hideBackground = false) {
         if (this.icon && this.icon.parent) {
             this.icon.parent.removeChild(this.icon);
         }
+
+        if(!this.iconBackground){
+            this.iconBackground = new PIXI.mesh.NineSlicePlane(
+                PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
+
+                this.squareButtonShape.addChildAt(this.iconBackground, 0)
+        }
         this.icon = graphic
         this.icon.scale.set(1)
-        this.squareButtonShape.addChildAt(this.icon, 0)
-        this.icon.x = offset.x
-        this.icon.y = offset.y
+        this.iconBackground.addChild(this.icon)
+        //this.icon.x = offset.x
+        //this.icon.y = offset.y
         if (graphic.width > graphic.height) {
-            this.icon.scale.set(this.buttonMask.width / (this.icon.width / this.icon.scale.x) * scale);
+            this.icon.scale.set(this.squareButtonBackShape.width / (this.icon.width / this.icon.scale.x) * scale);
         } else {
-            this.icon.scale.set(this.buttonMask.height / (this.icon.height / this.icon.scale.y) * scale);
+            this.icon.scale.set(this.squareButtonBackShape.height / (this.icon.height / this.icon.scale.y) * scale);
         }
 
-        this.icon.x = this.squareButtonShape.width / 2 - this.icon.width / 2 + offset.x
-        this.icon.y = this.squareButtonShape.height / 2 - this.icon.height / 2 + offset.y
+        this.iconBackground.width = this.icon.width + 10;
+        this.iconBackground.height = this.icon.height+ 10
+        this.icon.x = 5;
+        this.icon.y = 5;
+        this.iconBackground.x = this.squareButtonShape.width / 2 - this.iconBackground.width / 2 + offset.x
+        this.iconBackground.y = this.squareButtonShape.height / 2 - this.iconBackground.height / 2 + offset.y
+
+        if(hideBackground){
+            this.iconBackground.width = 0
+            this.iconBackground.height = 0
+        }
         //this.icon.mask = this.buttonMask
     }
 }

@@ -14,11 +14,13 @@ export default class InGameMenu extends PIXI.Container {
 
 
 		this.customWidth = 60;
-		this.backShape = new PIXI.Graphics();
-		this.backShape.beginFill(config.colors.white);
-		this.backShape.drawRoundedRect(0, 0, 290, 100, 20);
-		this.backShape.endFill();
-		this.backShape.alpha = 1
+
+
+		this.backShape = new PIXI.mesh.NineSlicePlane(
+			PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
+		this.backShape.width = 290
+		this.backShape.height = 100
+		this.backShape.tint = config.colors.white
 
 		this.positionSpring = new Spring();
 
@@ -26,18 +28,18 @@ export default class InGameMenu extends PIXI.Container {
 		this.openMenu.onClick.add(() => this.toggleState());
 
 		this.closeButton = new UIButton1(config.colors.background, window.iconsData.home, config.colors.white);
-        this.closeButton.onClick.add(() => {
-            this.state = 1;
-            this.onBack.dispatch()
-        });
-        this.closeButton.backShape.rotation = 0
+		this.closeButton.onClick.add(() => {
+			this.state = 1;
+			this.onBack.dispatch()
+		});
+		this.closeButton.backShape.rotation = 0
 
 		this.refreshButton = new UIButton1(config.colors.background, window.iconsData.reload, config.colors.white);
-        this.refreshButton.onClick.add(() => {
-            this.state = 1;
-            this.onRestart.dispatch()
-        });
-        this.refreshButton.backShape.rotation = 0
+		this.refreshButton.onClick.add(() => {
+			this.state = 1;
+			this.onRestart.dispatch()
+		});
+		this.refreshButton.backShape.rotation = 0
 
 		this.mainContainer.addChild(this.backShape);
 		this.mainContainer.scale.set(1.5)
@@ -58,18 +60,18 @@ export default class InGameMenu extends PIXI.Container {
 		// this.autoPlayButton.backShape.rotation = 0
 
 		this.toggleSound = new UIButton1(config.colors.background, window.iconsData.soundOn, config.colors.white);
-        this.toggleSound.onClick.add(() => {
-            let toggle = window.SOUND_MANAGER.toggleMute();
-            if (toggle) {
-                this.toggleSound.updateTexture(window.iconsData.soundOff);
-            } else {
-                this.toggleSound.updateTexture(window.iconsData.soundOn);
-            }
-        });
-        this.toggleSound.backShape.rotation = 0
-		if(!window.COOKIE_MANAGER.settings.sound){
-            this.toggleSound.updateTexture(window.iconsData.soundOff);
-        }
+		this.toggleSound.onClick.add(() => {
+			let toggle = window.SOUND_MANAGER.toggleMute();
+			if (toggle) {
+				this.toggleSound.updateTexture(window.iconsData.soundOff);
+			} else {
+				this.toggleSound.updateTexture(window.iconsData.soundOn);
+			}
+		});
+		this.toggleSound.backShape.rotation = 0
+		if (!window.COOKIE_MANAGER.settings.sound) {
+			this.toggleSound.updateTexture(window.iconsData.soundOff);
+		}
 
 		this.positionSpring.x = -this.backShape.width;
 		this.mainContainer.x = -this.backShape.width;
@@ -93,6 +95,8 @@ export default class InGameMenu extends PIXI.Container {
 
 		this.onBack = new signals.Signal()
 		this.onRestart = new signals.Signal()
+		this.onPause = new signals.Signal()
+		this.onUnPause = new signals.Signal()
 
 		this.state = 1;
 
@@ -101,33 +105,34 @@ export default class InGameMenu extends PIXI.Container {
 	toggleState() {
 		if (this.state == 1) {
 			this.state = 2;
-
-            if (window.SOUND_MANAGER.isMute) {
-                this.toggleSound.updateTexture(window.iconsData.soundOff);
-            } else {
-                this.toggleSound.updateTexture(window.iconsData.soundOn);
-            }
+			this.onPause.dispatch();
+			if (window.SOUND_MANAGER.isMute) {
+				this.toggleSound.updateTexture(window.iconsData.soundOff);
+			} else {
+				this.toggleSound.updateTexture(window.iconsData.soundOn);
+			}
 
 		} else {
-			this.state = 1;			
+			this.collapse();
 		}
 	}
-	collapse(){
+	collapse() {
 		this.state = 1;
+		this.onUnPause.dispatch();
 	}
 	update(delta) {
 
 		this.positionSpring.update();
-        if (this.state == 1) {
-            this.openMenu.updateTexture(window.iconsData.settings)
-            this.positionSpring.tx = this.backShape.width * this.mainContainer.scale.x + 50;
-            this.mainContainer.x = this.positionSpring.x//utils.lerp(this.mainContainer.x, this.backShape.width * this.mainContainer.scale.x + 50, 0.5);
-            this.mainContainer.alpha = utils.lerp(this.mainContainer.alpha, 0, 0.5);
-        } else {
-            this.openMenu.updateTexture(window.iconsData.cancel)
-            this.positionSpring.tx = -this.backShape.width * this.mainContainer.scale.x
-            this.mainContainer.x = this.positionSpring.x//utils.lerp(this.mainContainer.x, -this.backShape.width * this.mainContainer.scale.x, 0.5);
-            this.mainContainer.alpha = utils.lerp(this.mainContainer.alpha, 1, 0.5);
-        }
+		if (this.state == 1) {
+			this.openMenu.updateTexture(window.iconsData.settings)
+			this.positionSpring.tx = this.backShape.width * this.mainContainer.scale.x + 50;
+			this.mainContainer.x = this.positionSpring.x//utils.lerp(this.mainContainer.x, this.backShape.width * this.mainContainer.scale.x + 50, 0.5);
+			this.mainContainer.alpha = utils.lerp(this.mainContainer.alpha, 0, 0.5);
+		} else {
+			this.openMenu.updateTexture(window.iconsData.cancel)
+			this.positionSpring.tx = -this.backShape.width * this.mainContainer.scale.x
+			this.mainContainer.x = this.positionSpring.x//utils.lerp(this.mainContainer.x, -this.backShape.width * this.mainContainer.scale.x, 0.5);
+			this.mainContainer.alpha = utils.lerp(this.mainContainer.alpha, 1, 0.5);
+		}
 	}
 }

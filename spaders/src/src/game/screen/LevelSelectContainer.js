@@ -194,7 +194,7 @@ export default class LevelSelectContainer extends PIXI.Container {
 
                 
             }
-            navButton.updateLabel(finishedLevels + "/" + countLevels, { x: 0, y: -35 })
+            navButton.updateLabel(finishedLevels + "/" + countLevels, { x: 0, y: -25 })
             navButton.setProgressBar(finishedLevels / countLevels);
             // console.log('SECTION',colorSchemes.colorSchemes[navButton.section.colorPalletId].list[3].color)
             if (finishedLevels >= countLevels) {
@@ -367,7 +367,7 @@ export default class LevelSelectContainer extends PIXI.Container {
 
     buildBackButton() {
         let secButton = new SquareButton(this.unscaledCardSize)
-        secButton.updateIcon(PIXI.Sprite.fromImage(window.iconsData.back));
+        secButton.updateIcon(PIXI.Sprite.fromImage(window.iconsData.back), 0.4, {x:0,y:0}, true);
         secButton.buttonMode = true;
         secButton.interactive = true;
         this.gameScreen.resizeToFitAR(this.unscaledCardSize, secButton)
@@ -568,7 +568,7 @@ export default class LevelSelectContainer extends PIXI.Container {
 
             // finishedLevels + "/" + countLevels
             levelTierButton.setProgressBar(count / data.length);
-            levelTierButton.updateLabel(count + "/"+data.length, { x: 0, y: -35 });
+            levelTierButton.updateLabel(count + "/"+data.length, { x: 0, y: -25 });
             console.log("UPDATE STUFF HERE", data.length, count)
 
             levelTierButton.setStandardState()

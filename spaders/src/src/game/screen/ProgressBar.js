@@ -23,14 +23,27 @@ export default class ProgressBar extends PIXI.Container {
         this.sizeHeight = size.height
         this.sizeWidth = size.width
 
-        this.loadingBar = new PIXI.Graphics().beginFill(config.colors.white).drawRoundedRect(0, 0, this.sizeWidth, this.sizeHeight, this.round);
-        this.loadingBar.cacheAsBitmap = true;
-        this.loadingBarFillBack = new PIXI.Graphics().beginFill(config.colors.background).drawRoundedRect(0, 0, this.sizeWidth - this.round / 2, this.sizeHeight * 0.75, this.round * 0.75);
+        //this.loadingBar = new PIXI.Graphics().beginFill(config.colors.white).drawRoundedRect(0, 0, this.sizeWidth, this.sizeHeight, this.round);
+        this.loadingBar = new PIXI.mesh.NineSlicePlane(
+            PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
+        this.loadingBar.width = this.sizeWidth
+        this.loadingBar.height = this.sizeHeight
+        //this.loadingBar.cacheAsBitmap = true;
+        this.loadingBarFillBack = new PIXI.mesh.NineSlicePlane(
+            PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
+        this.loadingBarFillBack.width = this.sizeWidth- this.round / 2
+        this.loadingBarFillBack.height = this.sizeHeight- this.round / 2
+        this.loadingBarFillBack.tint = 0;
+        // = new PIXI.Graphics().beginFill(config.colors.background).drawRoundedRect(0, 0, this.sizeWidth - this.round / 2, this.sizeHeight * 0.75, this.round * 0.75);
         this.loadingBarFillBack.x = this.round / 4
         this.loadingBarFillBack.y = this.round / 4
         this.loadingBarFillBack.cacheAsBitmap = true;
 
-        this.loadingBarFill = new PIXI.Graphics().beginFill(config.colors.red).drawRoundedRect(0, 0, this.sizeWidth - this.round / 2, this.sizeHeight * 0.75, this.round * 0.75);
+        this.loadingBarFill = new PIXI.mesh.NineSlicePlane(
+            PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
+        this.loadingBarFill.width = this.sizeWidth- this.round / 2
+        this.loadingBarFill.height = this.sizeHeight- this.round / 2
+        this.loadingBarFill.tint = 0;
         this.loadingBarFill.x = this.round / 4
         this.loadingBarFill.y = this.round / 4
 
@@ -62,15 +75,15 @@ export default class ProgressBar extends PIXI.Container {
         if (value <= 0) {
             return;
         }
-        if(color === null){
+        if (color === null) {
             color = this.currentColor;
         }
         this.loadingBarFill.visible = true;
-        this.loadingBarFill.clear()
         value = Math.max(value, 0.1);
         this.currentValue = value;
-        this.loadingBarFill.beginFill(color).drawRoundedRect(0, 0, (this.sizeWidth - this.round / 2) * value, this.sizeHeight * 0.75, this.round * 0.75);
-        this.loadingBarFill.endFill();
+        this.loadingBarFill.tint = color;
+        this.loadingBarFill.width =  (this.sizeWidth - this.round / 2) * value//.beginFill(color).drawRoundedRect(0, 0, (this.sizeWidth - this.round / 2) * value, this.sizeHeight * 0.75, this.round * 0.75);
+        //this.loadingBarFill.endFill();
 
         //console.log("UPDATE STUFF NEW PROGRESS BAR", this.loadingBarFill)
 

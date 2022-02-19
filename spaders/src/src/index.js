@@ -202,6 +202,14 @@ window.SAVE_DATA = function (data, filename, type) {
 const sManager = new SoundManager();
 window.SOUND_MANAGER = sManager;
 
+// let tempTrailAdded = {}
+// colorSchemes.colorSchemes.forEach(element => {
+// 	if(!tempTrailAdded[element.grid.spriteTrail]){
+// 		PIXI.loader.add(element.grid.spriteTrail);
+// 		tempTrailAdded[element.grid.spriteTrail] = true;
+// 	}
+// });
+
 sManager.soundData.forEach(element => {
 	PIXI.loader.add(element.src);
 });

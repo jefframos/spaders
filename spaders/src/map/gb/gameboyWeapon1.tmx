@@ -10,7 +10,7 @@
  </properties>
  <tileset firstgid="1" source="../tilesets/spadersTileset.tsx"/>
  <tileset firstgid="65" source="../tilesets/gb.tsx"/>
- <layer id="115" name="Copy of Dagger" width="16" height="16">
+ <layer id="115" name="Copy of Dagger" width="16" height="16" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="1"/>
    <property name="i" type="int" value="9"/>
@@ -42,14 +42,14 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="71" name="Dagger" width="16" height="16" visible="0">
+ <layer id="71" name="Dagger" width="16" height="16">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="9"/>
    <property name="j" type="int" value="10"/>
    <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="1"/>
-   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-left" type="int" value="0"/>
+   <property name="padding-right" type="int" value="0"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
@@ -74,14 +74,14 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="72" name="Sword" width="16" height="16" visible="0">
+ <layer id="72" name="Sword" width="16" height="16">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="11"/>
    <property name="j" type="int" value="12"/>
    <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="1"/>
-   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-left" type="int" value="0"/>
+   <property name="padding-right" type="int" value="0"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
@@ -106,13 +106,13 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="89" name="Long Sword" width="16" height="16" visible="0">
+ <layer id="89" name="Long Sword" width="16" height="16">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="12"/>
    <property name="j" type="int" value="13"/>
    <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-left" type="int" value="0"/>
    <property name="padding-right" type="int" value="1"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
@@ -138,13 +138,13 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="110" name="_ADDONLongSword" width="16" height="16" visible="0">
+ <layer id="110" name="_ADDONLongSword" width="16" height="16">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="11"/>
    <property name="j" type="int" value="11"/>
    <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-left" type="int" value="0"/>
    <property name="padding-right" type="int" value="1"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
@@ -170,13 +170,13 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="90" name="Dark Sword" width="16" height="16" visible="0">
+ <layer id="90" name="Dark Sword" width="16" height="16">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="12"/>
    <property name="j" type="int" value="13"/>
    <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-left" type="int" value="0"/>
    <property name="padding-right" type="int" value="1"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
@@ -202,13 +202,13 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="93" name="_ADDONDarkSword" width="16" height="16" visible="0">
+ <layer id="93" name="_ADDONDarkSword" width="16" height="16">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="11"/>
    <property name="j" type="int" value="11"/>
    <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-left" type="int" value="0"/>
    <property name="padding-right" type="int" value="1"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
@@ -234,13 +234,13 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="96" name="Holy Sword" width="16" height="16" visible="0">
+ <layer id="96" name="Holy Sword" width="16" height="16">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="11"/>
    <property name="j" type="int" value="12"/>
    <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-left" type="int" value="0"/>
    <property name="padding-right" type="int" value="1"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
@@ -266,13 +266,13 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="109" name="_ADDONHolySword" width="16" height="16" visible="0">
+ <layer id="109" name="_ADDONHolySword" width="16" height="16">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="11"/>
    <property name="j" type="int" value="11"/>
    <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-left" type="int" value="0"/>
    <property name="padding-right" type="int" value="1"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
@@ -298,13 +298,13 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="73" name="Axe" width="16" height="16" visible="0">
+ <layer id="73" name="Axe" width="16" height="16">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="9"/>
    <property name="j" type="int" value="11"/>
    <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-left" type="int" value="0"/>
    <property name="padding-right" type="int" value="1"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
@@ -330,13 +330,13 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="95" name="Large Axe" width="16" height="16" visible="0">
+ <layer id="95" name="Large Axe" width="16" height="16">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="11"/>
    <property name="j" type="int" value="13"/>
    <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-left" type="int" value="0"/>
    <property name="padding-right" type="int" value="1"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
@@ -362,13 +362,13 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="108" name="_ADDONLargeAxe" width="16" height="16" visible="0">
+ <layer id="108" name="_ADDONLargeAxe" width="16" height="16">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="11"/>
    <property name="j" type="int" value="11"/>
    <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-left" type="int" value="0"/>
    <property name="padding-right" type="int" value="1"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
@@ -394,13 +394,13 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="76" name="Short Bow" width="16" height="16" visible="0">
+ <layer id="76" name="Short Bow" width="16" height="16">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="11"/>
    <property name="j" type="int" value="11"/>
    <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-left" type="int" value="0"/>
    <property name="padding-right" type="int" value="1"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
@@ -426,13 +426,13 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="77" name="Long Bow" width="16" height="16" visible="0">
+ <layer id="77" name="Long Bow" width="16" height="16">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="12"/>
    <property name="j" type="int" value="13"/>
    <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-left" type="int" value="0"/>
    <property name="padding-right" type="int" value="1"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
@@ -458,13 +458,13 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="91" name="Elven Bow" width="16" height="16" visible="0">
+ <layer id="91" name="Elven Bow" width="16" height="16">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="12"/>
    <property name="j" type="int" value="13"/>
    <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-left" type="int" value="0"/>
    <property name="padding-right" type="int" value="1"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
@@ -490,13 +490,13 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="92" name="_ADDONElvenBlow" width="16" height="16" visible="0">
+ <layer id="92" name="_ADDONElvenBlow" width="16" height="16">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="11"/>
    <property name="j" type="int" value="11"/>
    <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-left" type="int" value="0"/>
    <property name="padding-right" type="int" value="1"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>

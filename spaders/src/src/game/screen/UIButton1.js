@@ -20,9 +20,14 @@ export default class UIButton1 extends PIXI.Container {
 		// this.backShape.endFill();
 		// this.backShape.alpha = 1
 
-		this.backShape = PIXI.Sprite.fromFrame('largeCard.png')
-		this.backShape.scale.set(width / this.backShape.width);
-		this.backShape.anchor.set(0.5)
+		//this.backShape = PIXI.Sprite.fromFrame('largeCard.png')
+		this.backShape  = new PIXI.mesh.NineSlicePlane(
+            PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
+			this.backShape.width = width
+			this.backShape.height = width
+			this.backShape.pivot.set(width/2)
+		//this.backShape.scale.set(width / this.backShape.width);
+		//this.backShape.anchor.set(0.5)
 		this.backShape.tint = color;
 
 		this.backShape.rotation = Math.PI * 0.25

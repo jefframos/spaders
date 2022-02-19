@@ -246,6 +246,7 @@
                 <false/>
             </struct>
             <key type="filename">gridSquare.png</key>
+            <key type="filename">gridSquareTrail.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -344,6 +345,7 @@
                 <false/>
             </struct>
             <key type="filename">newEnemies/block.png</key>
+            <key type="filename">whiteEnemies/w_block.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -359,6 +361,7 @@
                 <false/>
             </struct>
             <key type="filename">newEnemies/bomb.png</key>
+            <key type="filename">whiteEnemies/w_bomb.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -376,6 +379,9 @@
             <key type="filename">newEnemies/pixil-layer-0.png</key>
             <key type="filename">newEnemies/pixil-layer-4.png</key>
             <key type="filename">newEnemies/pixil-layer-5.png</key>
+            <key type="filename">whiteEnemies/w_pixil-layer-0.png</key>
+            <key type="filename">whiteEnemies/w_pixil-layer-4.png</key>
+            <key type="filename">whiteEnemies/w_pixil-layer-5.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -392,6 +398,8 @@
             </struct>
             <key type="filename">newEnemies/pixil-layer-1.png</key>
             <key type="filename">newEnemies/pixil-layer-6.png</key>
+            <key type="filename">whiteEnemies/w_pixil-layer-1.png</key>
+            <key type="filename">whiteEnemies/w_pixil-layer-6.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -407,6 +415,7 @@
                 <false/>
             </struct>
             <key type="filename">newEnemies/pixil-layer-2.png</key>
+            <key type="filename">whiteEnemies/w_pixil-layer-2.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -422,6 +431,7 @@
                 <false/>
             </struct>
             <key type="filename">newEnemies/pixil-layer-3.png</key>
+            <key type="filename">whiteEnemies/w_pixil-layer-3.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -437,6 +447,7 @@
                 <false/>
             </struct>
             <key type="filename">newEnemies/pixil-layer-7.png</key>
+            <key type="filename">whiteEnemies/w_pixil-layer-7.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -452,6 +463,7 @@
                 <false/>
             </struct>
             <key type="filename">newEnemies/pixil-layer-8.png</key>
+            <key type="filename">whiteEnemies/w_pixil-layer-8.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -467,6 +479,7 @@
                 <false/>
             </struct>
             <key type="filename">newEnemies/pixil-layer-9.png</key>
+            <key type="filename">whiteEnemies/w_pixil-layer-9.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -612,6 +625,8 @@
             <filename>gridSquare.png</filename>
             <filename>backLabel.png</filename>
             <filename>enemy.png</filename>
+            <filename>whiteEnemies</filename>
+            <filename>gridSquareTrail.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

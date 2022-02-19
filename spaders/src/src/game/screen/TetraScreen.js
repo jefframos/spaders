@@ -42,7 +42,8 @@ export default class TetraScreen extends Screen {
 		this.levels = window.levelData;//window.levelsJson.levels;
 
 
-		this.trailHorizontal = new PIXI.Graphics().beginFill(0xFFFFFF).drawRoundedRect(0, 0, 20, 20, 10);
+		this.trailHorizontal = new PIXI.mesh.NineSlicePlane(
+			PIXI.Texture.fromFrame('largeCard.png'), 5, 0, 5, 0)//new PIXI.Graphics().beginFill(0xFFFFFF).drawRoundedRect(0, 0, 20, 20, 10);
 		this.trailHorizontal.alpha = 0;
 
 		//console.log(this.levels)
@@ -300,16 +301,16 @@ export default class TetraScreen extends Screen {
 			}
 		}
 
-		let background = this.getRoundRect2(level[0].length * size + size, container.height + size + paddingBottom, 0x222222)
+		// let background = this.getRoundRect2(level[0].length * size + size, container.height + size + paddingBottom, 0x222222)
 
-		container.addChildAt(background, 0)
+		// container.addChildAt(background, 0)
 
 		let texture = renderer.generateTexture(container);
 
 		let sprite = new PIXI.Sprite()
 		sprite.setTexture(texture)
 
-		sprite.background = background;
+		//sprite.background = background;
 		sprite.nodeSize = size;
 		window.imageThumbs[levelData.idSaveData] = sprite;
 
@@ -365,7 +366,7 @@ export default class TetraScreen extends Screen {
 		this.timerRect = new UIRectLabel(config.colors.yellow, 'time.png');
 		this.bottomUINewContainer.addChild(this.timerRect)
 
-		this.movesRect = new UIRectLabel(config.colors.green, 'pixil-layer-0.png');
+		this.movesRect = new UIRectLabel(config.colors.green, 'fire-96x96-1408702.png');
 		this.bottomUINewContainer.addChild(this.movesRect)
 
 		this.scoreRect = new UIRectLabel(config.colors.red2, 'icons8-star-48.png', false);
@@ -386,6 +387,8 @@ export default class TetraScreen extends Screen {
 		//this.inGameMenu.onBack.add(() => this.mainmenuState())
 		this.inGameMenu.onBack.add(() => this.mainmenuStateFromGame())
 		this.inGameMenu.onRestart.add(() => this.resetGame())
+		this.inGameMenu.onPause.add(() => this.pauseGame())
+		this.inGameMenu.onUnPause.add(() => this.onUnPause())
 
 		this.gridContainer.alpha = 0;
 		this.updateUI();
@@ -436,7 +439,13 @@ export default class TetraScreen extends Screen {
 
 		this.updateColorScheme();
 	}
+	pauseGame() {
+		//this.gameRunning = false;
+	}
+	onUnPause() {
+		//this.gameRunning = true;
 
+	}
 	updateColorScheme() {
 		let colorScheme = colorSchemes.getCurrentColorScheme();
 		this.timerRect.updateColor(colorScheme.fontColor);
@@ -497,6 +506,8 @@ export default class TetraScreen extends Screen {
 
 	}
 	hideInGameElements(delay = 0) {
+
+		this.removeTrails();
 		TweenMax.killTweensOf(this.cardsContainer);
 		TweenMax.killTweensOf(this.gridContainer);
 
@@ -525,6 +536,7 @@ export default class TetraScreen extends Screen {
 		this.mainMenuSettings.collapse();
 	}
 	mainmenuState(force = false) {
+		this.removeTrails();
 		window.SOUND_MANAGER.playMainMenu();
 		this.endGameScreenContainer.hide(force);
 		this.startScreenContainer.show(force, force ? 0.2 : 0.75);
@@ -540,7 +552,7 @@ export default class TetraScreen extends Screen {
 	}
 	mainmenuStateFromGame(force = false) {
 
-
+		this.removeTrails();
 		console.log("TO MAIN MENU")
 		window.SOUND_MANAGER.playMainMenu();
 		this.mainMenuSettings.collapse();
@@ -784,8 +796,7 @@ export default class TetraScreen extends Screen {
 			this.debugLabel.visible = false;
 		}
 	}
-	buildTrails() {
-
+	removeTrails() {
 		if (this.trailMarker && this.trailMarker.parent) {
 			this.trailMarker.parent.removeChild(this.trailMarker);
 		}
@@ -793,14 +804,50 @@ export default class TetraScreen extends Screen {
 		if (this.trailHorizontal && this.trailHorizontal.parent) {
 			this.trailHorizontal.parent.removeChild(this.trailHorizontal);
 		}
+	}
+	buildTrails() {
 
-		this.trailMarker = new PIXI.Graphics().beginFill(0xFFFFFF).drawRoundedRect(0, 0, CARD.width, GRID.height, 10);
-		this.gridContainer.addChild(this.trailMarker);
+		this.removeTrails();
+
+		let scheme = colorSchemes.getCurrentColorScheme().grid;
+
+		let temp = new PIXI.Sprite.fromFrame(scheme.spriteTrail);
+
+		let scl = 1;
+		scl = (temp.width / GRID.width) * this.cardsContainer.scale.x
+
+		//this.trailMarker = new PIXI.Graphics().beginFill(0xFFFFFF).drawRoundedRect(0, 0, CARD.width, GRID.height, 10);
+		this.trailMarker = new PIXI.mesh.NineSlicePlane(
+			PIXI.Texture.fromFrame(scheme.spriteTrail), 20, 20, 20, 20)
+
+
+
+		this.backGridContainer.addChild(this.trailMarker);
 		this.trailMarker.alpha = 0;
 
 
-		this.trailHorizontal = new PIXI.Graphics().beginFill(0xFFFFFF).drawRoundedRect(0, 0, GRID.width, CARD.height, 10);
-		this.cardsContainer.addChild(this.trailHorizontal);
+		//this.trailHorizontal = new PIXI.Graphics().beginFill(0xFFFFFF).drawRoundedRect(0, 0, GRID.width, CARD.height, 10);
+		this.trailHorizontal = new PIXI.mesh.NineSlicePlane(
+			PIXI.Texture.fromFrame(scheme.spriteTrail), 20, 20, 20, 20)
+
+
+		if (scheme.scaleTrail) {
+			this.trailHorizontal.width = GRID.width / scl;
+			this.trailHorizontal.height = CARD.height / scl;
+			this.trailHorizontal.scale.set(scl);
+
+			this.trailMarker.width = CARD.width / scl;
+			this.trailMarker.height = (GRID.height + CARD.height) / scl;
+			this.trailMarker.scale.set(scl);
+		} else {
+
+			this.trailHorizontal.width = GRID.width
+			this.trailHorizontal.height = CARD.height
+			this.trailMarker.width = CARD.width
+			this.trailMarker.height = GRID.height + CARD.height
+		}
+
+		this.backGridContainer.addChild(this.trailHorizontal);
 		this.trailHorizontal.alpha = 0;
 
 	}
@@ -952,7 +999,7 @@ export default class TetraScreen extends Screen {
 								console.log(customData)
 							}
 						});
-						this.cardsContainer.addChild(this.placeCard(j, i, ENEMIES.list[this.currentLevelData.pieces[i][j]].life, customData));
+						this.cardsContainer.addChild(this.placeCard(j, i, ENEMIES.list[this.currentLevelData.pieces[i][j]], customData));
 					}
 				} else if (this.currentLevelData.pieces[i][j] == -2) {
 					this.cardsContainer.addChild(this.placeBlock(j, i));
@@ -1148,7 +1195,7 @@ export default class TetraScreen extends Screen {
 			this.onTapUp(null, this.mousePosID)
 		}
 	}
-	placeCard(i, j, level = 0, customData = {}) {
+	placeCard(i, j, data, customData = {}) {
 		let card;
 		if (CARD_POOL.length) {
 			card = CARD_POOL[0];
@@ -1156,9 +1203,10 @@ export default class TetraScreen extends Screen {
 		} else {
 			card = new Card(this);
 		}
-		card.life = level;
+
+		card.life = data.life;
 		card.createCard(0, customData);
-		card.updateSprite(level);
+		card.updateSprite(data.life, data);
 		card.x = i * CARD.width;
 		card.y = j * CARD.height - CARD.height;
 		// card.cardContainer.scale.set(1.2 - j * 0.05)
@@ -1350,9 +1398,16 @@ export default class TetraScreen extends Screen {
 		if (this.mousePosID >= 0 && this.mousePosID < GRID.i) {
 			TweenMax.to(this.trailMarker, 0.1, { x: this.mousePosID * CARD.width });
 			this.trailMarker.tint = this.currentCard.enemySprite.tint
-			this.trailMarker.alpha = utils.lerp(this.trailMarker.alpha, 0.15, 0.1)
+			this.trailMarker.alpha = utils.lerp(this.trailMarker.alpha, 0.35, 0.1)
 			this.trailHorizontal.tint = this.currentCard.enemySprite.tint
 			this.trailHorizontal.alpha = this.trailMarker.alpha;
+
+
+			//this.trailHorizontal.alpha = 1//this.trailMarker.alpha;
+			//this.trailHorizontal.tint = 0xFFFFFF
+
+
+
 			this.currentCard.alpha = 1;
 			//this.trailHorizontal.y = this.currentCard.y
 			if (this.currentCard) {
@@ -1395,6 +1450,26 @@ export default class TetraScreen extends Screen {
 
 		this.mouseDirty = true;
 	}
+
+	popCircle(pos, color = 0xFFFFFF) {
+		let convertedPosition = this.toLocal(pos)
+		let realRadius = CARD.width / 2;// * this.game.gridContainer.scale.x * 0.25;
+		if (!this.tapCircle) {
+			this.tapCircle = new PIXI.Graphics().lineStyle(3, color).drawCircle(0, 0, realRadius);
+			this.addChild(this.tapCircle);
+		}
+		this.tapCircle.x = convertedPosition.x;
+		this.tapCircle.y = convertedPosition.y;
+
+		this.tapCircle.scale.set(0.5)
+		TweenMax.killTweensOf(this.tapCircle.scale);
+		TweenMax.to(this.tapCircle.scale, 0.2, {
+			x: 1.5, y: 1.5, onComplete: () => {
+				this.tapCircle.scale.set(0);
+			}
+		})
+	}
+
 	onTapUp(event, customID) {
 		if (!this.currentCard || !this.gameRunning || this.blockGameTimer > 0) {
 			return;

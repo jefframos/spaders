@@ -36,8 +36,8 @@
             "scale": 0.33,
             "selectedLayer": 20,
             "viewCenter": {
-                "x": 484.8484848484848,
-                "y": 518.1818181818182
+                "x": 478.7878787878788,
+                "y": 512.1212121212121
             }
         },
         "gb/gameboyMisc2.tmx": {
@@ -50,18 +50,18 @@
         },
         "gb/gameboyWeapon1.tmx": {
             "scale": 0.33,
-            "selectedLayer": 0,
+            "selectedLayer": 15,
             "viewCenter": {
-                "x": 303.0303030303031,
-                "y": 615.1515151515152
+                "x": 306.06060606060606,
+                "y": 618.1818181818182
             }
         },
         "gb/gameboyWeapon2.tmx": {
             "scale": 1.17265625,
-            "selectedLayer": 0,
+            "selectedLayer": 31,
             "viewCenter": {
                 "x": 479.2538307794804,
-                "y": 511.65889407061957
+                "y": 511.6588940706196
             }
         },
         "how-to-play/bossa.tmx": {
@@ -249,8 +249,8 @@
             "scale": 0.8201171875,
             "selectedLayer": 20,
             "viewCenter": {
-                "x": 321.9052155275066,
-                "y": 384.0914503453203
+                "x": 319.46653965229814,
+                "y": 382.87211240771614
             }
         },
         "videogames/levels2.tmx": {
@@ -265,8 +265,8 @@
             "scale": 0.8275390625,
             "selectedLayer": 18,
             "viewCenter": {
-                "x": 319.01817323578,
-                "y": 383.06348831720555
+                "x": 319.01817323578007,
+                "y": 383.0634883172056
             }
         },
         "videogames/spadersTileset.tsx": {

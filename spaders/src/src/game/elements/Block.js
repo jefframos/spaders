@@ -26,6 +26,12 @@ export default class Card extends PIXI.Container{
 		this.sprite.tint = 0x333333;
 		this.sprite.anchor.set(0.5);
 
+
+		this.enemySpriteWhite = PIXI.Sprite.fromFrame("w_"+window.IMAGE_DATA.enemyBlockImages[0]);
+		this.enemySpriteWhite.anchor = this.sprite.anchor;
+
+		this.sprite.addChild(this.enemySpriteWhite)
+
 		this.cardBackground.alpha = 0;
 		this.circleBackground.alpha = 0;
 

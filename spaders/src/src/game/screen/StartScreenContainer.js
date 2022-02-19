@@ -61,6 +61,9 @@ export default class StartScreenContainer extends PIXI.Container {
 			sprite.tint = window.colorsOrder[index]
 			spadersContainer.addChild(sprite);
 			sprite.x += 80 * index;
+			let spriteWhite = new PIXI.Sprite.fromFrame("w_"+element);
+			sprite.addChild(spriteWhite);
+			sprite.white = spriteWhite;
 			this.spadersList.push(sprite);
 		}
 		spadersContainer.pivot.x = spadersContainer.width / 2
@@ -187,8 +190,18 @@ export default class StartScreenContainer extends PIXI.Container {
 
 			element.tint = colors.list[index].color;
 		}
+
+		let scheme = colorSchemes.getCurrentColorScheme();
+
 		for (let index = 0; index < this.spadersList.length; index++) {
 			const element = this.spadersList[index];
+
+			if(scheme.list[index].hasWhite){
+				element.white.visible = true;
+				element.white.tint = scheme.list[index].hasWhite;
+			}else{
+				element.white.visible = false;
+			}
 
 			element.tint = colors.list[index].color;
 		}

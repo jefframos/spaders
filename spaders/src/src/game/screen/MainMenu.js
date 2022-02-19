@@ -14,12 +14,12 @@ export default class MainMenu extends PIXI.Container {
 
 
         this.customWidth = 60;
-        this.backShape = new PIXI.Graphics();
-        this.backShape.beginFill(config.colors.white);
-        this.backShape.drawRoundedRect(0, 0, 400, 400, 20);
-        // this.backShape.drawRoundedRect(0, 0, 290, 100, 20);
-        this.backShape.endFill();
-        this.backShape.alpha = 1
+
+        this.backShape = new PIXI.mesh.NineSlicePlane(
+			PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
+		this.backShape.width = 400
+		this.backShape.height = 400
+		this.backShape.tint = config.colors.white
 
         this.positionSpring = new Spring();
 
@@ -131,6 +131,8 @@ export default class MainMenu extends PIXI.Container {
         this.mainContainer.addChild(this.statsContainer)
 
         this.state = 1;
+
+        
 
     }
     updateDebugColor(){

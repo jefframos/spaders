@@ -121,13 +121,20 @@ export default class Game {
 		// // console.log(progress.progress);
 	}
 	updateProgress(progress) {
-		if (progress > 0.05) {
+		if (progress > 0) {
 			this.infoLabel.text = Math.floor(progress) + "%";
 			this.infoLabel.visible = true;
 			this.infoLabel.pivot.x = this.infoLabel.width / 2
-			this.infoLabel.x = this.barSize.width / 2
+
+			this.infoLabel.x = this.innerResolution.width/2;
+			//this.infoLabel.y = this.loadingBarFill.y - this.infoLabel.height - 20;
+
 			let scale = Math.max(0.2, progress / 100)
-			this.loadingBarFill.scale.x = scale;
+			this.loadingBarFill.scale.x = scale + this.loadingBarFill.extraScale;
+
+			if(progress >= 100){
+				this.loadingBarFill.complete = true;
+			}
 		}
 	}
 	onCompleteLoad() {
@@ -155,16 +162,6 @@ export default class Game {
 		this.sizeHeight = this.barSize.height
 		this.sizeWidth = this.barSize.width
 
-		this.infoLabel.x = this.barSize.width / 2//- this.infoLabel.width / 2
-		this.infoLabel.y = this.barSize.height / 2 - 40//- this.infoLabel.height / 2
-
-		this.loadingBar = new PIXI.Graphics().beginFill(colors.fontColor).drawRoundedRect(0, 0, this.sizeWidth, this.sizeHeight, this.round);
-		//this.loadingBar.cacheAsBitmap = true;
-
-		this.loadingBarFillBack = new PIXI.Graphics().beginFill(config.colors.background).drawRoundedRect(0, 0, this.sizeWidth - this.round / 2, this.sizeHeight * 0.75, this.round * 0.75);
-		this.loadingBarFillBack.x = this.round / 4
-		this.loadingBarFillBack.y = this.round / 4
-
 		let loaderColors = [
 			colors.list[0].color,
 			colors.list[1].color,
@@ -174,24 +171,24 @@ export default class Game {
 			colors.list[5].color
 		]
 
-		console.log("TIMES LOADED", window.COOKIE_MANAGER.stats.timesLoaded)
 		let timesLoaded = window.COOKIE_MANAGER.stats.timesLoaded || 1;
 		timesLoaded %= loaderColors.length;
 
-
-		this.loadingBarFill = new PIXI.Graphics().beginFill(loaderColors[timesLoaded]).drawRoundedRect(0, 0, this.sizeWidth - this.round / 2, this.sizeHeight * 0.75, this.round * 0.75);
+		//this.loadingBarFill = new PIXI.Graphics().beginFill(loaderColors[timesLoaded]).drawRoundedRect(0, 0, this.sizeWidth - this.round / 2, this.sizeHeight * 0.75, this.round * 0.75);
+		this.loadingBarFill = new PIXI.Graphics().beginFill(loaderColors[timesLoaded]).drawRect(0, 0, window.innerWidth, this.sizeHeight * 0.75);
 		this.loadingBarFill.x = this.round / 4
 		this.loadingBarFill.y = this.round / 4
 
-		this.loadingBarFill.scale.x = 0.2;
-		//TweenMax.to(this.loadingBarFill.scale, 1 + Math.random(), {x:0.6 + Math.random() * 0.3})
+		this.loadingBarFill.startWidth =  window.innerWidth;
+
+		
+		this.loadingBarFill.scale.x = 0;
+		this.loadingBarFill.extraScale = 0;
 
 		this.infoLabel.visible = true;
 
-		this.tapToStart.addChild(this.loadingBar)
-		this.loadingBar.addChild(this.loadingBarFillBack)
-		this.loadingBar.addChild(this.loadingBarFill)
-		this.loadingBar.addChild(this.infoLabel)
+		this.tapToStart.addChild(this.loadingBarFill)
+		this.tapToStart.addChild(this.infoLabel)
 
 		this.resize2();
 
@@ -207,7 +204,7 @@ export default class Game {
 		this.infoLabel.visible = true;
 
 		TweenMax.killTweensOf(this.loadingBarFill.scale);
-		TweenMax.to(this.loadingBarFill.scale, 0.3, { x: 1 })
+		//TweenMax.to(this.loadingBarFill.scale, 0.3, { x: 1 })
 
 		this.resize2()
 
@@ -312,17 +309,22 @@ export default class Game {
 		if (this.tapToStart) {
 			this.backTapShape.width = this.innerResolution.width
 			this.backTapShape.height = this.innerResolution.height
-			this.tapToStart.scale.x = sclX//this.ratio
-			this.tapToStart.scale.y = sclY//this.ratio
+			this.tapToStart.scale.x = sclX
+			this.tapToStart.scale.y = sclY
 
+			if(this.loadingBarFill.complete){
+				this.loadingBarFill.scale.x = 1;
+				this.loadingBarFill.width = this.innerResolution.width;
+			}else{
 
-			this.loadingBar.x = this.backTapShape.width / 2 - this.loadingBar.width / 2// sclX
-			this.loadingBar.y = this.backTapShape.height - this.loadingBar.height * 2 + 40// sclY
-			//this.tapToStart.pivot.x = this.tapToStart.width / 2 // this.tapToStart.scale.x
-			//this.tapToStart.pivot.y = this.tapToStart.height / 2 // this.tapToStart.scale.y
+				this.loadingBarFill.extraScale = 1 - this.loadingBarFill.startWidth / this.innerResolution.width;
+			}
 
-			//this.tapToStart.x = this.innerResolution.width / 2 // this.tapToStart.scale.x
-			//this.tapToStart.y = this.innerResolution.height / 2
+			this.loadingBarFill.x = 0
+			this.loadingBarFill.y =this.innerResolution.height - this.loadingBarFill.height * 2;
+
+			this.infoLabel.x = this.innerResolution.width/2;
+			this.infoLabel.y = this.loadingBarFill.y - this.infoLabel.height * 1.5;
 		}
 
 	}
