@@ -1,12 +1,12 @@
 {
-    "activeFile": "videogames/levels2.tmx",
+    "activeFile": "gb/gameboyMisc2.tmx",
     "expandedProjectPaths": [
-        "gb",
         "templates",
-        "main",
         "movies",
         "how-to-play",
-        "videogames"
+        "main",
+        "videogames",
+        "gb"
     ],
     "fileStates": {
         "D:/Projects/tetra/map/levels.tmx": {
@@ -45,7 +45,7 @@
             "selectedLayer": 8,
             "viewCenter": {
                 "x": 479.2538307794804,
-                "y": 511.65889407061957
+                "y": 511.6588940706196
             }
         },
         "gb/gameboyWeapon1.tmx": {
@@ -233,7 +233,7 @@
             "scaleInEditor": 1
         },
         "tilesets/poke.tsx": {
-            "scaleInDock": 1,
+            "scaleInDock": 0.5,
             "scaleInEditor": 1
         },
         "tilesets/spadersTileset.tsx": {
@@ -310,13 +310,13 @@
         "how-to-play/creatures.tmx",
         "how-to-play/things.tmx",
         "videogames/levels.tmx",
-        "how-to-play/pokemons.tmx",
-        "videogames/levels3.tmx",
-        "gb/gameboyWeapon2.tmx",
-        "gb/gameboyWeapon1.tmx",
-        "gb/gameboyMisc2.tmx",
-        "gb/gameboyCreatures.tmx",
-        "gb/gameboyMisc.tmx"
+        "videogames/levels2.tmx",
+        "movies/movies1.tmx",
+        "how-to-play/simple-shapes.tmx",
+        "how-to-play/simple-shapes-synt.tmx",
+        "how-to-play/pokemon2.tmx",
+        "how-to-play/pokemon22.tmx",
+        "how-to-play/bossa.tmx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",
