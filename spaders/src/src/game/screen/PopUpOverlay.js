@@ -13,13 +13,16 @@ export default class PopUpOverlay extends PIXI.Container {
         this.modalSize = { width: 500, height: 300 };
         this.addChild(this.background);
         this.background.alpha = 0.25;
+        this.background.interactive = true;
         this.interactive = true;
         this.textBoxContainer = new PIXI.Container();
-        this.backShape = new PIXI.Graphics();
-        this.backShape.beginFill(config.colors.white);
-        this.backShape.drawRoundedRect(0, 0, this.modalSize.width, this.modalSize.height, 20);
-        this.backShape.endFill();
-        this.backShape.alpha = 1
+
+        this.backShape= new PIXI.mesh.NineSlicePlane(
+			PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
+		this.backShape.width = this.modalSize.width
+		this.backShape.height = this.modalSize.height
+		this.backShape.tint = config.colors.white
+        this.backShape.interactive = true;
 
         this.textBoxContainer.addChild(this.backShape);
 
@@ -84,10 +87,8 @@ export default class PopUpOverlay extends PIXI.Container {
         this.callbackCancel = callbackCancel;
         this.tutorialLabel.text = data.text;
 
-        this.backShape.clear();
-        this.backShape.beginFill(config.colors.white);
-        this.backShape.drawRoundedRect(0, 0, this.modalSize.width, this.tutorialLabel.height + 80 + 120, 20);
-        this.backShape.endFill();
+        this.backShape.width = this.modalSize.width
+		this.backShape.height = this.tutorialLabel.height + 200;
 
         this.textBoxContainer.scale.set(1)
         this.cancelButton.x = 100;

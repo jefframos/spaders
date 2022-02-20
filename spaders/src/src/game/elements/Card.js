@@ -79,7 +79,7 @@ export default class Card extends PIXI.Container {
 		// utils.centerObject(this.enemySprite, this.cardForeground);
 		this.currentColor = 0x000000;
 
-		card.addChild(this.cardForeground);
+		// card.addChild(this.cardForeground);
 		this.cardContainer = cardContainer;//card;
 		this.addChild(card);
 		cardContainer.pivot.x = CARD.width / 2;
@@ -388,12 +388,13 @@ export default class Card extends PIXI.Container {
 	}
 
 	show(time = 0.3, delay = 0) {
-		let scheme = colorSchemes.getCurrentColorScheme().grid;
+		//let scheme = colorSchemes.getCurrentColorScheme().grid;
 
-		this.cardForeground.texture = (PIXI.Texture.fromFrame(scheme.spriteTile))
+		//this.cardForeground.texture = (PIXI.Texture.fromFrame(scheme.spriteTile))
 
 		this.updateSize();
 
+		return;
 		TweenMax.killTweensOf(this.cardForeground, true)
 		this.cardForeground.tint = this.enemySprite.tint
 		this.cardForeground.alpha = 1

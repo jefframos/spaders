@@ -194,11 +194,17 @@ export default class TetraScreen extends Screen {
 		this.currentSectionPiecesKilled++;
 	}
 	updateGridDimensions() {
+		console.log(this.currentLevelData)
 		window.GRID = {
 			i: this.currentLevelData.pieces[0].length,
 			j: this.currentLevelData.pieces.length,
 			height: this.innerResolution.width,
 			width: this.innerResolution.height,
+			iDraw: this.currentLevelData.piecesToDraw[0].length,
+			jDraw: this.currentLevelData.piecesToDraw.length,
+			heightDraw: this.innerResolution.width / this.currentLevelData.levelDataScale,
+			widthDraw: this.innerResolution.height / this.currentLevelData.levelDataScale,
+			scale: this.currentLevelData.levelDataScale
 		}
 
 		let min = 60//this.innerResolution.width / 6.5
@@ -225,7 +231,12 @@ export default class TetraScreen extends Screen {
 		window.GRID.width = window.GRID.i * CARD.width;
 		window.GRID.height = window.GRID.j * CARD.height;
 
+		console.log('lalalalala',this.currentLevelData)
+
+		window.GRID.widthDraw = CARD.width / this.currentLevelData.levelDataScale;
+		window.GRID.heightDraw = CARD.height / this.currentLevelData.levelDataScale;
 		//console.log(CARD.width)
+
 
 		if (this.gridContainer) {
 			this.buildTrails();
@@ -256,10 +267,10 @@ export default class TetraScreen extends Screen {
 		let container = new PIXI.Container();
 		let level = [];
 
-		for (let i = 0; i < levelData.pieces.length; i++) {
+		for (let i = 0; i < levelData.piecesToDraw.length; i++) {
 			let temp = []
-			for (let j = 0; j < levelData.pieces[i].length; j++) {
-				temp.push(levelData.pieces[i][j]);
+			for (let j = 0; j < levelData.piecesToDraw[i].length; j++) {
+				temp.push(levelData.piecesToDraw[i][j]);
 
 			}
 			level.push(temp);
@@ -699,6 +710,7 @@ export default class TetraScreen extends Screen {
 		this.backGridContainer = new PIXI.Container();
 		this.gridContainer = new PIXI.Container();
 		this.cardsContainer = new PIXI.Container();
+		this.frontGridContainer = new PIXI.Container();
 		this.UIContainer = new PIXI.Container();
 		this.topUIContainer = new PIXI.Container();
 		this.bottomUIContainer = new PIXI.Container();
@@ -719,6 +731,7 @@ export default class TetraScreen extends Screen {
 		this.gameContainer.addChild(this.backGridContainer);
 		this.gameContainer.addChild(this.gridContainer);
 		this.gameContainer.addChild(this.cardsContainer);
+		this.gameContainer.addChild(this.frontGridContainer);
 		this.gameContainer.addChild(this.UIContainer);
 		this.gameContainer.addChild(this.topUIContainer);
 		this.gameContainer.addChild(this.bottomUIContainer);
@@ -895,6 +908,11 @@ export default class TetraScreen extends Screen {
 	}
 	resetGame() {
 
+		// if (this.hasHash) {
+		// 	this.currentLevelData.pieces = utils.scaleLevel(this.currentLevelData.pieces, 2, true)
+		// 	this.updateGridDimensions();
+		// 	utils.addBlockers(this.currentLevelData.pieces, 2, 19, true)
+		// }
 		this.blockGameTimer = 0;
 		this.currentSectionPiecesKilled = 0;
 		this.isFinalState = false;
@@ -914,7 +932,7 @@ export default class TetraScreen extends Screen {
 
 		this.fireworksTimer = 0;
 		this.mainMenuSettings.collapse();
-		this.grid.createGrid();
+		this.grid.createGrid(this.currentLevelData.piecesToDraw);
 
 		this.gameplayState = 0;
 		this.cardQueueData = {
@@ -1030,9 +1048,11 @@ export default class TetraScreen extends Screen {
 		if (hasAddon) {
 			setTimeout(() => {
 				this.newRound();
-			}, 900 + countAdd * 100);
+			}, 1500 + countAdd * 100);
 		} else {
-			this.newRound();
+			setTimeout(() => {
+				this.newRound();
+			}, 1200);
 		}
 
 
@@ -1210,8 +1230,9 @@ export default class TetraScreen extends Screen {
 		card.x = i * CARD.width;
 		card.y = j * CARD.height - CARD.height;
 		// card.cardContainer.scale.set(1.2 - j * 0.05)
+		TweenMax.killTweensOf(card);
 		card.alpha = 0;
-		TweenMax.to(card, 0.5, { alpha: 1, delay: i * 0.05, y: j * CARD.height, ease: Back.easeOut })
+		TweenMax.to(card, 0.5, { alpha: 1, delay: i * 0.05 + 1, y: j * CARD.height, ease: Back.easeOut })
 
 		card.show(0.5, i * 0.05 + 0.75)
 
@@ -1645,6 +1666,15 @@ export default class TetraScreen extends Screen {
 
 		this.backGridContainer.scale.x = (this.gridContainer.scale.x)
 		this.backGridContainer.scale.y = (this.gridContainer.scale.y)
+
+
+		this.frontGridContainer.x = this.gridContainer.x;
+		this.frontGridContainer.y = this.gridContainer.y;
+
+		this.frontGridContainer.scale.x = (this.gridContainer.scale.x)
+		this.frontGridContainer.scale.y = (this.gridContainer.scale.y)
+
+
 
 		if (this.currentCard) {
 			//13 is the width of the border on the grid

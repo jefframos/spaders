@@ -20,20 +20,30 @@ export default class UIButton1 extends PIXI.Container {
 		// this.backShape.endFill();
 		// this.backShape.alpha = 1
 
+		let padding = 8;
+		this.backShapeBorder = new PIXI.mesh.NineSlicePlane(
+			PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
+		this.backShapeBorder.width = width + padding
+		this.backShapeBorder.height = width + padding
+		this.backShapeBorder.pivot.set((width + padding) / 2)
+		this.backShapeBorder.tint = iconColor;
+
 		//this.backShape = PIXI.Sprite.fromFrame('largeCard.png')
-		this.backShape  = new PIXI.mesh.NineSlicePlane(
-            PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
-			this.backShape.width = width
-			this.backShape.height = width
-			this.backShape.pivot.set(width/2)
+		this.backShape = new PIXI.mesh.NineSlicePlane(
+			PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
+		this.backShape.width = width
+		this.backShape.height = width
+		this.backShape.pivot.set(width / 2)
 		//this.backShape.scale.set(width / this.backShape.width);
 		//this.backShape.anchor.set(0.5)
 		this.backShape.tint = color;
 
-		this.backShape.rotation = Math.PI * 0.25
+		this.updateRotation( Math.PI * 0.25)
+		
 		this.icon.anchor.set(0.5);
 
 		this.icon.scale.set(this.backShape.height / this.icon.height * 0.7)
+		this.mainContainer.addChild(this.backShapeBorder);
 		this.mainContainer.addChild(this.backShape);
 		this.mainContainer.addChild(this.icon);
 		this.addChild(this.mainContainer);
@@ -44,6 +54,10 @@ export default class UIButton1 extends PIXI.Container {
 		this.interactive = true;
 		this.buttonMode = true;
 	}
+	updateRotation(rot){
+		this.backShapeBorder.rotation = rot
+		this.backShape.rotation = rot
+	}
 	setColor(color) {
 		this.backShape.tint = color;
 	}
@@ -52,7 +66,7 @@ export default class UIButton1 extends PIXI.Container {
 		window.SOUND_MANAGER.play('tap2', { volume: 0.5 })
 	}
 	updateTextColor(color) {
-		if(this.movesLabel){
+		if (this.movesLabel) {
 			this.movesLabel.style.fill = color;
 		}
 	}

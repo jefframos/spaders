@@ -549,6 +549,11 @@
                  "value":0
                 }, 
                 {
+                 "name":"scale",
+                 "type":"int",
+                 "value":0
+                }, 
+                {
                  "name":"startI",
                  "type":"int",
                  "value":0
@@ -778,7 +783,7 @@
          "value":"Shapes"
         }],
  "renderorder":"right-down",
- "tiledversion":"1.8.1",
+ "tiledversion":"1.7.2",
  "tileheight":64,
  "tilesets":[
         {
@@ -795,6 +800,6 @@
         }],
  "tilewidth":64,
  "type":"map",
- "version":"1.8",
+ "version":"1.6",
  "width":11
 }

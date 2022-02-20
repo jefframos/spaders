@@ -16,10 +16,10 @@ export default class MainMenu extends PIXI.Container {
         this.customWidth = 60;
 
         this.backShape = new PIXI.mesh.NineSlicePlane(
-			PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
-		this.backShape.width = 400
-		this.backShape.height = 400
-		this.backShape.tint = config.colors.white
+            PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
+        this.backShape.width = 400
+        this.backShape.height = 400
+        this.backShape.tint = config.colors.white
 
         this.positionSpring = new Spring();
 
@@ -29,17 +29,17 @@ export default class MainMenu extends PIXI.Container {
         this.wipeDataButton = new UIButton1(config.colors.background, window.iconsData.wipeData, config.colors.white);
         this.wipeDataButton.onClick.add(() => {
 
-            window.popUpOverlay.show({text: 'Do you want to clean your data?'}, ()=>{window.COOKIE_MANAGER.wipeData()})
+            window.popUpOverlay.show({ text: 'Do you want to clean your data?' }, () => { window.COOKIE_MANAGER.wipeData() })
             //window.COOKIE_MANAGER.wipeData();
         });
-        this.wipeDataButton.backShape.rotation = 0
+        this.wipeDataButton.updateRotation(0);
 
         this.refreshButton = new UIButton1(config.colors.background, window.iconsData.reload, config.colors.white);
         this.refreshButton.onClick.add(() => {
             this.state = 1;
             this.onRestart.dispatch()
         });
-        this.refreshButton.backShape.rotation = 0
+        this.refreshButton.updateRotation(0);
 
         this.mainContainer.addChild(this.backShape);
         this.mainContainer.scale.set(1.5)
@@ -53,26 +53,26 @@ export default class MainMenu extends PIXI.Container {
                 this.toggleSound.updateTexture(window.iconsData.soundOn);
             }
         });
-        this.toggleSound.backShape.rotation = 0
+        this.toggleSound.updateRotation(0);
 
 
         this.toggleDebug = new UIButton1(config.colors.green, window.iconsData.debugging, config.colors.white);
         this.toggleDebug.onClick.add(() => {
 
-            let data = {text: 'Do you want to ACTIVATE debug mode?'}
-            if(window.COOKIE_MANAGER.debug.showAllThumbs){
+            let data = { text: 'Do you want to ACTIVATE debug mode?' }
+            if (window.COOKIE_MANAGER.debug.showAllThumbs) {
                 data.text = 'Do you want to REMOVE debug mode?'
             }
-            window.popUpOverlay.show(data, ()=>{ 
+            window.popUpOverlay.show(data, () => {
                 window.COOKIE_MANAGER.toogleDebug();
                 this.updateDebugColor()
             })
 
-           
+
         });
         this.updateDebugColor()
 
-        this.toggleDebug.backShape.rotation = 0
+        this.toggleDebug.updateRotation(0);
 
         if (!window.COOKIE_MANAGER.settings.sound) {
             this.toggleSound.updateTexture(window.iconsData.soundOff);
@@ -87,13 +87,13 @@ export default class MainMenu extends PIXI.Container {
         this.toggleSound.x = this.backShape.width - 60
         this.toggleSound.y = 50;
 
-        
+
         // this.refreshButton.x = this.backShape.width - 60
         this.wipeDataButton.x = this.wipeDataButton.width * 0.5 + 30
         this.wipeDataButton.y = this.toggleSound.y;
         // this.refreshButton.y = 50
         this.mainContainer.addChild(this.toggleDebug);
-        this.toggleDebug.x = this.wipeDataButton.x +this.toggleDebug.width * 0.5 + 60
+        this.toggleDebug.x = this.wipeDataButton.x + this.toggleDebug.width * 0.5 + 60
         this.toggleDebug.y = this.toggleSound.y;
 
         // this.autoPlayButton.x = this.wipeDataButton.x - 90;
@@ -132,13 +132,13 @@ export default class MainMenu extends PIXI.Container {
 
         this.state = 1;
 
-        
+
 
     }
-    updateDebugColor(){
-        if(!window.COOKIE_MANAGER.debug.showAllThumbs){
+    updateDebugColor() {
+        if (!window.COOKIE_MANAGER.debug.showAllThumbs) {
             this.toggleDebug.setColor(config.colors.red)
-        }else{
+        } else {
             this.toggleDebug.setColor(config.colors.green)
         }
     }

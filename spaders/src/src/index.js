@@ -241,16 +241,16 @@ function loadJsons() {
 	PIXI.loader.add(jsonPath + window.levelSections.question.dataPath)
 
 
-	for (let index = window.levelSections.sections.length-1; index >= 0 ; index--) {
+	for (let index = window.levelSections.sections.length - 1; index >= 0; index--) {
 		const element = window.levelSections.sections[index];
 		console.log(element)
-		if(element.ignore){
+		if (element.ignore) {
 			window.levelSections.sections.splice(index, 1)
 		}
-		
+
 	}
 
-	console.log("--",window.levelSections)
+	console.log("--", window.levelSections)
 	window.levelSections.sections.forEach(section => {
 		//console.log(section)
 		if (section.imageSrc) {
@@ -295,6 +295,7 @@ function extractData(element) {
 		let i = element.width - 1;
 		let j = element.height - 1;
 		data.tier = 0//findPropertyValue(element.properties, "tier");
+		data.levelDataScale = findPropertyValue(element.properties, "scale")
 		data.padding = {
 			left: findPropertyValue(element.properties, "padding-left"), //| 0,
 			right: findPropertyValue(element.properties, "padding-right"), //| 0,
@@ -305,6 +306,7 @@ function extractData(element) {
 
 		let tempArr = [];
 		let levelMatrix = [];
+		let levelMatrixDraw = [];
 
 		let tempArrAddOn = [];
 		let levelMatrixAddOn = [];
@@ -324,6 +326,7 @@ function extractData(element) {
 			if (tempArr.length >= i) {
 				index += element.width - i
 				levelMatrix.push(tempArr)
+				levelMatrixDraw.push(tempArr)
 				levelMatrixAddOn.push(tempArrAddOn)
 				if (levelMatrix.length >= j) {
 					break;
@@ -336,16 +339,39 @@ function extractData(element) {
 		data.addOn = levelMatrixAddOn;
 		data.pieces = levelMatrix;
 
+
+		let matrixCopy = [];
+
+		for (let cc = 0; cc < levelMatrixDraw.length; cc++) {
+			const element = levelMatrixDraw[cc];
+			let cp = []
+			for (let dd = 0; dd < levelMatrixDraw[cc].length; dd++) {
+				cp.push(levelMatrixDraw[cc][dd])
+			}
+			matrixCopy.push(cp)
+		}
+
+
+		if (data.levelDataScale) {
+			data.pieces = utils.scaleLevel(data.pieces, data.levelDataScale)
+		} else {
+			data.levelDataScale = 1;
+		}
+
 		if (!element.isAddon) {
 
 			utils.trimMatrix(data.pieces)
 			utils.paddingMatrix(data.pieces, data.padding)
+			utils.trimMatrix(matrixCopy)
+			utils.paddingMatrix(matrixCopy, data.padding)
 		}
 
 		if (!element.isAddon && data.setAutoBlocker > 0) {
 			utils.addBlockers(data.pieces, data.setAutoBlocker)
 		}
 
+
+		data.piecesToDraw = matrixCopy;
 		return data
 	}
 

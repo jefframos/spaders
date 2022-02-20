@@ -12,28 +12,28 @@
  <tileset firstgid="65" source="../tilesets/gb.tsx"/>
  <layer id="115" name="Copy of Dagger" width="16" height="16" visible="0">
   <properties>
-   <property name="autoPlaceBlockers" type="int" value="1"/>
+   <property name="autoPlaceBlockers" type="int" value="0"/>
    <property name="i" type="int" value="9"/>
-   <property name="j" type="int" value="10"/>
-   <property name="padding-bottom" type="int" value="1"/>
-   <property name="padding-left" type="int" value="1"/>
-   <property name="padding-right" type="int" value="1"/>
+   <property name="j" type="int" value="15"/>
+   <property name="padding-bottom" type="int" value="0"/>
+   <property name="padding-left" type="int" value="0"/>
+   <property name="padding-right" type="int" value="0"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
   </properties>
   <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,65,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,74,65,65,65,0,0,0,0,0,0,
+0,0,0,0,0,0,74,74,65,65,0,0,0,0,0,0,
+65,65,0,0,65,0,74,65,65,65,0,0,0,0,0,0,
+65,65,0,0,65,0,65,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,65,0,0,0,0,0,0,0,0,0,0,
+0,4,4,0,65,0,0,0,0,0,0,0,0,0,0,0,
+0,0,4,4,0,0,4,4,0,0,0,0,0,0,0,0,
+0,0,0,4,4,4,4,74,0,0,0,0,0,0,0,0,
+74,74,0,0,4,4,0,0,74,74,0,0,0,0,0,0,
+74,74,0,0,0,0,0,0,74,74,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -50,7 +50,8 @@
    <property name="padding-bottom" type="int" value="2"/>
    <property name="padding-left" type="int" value="0"/>
    <property name="padding-right" type="int" value="0"/>
-   <property name="padding-top" type="int" value="0"/>
+   <property name="padding-top" type="int" value="1"/>
+   <property name="scale" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
@@ -113,7 +114,7 @@
    <property name="j" type="int" value="13"/>
    <property name="padding-bottom" type="int" value="2"/>
    <property name="padding-left" type="int" value="0"/>
-   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-right" type="int" value="0"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
@@ -145,7 +146,7 @@
    <property name="j" type="int" value="11"/>
    <property name="padding-bottom" type="int" value="2"/>
    <property name="padding-left" type="int" value="0"/>
-   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-right" type="int" value="0"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
@@ -177,7 +178,7 @@
    <property name="j" type="int" value="13"/>
    <property name="padding-bottom" type="int" value="2"/>
    <property name="padding-left" type="int" value="0"/>
-   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-right" type="int" value="0"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
@@ -209,7 +210,7 @@
    <property name="j" type="int" value="11"/>
    <property name="padding-bottom" type="int" value="2"/>
    <property name="padding-left" type="int" value="0"/>
-   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-right" type="int" value="0"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
@@ -241,7 +242,7 @@
    <property name="j" type="int" value="12"/>
    <property name="padding-bottom" type="int" value="2"/>
    <property name="padding-left" type="int" value="0"/>
-   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-right" type="int" value="0"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
@@ -273,7 +274,7 @@
    <property name="j" type="int" value="11"/>
    <property name="padding-bottom" type="int" value="2"/>
    <property name="padding-left" type="int" value="0"/>
-   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-right" type="int" value="0"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
@@ -305,7 +306,7 @@
    <property name="j" type="int" value="11"/>
    <property name="padding-bottom" type="int" value="2"/>
    <property name="padding-left" type="int" value="0"/>
-   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-right" type="int" value="0"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
@@ -337,7 +338,7 @@
    <property name="j" type="int" value="13"/>
    <property name="padding-bottom" type="int" value="2"/>
    <property name="padding-left" type="int" value="0"/>
-   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-right" type="int" value="0"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
@@ -369,7 +370,7 @@
    <property name="j" type="int" value="11"/>
    <property name="padding-bottom" type="int" value="2"/>
    <property name="padding-left" type="int" value="0"/>
-   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-right" type="int" value="0"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
@@ -401,7 +402,7 @@
    <property name="j" type="int" value="11"/>
    <property name="padding-bottom" type="int" value="2"/>
    <property name="padding-left" type="int" value="0"/>
-   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-right" type="int" value="0"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
@@ -433,7 +434,7 @@
    <property name="j" type="int" value="13"/>
    <property name="padding-bottom" type="int" value="2"/>
    <property name="padding-left" type="int" value="0"/>
-   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-right" type="int" value="0"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
@@ -465,7 +466,7 @@
    <property name="j" type="int" value="13"/>
    <property name="padding-bottom" type="int" value="2"/>
    <property name="padding-left" type="int" value="0"/>
-   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-right" type="int" value="0"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
@@ -497,7 +498,7 @@
    <property name="j" type="int" value="11"/>
    <property name="padding-bottom" type="int" value="2"/>
    <property name="padding-left" type="int" value="0"/>
-   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-right" type="int" value="0"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>

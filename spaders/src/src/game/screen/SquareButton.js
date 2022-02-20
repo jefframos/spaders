@@ -19,8 +19,13 @@ export default class SquareButton extends PIXI.Container {
         this.squareButtonShape.tint = 0x333333
         this.squareButtonBackShape.tint = 0x222222
 
+        this.squareButtonShape.width = 200//this.unscaledCardSize.width
+        this.squareButtonShape.height = 200//this.unscaledCardSize.height
 
-        this.buttonMask = PIXI.Sprite.fromFrame('largeCard.png');
+
+        this.squareButtonBackShape.width = 200//this.unscaledCardSize.width
+        this.squareButtonBackShape.height = 200//this.unscaledCardSize.height
+
         this.innerBorder = PIXI.Sprite.fromFrame('innerBorder.png');
 
 
@@ -49,7 +54,7 @@ export default class SquareButton extends PIXI.Container {
         this.container.addChild(this.squareButtonBackShape)
         //this.container.addChild(this.innerBorder)
         this.container.addChild(this.squareButtonShape)
-        //this.container.addChild(this.buttonMask)
+        
         this.squareButtonShape.addChild(this.label)
         this.squareButtonShape.addChild(this.labelTop)
 
@@ -62,7 +67,7 @@ export default class SquareButton extends PIXI.Container {
 
         let sizeBar = { width: this.squareButtonShape.width * 0.8, height: this.squareButtonShape.height * 0.12 }
         this.progressBar = new ProgressBar(sizeBar);
-        // this.progressBar.scale.set(0.5)
+        
         this.progressBar.visible = false;
 
         this.progressBar.x = this.squareButtonShape.width / 2 - sizeBar.width / 2

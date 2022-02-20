@@ -152,7 +152,89 @@ export default {
             pieces.push(colCounters);
         }
     },
-    addBlockers(pieces, distance = 2, id = 19) {
+
+    getArrounds(pieces, i, j) {
+        let arrounds = [];
+        let offsets = [
+            { i: 0, j: -1 },
+            { i: 0, j: 1 },
+
+            { i: -1, j: -1 },
+            { i: 1, j: 1 },
+
+            { i: 1, j: 0 },
+            { i: -1, j: 0 },
+
+            { i: 1, j: -1 },
+            { i: -1, j: 1 },
+        ]
+
+        offsets.forEach(element => {
+            let next = {
+                i: i + element.i,
+                j: j + element.j,
+            }
+
+            if (
+                (next.i >= 0 && next.i < pieces.length - 1) &&
+                (next.j >= 0 && next.j < pieces[i].length - 1)
+            ) {
+                if (pieces[next.i][next.j] >= 0 && pieces[next.i][next.j] < 19) {
+                    arrounds.push({
+                        id: pieces[next.i][next.j],
+                        i: next.i,
+                        j: next.j,
+                    })
+                }
+            }
+        })
+
+        return arrounds;
+    },
+
+    scaleLevel(pieces, scale = 2, debug = false) {
+        let scaledLevel = [];
+        for (let i = 0; i < pieces.length; i += scale) {
+            let col = [];
+            for (let j = 0; j < pieces[i].length; j += scale) {
+
+                let scalePiecesObject = {}
+                scalePiecesObject['p' + pieces[i][j]]
+                let scalePieces = [
+                    pieces[i][j],
+                    pieces[i + 1][j],
+                    pieces[i][j + 1],
+                    pieces[i + 1][j + 1]
+                ]
+
+                let more = -1;
+                scalePieces.forEach(sclPiece => {
+                    if (sclPiece >= 0) {
+
+                        if (scalePiecesObject['p' + sclPiece]) {
+                            scalePiecesObject['p' + sclPiece].quant++;
+                            more = sclPiece;
+                        } else {
+                            scalePiecesObject['p' + sclPiece] = {
+                                quant: 1,
+                                id: sclPiece
+                            }
+                            if (more < 0) {
+                                more = sclPiece;
+                            }
+                        }
+                    }
+                });
+
+                console.log(scalePiecesObject);
+                col.push(more);
+            }
+            scaledLevel.push(col);
+        }
+        console.log(scaledLevel)
+        return scaledLevel;
+    },
+    addBlockers(pieces, distance = 2, id = 19, debug = false) {
         if (pieces.length <= 0) {
             return;
         }
@@ -197,6 +279,27 @@ export default {
             }
         }
 
+        for (let index = 0; index < lineCounters.length; index++) {
+            const element = lineCounters[index];
+            let pos = { i: element - distance - 1, j: index }
+
+            if (element > 0 && pos.i > 0) {
+                let arrounds = this.getArrounds(pieces, pos.i, pos.j);
+                while (arrounds.length > 0 && pos.i >= 0) {
+
+                    arrounds = this.getArrounds(pieces, pos.i, pos.j);
+                    if (arrounds.length > 0) {
+                        if (lineCounters[index] && lineCounters[index] > 0) {
+                            lineCounters[index]--;
+                        }
+                    }
+                    pos.i--;
+                }
+            }
+
+        }
+
+
         for (let i = 0; i < pieces.length; i++) {
             for (let j = 0; j < pieces[i].length; j++) {
                 const element = pieces[i][j];
@@ -205,12 +308,8 @@ export default {
                 }
             }
         }
-
-        //console.log(lineCounters)
-        //console.log(colCounters)
-
-
     },
+
     formatPointsLabel(tempPoints) {
         if (tempPoints < 10) {
             return "00000" + tempPoints

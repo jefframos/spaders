@@ -32,14 +32,14 @@ export default class InGameMenu extends PIXI.Container {
 			this.state = 1;
 			this.onBack.dispatch()
 		});
-		this.closeButton.backShape.rotation = 0
+		this.closeButton.updateRotation(0);
 
 		this.refreshButton = new UIButton1(config.colors.background, window.iconsData.reload, config.colors.white);
 		this.refreshButton.onClick.add(() => {
 			this.state = 1;
 			this.onRestart.dispatch()
 		});
-		this.refreshButton.backShape.rotation = 0
+		this.refreshButton.updateRotation(0);
 
 		this.mainContainer.addChild(this.backShape);
 		this.mainContainer.scale.set(1.5)
@@ -57,7 +57,7 @@ export default class InGameMenu extends PIXI.Container {
 
 		// 	this.onRestart.dispatch();
 		// });
-		// this.autoPlayButton.backShape.rotation = 0
+		// this.autoPlayButton.updateRotation(0);
 
 		this.toggleSound = new UIButton1(config.colors.background, window.iconsData.soundOn, config.colors.white);
 		this.toggleSound.onClick.add(() => {
@@ -68,7 +68,7 @@ export default class InGameMenu extends PIXI.Container {
 				this.toggleSound.updateTexture(window.iconsData.soundOn);
 			}
 		});
-		this.toggleSound.backShape.rotation = 0
+		this.toggleSound.updateRotation(0);
 		if (!window.COOKIE_MANAGER.settings.sound) {
 			this.toggleSound.updateTexture(window.iconsData.soundOff);
 		}
