@@ -292,8 +292,8 @@ function extractData(element) {
 	if (element.visible) {
 		let data = {}
 		data.levelName = element.name;
-		let i = element.width - 1;
-		let j = element.height - 1;
+		let i = element.width;
+		let j = element.height;
 		data.tier = 0//findPropertyValue(element.properties, "tier");
 		data.levelDataScale = findPropertyValue(element.properties, "scale")
 		data.padding = {
@@ -343,7 +343,6 @@ function extractData(element) {
 		let matrixCopy = [];
 
 		for (let cc = 0; cc < levelMatrixDraw.length; cc++) {
-			const element = levelMatrixDraw[cc];
 			let cp = []
 			for (let dd = 0; dd < levelMatrixDraw[cc].length; dd++) {
 				cp.push(levelMatrixDraw[cc][dd])
@@ -363,13 +362,19 @@ function extractData(element) {
 			utils.trimMatrix(data.pieces)
 			utils.paddingMatrix(data.pieces, data.padding)
 			utils.trimMatrix(matrixCopy)
-			utils.paddingMatrix(matrixCopy, data.padding)
+			let scalePadding = {
+				left: data.padding.left * data.levelDataScale,
+				right: data.padding.right * data.levelDataScale,
+				top: data.padding.top * data.levelDataScale,
+				bottom: data.padding.bottom * data.levelDataScale
+			}
+			utils.paddingMatrix(matrixCopy, scalePadding);
+			
 		}
 
 		if (!element.isAddon && data.setAutoBlocker > 0) {
 			utils.addBlockers(data.pieces, data.setAutoBlocker)
 		}
-
 
 		data.piecesToDraw = matrixCopy;
 		return data
@@ -500,7 +505,7 @@ function configGame() {
 
 	});
 
-	window.levelsRawJson = PIXI.loader.resources["./data/gameboy/gameboy1.json"].data
+	window.levelsRawJson = PIXI.loader.resources["./data/gameboy/gameboycreatures.json"].data
 	//window.levelsRawJson = PIXI.loader.resources["./assets/levelsRaw.json"].data
 	window.levelsJson = PIXI.loader.resources["./assets/levels.json"].data
 

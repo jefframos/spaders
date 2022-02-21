@@ -13,6 +13,10 @@
             "levels": [
                 {
                     "name": "gameboy",
+                    "dataPath": "gameboy/gameboycreatures.json"
+                },
+                {
+                    "name": "gameboy",
                     "dataPath": "gameboy/gameboy1.json"
                 },
                 {

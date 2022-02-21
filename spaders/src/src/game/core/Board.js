@@ -465,6 +465,12 @@ export default class Board {
 
 		this.chainTimer += 300;
 	}
+	destroyAllCards() {
+		for (let index = this.allCards.length - 1; index >= 0 ; index--) {
+			const element = this.allCards[index];
+			this.attackCard(element, 1000);
+		}
+	}
 	destroyCards(list, card, autoDestroyCardData, hits) {
 		let timeline = new TimelineLite();
 		TweenMax.killTweensOf(card);

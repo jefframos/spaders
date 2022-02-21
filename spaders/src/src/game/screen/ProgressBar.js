@@ -71,6 +71,9 @@ export default class ProgressBar extends PIXI.Container {
         this.currentColor = colorScheme.fillBarColor;
         this.setProgressBar(this.currentValue, colorScheme.fillBarColor)
     }
+    updateBackgroundColor(color){
+        this.loadingBarFillBack.tint = color;
+    }
     setProgressBar(value = 0, color = null) {
         if (value <= 0) {
             return;

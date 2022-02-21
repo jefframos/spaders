@@ -932,7 +932,8 @@ export default class TetraScreen extends Screen {
 
 		this.fireworksTimer = 0;
 		this.mainMenuSettings.collapse();
-		this.grid.createGrid(this.currentLevelData.piecesToDraw);
+
+		this.grid.createGrid(this.currentLevelData);
 
 		this.gameplayState = 0;
 		this.cardQueueData = {
@@ -1232,9 +1233,11 @@ export default class TetraScreen extends Screen {
 		// card.cardContainer.scale.set(1.2 - j * 0.05)
 		TweenMax.killTweensOf(card);
 		card.alpha = 0;
-		TweenMax.to(card, 0.5, { alpha: 1, delay: i * 0.05 + 1, y: j * CARD.height, ease: Back.easeOut })
+		card.y = j * CARD.height;
+		//TweenMax.to(card, 0.5, { alpha: 1, delay: i * 0.05 + 1,ease: Back.easeOut })
+		TweenMax.to(card, 0.5, { alpha: 1, delay: Math.random() + 1,ease: Back.easeOut })
 
-		card.show(0.5, i * 0.05 + 0.75)
+		//card.show(0.5, i * 0.05 + 0.75)
 
 		card.pos.i = i;
 		card.pos.j = j;
@@ -1251,7 +1254,8 @@ export default class TetraScreen extends Screen {
 		block.x = i * CARD.width;
 		block.y = j * CARD.height - CARD.height;
 		block.alpha = 0;
-		TweenMax.to(block, 0.5, { alpha: 1, delay: i * 0.05, y: j * CARD.height, ease: Back.easeOut })
+		block.y = j * CARD.height
+		TweenMax.to(block, 0.5, { alpha: 1, delay: i * 0.05 + 1, ease: Back.easeOut })
 		block.pos.i = i;
 		block.pos.j = j;
 		this.board.addCard(block);

@@ -79,7 +79,61 @@ export default class Grid extends PIXI.Container {
 		this.dropTiles = [];
 
 	}
-	createGrid(toDraw) {
+	getGridPreviewImage(levelData) {
+
+
+		if(window.imageThumbs['toDraw' + levelData.idSaveData]){
+			return window.imageThumbs['toDraw' + levelData.idSaveData]
+		}
+		let colorScheme = colorSchemes.getCurrentColorScheme().grid;
+		let colorSchemeList = colorSchemes.getCurrentColorScheme().list;
+
+
+		let gridDrawContainer = new PIXI.Container();
+
+		let toDraw = levelData.piecesToDraw;
+		let piecesToTraw = []
+		for (let i = 0; i < toDraw.length; i++) {
+			let temp = []
+			for (let j = 0; j < toDraw[i].length; j++) {
+				temp.push(toDraw[i][j]);
+
+			}
+			piecesToTraw.push(temp);
+		}
+
+		for (var i = piecesToTraw.length - 1; i >= 0; i--) {
+			for (var j = 0; j < piecesToTraw[i].length; j++) {
+				if (piecesToTraw[i][j] >= 0 && piecesToTraw[i][j] < 19) {
+					//let gridSquare = PIXI.Sprite.fromFrame('gridSquare.png')
+					let gridSquare = new PIXI.mesh.NineSlicePlane(
+						PIXI.Texture.fromFrame(colorScheme.sprite), 20, 20, 20, 20);
+
+					gridSquare.width = GRID.widthDraw
+					gridSquare.height = GRID.heightDraw
+					//gridSquare.scale.set(CARD.width / gridSquare.width);
+					gridSquare.x = j * GRID.widthDraw;
+					gridSquare.y = i * GRID.heightDraw;
+
+					gridSquare.tint = colorSchemeList[piecesToTraw[i][j]].color
+					//gridSquare.alpha = 0;
+					//TweenMax.to(gridSquare, 0.5, { alpha: 1, delay: Math.random() * (1 - 0.6) });
+					gridDrawContainer.addChild(gridSquare)
+				}
+			}
+		}
+
+		let texture = renderer.generateTexture(gridDrawContainer);
+
+		let gridSprite = new PIXI.Sprite()
+		gridSprite.setTexture(texture)
+
+		window.imageThumbs['toDraw' + levelData.idSaveData] = gridSprite;
+
+		return gridSprite;
+
+	}
+	createGrid(levelData) {
 		console.log("CREATING GRID")
 
 		this.resetGrid();
@@ -88,36 +142,27 @@ export default class Grid extends PIXI.Container {
 		let colorScheme = colorSchemes.getCurrentColorScheme().grid;
 		let colorSchemeList = colorSchemes.getCurrentColorScheme().list;
 
-		if (toDraw) {
-			let piecesToTraw = []
-			for (let i = 0; i < toDraw.length; i++) {
-				let temp = []
-				for (let j = 0; j < toDraw[i].length; j++) {
-					temp.push(toDraw[i][j]);
+		//toDraw = null;
+		if (levelData) {
+
+			let gridDrawContainer = this.getGridPreviewImage(levelData)
+			this.topGridContainer.addChild(gridDrawContainer)
+
+			this.topGridContainer.alpha = 0;
+			//TweenMax.to(this.topGridContainer, 0.3, { alpha: 1, delay: 0.2 });
+			if(levelData.padding.left){
+				gridDrawContainer.x = levelData.padding.left * CARD.width;
+			}
+			if(levelData.padding.top){
+				gridDrawContainer.y = levelData.padding.top * CARD.width;
+			}
+			TweenMax.to(this.topGridContainer, 0.15, { alpha: 1 });
+			TweenMax.to(this.topGridContainer, 0.5, {
+				alpha: 0, delay: 1, onComplete: () => {
+					this.topGridContainer.removeChild(gridDrawContainer)
 
 				}
-				piecesToTraw.push(temp);
-			}
-			for (var i = piecesToTraw.length - 1; i >= 0; i--) {
-				for (var j = 0; j < piecesToTraw[i].length; j++) {
-					if (piecesToTraw[i][j] >= 0 && piecesToTraw[i][j] < 19) {
-						//let gridSquare = PIXI.Sprite.fromFrame('gridSquare.png')
-						let gridSquare = new PIXI.mesh.NineSlicePlane(
-							PIXI.Texture.fromFrame(colorScheme.sprite), 20, 20, 20, 20);
-
-						gridSquare.width = GRID.widthDraw
-						gridSquare.height = GRID.heightDraw
-						//gridSquare.scale.set(CARD.width / gridSquare.width);
-						gridSquare.x = j * GRID.widthDraw;
-						gridSquare.y = i * GRID.heightDraw;
-
-						gridSquare.tint = colorSchemeList[piecesToTraw[i][j]].color
-						gridSquare.alpha = 0;
-						TweenMax.to(gridSquare, 0.5, { alpha: 1, delay: Math.random() * (1 - 0.6) });
-						this.topGridContainer.addChild(gridSquare)
-					}
-				}
-			}
+			});
 		}
 		for (var i = GRID.i - 1; i >= 0; i--) {
 			let gridLine = [];
@@ -161,9 +206,7 @@ export default class Grid extends PIXI.Container {
 
 		gridContainer.alpha = 1
 
-		this.topGridContainer.alpha = 1;
-		//TweenMax.to(this.topGridContainer, 0.3, { alpha: 1, delay: 0.2 });
-		TweenMax.to(this.topGridContainer, 0.5, { alpha: 0, delay: 1 });
+
 
 
 		this.addChild(gridContainer);

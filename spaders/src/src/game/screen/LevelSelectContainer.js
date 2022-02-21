@@ -24,6 +24,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         this.sections = window.levelSections.sections
 
         this.unscaledCardSize = { width: window.innerWidth / 5, height: window.innerWidth / 5 }
+        this.unscaledLineButtonSize = { width: window.innerWidth / 5, height: window.innerWidth / 5 }
 
         this.mainCanvas = new PIXI.Graphics().beginFill(0xFF0000).drawRect(0, 0, config.width, config.height);
         this.addChild(this.mainCanvas)
@@ -52,15 +53,25 @@ export default class LevelSelectContainer extends PIXI.Container {
         setTimeout(() => {
             this.addChild(this.newContainer)
 
-            this.unscaledCardSize = { width: window.innerWidth / 5, height: window.innerWidth / 5 }
+            this.unscaledCardSize = { width: window.innerWidth / 4, height: window.innerWidth / 4 }
 
-            if (this.unscaledCardSize.width > 150) {
-                this.unscaledCardSize = { width: 150, height: 150 }
+
+            this.unscaledCardSize.width = Math.min(80, this.unscaledCardSize.width);
+
+            if(window.isMobile){
+
+                this.unscaledCardSize.width = Math.max(100, this.unscaledCardSize.width);
+            }else{
+                this.unscaledCardSize.width = Math.max(120, this.unscaledCardSize.width);
+
             }
 
-            if (this.unscaledCardSize.width < 80) {
-                this.unscaledCardSize = { width: 80, height: 80 }
-            }
+            this.unscaledCardSize.height = this.unscaledCardSize.width;
+
+            this.unscaledLineButtonSize = {width:window.innerWidth * 0.9, height:120}
+            this.unscaledLineButtonSize.width = Math.min(config.width, this.unscaledLineButtonSize.width);
+            this.unscaledLineButtonSize.width = Math.max(200, this.unscaledLineButtonSize.width);
+
 
             this.sectionsContainer.addChild(this.sectionsView)
             this.newContainer.addChild(this.sectionsContainer)
@@ -194,7 +205,7 @@ export default class LevelSelectContainer extends PIXI.Container {
 
                 
             }
-            navButton.updateLabel(finishedLevels + "/" + countLevels, { x: 0, y: -25 })
+            navButton.updateLabel(finishedLevels + "/" + countLevels, { x: 0, y: -4 })
             navButton.setProgressBar(finishedLevels / countLevels);
             // console.log('SECTION',colorSchemes.colorSchemes[navButton.section.colorPalletId].list[3].color)
             if (finishedLevels >= countLevels) {
@@ -377,12 +388,12 @@ export default class LevelSelectContainer extends PIXI.Container {
     }
 
     buildSectionButton(section) {
-        let secButton = new SquareButton(this.unscaledCardSize);
+        let secButton = new SquareButton(this.unscaledLineButtonSize);
         secButton.updateLabelTop(section.name);
         if (section.imageSrc)
             secButton.updateIcon(PIXI.Sprite.fromImage('./assets/' + section.imageSrc));
 
-        this.gameScreen.resizeToFitAR(this.unscaledCardSize, secButton)
+        this.gameScreen.resizeToFitAR(this.unscaledLineButtonSize, secButton)
 
 
 
@@ -391,12 +402,12 @@ export default class LevelSelectContainer extends PIXI.Container {
     buildLevelTierButton(level, index) {
 
         let dataFirstLevel = level.data[0];
-        let levelTierButton = new SquareButton(this.unscaledCardSize);
+        let levelTierButton = new SquareButton(this.unscaledLineButtonSize);
 
 
         levelTierButton.updateLabelTop(level.name);
         levelTierButton.updateIcon(this.gameScreen.generateImage(dataFirstLevel, 24, 0, dataFirstLevel.colorPalletId), 0.35,{ x: 0, y: -10 });
-        this.gameScreen.resizeToFitAR(this.unscaledCardSize, levelTierButton)
+        this.gameScreen.resizeToFitAR(this.unscaledLineButtonSize, levelTierButton)
 
         this.refreshTier(levelTierButton, level.data)
         //levelTierButton.setProgressBar();
@@ -639,8 +650,11 @@ export default class LevelSelectContainer extends PIXI.Container {
         this.resetDrags()
         this.resize(null, true)
     }
-    drawGrid(elements, margin = 10) {
-        let maxPerLine = Math.floor(this.mainCanvas.width / (this.unscaledCardSize.width + margin * 2.5)) + 1
+    drawGrid(elements, margin, size, isVertical) {
+        let maxPerLine = Math.floor(this.mainCanvas.width / (size.width + margin * 2.5)) + 1
+        if(isVertical){
+            maxPerLine = 1;
+        }
         let fullWidth = this.mainCanvas.width - margin * 2
         let distance = fullWidth / maxPerLine
         let line = -1
@@ -682,7 +696,7 @@ export default class LevelSelectContainer extends PIXI.Container {
 
             // }
 
-            lines.push(element.y + this.unscaledCardSize.height)
+            lines.push(element.y + size.height)
 
         }
 
@@ -711,9 +725,9 @@ export default class LevelSelectContainer extends PIXI.Container {
 
     }
     centerLevels() {
-        this.drawGrid(this.sectionButtons, 20);
-        this.drawGrid(this.navButtons, 20);
-        this.drawGrid(this.levelCards, 20);
+        this.drawGrid(this.sectionButtons, 20, this.unscaledLineButtonSize, true);
+        this.drawGrid(this.navButtons, 20,this.unscaledLineButtonSize, true);
+        this.drawGrid(this.levelCards, 20, this.unscaledCardSize, false);
 
         this.updateDrag(this.draggables[this.currentUISection])
         // if(this.currentUISection == 2){

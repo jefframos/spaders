@@ -19,12 +19,12 @@ export default class SquareButton extends PIXI.Container {
         this.squareButtonShape.tint = 0x333333
         this.squareButtonBackShape.tint = 0x222222
 
-        this.squareButtonShape.width = 200//this.unscaledCardSize.width
-        this.squareButtonShape.height = 200//this.unscaledCardSize.height
+        this.squareButtonShape.width = this.unscaledCardSize.width
+        this.squareButtonShape.height = this.unscaledCardSize.height
 
 
-        this.squareButtonBackShape.width = 200//this.unscaledCardSize.width
-        this.squareButtonBackShape.height = 200//this.unscaledCardSize.height
+        this.squareButtonBackShape.width = this.unscaledCardSize.width
+        this.squareButtonBackShape.height = this.unscaledCardSize.height
 
         this.innerBorder = PIXI.Sprite.fromFrame('innerBorder.png');
 
@@ -49,15 +49,13 @@ export default class SquareButton extends PIXI.Container {
             // strokeThickness: 12
         });
 
-        this.squareButtonBackShape.y = 20
+        this.squareButtonBackShape.y = 15
 
         this.container.addChild(this.squareButtonBackShape)
         //this.container.addChild(this.innerBorder)
         this.container.addChild(this.squareButtonShape)
-        
-        this.squareButtonShape.addChild(this.label)
-        this.squareButtonShape.addChild(this.labelTop)
 
+       
         this.addChild(this.container);
 
         this.squareButtonBackShape.interactive = true;
@@ -65,9 +63,9 @@ export default class SquareButton extends PIXI.Container {
         this.squareButtonBackShape.on('pointerout', this.onPointerOut.bind(this));
         this.squareButtonBackShape.on('pointerup', this.onPointerUp.bind(this));
 
-        let sizeBar = { width: this.squareButtonShape.width * 0.8, height: this.squareButtonShape.height * 0.12 }
+        let sizeBar = { width: this.squareButtonShape.width * 0.8, height: 20 }
         this.progressBar = new ProgressBar(sizeBar);
-        
+
         this.progressBar.visible = false;
 
         this.progressBar.x = this.squareButtonShape.width / 2 - sizeBar.width / 2
@@ -76,6 +74,8 @@ export default class SquareButton extends PIXI.Container {
         this.squareButtonShape.addChild(this.progressBar)
 
         this.currentState = 0;
+        this.squareButtonShape.addChild(this.label)
+        this.squareButtonShape.addChild(this.labelTop)
 
         window.COOKIE_MANAGER.onChangeColors.add(() => {
             this.updateColorScheme();
@@ -89,8 +89,8 @@ export default class SquareButton extends PIXI.Container {
         this.label.style.fill = colorScheme.fontColor;
         this.labelTop.style.fill = colorScheme.fontColor;
 
-
-        if(this.iconBackground){
+        this.progressBar.updateBackgroundColor(colorScheme.buttonStandardDarkColor)
+        if (this.iconBackground) {
             this.iconBackground.tint = colorScheme.buttonStandardDarkColor;
         }
         switch (this.currentState) {
@@ -111,11 +111,14 @@ export default class SquareButton extends PIXI.Container {
         window.SOUND_MANAGER.play('tap', { volume: 0.5 })
     }
     onPointerOver() {
-        this.squareButtonShape.y = 20;
+        TweenMax.killTweensOf(this.squareButtonShape)
+        TweenMax.to(this.squareButtonShape, 0.2, {y:15, ease:Back.easeIn})
+        //this.squareButtonShape.y = 10;
 
     }
     onPointerOut() {
-        this.squareButtonShape.y = 0;
+        TweenMax.killTweensOf(this.squareButtonShape)
+        TweenMax.to(this.squareButtonShape, 0.5, {y:0, ease:Back.easeOut})
     }
     hideProgressBar(progression = 0) {
         this.progressBar.visible = false;
@@ -138,24 +141,27 @@ export default class SquareButton extends PIXI.Container {
             this.labelTop.icon = icon;
 
             icon.scale.set(1);
-            icon.scale.set(this.labelTop.height / icon.height / icon.scale.y);
+            icon.scale.set(this.labelTop.height / icon.height);
             icon.anchor.x = 1.1;
             icon.anchor.y = 0;
 
             this.labelTop.addChild(icon);
         }
 
-        if (this.labelTop.width > this.squareButtonShape.width * 0.9) {
-            this.labelTop.scale.set(this.squareButtonShape.width / this.labelTop.width * 0.9)
-        }
+        utils.resizeToFitAR(
+            {
+                width: this.squareButtonBackShape.width * 0.7,
+                height: this.squareButtonBackShape.height * 0.15
+            }, this.labelTop)
 
         this.labelTop.pivot.x = this.labelTop.width / 2 / this.labelTop.scale.x
-        this.labelTop.pivot.y = this.labelTop.height / this.labelTop.scale.y;
+        this.labelTop.pivot.y = 0//this.labelTop.height / this.labelTop.scale.y;
         this.labelTop.x = this.squareButtonShape.width / 2 // this.container.scale.x
-        this.labelTop.y = this.squareButtonShape.height * 0.07 + this.labelTop.height / this.labelTop.scale.y// this.container.scale.y
+        this.labelTop.y = this.squareButtonShape.height * 0.07 //+ this.labelTop.height / this.labelTop.scale.y// this.container.scale.y
         if (icon) {
-            this.labelTop.x += icon.width / 2//icon.scale.x;
+            this.labelTop.x += icon.width / 2 * this.labelTop.scale.x//icon.scale.x;
         }
+
     }
     setPallet(colors) {
         if (this.pallet && this.pallet.parent) {
@@ -166,13 +172,18 @@ export default class SquareButton extends PIXI.Container {
         this.pallet.scale.set(1);
         this.pallet.pivot.x = this.pallet.width / 2
         this.pallet.pivot.y = this.pallet.height / 2
-        this.pallet.scale.set(this.squareButtonShape.width / this.pallet.width);
 
+        utils.resizeToFitAR(
+            {
+                width: this.squareButtonBackShape.width,
+                height: this.squareButtonBackShape.height * 0.15
+            }, this.pallet)
 
+            this.pallet.width = this.squareButtonShape.width
         this.pallet.x = this.squareButtonShape.width / 2;
         this.pallet.y = this.squareButtonShape.height / 2;
 
-        this.squareButtonShape.addChild(this.pallet);
+        this.squareButtonShape.addChildAt(this.pallet, 0);
 
         this.label.visible = false;
 
@@ -182,14 +193,19 @@ export default class SquareButton extends PIXI.Container {
         this.label.text = text;
         this.label.visible = true;
 
-        if (this.label.width > this.squareButtonShape.width * 0.9) {
-            this.label.scale.set(this.squareButtonShape.width / this.label.width * 0.9)
-        }
+        utils.resizeToFitAR(
+            {
+                width: this.squareButtonBackShape.width * 0.7,
+                height: this.squareButtonBackShape.height * 0.15
+            }, this.label)
 
         this.label.pivot.x = this.label.width / 2 / this.label.scale.x
         this.label.pivot.y = this.label.height / this.label.scale.y;
         this.label.x = this.squareButtonShape.width / 2 + offset.x// this.container.scale.x
         this.label.y = this.squareButtonShape.height * 0.93 + offset.y// this.container.scale.y
+
+      
+
     }
     setStandardState() {
         this.currentState = 0;
@@ -208,31 +224,36 @@ export default class SquareButton extends PIXI.Container {
             this.icon.parent.removeChild(this.icon);
         }
 
-        if(!this.iconBackground){
+        if (!this.iconBackground) {
             this.iconBackground = new PIXI.mesh.NineSlicePlane(
                 PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
 
-                this.squareButtonShape.addChildAt(this.iconBackground, 0)
+            this.squareButtonShape.addChildAt(this.iconBackground, 0)
         }
         this.icon = graphic
         this.icon.scale.set(1)
         this.iconBackground.addChild(this.icon)
         //this.icon.x = offset.x
         //this.icon.y = offset.y
-        if (graphic.width > graphic.height) {
-            this.icon.scale.set(this.squareButtonBackShape.width / (this.icon.width / this.icon.scale.x) * scale);
-        } else {
-            this.icon.scale.set(this.squareButtonBackShape.height / (this.icon.height / this.icon.scale.y) * scale);
-        }
+        utils.resizeToFitAR(
+            {
+                width: this.squareButtonBackShape.width,
+                height: this.squareButtonBackShape.height * scale
+            }, this.icon)
+        // if (graphic.width > graphic.height) {
+        //     this.icon.scale.set(this.squareButtonBackShape.width / (this.icon.width / this.icon.scale.x) * scale);
+        // } else {
+        //     this.icon.scale.set(this.squareButtonBackShape.height / (this.icon.height / this.icon.scale.y) * scale);
+        // }
 
         this.iconBackground.width = this.icon.width + 10;
-        this.iconBackground.height = this.icon.height+ 10
+        this.iconBackground.height = this.icon.height + 10
         this.icon.x = 5;
         this.icon.y = 5;
         this.iconBackground.x = this.squareButtonShape.width / 2 - this.iconBackground.width / 2 + offset.x
         this.iconBackground.y = this.squareButtonShape.height / 2 - this.iconBackground.height / 2 + offset.y
 
-        if(hideBackground){
+        if (hideBackground) {
             this.iconBackground.width = 0
             this.iconBackground.height = 0
         }

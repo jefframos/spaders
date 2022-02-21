@@ -200,12 +200,20 @@ export default {
 
                 let scalePiecesObject = {}
                 scalePiecesObject['p' + pieces[i][j]]
-                let scalePieces = [
-                    pieces[i][j],
-                    pieces[i + 1][j],
-                    pieces[i][j + 1],
-                    pieces[i + 1][j + 1]
-                ]
+                let scalePieces = []
+                scalePieces.push(pieces[i][j])
+                let pass = 0;
+                if (i + 1 < pieces.length) {
+                    scalePieces.push(pieces[i + 1][j])
+                    pass++
+                }
+                if (j + 1 < pieces[i].length) {
+                    scalePieces.push(pieces[i][j + 1])
+                    pass++
+                }
+                if (pass >= 2) {
+                    scalePieces.push(pieces[i + 1][j + 1])
+                }
 
                 let more = -1;
                 scalePieces.forEach(sclPiece => {
@@ -226,7 +234,7 @@ export default {
                     }
                 });
 
-                console.log(scalePiecesObject);
+                //console.log(scalePiecesObject);
                 col.push(more);
             }
             scaledLevel.push(col);
@@ -309,7 +317,21 @@ export default {
             }
         }
     },
-
+    resizeToFitAR(size, element, res) {
+		if (!res) {
+			res = element
+		}
+		let sclX = (size.width) / (res.width / res.scale.x);
+		let sclY = (size.height) / (res.height / res.scale.y);
+		let min = Math.min(sclX, sclY);
+		element.scale.set(min)
+	},
+	resizeToFit(size, element) {
+		let sclX = (size.width) / (element.width / element.scale.x);
+		let sclY = (size.height) / (element.height / element.scale.y);
+		let min = Math.min(sclX, sclY);
+		element.scale.set(sclX, sclY)
+	},
     formatPointsLabel(tempPoints) {
         if (tempPoints < 10) {
             return "00000" + tempPoints
