@@ -53,6 +53,7 @@ export default class TetraScreen extends Screen {
 		this.currentLevelData = this.levels[this.currentLevelID];
 
 		this.isTutorial = false;
+		this.autoRedirectToLevelSelect = false;
 
 		if (window.location.hash) {
 			var hash = window.location.hash.substring(1); //Puts hash in variable, and removes the # character
@@ -63,6 +64,8 @@ export default class TetraScreen extends Screen {
 
 				this.hasHash = true;
 				this.currentLevelID = -1;
+			} else if (hash == "m") {
+				this.autoRedirectToLevelSelect = true;
 			} else {
 				if (hash < this.levels.length) {
 
@@ -438,11 +441,17 @@ export default class TetraScreen extends Screen {
 
 		if (this.isTutorial) {
 			setTimeout(() => {
-
 				this.nextTutorial();
 			}, 2000);
 		}
 
+
+		if(this.autoRedirectToLevelSelect){
+			this.autoRedirectToLevelSelect = false;
+			setTimeout(() => {
+				this.mainmenuStateFromGame();
+			}, 100);
+		}
 
 		window.COOKIE_MANAGER.onChangeColors.add(() => {
 			this.updateColorScheme();

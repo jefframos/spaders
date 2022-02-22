@@ -27,14 +27,14 @@ export default {
             ],
             dark: 0x111111,
             fillBarColor: config.colors.green,
-            background: 0x111111,
+            background: 0x151515,
             fontColor: 0xFFFFFF,
             buttonData:{
                 fontColor: 0xFFFFFF,
                 levelCompleteColor:config.colors.blue2,
                 tierCompleteColor:config.colors.purple,
                 buttonStandardColor:0x333333,
-                buttonStandardDarkColor:config.colors.dark,
+                buttonStandardDarkColor:0x111111,
             },
             grid: {
                 color: 0xFFFFFF,
@@ -71,7 +71,7 @@ export default {
             ],
             dark: 0x111111,
             fillBarColor: 0xffd319,
-            background: 0x111111,
+            background: 0x151515,
             fontColor: 0xFFFFFF,
             buttonData:{
                 fontColor: 0xFFFFFF,

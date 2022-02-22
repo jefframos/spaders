@@ -6,6 +6,7 @@ import { debug } from 'webpack';
 import SquareButton from './SquareButton';
 import Spring from '../effects/Spring';
 import colorSchemes from '../../colorSchemes';
+import UIButton1 from './UIButton1';
 
 
 export default class LevelSelectContainer extends PIXI.Container {
@@ -49,7 +50,7 @@ export default class LevelSelectContainer extends PIXI.Container {
 
         this.tempBlockPanel = new PIXI.Graphics().beginFill(0x000099).drawRect(-5000, -5000, 10000, 10000);
 
-
+        this.currentGridOffset = {x:0, y:0}
         setTimeout(() => {
             this.addChild(this.newContainer)
 
@@ -58,35 +59,44 @@ export default class LevelSelectContainer extends PIXI.Container {
 
             this.unscaledCardSize.width = Math.min(80, this.unscaledCardSize.width);
 
-            if(window.isMobile){
+            if (window.isMobile) {
 
                 this.unscaledCardSize.width = Math.max(100, this.unscaledCardSize.width);
-            }else{
+            } else {
                 this.unscaledCardSize.width = Math.max(120, this.unscaledCardSize.width);
 
             }
 
             this.unscaledCardSize.height = this.unscaledCardSize.width;
 
-            this.unscaledLineButtonSize = {width:window.innerWidth * 0.9, height:120}
-            this.unscaledLineButtonSize.width = Math.min(config.width, this.unscaledLineButtonSize.width);
-            this.unscaledLineButtonSize.width = Math.max(200, this.unscaledLineButtonSize.width);
-
-
+            
+            
             this.sectionsContainer.addChild(this.sectionsView)
             this.newContainer.addChild(this.sectionsContainer)
-
+            
             this.tiersContainer.addChild(this.tiersView)
             this.newContainer.addChild(this.tiersContainer)
-
+            
             this.levelsContainer.addChild(this.levelsView)
             this.newContainer.addChild(this.levelsContainer)
+            
+          
+            
+            this.resize({ width: window.innerWidth, height: window.innerHeight }, true)
+
+
+
+            this.unscaledLineButtonSize = { width: window.innerWidth * 0.9, height: 120 }
+            this.unscaledLineButtonSize.width = Math.min(config.width, this.unscaledLineButtonSize.width)
+            this.unscaledLineButtonSize.width = Math.max(200, this.unscaledLineButtonSize.width);
+            this.unscaledLineButtonSize.width -= this.currentGridOffset.x;
+
 
             this.buildSections();
             this.refreshNavButtons();
+            
 
-            this.resize({ width: window.innerWidth, height: window.innerHeight }, true)
-
+            console.log(this.currentGridOffset, this.unscaledLineButtonSize)
             this.dragPanel = new PIXI.Graphics().beginFill(0x000099).drawRect(-5000, -5000, 10000, 10000);
 
             this.addChild(this.dragPanel)
@@ -99,14 +109,17 @@ export default class LevelSelectContainer extends PIXI.Container {
             this.tempBlockPanel.interactive = true;
             this.tempBlockPanel.visible = true;
             this.tempBlockPanel.alpha = 0;
-            
-            
 
-            window.COOKIE_MANAGER.onAddNewLevel.add(()=>{this.refreshAll()});
-            window.COOKIE_MANAGER.onToggleDebug.add(()=>{this.refreshAll()});
+
+
+            window.COOKIE_MANAGER.onAddNewLevel.add(() => { this.refreshAll() });
+            window.COOKIE_MANAGER.onToggleDebug.add(() => { this.refreshAll() });
+
+            this.addChild(this.backButton)
+
 
         }, 100);
-       
+
         this.sectionsContainer.x = 0;
         this.tiersContainer.x = config.width;
         this.levelsContainer.x = config.width * 2;
@@ -156,17 +169,27 @@ export default class LevelSelectContainer extends PIXI.Container {
 
         // this.center2 = new PIXI.Graphics().beginFill(0xF00FFF).drawCircle(0, 0, 20)
         // this.levelsContainer.addChild(this.center2)
+
+        this.backButton = new UIButton1(config.colors.background, window.iconsData.back, config.colors.white);
+        this.backButton.onClick.add(() => {
+            this.state = 1;
+            this.onBack();
+        })
+        this.addChild(this.backButton)
+
         window.COOKIE_MANAGER.onChangeColors.add(() => {
-			this.updateColorScheme();
-		})
+            this.updateColorScheme();
+        })
 
-		this.updateColorScheme();
+        this.updateColorScheme();
 
     }
-    updateColorScheme(){
-        let colorScheme = colorSchemes.getCurrentColorScheme();
+    updateColorScheme() {
+        let colorScheme = colorSchemes.getCurrentColorScheme().buttonData;
+        this.backButton.setColor(colorScheme.buttonStandardDarkColor)
+        this.backButton.setIconColor(colorScheme.fontColor)
     }
-    refreshAll(){
+    refreshAll() {
         this.refreshNavButtons();
         this.sectionButtons.forEach(element => {
             if (element.data) {
@@ -181,7 +204,7 @@ export default class LevelSelectContainer extends PIXI.Container {
     }
     refreshNavButtons() {
         let debugThumb = window.COOKIE_MANAGER.debug.showAllThumbs;
-        for (let index = 1; index < this.navButtons.length; index++) {
+        for (let index = 0; index < this.navButtons.length; index++) {
             let navButton = this.navButtons[index];
 
             let countLevels = 0;
@@ -203,7 +226,7 @@ export default class LevelSelectContainer extends PIXI.Container {
                     estimatedTimeHard += level.estimateTimeHard;
                 });
 
-                
+
             }
             navButton.updateLabel(finishedLevels + "/" + countLevels, { x: 0, y: -4 })
             navButton.setProgressBar(finishedLevels / countLevels);
@@ -216,16 +239,18 @@ export default class LevelSelectContainer extends PIXI.Container {
                 //navButton.setColor(colorSchemes.colorSchemes[navButton.section.colorPalletId].list[3].color)
                 navButton.updateLabel('COMPLETED');
                 navButton.hideProgressBar();
-            }else{
+            } else {
                 navButton.setStandardState();
             }
-            if(debugThumb){
-                navButton.updateLabelTop('~'+utils.convertNumToTime(Math.ceil(estimatedTime)) + '\n' +'~'+utils.convertNumToTime(Math.ceil(estimatedTimeHard)));
-            }else{
+            if (debugThumb) {
+                navButton.updateLabelTop('~' + utils.convertNumToTime(Math.ceil(estimatedTime)) + '\n' + '~' + utils.convertNumToTime(Math.ceil(estimatedTimeHard)));
+            } else {
                 navButton.updateLabelTop(navButton.section.name);
             }
+
+            navButton.setSectionButtonMode();
         }
-        
+
     }
     getRect(size = 4, color = 0xFFFFFF) {
         return new PIXI.Graphics().beginFill(color).drawRect(0, 0, size, size);
@@ -254,11 +279,11 @@ export default class LevelSelectContainer extends PIXI.Container {
     updateDrag(element) {
         //console.log(this.newContainer.getGlobalPosition())
         let cElementH = element.height//- this.newContainer.y;
-        let cCanvasH = this.mainCanvas.height - this.newContainer.getGlobalPosition().y//+ this.newContainer.y;
+        let cCanvasH = this.mainCanvas.height - this.y//this.newContainer.getGlobalPosition().y//+ this.newContainer.y;
         if (cElementH > cCanvasH) {
             element.spring.tx = element.dragPosition.y + this.dragSpeed.y;
             element.spring.tx = Math.min(element.spring.tx, 0);
-            element.spring.tx = Math.max(element.spring.tx, cCanvasH - cElementH - this.unscaledCardSize.height *0.5);
+            element.spring.tx = Math.max(element.spring.tx, cCanvasH - cElementH - this.unscaledCardSize.height * 0.5);
         } else {
             element.tx = 0;
         }
@@ -350,9 +375,11 @@ export default class LevelSelectContainer extends PIXI.Container {
     }
     buildSections() {
 
-        let backButton = this.buildBackButton();
-        this.sectionsView.addChild(backButton);
-        this.navButtons.push(backButton);
+        // let backButton = this.buildBackButton();
+        // this.sectionsView.addChild(backButton);
+        // this.navButtons.push(backButton);
+
+
         this.gameScreen.mainMenuSettings.collapse();
 
 
@@ -378,7 +405,7 @@ export default class LevelSelectContainer extends PIXI.Container {
 
     buildBackButton() {
         let secButton = new SquareButton(this.unscaledCardSize)
-        secButton.updateIcon(PIXI.Sprite.fromImage(window.iconsData.back), 0.4, {x:0,y:0}, true);
+        secButton.updateIcon(PIXI.Sprite.fromImage(window.iconsData.back), 0.4, { x: 0, y: 0 }, true);
         secButton.buttonMode = true;
         secButton.interactive = true;
         this.gameScreen.resizeToFitAR(this.unscaledCardSize, secButton)
@@ -395,7 +422,7 @@ export default class LevelSelectContainer extends PIXI.Container {
 
         this.gameScreen.resizeToFitAR(this.unscaledLineButtonSize, secButton)
 
-
+        //secButton.setLargeButtonMode();
 
         return secButton
     }
@@ -406,11 +433,12 @@ export default class LevelSelectContainer extends PIXI.Container {
 
 
         levelTierButton.updateLabelTop(level.name);
-        levelTierButton.updateIcon(this.gameScreen.generateImage(dataFirstLevel, 24, 0, dataFirstLevel.colorPalletId), 0.35,{ x: 0, y: -10 });
+        levelTierButton.updateIcon(this.gameScreen.generateImage(dataFirstLevel, 24, 0, dataFirstLevel.colorPalletId), 0.35, { x: 0, y: -10 });
         this.gameScreen.resizeToFitAR(this.unscaledLineButtonSize, levelTierButton)
 
         this.refreshTier(levelTierButton, level.data)
         //levelTierButton.setProgressBar();
+        //levelTierButton.setLargeButtonMode();
 
         return levelTierButton
     }
@@ -449,9 +477,9 @@ export default class LevelSelectContainer extends PIXI.Container {
 
 
 
-        let backButton = this.buildBackButton();
-        this.tiersView.addChild(backButton);
-        this.sectionButtons.push(backButton);
+        // let backButton = this.buildBackButton();
+        // this.tiersView.addChild(backButton);
+        // this.sectionButtons.push(backButton);
 
 
 
@@ -512,9 +540,9 @@ export default class LevelSelectContainer extends PIXI.Container {
         this.levelCards = [];
 
 
-        let backButton = this.buildBackButton();
-        this.levelsView.addChild(backButton);
-        this.levelCards.push(backButton);
+        // let backButton = this.buildBackButton();
+        // this.levelsView.addChild(backButton);
+        // this.levelCards.push(backButton);
 
         //console.log("tier", tier)
         tier.forEach(element => {
@@ -539,7 +567,7 @@ export default class LevelSelectContainer extends PIXI.Container {
 
         this.tempBlockPanel.visible = this.showingBlockTime > 0;
 
-        if(this.showingBlockTime > 0){
+        if (this.showingBlockTime > 0) {
             this.showingBlockTime -= delta;
         }
 
@@ -567,8 +595,8 @@ export default class LevelSelectContainer extends PIXI.Container {
         //let dataFirstLevel = data[Math.floor(Math.random() * data.length)];
         let dataFirstLevel = data[0];
 
-        levelTierButton.updateIcon(this.gameScreen.generateImage(dataFirstLevel, 24, 0, dataFirstLevel.colorPalletId), 0.35,{ x: 0, y: -10 });
-        
+        levelTierButton.updateIcon(this.gameScreen.generateImage(dataFirstLevel, 24, 0, dataFirstLevel.colorPalletId), 0.35, { x: 0, y: -10 });
+
         if (count >= data.length) {
 
             levelTierButton.setCompleteState()
@@ -579,16 +607,18 @@ export default class LevelSelectContainer extends PIXI.Container {
 
             // finishedLevels + "/" + countLevels
             levelTierButton.setProgressBar(count / data.length);
-            levelTierButton.updateLabel(count + "/"+data.length, { x: 0, y: -25 });
+            levelTierButton.updateLabel(count + "/" + data.length, { x: 0, y: -25 });
             console.log("UPDATE STUFF HERE", data.length, count)
 
             levelTierButton.setStandardState()
         }
 
         let debugThumb = window.COOKIE_MANAGER.debug.showAllThumbs;
-        if(debugThumb){
-            levelTierButton.updateLabelTop('~'+utils.convertNumToTime(Math.ceil(totalEstimatedTime) )+ '\n' +'~'+utils.convertNumToTime(Math.ceil(totalEstimatedTimeHard)));
+        if (debugThumb) {
+            levelTierButton.updateLabelTop('~' + utils.convertNumToTime(Math.ceil(totalEstimatedTime)) + '\n' + '~' + utils.convertNumToTime(Math.ceil(totalEstimatedTimeHard)));
         }
+
+        levelTierButton.setLargeButtonMode();
     }
     refreshCard(levelButton, data) {
         let levelStored = window.COOKIE_MANAGER.findLevel(data.idSaveData);
@@ -598,9 +628,9 @@ export default class LevelSelectContainer extends PIXI.Container {
             if (!debugThumb) {
                 levelButton.updateLabelTop(utils.convertNumToTime(Math.ceil(levelStored.bestTime)),
                     new PIXI.Sprite.fromImage(window.iconsData.time))
-            }else{
-                levelButton.updateLabelTop("~" + data.estimateTime2 + '\n' +'~'+utils.convertNumToTime(Math.ceil(data.estimateTimeHard)),
-                new PIXI.Sprite.fromImage(window.iconsData.time));
+            } else {
+                levelButton.updateLabelTop("~" + data.estimateTime2 + '\n' + '~' + utils.convertNumToTime(Math.ceil(data.estimateTimeHard)),
+                    new PIXI.Sprite.fromImage(window.iconsData.time));
             }
 
             levelButton.setCompleteStateLevel()
@@ -651,11 +681,11 @@ export default class LevelSelectContainer extends PIXI.Container {
         this.resize(null, true)
     }
     drawGrid(elements, margin, size, isVertical) {
-        let maxPerLine = Math.floor(this.mainCanvas.width / (size.width + margin * 2.5)) + 1
-        if(isVertical){
+        let maxPerLine = Math.floor((this.mainCanvas.width - this.currentGridOffset.x) / (size.width + margin * 2.5)) + 1
+        if (isVertical) {
             maxPerLine = 1;
         }
-        let fullWidth = this.mainCanvas.width - margin * 2
+        let fullWidth = (this.mainCanvas.width - this.currentGridOffset.x) - margin * 2
         let distance = fullWidth / maxPerLine
         let line = -1
         let col = 0
@@ -670,7 +700,7 @@ export default class LevelSelectContainer extends PIXI.Container {
             }
             let chunck = distance
             let adj = -(chunck * maxPerLine) / 2//0//(margin - fullWidth) * 0.5
-            element.x = (index % maxPerLine) * chunck + adj + chunck / 2 - element.width / 2//+ distance * 0.5 - fullWidth * 0.5///+ element.width / 2 + margin * 0.5
+            element.x = (index % maxPerLine) * chunck + adj + chunck / 2 - element.width / 2 + this.currentGridOffset.x//+ distance * 0.5 - fullWidth * 0.5///+ element.width / 2 + margin * 0.5
 
             // // if(!element.debug){
             // //     element.debug = new PIXI.Graphics().beginFill(0xff0066).drawRect(0,0,chunck,element.height);
@@ -680,7 +710,7 @@ export default class LevelSelectContainer extends PIXI.Container {
 
             //element.scale.set(0.8)
             if (index >= maxPerLine) {
-                element.y = 30 + lines[index - maxPerLine]
+                element.y = 20 + lines[index - maxPerLine]
             } else {
 
                 element.y = 50
@@ -723,10 +753,20 @@ export default class LevelSelectContainer extends PIXI.Container {
 
         this.newContainer.y = this.mainCanvas.y - 20;
 
+        if (this.backButton) {
+            let targetScale = Math.min(1, this.gameScreen.inGameMenu.scale.x * 2);
+            this.backButton.scale.set(targetScale);
+            this.backButton.x = this.backButton.width / 2 + this.backButton.height * 0.1/// this.backButton.scale.x;
+            this.backButton.y = this.mainCanvas.height - this.y - this.backButton.height / 2 - this.backButton.height * 0.1//- this.backButton.height / this.backButton.scale.y;
+
+            this.currentGridOffset = {x:this.backButton.x, y:0}
+        }
+
     }
     centerLevels() {
+        //this.currentGridOffset.x = 0
         this.drawGrid(this.sectionButtons, 20, this.unscaledLineButtonSize, true);
-        this.drawGrid(this.navButtons, 20,this.unscaledLineButtonSize, true);
+        this.drawGrid(this.navButtons, 20, this.unscaledLineButtonSize, true);
         this.drawGrid(this.levelCards, 20, this.unscaledCardSize, false);
 
         this.updateDrag(this.draggables[this.currentUISection])

@@ -74,6 +74,23 @@ export default class ProgressBar extends PIXI.Container {
     updateBackgroundColor(color){
         this.loadingBarFillBack.tint = color;
     }
+    resizeBar(width, height = 30){
+        if(width == this.sizeWidth){
+            return;
+        }
+        this.sizeHeight = height;
+        this.sizeWidth = width;
+        this.loadingBar.width = this.sizeWidth
+        this.loadingBar.height = this.sizeHeight
+        this.loadingBarFillBack.width = this.sizeWidth- this.round / 2
+        this.loadingBarFillBack.height = this.sizeHeight- this.round / 2
+        this.loadingBarFill.width = this.sizeWidth- this.round / 2
+        this.loadingBarFill.height = this.sizeHeight- this.round / 2
+
+
+        this.setProgressBar(this.currentValue);
+
+    }
     setProgressBar(value = 0, color = null) {
         if (value <= 0) {
             return;

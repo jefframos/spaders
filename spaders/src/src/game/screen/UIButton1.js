@@ -58,6 +58,9 @@ export default class UIButton1 extends PIXI.Container {
 		this.backShapeBorder.rotation = rot
 		this.backShape.rotation = rot
 	}
+	setIconColor(color) {
+		this.icon.tint = color;
+	}
 	setColor(color) {
 		this.backShape.tint = color;
 	}
