@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.1" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="64" tileheight="64" infinite="0" nextlayerid="115" nextobjectid="1">
+<map version="1.8" tiledversion="1.8.1" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="64" tileheight="64" infinite="0" nextlayerid="116" nextobjectid="1">
  <editorsettings>
   <export target="../../../www/data/gameboy/gameboyMisc.json" format="json"/>
  </editorsettings>
@@ -10,7 +10,7 @@
  </properties>
  <tileset firstgid="1" source="../tilesets/spadersTileset.tsx"/>
  <tileset firstgid="65" source="../tilesets/gb.tsx"/>
- <layer id="43" name="Game Boy" width="16" height="16">
+ <layer id="43" name="Game Boy" width="16" height="16" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="10"/>
@@ -68,6 +68,38 @@
 0,74,71,71,71,71,71,74,0,0,0,0,0,0,0,0,
 0,0,74,74,74,74,74,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="115" name="Trophy" width="16" height="16">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="9"/>
+   <property name="j" type="int" value="12"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,74,74,74,74,74,74,74,0,0,0,0,0,0,0,
+0,0,74,66,66,66,67,67,74,0,0,0,0,0,0,0,
+74,74,74,74,66,66,67,74,74,74,74,0,0,0,0,0,
+74,66,66,74,66,66,67,74,66,66,74,0,0,0,0,0,
+74,66,74,74,66,66,67,74,74,66,74,0,0,0,0,0,
+74,66,66,74,66,66,67,74,66,66,74,0,0,0,0,0,
+0,74,67,74,66,66,67,74,67,74,0,0,0,0,0,0,
+0,0,74,66,66,67,67,67,74,0,0,0,0,0,0,0,
+0,0,74,66,66,67,67,67,74,0,0,0,0,0,0,0,
+0,0,0,74,74,67,74,74,0,0,0,0,0,0,0,0,
+0,0,0,0,74,67,74,0,0,0,0,0,0,0,0,0,
+0,0,74,74,74,74,74,74,74,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -234,7 +266,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="74" name="Bat" width="16" height="16" visible="0">
+ <layer id="74" name="Bat" width="16" height="16">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="11"/>
@@ -266,7 +298,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="106" name="_ADDONBat" width="16" height="16" visible="0">
+ <layer id="106" name="_ADDONBat" width="16" height="16">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="11"/>

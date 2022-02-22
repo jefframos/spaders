@@ -60,7 +60,7 @@
                  "value":0
                 }],
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":16,
          "x":0,
          "y":0
@@ -70,6 +70,69 @@
          "height":16,
          "id":74,
          "name":"Potion",
+         "opacity":1,
+         "properties":[
+                {
+                 "name":"autoPlaceBlockers",
+                 "type":"int",
+                 "value":2
+                }, 
+                {
+                 "name":"i",
+                 "type":"int",
+                 "value":9
+                }, 
+                {
+                 "name":"j",
+                 "type":"int",
+                 "value":12
+                }, 
+                {
+                 "name":"padding-bottom",
+                 "type":"int",
+                 "value":2
+                }, 
+                {
+                 "name":"padding-left",
+                 "type":"int",
+                 "value":1
+                }, 
+                {
+                 "name":"padding-right",
+                 "type":"int",
+                 "value":1
+                }, 
+                {
+                 "name":"padding-top",
+                 "type":"int",
+                 "value":0
+                }, 
+                {
+                 "name":"startI",
+                 "type":"int",
+                 "value":0
+                }, 
+                {
+                 "name":"startJ",
+                 "type":"int",
+                 "value":0
+                }, 
+                {
+                 "name":"tier",
+                 "type":"int",
+                 "value":0
+                }],
+         "type":"tilelayer",
+         "visible":true,
+         "width":16,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "data":[0, 0, 74, 74, 74, 74, 74, 74, 74, 0, 0, 0, 0, 0, 0, 0, 0, 0, 74, 66, 66, 66, 67, 67, 74, 0, 0, 0, 0, 0, 0, 0, 74, 74, 74, 74, 66, 66, 67, 74, 74, 74, 74, 0, 0, 0, 0, 0, 74, 66, 66, 74, 66, 66, 67, 74, 66, 66, 74, 0, 0, 0, 0, 0, 74, 66, 74, 74, 66, 66, 67, 74, 74, 66, 74, 0, 0, 0, 0, 0, 74, 66, 66, 74, 66, 66, 67, 74, 66, 66, 74, 0, 0, 0, 0, 0, 0, 74, 67, 74, 66, 66, 67, 74, 67, 74, 0, 0, 0, 0, 0, 0, 0, 0, 74, 66, 66, 67, 67, 67, 74, 0, 0, 0, 0, 0, 0, 0, 0, 0, 74, 66, 66, 67, 67, 67, 74, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 74, 74, 67, 74, 74, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 74, 67, 74, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 74, 74, 74, 74, 74, 74, 74, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "height":16,
+         "id":115,
+         "name":"Trophy",
          "opacity":1,
          "properties":[
                 {
@@ -501,7 +564,7 @@
                  "value":0
                 }],
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":16,
          "x":0,
          "y":0
@@ -564,7 +627,7 @@
                  "value":0
                 }],
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":16,
          "x":0,
          "y":0
@@ -1325,7 +1388,7 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":115,
+ "nextlayerid":116,
  "nextobjectid":1,
  "orientation":"orthogonal",
  "properties":[

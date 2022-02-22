@@ -2,11 +2,11 @@
     "activeFile": "gb/gameboyCreatures.tmx",
     "expandedProjectPaths": [
         "how-to-play",
-        "templates",
         "main",
         "videogames",
         "movies",
-        "gb"
+        "gb",
+        "templates"
     ],
     "fileStates": {
         "D:/Projects/tetra/map/levels.tmx": {
@@ -25,16 +25,16 @@
             "scaleInDock": 1
         },
         "gb/gameboyCreatures.tmx": {
-            "scale": 0.33,
-            "selectedLayer": 3,
+            "scale": 0.5,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 737.8787878787875,
-                "y": 769.6969696969697
+                "x": 737,
+                "y": 768
             }
         },
         "gb/gameboyMisc.tmx": {
             "scale": 0.33,
-            "selectedLayer": 20,
+            "selectedLayer": 2,
             "viewCenter": {
                 "x": 480.30303030303,
                 "y": 512.1212121212122
