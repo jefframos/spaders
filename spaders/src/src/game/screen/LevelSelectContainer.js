@@ -63,7 +63,7 @@ export default class LevelSelectContainer extends PIXI.Container {
 
                 this.unscaledCardSize.width = Math.max(100, this.unscaledCardSize.width);
             } else {
-                this.unscaledCardSize.width = Math.max(120, this.unscaledCardSize.width);
+                this.unscaledCardSize.width = Math.max(180, this.unscaledCardSize.width);
 
             }
 
@@ -243,7 +243,7 @@ export default class LevelSelectContainer extends PIXI.Container {
                 navButton.setStandardState();
             }
             if (debugThumb) {
-                navButton.updateLabelTop('~' + utils.convertNumToTime(Math.ceil(estimatedTime)) + '\n' + '~' + utils.convertNumToTime(Math.ceil(estimatedTimeHard)));
+                navButton.updateLabelTop('~' + utils.convertNumToTime(Math.ceil(estimatedTime)) + '    ' + '~' + utils.convertNumToTime(Math.ceil(estimatedTimeHard)));
             } else {
                 navButton.updateLabelTop(navButton.section.name);
             }
@@ -615,7 +615,7 @@ export default class LevelSelectContainer extends PIXI.Container {
 
         let debugThumb = window.COOKIE_MANAGER.debug.showAllThumbs;
         if (debugThumb) {
-            levelTierButton.updateLabelTop('~' + utils.convertNumToTime(Math.ceil(totalEstimatedTime)) + '\n' + '~' + utils.convertNumToTime(Math.ceil(totalEstimatedTimeHard)));
+            levelTierButton.updateLabelTop('~' + utils.convertNumToTime(Math.ceil(totalEstimatedTime)) + '    ' + '~' + utils.convertNumToTime(Math.ceil(totalEstimatedTimeHard)));
         }
 
         levelTierButton.setLargeButtonMode();
@@ -626,18 +626,18 @@ export default class LevelSelectContainer extends PIXI.Container {
         if (levelStored || debugThumb) {
             levelButton.updateIcon(this.gameScreen.generateImage(data, 24, 0, data.colorPalletId));
             if (!debugThumb) {
-                levelButton.updateLabelTop(utils.convertNumToTime(Math.ceil(levelStored.bestTime)),
-                    new PIXI.Sprite.fromImage(window.iconsData.time))
+                levelButton.updateLabelTop(utils.convertNumToTime(Math.ceil(levelStored.bestTime)))//,
+                    //new PIXI.Sprite.fromImage(window.iconsData.time))
             } else {
-                levelButton.updateLabelTop("~" + data.estimateTime2 + '\n' + '~' + utils.convertNumToTime(Math.ceil(data.estimateTimeHard)),
-                    new PIXI.Sprite.fromImage(window.iconsData.time));
+                levelButton.updateLabelTop("~" + data.estimateTime2 + '    ' + '~' + utils.convertNumToTime(Math.ceil(data.estimateTimeHard)))//,
+                    //new PIXI.Sprite.fromImage(window.iconsData.time));
             }
 
             levelButton.setCompleteStateLevel()
             //levelButton.setColor(colorSchemes.colorSchemes[data.colorPalletId].list[4].color)
         } else {
-            levelButton.updateLabelTop("~" + data.estimateTime2,
-                new PIXI.Sprite.fromImage(window.iconsData.time));
+            levelButton.updateLabelTop("~" + data.estimateTime2)//,
+                //new PIXI.Sprite.fromImage(window.iconsData.time));
             levelButton.updateIcon(this.gameScreen.generateImage(window.questionMark));
             levelButton.updateIcon(this.gameScreen.generateImage(window.questionMark));
             levelButton.setStandardState()

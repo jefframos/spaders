@@ -36,7 +36,7 @@ export default class SquareButton extends PIXI.Container {
             //fontWeight: '200',
             fontFamily: window.STANDARD_FONT1,
             stroke: 0x000000,
-            strokeThickness: 8
+		    strokeThickness: 4
         });
 
         this.labelTop = new PIXI.Text("", {
@@ -88,7 +88,8 @@ export default class SquareButton extends PIXI.Container {
 
         this.label.style.fill = colorScheme.fontColor;
         this.label.style.fontWeight = 800;
-        this.label.style.stroke = colorScheme.background;
+        this.label.style.stroke = colorScheme.buttonStandardDarkColor;
+        this.label.style.strokeThickness = 8
         this.labelTop.style.fill = colorScheme.fontColor;
 
         this.progressBar.updateBackgroundColor(colorScheme.buttonStandardDarkColor)
@@ -277,7 +278,7 @@ export default class SquareButton extends PIXI.Container {
         this.label.pivot.x = this.label.width / 2 / this.label.scale.x
         this.label.pivot.y = this.label.height /2/ this.label.scale.y;
         this.label.x = this.squareButtonShape.width / 2 + offset.x// this.container.scale.x
-        this.label.y = this.squareButtonShape.height * 0.93 + offset.y// this.container.scale.y
+        this.label.y = this.squareButtonShape.height -this.label.height + offset.y// this.container.scale.y
 
 
 
