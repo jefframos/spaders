@@ -3,6 +3,7 @@ import TweenLite from 'gsap';
 import config from '../../config';
 import utils from '../../utils';
 import TweenMax from 'gsap';
+import colorSchemes from '../../colorSchemes';
 
 
 
@@ -16,11 +17,17 @@ export default class UIRectLabel extends PIXI.Container {
 		this.icon = PIXI.Sprite.fromFrame(icon);
 		//this.backShape.tint = color;
 
-		this.backShape = new PIXI.Graphics();
-		this.backShape.lineStyle(3, color, 1);
-		this.backShape.drawRect(0,0,224,60);
-		this.backShape.endFill();
-		this.backShape.alpha = 0
+		// this.backShape = new PIXI.Graphics();
+		// this.backShape.lineStyle(3, color, 1);
+		// this.backShape.drawRect(0,0,224,60);
+		// this.backShape.endFill();
+		// this.backShape.alpha = 0
+
+
+		this.backShape = new PIXI.mesh.NineSlicePlane(
+            PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
+        this.backShape.width = 224
+        this.backShape.height = 60
 
 
 		this.label = new PIXI.Text("name", { font: '30px', fill: 0xFFFFFF, align: center?'center':'left', fontFamily: window.STANDARD_FONT1 });
@@ -43,6 +50,17 @@ export default class UIRectLabel extends PIXI.Container {
 		//this.addChild(this.title);
 
 		this.updateLavel("00000")
+		window.COOKIE_MANAGER.onChangeColors.add(() => {
+            this.updateColorScheme();
+        })
+
+        this.updateColorScheme();
+    }
+    updateColorScheme() {
+        let colorScheme = colorSchemes.getCurrentColorScheme();
+
+		this.backShape.tint = colorScheme.background
+		this.backShape.alpha = 0.5
 	}
 	updateColor(fontColor){
 		if(this.label){

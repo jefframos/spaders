@@ -27,6 +27,11 @@ export default class BackgroundEffects extends PIXI.Container {
 
 		//this.backgroundImage.blendMode = PIXI.BLEND_MODES.ADD
 
+		this.bottomBackground = PIXI.Sprite.fromFrame("game_bg.png");
+		this.addChild(this.bottomBackground);
+
+		this.bottomBackground.anchor.set(0.5, 0);
+
 		this.starsContainer = new PIXI.Container();
 		this.addChild(this.starsContainer);
 
@@ -60,11 +65,22 @@ export default class BackgroundEffects extends PIXI.Container {
 
 	}
 	updateBackgroundColor() {
+
+		this.currentScheme = colorSchemes.getCurrentColorScheme();
 		window.colorTweenManager.killColorTween(this.backgroundShape);
 		window.colorTweenManager.addColorTween(
 			this.backgroundShape,
 			this.backgroundShape.tint,
-			colorSchemes.getCurrentColorScheme().background)
+			this.currentScheme.background)
+
+		if (this.currentScheme.backgroundAssets && this.currentScheme.backgroundAssets.bottomBackground) {
+
+			this.bottomBackground.y = this.innerResolution.height;
+			this.bottomBackground.texture = PIXI.Texture.fromFrame(this.currentScheme.backgroundAssets.bottomBackground);
+			this.bottomBackground.visible = true;
+		} else {
+			this.bottomBackground.visible = false;
+		}
 		//this.backgroundShape.tint = colorSchemes.getCurrentColorScheme().background;
 	}
 	resize(scaledResolution, innerResolution) {
@@ -76,6 +92,18 @@ export default class BackgroundEffects extends PIXI.Container {
 
 		this.background.x = -innerResolution.width / 2
 		this.background.y = -innerResolution.height / 2
+
+
+		if (this.bottomBackground.visible) {
+			let targetPositionScale = 0.1;
+			if(this.currentScheme.backgroundAssets && this.currentScheme.backgroundAssets.bottomBackgroundPosition){
+				targetPositionScale = this.currentScheme.backgroundAssets.bottomBackgroundPosition
+			}
+			this.bottomBackground.y = utils.lerp(this.bottomBackground.y, innerResolution.height / 2 - innerResolution.height * targetPositionScale, 0.2)
+			let targetScale = innerResolution.width / this.bottomBackground.width * this.bottomBackground.scale.x
+			targetScale = Math.max(targetScale, 1)
+			this.bottomBackground.scale.set(targetScale);
+		}
 
 		//this.starsContainer.width = innerResolution.width
 		//this.starsContainer.height = innerResolution.height

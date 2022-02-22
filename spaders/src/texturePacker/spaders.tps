@@ -245,6 +245,22 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">gbGrid.png</key>
+            <key type="filename">gbGridTile.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>15,15,30,30</rect>
+                <key>scale9Paddings</key>
+                <rect>15,15,30,30</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">gridSquare.png</key>
             <key type="filename">gridSquareTrail.png</key>
             <struct type="IndividualSpriteSettings">
@@ -313,6 +329,7 @@
             <key type="filename">icons/icons8-menu-48.png</key>
             <key type="filename">icons/icons8-menu-back-48.png</key>
             <key type="filename">icons/icons8-star-48.png</key>
+            <key type="filename">square-pixel.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -330,6 +347,8 @@
             <key type="filename">innerBorder.png</key>
             <key type="filename">largeCard.png</key>
             <key type="filename">largeCardBack.png</key>
+            <key type="filename">largeCardBackPixel.png</key>
+            <key type="filename">largeCardPixel.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -606,6 +625,21 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">progressBarSmall.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>5,5,10,10</rect>
+                <key>scale9Paddings</key>
+                <rect>5,5,10,10</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
         </map>
         <key>fileList</key>
         <array>
@@ -627,6 +661,12 @@
             <filename>enemy.png</filename>
             <filename>whiteEnemies</filename>
             <filename>gridSquareTrail.png</filename>
+            <filename>gbGrid.png</filename>
+            <filename>gbGridTile.png</filename>
+            <filename>progressBarSmall.png</filename>
+            <filename>largeCardBackPixel.png</filename>
+            <filename>largeCardPixel.png</filename>
+            <filename>square-pixel.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
