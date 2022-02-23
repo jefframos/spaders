@@ -216,6 +216,7 @@ sManager.soundData.forEach(element => {
 PIXI.loader
 	.add('./assets/images/backgrounds.json')
 	.add('./assets/images/game.json')
+	.add('./assets/images/logo.json')
 	.add('./data/levelSections.json')
 	.add('./assets/fonts/stylesheet.css')
 	.add('./assets/levels.json')

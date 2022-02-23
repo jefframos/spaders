@@ -24,22 +24,48 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.chooseLevelPanel.x = 0;
 		this.chooseLevelPanel.y = 150;
 
+		this.logoLayers = [];
 
-		this.logoLabel = new PIXI.Text(this.currentButtonLabel, { font: '64px', fill: config.colors.white, align: 'center', fontWeight: '800', fontFamily: window.LOGO_FONT });
+
+		//this.logoLabel = new PIXI.Text(this.currentButtonLabel, { font: '64px', fill: config.colors.white, align: 'center', fontWeight: '800', fontFamily: window.LOGO_FONT });
+		this.logoLabel = new PIXI.Sprite()//.fromFrame("logo1.png");
 
 		this.logoLabel.rotation = -Math.PI * 0.25
 
-		this.logoLabel.x = -150
-		this.logoLabel.y = - 260
+		this.logoLabel.x = -130
+		this.logoLabel.y = - 280
+		this.logoLabel.scale.set(0.7)
+		this.logoLabel.anchor.set(0.5)
 
-		this.logoLabel.pivot.x = this.logoLabel.width / 2
-		this.logoLabel.pivot.y = this.logoLabel.height / 2
+		for (let index = 1; index <= 3; index++) {
+			let logoLayer = new PIXI.Sprite.fromFrame("logoLayer" + index + ".png");
+			logoLayer.anchor = this.logoLabel.anchor
+			//logoLayer.tint = 0xFFffff * Math.random();
+			//logoLayer.alpha = 0;
+			this.logoLabel.addChild(logoLayer);
 
-		this.gameBy = new PIXI.Text("by jeff ramos", { font: '16px', fill: config.colors.white, align: 'center', fontFamily: window.STANDARD_FONT1 });
+			logoLayer.sin = index * Math.PI / 4;
+			logoLayer.maxAlpha = 0.65;
+			logoLayer.minAlpha = 0;
+			this.logoLayers.push(logoLayer);
+		}
+
+		this.mainLogo = new PIXI.Sprite.fromFrame("logo1.png");
+		this.mainLogo.anchor = this.logoLabel.anchor
+
+		this.mainLogo.sin = Math.PI;
+		this.mainLogo.maxAlpha = 1;
+		this.mainLogo.minAlpha = 0.75;
+
+		//	this.logoLayers.push(this.mainLogo);
+
+		this.logoLabel.addChild(this.mainLogo);
+
+		this.gameBy = new PIXI.Text("by jeff ramos", { font: '24px', fill: config.colors.white, align: 'center', fontFamily: window.LOGO_FONT });
 		this.gameBy.pivot.x = this.gameBy.width / 2;
-		this.gameBy.x = this.logoLabel.width / 2
-		this.gameBy.y = this.logoLabel.height
+		this.gameBy.y = this.logoLabel.height + 70
 		this.logoLabel.addChild(this.gameBy);
+
 
 		this.addChild(this.levelSelectionContainer);
 		this.addChild(this.screenContainer);
@@ -61,7 +87,7 @@ export default class StartScreenContainer extends PIXI.Container {
 			sprite.tint = window.colorsOrder[index]
 			spadersContainer.addChild(sprite);
 			sprite.x += 80 * index;
-			let spriteWhite = new PIXI.Sprite.fromFrame("w_"+element);
+			let spriteWhite = new PIXI.Sprite.fromFrame("w_" + element);
 			sprite.addChild(spriteWhite);
 			sprite.white = spriteWhite;
 			this.spadersList.push(sprite);
@@ -69,7 +95,7 @@ export default class StartScreenContainer extends PIXI.Container {
 		spadersContainer.pivot.x = spadersContainer.width / 2
 		spadersContainer.pivot.y = spadersContainer.height / 2
 		spadersContainer.rotation = -Math.PI * 0.25
-		spadersContainer.scale.set(0.75)
+		spadersContainer.scale.set(0.65)
 		spadersContainer.x = -60
 		spadersContainer.y = -200
 		this.screenContainer.addChild(spadersContainer);
@@ -172,13 +198,18 @@ export default class StartScreenContainer extends PIXI.Container {
 
 		this.updateColorScheme();
 
-    }
-    updateColorScheme(){
-        let colorScheme = colorSchemes.getCurrentColorScheme();
+	}
+	updateColorScheme() {
+		let colorScheme = colorSchemes.getCurrentColorScheme();
 
 		this.gameBy.style.fill = colorScheme.fontColor
-		this.logoLabel.style.fill = colorScheme.fontColor
-    }
+		this.mainLogo.tint = colorScheme.fontColor
+
+		for (let index = 0; index < this.logoLayers.length - 1; index++) {
+			const element = this.logoLayers[index];
+			element.tint = colorScheme.fontColor;
+		}
+	}
 	updateLinesColor() {
 		console.log(window.COOKIE_MANAGER.stats.colorPalletID)
 		let colors = colorSchemes.colorSchemes[window.COOKIE_MANAGER.stats.colorPalletID]
@@ -196,10 +227,10 @@ export default class StartScreenContainer extends PIXI.Container {
 		for (let index = 0; index < this.spadersList.length; index++) {
 			const element = this.spadersList[index];
 
-			if(scheme.list[index].hasWhite){
+			if (scheme.list[index].hasWhite) {
 				element.white.visible = true;
 				element.white.tint = scheme.list[index].hasWhite;
-			}else{
+			} else {
 				element.white.visible = false;
 			}
 
@@ -324,6 +355,15 @@ export default class StartScreenContainer extends PIXI.Container {
 		}
 
 		this.chooseLevelPanel.update(delta)
+		if (!delta) {
+			return;
+		}
+		for (let index = 0; index < this.logoLayers.length; index++) {
+			const element = this.logoLayers[index];
+			element.sin += delta * 2;
+			element.sin %= Math.PI * 2;
+			element.alpha = Math.sin(element.sin) * (element.maxAlpha - element.minAlpha) + element.minAlpha
+		}
 
 	}
 	startMenuState(delay = 0) {

@@ -1,0 +1,47 @@
+{"frames": {
+
+"logo1.png":
+{
+	"frame": {"x":0,"y":0,"w":587,"h":160},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":587,"h":160},
+	"sourceSize": {"w":587,"h":160}
+},
+"logoLayer1.png":
+{
+	"frame": {"x":0,"y":160,"w":587,"h":160},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":587,"h":160},
+	"sourceSize": {"w":587,"h":160}
+},
+"logoLayer2.png":
+{
+	"frame": {"x":0,"y":320,"w":587,"h":160},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":587,"h":160},
+	"sourceSize": {"w":587,"h":160}
+},
+"logoLayer3.png":
+{
+	"frame": {"x":0,"y":480,"w":587,"h":160},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":587,"h":160},
+	"sourceSize": {"w":587,"h":160}
+}},
+"animations": {
+	"logoLayer": ["logoLayer1.png","logoLayer2.png","logoLayer3.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "logo.png",
+	"format": "RGBA8888",
+	"size": {"w":587,"h":640},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:2763d57b8b5703856e1a7ae9af4aacc1:7b1e2921c876ffdc137fbe26c002ae22:6364ef14a8fbfea741f45122167fa6a7$"
+}
+}
