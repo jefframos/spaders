@@ -91,7 +91,7 @@ export default {
             },
             backgroundAssets: {
                 bottomBackground: "game_bg.png",
-                bottomBackgroundPosition: 0.12,
+                bottomBackgroundPosition: -0.025,
             }
         },
         {
@@ -139,7 +139,7 @@ export default {
             },
             backgroundAssets: {
                 bottomBackground: "gbBackground.png",
-                bottomBackgroundPosition: 0.12,
+                bottomBackgroundPosition: 0.01,
             }
         },
         {

@@ -61,7 +61,7 @@ export default class LevelSelectContainer extends PIXI.Container {
 
             if (window.isMobile) {
 
-                this.unscaledCardSize.width = Math.max(100, this.unscaledCardSize.width);
+                this.unscaledCardSize.width = Math.max(80, this.unscaledCardSize.width);
             } else {
                 this.unscaledCardSize.width = Math.max(180, this.unscaledCardSize.width);
 
@@ -86,11 +86,23 @@ export default class LevelSelectContainer extends PIXI.Container {
 
 
 
-            this.unscaledLineButtonSize = { width: window.innerWidth * 0.9, height: 120 }
+            if (window.isMobile) {
+
+                this.unscaledLineButtonSize = { width: window.innerWidth * 0.9, height: 80 }
+                this.unscaledLineButtonSize.width = Math.min(config.width, this.unscaledLineButtonSize.width)
+                this.unscaledLineButtonSize.width = Math.max(200, this.unscaledLineButtonSize.width);
+                this.unscaledLineButtonSize.width -= this.currentGridOffset.x;
+    
+            } else {
+                this.unscaledLineButtonSize = { width: window.innerWidth * 0.9, height: 120 }
             this.unscaledLineButtonSize.width = Math.min(config.width, this.unscaledLineButtonSize.width)
             this.unscaledLineButtonSize.width = Math.max(200, this.unscaledLineButtonSize.width);
             this.unscaledLineButtonSize.width -= this.currentGridOffset.x;
 
+
+            }
+
+            
 
             this.buildSections();
             this.refreshNavButtons();

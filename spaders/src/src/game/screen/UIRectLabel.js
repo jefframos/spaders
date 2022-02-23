@@ -60,7 +60,7 @@ export default class UIRectLabel extends PIXI.Container {
         let colorScheme = colorSchemes.getCurrentColorScheme();
 
 		this.backShape.tint = colorScheme.background
-		this.backShape.alpha = 0.5
+		this.backShape.alpha = 0.75
 	}
 	updateColor(fontColor){
 		if(this.label){

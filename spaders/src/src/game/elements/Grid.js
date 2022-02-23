@@ -82,7 +82,7 @@ export default class Grid extends PIXI.Container {
 	getGridPreviewImage(levelData) {
 
 
-		if(window.imageThumbs['toDraw' + levelData.idSaveData]){
+		if (window.imageThumbs['toDraw' + levelData.idSaveData]) {
 			return window.imageThumbs['toDraw' + levelData.idSaveData]
 		}
 		let colorScheme = colorSchemes.getCurrentColorScheme().grid;
@@ -148,15 +148,35 @@ export default class Grid extends PIXI.Container {
 			let gridDrawContainer = this.getGridPreviewImage(levelData)
 			this.topGridContainer.addChild(gridDrawContainer)
 
+			this.topGridContainer.x = 0;
+			this.topGridContainer.y = 0;
 			this.topGridContainer.alpha = 0;
 			//TweenMax.to(this.topGridContainer, 0.3, { alpha: 1, delay: 0.2 });
-			if(levelData.padding.left){
+			if (levelData.padding.left) {
 				gridDrawContainer.x = levelData.padding.left * CARD.width;
 			}
-			if(levelData.padding.top){
+			if (levelData.padding.top) {
 				gridDrawContainer.y = levelData.padding.top * CARD.width;
 			}
-			TweenMax.to(this.topGridContainer, 0.15, { alpha: 1 });
+			this.topGridContainer.pivot.x = this.topGridContainer.width / 2;
+			this.topGridContainer.pivot.y = this.topGridContainer.height / 2;
+			this.topGridContainer.x += this.topGridContainer.width / 2;
+			this.topGridContainer.y += this.topGridContainer.height / 2;
+			TweenMax.to(this.topGridContainer, 0.25, { alpha: 1 });
+			this.topGridContainer.scale.set(0.85)
+			TweenMax.to(this.topGridContainer.scale, 0.75, { x:1.1, y:1.1 });
+
+
+			setTimeout(() => {
+				window.SOUND_MANAGER.play('shoosh', { volume: 0.75 });
+			}, 50);
+			
+			setTimeout(() => {
+				window.SOUND_MANAGER.play('explosion', { volume: 0.75 });
+				window.SOUND_MANAGER.play('kill', { volume: 0.75 });
+			}, 900);
+			TweenMax.to(this.topGridContainer.scale, 0.5, {delay:0.751, x:1, y:1, ease:Back.easeInOut });
+			TweenMax.from(this.topGridContainer,1.25, { y:this.topGridContainer.height / 2 + levelData.padding.bottom * CARD.width , ease:Cubic.easeOut});
 			TweenMax.to(this.topGridContainer, 0.5, {
 				alpha: 0, delay: 1, onComplete: () => {
 					this.topGridContainer.removeChild(gridDrawContainer)
@@ -204,10 +224,10 @@ export default class Grid extends PIXI.Container {
 			this.gridsSquares.unshift(gridLine);
 		}
 
-		gridContainer.alpha = 1
+		gridContainer.alpha = 0
 
 
-
+		TweenMax.to(gridContainer, 0.5, { alpha: 1, delay: 0.75 });
 
 		this.addChild(gridContainer);
 	}

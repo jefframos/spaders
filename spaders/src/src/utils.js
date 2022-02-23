@@ -317,6 +317,15 @@ export default {
             }
         }
     },
+    resizeToFitMaxAR(size, element, res) {
+		if (!res) {
+			res = element
+		}
+		let sclX = (size.width) / (res.width / res.scale.x);
+		let sclY = (size.height) / (res.height / res.scale.y);
+		let min = Math.max(sclX, sclY);
+		element.scale.set(min)
+	},
     resizeToFitAR(size, element, res) {
 		if (!res) {
 			res = element

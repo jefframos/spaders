@@ -83,7 +83,7 @@ export default class BackgroundEffects extends PIXI.Container {
 		}
 		//this.backgroundShape.tint = colorSchemes.getCurrentColorScheme().background;
 	}
-	resize(scaledResolution, innerResolution) {
+	resize(scaledResolution, innerResolution, bottomBackgroundPosition, bottomHeight) {
 
 		this.innerResolution = innerResolution;
 		//console.log(resolution, innerResolution)
@@ -93,16 +93,18 @@ export default class BackgroundEffects extends PIXI.Container {
 		this.background.x = -innerResolution.width / 2
 		this.background.y = -innerResolution.height / 2
 
-
 		if (this.bottomBackground.visible) {
-			let targetPositionScale = 0.1;
+
+			let backPos = this.toLocal(bottomBackgroundPosition);
+			let targetAnchor = 0.1;
 			if(this.currentScheme.backgroundAssets && this.currentScheme.backgroundAssets.bottomBackgroundPosition){
-				targetPositionScale = this.currentScheme.backgroundAssets.bottomBackgroundPosition
+				targetAnchor = this.currentScheme.backgroundAssets.bottomBackgroundPosition
 			}
-			this.bottomBackground.y = utils.lerp(this.bottomBackground.y, innerResolution.height / 2 - innerResolution.height * targetPositionScale, 0.2)
-			let targetScale = innerResolution.width / this.bottomBackground.width * this.bottomBackground.scale.x
-			targetScale = Math.max(targetScale, 1)
-			this.bottomBackground.scale.set(targetScale);
+
+			this.bottomBackground.anchor.y = targetAnchor;
+			this.bottomBackground.y = backPos.y;
+
+			utils.resizeToFitMaxAR({width:innerResolution.width, height:bottomHeight},this.bottomBackground)
 		}
 
 		//this.starsContainer.width = innerResolution.width

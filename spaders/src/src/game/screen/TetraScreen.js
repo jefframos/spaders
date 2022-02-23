@@ -156,7 +156,7 @@ export default class TetraScreen extends Screen {
 
 		this.endGameLabel = PIXI.Sprite.fromFrame('finish-them-all.png');
 		this.endGameLabel.anchor.set(0.5)
-		this.resizeToFitAR({ width: this.gameCanvas.width, height: this.gameCanvas.height }, this.endGameLabel);
+		utils.resizeToFitAR({ width: this.gameCanvas.width, height: this.gameCanvas.height }, this.endGameLabel);
 
 
 		window.SOUND_MANAGER.play('getThemAll')
@@ -547,7 +547,7 @@ export default class TetraScreen extends Screen {
 		TweenMax.killTweensOf(this.cardsContainer);
 		TweenMax.killTweensOf(this.gridContainer);
 		this.mainMenuSettings.visible = false;
-		TweenMax.to(this.cardsContainer, 0.1, { alpha: 1 })
+		TweenMax.to(this.cardsContainer, 0.5, { delay:1.25,alpha: 1 })
 		TweenMax.to(this.gridContainer, 0.1, { alpha: 1 })
 		if (this.currentCard) {
 			TweenMax.killTweensOf(this.currentCard);
@@ -1065,8 +1065,8 @@ export default class TetraScreen extends Screen {
 			}, 1200);
 		}
 
-
-		TweenMax.to(this.cardsContainer, 0.1, { alpha: 1 })
+		this.cardsContainer.alpha = 0;
+		TweenMax.to(this.cardsContainer, 0.5, {delay:2, alpha: 1 })
 		TweenMax.to(this.gridContainer, 0.1, { alpha: 1, onComplete: () => { this.gameState() } })
 		//TweenMax.to(this.UIInGame, 0.75, { y: 0, ease: Cubic.easeOut, onComplete: () => { this.gameState() } })
 
@@ -1241,10 +1241,10 @@ export default class TetraScreen extends Screen {
 		card.y = j * CARD.height - CARD.height;
 		// card.cardContainer.scale.set(1.2 - j * 0.05)
 		TweenMax.killTweensOf(card);
-		card.alpha = 0;
+		card.alpha = 1;
 		card.y = j * CARD.height;
 		//TweenMax.to(card, 0.5, { alpha: 1, delay: i * 0.05 + 1,ease: Back.easeOut })
-		TweenMax.to(card, 0.5, { alpha: 1, delay: Math.random() + 1,ease: Back.easeOut })
+		//TweenMax.to(card, 0.5, { alpha: 1, delay: Math.random() + 1,ease: Back.easeOut })
 
 		//card.show(0.5, i * 0.05 + 0.75)
 
@@ -1634,7 +1634,29 @@ export default class TetraScreen extends Screen {
 		this.backFXContainer.scale.x = this.fxContainer.scale.x
 		this.backFXContainer.scale.y = this.fxContainer.scale.y
 
-		this.background.resize(scaledResolution, innerResolution)
+
+		let bottomCanvasPosition = this.gameCanvas.y + this.gameCanvas.height - this.bottomUICanvas.height;
+
+		if(!this.bottomTest){
+			this.bottomTest = new PIXI.Graphics().beginFill(0xFF0000).drawCircle(0,0,10);
+			this.bottomTest.alpha = 0;
+			this.background.parent.addChild(this.bottomTest);
+
+			this.bottomTest2 = new PIXI.Graphics().beginFill(0xFF00FF).drawCircle(0,0,10);
+			this.bottomTest2.alpha = 0;
+			this.background.parent.addChild(this.bottomTest2);
+		}else{
+			this.bottomTest.y = bottomCanvasPosition
+		}
+		
+		let bottomGlobalPos = this.bottomTest.getGlobalPosition();
+		let bottom2GlobalPos = this.toLocal({x:0, y:innerResolution.height * this.parent.parent.scale.y});
+		
+		this.bottomTest2.y = bottom2GlobalPos.y
+
+		let bottomBgHeight = this.bottomTest2.y - this.bottomTest.y;
+
+		this.background.resize(scaledResolution, innerResolution, bottomGlobalPos, bottomBgHeight)
 		this.ratio = config.width / config.height;
 
 
@@ -1642,16 +1664,16 @@ export default class TetraScreen extends Screen {
 		utils.scaleSize(this.gameCanvas, innerResolution, this.ratio)
 
 
-		//this.resizeToFitAR({width:this.bottomUICanvas.width * 0.8, height:this.bottomUICanvas.height * 0.4},this.containerQueue)
-		this.resizeToFitAR({ width: this.gameCanvas.width * 0.9, height: this.gameCanvas.height * 0.73 }, this.gridContainer)
+		//utils.resizeToFitAR({width:this.bottomUICanvas.width * 0.8, height:this.bottomUICanvas.height * 0.4},this.containerQueue)
+		utils.resizeToFitAR({ width: this.gameCanvas.width * 0.9, height: this.gameCanvas.height * 0.73 }, this.gridContainer)
 
 		if (this.gridContainer.scale.x > 1) {
 			this.gridContainer.scale.set(1)
 		}
 
 
-		this.resizeToFit({ width: this.gameCanvas.width, height: this.gameCanvas.height * 0.08 }, this.topCanvas)
-		this.resizeToFit({ width: this.gameCanvas.width, height: this.gameCanvas.height * 0.125 }, this.bottomUICanvas)
+		utils.resizeToFit({ width: this.gameCanvas.width, height: this.gameCanvas.height * 0.08 }, this.topCanvas)
+		utils.resizeToFit({ width: this.gameCanvas.width, height: this.gameCanvas.height * 0.125 }, this.bottomUICanvas)
 
 
 		//console.log(this.bottomUICanvas.scale.y, this.bottomUICanvas.height)

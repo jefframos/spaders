@@ -49,7 +49,7 @@ export default class SquareButton extends PIXI.Container {
             // strokeThickness: 12
         });
 
-        this.squareButtonBackShape.y = 15
+        this.squareButtonBackShape.y = this.unscaledCardSize.height * 0.075
 
         this.container.addChild(this.squareButtonBackShape)
         //this.container.addChild(this.innerBorder)
@@ -59,8 +59,8 @@ export default class SquareButton extends PIXI.Container {
         this.addChild(this.container);
 
         this.squareButtonBackShape.interactive = true;
-        this.squareButtonBackShape.on('pointerover', this.onPointerOver.bind(this));
-        this.squareButtonBackShape.on('pointerout', this.onPointerOut.bind(this));
+        this.squareButtonBackShape.on('pointerover', this.onPointerOver.bind(this)).on('touchstart', this.onPointerOver.bind(this));
+        this.squareButtonBackShape.on('pointerout', this.onPointerOut.bind(this)).on('touchend', this.onPointerOut.bind(this)).on('touchendoutside', this.onPointerOut.bind(this));
         this.squareButtonBackShape.on('pointerup', this.onPointerUp.bind(this));
 
         let sizeBar = { width: this.squareButtonShape.width * 0.8, height: 20 }
@@ -111,11 +111,12 @@ export default class SquareButton extends PIXI.Container {
         }
     }
     onPointerUp() {
+        
         window.SOUND_MANAGER.play('tap', { volume: 0.5 })
     }
     onPointerOver() {
         TweenMax.killTweensOf(this.squareButtonShape)
-        TweenMax.to(this.squareButtonShape, 0.2, { y: 15, ease: Back.easeIn })
+        TweenMax.to(this.squareButtonShape, 0.2, { y: this.unscaledCardSize.height * 0.075, ease: Back.easeOut })
         //this.squareButtonShape.y = 10;
 
     }
