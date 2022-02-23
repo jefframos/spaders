@@ -1521,9 +1521,9 @@ export default class TetraScreen extends Screen {
 			else {
 				this.mousePosition = renderer.plugins.interaction.mouse.global
 			}
-			if (this.mousePosition.y < this.topUIContainer.position.y + config.height * 0.2) {
-				return;
-			}
+			// if (this.mousePosition.y < this.topUIContainer.position.y + config.height * 0.2) {
+			// 	return;
+			// }
 			this.updateMousePosition();
 		} else {
 			this.mousePosID = customID;
