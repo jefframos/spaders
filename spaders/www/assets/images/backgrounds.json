@@ -2,15 +2,15 @@
 
 "game_bg.png":
 {
-	"frame": {"x":0,"y":0,"w":800,"h":242},
+	"frame": {"x":0,"y":0,"w":800,"h":225},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":800,"h":242},
-	"sourceSize": {"w":800,"h":242}
+	"spriteSourceSize": {"x":0,"y":0,"w":800,"h":225},
+	"sourceSize": {"w":800,"h":225}
 },
 "gbBackground.png":
 {
-	"frame": {"x":0,"y":242,"w":800,"h":100},
+	"frame": {"x":0,"y":225,"w":800,"h":100},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":800,"h":100},
@@ -21,8 +21,8 @@
 	"version": "1.0",
 	"image": "backgrounds.png",
 	"format": "RGBA8888",
-	"size": {"w":800,"h":342},
+	"size": {"w":800,"h":325},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:96502b0ac9edd06a2f99367bf9df5fc8:83d9af6ab74c9aaf4b1c1014205fc210:f1d160bc8f29cda58a3095e4596a0f13$"
+	"smartupdate": "$TexturePacker:SmartUpdate:fd873415285ba6440b632efe8dfa0a20:92c90265e826e7409227388cca515c6a:f1d160bc8f29cda58a3095e4596a0f13$"
 }
 }
