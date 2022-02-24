@@ -188,8 +188,15 @@ export default class Card extends PIXI.Container {
 			this.enemySpriteWhite.setTexture(PIXI.Texture.fromFrame("w_" + window.IMAGE_DATA.enemyImagesFrame[Math.floor(level)]));
 			this.enemySpriteWhite.visible = true;
 		}
+		if (data) {
+			console.log(data)
+			this.enemySprite.tint = data.color;
+			this.currentColor = this.enemySprite.tint;
+		}
+		//this.enemySprite.tint = data.color;
+
 	}
-	updateCard(isCurrent = false) {
+	updateCard(isCurrent = false, data = null) {
 
 		this.starterScale = CARD.width / this.realSpriteWidth * 0.55
 		for (var i = 0; i < ENEMIES.list.length; i++) {
@@ -203,6 +210,9 @@ export default class Card extends PIXI.Container {
 					this.enemySpriteWhite.visible = false;
 				}
 			}
+		}
+		if (data) {
+			this.enemySprite.tint = data.color;
 		}
 		this.currentColor = this.enemySprite.tint;
 		if (this.life < 1) {

@@ -28,8 +28,8 @@
             "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 737,
-                "y": 768
+                "x": 485,
+                "y": 554
             }
         },
         "gb/gameboyMisc.tmx": {
@@ -138,10 +138,10 @@
         },
         "how-to-play/simple-shapes-synt.tmx": {
             "scale": 0.25,
-            "selectedLayer": 10,
+            "selectedLayer": 0,
             "viewCenter": {
                 "x": 1810,
-                "y": 1720
+                "y": 1716
             }
         },
         "how-to-play/simple-shapes.tmx": {

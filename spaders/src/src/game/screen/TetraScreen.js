@@ -73,6 +73,7 @@ export default class TetraScreen extends Screen {
 					this.currentLevelID = hash;
 
 					this.currentLevelData = this.levels[hash];
+					
 				}
 			}
 		}
@@ -926,8 +927,12 @@ export default class TetraScreen extends Screen {
 		this.currentSectionPiecesKilled = 0;
 		this.isFinalState = false;
 		this.isFirstClick = true;
-		//window.COOKIE_MANAGER.stats.latestColorPallete
 
+		if(this.hasHash){
+			console.log(this.currentLevelData)
+			window.COOKIE_MANAGER.updateColorPallete(this.currentLevelData.colorPalletId);
+		}
+		//window.COOKIE_MANAGER.stats.latestColorPallete
 		if (this.currentLevelData.colorPalletId != undefined)
 			window.COOKIE_MANAGER.updateColorPallete(this.currentLevelData.colorPalletId);
 		let scheme = window.COOKIE_MANAGER.stats.colorPalletID;
@@ -1014,7 +1019,8 @@ export default class TetraScreen extends Screen {
 		for (var i = 0; i < this.currentLevelData.pieces.length; i++) {
 			for (var j = 0; j < this.currentLevelData.pieces[i].length; j++) {
 				if (this.currentLevelData.pieces[i][j] >= 0) {
-					if (ENEMIES.list[this.currentLevelData.pieces[i][j]].isBlock) {
+					//console.log("block",this.currentLevelData.pieces[i][j], window.ENEMIES.block.id)
+					if (this.currentLevelData.pieces[i][j] == window.ENEMIES.block.id) {
 						this.cardsContainer.addChild(this.placeBlock(j, i));
 					} else {
 						let customData = null;
@@ -1024,7 +1030,7 @@ export default class TetraScreen extends Screen {
 								customData = {
 									order: this.forceBottomArrow()
 								}
-								console.log(customData)
+								//console.log(customData)
 							}
 						});
 						this.cardsContainer.addChild(this.placeCard(j, i, ENEMIES.list[this.currentLevelData.pieces[i][j]], customData));
@@ -1234,6 +1240,7 @@ export default class TetraScreen extends Screen {
 			card = new Card(this);
 		}
 
+		console.log(data)
 		card.life = data.life;
 		card.createCard(0, customData);
 		card.updateSprite(data.life, data);
@@ -1250,7 +1257,7 @@ export default class TetraScreen extends Screen {
 
 		card.pos.i = i;
 		card.pos.j = j;
-		card.updateCard();
+		card.updateCard(false, data);
 		this.board.addCard(card);
 		this.grid.paintTile(card)
 		// this.CARD_POOL.push(card);
@@ -1258,6 +1265,7 @@ export default class TetraScreen extends Screen {
 	}
 
 	placeBlock(i, j) {
+		console.log("BLOCK")
 		let block;
 		block = new Block(this);
 		block.x = i * CARD.width;

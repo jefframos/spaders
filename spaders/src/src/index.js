@@ -290,7 +290,7 @@ function findPropertyValue(data, propertyName) {
 	return valueToReturn;
 
 }
-function extractData(element) {
+function extractData(element, debug) {
 	if (element.visible) {
 		let data = {}
 		data.levelName = element.name;
@@ -359,6 +359,7 @@ function extractData(element) {
 			data.levelDataScale = 1;
 		}
 
+		data.colorPalletId = element.colorPalletId;
 		if (!element.isAddon) {
 
 			utils.trimMatrix(data.pieces)
@@ -371,11 +372,13 @@ function extractData(element) {
 				bottom: data.padding.bottom * data.levelDataScale
 			}
 			utils.paddingMatrix(matrixCopy, scalePadding);
-			
+
 		}
 
 		if (!element.isAddon && data.setAutoBlocker > 0) {
-			utils.addBlockers(data.pieces, data.setAutoBlocker)
+			if(debug)
+			console.log("AddBlocker",data.colorPalletId)
+			utils.addBlockers(data.pieces, data.setAutoBlocker, data.colorPalletId)
 		}
 
 		data.piecesToDraw = matrixCopy;
@@ -449,10 +452,12 @@ function configGame() {
 							const element = data.pieces[index][j];
 							if (element >= 0) {
 								data.totalPieces++;
+								if (colorSchemes.colorSchemes[palletID].list[element]) {
 
-								let life = Math.floor(colorSchemes.colorSchemes[palletID].list[element].life) + 1;
-								if (life) {
-									data.totalBoardLife += life;
+									let life = Math.floor(colorSchemes.colorSchemes[palletID].list[element].life) + 1;
+									if (life) {
+										data.totalBoardLife += life;
+									}
 								}
 							} else {
 								data.totalEmptySpaces++;
@@ -495,7 +500,6 @@ function configGame() {
 			level.colorPalletId = palletID
 			level.data = sectionLevels
 
-
 			for (let index = 0; index < level.data.length; index++) {
 				let next = index + 1
 				next %= level.data.length;
@@ -507,19 +511,32 @@ function configGame() {
 
 	});
 
-	window.levelsRawJson = PIXI.loader.resources["./data/gameboy/gameboycreatures.json"].data
+	//let rawData = "./data/gameboy/gameboycreatures.json";
+	let rawData = "./data/how-to-play/shapes-synt.json";
+	window.levelsRawJson = PIXI.loader.resources[rawData].data
 	//window.levelsRawJson = PIXI.loader.resources["./assets/levelsRaw.json"].data
 	window.levelsJson = PIXI.loader.resources["./assets/levels.json"].data
+
+	console.log("SECTIONS", window.levelSections.sections)
+	let targetColorPallet = 0;
+	window.levelSections.sections.forEach(element => {
+		element.levels.forEach(dataLevel => {
+			if(rawData.includes(dataLevel.dataPath)){
+				console.log(dataLevel)
+				targetColorPallet = dataLevel.colorPalletId;
+			}
+		});
+	});
 
 	window.levelData = [];
 	window.levelsRawJson.layers.forEach(element => {
 
 		let isAddon = element.visible && element.name.search("_ADDON") >= 0
 		element.isAddon = isAddon;
-
-		let data = extractData(element);
-
-
+		element.colorPalletId = targetColorPallet
+		let data = extractData(element, true);
+		
+		
 		let dataa = null;
 		if (window.levelData.length == 1 && isAddon) {
 			window.levelData[0].addOn = data.addOn;
@@ -529,6 +546,8 @@ function configGame() {
 			window.levelData[window.levelData.length - 1].addOn = data.addOn;
 			dataa = window.levelData[window.levelData.length - 1];
 		} else if (data) {
+			console.log(data)
+			data.colorPalletId = targetColorPallet;
 			window.levelData.push(data)
 		}
 

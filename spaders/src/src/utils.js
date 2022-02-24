@@ -1,4 +1,5 @@
 import TweenMax from 'gsap';
+import colorSchemes from './colorSchemes';
 import config from './config';
 export default {
     horizontalListHelper(list) {
@@ -59,10 +60,11 @@ export default {
             for (let j = 0; j < pieces[i].length; j++) {
                 const element = pieces[i][j];
                 if (element >= 0) {
-                    if (!ignoreBlocker || (ignoreBlocker && element != 19)) {
+                    //if (!ignoreBlocker || (ignoreBlocker && element != 19)) {
+                   // if (!ignoreBlocker) {
                         lineCounters[j]++;
                         colCounters[i]++;
-                    }
+                    //}
                 }
             }
         }
@@ -179,7 +181,7 @@ export default {
                 (next.i >= 0 && next.i < pieces.length - 1) &&
                 (next.j >= 0 && next.j < pieces[i].length - 1)
             ) {
-                if (pieces[next.i][next.j] >= 0 && pieces[next.i][next.j] < 19) {
+                if (pieces[next.i][next.j] >= 0 && pieces[next.i][next.j] < 32) {
                     arrounds.push({
                         id: pieces[next.i][next.j],
                         i: next.i,
@@ -242,10 +244,11 @@ export default {
         console.log(scaledLevel)
         return scaledLevel;
     },
-    addBlockers(pieces, distance = 2, id = 19, debug = false) {
+    addBlockers(pieces, distance = 2, colorPallete = 0, debug = false) {
         if (pieces.length <= 0) {
             return;
         }
+        let colorScheme = colorSchemes.getColorScheme(colorPallete);
 
         let colCounters = [];
         let lineCounters = [];
@@ -312,7 +315,8 @@ export default {
             for (let j = 0; j < pieces[i].length; j++) {
                 const element = pieces[i][j];
                 if (i < lineCounters[j] - distance) {
-                    pieces[i][j] = id;
+                    pieces[i][j] = colorScheme.block.id;
+                    console.log(colorScheme.block.id)
                 }
             }
         }

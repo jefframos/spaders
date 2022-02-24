@@ -3,6 +3,7 @@ export default {
 
     colorSchemes: [
         {
+            block: { id: 19, hasWhite: false, isBlock: true, color: config.colors.block },
             list: [
                 { hasWhite: false, isBlock: false, color: config.colors.blue, life: 0 },
                 { hasWhite: false, isBlock: false, color: config.colors.red, life: 1 },
@@ -23,7 +24,6 @@ export default {
                 { hasWhite: false, isBlock: false, color: config.colors.darkSkin, life: 8.3 },
                 { hasWhite: false, isBlock: false, color: config.colors.darkSkin, life: 4.3 },
                 { hasWhite: false, isBlock: false, color: config.colors.darkSkin, life: 3.3 },
-                { hasWhite: false, isBlock: true, color: config.colors.block }
             ],
             dark: 0x111111,
             fillBarColor: config.colors.green,
@@ -47,6 +47,7 @@ export default {
             }
         },
         {
+            block: { id: 32, hasWhite: false, isBlock: true, color: config.colors.block },
             list: [//syinth
                 { hasWhite: false, isBlock: false, color: 0xffd319, life: 0 },
                 { hasWhite: false, isBlock: false, color: 0xff901f, life: 1 },
@@ -57,7 +58,7 @@ export default {
                 { hasWhite: false, isBlock: false, color: 0x5c2c6d, life: 6 },
                 { hasWhite: false, isBlock: false, color: 0x3c345c, life: 7 },
                 { hasWhite: false, isBlock: false, color: 0xffffff, life: 8 },
-                { hasWhite: 0xFFFFFF, isBlock: false, color: 0x333333, life: 9 },
+                { hasWhite: 0xFFFFFF, isBlock: false, color: 0x333333, life: 9 },//10
                 { hasWhite: false, isBlock: false, color: 0xb8aec8, life: 9.1 },
                 { hasWhite: false, isBlock: false, color: 0x5da4a6, life: 9.2 },
                 { hasWhite: false, isBlock: false, color: 0xd30cb8, life: 9.3 },
@@ -66,8 +67,16 @@ export default {
                 { hasWhite: false, isBlock: false, color: 0xee5dc0, life: 7.3 },
                 { hasWhite: false, isBlock: false, color: 0x844f58, life: 8.3 },
                 { hasWhite: false, isBlock: false, color: 0x831732, life: 4.3 },
+                { hasWhite: false, isBlock: false, color: 0xFFFFFF, life: 3.3 },
+                { hasWhite: false, isBlock: false, color: 0xFF0000, life: 3.3 },//20
+                { hasWhite: false, isBlock: false, color: 0x00FF00, life: 3.3 },
+                { hasWhite: false, isBlock: false, color: 0x0000FF, life: 3.3 },
+                { hasWhite: false, isBlock: false, color: 0xFFFF00, life: 3.3 },
+                { hasWhite: false, isBlock: false, color: 0x00FFFF, life: 3.3 },
+                { hasWhite: false, isBlock: false, color: 0xFF00FF, life: 3.3 },
                 { hasWhite: false, isBlock: false, color: 0xd30cb8, life: 3.3 },
-                { hasWhite: false, isBlock: true, color: config.colors.block }
+                { hasWhite: false, isBlock: false, color: 0xd30cb8, life: 3.3 },
+
             ],
             dark: 0x111111,
             fillBarColor: 0xffd319,
@@ -95,6 +104,7 @@ export default {
             }
         },
         {
+            block: { id: 19, hasWhite: false, isBlock: true, color: config.colors.block },
             list: [//gb
                 { hasWhite: false, isBlock: false, color: 0x85cd6e, life: 0 },
                 { hasWhite: false, isBlock: false, color: 0x89c077, life: 1 },
@@ -115,7 +125,6 @@ export default {
                 { hasWhite: false, isBlock: false, color: 0x3b3c2e, life: 8.3 },
                 { hasWhite: false, isBlock: false, color: 0x3b3c2e, life: 4.3 },
                 { hasWhite: false, isBlock: false, color: 0x3b3c2e, life: 3.3 },
-                { hasWhite: false, isBlock: true, color: config.colors.block }
             ],
             dark: 0x182018,
             fillBarColor: 0x85cd6e,
@@ -143,6 +152,7 @@ export default {
             }
         },
         {
+            block: { id: 19, hasWhite: false, isBlock: true, color: config.colors.block },
             list: [//poke
                 { hasWhite: false, isBlock: false, color: 0x4890a8, life: 0 },
                 { hasWhite: false, isBlock: false, color: 0xf06060, life: 1 },
@@ -163,7 +173,6 @@ export default {
                 { hasWhite: false, isBlock: false, color: 0xeee19b, life: 8.3 },
                 { hasWhite: false, isBlock: false, color: 0x786048, life: 4.3 },
                 { hasWhite: false, isBlock: false, color: 0x786048, life: 3.3 },
-                { hasWhite: false, isBlock: true, color: config.colors.block }
             ],
             dark: 0x333333,
             fillBarColor: 0x4890a8,
@@ -187,7 +196,9 @@ export default {
             }
         }
     ],
-
+    getColorScheme(id) {
+        return this.colorSchemes[id];
+    },
     getCurrentColorScheme() {
         let scheme = window.COOKIE_MANAGER.stats.colorPalletID;
 

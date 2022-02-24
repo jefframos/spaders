@@ -85,6 +85,7 @@ export default class Grid extends PIXI.Container {
 		if (window.imageThumbs['toDraw' + levelData.idSaveData]) {
 			return window.imageThumbs['toDraw' + levelData.idSaveData]
 		}
+		let scheme = colorSchemes.getCurrentColorScheme();
 		let colorScheme = colorSchemes.getCurrentColorScheme().grid;
 		let colorSchemeList = colorSchemes.getCurrentColorScheme().list;
 
@@ -104,7 +105,7 @@ export default class Grid extends PIXI.Container {
 
 		for (var i = piecesToTraw.length - 1; i >= 0; i--) {
 			for (var j = 0; j < piecesToTraw[i].length; j++) {
-				if (piecesToTraw[i][j] >= 0 && piecesToTraw[i][j] < 19) {
+				if (piecesToTraw[i][j] >= 0 && piecesToTraw[i][j] < scheme.block.id) {
 					//let gridSquare = PIXI.Sprite.fromFrame('gridSquare.png')
 					let gridSquare = new PIXI.mesh.NineSlicePlane(
 						PIXI.Texture.fromFrame(colorScheme.sprite), 20, 20, 20, 20);

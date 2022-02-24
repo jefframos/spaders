@@ -11,9 +11,9 @@
  <tileset firstgid="1" source="../tilesets/synt.tsx"/>
  <tileset firstgid="65" source="../tilesets/gb.tsx"/>
  <tileset firstgid="129" source="../tilesets/poke.tsx"/>
- <layer id="84" name="Copy of Outrun Sun" width="24" height="24" visible="0">
+ <layer id="84" name="Copy of Outrun Sun" width="24" height="24">
   <properties>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="autoPlaceBlockers" type="int" value="1"/>
    <property name="i" type="int" value="9"/>
    <property name="j" type="int" value="5"/>
    <property name="padding-bottom" type="int" value="2"/>
@@ -25,13 +25,13 @@
    <property name="tier" type="int" value="0"/>
   </properties>
   <data encoding="csv">
-0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,20,0,0,1,0,0,21,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,20,22,22,0,0,21,21,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,20,22,22,22,21,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,21,22,22,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,21,21,21,21,21,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -51,7 +51,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="71" name="Outrun Sun" width="24" height="24">
+ <layer id="71" name="Outrun Sun" width="24" height="24" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="9"/>
@@ -91,7 +91,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="78" name="Road 1" width="24" height="24">
+ <layer id="78" name="Road 1" width="24" height="24" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="7"/>
@@ -131,7 +131,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="72" name="Shape2" width="24" height="24">
+ <layer id="72" name="Shape2" width="24" height="24" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="5"/>
@@ -171,7 +171,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="83" name="_ADDONShape2" width="24" height="24">
+ <layer id="83" name="_ADDONShape2" width="24" height="24" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="5"/>
@@ -211,7 +211,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="73" name="Shape3" width="24" height="24">
+ <layer id="73" name="Shape3" width="24" height="24" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="5"/>
@@ -251,7 +251,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="74" name="Shape4" width="24" height="24">
+ <layer id="74" name="Shape4" width="24" height="24" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="5"/>
@@ -291,7 +291,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="81" name="Palm" width="24" height="24">
+ <layer id="81" name="Palm" width="24" height="24" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="10"/>
@@ -332,7 +332,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="85" name="Grid Small" width="24" height="24">
+ <layer id="85" name="Grid Small" width="24" height="24" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="7"/>
@@ -372,7 +372,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="86" name="_ADDONGridSmall" width="24" height="24">
+ <layer id="86" name="_ADDONGridSmall" width="24" height="24" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="7"/>
@@ -412,7 +412,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="82" name="Grid" width="24" height="24">
+ <layer id="82" name="Grid" width="24" height="24" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="10"/>
@@ -453,7 +453,7 @@
 6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6
 </data>
  </layer>
- <layer id="87" name="Sunset" width="24" height="24">
+ <layer id="87" name="Sunset" width="24" height="24" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="10"/>
@@ -494,7 +494,7 @@
 8,8,8,6,8,8,8,8,8,8,8,8,8,6,8,8,8,8,8,8,8,8,6,8
 </data>
  </layer>
- <layer id="88" name="Sunset 2" width="24" height="24">
+ <layer id="88" name="Sunset 2" width="24" height="24" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="10"/>
@@ -535,7 +535,7 @@
 8,7,8,8,8,8,7,8,7,8,8,8,8,8,8,8,7,8,7,8,8,8,7,8
 </data>
  </layer>
- <layer id="43" name="Mountain 1" width="24" height="24">
+ <layer id="43" name="Mountain 1" width="24" height="24" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="9"/>

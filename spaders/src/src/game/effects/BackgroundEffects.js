@@ -67,6 +67,7 @@ export default class BackgroundEffects extends PIXI.Container {
 	updateBackgroundColor() {
 
 		this.currentScheme = colorSchemes.getCurrentColorScheme();
+		console.log(this.currentScheme)
 		window.colorTweenManager.killColorTween(this.backgroundShape);
 		window.colorTweenManager.addColorTween(
 			this.backgroundShape,
