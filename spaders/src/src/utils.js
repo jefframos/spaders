@@ -241,7 +241,7 @@ export default {
             }
             scaledLevel.push(col);
         }
-        console.log(scaledLevel)
+        //console.log(scaledLevel)
         return scaledLevel;
     },
     addBlockers(pieces, distance = 2, colorPallete = 0, debug = false) {
@@ -316,7 +316,7 @@ export default {
                 const element = pieces[i][j];
                 if (i < lineCounters[j] - distance) {
                     pieces[i][j] = colorScheme.block.id;
-                    console.log(colorScheme.block.id)
+                    //console.log(colorScheme.block.id)
                 }
             }
         }

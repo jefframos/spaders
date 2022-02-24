@@ -58,9 +58,25 @@ export default class UIRectLabel extends PIXI.Container {
     }
     updateColorScheme() {
         let colorScheme = colorSchemes.getCurrentColorScheme();
-
+		this.backShape.texture = PIXI.Texture.fromFrame(colorScheme.grid.spriteRect)
 		this.backShape.tint = colorScheme.background
 		this.backShape.alpha = 0.75
+
+
+		// let colorScheme = colorSchemes.getCurrentColorScheme();
+		// this.timerRect.updateColor(colorScheme.fontColor);
+		// this.movesRect.updateColor(colorScheme.fontColor);
+		// this.scoreRect.updateColor(colorScheme.fontColor);
+
+
+		// let colorSchemeGrid = colorScheme.grid;
+		// this.backQueueShape.texture = PIXI.Texture.fromFrame(colorSchemeGrid.sprite)
+		// this.backQueueShape.width = CARD.width * 3 + 4
+		// this.backQueueShape.height = CARD.height + 4
+		// this.backQueueShape.x = -2
+		// this.backQueueShape.y = -2
+		// this.backQueueShape.tint = colorScheme.background;
+		// this.backQueueShape.alpha = 0.75;
 	}
 	updateColor(fontColor){
 		if(this.label){

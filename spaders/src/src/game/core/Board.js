@@ -725,6 +725,22 @@ export default class Board {
 		}
 
 	}
+	removeCard(i,j){
+		if(this.cards[i][j]){
+			this.cards[i][j].forceDestroy();
+		}
+
+		for (let index = 0; index < this.allCards.length; index++) {
+			const element = this.allCards[index];
+			if (element.cardID == this.cards[i][j].cardID) {
+				this.allCards.splice(index, 1);
+				break;
+			}
+
+		}
+
+		this.cards[i][j] = 0;
+	}
 	updateAllCardsColors(color) {
 		this.allCards.forEach(element => {
 			element.forceNewColor(color)

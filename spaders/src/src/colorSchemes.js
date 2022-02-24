@@ -41,6 +41,7 @@ export default {
                 sprite: "largeCard.png",
                 spriteTile: "largeCard.png",
                 spriteTrail: "largeCard.png",
+                spriteRect: "largeCard.png",
                 scaleTrail: false,
                 minAlpha: 0,
                 extraTileAlpha: 0
@@ -56,26 +57,29 @@ export default {
                 { hasWhite: false, isBlock: false, color: 0x8c1eff, life: 4 },
                 { hasWhite: false, isBlock: false, color: 0x6df1d8, life: 5 },
                 { hasWhite: false, isBlock: false, color: 0x5c2c6d, life: 6 },
-                { hasWhite: false, isBlock: false, color: 0x3c345c, life: 7 },
+                { hasWhite: 0xffffff, isBlock: false, color: 0x3c345c, life: 7 },//8
+
                 { hasWhite: false, isBlock: false, color: 0xffffff, life: 8 },
-                { hasWhite: 0xFFFFFF, isBlock: false, color: 0x333333, life: 9 },//10
+                { hasWhite: 0xffffff, isBlock: false, color: 0x333333, life: 9 },
                 { hasWhite: false, isBlock: false, color: 0xb8aec8, life: 9.1 },
                 { hasWhite: false, isBlock: false, color: 0x5da4a6, life: 9.2 },
-                { hasWhite: false, isBlock: false, color: 0xd30cb8, life: 9.3 },
+                { hasWhite: false, isBlock: false, color: 0xd30cb8, life: 5.3 },
                 { hasWhite: false, isBlock: false, color: 0xef281e, life: 5.3 },
                 { hasWhite: false, isBlock: false, color: 0xff6861, life: 6.3 },
-                { hasWhite: false, isBlock: false, color: 0xee5dc0, life: 7.3 },
-                { hasWhite: false, isBlock: false, color: 0x844f58, life: 8.3 },
-                { hasWhite: false, isBlock: false, color: 0x831732, life: 4.3 },
-                { hasWhite: false, isBlock: false, color: 0xFFFFFF, life: 3.3 },
-                { hasWhite: false, isBlock: false, color: 0xFF0000, life: 3.3 },//20
-                { hasWhite: false, isBlock: false, color: 0x00FF00, life: 3.3 },
-                { hasWhite: false, isBlock: false, color: 0x0000FF, life: 3.3 },
-                { hasWhite: false, isBlock: false, color: 0xFFFF00, life: 3.3 },
-                { hasWhite: false, isBlock: false, color: 0x00FFFF, life: 3.3 },
-                { hasWhite: false, isBlock: false, color: 0xFF00FF, life: 3.3 },
-                { hasWhite: false, isBlock: false, color: 0xd30cb8, life: 3.3 },
-                { hasWhite: false, isBlock: false, color: 0xd30cb8, life: 3.3 },
+                { hasWhite: false, isBlock: false, color: 0xee5dc0, life: 7.3 },//16
+
+                { hasWhite: false, isBlock: false, color: 0x844f58, life: 7.3 },
+                { hasWhite: false, isBlock: false, color: 0x831732, life: 5.3 },
+                { hasWhite: false, isBlock: false, color: 0xff3b72, life: 4.3 },
+                { hasWhite: false, isBlock: false, color: 0xff5c8f, life: 3.3 },
+                { hasWhite: false, isBlock: false, color: 0xfc92cf, life: 2.3 },
+                { hasWhite: 0xfc92cf, isBlock: false, color: 0x300837, life: 9.3 },
+                { hasWhite: 0x8ad2f4, isBlock: false, color: 0x1e1a69, life: 8.3 },
+                { hasWhite: false, isBlock: false, color: 0x524977, life: 7.3 },//24
+
+                { hasWhite: false, isBlock: false, color: 0x3484f5, life: 4.3 },
+                { hasWhite: false, isBlock: false, color: 0x8ad2f4, life: 3.3 },
+                { hasWhite: false, isBlock: false, color: 0x8ad2f4, life: 3.3 },
 
             ],
             dark: 0x111111,
@@ -91,16 +95,18 @@ export default {
             },
             grid: {
                 color: 0xFFFFFF,
-                sprite: "largeCard.png",
-                spriteTile: "largeCard.png",
-                spriteTrail: "largeCard.png",
+                sprite: "pixelSquare.png",
+                spriteTile: "pixelSquare.png",
+                spriteTrail: "pixelSquare.png",
+                spriteRect: "pixelSquare.png",
                 scaleTrail: false,
                 minAlpha: 0,
                 extraTileAlpha: 0
             },
             backgroundAssets: {
                 bottomBackground: "game_bg.png",
-                bottomBackgroundPosition: -0.025,
+                bottomBackgroundPosition: -0.2,
+                alpha:0.5,
             }
         },
         {
@@ -142,6 +148,7 @@ export default {
                 sprite: "gbGridTile.png",
                 spriteTile: "gbGrid.png",
                 spriteTrail: "gbGrid.png",
+                spriteRect: "gbGrid.png",
                 scaleTrail: false,
                 minAlpha: 0.5,
                 extraTileAlpha: 0.5
@@ -149,6 +156,7 @@ export default {
             backgroundAssets: {
                 bottomBackground: "gbBackground.png",
                 bottomBackgroundPosition: 0.01,
+                alpha: 0.75,
             }
         },
         {
@@ -190,6 +198,7 @@ export default {
                 sprite: "largeCard.png",
                 spriteTile: "largeCard.png",
                 spriteTrail: "largeCard.png",
+                spriteRect: "largeCard.png",
                 scaleTrail: false,
                 minAlpha: 0,
                 extraTileAlpha: 0

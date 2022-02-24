@@ -244,6 +244,7 @@ export default class EndGameContainer extends PIXI.Container {
     }
     setStats(points, rounds, time, image, data) {
 
+        getNextLevel(data);
         //console.log(image.scale)
         if (this.currentLevelImage && this.currentLevelImage.parent) {
             this.currentLevelImage.parent.removeChild(this.currentLevelImage);

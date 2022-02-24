@@ -245,14 +245,14 @@ function loadJsons() {
 
 	for (let index = window.levelSections.sections.length - 1; index >= 0; index--) {
 		const element = window.levelSections.sections[index];
-		console.log(element)
+		//console.log(element)
 		if (element.ignore) {
 			window.levelSections.sections.splice(index, 1)
 		}
 
 	}
 
-	console.log("--", window.levelSections)
+	// console.log("--", window.levelSections)
 	window.levelSections.sections.forEach(section => {
 		//console.log(section)
 		if (section.imageSrc) {
@@ -355,6 +355,7 @@ function extractData(element, debug) {
 
 		if (data.levelDataScale) {
 			data.pieces = utils.scaleLevel(data.pieces, data.levelDataScale)
+			data.scaled = true;
 		} else {
 			data.levelDataScale = 1;
 		}
@@ -376,8 +377,8 @@ function extractData(element, debug) {
 		}
 
 		if (!element.isAddon && data.setAutoBlocker > 0) {
-			if(debug)
-			console.log("AddBlocker",data.colorPalletId)
+			//if(debug)
+			// console.log("AddBlocker",data.colorPalletId)
 			utils.addBlockers(data.pieces, data.setAutoBlocker, data.colorPalletId)
 		}
 
@@ -386,8 +387,32 @@ function extractData(element, debug) {
 	}
 
 }
+window.getNextLevel = function(data) {
+	console.log('getNextLevel',data)
+	console.log(window.levelSections.sections)
+	let section = null;
+	let tier = null;
+	window.levelSections.sections.forEach(element => {
+		if (element.name == data.sectionName) {
+			section = element;
+		}
+	});
+	if (section) {
+		section.levels.forEach(element => {
+			if (element.name == data.tierName) {
+				tier = element;
+			}
+		});
+	}
 
+	//find on tier.data if theres an unfinished level
+	//if doesnt find nothing, finished the whole tier
+	console.log(tier);
+	//find on section.levels the next section
+	//if doesnt find nothing, finished the whole section
+	console.log(section);
 
+}
 window.allEstimate = 0;
 window.allEstimateHard = 0;
 function configGame() {
@@ -443,6 +468,7 @@ function configGame() {
 					data.idSaveData = idToSave;
 					data.sectionName = section.name;
 					data.tierName = level.name;
+					data.sectionName = section.name;
 					data.colorPalletId = palletID
 
 					data.totalPieces = 0;
@@ -500,6 +526,14 @@ function configGame() {
 			level.colorPalletId = palletID
 			level.data = sectionLevels
 
+			//console.log(sectionLevels)
+
+			sectionLevels.forEach(element => {
+				if (element.scaled && element.addOn) {
+					element.addOn = utils.scaleLevel(element.addOn, element.levelDataScale)
+				}
+			});
+
 			for (let index = 0; index < level.data.length; index++) {
 				let next = index + 1
 				next %= level.data.length;
@@ -511,18 +545,19 @@ function configGame() {
 
 	});
 
+
 	//let rawData = "./data/gameboy/gameboycreatures.json";
 	let rawData = "./data/how-to-play/shapes-synt.json";
 	window.levelsRawJson = PIXI.loader.resources[rawData].data
 	//window.levelsRawJson = PIXI.loader.resources["./assets/levelsRaw.json"].data
 	window.levelsJson = PIXI.loader.resources["./assets/levels.json"].data
 
-	console.log("SECTIONS", window.levelSections.sections)
+	// console.log("SECTIONS", window.levelSections.sections)
 	let targetColorPallet = 0;
 	window.levelSections.sections.forEach(element => {
 		element.levels.forEach(dataLevel => {
-			if(rawData.includes(dataLevel.dataPath)){
-				console.log(dataLevel)
+			if (rawData.includes(dataLevel.dataPath)) {
+				// console.log(dataLevel)
 				targetColorPallet = dataLevel.colorPalletId;
 			}
 		});
@@ -535,8 +570,8 @@ function configGame() {
 		element.isAddon = isAddon;
 		element.colorPalletId = targetColorPallet
 		let data = extractData(element, true);
-		
-		
+
+
 		let dataa = null;
 		if (window.levelData.length == 1 && isAddon) {
 			window.levelData[0].addOn = data.addOn;
@@ -546,7 +581,7 @@ function configGame() {
 			window.levelData[window.levelData.length - 1].addOn = data.addOn;
 			dataa = window.levelData[window.levelData.length - 1];
 		} else if (data) {
-			console.log(data)
+			// console.log(data)
 			data.colorPalletId = targetColorPallet;
 			window.levelData.push(data)
 		}
@@ -556,12 +591,18 @@ function configGame() {
 		}
 	});
 
+	console.log(window.levelData)
 
+	window.levelData.forEach(element => {
+		if (element.scaled && element.addOn) {
+			element.addOn = utils.scaleLevel(element.addOn, element.levelDataScale)
+		}
+	});
 	// utils.trimMatrix(window.levelData[0].pieces)
 	// utils.paddingMatrix(window.levelData[0].pieces, { left: 3, right: 3, top: 2, bottom: 2 })
 	// utils.addBlockers(window.levelData[0].pieces, 2)
 
-	console.log("ALL DATA", window.levelData)
+	// console.log("ALL DATA", window.levelData)
 	//console.log("ALL DATA", window.levelSections)
 	//create screen manager
 

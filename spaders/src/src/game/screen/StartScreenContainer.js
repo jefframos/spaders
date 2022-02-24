@@ -45,21 +45,33 @@ export default class StartScreenContainer extends PIXI.Container {
 			this.logoLabel.addChild(logoLayer);
 
 			logoLayer.sin = index * Math.PI / 4;
-			logoLayer.maxAlpha = 0.65;
-			logoLayer.minAlpha = 0;
+			logoLayer.maxAlpha = 0.35;
+			logoLayer.minAlpha = 0.1;
+			logoLayer.speed = index / 4;
 			this.logoLayers.push(logoLayer);
 		}
-
+		
+		this.staticLogo = new PIXI.Sprite.fromFrame("logoMain.png");
+		this.staticLogo.anchor = this.logoLabel.anchor
+		this.logoLabel.addChild(this.staticLogo);
+		
+		
 		this.mainLogo = new PIXI.Sprite.fromFrame("logo1.png");
 		this.mainLogo.anchor = this.logoLabel.anchor
-
+		
 		this.mainLogo.sin = Math.PI;
-		this.mainLogo.maxAlpha = 1;
-		this.mainLogo.minAlpha = 0.75;
+		this.mainLogo.maxAlpha = 0.3;
+		this.mainLogo.minAlpha = 0.1;
+		this.mainLogo.speed = 0.15;
+		this.logoLayers.push(this.mainLogo);
+		
+		this.logoLabel.addChild(this.mainLogo);
+
+
+
 
 		//	this.logoLayers.push(this.mainLogo);
 
-		this.logoLabel.addChild(this.mainLogo);
 
 		this.gameBy = new PIXI.Text("by jeff ramos", { font: '24px', fill: config.colors.white, align: 'center', fontFamily: window.LOGO_FONT });
 		this.gameBy.pivot.x = this.gameBy.width / 2;
@@ -360,7 +372,7 @@ export default class StartScreenContainer extends PIXI.Container {
 		}
 		for (let index = 0; index < this.logoLayers.length; index++) {
 			const element = this.logoLayers[index];
-			element.sin += delta * 2;
+			element.sin += delta * element.speed;
 			element.sin %= Math.PI * 2;
 			element.alpha = Math.sin(element.sin) * (element.maxAlpha - element.minAlpha) + element.minAlpha
 		}

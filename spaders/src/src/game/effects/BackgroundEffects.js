@@ -79,6 +79,12 @@ export default class BackgroundEffects extends PIXI.Container {
 			this.bottomBackground.y = this.innerResolution.height;
 			this.bottomBackground.texture = PIXI.Texture.fromFrame(this.currentScheme.backgroundAssets.bottomBackground);
 			this.bottomBackground.visible = true;
+
+			if(this.currentScheme.backgroundAssets.alpha){
+				this.bottomBackground.alpha = this.currentScheme.backgroundAssets.alpha;
+			}else{
+				this.bottomBackground.alpha = 1;
+			}
 		} else {
 			this.bottomBackground.visible = false;
 		}

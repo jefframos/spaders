@@ -135,7 +135,6 @@ export default class Grid extends PIXI.Container {
 
 	}
 	createGrid(levelData) {
-		console.log("CREATING GRID")
 
 		this.resetGrid();
 		let gridContainer = new PIXI.Container();
@@ -231,6 +230,14 @@ export default class Grid extends PIXI.Container {
 		TweenMax.to(gridContainer, 0.5, { alpha: 1, delay: 0.75 });
 
 		this.addChild(gridContainer);
+	}
+	removeCard(i,j){
+		let tile = this.gridsSquares[i][j]
+		if(tile.card){
+			this.cardsStartedOnGrid--;
+
+			tile.shape.parent.removeChild(tile.shape);
+		}
 	}
 	destroyCard(card) {
 		if (this.gridsSquares[card.pos.i][card.pos.j].card) {
