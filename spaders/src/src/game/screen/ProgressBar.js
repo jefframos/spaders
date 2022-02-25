@@ -41,7 +41,7 @@ export default class ProgressBar extends PIXI.Container {
 
         this.loadingBarFill = new PIXI.mesh.NineSlicePlane(
             PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
-        this.loadingBarFill.width = this.sizeWidth- this.round / 2
+        this.loadingBarFill.width = 0
         this.loadingBarFill.height = this.sizeHeight- this.round / 2
         this.loadingBarFill.tint = 0;
         this.loadingBarFill.x = this.round / 4
@@ -58,6 +58,7 @@ export default class ProgressBar extends PIXI.Container {
 
         //this.setProgressBar(Math.random())
         this.currentValue = 0;
+        this.state = 0;
 
         window.COOKIE_MANAGER.onChangeColors.add(() => {
             this.updateColorScheme();
@@ -65,14 +66,27 @@ export default class ProgressBar extends PIXI.Container {
 
         this.updateColorScheme();
         this.currentColor
+
     }
     updateColorScheme() {
-        let colorScheme = colorSchemes.getCurrentColorScheme();
-        this.currentColor = colorScheme.fillBarColor;
-        this.setProgressBar(this.currentValue, colorScheme.fillBarColor)
+        this.updateColor();
+        this.setProgressBar(this.currentValue, this.currentColor)
     }
     updateBackgroundColor(color){
         this.loadingBarFillBack.tint = color;
+    }
+    updateBackgroundFront(color){
+        this.currentColor = color;
+        this.loadingBarFill.tint = color;
+    }
+    updateColor(){
+        let colorScheme = colorSchemes.getCurrentColorScheme();
+
+        if(this.state == 0){
+            this.currentColor = colorScheme.fillBarColor;
+        }else{
+            this.currentColor = colorScheme.fillBarCompleteColor;
+        }
     }
     resizeBar(width, height = 30){
         if(width == this.sizeWidth){
@@ -91,6 +105,29 @@ export default class ProgressBar extends PIXI.Container {
         this.setProgressBar(this.currentValue);
 
     }
+    setProgressBar2(value = 0, color = null) {
+        if (value <= 0) {
+            return;
+        }
+        if (color === null) {
+            color = this.currentColor;
+        }
+        if(value >= 1){
+            this.state = 1;
+        }else{
+            this.state = 0;
+        }
+        this.updateColor();
+        this.loadingBarFill.visible = true;
+        this.currentValue = value;
+        this.loadingBarFill.tint = color;
+        let targetWidth = (this.sizeWidth - this.round / 2) * this.currentValue;
+        targetWidth = Math.max(targetWidth, 10);
+        TweenMax.killTweensOf(this.loadingBarFill);
+        TweenMax.to(this.loadingBarFill, 0.5, {width:targetWidth});
+
+
+    }
     setProgressBar(value = 0, color = null) {
         if (value <= 0) {
             return;
@@ -98,14 +135,17 @@ export default class ProgressBar extends PIXI.Container {
         if (color === null) {
             color = this.currentColor;
         }
+        if(value >= 1){
+            this.state = 1;
+        }else{
+            this.state = 0;
+        }
+        this.updateColor();
         this.loadingBarFill.visible = true;
         value = Math.max(value, 0.1);
         this.currentValue = value;
         this.loadingBarFill.tint = color;
-        this.loadingBarFill.width =  (this.sizeWidth - this.round / 2) * value//.beginFill(color).drawRoundedRect(0, 0, (this.sizeWidth - this.round / 2) * value, this.sizeHeight * 0.75, this.round * 0.75);
-        //this.loadingBarFill.endFill();
-
-        //console.log("UPDATE STUFF NEW PROGRESS BAR", this.loadingBarFill)
+        this.loadingBarFill.width =  (this.sizeWidth - this.round / 2) * value;
 
     }
 }

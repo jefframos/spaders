@@ -176,10 +176,18 @@ export default class Card extends PIXI.Container {
 		}
 		return null;
 	}
-	updateSprite(level, data) {
+	updateSprite(level, data, id = -1) {
 		this.isBomb = false;
-		this.enemySprite.setTexture(PIXI.Texture.fromFrame(window.IMAGE_DATA.enemyImagesFrame[Math.floor(level)]));
-		this.enemySpriteWhite.setTexture(PIXI.Texture.fromFrame("w_" + window.IMAGE_DATA.enemyImagesFrame[Math.floor(level)]));
+		console.log(data)
+
+		let imageID = Math.floor(level)
+		if(id >= 0){
+			imageID = id
+			imageID %= 10;
+		}
+		console.log(imageID)
+		this.enemySprite.setTexture(PIXI.Texture.fromFrame(window.IMAGE_DATA.enemyImagesFrame[imageID]));
+		this.enemySpriteWhite.setTexture(PIXI.Texture.fromFrame("w_" + window.IMAGE_DATA.enemyImagesFrame[imageID]));
 		this.enemySpriteWhite.visible = false;
 
 

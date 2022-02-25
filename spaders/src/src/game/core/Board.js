@@ -21,6 +21,7 @@ export default class Board {
 
 		this.onDestroyCard = new signals();
 		this.OnStartNextRound = new signals();
+		this.OnGameOver = new signals();
 	}
 	startNewGame() {
 		this.updateNumberOfEntities();
@@ -257,7 +258,7 @@ export default class Board {
 			}.bind(this), 200 / window.TIME_SCALE);
 			return 200 + 300 * (cardsToDestroy.length + 1) / window.TIME_SCALE
 		}
-
+		//this.findOutGameOver();
 	}
 
 	areaAttack(card, cardToIgnore) {
@@ -455,11 +456,8 @@ export default class Board {
 
 		window.EFFECTS.shake(0.2, 5, 0.3, this.game.gameContainer);
 		//explosion
-		//this.popLabel(this.game.toLocal(cardGlobal), "+" + 100, 0.25, 0.4, 0.8, window.textStyles.explosion, Elastic.easeOut);
 
 		this.areaAttack(cardFound);
-
-		console.log(this.chainTimer)
 
 		this.explosionChain.push(cardFound)
 
@@ -721,9 +719,17 @@ export default class Board {
 			card.destroy();
 			card.convertCard();
 
+			//this.findOutGameOver();
+
 			return true;
 		}
 
+	}
+	findOutGameOver(){
+		console.log("findOutGameOver", this.firstLineShots())
+		if(this.firstLineShots() <= 0){
+			this.OnGameOver.dispatch();
+		}
 	}
 	removeCard(i,j){
 		if(this.cards[i][j]){
@@ -802,36 +808,26 @@ export default class Board {
 			//console.log(str);
 		}
 	}
-	// moveCardDown(card){
-	// 	this.cards[card.pos.i][card.pos.j] = 0;
-	// 	card.pos.j ++;
-	// 	if(card.pos.j >= GRID.j){
-	// 		card.destroy();
-	// 		//GAME OVER AQUI
-	// 		return;
-	// 	}
-	// 	this.addCard(card);
-	// 	card.move({
-	// 		x: card.pos.i * CARD.width,
-	// 		y: card.pos.j * CARD.height
-	// 	}, 0.2, 0.5);
-	// }
-	updateCardsCounter(value, card) {
+
+
+//move cards down
+	moveCardsDown(value, card) {
 		let cardsToMove = [];
 		for (var i = 0; i < this.cards.length; i++) {
 			for (var j = 0; j < this.cards[i].length; j++) {
 				if (this.cards[i][j]) {
-					let tcard = this.cards[i][j].updateCounter(value);
-					if (tcard) {
-						////console.log(tcard);
-						cardsToMove.push(tcard)
-					}
+					// let tcard = this.cards[i][j].updateCounter(value);
+					// if (tcard) {
+					// 	////console.log(tcard);
+						cardsToMove.push(this.cards[i][j])
+					// }
 				}
 			}
 		}
 		// //console.log(cardsToMove);
 		let moveDownList = [];
 
+		// for (var i = 0; i < cardsToMove.length; i++) {
 		for (var i = 0; i < cardsToMove.length; i++) {
 			let id = cardsToMove[i].pos.i;
 			for (var j = cardsToMove[i].pos.j; j < GRID.j; j++) {
@@ -853,8 +849,23 @@ export default class Board {
 		for (var i = moveDownList.length - 1; i >= 0; i--) {
 			this.moveCardDown(moveDownList[i]);
 		}
-		//console.log(moveDownList);
 	}
+
+	moveCardDown(card){
+		this.cards[card.pos.i][card.pos.j] = 0;
+		card.pos.j ++;
+		if(card.pos.j >= GRID.j){
+			card.destroy();
+			this.OnGameOver.dispatch();
+			return;
+		}
+		this.addCard(card);
+		card.move({
+			x: card.pos.i * CARD.width,
+			y: card.pos.j * CARD.height
+		}, 0.2, 0.5);
+	}
+	
 	getWhereWillStop(laneID) {
 		let spaceID = -1
 		for (var i = this.cards[laneID].length - 1; i >= 0; i--) {

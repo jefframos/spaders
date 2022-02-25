@@ -1,11 +1,11 @@
 {
     "activeFile": "how-to-play/simple-shapes-synt.tmx",
     "expandedProjectPaths": [
+        "gb",
         "how-to-play",
         "movies",
-        "gb",
-        "templates",
         "videogames",
+        "templates",
         "main"
     ],
     "fileStates": {
@@ -26,10 +26,10 @@
         },
         "gb/gameboyCreatures.tmx": {
             "scale": 0.5,
-            "selectedLayer": 0,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 485,
-                "y": 554
+                "x": 219,
+                "y": 638
             }
         },
         "gb/gameboyMisc.tmx": {
@@ -53,7 +53,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 513.6363636363635,
-                "y": 515.1515151515152
+                "y": 512.1212121212122
             }
         },
         "gb/gameboyWeapon2.tmx": {
@@ -138,10 +138,10 @@
         },
         "how-to-play/simple-shapes-synt.tmx": {
             "scale": 0.33,
-            "selectedLayer": 15,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 689.3939393939393,
-                "y": 309.090909090909
+                "x": 286.36363636363626,
+                "y": 436.3636363636365
             }
         },
         "how-to-play/simple-shapes.tmx": {
@@ -242,7 +242,7 @@
             "scaleInEditor": 1
         },
         "tilesets/synt.tsx": {
-            "scaleInDock": 1,
+            "scaleInDock": 0.75,
             "scaleInEditor": 1
         },
         "videogames/levels.tmx": {

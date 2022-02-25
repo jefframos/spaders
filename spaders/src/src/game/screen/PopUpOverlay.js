@@ -81,7 +81,7 @@ export default class PopUpOverlay extends PIXI.Container {
         }
         this.close();
     }
-    show(data, callbackConfirm, callbackCancel) {
+    show(data, callbackConfirm, callbackCancel, requireOption = false) {
         this.visible = true;
         this.callbackConfirm = callbackConfirm;
         this.callbackCancel = callbackCancel;
@@ -112,7 +112,7 @@ export default class PopUpOverlay extends PIXI.Container {
         TweenMax.to(this.textBoxContainer, 0.25, { alpha: 1, onComplete:()=>{
             this.confirmButton.interactive = true;
             this.cancelButton.interactive = true;
-            this.background.interactive = true;
+            this.background.interactive = !requireOption;
         } })
         TweenMax.from(this.textBoxContainer, 0.5, { y: this.textBoxContainer.y - 50, ease: Back.easeOut })
     }

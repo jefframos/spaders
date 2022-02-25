@@ -221,6 +221,8 @@ export default class StartScreenContainer extends PIXI.Container {
 			const element = this.logoLayers[index];
 			element.tint = colorScheme.fontColor;
 		}
+
+		this.staticLogo.tint = colorScheme.fontColor;
 	}
 	updateLinesColor() {
 		console.log(window.COOKIE_MANAGER.stats.colorPalletID)

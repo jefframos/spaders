@@ -305,6 +305,7 @@ function extractData(element, debug) {
 			bottom: findPropertyValue(element.properties, "padding-bottom") //| 0,
 		}
 		data.setAutoBlocker = findPropertyValue(element.properties, "autoPlaceBlockers")
+		data.gameMode = findPropertyValue(element.properties, "gameMode")
 
 		let tempArr = [];
 		let levelMatrix = [];

@@ -27,6 +27,7 @@ export default {
             ],
             dark: 0x111111,
             fillBarColor: config.colors.green,
+            fillBarCompleteColor: config.colors.purple,
             background: 0x151515,
             fontColor: 0xFFFFFF,
             buttonData: {
@@ -84,6 +85,7 @@ export default {
             ],
             dark: 0x111111,
             fillBarColor: 0xffd319,
+            fillBarCompleteColor: 0xFFFFFF,
             background: 0x151515,
             fontColor: 0xFFFFFF,
             buttonData: {
@@ -134,6 +136,7 @@ export default {
             ],
             dark: 0x182018,
             fillBarColor: 0x85cd6e,
+            fillBarCompleteColor: 0xFFFFFF,
             background: 0xCADCA0,
             fontColor: 0x182018,
             buttonData: {
@@ -184,6 +187,7 @@ export default {
             ],
             dark: 0x333333,
             fillBarColor: 0x4890a8,
+            fillBarCompleteColor: 0xFFFFFF,
             background: 0x333333,
             fontColor: 0xFFFFFF,
             buttonData: {

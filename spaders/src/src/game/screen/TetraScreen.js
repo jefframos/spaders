@@ -23,6 +23,7 @@ import Trail from '../effects/Trail';
 import TutorialOverlay from './TutorialOverlay';
 import colorSchemes from '../../colorSchemes';
 import PopUpOverlay from './PopUpOverlay';
+import ProgressBar from './ProgressBar';
 
 export default class TetraScreen extends Screen {
 	constructor(label) {
@@ -93,6 +94,7 @@ export default class TetraScreen extends Screen {
 		this.board = new Board(this);
 		this.board.onDestroyCard.add((card) => this.onDestroyCard(card));
 		this.board.OnStartNextRound.add((card) => this.OnStartNextRound(card));
+		this.board.OnGameOver.add((card) => this.OnGameOver(card));
 
 		this.totalLines = 6;
 
@@ -120,7 +122,7 @@ export default class TetraScreen extends Screen {
 			bestScore: 0
 		}
 
-		this.gameplayState = 0;
+		this.gameplayState = 0;		
 		//console.log(utils.convertNumToTime(1231))
 
 
@@ -210,7 +212,7 @@ export default class TetraScreen extends Screen {
 			scale: this.currentLevelData.levelDataScale
 		}
 
-		let min = 60//this.innerResolution.width / 6.5
+		let min = 60;
 
 		if (GRID.height > GRID.width) {
 			window.CARD = {
@@ -225,27 +227,19 @@ export default class TetraScreen extends Screen {
 			}
 		}
 
-		// window.CARD = {
-		// 	width: GRID.width / GRID.i,
-		// 	height: GRID.width / GRID.i,//GRID.height / GRID.j
-		// }
-
-
 		window.GRID.width = window.GRID.i * CARD.width;
 		window.GRID.height = window.GRID.j * CARD.height;
 
-
 		window.GRID.widthDraw = CARD.width / this.currentLevelData.levelDataScale;
 		window.GRID.heightDraw = CARD.height / this.currentLevelData.levelDataScale;
-		//console.log(CARD.width)
 
 
 		if (this.gridContainer) {
 			this.buildTrails();
 		}
 	}
-	getPixelSprite(){
-		if(!window.PIXEL_SPRITE_POOL){
+	getPixelSprite() {
+		if (!window.PIXEL_SPRITE_POOL) {
 			window.PIXEL_SPRITE_POOL = [];
 		}
 		let sprite;
@@ -253,9 +247,8 @@ export default class TetraScreen extends Screen {
 			sprite = window.PIXEL_SPRITE_POOL[0];
 			window.PIXEL_SPRITE_POOL.shift();
 		} else {
-			sprite  = new PIXI.Sprite.fromFrame("pixelSquare.png");
+			sprite = new PIXI.Sprite.fromFrame("pixelSquare.png");
 		}
-		//console.log(window.PIXEL_SPRITE_POOL.length)
 		return sprite;
 	}
 	getRect(size = 4, color = 0xFFFFFF) {
@@ -420,7 +413,29 @@ export default class TetraScreen extends Screen {
 
 		this.scoreRect = new UIRectLabel(config.colors.red2, 'icons8-star-48.png', false);
 		this.UIInGame.addChild(this.scoreRect)
+		this.scoreRect.updateFontSize(20);
 
+		let sizeBar = { width: 300, height: 20 }
+
+		this.chargeBombBar = new ProgressBar(sizeBar);
+
+		
+		this.UIInGame.addChild(this.chargeBombBar)
+
+		this.chargeBombBar.visible = false;
+
+		this.chargeBombBar.currentChargeValue = 0;
+		this.chargeBombBar.maxValue = 1000;
+
+		let bombIcon = new PIXI.Sprite.fromFrame(window.IMAGE_DATA.enemyBombImages);
+		bombIcon.anchor.set(0, 0.5);
+		bombIcon.scale.set(0.5);
+		bombIcon.x = 305;
+		bombIcon.y = 10;
+		this.chargeBombBar.icon = bombIcon;
+		this.chargeBombBar.addChild(bombIcon);
+
+		
 
 		this.backButton = new UIButton1(config.colors.white, 'icons8-menu-48.png', config.colors.dark);
 		this.backButton.onClick.add(() => this.mainmenuState());
@@ -430,10 +445,6 @@ export default class TetraScreen extends Screen {
 		this.UIInGame.addChild(this.inGameMenu)
 
 
-
-
-		//this.UIInGame.addChild(this.backButton)
-		//this.inGameMenu.onBack.add(() => this.mainmenuState())
 		this.inGameMenu.onBack.add(() => this.mainmenuStateFromGame())
 		this.inGameMenu.onRestart.add(() => this.resetGame())
 		this.inGameMenu.onPause.add(() => this.pauseGame())
@@ -507,6 +518,7 @@ export default class TetraScreen extends Screen {
 		this.movesRect.updateColor(colorScheme.fontColor);
 		this.scoreRect.updateColor(colorScheme.fontColor);
 
+		
 
 		let colorSchemeGrid = colorScheme.grid;
 		this.backQueueShape.texture = PIXI.Texture.fromFrame(colorSchemeGrid.spriteRect)
@@ -537,7 +549,7 @@ export default class TetraScreen extends Screen {
 		this.timerRect.scale.set(this.bottomUICanvas.height / this.timerRect.backShape.height * 0.3)
 		this.movesRect.scale.set(this.timerRect.scale.x)
 		this.scoreRect.scale.set(this.timerRect.scale.x * 1.5)
-
+		this.chargeBombBar.scale.set(this.scoreRect.scale.x)
 		this.timerRect.x = this.bottomUICanvas.x + this.bottomUICanvas.width - this.timerRect.width - this.bottomUICanvas.height * 0.1
 		this.movesRect.x = this.bottomUICanvas.x + this.bottomUICanvas.width - this.timerRect.width - this.bottomUICanvas.height * 0.1
 
@@ -549,6 +561,8 @@ export default class TetraScreen extends Screen {
 
 		//this.scoreRect.y = this.mainMenuContainer.y//this.movesRect.y + (this.movesRect.height / this.movesRect.scale.y) - (this.scoreRect.height / this.scoreRect.scale.y)
 		this.scoreRect.x = this.topCanvas.x + 20;
+		this.chargeBombBar.x = this.topCanvas.x + this.topCanvas.width / 2 - this.chargeBombBar.width / 2;
+		this.chargeBombBar.y = this.scoreRect.y + this.scoreRect.height / 2 - 10
 
 		this.containerQueue.scale.set(this.bottomUICanvas.height / CARD.height * 0.5)
 		this.containerQueue.x = this.bottomUICanvas.height * 0.1
@@ -759,7 +773,6 @@ export default class TetraScreen extends Screen {
 		this.background = new BackgroundEffects();
 		this.addChild(this.background)
 
-
 		this.gameContainer = new PIXI.Container();
 		this.backFXContainer = new PIXI.Container();
 		this.backGridContainer = new PIXI.Container();
@@ -781,7 +794,6 @@ export default class TetraScreen extends Screen {
 
 		this.addChild(this.gameContainer);
 
-		//this.gameContainer.addChild(this.background);
 		this.gameContainer.addChild(this.backFXContainer);
 		this.gameContainer.addChild(this.backGridContainer);
 		this.gameContainer.addChild(this.gridContainer);
@@ -800,11 +812,6 @@ export default class TetraScreen extends Screen {
 
 
 		this.mousePosID = GRID.i / 2;
-		// this.currentCard = this.createCard();
-		// this.cardsContainer.addChild(this.currentCard)
-		// utils.centerObject(this.currentCard, this.background)
-
-
 
 		this.grid.createGrid();
 		this.gridContainer.addChild(this.grid);
@@ -969,6 +976,15 @@ export default class TetraScreen extends Screen {
 		// 	this.updateGridDimensions();
 		// 	utils.addBlockers(this.currentLevelData.pieces, 2, 19, true)
 		// }
+
+		this.topUIContainer.y =this.gameCanvas.y - 500
+		this.bottomUIContainer.y = this.gameCanvas.y + this.gameCanvas.height - this.bottomUICanvas.height + 500
+
+		
+
+		this.chargeBombBar.currentChargeValue = 0;
+		this.chargeBombBar.maxValue = 100;
+
 		this.blockGameTimer = 0;
 		this.currentSectionPiecesKilled = 0;
 		this.isFinalState = false;
@@ -1076,10 +1092,10 @@ export default class TetraScreen extends Screen {
 								customData = {
 									order: this.forceBottomArrow()
 								}
-								//console.log(customData)
 							}
 						});
-						this.cardsContainer.addChild(this.placeCard(j, i, ENEMIES.list[this.currentLevelData.pieces[i][j]], customData));
+						let card = this.placeCard(j, i, ENEMIES.list[this.currentLevelData.pieces[i][j]], customData, this.currentLevelData.pieces[i][j])
+						this.cardsContainer.addChild(card);
 					}
 				} else if (this.currentLevelData.pieces[i][j] == -2) {
 					this.cardsContainer.addChild(this.placeBlock(j, i));
@@ -1097,9 +1113,9 @@ export default class TetraScreen extends Screen {
 					hasAddon = true;
 					this.board.setCardToCrazy(j, i, 900 + countAdd * 100);
 					countAdd++;
-				}else if(id == 33){
-					this.board.removeCard(j,i);
-					this.grid.removeCard(j,i);
+				} else if (id == 33) {
+					this.board.removeCard(j, i);
+					this.grid.removeCard(j, i);
 				}
 			}
 		}
@@ -1112,11 +1128,11 @@ export default class TetraScreen extends Screen {
 
 		if (hasAddon) {
 			setTimeout(() => {
-				this.newRound();
+				this.OnStartNextRound(null, true);
 			}, 1500 + countAdd * 100);
 		} else {
 			setTimeout(() => {
-				this.newRound();
+				this.OnStartNextRound(null, true);
 			}, 1200);
 		}
 
@@ -1159,12 +1175,18 @@ export default class TetraScreen extends Screen {
 
 		this.timerRect.updateLavel(utils.convertNumToTime(Math.ceil(this.currentTime)))
 		this.movesRect.updateLavel(utils.formatPointsLabel(Math.ceil(this.currentRound)))
-		this.scoreRect.updateLavel(Math.ceil(this.currentPointsLabel), '', false)
+		this.scoreRect.updateLavel(Math.ceil(this.currentPointsLabel), '', false, {x:-10, y:5})
+		
 	}
 	addRandomPiece() {
 	}
 	addPoints(points) {
 		this.currentPoints += points;
+		this.chargeBombBar.currentChargeValue += points;
+		
+		let targetBar = Math.min(1, this.chargeBombBar.currentChargeValue / this.chargeBombBar.maxValue)
+		this.chargeBombBar.setProgressBar2(targetBar)
+
 		TweenMax.to(this, 0.2, {
 			currentPointsLabel: this.currentPoints, onUpdate: function () {
 				this.currentPointsLabel = Math.ceil(this.currentPointsLabel);
@@ -1238,10 +1260,47 @@ export default class TetraScreen extends Screen {
 		this.cardQueue[1].mark();
 
 	}
-	OnStartNextRound() {
-		this.newRound();
+	OnGameOver(){
+		if(!this.gameRunning){
+			return;
+		}
+		this.gameRunning = false;
+
+		setTimeout(() => {			
+			let data = { text: 'Game Over, would you like to try again?' }
+			window.popUpOverlay.show(data, () => {
+				this.resetGame();			
+			},  () => {
+				this.mainmenuStateFromGame();			
+			}, true)
+		}, 750);
 	}
-	newRound() {
+	OnStartNextRound(card, first = false) {
+		this.newRound(first);
+	}
+	newRound(first = false) {
+		console.log("newRound", first);
+		if (this.currentLevelData.gameMode == 0) {
+
+			this.getNextPieceRound();
+
+			
+
+		} else if (this.currentLevelData.gameMode == 1) {
+			if (first) {
+				this.getNextPieceRound();
+			} else {
+
+				this.board.moveCardsDown();
+				setTimeout(() => {
+
+					this.getNextPieceRound();
+				}, 1000);
+			}
+		}
+	}
+	getNextPieceRound() {
+
 		this.blockGameTimer = 0.2;
 		this.updateQueue();
 		this.currentCard = this.cardQueue[0];
@@ -1257,9 +1316,18 @@ export default class TetraScreen extends Screen {
 
 		this.firstLineShots = this.board.firstLineShots();
 
-		if (this.firstLineShots == 1) {
-			this.currentCard.isABomb();
-		}
+		//this.board.findOutGameOver();
+		
+
+		setTimeout(() => {
+			this.board.findOutGameOver();			
+		}, 1000);
+		
+		// if (this.firstLineShots == 0) {
+		// 	//this.currentCard.isABomb();
+		// 	//console.log("No moves")
+		// 	this.OnGameOver();
+		// }
 
 		if (this.autoPlayTimeout) {
 			clearTimeout(this.autoPlayTimeout);
@@ -1282,7 +1350,7 @@ export default class TetraScreen extends Screen {
 			this.onTapUp(null, this.mousePosID)
 		}
 	}
-	placeCard(i, j, data, customData = {}) {
+	placeCard(i, j, data, customData = {}, cardID = 0) {
 		let card;
 		if (CARD_POOL.length) {
 			card = CARD_POOL[0];
@@ -1294,7 +1362,8 @@ export default class TetraScreen extends Screen {
 		//console.log(data)
 		card.life = data.life;
 		card.createCard(0, customData);
-		card.updateSprite(data.life, data);
+		console.log("pppp",data.life, data, cardID)
+		card.updateSprite(data.life, data, cardID);
 		card.x = i * CARD.width;
 		card.y = j * CARD.height - CARD.height;
 		// card.cardContainer.scale.set(1.2 - j * 0.05)
@@ -1395,18 +1464,27 @@ export default class TetraScreen extends Screen {
 
 		if (!this.gameRunning) {
 			this.topUIContainer.x = this.gameCanvas.x
-			this.topUIContainer.y = utils.lerp(this.topUIContainer.y, this.gameCanvas.y - 500, 0.1)
+			this.topUIContainer.y = utils.lerp(this.topUIContainer.y, this.gameCanvas.y - 500, 0.01)
 			this.bottomUIContainer.x = this.gameCanvas.x
-			this.bottomUIContainer.y = utils.lerp(this.bottomUIContainer.y, this.gameCanvas.y + this.gameCanvas.height - this.bottomUICanvas.height + 500, 0.2)
+			this.bottomUIContainer.y = utils.lerp(this.bottomUIContainer.y, this.gameCanvas.y + this.gameCanvas.height - this.bottomUICanvas.height + 500, 0.01)
 
 			if (this.currentCard) {
-				this.currentCard.alpha = 0;
+				//this.currentCard.alpha = utils.lerp(this.currentCard.alpha, 0, 0.1)
 			}
 
 			return;
 		}
 
 
+		let targetBar = Math.min(1, this.chargeBombBar.currentChargeValue / this.chargeBombBar.maxValue)
+
+		if(targetBar >= 1){
+			this.chargeBombBar.icon.scale.x = utils.lerp(this.chargeBombBar.icon.scale.x, 0.85, 0.1)
+			this.chargeBombBar.icon.scale.y = utils.lerp(this.chargeBombBar.icon.scale.y, 0.85, 0.1)
+		}else{
+			this.chargeBombBar.icon.scale.x = utils.lerp(this.chargeBombBar.icon.scale.x, 0.5, 0.1)
+			this.chargeBombBar.icon.scale.y = utils.lerp(this.chargeBombBar.icon.scale.y, 0.5, 0.1)
+		}
 
 		if (this.currentCard) {
 			this.currentCard.update(delta)

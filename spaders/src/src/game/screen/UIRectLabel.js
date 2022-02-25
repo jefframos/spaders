@@ -56,6 +56,9 @@ export default class UIRectLabel extends PIXI.Container {
 
         this.updateColorScheme();
     }
+    updateFontSize(size) {
+		this.label.style.fontSize = size;
+	}
     updateColorScheme() {
         let colorScheme = colorSchemes.getCurrentColorScheme();
 		this.backShape.texture = PIXI.Texture.fromFrame(colorScheme.grid.spriteRect)
@@ -85,7 +88,7 @@ export default class UIRectLabel extends PIXI.Container {
 		}
 
 	}
-	updateLavel(text, title, center = true) {
+	updateLavel(text, title, center = true, offset = {x:0, y:0}) {
 		this.label.text = text;
 		this.title.text = title ? title : "";
 		//this.title.pivot.x = this.title.width * 0.5
@@ -104,6 +107,9 @@ export default class UIRectLabel extends PIXI.Container {
 			this.label.x = this.icon.x + this.icon.width + 5;
 			this.label.y = 12;
 		}
+
+		this.label.x += offset.x;
+		this.label.y += offset.y;
 	}
 	getParticles(particle){
 		TweenMax.killTweensOf(this.icon.scale);
