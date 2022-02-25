@@ -122,7 +122,7 @@ export default class TetraScreen extends Screen {
 			bestScore: 0
 		}
 
-		this.gameplayState = 0;		
+		this.gameplayState = 0;
 		//console.log(utils.convertNumToTime(1231))
 
 
@@ -419,7 +419,7 @@ export default class TetraScreen extends Screen {
 
 		this.chargeBombBar = new ProgressBar(sizeBar);
 
-		
+
 		this.UIInGame.addChild(this.chargeBombBar)
 
 		this.chargeBombBar.visible = false;
@@ -435,7 +435,7 @@ export default class TetraScreen extends Screen {
 		this.chargeBombBar.icon = bombIcon;
 		this.chargeBombBar.addChild(bombIcon);
 
-		
+
 
 		this.backButton = new UIButton1(config.colors.white, 'icons8-menu-48.png', config.colors.dark);
 		this.backButton.onClick.add(() => this.mainmenuState());
@@ -518,7 +518,7 @@ export default class TetraScreen extends Screen {
 		this.movesRect.updateColor(colorScheme.fontColor);
 		this.scoreRect.updateColor(colorScheme.fontColor);
 
-		
+
 
 		let colorSchemeGrid = colorScheme.grid;
 		this.backQueueShape.texture = PIXI.Texture.fromFrame(colorSchemeGrid.spriteRect)
@@ -977,10 +977,10 @@ export default class TetraScreen extends Screen {
 		// 	utils.addBlockers(this.currentLevelData.pieces, 2, 19, true)
 		// }
 
-		this.topUIContainer.y =this.gameCanvas.y - 500
+		this.topUIContainer.y = this.gameCanvas.y - 500
 		this.bottomUIContainer.y = this.gameCanvas.y + this.gameCanvas.height - this.bottomUICanvas.height + 500
 
-		
+
 
 		this.chargeBombBar.currentChargeValue = 0;
 		this.chargeBombBar.maxValue = 100;
@@ -1175,15 +1175,15 @@ export default class TetraScreen extends Screen {
 
 		this.timerRect.updateLavel(utils.convertNumToTime(Math.ceil(this.currentTime)))
 		this.movesRect.updateLavel(utils.formatPointsLabel(Math.ceil(this.currentRound)))
-		this.scoreRect.updateLavel(Math.ceil(this.currentPointsLabel), '', false, {x:-10, y:5})
-		
+		this.scoreRect.updateLavel(Math.ceil(this.currentPointsLabel), '', false, { x: -10, y: 5 })
+
 	}
 	addRandomPiece() {
 	}
 	addPoints(points) {
 		this.currentPoints += points;
 		this.chargeBombBar.currentChargeValue += points;
-		
+
 		let targetBar = Math.min(1, this.chargeBombBar.currentChargeValue / this.chargeBombBar.maxValue)
 		this.chargeBombBar.setProgressBar2(targetBar)
 
@@ -1260,18 +1260,18 @@ export default class TetraScreen extends Screen {
 		this.cardQueue[1].mark();
 
 	}
-	OnGameOver(){
-		if(!this.gameRunning){
+	OnGameOver() {
+		if (!this.gameRunning) {
 			return;
 		}
 		this.gameRunning = false;
 
-		setTimeout(() => {			
+		setTimeout(() => {
 			let data = { text: 'Game Over, would you like to try again?' }
 			window.popUpOverlay.show(data, () => {
-				this.resetGame();			
-			},  () => {
-				this.mainmenuStateFromGame();			
+				this.resetGame();
+			}, () => {
+				this.mainmenuStateFromGame();
 			}, true)
 		}, 750);
 	}
@@ -1282,9 +1282,9 @@ export default class TetraScreen extends Screen {
 		console.log("newRound", first);
 		if (this.currentLevelData.gameMode == 0) {
 
-			this.getNextPieceRound();
+			this.getNextPieceRound(first);
 
-			
+
 
 		} else if (this.currentLevelData.gameMode == 1) {
 			if (first) {
@@ -1299,7 +1299,7 @@ export default class TetraScreen extends Screen {
 			}
 		}
 	}
-	getNextPieceRound() {
+	getNextPieceRound(first = false) {
 
 		this.blockGameTimer = 0.2;
 		this.updateQueue();
@@ -1317,12 +1317,14 @@ export default class TetraScreen extends Screen {
 		this.firstLineShots = this.board.firstLineShots();
 
 		//this.board.findOutGameOver();
-		
 
-		setTimeout(() => {
-			this.board.findOutGameOver();			
-		}, 1000);
-		
+		if (!first) {
+
+			// setTimeout(() => {
+			// 	this.board.findOutGameOver();
+			// }, 1000);
+		}
+
 		// if (this.firstLineShots == 0) {
 		// 	//this.currentCard.isABomb();
 		// 	//console.log("No moves")
@@ -1362,7 +1364,7 @@ export default class TetraScreen extends Screen {
 		//console.log(data)
 		card.life = data.life;
 		card.createCard(0, customData);
-		console.log("pppp",data.life, data, cardID)
+		console.log("pppp", data.life, data, cardID)
 		card.updateSprite(data.life, data, cardID);
 		card.x = i * CARD.width;
 		card.y = j * CARD.height - CARD.height;
@@ -1478,10 +1480,10 @@ export default class TetraScreen extends Screen {
 
 		let targetBar = Math.min(1, this.chargeBombBar.currentChargeValue / this.chargeBombBar.maxValue)
 
-		if(targetBar >= 1){
+		if (targetBar >= 1) {
 			this.chargeBombBar.icon.scale.x = utils.lerp(this.chargeBombBar.icon.scale.x, 0.85, 0.1)
 			this.chargeBombBar.icon.scale.y = utils.lerp(this.chargeBombBar.icon.scale.y, 0.85, 0.1)
-		}else{
+		} else {
 			this.chargeBombBar.icon.scale.x = utils.lerp(this.chargeBombBar.icon.scale.x, 0.5, 0.1)
 			this.chargeBombBar.icon.scale.y = utils.lerp(this.chargeBombBar.icon.scale.y, 0.5, 0.1)
 		}
