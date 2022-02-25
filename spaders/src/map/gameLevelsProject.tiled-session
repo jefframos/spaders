@@ -1,12 +1,12 @@
 {
     "activeFile": "how-to-play/simple-shapes-synt.tmx",
     "expandedProjectPaths": [
-        "gb",
         "how-to-play",
-        "movies",
-        "videogames",
         "templates",
-        "main"
+        "movies",
+        "main",
+        "gb",
+        "videogames"
     ],
     "fileStates": {
         "D:/Projects/tetra/map/levels.tmx": {
@@ -140,8 +140,8 @@
             "scale": 0.33,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 765.1515151515151,
-                "y": 769.6969696969697
+                "x": 286.3636363636364,
+                "y": 439.39393939393943
             }
         },
         "how-to-play/simple-shapes.tmx": {
