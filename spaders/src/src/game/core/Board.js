@@ -22,6 +22,29 @@ export default class Board {
 		this.onDestroyCard = new signals();
 		this.OnStartNextRound = new signals();
 		this.OnGameOver = new signals();
+
+		this.nextTurnTimer = 0;
+
+		this.chainExplosionTime = 300;
+	}
+	update(delta) {
+		for (var i = 0; i < this.cards.length; i++) {
+			for (var j = 0; j < this.cards[i].length; j++) {
+				if (this.cards[i][j] && this.cards[i][j].update) {
+					this.cards[i][j].update(delta);
+				}
+			}
+		}
+
+		this.updateNumberOfEntities();
+
+		if (this.nextTurnTimer > 0) {
+			this.nextTurnTimer -= delta;
+			
+			if (this.nextTurnTimer <= 0) {
+				this.nextRound();
+			}
+		}
 	}
 	startNewGame() {
 		this.updateNumberOfEntities();
@@ -104,22 +127,22 @@ export default class Board {
 						for (let totalMoves = card.pos.j; totalMoves >= 0; totalMoves--) {
 							if (!this.cards[card.pos.i][card.pos.j - totalMoves]) {
 								this.cards[card.pos.i][card.pos.j] = 0;
-								card.pos.j-= totalMoves;
+								card.pos.j -= totalMoves;
 								this.addCard(card);
 								card.moveAndGoCrazy({
 									x: card.pos.i * CARD.width,
 									y: card.pos.j * CARD.height
 								}, 0.05 * movers + 0.2);
-								movers ++;
+								movers++;
 								break;
 							}
-							
+
 							// if (!this.cards[card.pos.i][card.pos.j - 1]) {
-								
+
 							// }
 						}
 					}
-					
+
 				}
 			}
 		}
@@ -150,6 +173,7 @@ export default class Board {
 		return false;
 	}
 	nextRound() {
+		console.log("next round")
 		if (this.canGoNext) {
 			this.OnStartNextRound.dispatch();
 			this.canGoNext = false;
@@ -201,9 +225,10 @@ export default class Board {
 				this.attackCard(card, 1000);
 
 				//on forced bomb
-				setTimeout(() => {
-					this.nextRound();
-				}, 300);
+				this.addTurnTime(this.chainExplosionTime * 0.01)
+				// setTimeout(() => {
+				// 	this.nextRound();
+				// }, 300);
 			}, 300);
 			return 1000 / window.TIME_SCALE
 		}
@@ -248,9 +273,11 @@ export default class Board {
 			}
 			//when nothing happens
 			console.log("nothi explode", tempBombDelay)
-			setTimeout(() => {
-				this.nextRound();
-			}, 300 + tempBombDelay);
+			// setTimeout(() => {
+			// 	this.nextRound();
+
+			// }, 300 + tempBombDelay);
+			this.addTurnTime(0.3);
 			return 100;
 		} else {
 			setTimeout(function () {
@@ -294,6 +321,7 @@ export default class Board {
 
 		if (areaAttacksCards.length > 0) {
 			window.SOUND_MANAGER.play('kill')
+			this.addTurnTime(0.1 + this.chainTimer * 0.01)
 			setTimeout(() => {
 				window.SOUND_MANAGER.play('explosion', { singleInstance: true })
 			}, 100 + this.chainTimer);
@@ -307,7 +335,7 @@ export default class Board {
 			setTimeout(() => {
 
 
-
+				this.addTurnTime(0.3)
 				let points = (areaAttacksCards.length + 1) * 10
 				this.game.addPoints(points);
 
@@ -318,7 +346,7 @@ export default class Board {
 					this.game.scoreRect,
 					element.currentColor
 				)
-				
+
 				let style = window.getStyle('areaAttack', colorSchemes.colorSchemes[window.COOKIE_MANAGER.stats.colorPalletID].list[4].color)
 
 				this.popLabel(this.game.toLocal(cardGlobal), "+" + points, 0.1, 0.5, 0.5, style);
@@ -333,11 +361,13 @@ export default class Board {
 				}
 
 				if (element.dead && element.crazyMood) {
+					let timer = 100 * areaAttacksCards[index] * 100 + this.chainTime
+					this.addTurnTime(timer * 0.01)
 					setTimeout(() => {
 						this.explodeCard(element, globalPosTemp)
 
 						//console.log('-', this.explosionAreaChain)
-					}, 100 * areaAttacksCards[index] * 100 + this.chainTimer);
+					}, timer);
 				}
 			}, 100 * index);
 		}
@@ -438,7 +468,6 @@ export default class Board {
 		if (this.explosionChain.includes(cardFound)) {
 			return;
 		}
-
 		let cardGlobal = customPosition ? customPosition : cardFound.getGlobalPosition({ x: 0, y: 0 });
 		cardGlobal.x += 20;
 		cardGlobal.y += 30;
@@ -461,10 +490,12 @@ export default class Board {
 
 		this.explosionChain.push(cardFound)
 
-		this.chainTimer += 300;
+		this.chainTimer += this.chainExplosionTime;
+		this.addTurnTime(this.chainTimer * 0.01)
+
 	}
 	destroyAllCards() {
-		for (let index = this.allCards.length - 1; index >= 0 ; index--) {
+		for (let index = this.allCards.length - 1; index >= 0; index--) {
 			const element = this.allCards[index];
 			this.attackCard(element, 1000);
 		}
@@ -488,7 +519,7 @@ export default class Board {
 				onStartParams: [list[i].currentCard.getArrow(list[i].attackZone.label), list[i].attackZone, (i + 1), list[i].cardFound],
 				onStart: function (arrow, zone, id, cardFound) {
 					if (arrow) {
-
+						this.addTurnTime(0.3)
 						let arrowGlobal = arrow.getGlobalPosition({ x: 0, y: 0 });
 
 						//this.popCircle(arrowGlobal);
@@ -496,22 +527,28 @@ export default class Board {
 						arrow.tint = card.currentColor;
 
 						TweenMax.to(arrow.scale, 0.3, { x: 0, y: 0, ease: Back.easeIn })
-						TweenMax.to(arrow.scale, 0.3, { delay: 0.3, x: 1, y: 1, ease: Back.easeOut, onStart:()=>{
+						TweenMax.to(arrow.scale, 0.3, {
+							delay: 0.3, x: 1, y: 1, ease: Back.easeOut, onStart: () => {
 
 
-						} })
+							}
+						})
 
-						TweenMax.to(arrow, 0.05, { x: arrow.x + 10 * zone.dir.x, y: arrow.y + 10 * zone.dir.y,
-							ease: Back.easeIn, onComplete:()=>{
+						TweenMax.to(arrow, 0.05, {
+							x: arrow.x + 10 * zone.dir.x, y: arrow.y + 10 * zone.dir.y,
+							ease: Back.easeIn, onComplete: () => {
 								let arrowGlobal2 = arrow.getGlobalPosition({ x: 0, y: 0 });
 
 								this.popCircle(arrowGlobal2, card.currentColor);
-		
 
-							} })
-						TweenMax.to(arrow, 0.2, { delay: 0.2, x: arrow.x, y: arrow.y, ease: Back.easeIn, onComplete:()=>{
-							arrow.tint = 0xFFFFFF;
-						} })
+
+							}
+						})
+						TweenMax.to(arrow, 0.2, {
+							delay: 0.2, x: arrow.x, y: arrow.y, ease: Back.easeIn, onComplete: () => {
+								arrow.tint = 0xFFFFFF;
+							}
+						})
 						let screenPos = {
 							x: arrowGlobal.x / config.width,
 							y: arrowGlobal.y / config.height
@@ -532,13 +569,14 @@ export default class Board {
 							cardFound.currentColor
 						)
 
-						this.popLabel(this.game.toLocal(arrowGlobal), "+" + 10 * id, 0, 1, 0.5 + id * 0.15, window.textStyles.normalAttack);
+						this.popLabel(this.game.toLocal(arrowGlobal), "+" + 10 * id, 0, 1, 0.5 + id * 0.2, window.textStyles.normalAttack);
 
 					}
 				}.bind(this),
 				onCompleteParams: [card, list[i].cardFound],
 				onComplete: function (card, cardFound) {
 					if (this.attackCard(cardFound, hits)) {
+						this.addTurnTime(this.chainTimer * 0.01)
 						if (cardFound.crazyMood) {
 							setTimeout(() => {
 
@@ -562,6 +600,7 @@ export default class Board {
 
 
 		if (autoDestroyCardData) {
+			this.addTurnTime(list.length * 0.2)
 			setTimeout(function () {
 				let arrow = autoDestroyCardData.card.getArrow(this.getOpposite(autoDestroyCardData.zone.label));
 				if (!arrow) {
@@ -590,32 +629,37 @@ export default class Board {
 				spritePos.y -= CARD.height
 				this.game.fxContainer.popSprite('counter.png', spritePos, CARD.width * 2, autoDestroyCardData.card.currentColor)
 				let style = window.textStyles.counter
-				
+
 				style.fill = autoDestroyCardData.card.currentColor
 				this.popLabel(this.game.toLocal(arrowGlobal), "+" + 10 * counterHits, 0.2, 0, 0.3 + counterHits * 0.1, style);
 				window.EFFECTS.shake(0.2, 5, 0.3, this.game.gameContainer);
 
 				//when has an attack
 				console.log("when has explosion 2", hasExplosionTime)
-				setTimeout(() => {
-					this.nextRound();
-				}, list.length * 200 / window.TIME_SCALE);
+
+				// setTimeout(() => {
+				// 	this.nextRound();
+				// }, list.length * 200 / window.TIME_SCALE);
 
 
 			}.bind(this), list.length * 200 / window.TIME_SCALE);
 		} else {
 			card.convertCard();
-
+			this.addTurnTime(0.1)
 			console.log("when has explosion old", hasExplosionTime)
-			setTimeout(() => {
-				this.nextRound();
-			}, hasExplosionTime / window.TIME_SCALE);
+			// setTimeout(() => {
+			// 	this.nextRound();
+			// }, hasExplosionTime / window.TIME_SCALE);
 
 		}
 
 
 	}
-
+	addTurnTime(value) {
+		this.nextTurnTimer = value + 0.01;
+		this.nextTurnTimer = Math.max(this.nextTurnTimer, 0.1)
+		this.nextTurnTimer = Math.min(this.nextTurnTimer, 1)
+	}
 	playDelayedCoins(total) {
 		for (let index = 0; index < total; index++) {
 			setTimeout(() => {
@@ -625,7 +669,7 @@ export default class Board {
 
 		}
 	}
-	popCircle(pos, color = 0xFFFFFF){
+	popCircle(pos, color = 0xFFFFFF) {
 		let convertedPosition = this.game.toLocal(pos)
 		let realRadius = CARD.width / 2 * this.game.gridContainer.scale.x * 0.25;
 		let external = new PIXI.Graphics().lineStyle(3, color).drawCircle(0, 0, realRadius);
@@ -725,14 +769,14 @@ export default class Board {
 		}
 
 	}
-	findOutGameOver(){
+	findOutGameOver() {
 		console.log("findOutGameOver", this.firstLineShots())
-		if(this.firstLineShots() <= 0){
+		if (this.firstLineShots() <= 0) {
 			this.OnGameOver.dispatch();
 		}
 	}
-	removeCard(i,j){
-		if(this.cards[i][j]){
+	removeCard(i, j) {
+		if (this.cards[i][j]) {
 			this.cards[i][j].forceDestroy();
 		}
 
@@ -769,17 +813,7 @@ export default class Board {
 		return opposit;
 	}
 
-	update(delta) {
-		for (var i = 0; i < this.cards.length; i++) {
-			for (var j = 0; j < this.cards[i].length; j++) {
-				if (this.cards[i][j] && this.cards[i][j].update) {
-					this.cards[i][j].update(delta);
-				}
-			}
-		}
 
-		this.updateNumberOfEntities();
-	}
 	destroyBoard() {
 		for (var i = 0; i < this.cards.length; i++) {
 			for (var j = 0; j < this.cards[i].length; j++) {
@@ -810,7 +844,7 @@ export default class Board {
 	}
 
 
-//move cards down
+	//move cards down
 	moveCardsDown(value, card) {
 		let cardsToMove = [];
 		for (var i = 0; i < this.cards.length; i++) {
@@ -819,7 +853,7 @@ export default class Board {
 					// let tcard = this.cards[i][j].updateCounter(value);
 					// if (tcard) {
 					// 	////console.log(tcard);
-						cardsToMove.push(this.cards[i][j])
+					cardsToMove.push(this.cards[i][j])
 					// }
 				}
 			}
@@ -851,10 +885,10 @@ export default class Board {
 		}
 	}
 
-	moveCardDown(card){
+	moveCardDown(card) {
 		this.cards[card.pos.i][card.pos.j] = 0;
-		card.pos.j ++;
-		if(card.pos.j >= GRID.j){
+		card.pos.j++;
+		if (card.pos.j >= GRID.j) {
 			card.destroy();
 			this.OnGameOver.dispatch();
 			return;
@@ -865,7 +899,7 @@ export default class Board {
 			y: card.pos.j * CARD.height
 		}, 0.2, 0.5);
 	}
-	
+
 	getWhereWillStop(laneID) {
 		let spaceID = -1
 		for (var i = this.cards[laneID].length - 1; i >= 0; i--) {
