@@ -4,6 +4,7 @@ import colorSchemes from '../../colorSchemes';
 import config from '../../config';
 import utils from '../../utils';
 import ParticleSystem from '../effects/ParticleSystem';
+import Spring from '../effects/Spring';
 export default class Card extends PIXI.Container {
 	constructor(game) {
 		super();
@@ -26,6 +27,8 @@ export default class Card extends PIXI.Container {
 		let card = new PIXI.Container();
 		this.counter = this.MAX_COUNTER;
 
+		this.horizontalSpring = new Spring();
+		this.targetY = 0;
 		// let gridEffectSquare = PIXI.Sprite.fromImage('./assets/images/largeCard.png')
 		// 		gridEffectSquare.scale.set(CARD.width / gridEffectSquare.width);
 
@@ -178,14 +181,12 @@ export default class Card extends PIXI.Container {
 	}
 	updateSprite(level, data, id = -1) {
 		this.isBomb = false;
-		console.log(data)
 
 		let imageID = Math.floor(level)
-		if(id >= 0){
+		if (id >= 0) {
 			imageID = id
 			imageID %= 10;
 		}
-		console.log(imageID)
 		this.enemySprite.setTexture(PIXI.Texture.fromFrame(window.IMAGE_DATA.enemyImagesFrame[imageID]));
 		this.enemySpriteWhite.setTexture(PIXI.Texture.fromFrame("w_" + window.IMAGE_DATA.enemyImagesFrame[imageID]));
 		this.enemySpriteWhite.visible = false;
@@ -196,7 +197,7 @@ export default class Card extends PIXI.Container {
 			this.enemySpriteWhite.tint = data.hasWhite;
 
 			this.enemySpriteWhite.visible = true;
-		}else{
+		} else {
 			this.enemySpriteWhite.visible = false;
 
 		}
@@ -250,7 +251,7 @@ export default class Card extends PIXI.Container {
 			this.lifeContainer.scale.set(CARD.width / this.lifeContainerBackground.width * 0.3)
 		}
 
-
+		this.isCurrent = isCurrent;
 		if (isCurrent) {
 			if (this.backshape && this.backshape.parent) {
 				this.backshape.parent.removeChild(this.backshape)
@@ -414,7 +415,18 @@ export default class Card extends PIXI.Container {
 	}
 	move(pos, time = 0.3, delay = 0) {
 		// console.log(	pos);
+		// if (delay > 0) {
 
+		// 	setTimeout(() => {
+
+		// 		this.horizontalSpring.tx = pos.x;
+		// 		this.targetY = pos.y;
+		// 	}, delay * 1000);
+		// } else {
+		// 	this.horizontalSpring.tx = pos.x;
+		// 	this.targetY = pos.y;
+		// }
+		// return;
 		TweenMax.killTweensOf(this)
 		TweenMax.killTweensOf(this.position)
 		TweenMax.killTweensOf(this.scale)
@@ -423,6 +435,15 @@ export default class Card extends PIXI.Container {
 		}
 
 		TweenMax.to(this, time, { x: pos.x, y: pos.y, delay: delay });
+
+		return
+		if (!this.isCurrent) {
+
+		} else {
+			this.horizontalSpring.tx = pos.x
+			TweenMax.to(this, time, { y: pos.y, delay: delay });
+
+		}
 	}
 
 	show(time = 0.3, delay = 0) {
@@ -496,11 +517,19 @@ export default class Card extends PIXI.Container {
 		this.cardBack3.y = this.enemySprite.y - 10;
 		this.initGridAcc += 0.05
 
+
+		// this.horizontalSpring.update();
+		// if (this.isCurrent) {
+		// 	this.x = this.horizontalSpring.x
+
+		// }
+		// this.y = utils.lerp(this.y, this.targetY, 0.2)
+
 		this.enemySprite.scale.x = this.starterScale + Math.cos(this.initGridAcc) * 0.05
 		this.enemySprite.scale.y = this.starterScale + Math.sin(this.initGridAcc) * 0.05
 		if (this.crazyMood) {
 
-			this.initGridAcc += delta * (60*0.25)
+			this.initGridAcc += delta * (60 * 0.25)
 
 			this.enemySprite.y = CARD.height / 2 + Math.sin(this.initGridAcc) * 5;
 			this.enemySprite.scale.x = this.starterScale + Math.cos(this.initGridAcc) * 0.1

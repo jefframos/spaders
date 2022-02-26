@@ -44,20 +44,20 @@ export default class InGameMenu extends PIXI.Container {
 		this.mainContainer.addChild(this.backShape);
 		this.mainContainer.scale.set(1.5)
 
-		// this.autoPlayButton = new UIButton1(config.colors.background, './assets/images/robot-antennas.png', config.colors.white);
-		// this.autoPlayButton.onClick.add(() => {
-		// 	this.state = 1;
-		// 	window.AUTO_PLAY = !window.AUTO_PLAY;
+		this.autoPlayButton = new UIButton1(config.colors.background,  window.iconsData.reload, config.colors.white);
+		this.autoPlayButton.onClick.add(() => {
+			this.state = 1;
+			window.AUTO_PLAY_HARD = !window.AUTO_PLAY_HARD;
 
-		// 	if (window.AUTO_PLAY) {
-		// 		window.TIME_SCALE = 3;
-		// 	} else {
-		// 		window.TIME_SCALE = 1;
-		// 	}
+			if (window.AUTO_PLAY) {
+				window.TIME_SCALE = 3;
+			} else {
+				window.TIME_SCALE = 1;
+			}
 
-		// 	this.onRestart.dispatch();
-		// });
-		// this.autoPlayButton.updateRotation(0);
+			this.onRestart.dispatch();
+		});
+		this.autoPlayButton.updateRotation(0);
 
 		this.toggleSound = new UIButton1(config.colors.background, window.iconsData.soundOn, config.colors.white);
 		this.toggleSound.onClick.add(() => {
@@ -85,8 +85,8 @@ export default class InGameMenu extends PIXI.Container {
 		this.refreshButton.y = 50
 		this.closeButton.y = this.refreshButton.y;
 
-		// this.autoPlayButton.x = this.closeButton.x - 90;
-		// this.autoPlayButton.y = this.refreshButton.y;
+		this.autoPlayButton.x = this.toggleSound.x - 90;
+		this.autoPlayButton.y = this.refreshButton.y;
 
 		this.toggleSound.x = this.closeButton.x - 90;
 		this.toggleSound.y = this.refreshButton.y;

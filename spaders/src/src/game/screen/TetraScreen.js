@@ -24,6 +24,7 @@ import TutorialOverlay from './TutorialOverlay';
 import colorSchemes from '../../colorSchemes';
 import PopUpOverlay from './PopUpOverlay';
 import ProgressBar from './ProgressBar';
+import Spring from '../effects/Spring';
 
 export default class TetraScreen extends Screen {
 	constructor(label) {
@@ -895,8 +896,9 @@ export default class TetraScreen extends Screen {
 		this.trailMarker = new PIXI.mesh.NineSlicePlane(
 			PIXI.Texture.fromFrame(scheme.spriteTrail), 20, 20, 20, 20)
 
-
-
+		this.trailMarker.positionSpringX = new Spring();
+		this.trailMarker.positionSpringX.springiness = 0.3;
+		this.trailMarker.positionSpringX.damp = 0.65;
 		this.backGridContainer.addChild(this.trailMarker);
 		this.trailMarker.alpha = 0;
 
@@ -1221,6 +1223,10 @@ export default class TetraScreen extends Screen {
 				if (this.cardQueueData.counter <= 0) {
 					//change frequecy of high level cards
 					this.cardQueueData.counter = 2 + Math.floor(Math.random() * 2)
+
+					if(Math.random() < 0.1){
+						nextLife ++;
+					}
 				} else {
 					nextLife = 0;
 				}
@@ -1324,7 +1330,8 @@ export default class TetraScreen extends Screen {
 
 
 		if (first) {
-
+			this.trailMarker.positionSpringX.x = this.currentCard.x;
+			this.trailMarker.positionSpringX.tx = this.currentCard.x;
 			this.updateTrailsPosition(true);
 		}
 		//this.board.findOutGameOver();
@@ -1377,7 +1384,7 @@ export default class TetraScreen extends Screen {
 		//console.log(data)
 		card.life = data.life;
 		card.createCard(0, customData);
-		console.log("pppp", data.life, data, cardID)
+		
 		card.updateSprite(data.life, data, cardID);
 		card.x = i * CARD.width;
 		card.y = j * CARD.height - CARD.height;
@@ -1563,12 +1570,17 @@ export default class TetraScreen extends Screen {
 	}
 
 	updateTrailsPosition(force = false) {
+		this.trailMarker.positionSpringX.update();
 		if (this.currentCard && this.mousePosID >= 0 && this.mousePosID < GRID.i) {
-			TweenMax.to(this.trailMarker, 0.1, { x: this.mousePosID * CARD.width });
+			//TweenMax.to(this.trailMarker, 0.1, { x: this.mousePosID * CARD.width });
+			this.trailMarker.positionSpringX.tx = this.mousePosID * CARD.width;
+			//this.trailMarker.x = this.trailMarker.positionSpringX.x//utils.lerp(this.trailMarker.x, this.mousePosID * CARD.width, 0.4)
+			this.trailMarker.x = utils.lerp(this.trailMarker.x, this.mousePosID * CARD.width, 0.4)
 			this.trailMarker.tint = this.currentCard.enemySprite.tint
 			this.trailHorizontal.tint = this.currentCard.enemySprite.tint
 			if (force) {
 				this.trailMarker.alpha = 0.35//utils.lerp(this.trailMarker.alpha, 0.35, 0.1)
+				this.trailMarker.x = this.trailMarker.positionSpringX.tx;
 			} else {
 				this.trailMarker.alpha = utils.lerp(this.trailMarker.alpha, 0.35, 0.1)
 			}
