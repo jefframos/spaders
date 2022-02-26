@@ -6,55 +6,7 @@
         {
             "color": "0xDDDDDD",
             "ignore": false,
-            "name": "Game Boy",
-            "displayName": "Video Game History",
-            "imageSrc": "",
-            "colorPalletId": 2,
-            "levels": [
-                {
-                    "name": "gameboy",
-                    "dataPath": "gameboy/gameboy1.json"
-                },
-                {
-                    "name": "gameboy",
-                    "dataPath": "gameboy/gameboyWeapons2.json"
-                },
-                {
-                    "name": "gameboy",
-                    "dataPath": "gameboy/gameboyMisc.json"
-                },
-                {
-                    "name": "gameboy",
-                    "dataPath": "gameboy/gameboyMisc2.json"
-                },
-                {
-                    "name": "gameboy",
-                    "dataPath": "gameboy/gameboycreatures.json"
-                }
-            ]
-        },
-        {
-            "color": "0xDDDDDD",
-            "ignore": false,
-            "name": "pokemon",
-            "displayName": "Video Game History",
-            "imageSrc": "",
-            "colorPalletId": 3,
-            "levels": [
-                {
-                    "name": "pokemon",
-                    "dataPath": "how-to-play/pokemon.json"
-                },
-                {
-                    "name": "pokemon",
-                    "dataPath": "how-to-play/pokemon2.json"
-                }
-            ]
-        },
-        {
-            "color": "0xDDDDDD",
-            "ignore": false,
-            "name": "Easy",
+            "name": "Shapes",
             "displayName": "Video Game History",
             "imageSrc": "",
             "colorPalletId": 0,
@@ -80,7 +32,7 @@
         {
             "color": "0xDDDDDD",
             "ignore": false,
-            "name": "Medium",
+            "name": "Video Games",
             "displayName": "Video Game History",
             "imageSrc": "",
             "colorPalletId": 0,
@@ -96,6 +48,28 @@
                 {
                     "name": "3nd gen",
                     "dataPath": "videogames/videogamesLevels3.json"
+                },
+                {
+                    "name": "---",
+                    "dataPath": "movies/moviesLevels1.json"
+                }
+            ]
+        },
+        {
+            "color": "0xDDDDDD",
+            "ignore": false,
+            "name": "pokemon",
+            "displayName": "Video Game History",
+            "imageSrc": "",
+            "colorPalletId": 3,
+            "levels": [
+                {
+                    "name": "pokemon",
+                    "dataPath": "how-to-play/pokemon.json"
+                },
+                {
+                    "name": "pokemon",
+                    "dataPath": "how-to-play/pokemon2.json"
                 }
             ]
         },
@@ -116,14 +90,30 @@
         {
             "color": "0xDDDDDD",
             "ignore": false,
-            "name": "Large",
+            "name": "Game Boy",
             "displayName": "Video Game History",
             "imageSrc": "",
-            "colorPalletId": 0,
+            "colorPalletId": 2,
             "levels": [
                 {
-                    "name": "---",
-                    "dataPath": "movies/moviesLevels1.json"
+                    "name": "gameboy",
+                    "dataPath": "gameboy/gameboy1.json"
+                },
+                {
+                    "name": "gameboy",
+                    "dataPath": "gameboy/gameboyWeapons2.json"
+                },
+                {
+                    "name": "gameboy",
+                    "dataPath": "gameboy/gameboyMisc.json"
+                },
+                {
+                    "name": "gameboy",
+                    "dataPath": "gameboy/gameboyMisc2.json"
+                },
+                {
+                    "name": "gameboy",
+                    "dataPath": "gameboy/gameboycreatures.json"
                 }
             ]
         },
