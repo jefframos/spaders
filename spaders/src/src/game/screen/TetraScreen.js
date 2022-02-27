@@ -898,7 +898,7 @@ export default class TetraScreen extends Screen {
 
 		this.trailMarker.positionSpringX = new Spring();
 		this.trailMarker.positionSpringX.springiness = 0.3;
-		this.trailMarker.positionSpringX.damp = 0.65;
+		this.trailMarker.positionSpringX.damp = 0.8;
 		this.backGridContainer.addChild(this.trailMarker);
 		this.trailMarker.alpha = 0;
 
@@ -1044,8 +1044,14 @@ export default class TetraScreen extends Screen {
 			this.cardQueue[i].forceDestroy();
 		}
 		this.cardQueue = []
-		if (this.currentCard)
+		if (this.currentCard) {
+
+			if (this.currentCard.parent) {
+				this.currentCard.parent.removeChild(this.currentCard);
+			}
 			this.currentCard.forceDestroy();
+		}
+
 		this.currentCard = null;
 
 		this.dataToSave.levelName = this.currentLevelData.levelName;
@@ -1224,8 +1230,8 @@ export default class TetraScreen extends Screen {
 					//change frequecy of high level cards
 					this.cardQueueData.counter = 2 + Math.floor(Math.random() * 2)
 
-					if(Math.random() < 0.1){
-						nextLife ++;
+					if (Math.random() < 0.1) {
+						nextLife++;
 					}
 				} else {
 					nextLife = 0;
@@ -1285,6 +1291,9 @@ export default class TetraScreen extends Screen {
 		}, 750);
 	}
 	OnStartNextRound(card, first = false) {
+		if (!this.gameRunning) {
+			return;
+		}
 		this.newRound(first);
 	}
 	newRound(first = false) {
@@ -1384,7 +1393,7 @@ export default class TetraScreen extends Screen {
 		//console.log(data)
 		card.life = data.life;
 		card.createCard(0, customData);
-		
+
 		card.updateSprite(data.life, data, cardID);
 		card.x = i * CARD.width;
 		card.y = j * CARD.height - CARD.height;
@@ -1553,6 +1562,12 @@ export default class TetraScreen extends Screen {
 		this.bottomUIContainer.x = this.gameCanvas.x
 		this.bottomUIContainer.y = utils.lerp(this.bottomUIContainer.y, this.gameCanvas.y + this.gameCanvas.height - this.bottomUICanvas.height, 0.2)
 
+		if (this.currentCard) {
+			this.latestCardPosition = this.currentCard.x
+		}
+
+		this.updateTrailsPosition()
+
 
 		this.updateLabelsPosition()
 		this.updateUI();
@@ -1562,7 +1577,7 @@ export default class TetraScreen extends Screen {
 		} else {
 		}
 
-		this.updateTrailsPosition()
+
 		//  else {
 		// 	//this.updateMousePositionMobile();
 		// }
@@ -1571,11 +1586,15 @@ export default class TetraScreen extends Screen {
 
 	updateTrailsPosition(force = false) {
 		this.trailMarker.positionSpringX.update();
+		if (this.latestCardPosition !== undefined && this.latestCardPosition >= 0) {
+			this.trailMarker.positionSpringX.tx = this.latestCardPosition;
+			this.trailMarker.x = utils.lerp(this.trailMarker.x, this.latestCardPosition, 0.2)
+		}
 		if (this.currentCard && this.mousePosID >= 0 && this.mousePosID < GRID.i) {
 			//TweenMax.to(this.trailMarker, 0.1, { x: this.mousePosID * CARD.width });
-			this.trailMarker.positionSpringX.tx = this.mousePosID * CARD.width;
+			//this.trailMarker.positionSpringX.tx = this.mousePosID * CARD.width;
 			//this.trailMarker.x = this.trailMarker.positionSpringX.x//utils.lerp(this.trailMarker.x, this.mousePosID * CARD.width, 0.4)
-			this.trailMarker.x = utils.lerp(this.trailMarker.x, this.mousePosID * CARD.width, 0.4)
+			//this.trailMarker.x = this.mousePosID * CARD.width//utils.lerp(this.trailMarker.x, this.mousePosID * CARD.width, 0.4)
 			this.trailMarker.tint = this.currentCard.enemySprite.tint
 			this.trailHorizontal.tint = this.currentCard.enemySprite.tint
 			if (force) {
@@ -1583,6 +1602,7 @@ export default class TetraScreen extends Screen {
 				this.trailMarker.x = this.trailMarker.positionSpringX.tx;
 			} else {
 				this.trailMarker.alpha = utils.lerp(this.trailMarker.alpha, 0.35, 0.1)
+
 			}
 			this.trailHorizontal.alpha = this.trailMarker.alpha;
 
@@ -1594,13 +1614,6 @@ export default class TetraScreen extends Screen {
 					this.currentCard.moveX(this.mousePosID * CARD.width, 0.1);
 				}
 			}
-		} else {
-			// if(this.currentCard){
-			// 	//this.mousePosition.x = this.currentCard.x;
-			// }
-			// //this.updateMousePositionMobile();
-			// this.debugLabel.text = "WHY"
-			// this.debugLabel.visible = true;
 		}
 	}
 	updateMousePositionMobile() {
@@ -1738,12 +1751,18 @@ export default class TetraScreen extends Screen {
 		let normalDist = (this.currentCard.y - this.currentCard.pos.j * CARD.height) / GRID.height;
 		this.currentCard.x = this.currentCard.pos.i * CARD.width
 		this.latestShoot.x = this.currentCard.x
+
+		this.latestCardPosition = this.currentCard.x
+
 		this.latestShoot.id = this.mousePosID
 		this.currentCard.move({
 			x: this.currentCard.pos.i * CARD.width,
 			y: this.currentCard.pos.j * CARD.height
 		}, 0.1 * normalDist);
 
+		// if (this.currentCard && this.currentCard.parent) {
+		// 	this.currentCard.parent.removeChild(this.currentCard);
+		// }
 		this.currentCard = null;
 		this.updateUI();
 		// console.log(0.1 * normalDist * 100);

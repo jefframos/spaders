@@ -88,6 +88,7 @@ export default class Board {
 		return firstLineShots
 	}
 	resetBoard() {
+		this.nextTurnTimer = 0;
 		this.cards = [];
 		this.allCards = [];
 		for (var i = window.GRID.i - 1; i >= 0; i--) {
