@@ -108,7 +108,7 @@ export default {
             backgroundAssets: {
                 bottomBackground: "game_bg.png",
                 bottomBackgroundPosition: -0.2,
-                alpha:0.5,
+                alpha:0,
             }
         },
         {

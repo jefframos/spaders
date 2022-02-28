@@ -1,12 +1,12 @@
 {
-    "activeFile": "how-to-play/simple-shapes-synt.tmx",
+    "activeFile": "how-to-play/creatures.tmx",
     "expandedProjectPaths": [
-        "templates",
-        "main",
-        "videogames",
         "movies",
         "gb",
-        "how-to-play"
+        "main",
+        "how-to-play",
+        "templates",
+        "videogames"
     ],
     "fileStates": {
         "D:/Projects/tetra/map/levels.tmx": {
@@ -74,7 +74,7 @@
         },
         "how-to-play/creatures.tmx": {
             "scale": 1.0512073863636362,
-            "selectedLayer": 3,
+            "selectedLayer": 7,
             "viewCenter": {
                 "x": 351.5005742855213,
                 "y": 384.3199783798393
@@ -84,7 +84,7 @@
             "scale": 0.5,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 479,
+                "x": 481,
                 "y": 512
             }
         },
@@ -140,15 +140,15 @@
             "scale": 0.33,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 743.9393939393939,
-                "y": 818.1818181818182
+                "x": 768.1818181818181,
+                "y": 769.6969696969697
             }
         },
         "how-to-play/simple-shapes.tmx": {
             "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 351.3333333333333,
+                "x": 352.66666666666663,
                 "y": 384
             }
         },
@@ -249,8 +249,8 @@
             "scale": 0.8201171875,
             "selectedLayer": 20,
             "viewCenter": {
-                "x": 318.8568706834961,
-                "y": 382.8721124077162
+                "x": 320.07620862110025,
+                "y": 384.09145034532037
             }
         },
         "videogames/levels2.tmx": {
@@ -307,16 +307,16 @@
     "recentFiles": [
         "how-to-play/people-set-1.tmx",
         "how-to-play/how-to-play-medium.tmx",
-        "how-to-play/creatures.tmx",
-        "how-to-play/things.tmx",
-        "videogames/levels.tmx",
-        "videogames/levels2.tmx",
-        "movies/movies1.tmx",
-        "how-to-play/simple-shapes.tmx",
         "how-to-play/pokemons.tmx",
         "videogames/levels3.tmx",
         "gb/gameboyWeapon2.tmx",
-        "gb/gameboyWeapon1.tmx"
+        "gb/gameboyWeapon1.tmx",
+        "gb/gameboyMisc2.tmx",
+        "gb/gameboyCreatures.tmx",
+        "gb/gameboyMisc.tmx",
+        "how-to-play/gameboy.tmx",
+        "how-to-play/bossa.tmx",
+        "how-to-play/pokemon22.tmx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",

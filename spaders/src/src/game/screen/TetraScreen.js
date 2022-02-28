@@ -38,6 +38,9 @@ export default class TetraScreen extends Screen {
 		this.innerResolution = { width: config.width, height: config.height };
 
 		this.colorTween = new ColorTweens();
+
+		this.colorTweenBomb = new ColorTweens();
+
 		this.levels = window.levelData;//window.levelsJson.levels;
 
 		this.offsetCard = { x: 0, y: 0 }
@@ -432,6 +435,8 @@ export default class TetraScreen extends Screen {
 		bombIcon.x = 305;
 		bombIcon.y = 10;
 		this.chargeBombBar.icon = bombIcon;
+		this.chargeBombBar.sin = 0;
+		this.chargeBombBar.scaleOffset = { x: 0, y: 0 };
 		this.chargeBombBar.addChild(bombIcon);
 
 
@@ -561,7 +566,7 @@ export default class TetraScreen extends Screen {
 		//this.scoreRect.y = this.mainMenuContainer.y//this.movesRect.y + (this.movesRect.height / this.movesRect.scale.y) - (this.scoreRect.height / this.scoreRect.scale.y)
 		this.scoreRect.x = this.topCanvas.x + 20;
 		this.chargeBombBar.x = this.topCanvas.x + this.topCanvas.width / 2 - this.chargeBombBar.width / 2;
-		this.chargeBombBar.y = this.scoreRect.y + this.scoreRect.height / 2 - 10
+		this.chargeBombBar.y = this.scoreRect.y + this.scoreRect.height / 2 - this.chargeBombBar.height * 0.12
 
 		this.containerQueue.scale.set(this.bottomUICanvas.height / CARD.height * 0.5)
 		this.containerQueue.x = this.bottomUICanvas.height * 0.1
@@ -928,16 +933,16 @@ export default class TetraScreen extends Screen {
 
 		this.trailMarker.addChild(this.trailMarker.overShape)
 
-		
-		
-		
+
+
+
 		this.trailMarker.overShape.width = CARD.width //* 0.75
 		this.trailMarker.overShape.height = GRID.height + CARD.height
 		this.trailMarker.overShape.x = CARD.width / 2 - this.trailMarker.overShape.width / 2
 		this.trailMarker.overShape.margin = CARD.width - this.trailMarker.overShape.width;
 		this.trailMarker.overShape.y = 0
-		
-		this.trailMarker.arrowsUp = new PIXI.extras.TilingSprite(PIXI.Texture.fromImage('./assets/images/arrowsUp.png'), 128,128)
+
+		this.trailMarker.arrowsUp = new PIXI.extras.TilingSprite(PIXI.Texture.fromImage('./assets/images/arrowsUp.png'), 128, 128)
 		this.trailMarker.overShape.addChild(this.trailMarker.arrowsUp);
 
 		this.backGridContainer.addChild(this.trailHorizontal);
@@ -994,7 +999,11 @@ export default class TetraScreen extends Screen {
 		// 	this.updateGridDimensions();
 		// 	utils.addBlockers(this.currentLevelData.pieces, 2, 19, true)
 		// }
+		//this.chargeBombBar.visible = true;
 
+		
+		this.chargeBombBar.sin = 0;
+		this.chargeBombBar.scaleOffset = { x: 0, y: 0 };
 		this.offsetCard = { x: 0, y: 0 }
 
 		if (this.currentCard && this.currentCard.parent) {
@@ -1029,6 +1038,7 @@ export default class TetraScreen extends Screen {
 
 		this.background.updateColors(colorSchemes.colorSchemes[scheme].list)
 
+		this.colorTweenBomb.startTween(this.currentLevelData.colorPalletId)
 
 		this.fireworksTimer = 0;
 		this.mainMenuSettings.collapse();
@@ -1348,8 +1358,10 @@ export default class TetraScreen extends Screen {
 		this.currentCard.scale.set(1)
 		this.currentCard.alpha = 0;
 		this.currentCard.updateCard(true);
+		this.currentCard.visible = false;
 		setTimeout(() => {
-			this.offsetCard.y = CARD.height;
+			this.offsetCard.y = CARD.height * 3;
+			this.currentCard.visible = true;
 			TweenMax.to(this.offsetCard, 0.3, { y: 0, ease: Back.easeOut })
 			TweenMax.to(this.currentCard, 0.3, { delay: 0.1, alpha: 1, y: this.gridContainer.height + 20 })
 			this.cardsContainer.addChild(this.currentCard);
@@ -1476,6 +1488,10 @@ export default class TetraScreen extends Screen {
 			this.hashUsed = true;
 		}
 
+		if (this.colorTweenBomb.isActive && this.chargeBombBar.visible) {
+			this.chargeBombBar.icon.tint = this.colorTweenBomb.currentColor;
+		}
+
 		if (this.colorTween.isActive) {
 			if (this.fireworksTimer <= 0) {
 				this.spawnFireworks();
@@ -1530,12 +1546,20 @@ export default class TetraScreen extends Screen {
 
 		let targetBar = Math.min(1, this.chargeBombBar.currentChargeValue / this.chargeBombBar.maxValue)
 
-		if (targetBar >= 1) {
-			this.chargeBombBar.icon.scale.x = utils.lerp(this.chargeBombBar.icon.scale.x, 0.85, 0.1)
-			this.chargeBombBar.icon.scale.y = utils.lerp(this.chargeBombBar.icon.scale.y, 0.85, 0.1)
-		} else {
-			this.chargeBombBar.icon.scale.x = utils.lerp(this.chargeBombBar.icon.scale.x, 0.5, 0.1)
-			this.chargeBombBar.icon.scale.y = utils.lerp(this.chargeBombBar.icon.scale.y, 0.5, 0.1)
+
+		if (this.chargeBombBar.visible) {
+
+			if (targetBar >= 1) {
+				this.chargeBombBar.sin += delta * 5;
+				this.chargeBombBar.icon.scale.x = utils.lerp(this.chargeBombBar.icon.scale.x, 0.75 + this.chargeBombBar.scaleOffset.x, 0.1)
+				this.chargeBombBar.icon.scale.y = utils.lerp(this.chargeBombBar.icon.scale.y, 0.75 + this.chargeBombBar.scaleOffset.y, 0.1)
+			} else {
+				this.chargeBombBar.sin += delta;
+				this.chargeBombBar.icon.scale.x = utils.lerp(this.chargeBombBar.icon.scale.x, 0.5 + this.chargeBombBar.scaleOffset.x, 0.1)
+				this.chargeBombBar.icon.scale.y = utils.lerp(this.chargeBombBar.icon.scale.y, 0.5 + this.chargeBombBar.scaleOffset.y, 0.1)
+			}
+			this.chargeBombBar.scaleOffset.x = Math.cos(this.chargeBombBar.sin) * 0.1
+			this.chargeBombBar.scaleOffset.y = Math.sin(this.chargeBombBar.sin) * 0.1
 		}
 
 		if (this.currentCard) {
@@ -1634,7 +1658,7 @@ export default class TetraScreen extends Screen {
 			this.trailMarker.arrowsUp.y = 0
 			this.trailMarker.arrowsUp.alpha = 0.35;
 			this.trailMarker.overShape.tint = this.trailMarker.tint;
-			
+
 			// if(this.tvLines.tilePosition.y > 40){
 			// 	this.tvLines.tilePosition.y = 0;
 			// }

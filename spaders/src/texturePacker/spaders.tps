@@ -641,6 +641,7 @@
                 <false/>
             </struct>
             <key type="filename">progressBarSmall.png</key>
+            <key type="filename">smallButton.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -683,6 +684,7 @@
             <filename>largeCardPixel.png</filename>
             <filename>square-pixel.png</filename>
             <filename>pixelSquare.png</filename>
+            <filename>smallButton.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
