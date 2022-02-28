@@ -217,6 +217,7 @@ PIXI.loader
 	.add('./assets/images/backgrounds.json')
 	.add('./assets/images/game.json')
 	.add('./assets/images/logo.json')
+	.add('./assets/images/arrowsUp.png')
 	.add('./data/levelSections.json')
 	.add('./assets/fonts/stylesheet.css')
 	.add('./assets/levels.json')

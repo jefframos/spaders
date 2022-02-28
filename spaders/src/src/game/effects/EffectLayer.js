@@ -21,7 +21,8 @@ export default class EffectLayer extends PIXI.Container{
 	    this.grey.alpha = 0;
 		this.addChild(this.grey);
 
-		// this.tvLines = new PIXI.extras.TilingSprite(PIXI.Texture.fromImage('./assets/images/tvlines.png', config.width, config.height))
+		//'./assets/images/arrowsUp.png'
+		// this.tvLines = new PIXI.extras.TilingSprite(PIXI.Texture.fromImage('./assets/images/arrowsUp.png', config.width, config.height))
 		// //this.addChild(this.tvLines)
 		// this.tvLines.width = config.width;
 		// this.tvLines.height = config.height;
