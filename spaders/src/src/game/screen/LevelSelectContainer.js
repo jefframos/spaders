@@ -620,7 +620,6 @@ export default class LevelSelectContainer extends PIXI.Container {
             // finishedLevels + "/" + countLevels
             levelTierButton.setProgressBar(count / data.length);
             levelTierButton.updateLabel(count + "/" + data.length, { x: 0, y: -25 });
-            console.log("UPDATE STUFF HERE", data.length, count)
 
             levelTierButton.setStandardState()
         }

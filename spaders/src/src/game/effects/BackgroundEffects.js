@@ -161,7 +161,7 @@ export default class BackgroundEffects extends PIXI.Container {
 		}
 	}
 	addStars() {
-		let totalStars = this.innerResolution.width * 0.08;
+		let totalStars = this.innerResolution.width * 0.1;
 
 		totalStars = Math.min(40, totalStars);
 		let l = this.innerResolution.width * 0.001

@@ -180,6 +180,19 @@ export default class Board {
 			this.canGoNext = false;
 		}
 	}
+	getLastCardPosition(laneID){
+		laneID = Math.min(laneID, this.cards[0].length)
+		laneID = Math.max(laneID, 0)
+		let spaceID = -1;
+		for (var i = this.cards[laneID].length - 1; i >= 0; i--) {
+			if (!this.cards[laneID][i]) {
+				spaceID = i;
+			} else {
+				break;
+			}
+		}
+		return spaceID;
+	}
 	shootCard(laneID, card) {
 		card.cardContainer.scale.x = 0.5;
 		card.cardContainer.scale.y = 1.5;

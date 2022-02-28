@@ -37,12 +37,10 @@ export default class TetraScreen extends Screen {
 		////console.log(levels)
 		this.innerResolution = { width: config.width, height: config.height };
 
-		let a = -1;
-		let b = -2;
-
 		this.colorTween = new ColorTweens();
 		this.levels = window.levelData;//window.levelsJson.levels;
 
+		this.offsetCard = {x:0, y:0}
 
 		this.trailHorizontal = new PIXI.mesh.NineSlicePlane(
 			PIXI.Texture.fromFrame('largeCard.png'), 5, 0, 5, 0)//new PIXI.Graphics().beginFill(0xFFFFFF).drawRoundedRect(0, 0, 20, 20, 10);
@@ -924,6 +922,20 @@ export default class TetraScreen extends Screen {
 			this.trailMarker.height = GRID.height + CARD.height
 		}
 
+
+		this.trailMarker.overShape = new PIXI.mesh.NineSlicePlane(
+			PIXI.Texture.fromFrame(scheme.spriteTrail), 20, 20, 20, 20)
+
+		this.trailMarker.addChild(this.trailMarker.overShape)
+
+
+
+		this.trailMarker.overShape.width = CARD.width * 0.5
+		this.trailMarker.overShape.height = GRID.height + CARD.height
+		this.trailMarker.overShape.x = this.trailMarker.overShape.width * 0.5
+		this.trailMarker.overShape.y = 0
+
+
 		this.backGridContainer.addChild(this.trailHorizontal);
 		this.trailHorizontal.alpha = 0;
 
@@ -978,6 +990,9 @@ export default class TetraScreen extends Screen {
 		// 	this.updateGridDimensions();
 		// 	utils.addBlockers(this.currentLevelData.pieces, 2, 19, true)
 		// }
+
+		this.offsetCard = {x:0, y:0}
+
 		if (this.currentCard && this.currentCard.parent) {
 			this.currentCard.parent.removeChild(this.currentCard)
 		}
@@ -1040,6 +1055,7 @@ export default class TetraScreen extends Screen {
 		this.board.destroyBoard();
 		this.board.resetBoard();
 
+		this.isTouchingDown = false;
 		for (var i = this.cardQueue.length - 1; i >= 0; i--) {
 			this.cardQueue[i].forceDestroy();
 		}
@@ -1327,12 +1343,13 @@ export default class TetraScreen extends Screen {
 		this.currentCard.x = this.latestShoot.x
 		this.currentCard.scale.set(1)
 		this.currentCard.alpha = 0;
-		TweenMax.to(this.currentCard, 0.3, { delay: 0.1, alpha: 1, y: this.gridContainer.height + 20, ease: Elastic.easeOut })
 		this.currentCard.updateCard(true);
 		setTimeout(() => {
-
+			this.offsetCard.y = CARD.height;
+			TweenMax.to(this.offsetCard, 0.3, { y:0, ease:Back.easeOut})
+			TweenMax.to(this.currentCard, 0.3, { delay: 0.1, alpha: 1, y: this.gridContainer.height + 20})
 			this.cardsContainer.addChild(this.currentCard);
-		}, 1);
+		}, 100);
 
 
 		this.firstLineShots = this.board.firstLineShots();
@@ -1519,7 +1536,7 @@ export default class TetraScreen extends Screen {
 
 		if (this.currentCard) {
 			this.currentCard.update(delta)
-			this.trailHorizontal.y = this.currentCard.y;
+			this.trailHorizontal.y = this.currentCard.y - this.offsetCard.y;
 
 			//console.log(this.trailHorizontal)
 		}
@@ -1547,7 +1564,13 @@ export default class TetraScreen extends Screen {
 				this.latestShoot.x = this.mousePosition.x
 			}
 		}
-
+		this.trailMarker.overShapeVisible = this.isTouchingDown
+		if (this.trailMarker.overShapeVisible) {
+			this.trailMarker.overShape.alpha = utils.lerp(this.trailMarker.overShape.alpha, 1, 0.1)
+			
+		} else {
+			this.trailMarker.overShape.alpha = utils.lerp(this.trailMarker.overShape.alpha, 0, 0.1)
+		}
 
 		this.initGridAcc += 0.05;
 
@@ -1589,8 +1612,26 @@ export default class TetraScreen extends Screen {
 		if (this.latestCardPosition !== undefined && this.latestCardPosition >= 0) {
 			this.trailMarker.positionSpringX.tx = this.latestCardPosition;
 			this.trailMarker.x = utils.lerp(this.trailMarker.x, this.latestCardPosition, 0.2)
+
+			
 		}
 		if (this.currentCard && this.mousePosID >= 0 && this.mousePosID < GRID.i) {
+
+			let lastPossible = this.board.getLastCardPosition(this.mousePosID)
+			if (lastPossible < 0) {
+				this.trailMarker.overShape.height = 0
+			} else {
+
+				this.trailMarker.overShape.height = GRID.height - (lastPossible * CARD.height)
+			}
+			this.trailMarker.overShape.y = GRID.height - this.trailMarker.overShape.height
+
+			
+
+			this.debugLabel.visible = true;
+			this.debugLabel.x = this.mousePosID + " - "+lastPossible;
+
+
 			//TweenMax.to(this.trailMarker, 0.1, { x: this.mousePosID * CARD.width });
 			//this.trailMarker.positionSpringX.tx = this.mousePosID * CARD.width;
 			//this.trailMarker.x = this.trailMarker.positionSpringX.x//utils.lerp(this.trailMarker.x, this.mousePosID * CARD.width, 0.4)
@@ -1622,7 +1663,6 @@ export default class TetraScreen extends Screen {
 			this.trailHorizontal.alpha = this.trailMarker.alpha;
 			return;
 		}
-
 		let toGrid = this.gridContainer.toLocal(this.mousePosition)
 		this.mousePosID = Math.floor((toGrid.x) / CARD.width);
 
@@ -1655,7 +1695,7 @@ export default class TetraScreen extends Screen {
 		this.mousePosID = Math.floor((toGrid.x) / CARD.width);
 
 		if (this.mousePosID < 0) {
-			if (window.isMobile) {
+			if (window.isMobile || !this.isFirstClick) {
 				this.mousePosID = 0
 			} else {
 				this.mousePosID = this.latestShoot.id
@@ -1710,9 +1750,10 @@ export default class TetraScreen extends Screen {
 	}
 
 	onTapUp(event, customID) {
-		if (!this.currentCard || !this.gameRunning || this.blockGameTimer > 0) {
+		if (!this.currentCard || !this.gameRunning || this.blockGameTimer > 0 || !this.isTouchingDown) {
 			return;
 		}
+		this.isTouchingDown = false;
 		if (customID == undefined) {
 			if (renderer.plugins.interaction.activeInteractionData) {
 				for (const key in renderer.plugins.interaction.activeInteractionData) {
@@ -1733,7 +1774,6 @@ export default class TetraScreen extends Screen {
 		} else {
 			this.mousePosID = customID;
 		}
-
 
 
 		if (!this.board.isPossibleShot(this.mousePosID)) {
@@ -1760,25 +1800,15 @@ export default class TetraScreen extends Screen {
 			y: this.currentCard.pos.j * CARD.height
 		}, 0.1 * normalDist);
 
-		// if (this.currentCard && this.currentCard.parent) {
-		// 	this.currentCard.parent.removeChild(this.currentCard);
-		// }
 		this.currentCard = null;
 		this.updateUI();
-		// console.log(0.1 * normalDist * 100);
-
-
-		// setTimeout(function () {
-		// 	this.newRound();
-		// }.bind(this), 0.1 * normalDist + nextRoundTimer / window.TIME_SCALE);
-
-		// console.log(nextRoundTimer);
 	}
 
 	onTapDown() {
 		if (!this.currentCard || !this.gameRunning) {
 			return;
 		}
+		this.isTouchingDown = true;
 		if (renderer.plugins.interaction.activeInteractionData[0]) {
 			this.mousePosition = renderer.plugins.interaction.activeInteractionData[0].global
 
@@ -1806,6 +1836,41 @@ export default class TetraScreen extends Screen {
 		this.updateMousePositionMobile();
 
 	}
+
+	
+	mouseOver() {
+		this.isTouchingDown = true;
+	}
+	
+	mouseOut() {
+		this.isTouchingDown = false;
+	}
+
+	addEvents() {
+		this.removeEvents();
+		this.interactive = true;
+		this.gridContainer.interactive = true;
+		this.gridContainer.on('mousedown', this.onTapDown.bind(this)).on('touchstart', this.onTapDown.bind(this));
+		this.on('mouseup', this.onTapUp.bind(this)).on('touchend', this.onTapUp.bind(this));
+
+		this.trailHorizontal.interactive = true;
+		this.trailHorizontal.on('mousedown', this.onTapDown.bind(this)).on('touchstart', this.onTapDown.bind(this));
+		//this.trailHorizontal.on('mouseup', this.onTapUp.bind(this)).on('touchend', this.onTapUp.bind(this));
+		this.trailHorizontal.on('touchmove', this.onTouchMove.bind(this));
+		this.gridContainer.on('touchmove', this.onTouchMove.bind(this));
+
+		if(!window.isMobile){
+			this.gridContainer.on('mouseover', this.mouseOver.bind(this));
+			this.trailHorizontal.on('mouseover', this.mouseOver.bind(this));
+
+			this.gridContainer.on('mouseout', this.mouseOut.bind(this));
+			this.trailHorizontal.on('mouseout', this.mouseOut.bind(this));
+		}
+
+		this.startScreenContainer.addEvents();
+		this.endGameScreenContainer.addEvents();
+
+	}
 	removeEvents() {
 		this.gridContainer.interactive = false;
 		this.gridContainer.off('mousedown', this.onTapDown.bind(this)).off('touchstart', this.onTapDown.bind(this));
@@ -1819,23 +1884,6 @@ export default class TetraScreen extends Screen {
 		this.endGameScreenContainer.removeEvents();
 
 	}
-	addEvents() {
-		this.removeEvents();
-		this.gridContainer.interactive = true;
-		this.gridContainer.on('mousedown', this.onTapDown.bind(this)).on('touchstart', this.onTapDown.bind(this));
-		this.gridContainer.on('mouseup', this.onTapUp.bind(this)).on('touchend', this.onTapUp.bind(this));
-
-		this.trailHorizontal.interactive = true;
-		this.trailHorizontal.on('mousedown', this.onTapDown.bind(this)).on('touchstart', this.onTapDown.bind(this));
-		this.trailHorizontal.on('mouseup', this.onTapUp.bind(this)).on('touchend', this.onTapUp.bind(this));
-		this.trailHorizontal.on('touchmove', this.onTouchMove.bind(this));
-		this.gridContainer.on('touchmove', this.onTouchMove.bind(this));
-
-		this.startScreenContainer.addEvents();
-		this.endGameScreenContainer.addEvents();
-
-	}
-
 	resizeToFitAR(size, element, res) {
 		if (!res) {
 			res = element
@@ -1942,7 +1990,7 @@ export default class TetraScreen extends Screen {
 
 		if (this.currentCard) {
 			//13 is the width of the border on the grid
-			this.currentCard.y = ((this.gridContainer.height) / this.gridContainer.scale.y);
+			this.currentCard.y = ((this.gridContainer.height) / this.gridContainer.scale.y) + this.offsetCard.y;
 		}
 
 
