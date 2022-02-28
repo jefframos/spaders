@@ -1,12 +1,12 @@
 {
     "activeFile": "how-to-play/creatures.tmx",
     "expandedProjectPaths": [
-        "movies",
-        "gb",
-        "main",
         "how-to-play",
+        "gb",
         "templates",
-        "videogames"
+        "videogames",
+        "movies",
+        "main"
     ],
     "fileStates": {
         "D:/Projects/tetra/map/levels.tmx": {
