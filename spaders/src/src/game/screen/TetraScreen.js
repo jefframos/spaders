@@ -1628,10 +1628,7 @@ export default class TetraScreen extends Screen {
 
 			
 
-			this.debugLabel.visible = true;
-			this.debugLabel.x = this.mousePosID + " - "+lastPossible;
-
-
+			
 			//TweenMax.to(this.trailMarker, 0.1, { x: this.mousePosID * CARD.width });
 			//this.trailMarker.positionSpringX.tx = this.mousePosID * CARD.width;
 			//this.trailMarker.x = this.trailMarker.positionSpringX.x//utils.lerp(this.trailMarker.x, this.mousePosID * CARD.width, 0.4)
