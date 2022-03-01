@@ -46,6 +46,20 @@
         {
             "color": "0xDDDDDD",
             "ignore": false,
+            "name": "Movies",
+            "displayName": "Video Game History",
+            "imageSrc": "",
+            "colorPalletId": 0,
+            "levels": [
+                {
+                    "name": "2nd gen",
+                    "dataPath": "movies/moviesLevels1.json"
+                }                
+            ]
+        },
+        {
+            "color": "0xDDDDDD",
+            "ignore": false,
             "name": "Pokemon",
             "displayName": "Video Game History",
             "imageSrc": "",
