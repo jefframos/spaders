@@ -514,6 +514,7 @@ export default class TetraScreen extends Screen {
 		this.topUIContainer.y = this.gameCanvas.y - 500
 		this.bottomUIContainer.x = this.gameCanvas.x
 		this.bottomUIContainer.y = window.innerHeight//this.gameCanvas.y + this.gameCanvas.height + 500
+		this.bottomUIContainer.visible = false;
 	}
 	pauseGame() {
 		//this.gameRunning = false;
@@ -1008,7 +1009,7 @@ export default class TetraScreen extends Screen {
 		// }
 		//this.chargeBombBar.visible = true;
 
-
+		this.bottomUIContainer.visible = true;
 		this.chargeBombBar.sin = 0;
 		this.chargeBombBar.scaleOffset = { x: 0, y: 0 };
 		this.offsetCard = { x: 0, y: 0 }
