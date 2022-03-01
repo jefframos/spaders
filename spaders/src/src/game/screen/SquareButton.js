@@ -296,7 +296,7 @@ export default class SquareButton extends PIXI.Container {
         this.currentState = 1;
         this.updateColorScheme();
     }
-    updateIcon(graphic, scale = 0.45, offset = { x: 0, y: 0 }, hideBackground = false) {
+    updateIcon(graphic, scale = 0.4, offset = { x: 0, y: 0 }, hideBackground = false) {
         if (this.icon && this.icon.parent) {
             this.icon.parent.removeChild(this.icon);
         }

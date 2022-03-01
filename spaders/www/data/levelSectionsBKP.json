@@ -40,7 +40,19 @@
                 {
                     "name": "2nd gen",
                     "dataPath": "videogames/videogamesLevels1.json"
-                }                
+                },
+                {
+                    "name": "3nd gen",
+                    "dataPath": "videogames/videogamesLevels2.json"
+                },
+                {
+                    "name": "3nd gen",
+                    "dataPath": "videogames/videogamesLevels3.json"
+                },
+                {
+                    "name": "---",
+                    "dataPath": "movies/moviesLevels1.json"
+                }
             ]
         },
         {

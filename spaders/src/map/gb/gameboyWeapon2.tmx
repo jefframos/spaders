@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="64" tileheight="64" infinite="0" nextlayerid="115" nextobjectid="1">
+<map version="1.8" tiledversion="1.8.1" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="64" tileheight="64" infinite="0" nextlayerid="115" nextobjectid="1">
  <editorsettings>
   <export target="../../../www/data/gameboy/gameboyWeapons2.json" format="json"/>
  </editorsettings>
@@ -10,582 +10,6 @@
  </properties>
  <tileset firstgid="1" source="../tilesets/spadersTileset.tsx"/>
  <tileset firstgid="65" source="../tilesets/gb.tsx"/>
- <layer id="43" name="Game Boy" width="16" height="16" visible="0">
-  <properties>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
-   <property name="i" type="int" value="10"/>
-   <property name="j" type="int" value="11"/>
-   <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="1"/>
-   <property name="padding-right" type="int" value="1"/>
-   <property name="padding-top" type="int" value="0"/>
-   <property name="startI" type="int" value="0"/>
-   <property name="startJ" type="int" value="0"/>
-   <property name="tier" type="int" value="0"/>
-  </properties>
-  <data encoding="csv">
-0,74,74,74,74,74,74,74,74,0,0,0,0,0,0,0,
-74,73,73,73,73,73,73,73,73,74,0,0,0,0,0,0,
-74,73,66,66,66,66,66,66,73,74,0,0,0,0,0,0,
-74,73,66,66,66,66,66,66,73,74,0,0,0,0,0,0,
-74,73,66,66,66,66,66,66,73,74,0,0,0,0,0,0,
-74,73,66,66,66,66,66,66,73,74,0,0,0,0,0,0,
-74,73,73,73,73,73,73,73,73,74,0,0,0,0,0,0,
-74,73,73,74,73,73,73,69,73,74,0,0,0,0,0,0,
-74,73,74,74,74,73,69,73,73,74,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
- <layer id="74" name="Empty" width="16" height="16" visible="0">
-  <properties>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
-   <property name="i" type="int" value="11"/>
-   <property name="j" type="int" value="11"/>
-   <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="1"/>
-   <property name="padding-right" type="int" value="1"/>
-   <property name="padding-top" type="int" value="0"/>
-   <property name="startI" type="int" value="0"/>
-   <property name="startJ" type="int" value="0"/>
-   <property name="tier" type="int" value="0"/>
-  </properties>
-  <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
- <layer id="114" name="mpty level teste redisdsid" width="16" height="16" visible="0">
-  <properties>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
-   <property name="i" type="int" value="5"/>
-   <property name="j" type="int" value="6"/>
-   <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="1"/>
-   <property name="padding-right" type="int" value="1"/>
-   <property name="padding-top" type="int" value="0"/>
-   <property name="startI" type="int" value="0"/>
-   <property name="startJ" type="int" value="0"/>
-   <property name="tier" type="int" value="0"/>
-  </properties>
-  <data encoding="csv">
-0,0,67,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
- <layer id="71" name="Dagger" width="16" height="16" visible="0">
-  <properties>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
-   <property name="i" type="int" value="9"/>
-   <property name="j" type="int" value="10"/>
-   <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="1"/>
-   <property name="padding-right" type="int" value="1"/>
-   <property name="padding-top" type="int" value="0"/>
-   <property name="startI" type="int" value="0"/>
-   <property name="startJ" type="int" value="0"/>
-   <property name="tier" type="int" value="0"/>
-  </properties>
-  <data encoding="csv">
-0,0,0,0,0,0,74,74,74,0,0,0,0,0,0,0,
-0,0,0,0,0,74,69,69,74,0,0,0,0,0,0,0,
-0,0,0,0,74,69,66,69,74,0,0,0,0,0,0,0,
-0,0,74,74,69,66,69,74,0,0,0,0,0,0,0,0,
-0,74,68,74,66,69,74,0,0,0,0,0,0,0,0,0,
-0,0,74,68,74,74,0,0,0,0,0,0,0,0,0,0,
-0,74,69,74,68,74,0,0,0,0,0,0,0,0,0,0,
-74,70,74,0,74,0,0,0,0,0,0,0,0,0,0,0,
-74,74,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
- <layer id="72" name="Sword" width="16" height="16" visible="0">
-  <properties>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
-   <property name="i" type="int" value="11"/>
-   <property name="j" type="int" value="12"/>
-   <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="1"/>
-   <property name="padding-right" type="int" value="1"/>
-   <property name="padding-top" type="int" value="0"/>
-   <property name="startI" type="int" value="0"/>
-   <property name="startJ" type="int" value="0"/>
-   <property name="tier" type="int" value="0"/>
-  </properties>
-  <data encoding="csv">
-0,0,0,0,0,0,0,0,74,74,74,0,0,0,0,0,
-0,0,0,0,0,0,0,74,65,65,74,0,0,0,0,0,
-0,0,0,0,0,0,74,65,67,65,74,0,0,0,0,0,
-0,0,0,0,0,74,65,67,65,74,0,0,0,0,0,0,
-0,0,74,0,74,65,67,65,74,0,0,0,0,0,0,0,
-0,74,69,74,65,67,65,74,0,0,0,0,0,0,0,0,
-0,0,74,69,74,65,74,0,0,0,0,0,0,0,0,0,
-0,0,74,74,69,74,0,0,0,0,0,0,0,0,0,0,
-0,74,67,74,74,69,74,0,0,0,0,0,0,0,0,0,
-74,69,74,0,0,74,0,0,0,0,0,0,0,0,0,0,
-74,74,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
- <layer id="89" name="Long Sword" width="16" height="16" visible="0">
-  <properties>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
-   <property name="i" type="int" value="12"/>
-   <property name="j" type="int" value="13"/>
-   <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="1"/>
-   <property name="padding-right" type="int" value="1"/>
-   <property name="padding-top" type="int" value="0"/>
-   <property name="startI" type="int" value="0"/>
-   <property name="startJ" type="int" value="0"/>
-   <property name="tier" type="int" value="0"/>
-  </properties>
-  <data encoding="csv">
-0,0,0,0,0,0,0,0,0,74,74,74,0,0,0,0,
-0,0,0,0,0,0,0,0,74,73,73,74,0,0,0,0,
-0,0,0,0,0,0,0,74,73,68,73,74,0,0,0,0,
-0,0,0,0,0,0,74,73,68,73,74,0,0,0,0,0,
-0,0,74,0,0,74,73,68,73,74,0,0,0,0,0,0,
-0,74,74,0,74,73,68,73,74,0,0,0,0,0,0,0,
-0,74,67,74,73,68,73,74,0,0,0,0,0,0,0,0,
-0,74,74,67,68,73,74,0,0,0,0,0,0,0,0,0,
-0,0,74,68,67,74,0,0,0,0,0,0,0,0,0,0,
-0,74,66,74,74,67,74,74,0,0,0,0,0,0,0,0,
-74,69,74,0,74,74,74,0,0,0,0,0,0,0,0,0,
-74,74,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
- <layer id="110" name="_ADDONLongSword" width="16" height="16" visible="0">
-  <properties>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
-   <property name="i" type="int" value="11"/>
-   <property name="j" type="int" value="11"/>
-   <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="1"/>
-   <property name="padding-right" type="int" value="1"/>
-   <property name="padding-top" type="int" value="0"/>
-   <property name="startI" type="int" value="0"/>
-   <property name="startJ" type="int" value="0"/>
-   <property name="tier" type="int" value="0"/>
-  </properties>
-  <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,97,97,0,0,0,0,0,
-0,0,0,0,0,0,0,0,97,0,97,0,0,0,0,0,
-0,0,0,0,0,0,0,97,0,97,0,0,0,0,0,0,
-0,0,0,0,0,0,97,0,97,0,0,0,0,0,0,0,
-0,0,0,0,0,97,0,97,0,0,0,0,0,0,0,0,
-0,0,0,0,97,0,97,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
- <layer id="90" name="Dark Sword" width="16" height="16" visible="0">
-  <properties>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
-   <property name="i" type="int" value="12"/>
-   <property name="j" type="int" value="13"/>
-   <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="1"/>
-   <property name="padding-right" type="int" value="1"/>
-   <property name="padding-top" type="int" value="0"/>
-   <property name="startI" type="int" value="0"/>
-   <property name="startJ" type="int" value="0"/>
-   <property name="tier" type="int" value="0"/>
-  </properties>
-  <data encoding="csv">
-0,0,0,0,0,0,0,0,0,74,74,74,0,0,0,0,
-0,0,0,0,0,0,0,0,74,71,71,74,0,0,0,0,
-0,0,0,0,0,0,0,74,71,67,71,74,0,0,0,0,
-0,0,0,0,0,0,74,71,67,71,74,0,0,0,0,0,
-0,0,0,0,0,0,74,67,71,74,0,0,0,0,0,0,
-74,74,74,0,0,74,67,74,74,0,0,0,0,0,0,0,
-0,74,70,74,74,67,74,0,0,0,0,0,0,0,0,0,
-0,74,74,70,71,74,0,0,0,0,0,0,0,0,0,0,
-0,0,74,71,70,74,0,0,0,0,0,0,0,0,0,0,
-0,74,70,74,74,70,74,0,0,0,0,0,0,0,0,0,
-74,71,74,0,74,74,74,0,0,0,0,0,0,0,0,0,
-74,74,0,0,0,0,74,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
- <layer id="93" name="_ADDONDarkSword" width="16" height="16" visible="0">
-  <properties>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
-   <property name="i" type="int" value="11"/>
-   <property name="j" type="int" value="11"/>
-   <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="1"/>
-   <property name="padding-right" type="int" value="1"/>
-   <property name="padding-top" type="int" value="0"/>
-   <property name="startI" type="int" value="0"/>
-   <property name="startJ" type="int" value="0"/>
-   <property name="tier" type="int" value="0"/>
-  </properties>
-  <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,97,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,97,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,97,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,97,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
- <layer id="96" name="Holy Sword" width="16" height="16" visible="0">
-  <properties>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
-   <property name="i" type="int" value="11"/>
-   <property name="j" type="int" value="12"/>
-   <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="1"/>
-   <property name="padding-right" type="int" value="1"/>
-   <property name="padding-top" type="int" value="0"/>
-   <property name="startI" type="int" value="0"/>
-   <property name="startJ" type="int" value="0"/>
-   <property name="tier" type="int" value="0"/>
-  </properties>
-  <data encoding="csv">
-0,0,0,0,0,0,0,74,74,74,74,0,0,0,0,0,
-0,0,0,0,0,0,74,71,71,73,74,0,0,0,0,0,
-0,0,0,0,0,0,74,71,73,71,74,0,0,0,0,0,
-0,0,0,0,0,74,71,73,71,71,74,0,0,0,0,0,
-0,0,0,0,74,71,73,71,74,74,0,0,0,0,0,0,
-74,0,0,74,71,73,71,74,0,0,0,0,0,0,0,0,
-0,74,0,74,73,71,74,0,0,0,0,0,0,0,0,0,
-0,0,74,71,74,74,0,0,0,0,0,0,0,0,0,0,
-0,0,74,74,0,0,0,0,0,0,0,0,0,0,0,0,
-74,74,0,0,74,0,0,0,0,0,0,0,0,0,0,0,
-74,74,0,0,0,74,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
- <layer id="109" name="_ADDONHolySword" width="16" height="16" visible="0">
-  <properties>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
-   <property name="i" type="int" value="11"/>
-   <property name="j" type="int" value="11"/>
-   <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="1"/>
-   <property name="padding-right" type="int" value="1"/>
-   <property name="padding-top" type="int" value="0"/>
-   <property name="startI" type="int" value="0"/>
-   <property name="startJ" type="int" value="0"/>
-   <property name="tier" type="int" value="0"/>
-  </properties>
-  <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,97,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,97,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,97,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,97,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
- <layer id="73" name="Axe" width="16" height="16" visible="0">
-  <properties>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
-   <property name="i" type="int" value="9"/>
-   <property name="j" type="int" value="11"/>
-   <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="1"/>
-   <property name="padding-right" type="int" value="1"/>
-   <property name="padding-top" type="int" value="0"/>
-   <property name="startI" type="int" value="0"/>
-   <property name="startJ" type="int" value="0"/>
-   <property name="tier" type="int" value="0"/>
-  </properties>
-  <data encoding="csv">
-0,0,0,74,74,74,0,0,0,0,0,0,0,0,0,0,
-0,0,74,73,66,74,0,0,0,0,0,0,0,0,0,0,
-0,0,74,65,67,74,74,0,0,0,0,0,0,0,0,0,
-0,0,74,74,74,67,67,74,0,0,0,0,0,0,0,0,
-0,0,0,0,74,74,67,74,0,0,0,0,0,0,0,0,
-0,0,0,74,75,74,74,67,74,0,0,0,0,0,0,0,
-0,0,74,66,74,0,0,74,0,0,0,0,0,0,0,0,
-0,74,66,74,0,0,0,0,0,0,0,0,0,0,0,0,
-74,75,74,0,0,0,0,0,0,0,0,0,0,0,0,0,
-74,74,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
- <layer id="95" name="Large Axe" width="16" height="16" visible="0">
-  <properties>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
-   <property name="i" type="int" value="11"/>
-   <property name="j" type="int" value="13"/>
-   <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="1"/>
-   <property name="padding-right" type="int" value="1"/>
-   <property name="padding-top" type="int" value="0"/>
-   <property name="startI" type="int" value="0"/>
-   <property name="startJ" type="int" value="0"/>
-   <property name="tier" type="int" value="0"/>
-  </properties>
-  <data encoding="csv">
-0,0,0,74,74,74,74,0,0,0,0,0,0,0,0,0,
-0,0,74,73,73,75,74,0,74,74,74,0,0,0,0,0,
-0,74,73,73,75,75,74,74,74,71,74,0,0,0,0,0,
-0,74,73,75,75,75,75,71,71,74,74,0,0,0,0,0,
-74,73,75,74,74,74,74,71,74,0,0,0,0,0,0,0,
-74,74,74,0,0,74,69,74,71,74,74,0,0,0,0,0,
-0,0,0,0,74,69,74,0,74,70,74,0,0,0,0,0,
-0,0,0,74,66,74,0,0,74,74,74,0,0,0,0,0,
-0,0,74,66,74,0,0,0,0,0,0,0,0,0,0,0,
-0,74,69,74,0,0,0,0,0,0,0,0,0,0,0,0,
-74,69,74,0,0,0,0,0,0,0,0,0,0,0,0,0,
-74,74,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
- <layer id="108" name="_ADDONLargeAxe" width="16" height="16" visible="0">
-  <properties>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
-   <property name="i" type="int" value="11"/>
-   <property name="j" type="int" value="11"/>
-   <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="1"/>
-   <property name="padding-right" type="int" value="1"/>
-   <property name="padding-top" type="int" value="0"/>
-   <property name="startI" type="int" value="0"/>
-   <property name="startJ" type="int" value="0"/>
-   <property name="tier" type="int" value="0"/>
-  </properties>
-  <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,0,
-0,0,97,97,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,97,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,97,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,97,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
- <layer id="76" name="Short Bow" width="16" height="16" visible="0">
-  <properties>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
-   <property name="i" type="int" value="11"/>
-   <property name="j" type="int" value="11"/>
-   <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="1"/>
-   <property name="padding-right" type="int" value="1"/>
-   <property name="padding-top" type="int" value="0"/>
-   <property name="startI" type="int" value="0"/>
-   <property name="startJ" type="int" value="0"/>
-   <property name="tier" type="int" value="0"/>
-  </properties>
-  <data encoding="csv">
-0,0,0,0,0,0,74,74,74,0,0,0,0,0,0,0,
-0,0,0,0,0,74,66,67,66,74,0,0,0,0,0,0,
-0,0,0,0,74,74,67,74,74,67,74,0,0,0,0,0,
-0,0,0,74,67,66,74,0,0,74,74,0,0,0,0,0,
-0,0,74,74,66,74,0,0,73,0,0,0,0,0,0,0,
-0,74,66,67,74,0,0,73,0,0,0,0,0,0,0,0,
-0,74,67,74,0,0,73,0,0,0,0,0,0,0,0,0,
-0,74,66,74,0,73,0,0,0,0,0,0,0,0,0,0,
-0,0,74,67,74,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,74,74,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
- <layer id="77" name="Long Bow" width="16" height="16" visible="0">
-  <properties>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
-   <property name="i" type="int" value="12"/>
-   <property name="j" type="int" value="13"/>
-   <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="1"/>
-   <property name="padding-right" type="int" value="1"/>
-   <property name="padding-top" type="int" value="0"/>
-   <property name="startI" type="int" value="0"/>
-   <property name="startJ" type="int" value="0"/>
-   <property name="tier" type="int" value="0"/>
-  </properties>
-  <data encoding="csv">
-0,0,0,0,0,0,74,74,74,74,0,0,0,0,0,0,
-0,0,0,0,74,74,69,66,66,69,74,0,0,0,0,0,
-0,0,0,74,70,71,71,74,74,74,70,74,0,0,0,0,
-0,0,74,70,71,71,74,0,0,0,74,74,0,0,0,0,
-0,74,70,71,71,74,0,0,0,76,0,0,0,0,0,0,
-0,74,71,71,74,0,0,0,76,0,0,0,0,0,0,0,
-74,69,71,74,0,0,0,76,0,0,0,0,0,0,0,0,
-74,66,74,0,0,0,76,0,0,0,0,0,0,0,0,0,
-74,66,74,0,0,76,0,0,0,0,0,0,0,0,0,0,
-74,69,74,0,76,0,0,0,0,0,0,0,0,0,0,0,
-0,74,70,74,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,74,74,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
- <layer id="91" name="Elven Bow" width="16" height="16" visible="0">
-  <properties>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
-   <property name="i" type="int" value="12"/>
-   <property name="j" type="int" value="13"/>
-   <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="1"/>
-   <property name="padding-right" type="int" value="1"/>
-   <property name="padding-top" type="int" value="0"/>
-   <property name="startI" type="int" value="0"/>
-   <property name="startJ" type="int" value="0"/>
-   <property name="tier" type="int" value="0"/>
-  </properties>
-  <data encoding="csv">
-0,0,0,0,0,0,74,74,0,0,74,0,0,0,0,0,
-0,0,0,0,74,74,65,72,74,74,67,74,0,0,0,0,
-0,0,0,74,65,71,71,74,67,67,74,74,0,0,0,0,
-0,0,74,65,71,71,74,0,74,74,73,0,0,0,0,0,
-0,74,65,71,71,74,0,0,0,73,0,0,0,0,0,0,
-0,74,71,71,74,0,0,0,73,0,0,0,0,0,0,0,
-74,65,71,74,0,0,0,73,0,0,0,0,0,0,0,0,
-74,72,74,0,0,0,73,0,0,0,0,0,0,0,0,0,
-0,74,67,74,0,73,0,0,0,0,0,0,0,0,0,0,
-0,74,67,74,73,0,0,0,0,0,0,0,0,0,0,0,
-74,67,74,73,0,0,0,0,0,0,0,0,0,0,0,0,
-0,74,74,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
- <layer id="92" name="_ADDONElvenBlow" width="16" height="16" visible="0">
-  <properties>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
-   <property name="i" type="int" value="11"/>
-   <property name="j" type="int" value="11"/>
-   <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="1"/>
-   <property name="padding-right" type="int" value="0"/>
-   <property name="padding-top" type="int" value="0"/>
-   <property name="startI" type="int" value="0"/>
-   <property name="startJ" type="int" value="0"/>
-   <property name="tier" type="int" value="0"/>
-  </properties>
-  <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,97,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,97,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,97,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,97,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
  <layer id="101" name="Wooden Arrow" width="16" height="16">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
@@ -595,6 +19,7 @@
    <property name="padding-left" type="int" value="0"/>
    <property name="padding-right" type="int" value="0"/>
    <property name="padding-top" type="int" value="0"/>
+   <property name="scale" type="int" value="2"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
@@ -627,6 +52,7 @@
    <property name="padding-left" type="int" value="0"/>
    <property name="padding-right" type="int" value="0"/>
    <property name="padding-top" type="int" value="0"/>
+   <property name="scale" type="int" value="2"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
@@ -659,6 +85,7 @@
    <property name="padding-left" type="int" value="0"/>
    <property name="padding-right" type="int" value="0"/>
    <property name="padding-top" type="int" value="0"/>
+   <property name="scale" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
@@ -691,6 +118,7 @@
    <property name="padding-left" type="int" value="0"/>
    <property name="padding-right" type="int" value="0"/>
    <property name="padding-top" type="int" value="0"/>
+   <property name="scale" type="int" value="2"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
@@ -723,6 +151,7 @@
    <property name="padding-left" type="int" value="0"/>
    <property name="padding-right" type="int" value="0"/>
    <property name="padding-top" type="int" value="0"/>
+   <property name="scale" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
@@ -755,6 +184,7 @@
    <property name="padding-left" type="int" value="0"/>
    <property name="padding-right" type="int" value="0"/>
    <property name="padding-top" type="int" value="0"/>
+   <property name="scale" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
@@ -763,422 +193,6 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,97,97,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,97,97,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
- <layer id="100" name="Shovel" width="16" height="16">
-  <properties>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
-   <property name="i" type="int" value="10"/>
-   <property name="j" type="int" value="12"/>
-   <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="0"/>
-   <property name="padding-right" type="int" value="0"/>
-   <property name="padding-top" type="int" value="0"/>
-   <property name="startI" type="int" value="0"/>
-   <property name="startJ" type="int" value="0"/>
-   <property name="tier" type="int" value="0"/>
-  </properties>
-  <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,74,74,74,0,0,0,0,0,0,0,
-0,0,0,0,0,74,72,72,72,74,0,0,0,0,0,0,
-0,0,0,0,74,72,72,73,72,74,0,0,0,0,0,0,
-0,0,0,74,72,72,73,72,72,74,0,0,0,0,0,0,
-0,0,0,0,74,73,72,72,74,0,0,0,0,0,0,0,
-0,0,0,0,74,74,72,74,0,0,0,0,0,0,0,0,
-0,0,0,74,0,0,74,0,0,0,0,0,0,0,0,0,
-0,0,74,0,0,0,0,0,0,0,0,0,0,0,0,0,
-74,74,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-74,74,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
- <layer id="107" name="_ADDONShovel" width="16" height="16">
-  <properties>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
-   <property name="i" type="int" value="11"/>
-   <property name="j" type="int" value="11"/>
-   <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="0"/>
-   <property name="padding-right" type="int" value="0"/>
-   <property name="padding-top" type="int" value="0"/>
-   <property name="startI" type="int" value="0"/>
-   <property name="startJ" type="int" value="0"/>
-   <property name="tier" type="int" value="0"/>
-  </properties>
-  <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,97,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,97,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
- <layer id="99" name="Iron Shield" width="16" height="16">
-  <properties>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
-   <property name="i" type="int" value="10"/>
-   <property name="j" type="int" value="10"/>
-   <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="0"/>
-   <property name="padding-right" type="int" value="0"/>
-   <property name="padding-top" type="int" value="0"/>
-   <property name="startI" type="int" value="0"/>
-   <property name="startJ" type="int" value="0"/>
-   <property name="tier" type="int" value="0"/>
-  </properties>
-  <data encoding="csv">
-0,74,74,74,0,0,74,74,74,0,0,0,0,0,0,0,
-0,74,68,68,74,74,65,65,74,0,0,0,0,0,0,0,
-0,74,68,68,68,68,68,65,74,0,0,0,0,0,0,0,
-0,74,68,74,74,74,74,68,74,0,0,0,0,0,0,0,
-0,74,68,74,71,71,74,68,74,0,0,0,0,0,0,0,
-0,74,68,74,71,71,74,68,74,0,0,0,0,0,0,0,
-0,74,68,68,74,74,68,68,74,0,0,0,0,0,0,0,
-0,0,74,68,68,68,68,74,0,0,0,0,0,0,0,0,
-0,0,0,74,74,74,74,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
- <layer id="103" name="Round Shield" width="16" height="16">
-  <properties>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
-   <property name="i" type="int" value="10"/>
-   <property name="j" type="int" value="10"/>
-   <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="0"/>
-   <property name="padding-right" type="int" value="0"/>
-   <property name="padding-top" type="int" value="0"/>
-   <property name="startI" type="int" value="0"/>
-   <property name="startJ" type="int" value="0"/>
-   <property name="tier" type="int" value="0"/>
-  </properties>
-  <data encoding="csv">
-0,0,0,0,74,74,0,0,0,0,0,0,0,0,0,0,
-0,0,74,74,70,70,74,74,0,0,0,0,0,0,0,0,
-0,74,71,71,73,73,70,70,74,0,0,0,0,0,0,0,
-74,71,71,71,71,71,71,70,70,74,0,0,0,0,0,0,
-74,71,73,71,73,73,71,73,70,74,0,0,0,0,0,0,
-74,72,72,71,71,71,71,71,70,74,0,0,0,0,0,0,
-0,74,72,72,73,73,71,71,74,0,0,0,0,0,0,0,
-0,0,74,74,72,72,74,74,0,0,0,0,0,0,0,0,
-0,0,0,0,74,74,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
- <layer id="104" name="Mirror Shield" width="16" height="16">
-  <properties>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
-   <property name="i" type="int" value="10"/>
-   <property name="j" type="int" value="13"/>
-   <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="0"/>
-   <property name="padding-right" type="int" value="0"/>
-   <property name="padding-top" type="int" value="0"/>
-   <property name="startI" type="int" value="0"/>
-   <property name="startJ" type="int" value="0"/>
-   <property name="tier" type="int" value="0"/>
-  </properties>
-  <data encoding="csv">
-0,0,0,0,74,74,0,0,0,0,0,0,0,0,0,0,
-0,0,74,74,70,70,74,74,0,0,0,0,0,0,0,0,
-0,74,70,70,74,74,70,70,74,0,0,0,0,0,0,0,
-74,70,70,74,68,73,74,70,70,74,0,0,0,0,0,0,
-74,70,74,68,68,73,73,74,70,74,0,0,0,0,0,0,
-74,70,74,68,68,73,73,74,70,74,0,0,0,0,0,0,
-74,70,74,68,68,73,73,74,70,74,0,0,0,0,0,0,
-0,74,70,74,68,73,74,70,74,0,0,0,0,0,0,0,
-0,74,70,70,74,74,70,70,74,0,0,0,0,0,0,0,
-0,0,74,70,70,70,70,74,0,0,0,0,0,0,0,0,
-0,0,0,74,70,70,74,0,0,0,0,0,0,0,0,0,
-0,0,0,0,74,74,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
- <layer id="105" name="Holy Shield" width="16" height="16">
-  <properties>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
-   <property name="i" type="int" value="10"/>
-   <property name="j" type="int" value="11"/>
-   <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="0"/>
-   <property name="padding-right" type="int" value="0"/>
-   <property name="padding-top" type="int" value="0"/>
-   <property name="startI" type="int" value="0"/>
-   <property name="startJ" type="int" value="0"/>
-   <property name="tier" type="int" value="0"/>
-  </properties>
-  <data encoding="csv">
-0,0,0,0,74,74,0,0,0,0,0,0,0,0,0,0,
-0,0,74,74,70,70,74,74,0,0,0,0,0,0,0,0,
-0,74,70,70,73,73,70,70,74,0,0,0,0,0,0,0,
-74,70,70,70,73,73,70,70,70,74,0,0,0,0,0,0,
-74,70,73,73,73,73,73,73,70,74,0,0,0,0,0,0,
-74,71,73,73,73,65,65,65,71,74,0,0,0,0,0,0,
-74,71,71,71,73,65,71,71,71,74,0,0,0,0,0,0,
-0,74,71,71,73,65,71,71,74,0,0,0,0,0,0,0,
-0,0,74,74,73,65,74,74,0,0,0,0,0,0,0,0,
-0,0,0,0,74,74,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
- <layer id="106" name="_ADDONHoly" width="16" height="16">
-  <properties>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
-   <property name="i" type="int" value="11"/>
-   <property name="j" type="int" value="11"/>
-   <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="0"/>
-   <property name="padding-right" type="int" value="0"/>
-   <property name="padding-top" type="int" value="0"/>
-   <property name="startI" type="int" value="0"/>
-   <property name="startJ" type="int" value="0"/>
-   <property name="tier" type="int" value="0"/>
-  </properties>
-  <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
- <layer id="79" name="Shuriken" width="16" height="16">
-  <properties>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
-   <property name="i" type="int" value="10"/>
-   <property name="j" type="int" value="10"/>
-   <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="0"/>
-   <property name="padding-right" type="int" value="0"/>
-   <property name="padding-top" type="int" value="0"/>
-   <property name="startI" type="int" value="0"/>
-   <property name="startJ" type="int" value="0"/>
-   <property name="tier" type="int" value="0"/>
-  </properties>
-  <data encoding="csv">
-0,0,69,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,69,70,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,69,70,70,0,69,69,69,69,0,0,0,0,0,0,
-0,0,69,69,72,72,69,70,70,0,0,0,0,0,0,0,
-0,0,0,72,65,65,72,70,0,0,0,0,0,0,0,0,
-0,0,70,72,65,65,72,0,0,0,0,0,0,0,0,0,
-0,70,70,69,72,72,69,69,0,0,0,0,0,0,0,0,
-69,69,69,69,0,70,70,69,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,70,69,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,69,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
- <layer id="80" name="_ADDONShuriken" width="16" height="16">
-  <properties>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
-   <property name="i" type="int" value="11"/>
-   <property name="j" type="int" value="11"/>
-   <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="0"/>
-   <property name="padding-right" type="int" value="0"/>
-   <property name="padding-top" type="int" value="0"/>
-   <property name="startI" type="int" value="0"/>
-   <property name="startJ" type="int" value="0"/>
-   <property name="tier" type="int" value="0"/>
-  </properties>
-  <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
- <layer id="86" name="Boomerang" width="16" height="16">
-  <properties>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
-   <property name="i" type="int" value="9"/>
-   <property name="j" type="int" value="10"/>
-   <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="0"/>
-   <property name="padding-right" type="int" value="0"/>
-   <property name="padding-top" type="int" value="0"/>
-   <property name="startI" type="int" value="0"/>
-   <property name="startJ" type="int" value="0"/>
-   <property name="tier" type="int" value="0"/>
-  </properties>
-  <data encoding="csv">
-0,74,74,74,74,74,74,74,0,0,0,0,0,0,0,0,
-74,66,66,66,66,66,66,66,74,0,0,0,0,0,0,0,
-74,66,70,70,70,70,70,70,71,0,0,0,0,0,0,0,
-74,66,70,71,71,71,71,71,0,0,0,0,0,0,0,0,
-74,66,70,71,0,0,0,0,0,0,0,0,0,0,0,0,
-74,66,70,71,0,0,0,0,0,0,0,0,0,0,0,0,
-74,66,70,71,0,0,0,0,0,0,0,0,0,0,0,0,
-74,66,70,71,0,0,0,0,0,0,0,0,0,0,0,0,
-0,74,71,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
- <layer id="82" name="Granade" width="16" height="16">
-  <properties>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
-   <property name="i" type="int" value="9"/>
-   <property name="j" type="int" value="11"/>
-   <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="0"/>
-   <property name="padding-right" type="int" value="0"/>
-   <property name="padding-top" type="int" value="0"/>
-   <property name="startI" type="int" value="0"/>
-   <property name="startJ" type="int" value="0"/>
-   <property name="tier" type="int" value="0"/>
-  </properties>
-  <data encoding="csv">
-0,0,0,0,0,0,65,65,0,0,0,0,0,0,0,0,
-0,0,0,0,0,65,0,0,65,0,0,0,0,0,0,0,
-0,0,0,70,70,65,0,0,65,0,0,0,0,0,0,0,
-0,0,0,70,70,0,65,65,0,0,0,0,0,0,0,0,
-0,0,71,71,71,71,0,0,0,0,0,0,0,0,0,0,
-0,71,71,71,71,71,71,0,0,0,0,0,0,0,0,0,
-0,73,73,73,73,73,73,0,0,0,0,0,0,0,0,0,
-0,69,69,69,69,69,69,0,0,0,0,0,0,0,0,0,
-0,71,71,71,71,71,71,0,0,0,0,0,0,0,0,0,
-0,0,72,72,72,72,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
- <layer id="98" name="Hookshoot" width="16" height="16">
-  <properties>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
-   <property name="i" type="int" value="11"/>
-   <property name="j" type="int" value="12"/>
-   <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="0"/>
-   <property name="padding-right" type="int" value="0"/>
-   <property name="padding-top" type="int" value="0"/>
-   <property name="startI" type="int" value="0"/>
-   <property name="startJ" type="int" value="0"/>
-   <property name="tier" type="int" value="0"/>
-  </properties>
-  <data encoding="csv">
-0,0,0,0,0,74,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,74,73,74,0,0,0,0,0,0,0,0,0,
-0,0,0,74,73,73,73,74,0,0,0,0,0,0,0,0,
-0,0,74,67,67,67,67,67,74,0,0,0,0,0,0,0,
-0,0,74,66,66,66,66,66,74,0,0,0,0,0,0,0,
-0,0,0,74,74,74,74,74,0,0,0,0,0,0,0,0,
-0,0,0,0,73,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,73,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,73,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,74,66,74,0,0,0,0,0,0,0,0,0,
-0,0,0,74,66,66,66,74,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
- <layer id="111" name="_ADDONHookshot" width="16" height="16">
-  <properties>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
-   <property name="i" type="int" value="11"/>
-   <property name="j" type="int" value="11"/>
-   <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="0"/>
-   <property name="padding-right" type="int" value="0"/>
-   <property name="padding-top" type="int" value="0"/>
-   <property name="startI" type="int" value="0"/>
-   <property name="startJ" type="int" value="0"/>
-   <property name="tier" type="int" value="0"/>
-  </properties>
-  <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,97,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,97,97,97,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -1203,6 +217,7 @@
    <property name="padding-left" type="int" value="0"/>
    <property name="padding-right" type="int" value="0"/>
    <property name="padding-top" type="int" value="0"/>
+   <property name="scale" type="int" value="2"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
@@ -1235,6 +250,7 @@
    <property name="padding-left" type="int" value="0"/>
    <property name="padding-right" type="int" value="0"/>
    <property name="padding-top" type="int" value="0"/>
+   <property name="scale" type="int" value="2"/>
    <property name="startI" type="int" value="0"/>
    <property name="startJ" type="int" value="0"/>
    <property name="tier" type="int" value="0"/>
@@ -1249,6 +265,435 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="100" name="Shovel" width="16" height="16">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="10"/>
+   <property name="j" type="int" value="12"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="0"/>
+   <property name="padding-right" type="int" value="0"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="scale" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,74,74,74,0,0,0,0,0,0,0,
+0,0,0,0,0,74,72,72,72,74,0,0,0,0,0,0,
+0,0,0,0,74,72,72,73,72,74,0,0,0,0,0,0,
+0,0,0,74,72,72,73,72,72,74,0,0,0,0,0,0,
+0,0,0,0,74,73,72,72,74,0,0,0,0,0,0,0,
+0,0,0,0,74,74,72,74,0,0,0,0,0,0,0,0,
+0,0,0,74,0,0,74,0,0,0,0,0,0,0,0,0,
+0,0,74,0,0,0,0,0,0,0,0,0,0,0,0,0,
+74,74,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+74,74,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="107" name="_ADDONShovel" width="16" height="16">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="11"/>
+   <property name="j" type="int" value="11"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="0"/>
+   <property name="padding-right" type="int" value="0"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="scale" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,97,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,97,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,97,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="79" name="Shuriken" width="16" height="16">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="10"/>
+   <property name="j" type="int" value="10"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="0"/>
+   <property name="padding-right" type="int" value="0"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="scale" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,69,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,69,70,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,69,70,70,0,69,69,69,69,0,0,0,0,0,0,
+0,0,69,69,72,72,69,70,70,0,0,0,0,0,0,0,
+0,0,0,72,65,65,72,70,0,0,0,0,0,0,0,0,
+0,0,70,72,65,65,72,0,0,0,0,0,0,0,0,0,
+0,70,70,69,72,72,69,69,0,0,0,0,0,0,0,0,
+69,69,69,69,0,70,70,69,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,70,69,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,69,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="80" name="_ADDONShuriken" width="16" height="16">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="11"/>
+   <property name="j" type="int" value="11"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="0"/>
+   <property name="padding-right" type="int" value="0"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="scale" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="86" name="Boomerang" width="16" height="16">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="9"/>
+   <property name="j" type="int" value="10"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="0"/>
+   <property name="padding-right" type="int" value="0"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="scale" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,74,74,74,74,74,74,74,0,0,0,0,0,0,0,0,
+74,66,66,66,66,66,66,66,74,0,0,0,0,0,0,0,
+74,66,70,70,70,70,70,70,71,0,0,0,0,0,0,0,
+74,66,70,71,71,71,71,71,0,0,0,0,0,0,0,0,
+74,66,70,71,0,0,0,0,0,0,0,0,0,0,0,0,
+74,66,70,71,0,0,0,0,0,0,0,0,0,0,0,0,
+74,66,70,71,0,0,0,0,0,0,0,0,0,0,0,0,
+74,66,70,71,0,0,0,0,0,0,0,0,0,0,0,0,
+0,74,71,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="98" name="Hookshoot" width="16" height="16">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="11"/>
+   <property name="j" type="int" value="12"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="0"/>
+   <property name="padding-right" type="int" value="0"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="scale" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,74,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,74,73,74,0,0,0,0,0,0,0,0,0,
+0,0,0,74,73,73,73,74,0,0,0,0,0,0,0,0,
+0,0,74,67,67,67,67,67,74,0,0,0,0,0,0,0,
+0,0,74,66,66,66,66,66,74,0,0,0,0,0,0,0,
+0,0,0,74,74,74,74,74,0,0,0,0,0,0,0,0,
+0,0,0,0,73,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,73,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,73,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,74,66,74,0,0,0,0,0,0,0,0,0,
+0,0,0,74,66,66,66,74,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="111" name="_ADDONHookshot" width="16" height="16">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="11"/>
+   <property name="j" type="int" value="11"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="0"/>
+   <property name="padding-right" type="int" value="0"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="scale" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,97,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,97,97,97,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="82" name="Granade" width="16" height="16">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="9"/>
+   <property name="j" type="int" value="11"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="0"/>
+   <property name="padding-right" type="int" value="0"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="scale" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,65,65,0,0,0,0,0,0,0,0,
+0,0,0,0,0,65,0,0,65,0,0,0,0,0,0,0,
+0,0,0,70,70,65,0,0,65,0,0,0,0,0,0,0,
+0,0,0,70,70,0,65,65,0,0,0,0,0,0,0,0,
+0,0,71,71,71,71,0,0,0,0,0,0,0,0,0,0,
+0,71,71,71,71,71,71,0,0,0,0,0,0,0,0,0,
+0,73,73,73,73,73,73,0,0,0,0,0,0,0,0,0,
+0,69,69,69,69,69,69,0,0,0,0,0,0,0,0,0,
+0,71,71,71,71,71,71,0,0,0,0,0,0,0,0,0,
+0,0,72,72,72,72,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="99" name="Iron Shield" width="16" height="16">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="10"/>
+   <property name="j" type="int" value="10"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="0"/>
+   <property name="padding-right" type="int" value="0"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="scale" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,74,74,74,0,0,74,74,74,0,0,0,0,0,0,0,
+0,74,68,68,74,74,65,65,74,0,0,0,0,0,0,0,
+0,74,68,68,68,68,68,65,74,0,0,0,0,0,0,0,
+0,74,68,74,74,74,74,68,74,0,0,0,0,0,0,0,
+0,74,68,74,71,71,74,68,74,0,0,0,0,0,0,0,
+0,74,68,74,71,71,74,68,74,0,0,0,0,0,0,0,
+0,74,68,68,74,74,68,68,74,0,0,0,0,0,0,0,
+0,0,74,68,68,68,68,74,0,0,0,0,0,0,0,0,
+0,0,0,74,74,74,74,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="103" name="Round Shield" width="16" height="16">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="10"/>
+   <property name="j" type="int" value="10"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="0"/>
+   <property name="padding-right" type="int" value="0"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="scale" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,74,74,0,0,0,0,0,0,0,0,0,0,
+0,0,74,74,70,70,74,74,0,0,0,0,0,0,0,0,
+0,74,71,71,73,73,70,70,74,0,0,0,0,0,0,0,
+74,71,71,71,71,71,71,70,70,74,0,0,0,0,0,0,
+74,71,73,71,73,73,71,73,70,74,0,0,0,0,0,0,
+74,72,72,71,71,71,71,71,70,74,0,0,0,0,0,0,
+0,74,72,72,73,73,71,71,74,0,0,0,0,0,0,0,
+0,0,74,74,72,72,74,74,0,0,0,0,0,0,0,0,
+0,0,0,0,74,74,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="104" name="Mirror Shield" width="16" height="16">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="10"/>
+   <property name="j" type="int" value="13"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="0"/>
+   <property name="padding-right" type="int" value="0"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="scale" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,74,74,0,0,0,0,0,0,0,0,0,0,
+0,0,74,74,70,70,74,74,0,0,0,0,0,0,0,0,
+0,74,70,70,74,74,70,70,74,0,0,0,0,0,0,0,
+74,70,70,74,68,73,74,70,70,74,0,0,0,0,0,0,
+74,70,74,68,68,73,73,74,70,74,0,0,0,0,0,0,
+74,70,74,68,68,73,73,74,70,74,0,0,0,0,0,0,
+74,70,74,68,68,73,73,74,70,74,0,0,0,0,0,0,
+0,74,70,74,68,73,74,70,74,0,0,0,0,0,0,0,
+0,74,70,70,74,74,70,70,74,0,0,0,0,0,0,0,
+0,0,74,70,70,70,70,74,0,0,0,0,0,0,0,0,
+0,0,0,74,70,70,74,0,0,0,0,0,0,0,0,0,
+0,0,0,0,74,74,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="105" name="Holy Shield" width="16" height="16">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="10"/>
+   <property name="j" type="int" value="11"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="0"/>
+   <property name="padding-right" type="int" value="0"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="scale" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,74,74,0,0,0,0,0,0,0,0,0,0,
+0,0,74,74,70,70,74,74,0,0,0,0,0,0,0,0,
+0,74,70,70,73,73,70,70,74,0,0,0,0,0,0,0,
+74,70,70,70,73,73,70,70,70,74,0,0,0,0,0,0,
+74,70,73,73,73,73,73,73,70,74,0,0,0,0,0,0,
+74,71,73,73,73,65,65,65,71,74,0,0,0,0,0,0,
+74,71,71,71,73,65,71,71,71,74,0,0,0,0,0,0,
+0,74,71,71,73,65,71,71,74,0,0,0,0,0,0,0,
+0,0,74,74,73,65,74,74,0,0,0,0,0,0,0,0,
+0,0,0,0,74,74,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="106" name="_ADDONHoly" width="16" height="16">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="11"/>
+   <property name="j" type="int" value="11"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="0"/>
+   <property name="padding-right" type="int" value="0"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="scale" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
+0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
+0,0,97,97,97,97,97,97,0,0,0,0,0,0,0,0,
+0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,97,97,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

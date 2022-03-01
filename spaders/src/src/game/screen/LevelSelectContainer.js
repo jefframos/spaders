@@ -255,7 +255,7 @@ export default class LevelSelectContainer extends PIXI.Container {
                 navButton.setStandardState();
             }
             if (debugThumb) {
-                navButton.updateLabelTop('~' + utils.convertNumToTime(Math.ceil(estimatedTime)) + '    ' + '~' + utils.convertNumToTime(Math.ceil(estimatedTimeHard)));
+                navButton.updateLabelTop('~' + utils.convertNumToTime(Math.ceil(estimatedTime)))// + '    ' + '~' + utils.convertNumToTime(Math.ceil(estimatedTimeHard)));
             } else {
                 navButton.updateLabelTop(navButton.section.name);
             }
@@ -626,7 +626,7 @@ export default class LevelSelectContainer extends PIXI.Container {
 
         let debugThumb = window.COOKIE_MANAGER.debug.showAllThumbs;
         if (debugThumb) {
-            levelTierButton.updateLabelTop('~' + utils.convertNumToTime(Math.ceil(totalEstimatedTime)) + '    ' + '~' + utils.convertNumToTime(Math.ceil(totalEstimatedTimeHard)));
+            levelTierButton.updateLabelTop('~' + utils.convertNumToTime(Math.ceil(totalEstimatedTime)))// + '    ' + '~' + utils.convertNumToTime(Math.ceil(totalEstimatedTimeHard)));
         }
 
         levelTierButton.setLargeButtonMode();
@@ -640,7 +640,7 @@ export default class LevelSelectContainer extends PIXI.Container {
                 levelButton.updateLabelTop(utils.convertNumToTime(Math.ceil(levelStored.bestTime)))//,
                     //new PIXI.Sprite.fromImage(window.iconsData.time))
             } else {
-                levelButton.updateLabelTop("~" + data.estimateTime2 + '    ' + '~' + utils.convertNumToTime(Math.ceil(data.estimateTimeHard)))//,
+                levelButton.updateLabelTop("~" + data.estimateTime2)// + '    ' + '~' + utils.convertNumToTime(Math.ceil(data.estimateTimeHard)))//,
                     //new PIXI.Sprite.fromImage(window.iconsData.time));
             }
 

@@ -26,7 +26,7 @@
         },
         "gb/gameboyCreatures.tmx": {
             "scale": 0.5,
-            "selectedLayer": 1,
+            "selectedLayer": 7,
             "viewCenter": {
                 "x": 735,
                 "y": 768
@@ -34,34 +34,34 @@
         },
         "gb/gameboyMisc.tmx": {
             "scale": 0.33,
-            "selectedLayer": 2,
+            "selectedLayer": 6,
             "viewCenter": {
                 "x": 480.30303030303025,
-                "y": 512.1212121212122
+                "y": 515.1515151515152
             }
         },
         "gb/gameboyMisc2.tmx": {
-            "scale": 1.17265625,
-            "selectedLayer": 8,
+            "scale": 0.5,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 479.6802131912059,
-                "y": 511.65889407061957
+                "x": 533,
+                "y": 798
             }
         },
         "gb/gameboyWeapon1.tmx": {
             "scale": 0.33,
-            "selectedLayer": 0,
+            "selectedLayer": 8,
             "viewCenter": {
                 "x": 513.6363636363636,
-                "y": 512.1212121212122
+                "y": 515.1515151515152
             }
         },
         "gb/gameboyWeapon2.tmx": {
-            "scale": 1.17265625,
-            "selectedLayer": 18,
+            "scale": 0.33,
+            "selectedLayer": 6,
             "viewCenter": {
-                "x": 479.6802131912059,
-                "y": 511.65889407061957
+                "x": 128.78787878787875,
+                "y": 527.2727272727273
             }
         },
         "how-to-play/bossa.tmx": {
@@ -73,11 +73,11 @@
             }
         },
         "how-to-play/creatures.tmx": {
-            "scale": 1.0512073863636362,
-            "selectedLayer": 7,
+            "scale": 0.75,
+            "selectedLayer": 14,
             "viewCenter": {
-                "x": 351.5005742855213,
-                "y": 385.2712654550368
+                "x": 301.99999999999994,
+                "y": 405.33333333333337
             }
         },
         "how-to-play/gameboy.tmx": {
@@ -93,7 +93,7 @@
             "selectedLayer": 3,
             "viewCenter": {
                 "x": 351.5005742855213,
-                "y": 384.3199783798393
+                "y": 385.2712654550368
             }
         },
         "how-to-play/how-to-play-small.tmx": {
@@ -106,7 +106,7 @@
         },
         "how-to-play/people-set-1.tmx": {
             "scale": 0.8201171875,
-            "selectedLayer": 1,
+            "selectedLayer": 4,
             "viewCenter": {
                 "x": 352.9983329364134,
                 "y": 384.09145034532037
@@ -136,6 +136,14 @@
                 "y": 384.33847991128556
             }
         },
+        "how-to-play/question-mark.tmx": {
+            "scale": 1.008025568181818,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 352.6696258719087,
+                "y": 384.91087155640105
+            }
+        },
         "how-to-play/simple-shapes-synt.tmx": {
             "scale": 0.33,
             "selectedLayer": 9,
@@ -146,21 +154,21 @@
         },
         "how-to-play/simple-shapes.tmx": {
             "scale": 0.5,
-            "selectedLayer": 19,
+            "selectedLayer": 16,
             "viewCenter": {
                 "x": 639,
-                "y": 460
+                "y": 458
             }
         },
         "how-to-play/spadersTileset.tsx": {
             "scaleInDock": 1
         },
         "how-to-play/things.tmx": {
-            "scale": 1.0512073863636362,
-            "selectedLayer": 0,
+            "scale": 0.5,
+            "selectedLayer": 14,
             "viewCenter": {
-                "x": 351.5005742855213,
-                "y": 384.3199783798393
+                "x": 253,
+                "y": 132
             }
         },
         "levels.tmx": {
@@ -246,11 +254,11 @@
             "scaleInEditor": 1
         },
         "videogames/levels.tmx": {
-            "scale": 0.8201171875,
-            "selectedLayer": 20,
+            "scale": 0.25,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 320.07620862110025,
-                "y": 384.09145034532037
+                "x": 698,
+                "y": 376
             }
         },
         "videogames/levels2.tmx": {
@@ -275,7 +283,7 @@
             "scaleInEditor": 1
         }
     },
-    "last.exportedFilePath": "D:/projects/spaders/spaders/www/data/gameboy",
+    "last.exportedFilePath": "D:/projects/spaders/spaders/www/data",
     "last.externalTilesetPath": "E:/projects/spaders/spaders/src/map/tilesets",
     "last.imagePath": "E:/projects/spaders/spaders/src/map/tilesets",
     "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
@@ -305,18 +313,18 @@
     "project": "gameLevelsProject.tiled-project",
     "property.type": "int",
     "recentFiles": [
+        "gb/gameboyWeapon1.tmx",
+        "videogames/levels.tmx",
         "how-to-play/people-set-1.tmx",
         "how-to-play/how-to-play-medium.tmx",
         "how-to-play/pokemons.tmx",
         "videogames/levels3.tmx",
         "gb/gameboyWeapon2.tmx",
-        "gb/gameboyWeapon1.tmx",
         "gb/gameboyMisc2.tmx",
         "gb/gameboyCreatures.tmx",
         "gb/gameboyMisc.tmx",
         "how-to-play/gameboy.tmx",
-        "how-to-play/bossa.tmx",
-        "how-to-play/pokemon22.tmx"
+        "how-to-play/bossa.tmx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",

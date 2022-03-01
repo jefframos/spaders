@@ -27,14 +27,14 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.logoLayers = [];
 
 
-		//this.logoLabel = new PIXI.Text(this.currentButtonLabel, { font: '64px', fill: config.colors.white, align: 'center', fontWeight: '800', fontFamily: window.LOGO_FONT });
-		this.logoLabel = new PIXI.Sprite()//.fromFrame("logo1.png");
+		this.logoLabel = new PIXI.Text(this.currentButtonLabel, { font: '64px', fill: config.colors.white, align: 'center', fontWeight: '800', fontFamily: window.LOGO_FONT });
+		//this.logoLabel = new PIXI.Sprite()//.fromFrame("logo1.png");
 
 		this.logoLabel.rotation = -Math.PI * 0.25
 
 		this.logoLabel.x = -130
 		this.logoLabel.y = - 280
-		this.logoLabel.scale.set(0.7)
+		// this.logoLabel.scale.set(0.7)
 		this.logoLabel.anchor.set(0.5)
 
 		// for (let index = 1; index <= 3; index++) {
@@ -51,21 +51,21 @@ export default class StartScreenContainer extends PIXI.Container {
 		// 	this.logoLayers.push(logoLayer);
 		// }
 		
-		this.staticLogo = new PIXI.Sprite.fromFrame("logoMain.png");
-		this.staticLogo.anchor = this.logoLabel.anchor
-		this.logoLabel.addChild(this.staticLogo);
+		// this.staticLogo = new PIXI.Sprite.fromFrame("logoMain.png");
+		// this.staticLogo.anchor = this.logoLabel.anchor
+		// this.logoLabel.addChild(this.staticLogo);
 		
 		
-		this.mainLogo = new PIXI.Sprite.fromFrame("logo1.png");
-		this.mainLogo.anchor = this.logoLabel.anchor
+		// this.mainLogo = new PIXI.Sprite.fromFrame("logo1.png");
+		// this.mainLogo.anchor = this.logoLabel.anchor
 		
-		this.mainLogo.sin = Math.PI;
-		this.mainLogo.maxAlpha = 0.3;
-		this.mainLogo.minAlpha = 0.1;
-		this.mainLogo.speed = 0.15;
-		this.logoLayers.push(this.mainLogo);
+		// this.mainLogo.sin = Math.PI;
+		// this.mainLogo.maxAlpha = 0.3;
+		// this.mainLogo.minAlpha = 0.1;
+		// this.mainLogo.speed = 0.15;
+		// this.logoLayers.push(this.mainLogo);
 		
-		this.logoLabel.addChild(this.mainLogo);
+		// this.logoLabel.addChild(this.mainLogo);
 
 
 
@@ -73,9 +73,9 @@ export default class StartScreenContainer extends PIXI.Container {
 		//	this.logoLayers.push(this.mainLogo);
 
 
-		this.gameBy = new PIXI.Text("by jeff ramos", { font: '24px', fill: config.colors.white, align: 'center', fontFamily: window.LOGO_FONT });
+		this.gameBy = new PIXI.Text("by jeff ramos", { font: '18px', fill: config.colors.white, align: 'center', fontFamily: window.LOGO_FONT });
 		this.gameBy.pivot.x = this.gameBy.width / 2;
-		this.gameBy.y = this.logoLabel.height + 70
+		this.gameBy.y = this.logoLabel.height / 2 // + 70
 		this.logoLabel.addChild(this.gameBy);
 
 
@@ -215,14 +215,15 @@ export default class StartScreenContainer extends PIXI.Container {
 		let colorScheme = colorSchemes.getCurrentColorScheme();
 
 		this.gameBy.style.fill = colorScheme.fontColor
-		this.mainLogo.tint = colorScheme.fontColor
+		this.logoLabel.style.fill = colorScheme.fontColor
+		//this.mainLogo.tint = colorScheme.fontColor
 
 		for (let index = 0; index < this.logoLayers.length - 1; index++) {
 			const element = this.logoLayers[index];
 			element.tint = colorScheme.fontColor;
 		}
 
-		this.staticLogo.tint = colorScheme.fontColor;
+		//this.staticLogo.tint = colorScheme.fontColor;
 	}
 	updateLinesColor() {
 		console.log(window.COOKIE_MANAGER.stats.colorPalletID)
