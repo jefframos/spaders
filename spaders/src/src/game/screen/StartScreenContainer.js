@@ -37,19 +37,19 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.logoLabel.scale.set(0.7)
 		this.logoLabel.anchor.set(0.5)
 
-		for (let index = 1; index <= 3; index++) {
-			let logoLayer = new PIXI.Sprite.fromFrame("logoLayer" + index + ".png");
-			logoLayer.anchor = this.logoLabel.anchor
-			//logoLayer.tint = 0xFFffff * Math.random();
-			//logoLayer.alpha = 0;
-			this.logoLabel.addChild(logoLayer);
+		// for (let index = 1; index <= 3; index++) {
+		// 	let logoLayer = new PIXI.Sprite.fromFrame("logoLayer" + index + ".png");
+		// 	logoLayer.anchor = this.logoLabel.anchor
+		// 	//logoLayer.tint = 0xFFffff * Math.random();
+		// 	//logoLayer.alpha = 0;
+		// 	this.logoLabel.addChild(logoLayer);
 
-			logoLayer.sin = index * Math.PI / 4;
-			logoLayer.maxAlpha = 0.35;
-			logoLayer.minAlpha = 0.1;
-			logoLayer.speed = index / 4;
-			this.logoLayers.push(logoLayer);
-		}
+		// 	logoLayer.sin = index * Math.PI / 4;
+		// 	logoLayer.maxAlpha = 0.35;
+		// 	logoLayer.minAlpha = 0.1;
+		// 	logoLayer.speed = index / 4;
+		// 	this.logoLayers.push(logoLayer);
+		// }
 		
 		this.staticLogo = new PIXI.Sprite.fromFrame("logoMain.png");
 		this.staticLogo.anchor = this.logoLabel.anchor
