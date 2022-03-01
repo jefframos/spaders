@@ -255,7 +255,7 @@ export default class LevelSelectContainer extends PIXI.Container {
                 navButton.setStandardState();
             }
             if (debugThumb) {
-                navButton.updateLabelTop('~' + utils.convertNumToTime(Math.ceil(estimatedTime)))// + '    ' + '~' + utils.convertNumToTime(Math.ceil(estimatedTimeHard)));
+                navButton.updateLabelTop(navButton.section.name + ' ~' + utils.convertNumToTime(Math.ceil(estimatedTime)))// + '    ' + '~' + utils.convertNumToTime(Math.ceil(estimatedTimeHard)));
             } else {
                 navButton.updateLabelTop(navButton.section.name);
             }
@@ -626,7 +626,7 @@ export default class LevelSelectContainer extends PIXI.Container {
 
         let debugThumb = window.COOKIE_MANAGER.debug.showAllThumbs;
         if (debugThumb) {
-            levelTierButton.updateLabelTop('~' + utils.convertNumToTime(Math.ceil(totalEstimatedTime)))// + '    ' + '~' + utils.convertNumToTime(Math.ceil(totalEstimatedTimeHard)));
+            levelTierButton.updateLabelTop(data[0].tierName+ ' ~' + utils.convertNumToTime(Math.ceil(totalEstimatedTime)))// + '    ' + '~' + utils.convertNumToTime(Math.ceil(totalEstimatedTimeHard)));
         }
 
         levelTierButton.setLargeButtonMode();

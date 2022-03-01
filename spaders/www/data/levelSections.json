@@ -54,6 +54,10 @@
                 {
                     "name": "2nd gen",
                     "dataPath": "movies/moviesLevels1.json"
+                },                
+                {
+                    "name": "2nd gen",
+                    "dataPath": "movies/moviesLevelsAdventure.json"
                 }                
             ]
         },

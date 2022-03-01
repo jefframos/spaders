@@ -1,12 +1,12 @@
 {
-    "activeFile": "how-to-play/creatures.tmx",
+    "activeFile": "movies/moviesAdventure.tmx",
     "expandedProjectPaths": [
         "how-to-play",
         "gb",
         "templates",
+        "main",
         "videogames",
-        "movies",
-        "main"
+        "movies"
     ],
     "fileStates": {
         "D:/Projects/tetra/map/levels.tmx": {
@@ -215,11 +215,19 @@
             }
         },
         "movies/movies1.tmx": {
-            "scale": 0.8275390625,
-            "selectedLayer": 0,
+            "scale": 0.5,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 352.2492329478404,
-                "y": 384.27189048855325
+                "x": 355,
+                "y": 264
+            }
+        },
+        "movies/moviesAdventure.tmx": {
+            "scale": 0.33,
+            "selectedLayer": 8,
+            "viewCenter": {
+                "x": 859.090909090909,
+                "y": 839.3939393939394
             }
         },
         "movies/spadersTileset.tsx": {
@@ -255,7 +263,7 @@
         },
         "videogames/levels.tmx": {
             "scale": 0.25,
-            "selectedLayer": 0,
+            "selectedLayer": 13,
             "viewCenter": {
                 "x": 698,
                 "y": 376
@@ -283,7 +291,7 @@
             "scaleInEditor": 1
         }
     },
-    "last.exportedFilePath": "D:/projects/spaders/spaders/www/data",
+    "last.exportedFilePath": "D:/projects/spaders/spaders/www/data/movies",
     "last.externalTilesetPath": "E:/projects/spaders/spaders/src/map/tilesets",
     "last.imagePath": "E:/projects/spaders/spaders/src/map/tilesets",
     "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
@@ -308,22 +316,24 @@
         "gb/gameboyWeapon1.tmx",
         "gb/gameboyWeapon2.tmx",
         "videogames/levels3.tmx",
-        "how-to-play/pokemons.tmx"
+        "how-to-play/pokemons.tmx",
+        "how-to-play/question-mark.tmx",
+        "movies/moviesAdventure.tmx"
     ],
     "project": "gameLevelsProject.tiled-project",
     "property.type": "int",
     "recentFiles": [
-        "gb/gameboyWeapon1.tmx",
-        "videogames/levels.tmx",
         "how-to-play/people-set-1.tmx",
         "how-to-play/how-to-play-medium.tmx",
-        "how-to-play/pokemons.tmx",
-        "videogames/levels3.tmx",
-        "gb/gameboyWeapon2.tmx",
-        "gb/gameboyMisc2.tmx",
-        "gb/gameboyCreatures.tmx",
-        "gb/gameboyMisc.tmx",
-        "how-to-play/gameboy.tmx",
+        "how-to-play/creatures.tmx",
+        "how-to-play/things.tmx",
+        "videogames/levels.tmx",
+        "videogames/levels2.tmx",
+        "movies/movies1.tmx",
+        "how-to-play/simple-shapes.tmx",
+        "how-to-play/simple-shapes-synt.tmx",
+        "how-to-play/pokemon2.tmx",
+        "how-to-play/pokemon22.tmx",
         "how-to-play/bossa.tmx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
