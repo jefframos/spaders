@@ -451,6 +451,7 @@ export default class TetraScreen extends Screen {
 
 		this.inGameMenu.onBack.add(() => this.mainmenuStateFromGame())
 		this.inGameMenu.onRestart.add(() => this.resetGame())
+		this.inGameMenu.onNextLevel.add(() => this.playNextLevel())
 		this.inGameMenu.onPause.add(() => this.pauseGame())
 		this.inGameMenu.onUnPause.add(() => this.onUnPause())
 
@@ -521,8 +522,6 @@ export default class TetraScreen extends Screen {
 		this.timerRect.updateColor(colorScheme.fontColor);
 		this.movesRect.updateColor(colorScheme.fontColor);
 		this.scoreRect.updateColor(colorScheme.fontColor);
-
-
 
 		let colorSchemeGrid = colorScheme.grid;
 		this.backQueueShape.texture = PIXI.Texture.fromFrame(colorSchemeGrid.spriteRect)
@@ -948,6 +947,9 @@ export default class TetraScreen extends Screen {
 		this.backGridContainer.addChild(this.trailHorizontal);
 		this.trailHorizontal.alpha = 0;
 
+		let colorScheme = colorSchemes.getCurrentColorScheme();
+		this.trailMarker.arrowsUp.tint = colorScheme.arrowTrailColor;
+
 	}
 	startNewLevel(data, isEasy) {
 		this.currentLevelData = data;
@@ -1359,6 +1361,9 @@ export default class TetraScreen extends Screen {
 		this.currentCard.alpha = 0;
 		this.currentCard.updateCard(true);
 		this.currentCard.visible = false;
+
+		TweenMax.killTweensOf(this.offsetCard)
+		TweenMax.killTweensOf(this.currentCard)
 		setTimeout(() => {
 			this.offsetCard.y = CARD.height * 3;
 			this.currentCard.visible = true;
@@ -1622,6 +1627,7 @@ export default class TetraScreen extends Screen {
 		this.trailMarker.arrowsUp.tilePosition.y -= 128 * delta;
 		this.trailMarker.arrowsUp.tilePosition.y %= 128;
 
+
 		this.updateLabelsPosition()
 		this.updateUI();
 
@@ -1656,7 +1662,7 @@ export default class TetraScreen extends Screen {
 			this.trailMarker.arrowsUp.scale.set(this.trailMarker.overShape.width / this.trailMarker.arrowsUp.width)
 			this.trailMarker.arrowsUp.height = this.trailMarker.overShape.height / this.trailMarker.arrowsUp.scale.y
 			this.trailMarker.arrowsUp.y = 0
-			this.trailMarker.arrowsUp.alpha = 0.35;
+			this.trailMarker.arrowsUp.alpha = 0.75;			
 			this.trailMarker.overShape.tint = this.trailMarker.tint;
 
 			// if(this.tvLines.tilePosition.y > 40){

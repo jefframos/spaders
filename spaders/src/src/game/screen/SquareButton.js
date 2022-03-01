@@ -314,7 +314,7 @@ export default class SquareButton extends PIXI.Container {
         //this.icon.y = offset.y
         utils.resizeToFitAR(
             {
-                width: this.squareButtonBackShape.width,
+                width: this.squareButtonBackShape.width * 0.8,
                 height: this.squareButtonBackShape.height * scale
             }, this.icon)
         // if (graphic.width > graphic.height) {

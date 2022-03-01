@@ -181,7 +181,7 @@ export default class Board {
 		}
 	}
 	getLastCardPosition(laneID){
-		laneID = Math.min(laneID, this.cards[0].length)
+		laneID = Math.min(laneID, this.cards.length)
 		laneID = Math.max(laneID, 0)
 		let spaceID = -1;
 		for (var i = this.cards[laneID].length - 1; i >= 0; i--) {

@@ -6,7 +6,7 @@
  <properties>
   <property name="description" value="no description here"/>
   <property name="iconURL" value=""/>
-  <property name="sectionName" value="Misc"/>
+  <property name="sectionName" value="High Res"/>
  </properties>
  <tileset firstgid="1" source="../tilesets/spadersTileset.tsx"/>
  <tileset firstgid="65" source="../tilesets/gb.tsx"/>

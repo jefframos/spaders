@@ -6,7 +6,7 @@
         {
             "color": "0xDDDDDD",
             "ignore": false,
-            "name": "Shapes",
+            "name": "Basics",
             "displayName": "Video Game History",
             "imageSrc": "",
             "colorPalletId": 0,
@@ -58,7 +58,7 @@
         {
             "color": "0xDDDDDD",
             "ignore": false,
-            "name": "pokemon",
+            "name": "Pokemon",
             "displayName": "Video Game History",
             "imageSrc": "",
             "colorPalletId": 3,

@@ -44,6 +44,14 @@ export default class InGameMenu extends PIXI.Container {
 		this.mainContainer.addChild(this.backShape);
 		this.mainContainer.scale.set(1.5)
 
+
+
+		this.nextLevel = new UIButton1(config.colors.background, window.iconsData.next, config.colors.white);
+		this.nextLevel.onClick.add(() => {
+			this.onNextLevel.dispatch()
+		});
+		this.nextLevel.updateRotation(0);
+
 		this.autoPlayButton = new UIButton1(config.colors.background,  window.iconsData.reload, config.colors.white);
 		this.autoPlayButton.onClick.add(() => {
 			this.state = 1;
@@ -76,20 +84,6 @@ export default class InGameMenu extends PIXI.Container {
 		this.positionSpring.x = -this.backShape.width;
 		this.mainContainer.x = -this.backShape.width;
 		this.addChild(this.mainContainer);
-		this.mainContainer.addChild(this.closeButton);
-		this.mainContainer.addChild(this.refreshButton);
-		//this.mainContainer.addChild(this.autoPlayButton);
-		this.mainContainer.addChild(this.toggleSound);
-		this.refreshButton.x = this.backShape.width - 60
-		this.closeButton.x = this.refreshButton.x - 90
-		this.refreshButton.y = 50
-		this.closeButton.y = this.refreshButton.y;
-
-		this.autoPlayButton.x = this.toggleSound.x - 90;
-		this.autoPlayButton.y = this.refreshButton.y;
-
-		this.toggleSound.x = this.closeButton.x - 90;
-		this.toggleSound.y = this.refreshButton.y;
 
 		this.addChild(this.openMenu);
 
@@ -97,9 +91,26 @@ export default class InGameMenu extends PIXI.Container {
 		this.onRestart = new signals.Signal()
 		this.onPause = new signals.Signal()
 		this.onUnPause = new signals.Signal()
+		this.onNextLevel = new signals.Signal()
 
 		this.state = 1;
 
+		this.buttons = [this.refreshButton, this.nextLevel, this.toggleSound, this.closeButton]
+
+		let padding = 60
+		let space = 20
+		this.backShape.width = (this.refreshButton.width +space) * this.buttons.length + padding / 2
+		this.backShape.height = 100
+		this.refreshButton.x = this.backShape.width - padding;
+		this.refreshButton.y = 50;
+		for (let index = 0; index < this.buttons.length; index++) {
+			let element = this.buttons[index]
+			let prev = this.buttons[index - 1]
+			this.mainContainer.addChild(element);
+			
+			element.x = this.backShape.width - element.width / 2 - ((element.width +space) * index) - padding / 2
+			element.y = 50
+		}
 
 	}
 	toggleState() {

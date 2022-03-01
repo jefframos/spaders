@@ -30,6 +30,7 @@ export default {
             fillBarCompleteColor: config.colors.purple,
             background: 0x151515,
             fontColor: 0xFFFFFF,
+            arrowTrailColor: 0xFFFFFF,
             buttonData: {
                 fontColor: 0xFFFFFF,
                 levelCompleteColor: config.colors.blue2,
@@ -88,6 +89,7 @@ export default {
             fillBarCompleteColor: 0xFFFFFF,
             background: 0x151515,
             fontColor: 0xFFFFFF,
+            arrowTrailColor: 0xFFFFFF,
             buttonData: {
                 fontColor: 0xFFFFFF,
                 levelCompleteColor: config.colors.blue2,
@@ -139,6 +141,7 @@ export default {
             fillBarCompleteColor: 0xFFFFFF,
             background: 0xCADCA0,
             fontColor: 0x182018,
+            arrowTrailColor: 0x182018,
             buttonData: {
                 fontColor: 0xFFFFFF,
                 levelCompleteColor: 0x89c077,
@@ -190,6 +193,7 @@ export default {
             fillBarCompleteColor: 0xFFFFFF,
             background: 0x333333,
             fontColor: 0xFFFFFF,
+            arrowTrailColor: 0xFFFFFF,
             buttonData: {
                 fontColor: 0xFFFFFF,
                 levelCompleteColor: config.colors.blue2,
