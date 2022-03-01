@@ -221,12 +221,12 @@
                 {
                  "name":"padding-left",
                  "type":"int",
-                 "value":2
+                 "value":1
                 }, 
                 {
                  "name":"padding-right",
                  "type":"int",
-                 "value":2
+                 "value":1
                 }, 
                 {
                  "name":"padding-top",
@@ -284,12 +284,12 @@
                 {
                  "name":"padding-left",
                  "type":"int",
-                 "value":2
+                 "value":0
                 }, 
                 {
                  "name":"padding-right",
                  "type":"int",
-                 "value":2
+                 "value":0
                 }, 
                 {
                  "name":"padding-top",
