@@ -221,7 +221,7 @@
                 {
                  "name":"scale",
                  "type":"int",
-                 "value":0
+                 "value":2
                 }, 
                 {
                  "name":"tier",
@@ -279,7 +279,7 @@
                 {
                  "name":"scale",
                  "type":"int",
-                 "value":0
+                 "value":2
                 }, 
                 {
                  "name":"tier",
@@ -337,7 +337,7 @@
                 {
                  "name":"scale",
                  "type":"int",
-                 "value":0
+                 "value":2
                 }, 
                 {
                  "name":"tier",
@@ -395,7 +395,7 @@
                 {
                  "name":"scale",
                  "type":"int",
-                 "value":0
+                 "value":2
                 }, 
                 {
                  "name":"tier",
@@ -453,7 +453,7 @@
                 {
                  "name":"scale",
                  "type":"int",
-                 "value":0
+                 "value":2
                 }, 
                 {
                  "name":"tier",
@@ -511,7 +511,7 @@
                 {
                  "name":"scale",
                  "type":"int",
-                 "value":0
+                 "value":2
                 }, 
                 {
                  "name":"tier",
@@ -569,7 +569,7 @@
                 {
                  "name":"scale",
                  "type":"int",
-                 "value":0
+                 "value":2
                 }, 
                 {
                  "name":"tier",
@@ -627,7 +627,7 @@
                 {
                  "name":"scale",
                  "type":"int",
-                 "value":0
+                 "value":2
                 }, 
                 {
                  "name":"tier",
@@ -685,7 +685,7 @@
                 {
                  "name":"scale",
                  "type":"int",
-                 "value":0
+                 "value":2
                 }, 
                 {
                  "name":"tier",
@@ -743,7 +743,7 @@
                 {
                  "name":"scale",
                  "type":"int",
-                 "value":0
+                 "value":2
                 }, 
                 {
                  "name":"tier",
