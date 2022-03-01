@@ -509,6 +509,11 @@ export default class TetraScreen extends Screen {
 		})
 
 		this.updateColorScheme();
+
+		this.topUIContainer.x = this.gameCanvas.x
+		this.topUIContainer.y = this.gameCanvas.y - 500
+		this.bottomUIContainer.x = this.gameCanvas.x
+		this.bottomUIContainer.y = window.innerHeight//this.gameCanvas.y + this.gameCanvas.height + 500
 	}
 	pauseGame() {
 		//this.gameRunning = false;
@@ -1003,7 +1008,7 @@ export default class TetraScreen extends Screen {
 		// }
 		//this.chargeBombBar.visible = true;
 
-		
+
 		this.chargeBombBar.sin = 0;
 		this.chargeBombBar.scaleOffset = { x: 0, y: 0 };
 		this.offsetCard = { x: 0, y: 0 }
@@ -1662,7 +1667,7 @@ export default class TetraScreen extends Screen {
 			this.trailMarker.arrowsUp.scale.set(this.trailMarker.overShape.width / this.trailMarker.arrowsUp.width)
 			this.trailMarker.arrowsUp.height = this.trailMarker.overShape.height / this.trailMarker.arrowsUp.scale.y
 			this.trailMarker.arrowsUp.y = 0
-			this.trailMarker.arrowsUp.alpha = 0.75;			
+			this.trailMarker.arrowsUp.alpha = 0.75;
 			this.trailMarker.overShape.tint = this.trailMarker.tint;
 
 			// if(this.tvLines.tilePosition.y > 40){
