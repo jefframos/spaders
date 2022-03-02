@@ -4,7 +4,7 @@
   <export target="../../../www/data/gameboy/gameboyWeapons2.json" format="json"/>
  </editorsettings>
  <properties>
-  <property name="description" value="no description here"/>
+  <property name="coverID" type="int" value="5"/>
   <property name="iconURL" value="sss"/>
   <property name="sectionName" value="Weapons 2"/>
  </properties>

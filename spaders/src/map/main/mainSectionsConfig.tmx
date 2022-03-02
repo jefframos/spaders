@@ -4,7 +4,7 @@
   <export target="../../../www/data/mainLevelSections.json" format="json"/>
  </editorsettings>
  <properties>
-  <property name="description" value="no description here"/>
+    <property name="coverID" type="int" value="0"/>
   <property name="sectionName" value=""/>
  </properties>
  <tileset firstgid="1" source="../tilesets/spadersTileset.tsx"/>

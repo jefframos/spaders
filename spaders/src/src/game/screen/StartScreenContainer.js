@@ -447,7 +447,7 @@ export default class StartScreenContainer extends PIXI.Container {
 	showCloseButton() {
 		this.closeApplicationButton.visible = true;
 	}
-	showFromGame(force = false, delay = 0) {
+	showFromGame(force = false, delay = 0, redirectData = null) {
 		TweenLite.killTweensOf(this.screenContainer)
 		this.screenState = 2
 		//this.startMenuState(delay, force);
@@ -460,6 +460,10 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.playButton.visible = true;
 		this.backButton.visible = true;
 
+		if(redirectData){
+			this.chooseLevelPanel.setRedirectData(redirectData);
+		}
+		
 		this.chooseLevelPanel.showingBlockTime = 0.5;
 		TweenLite.to(this.screenContainer, force ? 0 : 0.2, { alpha: 1 })
 	}

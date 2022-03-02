@@ -10,6 +10,11 @@
          "opacity":1,
          "properties":[
                 {
+                 "name":"autoPlaceBlockers",
+                 "type":"int",
+                 "value":2
+                }, 
+                {
                  "name":"i",
                  "type":"int",
                  "value":7
@@ -18,6 +23,26 @@
                  "name":"j",
                  "type":"int",
                  "value":9
+                }, 
+                {
+                 "name":"padding-bottom",
+                 "type":"int",
+                 "value":2
+                }, 
+                {
+                 "name":"padding-left",
+                 "type":"int",
+                 "value":1
+                }, 
+                {
+                 "name":"padding-right",
+                 "type":"int",
+                 "value":1
+                }, 
+                {
+                 "name":"padding-top",
+                 "type":"int",
+                 "value":0
                 }, 
                 {
                  "name":"startI",
@@ -48,6 +73,11 @@
          "opacity":1,
          "properties":[
                 {
+                 "name":"autoPlaceBlockers",
+                 "type":"int",
+                 "value":2
+                }, 
+                {
                  "name":"i",
                  "type":"int",
                  "value":7
@@ -56,6 +86,26 @@
                  "name":"j",
                  "type":"int",
                  "value":9
+                }, 
+                {
+                 "name":"padding-bottom",
+                 "type":"int",
+                 "value":2
+                }, 
+                {
+                 "name":"padding-left",
+                 "type":"int",
+                 "value":1
+                }, 
+                {
+                 "name":"padding-right",
+                 "type":"int",
+                 "value":1
+                }, 
+                {
+                 "name":"padding-top",
+                 "type":"int",
+                 "value":0
                 }, 
                 {
                  "name":"startI",
@@ -83,9 +133,9 @@
  "orientation":"orthogonal",
  "properties":[
         {
-         "name":"description",
-         "type":"string",
-         "value":"no description here"
+         "name":"coverID",
+         "type":"int",
+         "value":0
         }, 
         {
          "name":"iconURL",
@@ -98,7 +148,7 @@
          "value":"Pokemon"
         }],
  "renderorder":"right-down",
- "tiledversion":"1.7.2",
+ "tiledversion":"1.8.1",
  "tileheight":64,
  "tilesets":[
         {
@@ -111,6 +161,6 @@
         }],
  "tilewidth":64,
  "type":"map",
- "version":"1.6",
+ "version":"1.8",
  "width":11
 }

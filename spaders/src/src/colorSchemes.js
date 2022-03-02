@@ -3,6 +3,7 @@ export default {
 
     colorSchemes: [
         {
+            name:"standard",
             block: { id: 19, hasWhite: false, isBlock: true, color: config.colors.block },
             list: [
                 { hasWhite: false, isBlock: false, color: config.colors.blue, life: 0 },
@@ -50,6 +51,7 @@ export default {
             }
         },
         {
+            name:"synth",
             block: { id: 32, hasWhite: false, isBlock: true, color: config.colors.block },
             list: [//syinth
                 { hasWhite: false, isBlock: false, color: 0xffd319, life: 0 },
@@ -81,7 +83,8 @@ export default {
 
                 { hasWhite: false, isBlock: false, color: 0x3484f5, life: 4.3 },
                 { hasWhite: false, isBlock: false, color: 0x8ad2f4, life: 3.3 },
-                { hasWhite: false, isBlock: false, color: 0x8ad2f4, life: 3.3 },
+                { hasWhite: false, isBlock: false, color: 0xf4d28a, life: 3.3 },
+                { hasWhite: false, isBlock: false, color: 0x98e826, life: 3.3 },
 
             ],
             dark: 0x111111,
@@ -114,6 +117,7 @@ export default {
             }
         },
         {
+            name:"gameboy",
             block: { id: 19, hasWhite: false, isBlock: true, color: config.colors.block },
             list: [//gb
                 { hasWhite: false, isBlock: false, color: 0x85cd6e, life: 0 },
@@ -166,6 +170,7 @@ export default {
             }
         },
         {
+            name:"pokemon",
             block: { id: 19, hasWhite: false, isBlock: true, color: config.colors.block },
             list: [//poke
                 { hasWhite: false, isBlock: false, color: 0x4890a8, life: 0 },
@@ -211,7 +216,66 @@ export default {
                 minAlpha: 0,
                 extraTileAlpha: 0
             }
-        }
+        },
+        {
+            name:"videogames",
+            block: { id: 32, hasWhite: false, isBlock: true, color: config.colors.block },
+            list: [
+                { hasWhite: false, isBlock: false, color: 0x71bf45, life: 0 },
+                { hasWhite: false, isBlock: false, color: 0x00a1e5, life: 1 },
+                { hasWhite: false, isBlock: false, color: 0xffde00, life: 2 },
+                { hasWhite: false, isBlock: false, color: 0xed145b, life: 3 },
+                { hasWhite: false, isBlock: false, color: 0x8c1eff, life: 4 },
+                { hasWhite: false, isBlock: false, color: 0xff3ffd, life: 5 },
+                { hasWhite: false, isBlock: false, color: 0xff5600, life: 6 },
+                { hasWhite: false, isBlock: false, color: 0xffffff, life: 7 },
+
+                { hasWhite: false, isBlock: false, color: 0x9ee078, life: 8.1 },
+                { hasWhite: false, isBlock: false, color: 0x41bbee, life: 4.1 },
+                { hasWhite: false, isBlock: false, color: 0xfff192, life: 5.1 },
+                { hasWhite: false, isBlock: false, color: 0xf35d8e, life: 6.2 },
+                { hasWhite: false, isBlock: false, color: 0xac61fb, life: 6.3 },
+                { hasWhite: false, isBlock: false, color: 0xfa7df9, life: 5.3 },
+                { hasWhite: false, isBlock: false, color: 0xff6861, life: 6.3 },
+                { hasWhite: false, isBlock: false, color: 0x777777, life: 7.3 },
+                
+                { hasWhite: false, isBlock: false, color: 0x4f8b2d, life: 8.3 },
+                { hasWhite: false, isBlock: false, color: 0x066d99, life: 4.3 },
+                { hasWhite: false, isBlock: false, color: 0xa38e03, life: 3.3 },
+                { hasWhite: false, isBlock: false, color: 0xb21146, life: 3.3 },
+                { hasWhite: false, isBlock: false, color: 0x551995, life: 3.3 },
+                { hasWhite: false, isBlock: false, color: 0x9b249a, life: 3.3 },
+                { hasWhite: false, isBlock: false, color: 0xb44208, life: 3.3 },
+                { hasWhite: 0xffffff, isBlock: false, color: 0x231f20, life: 3.3 },
+                
+                { hasWhite: false, isBlock: false, color: 0x654d33, life: 3.3 },
+                { hasWhite: false, isBlock: false, color: 0xe4c39c, life: 3.3 },
+                { hasWhite: false, isBlock: false, color: 0xff1f1f, life: 3.3 },
+            ],
+            dark: 0x231f20,
+            fillBarColor: 0x71bf45,
+            fillBarCompleteColor: 0x00a1e5,
+            background: 0x151515,
+            fontColor: 0xFFFFFF,
+            arrowTrailColor: 0xFFFFFF,
+            buttonData: {
+                fontColor: 0xFFFFFF,
+                levelCompleteColor: 0x00a1e5,
+                tierCompleteColor: 0x8c1eff,
+                buttonStandardColor: 0x333333,
+                buttonStandardDarkColor: 0x111111,
+            },
+            grid: {
+                color: 0xFFFFFF,
+                sprite: "largeCard.png",
+                spriteTile: "largeCard.png",
+                spriteTrail: "largeCard.png",
+                spriteRect: "largeCard.png",
+                scaleTrail: false,
+                minAlpha: 0,
+                extraTileAlpha: 0
+            }
+        },
     ],
     getColorScheme(id) {
         return this.colorSchemes[id];

@@ -159,6 +159,7 @@ export default class Grid extends PIXI.Container {
 			let drawOdd = levelData.piecesToDraw[0].length % 2 != 0
 			let boardOdd = levelData.pieces[0].length % 2 != 0
 			let scaleOdd = levelData.levelDataScale % 2 != 0
+
 			console.log(drawOdd)
 			if (levelData.padding.left) {
 				gridDrawContainer.x = levelData.padding.left * CARD.width;
@@ -177,7 +178,7 @@ export default class Grid extends PIXI.Container {
 
 				if (drawOdd && (boardOdd != drawOdd)) {
 					this.topGridContainer.x += CARD.width * 0.25;
-				} else if (!drawOdd && (boardOdd == drawOdd) && !scaleOdd) {
+				} else if (!drawOdd && (boardOdd == drawOdd) && (scaleOdd && levelData.piecesToDraw[0].length < 18)) {
 					this.topGridContainer.x += CARD.width * 0.5;
 				}
 			}

@@ -49,8 +49,6 @@ export default class TetraScreen extends Screen {
 			PIXI.Texture.fromFrame('largeCard.png'), 5, 0, 5, 0)//new PIXI.Graphics().beginFill(0xFFFFFF).drawRoundedRect(0, 0, 20, 20, 10);
 		this.trailHorizontal.alpha = 0;
 
-		//console.log(this.levels)
-		//console.log(this.levels)
 		this.hasHash = false;
 		this.currentLevelID = 0;
 		this.currentLevelData = this.levels[this.currentLevelID];
@@ -58,9 +56,10 @@ export default class TetraScreen extends Screen {
 		this.isTutorial = false;
 		this.autoRedirectToLevelSelect = false;
 
+		this.autoRedirectData = {section:null, tier:null}
+
 		if (window.location.hash) {
-			var hash = window.location.hash.substring(1); //Puts hash in variable, and removes the # character
-			//console.log(hash)
+			var hash = window.location.hash.substring(1);
 			if (hash == "t") {
 				this.isTutorial = true;
 			} else if (hash == "a") {
@@ -74,15 +73,39 @@ export default class TetraScreen extends Screen {
 
 					this.hasHash = true;
 					this.currentLevelID = hash;
-
 					this.currentLevelData = this.levels[hash];
 
 				}
 			}
 		}
 
+		const urlParams = new URLSearchParams(window.location.search);
+		if (urlParams) {
+			let levelRedirectParameters = urlParams.get('level')
 
-		let tempid = this.currentLevelID >= 0 ? this.currentLevelID : 0
+			if (levelRedirectParameters) {
+				levelRedirectParameters = levelRedirectParameters.split(',');
+
+				for (let index = 0; index < 3; index++) {
+					if (levelRedirectParameters.length < index + 1) {
+						levelRedirectParameters.push(null);
+					}
+				}
+				let parameters = window.getLevelData(levelRedirectParameters[0], levelRedirectParameters[1], levelRedirectParameters[2])
+				if (parameters.level) {
+					this.currentLevelData = parameters.level
+					this.hasHash = true;
+					this.currentLevelID = 0;
+				}else if (parameters.section){
+					this.autoRedirectData.section = parameters.section;
+					this.autoRedirectData.tier = parameters.tier;
+					this.autoRedirectToLevelSelect = true;
+					this.hasHash = true;
+					this.currentLevelID = -1;
+				}
+			}
+		}
+
 
 		this.updateGridDimensions();
 
@@ -131,7 +154,13 @@ export default class TetraScreen extends Screen {
 	}
 	onDestroyAllStartedCards() {
 		this.blockGameTimer = 1;
-		this.colorTween.startTween(this.currentLevelData.colorPalletId);
+
+		let targetPallet = this.currentLevelData.colorPalletId
+		if (this.currentLevelData.customPallet && this.currentLevelData.customPallet > 0) {
+			targetPallet = this.currentLevelData.customPallet;
+		}
+
+		this.colorTween.startTween(targetPallet);
 		this.gameplayState = 1;
 
 		//(pos, label, delay = 0, dir = 1, scale = 1, color = 0xFFFFFF, ease = Back.easeOut)
@@ -466,6 +495,10 @@ export default class TetraScreen extends Screen {
 		if (!this.hasHash) {
 			this.mainmenuState();
 
+		} else {
+			setTimeout(() => {
+				window.game.onTapUp();
+			}, 60);
 		}
 		this.tutorialOverlay = new TutorialOverlay();
 		this.addChild(this.tutorialOverlay);
@@ -500,7 +533,8 @@ export default class TetraScreen extends Screen {
 		if (this.autoRedirectToLevelSelect) {
 			this.autoRedirectToLevelSelect = false;
 			setTimeout(() => {
-				this.mainmenuStateFromGame();
+				console.log(this.autoRedirectData)
+				this.mainmenuStateFromGame(false, this.autoRedirectData);
 			}, 100);
 		}
 
@@ -639,14 +673,14 @@ export default class TetraScreen extends Screen {
 		this.colorTween.stopTween();
 
 	}
-	mainmenuStateFromGame(force = false) {
+	mainmenuStateFromGame(force = false, redirectData = null) {
 
 		this.removeTrails();
 		console.log("TO MAIN MENU")
 		window.SOUND_MANAGER.playMainMenu();
 		this.mainMenuSettings.collapse();
 		this.endGameScreenContainer.hide(force);
-		this.startScreenContainer.showFromGame(force, force ? 0.2 : 0.75);
+		this.startScreenContainer.showFromGame(force, force ? 0.2 : 0.75, redirectData);
 		this.gameRunning = false;
 		this.mainMenuSettings.visible = true;
 		this.startScreenContainer.showCloseButton();
@@ -667,8 +701,13 @@ export default class TetraScreen extends Screen {
 		this.startScreenContainer.hide(true);
 		let tempid = this.currentLevelID >= 0 ? this.currentLevelID : 0
 
-		let img = this.generateImage(this.currentLevelData, 24, 0, this.currentLevelData.colorPalletId);
-		img = this.generateImage(this.currentLevelData, 24, 0, this.currentLevelData.colorPalletId);
+		let targetPallet = this.currentLevelData.colorPalletId
+		if (this.currentLevelData.customPallet && this.currentLevelData.customPallet > 0) {
+			targetPallet = this.currentLevelData.customPallet;
+		}
+
+		let img = this.generateImage(this.currentLevelData, 24, 0, targetPallet);
+		img = this.generateImage(this.currentLevelData, 24, 0, targetPallet);
 		this.endGameScreenContainer.setStats(
 			this.currentPoints,
 			this.currentRound,
@@ -1031,14 +1070,20 @@ export default class TetraScreen extends Screen {
 		this.isFinalState = false;
 		this.isFirstClick = true;
 
+		let targetPallet = this.currentLevelData.colorPalletId
+		if (this.currentLevelData.customPallet && this.currentLevelData.customPallet > 0) {
+			targetPallet = this.currentLevelData.customPallet;
+		}
+
+
 		if (this.hasHash) {
 			//console.log(this.currentLevelData)
-			window.COOKIE_MANAGER.updateColorPallete(this.currentLevelData.colorPalletId);
+			window.COOKIE_MANAGER.updateColorPallete(targetPallet);
 		}
 		//window.COOKIE_MANAGER.stats.latestColorPallete
 		if (this.currentLevelData.colorPalletId != undefined)
-			window.COOKIE_MANAGER.updateColorPallete(this.currentLevelData.colorPalletId);
-		let scheme = window.COOKIE_MANAGER.stats.colorPalletID;
+			window.COOKIE_MANAGER.updateColorPallete(targetPallet);
+		let scheme = targetPallet;
 
 		//scheme = scheme == undefined ? 0 : scheme
 
@@ -1046,7 +1091,7 @@ export default class TetraScreen extends Screen {
 
 		this.background.updateColors(colorSchemes.colorSchemes[scheme].list)
 
-		this.colorTweenBomb.startTween(this.currentLevelData.colorPalletId)
+		this.colorTweenBomb.startTween(targetPallet)
 
 		this.fireworksTimer = 0;
 		this.mainMenuSettings.collapse();
@@ -1324,7 +1369,7 @@ export default class TetraScreen extends Screen {
 			window.popUpOverlay.show(data, () => {
 				this.resetGame();
 			}, () => {
-				this.mainmenuStateFromGame();
+				this.mainmenuStateFromGame(false);
 			}, true)
 		}, 750);
 	}
@@ -1490,6 +1535,7 @@ export default class TetraScreen extends Screen {
 		}
 		///sort hash when load
 		if (this.hasHash && !this.hashUsed) {
+
 			if (this.currentLevelID < 0) {
 				this.endGameState();
 			} else {

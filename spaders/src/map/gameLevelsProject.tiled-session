@@ -1,12 +1,12 @@
 {
-    "activeFile": "movies/moviesAdventure.tmx",
+    "activeFile": "how-to-play/pokemon22.tmx",
     "expandedProjectPaths": [
         "how-to-play",
+        "videogames",
+        "movies",
         "gb",
         "templates",
-        "main",
-        "videogames",
-        "movies"
+        "main"
     ],
     "fileStates": {
         "D:/Projects/tetra/map/levels.tmx": {
@@ -42,25 +42,25 @@
         },
         "gb/gameboyMisc2.tmx": {
             "scale": 0.5,
-            "selectedLayer": 2,
+            "selectedLayer": 28,
             "viewCenter": {
-                "x": 481,
-                "y": 512
+                "x": 533,
+                "y": 798
             }
         },
         "gb/gameboyWeapon1.tmx": {
             "scale": 0.33,
             "selectedLayer": 8,
             "viewCenter": {
-                "x": 513.6363636363636,
-                "y": 512.1212121212122
+                "x": 513.6363636363637,
+                "y": 515.1515151515152
             }
         },
         "gb/gameboyWeapon2.tmx": {
             "scale": 0.33,
             "selectedLayer": 19,
             "viewCenter": {
-                "x": 128.78787878787875,
+                "x": 128.78787878787898,
                 "y": 527.2727272727273
             }
         },
@@ -68,7 +68,7 @@
             "scale": 0.9014204545454545,
             "selectedLayer": 8,
             "viewCenter": {
-                "x": 352.22187204538295,
+                "x": 352.2218720453829,
                 "y": 384.9479987393634
             }
         },
@@ -76,7 +76,7 @@
             "scale": 0.75,
             "selectedLayer": 14,
             "viewCenter": {
-                "x": 301.99999999999994,
+                "x": 301.9999999999999,
                 "y": 405.33333333333337
             }
         },
@@ -92,8 +92,8 @@
             "scale": 1.0512073863636362,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 351.5005742855213,
-                "y": 384.3199783798393
+                "x": 352.45186136071896,
+                "y": 384.3199783798392
             }
         },
         "how-to-play/how-to-play-small.tmx": {
@@ -108,8 +108,8 @@
             "scale": 0.8201171875,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 352.9983329364134,
-                "y": 384.09145034532037
+                "x": 352.9983329364135,
+                "y": 384.0914503453203
             }
         },
         "how-to-play/pokemon2.tmx": {
@@ -117,7 +117,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 352.51044954363215,
-                "y": 384.33847991128556
+                "y": 385.5395376610083
             }
         },
         "how-to-play/pokemon22.tmx": {
@@ -125,7 +125,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 352.51044954363215,
-                "y": 384.33847991128556
+                "y": 385.5395376610083
             }
         },
         "how-to-play/pokemons.tmx": {
@@ -133,22 +133,22 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 352.51044954363215,
-                "y": 384.33847991128556
+                "y": 385.5395376610083
             }
         },
         "how-to-play/question-mark.tmx": {
             "scale": 1.008025568181818,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 352.6696258719087,
+                "x": 352.6696258719088,
                 "y": 384.91087155640105
             }
         },
         "how-to-play/simple-shapes-synt.tmx": {
             "scale": 0.33,
-            "selectedLayer": 13,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 768.1818181818181,
+                "x": 768.1818181818182,
                 "y": 769.6969696969697
             }
         },
@@ -165,7 +165,7 @@
         },
         "how-to-play/things.tmx": {
             "scale": 0.5,
-            "selectedLayer": 14,
+            "selectedLayer": 10,
             "viewCenter": {
                 "x": 253,
                 "y": 132
@@ -216,7 +216,7 @@
         },
         "movies/movies1.tmx": {
             "scale": 0.5,
-            "selectedLayer": 3,
+            "selectedLayer": 6,
             "viewCenter": {
                 "x": 735,
                 "y": 768
@@ -224,10 +224,10 @@
         },
         "movies/moviesAdventure.tmx": {
             "scale": 0.33,
-            "selectedLayer": 8,
+            "selectedLayer": 6,
             "viewCenter": {
-                "x": 859.090909090909,
-                "y": 839.3939393939394
+                "x": 1643.939393939394,
+                "y": 1021.2121212121212
             }
         },
         "movies/spadersTileset.tsx": {
@@ -243,6 +243,14 @@
         },
         "spadersTileset.tsx": {
             "scaleInDock": 1
+        },
+        "templates/template.tmx": {
+            "scale": 1.1045496323529411,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 480.2862492198877,
+                "y": 512.4260453505306
+            }
         },
         "tilesets/gb.tsx": {
             "scaleInDock": 0.5,
@@ -261,20 +269,24 @@
             "scaleInDock": 0.75,
             "scaleInEditor": 1
         },
+        "tilesets/videogames.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
         "videogames/levels.tmx": {
             "scale": 0.25,
-            "selectedLayer": 5,
+            "selectedLayer": 6,
             "viewCenter": {
-                "x": 698,
-                "y": 376
+                "x": 1734,
+                "y": 624
             }
         },
         "videogames/levels2.tmx": {
-            "scale": 0.8275390625,
-            "selectedLayer": 13,
+            "scale": 0.5,
+            "selectedLayer": 11,
             "viewCenter": {
-                "x": 320.8307764928015,
-                "y": 384.27189048855325
+                "x": 389,
+                "y": 456
             }
         },
         "videogames/levels3.tmx": {
@@ -282,7 +294,7 @@
             "selectedLayer": 18,
             "viewCenter": {
                 "x": 320.8307764928015,
-                "y": 384.27189048855325
+                "y": 384.2718904885532
             }
         },
         "videogames/spadersTileset.tsx": {
@@ -293,7 +305,7 @@
     },
     "last.exportedFilePath": "D:/projects/spaders/spaders/www/data/movies",
     "last.externalTilesetPath": "E:/projects/spaders/spaders/src/map/tilesets",
-    "last.imagePath": "E:/projects/spaders/spaders/src/map/tilesets",
+    "last.imagePath": "D:/projects/spaders/spaders/src/map/tilesets",
     "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
     "map.lastUsedFormat": "tmx",
     "openFiles": [
@@ -318,7 +330,8 @@
         "videogames/levels3.tmx",
         "how-to-play/pokemons.tmx",
         "how-to-play/question-mark.tmx",
-        "movies/moviesAdventure.tmx"
+        "movies/moviesAdventure.tmx",
+        "templates/template.tmx"
     ],
     "project": "gameLevelsProject.tiled-project",
     "property.type": "int",
@@ -333,8 +346,8 @@
         "how-to-play/simple-shapes.tmx",
         "how-to-play/simple-shapes-synt.tmx",
         "how-to-play/pokemon2.tmx",
-        "how-to-play/pokemon22.tmx",
-        "how-to-play/bossa.tmx"
+        "templates/template.tmx",
+        "movies/moviesAdventure.tmx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",

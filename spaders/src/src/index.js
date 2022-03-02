@@ -24,6 +24,100 @@ window.imageThumbs = {};
 
 window.colorTweenManager = new ColorTweenManager();
 
+
+
+window.getNextLevel = function (data) {
+	console.log('getNextLevel', data)
+	console.log(window.levelSections.sections)
+	let section = null;
+	let tier = null;
+
+	window.levelSections.sections.forEach(element => {
+		if (element.name == data.sectionName) {
+			section = element;
+		}
+	});
+	if (section) {
+		section.levels.forEach(element => {
+			if (element.name == data.tierName) {
+				tier = element;
+			}
+		});
+	}
+
+	//find on tier.data if theres an unfinished level
+	//if doesnt find nothing, finished the whole tier
+	console.log(tier);
+	//find on section.levels the next section
+	//if doesnt find nothing, finished the whole section
+	console.log(section);
+
+}
+
+window.getLevelData = function (sec, ti, lvl) {
+	let section = null;
+	let tier = null;
+	let level = null;
+
+	if (sec) {
+
+		if (isNaN(sec)) {
+			window.levelSections.sections.forEach(element => {
+				if (element.id.toLowerCase() == sec) {
+					section = element;
+				}
+			});
+		} else {
+			sec = Math.min(sec, window.levelSections.sections.length - 1)
+			section = window.levelSections.sections[sec]
+		}
+	}
+
+	if (ti) {
+		if (section) {
+			if (isNaN(ti)) {
+				section.levels.forEach(element => {
+					if (element.id == ti) {
+						tier = element;
+					}
+				});
+			} else {
+				ti = Math.min(ti, section.levels.length - 1)
+				tier = section.levels[ti]
+			}
+		} else {
+			console.log("getLevelData -> No Section")
+		}
+	}
+
+	if (lvl && tier) {
+		if (isNaN(lvl)) {
+			tier.data.forEach(element => {
+				if (element.id == lvl) {
+					level = element;
+				}
+			});
+		} else {
+			lvl = Math.min(lvl, tier.data.length - 1)
+			level = tier.data[lvl]
+		}
+	} else {
+		console.log("getLevelData -> No Tier")
+	}
+
+	if(!level){
+		console.log("getLevelData -> No Level")
+	}
+	// console.log("section", section)
+	// console.log("tier", tier)
+	// console.log("level", level)
+
+	let toReturn = {section,tier,level}
+	console.log(toReturn)
+	return toReturn
+
+}
+
 window.ENEMIES = {
 	list: [
 		{ isBlock: false, color: config.colors.blue, life: 0 },
@@ -247,9 +341,9 @@ function loadJsons() {
 	for (let index = window.levelSections.sections.length - 1; index >= 0; index--) {
 		const element = window.levelSections.sections[index];
 		//console.log(element)
-		if (element.ignore) {
-			window.levelSections.sections.splice(index, 1)
-		}
+		//if (element.ignore) {
+			//window.levelSections.sections.splice(index, 1)
+		//}
 
 	}
 
@@ -295,6 +389,14 @@ function extractData(element, debug) {
 	if (element.visible) {
 		let data = {}
 		data.levelName = element.name;
+
+		let nameID = element.name;
+		nameID = nameID.toLowerCase();
+		nameID = nameID.split(' ').join('')
+		nameID = nameID.replace(/\s/g, '')
+		data.id = nameID;
+
+
 		let i = element.width;
 		let j = element.height;
 		data.tier = 0//findPropertyValue(element.properties, "tier");
@@ -363,6 +465,7 @@ function extractData(element, debug) {
 		}
 
 		data.colorPalletId = element.colorPalletId;
+		//data.customPallet = element.customPallet;
 		if (!element.isAddon) {
 
 			utils.trimMatrix(data.pieces)
@@ -389,32 +492,7 @@ function extractData(element, debug) {
 	}
 
 }
-window.getNextLevel = function (data) {
-	console.log('getNextLevel', data)
-	console.log(window.levelSections.sections)
-	let section = null;
-	let tier = null;
-	window.levelSections.sections.forEach(element => {
-		if (element.name == data.sectionName) {
-			section = element;
-		}
-	});
-	if (section) {
-		section.levels.forEach(element => {
-			if (element.name == data.tierName) {
-				tier = element;
-			}
-		});
-	}
 
-	//find on tier.data if theres an unfinished level
-	//if doesnt find nothing, finished the whole tier
-	console.log(tier);
-	//find on section.levels the next section
-	//if doesnt find nothing, finished the whole section
-	console.log(section);
-
-}
 window.allEstimate = 0;
 window.allEstimateHard = 0;
 function configGame() {
@@ -426,29 +504,53 @@ function configGame() {
 
 		//show the main sections
 
-
+		let nameID = section.name;
+		nameID = nameID.toLowerCase();
+		nameID = nameID.split(' ').join('')
+		nameID = nameID.replace(/\s/g, '')
+		section.id = nameID;
 
 		let palletID = section.colorPalletId;
+		let customPallet = -1;
 
 		if (palletID === undefined) {
 			palletID = 0;
 		}
+		////////////level is tier
 		section.levels.forEach(level => {
+
+
+			
 
 			let res = PIXI.loader.resources[jsonPath + level.dataPath].data
 
 			let sectionLevels = []
-
+			level.customPallet = -1;
 			res.properties.forEach(property => {
 				if (property.name == "sectionName") {
 					level.name = property.value;
 				}
 
-				if (property.name == "iconURL") {
-					level.iconURL = property.value;
+				if (property.name == "coverID") {
+					level.coverID = property.value;
+				}
+
+				if (property.name == "customPallet") {
+					level.customPallet = property.value;
 				}
 			});
 
+			let nameID = level.name;
+			nameID = nameID.toLowerCase();
+			nameID = nameID.split(' ').join('')
+			nameID = nameID.replace(/\s/g, '')
+			level.id = nameID;
+
+
+			if (level.coverID == undefined) {
+				level.coverID = 0;
+			}
+			customPallet = level.customPallet;
 			level.sectionName = section.name;
 			res.layers.forEach(layer => {
 
@@ -470,8 +572,16 @@ function configGame() {
 					data.idSaveData = idToSave;
 					data.sectionName = section.name;
 					data.tierName = level.name;
+					//console.log(level.name)
+
 					data.sectionName = section.name;
-					data.colorPalletId = palletID
+
+					if (customPallet >= 0) {
+						data.colorPalletId = customPallet
+					} else {
+
+						data.colorPalletId = palletID
+					}
 
 					data.totalPieces = 0;
 					data.totalEmptySpaces = 0;
@@ -611,7 +721,7 @@ function configGame() {
 			levels.data.forEach(levelsData => {
 				//let max = Math.max(levelsData.pieces[0].length, levelsData.pieces.length);
 				if (levelsData.pieces[0].length > 10 || levelsData.pieces.lengt > 12) {
-					console.log(levelsData.tierName+' - '+levelsData.levelName, levelsData.pieces[0].length + ' x ' + levelsData.pieces.length);
+					console.log(levelsData.tierName + ' - ' + levelsData.levelName, levelsData.pieces[0].length + ' x ' + levelsData.pieces.length);
 				}
 			});
 		});

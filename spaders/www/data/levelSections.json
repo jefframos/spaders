@@ -35,12 +35,16 @@
             "name": "Video Games",
             "displayName": "Video Game History",
             "imageSrc": "",
-            "colorPalletId": 0,
+            "colorPalletId": 4,
             "levels": [
                 {
                     "name": "2nd gen",
                     "dataPath": "videogames/videogamesLevels1.json"
-                }                
+                },
+                {
+                    "name": "2nd gen",
+                    "dataPath": "videogames/videogamesLevels2.json"
+                }
             ]
         },
         {
@@ -54,11 +58,11 @@
                 {
                     "name": "2nd gen",
                     "dataPath": "movies/moviesLevels1.json"
-                },                
+                },
                 {
                     "name": "2nd gen",
                     "dataPath": "movies/moviesLevelsAdventure.json"
-                }                
+                }
             ]
         },
         {
@@ -76,6 +80,20 @@
                 {
                     "name": "pokemon",
                     "dataPath": "how-to-play/pokemon2.json"
+                }
+            ]
+        },
+        {
+            "color": "0xDDDDDD",
+            "ignore": true,
+            "name": "Bossa",
+            "displayName": "Video Game History",
+            "imageSrc": "",
+            "colorPalletId": 1,
+            "levels": [
+                {
+                    "name": "---",
+                    "dataPath": "how-to-play/bossa.json"
                 }
             ]
         },
@@ -120,20 +138,6 @@
                 {
                     "name": "gameboy",
                     "dataPath": "gameboy/gameboycreatures.json"
-                }
-            ]
-        },
-        {
-            "color": "0xDDDDDD",
-            "ignore": true,
-            "name": "Bossa",
-            "displayName": "Video Game History",
-            "imageSrc": "",
-            "colorPalletId": 1,
-            "levels": [
-                {
-                    "name": "---",
-                    "dataPath": "how-to-play/bossa.json"
                 }
             ]
         }

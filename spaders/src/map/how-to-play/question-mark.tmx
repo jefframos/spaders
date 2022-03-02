@@ -4,7 +4,7 @@
   <export target="../../../www/data/question.json" format="json"/>
  </editorsettings>
  <properties>
-  <property name="description" value="no description here"/>
+    <property name="coverID" type="int" value="0"/>
   <property name="iconURL" value=""/>
   <property name="sectionName" value="Shapes"/>
  </properties>

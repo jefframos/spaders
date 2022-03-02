@@ -70,9 +70,9 @@
  "orientation":"orthogonal",
  "properties":[
         {
-         "name":"description",
-         "type":"string",
-         "value":"no description here"
+         "name":"coverID",
+         "type":"int",
+         "value":0
         }, 
         {
          "name":"iconURL",

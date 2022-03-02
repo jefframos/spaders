@@ -1582,9 +1582,9 @@
  "orientation":"orthogonal",
  "properties":[
         {
-         "name":"description",
-         "type":"string",
-         "value":"no description here"
+         "name":"coverID",
+         "type":"int",
+         "value":10
         }, 
         {
          "name":"sectionName",
