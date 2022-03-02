@@ -1135,7 +1135,7 @@
                 {
                  "name":"scale",
                  "type":"int",
-                 "value":0
+                 "value":2
                 }, 
                 {
                  "name":"startI",
@@ -1203,7 +1203,7 @@
                 {
                  "name":"scale",
                  "type":"int",
-                 "value":0
+                 "value":2
                 }, 
                 {
                  "name":"startI",
@@ -1271,7 +1271,7 @@
                 {
                  "name":"scale",
                  "type":"int",
-                 "value":0
+                 "value":2
                 }, 
                 {
                  "name":"startI",
@@ -1339,7 +1339,7 @@
                 {
                  "name":"scale",
                  "type":"int",
-                 "value":0
+                 "value":2
                 }, 
                 {
                  "name":"startI",
@@ -1528,12 +1528,12 @@
                 {
                  "name":"padding-left",
                  "type":"int",
-                 "value":1
+                 "value":0
                 }, 
                 {
                  "name":"padding-right",
                  "type":"int",
-                 "value":1
+                 "value":0
                 }, 
                 {
                  "name":"padding-top",
@@ -1596,12 +1596,12 @@
                 {
                  "name":"padding-left",
                  "type":"int",
-                 "value":1
+                 "value":0
                 }, 
                 {
                  "name":"padding-right",
                  "type":"int",
-                 "value":1
+                 "value":0
                 }, 
                 {
                  "name":"padding-top",
@@ -1679,7 +1679,7 @@
                 {
                  "name":"scale",
                  "type":"int",
-                 "value":0
+                 "value":2
                 }, 
                 {
                  "name":"startI",
@@ -1747,7 +1747,7 @@
                 {
                  "name":"scale",
                  "type":"int",
-                 "value":0
+                 "value":2
                 }, 
                 {
                  "name":"startI",
@@ -1815,7 +1815,7 @@
                 {
                  "name":"scale",
                  "type":"int",
-                 "value":0
+                 "value":2
                 }, 
                 {
                  "name":"startI",
@@ -1883,7 +1883,7 @@
                 {
                  "name":"scale",
                  "type":"int",
-                 "value":0
+                 "value":2
                 }, 
                 {
                  "name":"startI",
@@ -1951,7 +1951,7 @@
                 {
                  "name":"scale",
                  "type":"int",
-                 "value":0
+                 "value":2
                 }, 
                 {
                  "name":"startI",
@@ -2019,7 +2019,7 @@
                 {
                  "name":"scale",
                  "type":"int",
-                 "value":0
+                 "value":2
                 }, 
                 {
                  "name":"startI",

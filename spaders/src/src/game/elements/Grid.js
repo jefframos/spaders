@@ -151,9 +151,19 @@ export default class Grid extends PIXI.Container {
 			this.topGridContainer.x = 0;
 			this.topGridContainer.y = 0;
 			this.topGridContainer.alpha = 0;
+
+			//let zero = new PIXI.Graphics().beginFill(0xFF0000).drawCircle(0, 0, 10)
+			//this.topGridContainer.addChild(zero)
 			//TweenMax.to(this.topGridContainer, 0.3, { alpha: 1, delay: 0.2 });
+
+			let drawOdd = levelData.piecesToDraw[0].length % 2 != 0
+			let boardOdd = levelData.pieces[0].length % 2 != 0
+			let scaleOdd = levelData.levelDataScale % 2 != 0
+			console.log(drawOdd)
 			if (levelData.padding.left) {
 				gridDrawContainer.x = levelData.padding.left * CARD.width;
+
+
 			}
 			if (levelData.padding.top) {
 				gridDrawContainer.y = levelData.padding.top * CARD.width;
@@ -162,7 +172,20 @@ export default class Grid extends PIXI.Container {
 			this.topGridContainer.pivot.y = this.topGridContainer.height / 2;
 			this.topGridContainer.x += this.topGridContainer.width / 2;
 			this.topGridContainer.y += this.topGridContainer.height / 2;
+
+			if (levelData.levelDataScale > 1) {
+
+				if (drawOdd && (boardOdd != drawOdd)) {
+					this.topGridContainer.x += CARD.width * 0.25;
+				} else if (!drawOdd && (boardOdd == drawOdd) && !scaleOdd) {
+					this.topGridContainer.x += CARD.width * 0.5;
+				}
+			}
 			TweenMax.to(this.topGridContainer, 0.25, { alpha: 1 });
+			///////////////////this.topGridContainer.scale.set(0.5)
+			//////////////////TweenMax.to(this.topGridContainer.scale, 3, { x:1.1, y:1.1 });
+			////////
+
 			this.topGridContainer.scale.set(0.85)
 			TweenMax.to(this.topGridContainer.scale, 0.75, { x:1.1, y:1.1 });
 
@@ -170,12 +193,12 @@ export default class Grid extends PIXI.Container {
 			setTimeout(() => {
 				window.SOUND_MANAGER.play('shoosh', { volume: 0.75 });
 			}, 50);
-			
+
 			setTimeout(() => {
 				window.SOUND_MANAGER.play('explosion', { volume: 0.75 });
 				window.SOUND_MANAGER.play('kill', { volume: 0.75 });
 			}, 900);
-			TweenMax.to(this.topGridContainer.scale, 0.5, {delay:0.751, x:1, y:1, ease:Back.easeInOut });
+			TweenMax.to(this.topGridContainer.scale, 0.5, {delay:0.751, x:1, y:1, ease:Elastic.easeOut });
 			TweenMax.from(this.topGridContainer,1.25, { y:this.topGridContainer.height / 2 + levelData.padding.bottom * CARD.width , ease:Cubic.easeOut});
 			TweenMax.to(this.topGridContainer, 0.5, {
 				alpha: 0, delay: 1, onComplete: () => {
@@ -183,6 +206,8 @@ export default class Grid extends PIXI.Container {
 
 				}
 			});
+
+			/////////
 		}
 		for (var i = GRID.i - 1; i >= 0; i--) {
 			let gridLine = [];
@@ -231,9 +256,9 @@ export default class Grid extends PIXI.Container {
 
 		this.addChild(gridContainer);
 	}
-	removeCard(i,j){
+	removeCard(i, j) {
 		let tile = this.gridsSquares[i][j]
-		if(tile.card){
+		if (tile.card) {
 			this.cardsStartedOnGrid--;
 
 			tile.shape.parent.removeChild(tile.shape);

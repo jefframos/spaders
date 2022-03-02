@@ -34,7 +34,7 @@
         },
         "gb/gameboyMisc.tmx": {
             "scale": 0.33,
-            "selectedLayer": 6,
+            "selectedLayer": 21,
             "viewCenter": {
                 "x": 480.30303030303025,
                 "y": 515.1515151515152
@@ -44,8 +44,8 @@
             "scale": 0.5,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 533,
-                "y": 798
+                "x": 481,
+                "y": 512
             }
         },
         "gb/gameboyWeapon1.tmx": {
@@ -53,12 +53,12 @@
             "selectedLayer": 8,
             "viewCenter": {
                 "x": 513.6363636363636,
-                "y": 515.1515151515152
+                "y": 512.1212121212122
             }
         },
         "gb/gameboyWeapon2.tmx": {
             "scale": 0.33,
-            "selectedLayer": 6,
+            "selectedLayer": 19,
             "viewCenter": {
                 "x": 128.78787878787875,
                 "y": 527.2727272727273
@@ -93,7 +93,7 @@
             "selectedLayer": 3,
             "viewCenter": {
                 "x": 351.5005742855213,
-                "y": 385.2712654550368
+                "y": 384.3199783798393
             }
         },
         "how-to-play/how-to-play-small.tmx": {
@@ -146,7 +146,7 @@
         },
         "how-to-play/simple-shapes-synt.tmx": {
             "scale": 0.33,
-            "selectedLayer": 9,
+            "selectedLayer": 13,
             "viewCenter": {
                 "x": 768.1818181818181,
                 "y": 769.6969696969697
@@ -154,7 +154,7 @@
         },
         "how-to-play/simple-shapes.tmx": {
             "scale": 0.5,
-            "selectedLayer": 16,
+            "selectedLayer": 20,
             "viewCenter": {
                 "x": 639,
                 "y": 458
@@ -218,8 +218,8 @@
             "scale": 0.5,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 355,
-                "y": 264
+                "x": 735,
+                "y": 768
             }
         },
         "movies/moviesAdventure.tmx": {
@@ -263,7 +263,7 @@
         },
         "videogames/levels.tmx": {
             "scale": 0.25,
-            "selectedLayer": 13,
+            "selectedLayer": 5,
             "viewCenter": {
                 "x": 698,
                 "y": 376

@@ -389,8 +389,8 @@ function extractData(element, debug) {
 	}
 
 }
-window.getNextLevel = function(data) {
-	console.log('getNextLevel',data)
+window.getNextLevel = function (data) {
+	console.log('getNextLevel', data)
 	console.log(window.levelSections.sections)
 	let section = null;
 	let tier = null;
@@ -604,7 +604,18 @@ function configGame() {
 	// utils.paddingMatrix(window.levelData[0].pieces, { left: 3, right: 3, top: 2, bottom: 2 })
 	// utils.addBlockers(window.levelData[0].pieces, 2)
 
-	// console.log("ALL DATA", window.levelData)
+	console.log("ALL DATA", window.levelSections)
+
+	window.levelSections.sections.forEach(sections => {
+		sections.levels.forEach(levels => {
+			levels.data.forEach(levelsData => {
+				//let max = Math.max(levelsData.pieces[0].length, levelsData.pieces.length);
+				if (levelsData.pieces[0].length > 10 || levelsData.pieces.lengt > 12) {
+					console.log(levelsData.tierName+' - '+levelsData.levelName, levelsData.pieces[0].length + ' x ' + levelsData.pieces.length);
+				}
+			});
+		});
+	});
 	//console.log("ALL DATA", window.levelSections)
 	//create screen manager
 

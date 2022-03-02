@@ -15,7 +15,7 @@
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="10"/>
    <property name="j" type="int" value="11"/>
-   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-bottom" type="int" value="1"/>
    <property name="padding-left" type="int" value="0"/>
    <property name="padding-right" type="int" value="0"/>
    <property name="padding-top" type="int" value="0"/>
@@ -48,7 +48,7 @@
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="10"/>
    <property name="j" type="int" value="11"/>
-   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-bottom" type="int" value="1"/>
    <property name="padding-left" type="int" value="0"/>
    <property name="padding-right" type="int" value="0"/>
    <property name="padding-top" type="int" value="0"/>
@@ -81,7 +81,7 @@
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="8"/>
    <property name="j" type="int" value="9"/>
-   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-bottom" type="int" value="1"/>
    <property name="padding-left" type="int" value="0"/>
    <property name="padding-right" type="int" value="0"/>
    <property name="padding-top" type="int" value="0"/>
@@ -114,7 +114,7 @@
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="11"/>
    <property name="j" type="int" value="12"/>
-   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-bottom" type="int" value="1"/>
    <property name="padding-left" type="int" value="0"/>
    <property name="padding-right" type="int" value="0"/>
    <property name="padding-top" type="int" value="0"/>
@@ -147,7 +147,7 @@
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="10"/>
    <property name="j" type="int" value="11"/>
-   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-bottom" type="int" value="1"/>
    <property name="padding-left" type="int" value="0"/>
    <property name="padding-right" type="int" value="0"/>
    <property name="padding-top" type="int" value="0"/>
@@ -279,7 +279,7 @@
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="10"/>
    <property name="j" type="int" value="12"/>
-   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-bottom" type="int" value="1"/>
    <property name="padding-left" type="int" value="0"/>
    <property name="padding-right" type="int" value="0"/>
    <property name="padding-top" type="int" value="0"/>
@@ -345,7 +345,7 @@
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="10"/>
    <property name="j" type="int" value="10"/>
-   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-bottom" type="int" value="1"/>
    <property name="padding-left" type="int" value="0"/>
    <property name="padding-right" type="int" value="0"/>
    <property name="padding-top" type="int" value="0"/>
@@ -444,9 +444,9 @@
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="11"/>
    <property name="j" type="int" value="12"/>
-   <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="0"/>
-   <property name="padding-right" type="int" value="0"/>
+   <property name="padding-bottom" type="int" value="1"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
    <property name="padding-top" type="int" value="0"/>
    <property name="scale" type="int" value="0"/>
    <property name="startI" type="int" value="0"/>
@@ -538,6 +538,39 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <layer id="104" name="Mirror Shield" width="16" height="16">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="10"/>
+   <property name="j" type="int" value="13"/>
+   <property name="padding-bottom" type="int" value="1"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="scale" type="int" value="2"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,74,74,0,0,0,0,0,0,0,0,0,0,
+0,0,74,74,70,70,74,74,0,0,0,0,0,0,0,0,
+0,74,70,70,74,74,70,70,74,0,0,0,0,0,0,0,
+74,70,70,74,68,73,74,70,70,74,0,0,0,0,0,0,
+74,70,74,68,68,73,73,74,70,74,0,0,0,0,0,0,
+74,70,74,68,68,73,73,74,70,74,0,0,0,0,0,0,
+74,70,74,68,68,73,73,74,70,74,0,0,0,0,0,0,
+0,74,70,74,68,73,74,70,74,0,0,0,0,0,0,0,
+0,74,70,70,74,74,70,70,74,0,0,0,0,0,0,0,
+0,0,74,70,70,70,70,74,0,0,0,0,0,0,0,0,
+0,0,0,74,70,70,74,0,0,0,0,0,0,0,0,0,
+0,0,0,0,74,74,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
  <layer id="99" name="Iron Shield" width="16" height="16">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
@@ -604,45 +637,12 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="104" name="Mirror Shield" width="16" height="16">
-  <properties>
-   <property name="autoPlaceBlockers" type="int" value="2"/>
-   <property name="i" type="int" value="10"/>
-   <property name="j" type="int" value="13"/>
-   <property name="padding-bottom" type="int" value="2"/>
-   <property name="padding-left" type="int" value="0"/>
-   <property name="padding-right" type="int" value="0"/>
-   <property name="padding-top" type="int" value="0"/>
-   <property name="scale" type="int" value="0"/>
-   <property name="startI" type="int" value="0"/>
-   <property name="startJ" type="int" value="0"/>
-   <property name="tier" type="int" value="0"/>
-  </properties>
-  <data encoding="csv">
-0,0,0,0,74,74,0,0,0,0,0,0,0,0,0,0,
-0,0,74,74,70,70,74,74,0,0,0,0,0,0,0,0,
-0,74,70,70,74,74,70,70,74,0,0,0,0,0,0,0,
-74,70,70,74,68,73,74,70,70,74,0,0,0,0,0,0,
-74,70,74,68,68,73,73,74,70,74,0,0,0,0,0,0,
-74,70,74,68,68,73,73,74,70,74,0,0,0,0,0,0,
-74,70,74,68,68,73,73,74,70,74,0,0,0,0,0,0,
-0,74,70,74,68,73,74,70,74,0,0,0,0,0,0,0,
-0,74,70,70,74,74,70,70,74,0,0,0,0,0,0,0,
-0,0,74,70,70,70,70,74,0,0,0,0,0,0,0,0,
-0,0,0,74,70,70,74,0,0,0,0,0,0,0,0,0,
-0,0,0,0,74,74,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
  <layer id="105" name="Holy Shield" width="16" height="16">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="10"/>
    <property name="j" type="int" value="11"/>
-   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-bottom" type="int" value="1"/>
    <property name="padding-left" type="int" value="0"/>
    <property name="padding-right" type="int" value="0"/>
    <property name="padding-top" type="int" value="0"/>

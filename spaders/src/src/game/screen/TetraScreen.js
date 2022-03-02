@@ -1988,7 +1988,7 @@ export default class TetraScreen extends Screen {
 
 
 		//utils.resizeToFitAR({width:this.bottomUICanvas.width * 0.8, height:this.bottomUICanvas.height * 0.4},this.containerQueue)
-		utils.resizeToFitAR({ width: this.gameCanvas.width * 0.9, height: this.gameCanvas.height * 0.73 }, this.gridContainer)
+		utils.resizeToFitAR({ width: this.gameCanvas.width * 0.95, height: this.gameCanvas.height * 0.73 }, this.gridContainer)
 
 		if (this.gridContainer.scale.x > 1) {
 			this.gridContainer.scale.set(1)

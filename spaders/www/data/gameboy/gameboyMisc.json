@@ -108,6 +108,11 @@
                  "value":0
                 }, 
                 {
+                 "name":"scale",
+                 "type":"int",
+                 "value":2
+                }, 
+                {
                  "name":"startI",
                  "type":"int",
                  "value":0
@@ -169,6 +174,11 @@
                  "name":"padding-top",
                  "type":"int",
                  "value":0
+                }, 
+                {
+                 "name":"scale",
+                 "type":"int",
+                 "value":2
                 }, 
                 {
                  "name":"startI",
@@ -234,6 +244,11 @@
                  "value":0
                 }, 
                 {
+                 "name":"scale",
+                 "type":"int",
+                 "value":2
+                }, 
+                {
                  "name":"startI",
                  "type":"int",
                  "value":0
@@ -295,6 +310,11 @@
                  "name":"padding-top",
                  "type":"int",
                  "value":0
+                }, 
+                {
+                 "name":"scale",
+                 "type":"int",
+                 "value":2
                 }, 
                 {
                  "name":"startI",
@@ -360,6 +380,11 @@
                  "value":0
                 }, 
                 {
+                 "name":"scale",
+                 "type":"int",
+                 "value":2
+                }, 
+                {
                  "name":"startI",
                  "type":"int",
                  "value":0
@@ -421,6 +446,11 @@
                  "name":"padding-top",
                  "type":"int",
                  "value":0
+                }, 
+                {
+                 "name":"scale",
+                 "type":"int",
+                 "value":2
                 }, 
                 {
                  "name":"startI",
@@ -486,6 +516,11 @@
                  "value":0
                 }, 
                 {
+                 "name":"scale",
+                 "type":"int",
+                 "value":2
+                }, 
+                {
                  "name":"startI",
                  "type":"int",
                  "value":0
@@ -547,6 +582,11 @@
                  "name":"padding-top",
                  "type":"int",
                  "value":0
+                }, 
+                {
+                 "name":"scale",
+                 "type":"int",
+                 "value":2
                 }, 
                 {
                  "name":"startI",
@@ -612,6 +652,11 @@
                  "value":0
                 }, 
                 {
+                 "name":"scale",
+                 "type":"int",
+                 "value":2
+                }, 
+                {
                  "name":"startI",
                  "type":"int",
                  "value":0
@@ -673,6 +718,11 @@
                  "name":"padding-top",
                  "type":"int",
                  "value":0
+                }, 
+                {
+                 "name":"scale",
+                 "type":"int",
+                 "value":2
                 }, 
                 {
                  "name":"startI",
@@ -738,6 +788,11 @@
                  "value":0
                 }, 
                 {
+                 "name":"scale",
+                 "type":"int",
+                 "value":2
+                }, 
+                {
                  "name":"startI",
                  "type":"int",
                  "value":0
@@ -799,6 +854,11 @@
                  "name":"padding-top",
                  "type":"int",
                  "value":0
+                }, 
+                {
+                 "name":"scale",
+                 "type":"int",
+                 "value":2
                 }, 
                 {
                  "name":"startI",
@@ -864,6 +924,11 @@
                  "value":0
                 }, 
                 {
+                 "name":"scale",
+                 "type":"int",
+                 "value":2
+                }, 
+                {
                  "name":"startI",
                  "type":"int",
                  "value":0
@@ -925,6 +990,11 @@
                  "name":"padding-top",
                  "type":"int",
                  "value":0
+                }, 
+                {
+                 "name":"scale",
+                 "type":"int",
+                 "value":2
                 }, 
                 {
                  "name":"startI",
@@ -990,6 +1060,11 @@
                  "value":0
                 }, 
                 {
+                 "name":"scale",
+                 "type":"int",
+                 "value":2
+                }, 
+                {
                  "name":"startI",
                  "type":"int",
                  "value":0
@@ -1051,6 +1126,11 @@
                  "name":"padding-top",
                  "type":"int",
                  "value":0
+                }, 
+                {
+                 "name":"scale",
+                 "type":"int",
+                 "value":2
                 }, 
                 {
                  "name":"startI",
@@ -1116,6 +1196,11 @@
                  "value":0
                 }, 
                 {
+                 "name":"scale",
+                 "type":"int",
+                 "value":2
+                }, 
+                {
                  "name":"startI",
                  "type":"int",
                  "value":0
@@ -1177,6 +1262,11 @@
                  "name":"padding-top",
                  "type":"int",
                  "value":0
+                }, 
+                {
+                 "name":"scale",
+                 "type":"int",
+                 "value":2
                 }, 
                 {
                  "name":"startI",
@@ -1242,6 +1332,11 @@
                  "value":0
                 }, 
                 {
+                 "name":"scale",
+                 "type":"int",
+                 "value":2
+                }, 
+                {
                  "name":"startI",
                  "type":"int",
                  "value":0
@@ -1305,6 +1400,11 @@
                  "value":0
                 }, 
                 {
+                 "name":"scale",
+                 "type":"int",
+                 "value":2
+                }, 
+                {
                  "name":"startI",
                  "type":"int",
                  "value":0
@@ -1366,6 +1466,11 @@
                  "name":"padding-top",
                  "type":"int",
                  "value":0
+                }, 
+                {
+                 "name":"scale",
+                 "type":"int",
+                 "value":2
                 }, 
                 {
                  "name":"startI",
