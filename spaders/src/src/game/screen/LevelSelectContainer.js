@@ -7,6 +7,7 @@ import SquareButton from './SquareButton';
 import Spring from '../effects/Spring';
 import colorSchemes from '../../colorSchemes';
 import UIButton1 from './UIButton1';
+import VerticalNavBar from './VerticalNavBar';
 
 
 export default class LevelSelectContainer extends PIXI.Container {
@@ -127,6 +128,8 @@ export default class LevelSelectContainer extends PIXI.Container {
             window.COOKIE_MANAGER.onAddNewLevel.add(() => { this.refreshAll() });
             window.COOKIE_MANAGER.onToggleDebug.add(() => { this.refreshAll() });
 
+           
+            this.addChild(this.verticalBar)
             this.addChild(this.backButton)
 
 
@@ -187,7 +190,9 @@ export default class LevelSelectContainer extends PIXI.Container {
             this.state = 1;
             this.onBack();
         })
-        this.addChild(this.backButton)
+        //this.addChild(this.backButton)
+
+        this.verticalBar = new VerticalNavBar();       
 
         window.COOKIE_MANAGER.onChangeColors.add(() => {
             this.updateColorScheme();
@@ -377,7 +382,10 @@ export default class LevelSelectContainer extends PIXI.Container {
             this.currentUISection--
             window.SOUND_MANAGER.play('shoosh', { volume: 0.1 })
             if (this.currentUISection <= 0) {
+                this.verticalBar.setSectionLabel("")
                 this.refreshNavButtons()
+            }else{
+                this.verticalBar.setSectionLabel(this.currentSection.name)
             }
             this.sectionButtons.forEach(element => {
                 if (element.data) {
@@ -491,6 +499,9 @@ export default class LevelSelectContainer extends PIXI.Container {
         window.SOUND_MANAGER.play('shoosh', { volume: 0.1 })
         this.gameScreen.mainMenuSettings.collapse();
         this.currentUISection = 1
+
+        this.verticalBar.setSectionLabel(section.name)
+
         if (this.currentSection == section) {
 
             this.sectionButtons.forEach(element => {
@@ -512,7 +523,6 @@ export default class LevelSelectContainer extends PIXI.Container {
         });
 
         this.sectionButtons = [];
-
 
 
         // let backButton = this.buildBackButton();
@@ -555,6 +565,10 @@ export default class LevelSelectContainer extends PIXI.Container {
         window.SOUND_MANAGER.play('shoosh', { volume: 0.1 })
         this.gameScreen.mainMenuSettings.collapse();
         this.currentUISection = 2
+
+        this.verticalBar.setSectionLabel(this.currentSection.name + " - " +tier[0].tierName)
+
+        
         if (this.currentTier == tier) {
 
             this.levelCards.forEach(element => {
@@ -577,7 +591,6 @@ export default class LevelSelectContainer extends PIXI.Container {
         });
 
         this.levelCards = [];
-
 
         // let backButton = this.buildBackButton();
         // this.levelsView.addChild(backButton);
@@ -804,8 +817,12 @@ export default class LevelSelectContainer extends PIXI.Container {
             this.backButton.scale.set(targetScale);
             this.backButton.x = this.backButton.width / 2 + this.backButton.height * 0.1/// this.backButton.scale.x;
             this.backButton.y = this.mainCanvas.height - this.y - this.backButton.height / 2 - this.backButton.height * 0.1//- this.backButton.height / this.backButton.scale.y;
-
+            
             this.currentGridOffset = { x: this.backButton.x, y: 0 }
+            
+            this.verticalBar.scale.set(targetScale);
+            this.verticalBar.x = this.backButton.x 
+            this.verticalBar.y = this.backButton.y - 2// + this.backButton.height / 2
         }
 
     }

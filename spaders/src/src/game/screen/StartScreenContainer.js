@@ -85,7 +85,8 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.screenContainer.positionSpringX = new Spring();
 		this.screenContainer.positionSpringY = new Spring();
 		this.screenContainer.rotationSpring = new Spring();
-
+		this.screenContainer.rotationSpring.damp = 0.6
+		this.screenContainer.positionSpringY.damp = 0.7
 
 		this.screenContainer.addChild(this.stripsContainer);
 		this.screenContainer.addChild(this.logoLabel);
@@ -267,6 +268,9 @@ export default class StartScreenContainer extends PIXI.Container {
 		return this.currentMask
 	}
 	resize(innerResolution, ratio) {
+		// if(this.innerResolution && this.innerResolution.width == window.innerWidth && window.innerWidth.height == window.innerHeight){
+		// 	return
+		// }
 		this.mainCanvas.width = innerResolution.width;
 		this.mainCanvas.height = innerResolution.height;
 

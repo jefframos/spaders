@@ -126,13 +126,13 @@ export default class Game {
 			this.infoLabel.visible = true;
 			this.infoLabel.pivot.x = this.infoLabel.width / 2
 
-			this.infoLabel.x = this.innerResolution.width/2;
+			this.infoLabel.x = this.innerResolution.width / 2;
 			//this.infoLabel.y = this.loadingBarFill.y - this.infoLabel.height - 20;
 
 			let scale = Math.max(0.2, progress / 100)
 			this.loadingBarFill.scale.x = scale + this.loadingBarFill.extraScale;
 
-			if(progress >= 100){
+			if (progress >= 100) {
 				this.loadingBarFill.complete = true;
 			}
 		}
@@ -179,9 +179,9 @@ export default class Game {
 		this.loadingBarFill.x = this.round / 4
 		this.loadingBarFill.y = this.round / 4
 
-		this.loadingBarFill.startWidth =  window.innerWidth;
+		this.loadingBarFill.startWidth = window.innerWidth;
 
-		
+
 		this.loadingBarFill.scale.x = 0;
 		this.loadingBarFill.extraScale = 0;
 
@@ -257,12 +257,17 @@ export default class Game {
 		TweenMax.globalTimeScale(window.TIME_SCALE);
 		this.dt /= 1000
 		this.dt /= window.TIME_SCALE;
+
 		this.resize2();
+
 		this.screenManager.update(this.dt)
 		this.renderer.render(this.stage);
 		requestAnimationFrame(this.update.bind(this));
 	}
 	resize2() {
+		if(this.innerResolution && this.innerResolution.width == window.innerWidth && this.innerResolution.height == window.innerHeight){
+			//return
+		}
 		//this.resolution = { width: window.outerWidth, height: window.outerHeight };
 		this.resolution = { width: window.outerWidth, height: window.outerHeight };
 		this.innerResolution = { width: window.innerWidth, height: window.innerHeight };
@@ -309,18 +314,18 @@ export default class Game {
 			this.tapToStart.scale.x = sclX
 			this.tapToStart.scale.y = sclY
 
-			if(this.loadingBarFill.complete){
+			if (this.loadingBarFill.complete) {
 				this.loadingBarFill.scale.x = 1;
 				this.loadingBarFill.width = this.innerResolution.width;
-			}else{
+			} else {
 
 				this.loadingBarFill.extraScale = 1 - this.loadingBarFill.startWidth / this.innerResolution.width;
 			}
 
 			this.loadingBarFill.x = 0
-			this.loadingBarFill.y =this.innerResolution.height - this.loadingBarFill.height * 2;
+			this.loadingBarFill.y = this.innerResolution.height - this.loadingBarFill.height * 2;
 
-			this.infoLabel.x = this.innerResolution.width/2;
+			this.infoLabel.x = this.innerResolution.width / 2;
 			this.infoLabel.y = this.loadingBarFill.y - this.infoLabel.height * 1.5;
 		}
 

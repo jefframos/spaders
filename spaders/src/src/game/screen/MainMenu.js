@@ -22,6 +22,7 @@ export default class MainMenu extends PIXI.Container {
         this.backShape.tint = config.colors.white
 
         this.positionSpring = new Spring();
+        this.positionSpring.damp = 0.65
 
         this.openMenu = new UIButton1(config.colors.white, window.iconsData.settings, config.colors.dark);
         this.openMenu.onClick.add(() => this.toggleState());

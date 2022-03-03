@@ -60,7 +60,7 @@
         <key>jxrCompressionLevel</key>
         <uint>0</uint>
         <key>ditherType</key>
-        <enum type="SettingsBase::DitherType">NearestNeighbour</enum>
+        <enum type="SettingsBase::DitherType">PngQuantLow</enum>
         <key>backgroundColor</key>
         <uint>0</uint>
         <key>libGdx</key>
@@ -656,6 +656,21 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">verticalbar.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>19,20,39,39</rect>
+                <key>scale9Paddings</key>
+                <rect>19,20,39,39</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
         </map>
         <key>fileList</key>
         <array>
@@ -685,6 +700,7 @@
             <filename>square-pixel.png</filename>
             <filename>pixelSquare.png</filename>
             <filename>smallButton.png</filename>
+            <filename>verticalbar.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

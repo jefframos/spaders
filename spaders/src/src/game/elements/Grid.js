@@ -15,6 +15,7 @@ export default class Grid extends PIXI.Container {
 
 		this.topGridContainer = new PIXI.Container();
 
+		this.backgroundOffset = { x: 12, y: 16 }
 	}
 	start() {
 	}
@@ -188,7 +189,7 @@ export default class Grid extends PIXI.Container {
 			////////
 
 			this.topGridContainer.scale.set(0.85)
-			TweenMax.to(this.topGridContainer.scale, 0.75, { x:1.1, y:1.1 });
+			TweenMax.to(this.topGridContainer.scale, 0.75, { x: 1.1, y: 1.1 });
 
 
 			setTimeout(() => {
@@ -199,8 +200,8 @@ export default class Grid extends PIXI.Container {
 				window.SOUND_MANAGER.play('explosion', { volume: 0.75 });
 				window.SOUND_MANAGER.play('kill', { volume: 0.75 });
 			}, 900);
-			TweenMax.to(this.topGridContainer.scale, 0.5, {delay:0.751, x:1, y:1, ease:Elastic.easeOut });
-			TweenMax.from(this.topGridContainer,1.25, { y:this.topGridContainer.height / 2 + levelData.padding.bottom * CARD.width , ease:Cubic.easeOut});
+			TweenMax.to(this.topGridContainer.scale, 0.5, { delay: 0.751, x: 1, y: 1, ease: Elastic.easeOut });
+			TweenMax.from(this.topGridContainer, 1.25, { y: this.topGridContainer.height / 2 + levelData.padding.bottom * CARD.width, ease: Cubic.easeOut });
 			TweenMax.to(this.topGridContainer, 0.5, {
 				alpha: 0, delay: 1, onComplete: () => {
 					this.topGridContainer.removeChild(gridDrawContainer)
@@ -256,6 +257,18 @@ export default class Grid extends PIXI.Container {
 		TweenMax.to(gridContainer, 0.5, { alpha: 1, delay: 0.75 });
 
 		this.addChild(gridContainer);
+
+		//setTimeout(() => {
+
+			let back = new PIXI.mesh.NineSlicePlane(
+				PIXI.Texture.fromFrame(colorScheme.spriteTile), 20, 20, 20, 20)
+			back.tint = colorScheme.background;
+			back.width = gridContainer.width + this.backgroundOffset.x
+			back.height = gridContainer.height + this.backgroundOffset.y + CARD.height
+			back.x = -this.backgroundOffset.x / 2
+			back.y = -this.backgroundOffset.y / 4
+			gridContainer.addChildAt(back, 0);
+		//}, 100);
 	}
 	removeCard(i, j) {
 		let tile = this.gridsSquares[i][j]

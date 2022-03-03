@@ -940,13 +940,14 @@ export default class TetraScreen extends Screen {
 		scl = (temp.width / GRID.width) * this.cardsContainer.scale.x
 
 		//this.trailMarker = new PIXI.Graphics().beginFill(0xFFFFFF).drawRoundedRect(0, 0, CARD.width, GRID.height, 10);
-		this.trailMarker = new PIXI.mesh.NineSlicePlane(
-			PIXI.Texture.fromFrame(scheme.spriteTrail), 20, 20, 20, 20)
+		this.trailMarker = new PIXI.Container()
+		// new PIXI.mesh.NineSlicePlane(
+		// 	PIXI.Texture.fromFrame(scheme.spriteTrail), 20, 20, 20, 20)
 
 		this.trailMarker.positionSpringX = new Spring();
 		this.trailMarker.positionSpringX.springiness = 0.3;
 		this.trailMarker.positionSpringX.damp = 0.8;
-		this.backGridContainer.addChild(this.trailMarker);
+		this.frontGridContainer.addChild(this.trailMarker);
 		this.trailMarker.alpha = 0;
 
 
@@ -984,12 +985,12 @@ export default class TetraScreen extends Screen {
 		this.trailMarker.overShape.height = GRID.height + CARD.height
 		this.trailMarker.overShape.x = CARD.width / 2 - this.trailMarker.overShape.width / 2
 		this.trailMarker.overShape.margin = CARD.width - this.trailMarker.overShape.width;
-		this.trailMarker.overShape.y = 0
+		this.trailMarker.overShape.y = this.grid.backgroundOffset.y / 4
 
 		this.trailMarker.arrowsUp = new PIXI.extras.TilingSprite(PIXI.Texture.fromImage('./assets/images/arrowsUp.png'), 128, 128)
-		this.trailMarker.overShape.addChild(this.trailMarker.arrowsUp);
+		this.trailMarker.addChild(this.trailMarker.arrowsUp);
 
-		this.backGridContainer.addChild(this.trailHorizontal);
+		this.frontGridContainer.addChild(this.trailHorizontal);
 		this.trailHorizontal.alpha = 0;
 
 		let colorScheme = colorSchemes.getCurrentColorScheme();
@@ -1420,7 +1421,7 @@ export default class TetraScreen extends Screen {
 			this.currentCard.visible = true;
 			TweenMax.to(this.offsetCard, 0.3, { y: 0, ease: Back.easeOut })
 			TweenMax.to(this.currentCard, 0.3, { delay: 0.1, alpha: 1, y: this.gridContainer.height + 20 })
-			this.cardsContainer.addChild(this.currentCard);
+			this.frontGridContainer.addChild(this.currentCard);
 		}, 100);
 
 
@@ -1622,7 +1623,8 @@ export default class TetraScreen extends Screen {
 		if (this.currentCard) {
 			this.currentCard.update(delta)
 			this.trailHorizontal.y = this.currentCard.y - this.offsetCard.y;
-
+			this.trailHorizontal.tint = this.currentCard.currentColor;
+			this.trailMarker.arrowsUp.tint = this.trailHorizontal.tint;
 			//console.log(this.trailHorizontal)
 		}
 		////console.log(this.mousePosition)
@@ -1710,27 +1712,22 @@ export default class TetraScreen extends Screen {
 
 				this.trailMarker.overShape.height = GRID.height - (lastPossible * CARD.height) + CARD.height - this.trailMarker.overShape.margin
 			}
-			this.trailMarker.overShape.y = GRID.height - this.trailMarker.overShape.height + CARD.height - this.trailMarker.overShape.margin * 0.5
+			this.trailMarker.overShape.y = GRID.height - this.trailMarker.overShape.height + CARD.height - this.trailMarker.overShape.margin * 0.5 + this.grid.backgroundOffset.y / 4
 			this.trailMarker.arrowsUp.scale.set(this.trailMarker.overShape.width / this.trailMarker.arrowsUp.width)
 			this.trailMarker.arrowsUp.height = this.trailMarker.overShape.height / this.trailMarker.arrowsUp.scale.y
-			this.trailMarker.arrowsUp.y = 0
+			this.trailMarker.arrowsUp.y = this.trailMarker.overShape.y
 			this.trailMarker.arrowsUp.alpha = 0.75;
+			
+			this.trailMarker.arrowsUp.tint = this.trailMarker.tint;
 			this.trailMarker.overShape.tint = this.trailMarker.tint;
 
-			// if(this.tvLines.tilePosition.y > 40){
-			// 	this.tvLines.tilePosition.y = 0;
-			// }
-			//TweenMax.to(this.trailMarker, 0.1, { x: this.mousePosID * CARD.width });
-			//this.trailMarker.positionSpringX.tx = this.mousePosID * CARD.width;
-			//this.trailMarker.x = this.trailMarker.positionSpringX.x//utils.lerp(this.trailMarker.x, this.mousePosID * CARD.width, 0.4)
-			//this.trailMarker.x = this.mousePosID * CARD.width//utils.lerp(this.trailMarker.x, this.mousePosID * CARD.width, 0.4)
 			this.trailMarker.tint = this.currentCard.enemySprite.tint
 			this.trailHorizontal.tint = this.currentCard.enemySprite.tint
 			if (force) {
-				this.trailMarker.alpha = 0.35//utils.lerp(this.trailMarker.alpha, 0.35, 0.1)
+				this.trailMarker.alpha = 0.65//utils.lerp(this.trailMarker.alpha, 0.35, 0.1)
 				this.trailMarker.x = this.trailMarker.positionSpringX.tx;
 			} else {
-				this.trailMarker.alpha = utils.lerp(this.trailMarker.alpha, 0.35, 0.1)
+				this.trailMarker.alpha = utils.lerp(this.trailMarker.alpha, 0.65, 0.1)
 
 			}
 			this.trailHorizontal.alpha = this.trailMarker.alpha;
@@ -1878,6 +1875,8 @@ export default class TetraScreen extends Screen {
 		this.currentRound++;
 		let nextRoundTimer = this.board.shootCard(this.mousePosID, this.currentCard);
 
+		this.cardsContainer.addChild(this.currentCard)
+
 		window.fxSpeed = 5;
 		this.inGameMenu.collapse();
 		let normalDist = (this.currentCard.y - this.currentCard.pos.j * CARD.height) / GRID.height;
@@ -1945,7 +1944,7 @@ export default class TetraScreen extends Screen {
 		this.gridContainer.on('mousedown', this.onTapDown.bind(this)).on('touchstart', this.onTapDown.bind(this));
 		this.on('mouseup', this.onTapUp.bind(this)).on('touchend', this.onTapUp.bind(this));
 
-		this.trailHorizontal.interactive = true;
+		//this.trailHorizontal.interactive = true;
 		this.trailHorizontal.on('mousedown', this.onTapDown.bind(this)).on('touchstart', this.onTapDown.bind(this));
 		//this.trailHorizontal.on('mouseup', this.onTapUp.bind(this)).on('touchend', this.onTapUp.bind(this));
 		this.trailHorizontal.on('touchmove', this.onTouchMove.bind(this));
@@ -1991,7 +1990,10 @@ export default class TetraScreen extends Screen {
 		let min = Math.min(sclX, sclY);
 		element.scale.set(sclX, sclY)
 	}
-	resize(scaledResolution, innerResolution) {
+	resize(scaledResolution, innerResolution, force) {
+		if(this.innerResolution && this.innerResolution.width == window.innerWidth && this.innerResolution.height == window.innerHeight){
+			//return
+		}
 		//console.log(resolution, innerResolution)
 		let offset = this.toLocal(new PIXI.Point())
 		this.innerResolution = innerResolution;
@@ -2058,8 +2060,8 @@ export default class TetraScreen extends Screen {
 		this.background.y = innerResolution.height / 2 + offset.y// * window.appScale.y
 
 
-		this.gridContainer.x = this.gameCanvas.x + this.gameCanvas.width / 2 - (this.gridContainer.width) / 2
-		this.gridContainer.y = this.gameCanvas.y + this.gameCanvas.height / 2 - this.gridContainer.height / 2 - this.topCanvas.height//* 0.1125
+		this.gridContainer.x = this.gameCanvas.x + this.gameCanvas.width / 2 - (this.gridContainer.width) / 2 + this.grid.backgroundOffset.x / 4
+		this.gridContainer.y = this.gameCanvas.y + this.gameCanvas.height / 2 - this.gridContainer.height / 2 - this.topCanvas.height+ this.grid.backgroundOffset.y / 2
 		//utils.centerObject(this.gridContainer, this.gameCanvas)
 
 		this.cardsContainer.x = this.gridContainer.x;
@@ -2082,7 +2084,7 @@ export default class TetraScreen extends Screen {
 
 		if (this.currentCard) {
 			//13 is the width of the border on the grid
-			this.currentCard.y = ((this.gridContainer.height) / this.gridContainer.scale.y) + this.offsetCard.y;
+			this.currentCard.y = ((this.gridContainer.height) / this.gridContainer.scale.y) + this.offsetCard.y - CARD.height - 10;
 		}
 
 

@@ -105,14 +105,14 @@ window.getLevelData = function (sec, ti, lvl) {
 		console.log("getLevelData -> No Tier")
 	}
 
-	if(!level){
+	if (!level) {
 		console.log("getLevelData -> No Level")
 	}
 	// console.log("section", section)
 	// console.log("tier", tier)
 	// console.log("level", level)
 
-	let toReturn = {section,tier,level}
+	let toReturn = { section, tier, level }
 	console.log(toReturn)
 	return toReturn
 
@@ -296,33 +296,41 @@ window.SAVE_DATA = function (data, filename, type) {
 const sManager = new SoundManager();
 window.SOUND_MANAGER = sManager;
 
-// let tempTrailAdded = {}
-// colorSchemes.colorSchemes.forEach(element => {
-// 	if(!tempTrailAdded[element.grid.spriteTrail]){
-// 		PIXI.loader.add(element.grid.spriteTrail);
-// 		tempTrailAdded[element.grid.spriteTrail] = true;
-// 	}
-// });
 
 sManager.soundData.forEach(element => {
 	PIXI.loader.add(element.src);
 });
 PIXI.loader
-	.add('./assets/images/backgrounds.json')
-	.add('./assets/images/game.json')
-	//.add('./assets/images/logo.json')
-	.add('./assets/images/arrowsUp.png')
-	.add('./data/levelSections.json')
-	.add('./assets/fonts/stylesheet.css')
-	.add('./assets/levels.json')
-	.add('./assets/levelsRaw.json')
-	.load(loadJsons)
-	.onProgress.add(() => {
-		//console.log(PIXI.loader.progress);
-		if (window.game) {
-			window.game.updateProgress(PIXI.loader.progress * 0.75);
-		}
-	});
+	.add('./data/colors.json')
+	.load(setUpColors)
+
+function setUpColors() {
+
+	let colors = PIXI.loader.resources['./data/colors.json']
+	console.log(colors.data)
+	//window.levelsRawJson = PIXI.loader.resources["./assets/levelsRaw.json"].data
+	colorSchemes.colorSchemes = colors.data.colorSchemes
+
+	console.log(colorSchemes)
+
+	window.game = new Game(config);
+
+	PIXI.loader.add('./assets/images/backgrounds.json')
+		.add('./assets/images/game.json')
+		//.add('./assets/images/logo.json')
+		.add('./assets/images/arrowsUp.png')
+		.add('./data/levelSections.json')
+		.add('./assets/fonts/stylesheet.css')
+		.add('./assets/levels.json')
+		.add('./assets/levelsRaw.json')
+		.load(loadJsons)
+		.onProgress.add(() => {
+			//console.log(PIXI.loader.progress);
+			if (window.game) {
+				window.game.updateProgress(PIXI.loader.progress * 0.75);
+			}
+		});
+}
 
 window.levelsJson = ""
 
@@ -330,6 +338,8 @@ window.TIME_SCALE = 1;
 const jsonPath = "./data/"
 
 function loadJsons() {
+
+	
 
 	window.levelSections = PIXI.loader.resources[jsonPath + "levelSections.json"].data
 
@@ -342,7 +352,7 @@ function loadJsons() {
 		const element = window.levelSections.sections[index];
 		//console.log(element)
 		//if (element.ignore) {
-			//window.levelSections.sections.splice(index, 1)
+		//window.levelSections.sections.splice(index, 1)
 		//}
 
 	}
@@ -497,6 +507,8 @@ window.allEstimate = 0;
 window.allEstimateHard = 0;
 function configGame() {
 
+
+
 	window.questionMark = extractData(PIXI.loader.resources[jsonPath + window.levelSections.question.dataPath].data.layers[0])
 
 
@@ -520,7 +532,7 @@ function configGame() {
 		section.levels.forEach(level => {
 
 
-			
+
 
 			let res = PIXI.loader.resources[jsonPath + level.dataPath].data
 
@@ -661,7 +673,8 @@ function configGame() {
 	//let rawData = "./data/gameboy/gameboycreatures.json";
 	let rawData = "./data/how-to-play/shapes-synt.json";
 	window.levelsRawJson = PIXI.loader.resources[rawData].data
-	//window.levelsRawJson = PIXI.loader.resources["./assets/levelsRaw.json"].data
+
+
 	window.levelsJson = PIXI.loader.resources["./assets/levels.json"].data
 
 	// console.log("SECTIONS", window.levelSections.sections)
@@ -752,7 +765,6 @@ function configGame() {
 
 }
 
-window.game = new Game(config);
 
 document.addEventListener("deviceready", onDeviceReady, true);
 
@@ -768,5 +780,8 @@ function onDeviceReady() {
 	document.addEventListener("backbutton", onBackKeyDown, false);
 }
 function onBackKeyDown() {
+	if (!window.game) {
+		return
+	}
 	window.game.screenManager.backKeyDown();
 }

@@ -23,7 +23,8 @@ export default class InGameMenu extends PIXI.Container {
 		this.backShape.tint = config.colors.white
 
 		this.positionSpring = new Spring();
-
+		this.positionSpring.damp = 0.65
+		
 		this.openMenu = new UIButton1(config.colors.white, 'icons8-menu-48.png', config.colors.dark);
 		this.openMenu.onClick.add(() => this.toggleState());
 

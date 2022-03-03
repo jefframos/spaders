@@ -75,7 +75,16 @@ export default class SquareButton extends PIXI.Container {
 
         this.currentState = 0;
         this.squareButtonShape.addChild(this.label)
+
+        this.backTop = new PIXI.mesh.NineSlicePlane(
+            PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
+            this.backTop.width = 20;
+            this.backTop.height = 20;
+        this.squareButtonShape.addChild(this.backTop)
+        this.backTop.tint = 0;
+        this.backTop.alpha = 0.25
         this.squareButtonShape.addChild(this.labelTop)
+
 
         window.COOKIE_MANAGER.onChangeColors.add(() => {
             this.updateColorScheme();
@@ -91,6 +100,8 @@ export default class SquareButton extends PIXI.Container {
         this.label.style.stroke = colorScheme.buttonStandardDarkColor;
         this.label.style.strokeThickness = 8
         this.labelTop.style.fill = colorScheme.fontColor;
+
+        //this.backTop.tint = colorScheme.buttonBackTitleColor;
 
         this.progressBar.updateBackgroundColor(colorScheme.buttonStandardDarkColor)
         if (this.iconBackground) {
@@ -153,14 +164,18 @@ export default class SquareButton extends PIXI.Container {
         utils.resizeToFitAR(
             {
                 width: this.squareButtonBackShape.width  - this.iconBackground.width - 20,
-                height: this.iconBackground.height / 3 
+                height: this.iconBackground.height * 0.28
             }, this.labelTop)
 
         this.labelTop.pivot.x = 0
         this.labelTop.pivot.y = 0//this.labelTop.height / this.labelTop.scale.y;
-        this.labelTop.x = this.progressBar.x // this.container.scale.x
-        this.labelTop.y = this.iconBackground.y //+ this.labelTop.height / this.labelTop.scale.y// this.container.scale.y
+        this.labelTop.x = this.progressBar.x + 10 // this.container.scale.x
+        this.labelTop.y = this.iconBackground.y + 5//+ this.labelTop.height / this.labelTop.scale.y// this.container.scale.y
 
+        this.backTop.x = this.labelTop.x - 10
+        this.backTop.y = this.labelTop.y - 5
+        this.backTop.width = this.squareButtonBackShape.width  - this.iconBackground.width - 40
+        this.backTop.height = this.labelTop.height + 10
     }
 
     setSectionButtonMode() {
@@ -190,9 +205,15 @@ export default class SquareButton extends PIXI.Container {
         utils.resizeToFitAR(
             {
                 width: this.squareButtonBackShape.width  - 40,
-                height: (this.squareButtonBackShape.height - 20)/3
+                height: (this.squareButtonBackShape.height - 20)* 0.25
             }, this.labelTop)
-
+            
+            let marginBack = this.labelTop.height * 0.2
+            this.labelTop.y = 12
+            this.backTop.height = this.labelTop.height + marginBack
+            this.backTop.width = this.squareButtonBackShape.width  - 40
+            this.backTop.x = this.labelTop.x - this.backTop.width/2
+        this.backTop.y = this.labelTop.y - marginBack * 0.5
         // this.labelTop.pivot.x = 0
         // this.labelTop.pivot.y = 0//this.labelTop.height / this.labelTop.scale.y;
         // this.labelTop.x = this.progressBar.x // this.container.scale.x
@@ -234,10 +255,17 @@ export default class SquareButton extends PIXI.Container {
         this.labelTop.pivot.x = this.labelTop.width / 2 / this.labelTop.scale.x
         this.labelTop.pivot.y = 0//this.labelTop.height / this.labelTop.scale.y;
         this.labelTop.x = this.squareButtonShape.width / 2 // this.container.scale.x
-        this.labelTop.y = this.squareButtonShape.height * 0.07 //+ this.labelTop.height / this.labelTop.scale.y// this.container.scale.y
+        this.labelTop.y = this.squareButtonShape.height * 0.05 //+ this.labelTop.height / this.labelTop.scale.y// this.container.scale.y
         if (icon) {
             this.labelTop.x += icon.width / 2 * this.labelTop.scale.x//icon.scale.x;
         }
+
+        let marginBack = this.labelTop.height * 0.2
+        
+            this.backTop.height = this.labelTop.height + marginBack
+            this.backTop.width = this.labelTop.width * 1.1
+            this.backTop.x = this.labelTop.x - this.backTop.width/2
+        this.backTop.y = this.labelTop.y - marginBack * 0.5
 
     }
     setPallet(colors) {
