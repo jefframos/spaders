@@ -463,7 +463,7 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.playLine.visible = true;
 		this.playButton.visible = true;
 		this.backButton.visible = true;
-
+		this.chooseLevelPanel.show();
 		if(redirectData){
 			this.chooseLevelPanel.setRedirectData(redirectData);
 		}
@@ -507,6 +507,7 @@ export default class StartScreenContainer extends PIXI.Container {
 		window.SOUND_MANAGER.play('tapPlay', { volume: 0.65 })
 
 		this.gameScreen.mainMenuSettings.collapse();
+		this.chooseLevelPanel.show();
 		this.startMenuState();
 
 

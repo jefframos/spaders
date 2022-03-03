@@ -280,6 +280,7 @@
             <key type="filename">icons/icons8-back-100.png</key>
             <key type="filename">icons/icons8-close-100.png</key>
             <key type="filename">icons/icons8-forward-100.png</key>
+            <key type="filename">smallCard.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -701,6 +702,7 @@
             <filename>pixelSquare.png</filename>
             <filename>smallButton.png</filename>
             <filename>verticalbar.png</filename>
+            <filename>smallCard.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

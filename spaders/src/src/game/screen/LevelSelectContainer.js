@@ -128,7 +128,7 @@ export default class LevelSelectContainer extends PIXI.Container {
             window.COOKIE_MANAGER.onAddNewLevel.add(() => { this.refreshAll() });
             window.COOKIE_MANAGER.onToggleDebug.add(() => { this.refreshAll() });
 
-           
+
             this.addChild(this.verticalBar)
             this.addChild(this.backButton)
 
@@ -192,7 +192,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         })
         //this.addChild(this.backButton)
 
-        this.verticalBar = new VerticalNavBar();       
+        this.verticalBar = new VerticalNavBar();
 
         window.COOKIE_MANAGER.onChangeColors.add(() => {
             this.updateColorScheme();
@@ -201,10 +201,10 @@ export default class LevelSelectContainer extends PIXI.Container {
         this.updateColorScheme();
 
     }
-    setRedirectData(redirectData){
-        if(redirectData.tier){
+    setRedirectData(redirectData) {
+        if (redirectData.tier) {
             this.openLevelTier(redirectData.tier.data)
-        }else if(redirectData.section){
+        } else if (redirectData.section) {
             this.openSection(redirectData.section)
         }
     }
@@ -384,7 +384,7 @@ export default class LevelSelectContainer extends PIXI.Container {
             if (this.currentUISection <= 0) {
                 this.verticalBar.setSectionLabel("")
                 this.refreshNavButtons()
-            }else{
+            } else {
                 this.verticalBar.setSectionLabel(this.currentSection.name)
             }
             this.sectionButtons.forEach(element => {
@@ -488,7 +488,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         if (this.disableClickCounter > 0) {
             return;
         }
-
+        this.show();
         //console.log(section, " 000000")
         let targetPallet = section.colorPalletId
         if (section.customPallet && section.customPallet > 0) {
@@ -558,17 +558,20 @@ export default class LevelSelectContainer extends PIXI.Container {
     }
 
     openLevelTier(tier) {
-        console.log("openLevelTier",tier)
+        console.log("openLevelTier", tier)
         if (this.disableClickCounter > 0) {
             return;
         }
+
+        this.show();
+        
         window.SOUND_MANAGER.play('shoosh', { volume: 0.1 })
         this.gameScreen.mainMenuSettings.collapse();
         this.currentUISection = 2
 
-        this.verticalBar.setSectionLabel(this.currentSection.name + " - " +tier[0].tierName)
+        this.verticalBar.setSectionLabel(this.currentSection.name + " - " + tier[0].tierName)
 
-        
+
         if (this.currentTier == tier) {
 
             this.levelCards.forEach(element => {
@@ -728,13 +731,19 @@ export default class LevelSelectContainer extends PIXI.Container {
     getGridGraphic() {
         return new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, 100, 130);
     }
-
+    show() {
+        this.backButton.visible = true;
+        this.verticalBar.visible = true;
+    }
     selectLevel(data) {
         if (this.disableClickCounter > 0) {
             return;
         }
         this.gameScreen.mainMenuSettings.collapse();
         this.gameScreen.startNewLevel(data, false);
+
+        this.backButton.visible = false;
+        this.verticalBar.visible = false;
         //this.currentUISection = 0;
         this.resetDrags()
         this.resize(null, true)
@@ -817,11 +826,11 @@ export default class LevelSelectContainer extends PIXI.Container {
             this.backButton.scale.set(targetScale);
             this.backButton.x = this.backButton.width / 2 + this.backButton.height * 0.1/// this.backButton.scale.x;
             this.backButton.y = this.mainCanvas.height - this.y - this.backButton.height / 2 - this.backButton.height * 0.1//- this.backButton.height / this.backButton.scale.y;
-            
+
             this.currentGridOffset = { x: this.backButton.x, y: 0 }
-            
+
             this.verticalBar.scale.set(targetScale);
-            this.verticalBar.x = this.backButton.x 
+            this.verticalBar.x = this.backButton.x
             this.verticalBar.y = this.backButton.y - 2// + this.backButton.height / 2
         }
 

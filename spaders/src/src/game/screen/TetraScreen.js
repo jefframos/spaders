@@ -56,7 +56,7 @@ export default class TetraScreen extends Screen {
 		this.isTutorial = false;
 		this.autoRedirectToLevelSelect = false;
 
-		this.autoRedirectData = {section:null, tier:null}
+		this.autoRedirectData = { section: null, tier: null }
 
 		if (window.location.hash) {
 			var hash = window.location.hash.substring(1);
@@ -96,7 +96,7 @@ export default class TetraScreen extends Screen {
 					this.currentLevelData = parameters.level
 					this.hasHash = true;
 					this.currentLevelID = 0;
-				}else if (parameters.section){
+				} else if (parameters.section) {
 					this.autoRedirectData.section = parameters.section;
 					this.autoRedirectData.tier = parameters.tier;
 					this.autoRedirectToLevelSelect = true;
@@ -1582,6 +1582,9 @@ export default class TetraScreen extends Screen {
 			this.board.updateAllCardsColors(this.colorTween.currentColor)
 			if (this.currentCard) {
 				this.currentCard.forceNewColor(this.colorTween.currentColor);
+			} else {
+				this.trailHorizontal.tint = this.colorTween.currentColor;
+				this.trailMarker.arrowsUp.tint = this.trailHorizontal.tint;
 			}
 			this.cardQueue.forEach(element => {
 				element.forceNewColor(this.colorTween.currentColor)
@@ -1653,11 +1656,14 @@ export default class TetraScreen extends Screen {
 		}
 		this.trailMarker.overShapeVisible = this.isTouchingDown
 		if (this.trailMarker.overShapeVisible) {
-			this.trailMarker.overShape.alpha = utils.lerp(this.trailMarker.overShape.alpha, 0.5, 0.1)
+			this.trailMarker.arrowsUp.alpha = utils.lerp(this.trailMarker.arrowsUp.alpha, 0.5, 0.1)
 
 		} else {
-			this.trailMarker.overShape.alpha = utils.lerp(this.trailMarker.overShape.alpha, 0, 0.1)
+			this.trailMarker.arrowsUp.alpha = utils.lerp(this.trailMarker.arrowsUp.alpha, 0, 0.1)
 		}
+
+		this.trailMarker.arrowsUp.tint = this.trailMarker.tint;
+		this.trailMarker.overShape.tint = this.trailMarker.tint;
 
 		this.initGridAcc += 0.05;
 
@@ -1696,30 +1702,33 @@ export default class TetraScreen extends Screen {
 		// }
 
 	}
+	updateTrailLenght() {
+		let lastPossible = this.board.getLastCardPosition(this.mousePosID)
+		if (lastPossible < 0) {
+			this.trailMarker.overShape.height = 0
+		} else {
 
+			this.trailMarker.overShape.height = GRID.height - (lastPossible * CARD.height) + CARD.height + this.trailMarker.overShape.margin+ this.grid.backgroundOffset.y / 4
+		}
+
+		this.trailMarker.overShape.y = GRID.height - this.trailMarker.overShape.height + CARD.height - this.trailMarker.overShape.margin * 0.5 + this.grid.backgroundOffset.y / 4
+		this.trailMarker.arrowsUp.scale.set(this.trailMarker.overShape.width / this.trailMarker.arrowsUp.width)
+		this.trailMarker.arrowsUp.height = this.trailMarker.overShape.height / this.trailMarker.arrowsUp.scale.y
+		this.trailMarker.arrowsUp.y = this.trailMarker.overShape.y
+	}
 	updateTrailsPosition(force = false) {
 		this.trailMarker.positionSpringX.update();
 		if (this.latestCardPosition !== undefined && this.latestCardPosition >= 0) {
 			this.trailMarker.positionSpringX.tx = this.latestCardPosition;
-			this.trailMarker.x = utils.lerp(this.trailMarker.x, this.latestCardPosition, 0.2)
+			this.trailMarker.x = utils.lerp(this.trailMarker.x, this.latestCardPosition, 0.4)
 		}
 		if (this.currentCard && this.mousePosID >= 0 && this.mousePosID < GRID.i) {
 
-			let lastPossible = this.board.getLastCardPosition(this.mousePosID)
-			if (lastPossible < 0) {
-				this.trailMarker.overShape.height = 0
-			} else {
+			this.updateTrailLenght();
 
-				this.trailMarker.overShape.height = GRID.height - (lastPossible * CARD.height) + CARD.height - this.trailMarker.overShape.margin
-			}
-			this.trailMarker.overShape.y = GRID.height - this.trailMarker.overShape.height + CARD.height - this.trailMarker.overShape.margin * 0.5 + this.grid.backgroundOffset.y / 4
-			this.trailMarker.arrowsUp.scale.set(this.trailMarker.overShape.width / this.trailMarker.arrowsUp.width)
-			this.trailMarker.arrowsUp.height = this.trailMarker.overShape.height / this.trailMarker.arrowsUp.scale.y
-			this.trailMarker.arrowsUp.y = this.trailMarker.overShape.y
-			this.trailMarker.arrowsUp.alpha = 0.75;
-			
-			this.trailMarker.arrowsUp.tint = this.trailMarker.tint;
-			this.trailMarker.overShape.tint = this.trailMarker.tint;
+			this.trailMarker.overShape.alpha = 0.5;
+
+
 
 			this.trailMarker.tint = this.currentCard.enemySprite.tint
 			this.trailHorizontal.tint = this.currentCard.enemySprite.tint
@@ -1891,6 +1900,7 @@ export default class TetraScreen extends Screen {
 			y: this.currentCard.pos.j * CARD.height
 		}, 0.1 * normalDist);
 
+		this.updateTrailLenght()
 		this.currentCard = null;
 		this.updateUI();
 	}
@@ -1991,7 +2001,7 @@ export default class TetraScreen extends Screen {
 		element.scale.set(sclX, sclY)
 	}
 	resize(scaledResolution, innerResolution, force) {
-		if(this.innerResolution && this.innerResolution.width == window.innerWidth && this.innerResolution.height == window.innerHeight){
+		if (this.innerResolution && this.innerResolution.width == window.innerWidth && this.innerResolution.height == window.innerHeight) {
 			//return
 		}
 		//console.log(resolution, innerResolution)
@@ -2061,7 +2071,7 @@ export default class TetraScreen extends Screen {
 
 
 		this.gridContainer.x = this.gameCanvas.x + this.gameCanvas.width / 2 - (this.gridContainer.width) / 2 + this.grid.backgroundOffset.x / 4
-		this.gridContainer.y = this.gameCanvas.y + this.gameCanvas.height / 2 - this.gridContainer.height / 2 - this.topCanvas.height+ this.grid.backgroundOffset.y / 2
+		this.gridContainer.y = this.gameCanvas.y + this.gameCanvas.height / 2 - this.gridContainer.height / 2 - this.topCanvas.height + this.grid.backgroundOffset.y / 2
 		//utils.centerObject(this.gridContainer, this.gameCanvas)
 
 		this.cardsContainer.x = this.gridContainer.x;

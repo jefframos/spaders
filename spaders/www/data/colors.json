@@ -124,10 +124,12 @@
                 "background": "0x231f20",
                 "sprite": "largeCard.png",
                 "spriteTile": "largeCard.png",
+                "spriteDraw": "smallCard.png",
                 "spriteTrail": "largeCard.png",
                 "spriteRect": "largeCard.png",
                 "scaleTrail": false,
-                "minAlpha": 0,
+                "minAlpha": 0.05,
+                "maxAlpha": 0.1,
                 "extraTileAlpha": 0
             }
         },
@@ -297,13 +299,15 @@
             },
             "grid": {
                 "color": "0xFFFFFF",
-                "background": "0x231f20",
+                "background": "0x222222",
                 "sprite": "pixelSquare.png",
                 "spriteTile": "pixelSquare.png",
+                "spriteDraw": "pixelSquare.png",
                 "spriteTrail": "pixelSquare.png",
                 "spriteRect": "pixelSquare.png",
                 "scaleTrail": false,
                 "minAlpha": 0,
+                "maxAlpha": 0.1,
                 "extraTileAlpha": 0
             },
             "backgroundAssets": {
@@ -432,14 +436,16 @@
                 "buttonBackTitleColor": "0x285746"
             },
             "grid": {
-                "color": "0x182018",
+                "color": "0xFFFFFF",
                 "background": "0x3b3c2e",
                 "sprite": "gbGridTile.png",
                 "spriteTile": "gbGrid.png",
+                "spriteDraw": "gbGrid.png",
                 "spriteTrail": "gbGrid.png",
                 "spriteRect": "gbGrid.png",
                 "scaleTrail": false,
-                "minAlpha": 0.5,
+                "minAlpha": 0.05,
+                "maxAlpha": 0.1,
                 "extraTileAlpha": 0.5
             },
             "backgroundAssets": {
@@ -572,10 +578,12 @@
                 "background": "0x231f20",
                 "sprite": "largeCard.png",
                 "spriteTile": "largeCard.png",
+                "spriteDraw": "smallCard.png",
                 "spriteTrail": "largeCard.png",
                 "spriteRect": "largeCard.png",
                 "scaleTrail": false,
-                "minAlpha": 0,
+                "minAlpha": 0.05,
+                "maxAlpha": 0.1,
                 "extraTileAlpha": 0
             }
         },
@@ -743,10 +751,12 @@
                 "background": "0x231f20",
                 "sprite": "largeCard.png",
                 "spriteTile": "largeCard.png",
+                "spriteDraw": "smallCard.png",
                 "spriteTrail": "largeCard.png",
                 "spriteRect": "largeCard.png",
                 "scaleTrail": false,
-                "minAlpha": 0,
+                "minAlpha": 0.05,
+                "maxAlpha": 0.1,
                 "extraTileAlpha": 0
             }
         }

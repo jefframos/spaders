@@ -104,6 +104,8 @@ export default class Card extends PIXI.Container {
 		if (this.backshape) {
 			this.backshape.tint = color;
 		}
+
+		this.currentColor = color;
 	}
 	startCrazyMood() {
 		this.crazyMood = true;

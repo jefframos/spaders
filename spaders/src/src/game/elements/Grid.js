@@ -43,13 +43,13 @@ export default class Grid extends PIXI.Container {
 			}
 
 		}
-		this.grids.forEach(element => {
-			element.sin += delta * element.speed;
-			element.alpha = element.startAlpha * Math.sin(element.sin);
+		// this.grids.forEach(element => {
+		// 	element.sin += delta * element.speed;
+		// 	element.alpha = element.startAlpha * Math.sin(element.sin);
 
-			element.alpha = Math.max(element.alphaMin, element.alpha);
+		// 	element.alpha = Math.max(element.alphaMin, element.alpha);
 
-		});
+		// });
 	}
 	resetGrid() {
 		this.cardsStartedOnGrid = 0;
@@ -104,12 +104,20 @@ export default class Grid extends PIXI.Container {
 			piecesToTraw.push(temp);
 		}
 
+		let targetSprite = colorScheme.sprite;
+		let paddingSprite = 20;
+		
+		if(levelData.levelDataScale > 1){
+			paddingSprite = 10;
+			targetSprite = colorScheme.spriteDraw;
+		}
 		for (var i = piecesToTraw.length - 1; i >= 0; i--) {
 			for (var j = 0; j < piecesToTraw[i].length; j++) {
 				if (piecesToTraw[i][j] >= 0 && piecesToTraw[i][j] < scheme.block.id) {
 					//let gridSquare = PIXI.Sprite.fromFrame('gridSquare.png')
+
 					let gridSquare = new PIXI.mesh.NineSlicePlane(
-						PIXI.Texture.fromFrame(colorScheme.sprite), 20, 20, 20, 20);
+						PIXI.Texture.fromFrame(targetSprite), paddingSprite, paddingSprite, paddingSprite, paddingSprite);
 
 					gridSquare.width = GRID.widthDraw
 					gridSquare.height = GRID.heightDraw
@@ -161,7 +169,9 @@ export default class Grid extends PIXI.Container {
 			let boardOdd = levelData.pieces[0].length % 2 != 0
 			let scaleOdd = levelData.levelDataScale % 2 != 0
 
-			console.log(drawOdd)
+			let drawOddY = levelData.piecesToDraw.length % 2 != 0
+			let boardOddY = levelData.pieces.length % 2 != 0
+
 			if (levelData.padding.left) {
 				gridDrawContainer.x = levelData.padding.left * CARD.width;
 
@@ -176,20 +186,25 @@ export default class Grid extends PIXI.Container {
 			this.topGridContainer.y += this.topGridContainer.height / 2;
 
 			if (levelData.levelDataScale > 1) {
+				if (drawOddY && (boardOddY != drawOddY)) {
+					this.topGridContainer.y += CARD.width * 0.25;
+				} else if (!drawOddY && (boardOddY == drawOddY) && (scaleOdd && levelData.piecesToDraw[0].length < 20)) {
+					this.topGridContainer.y += CARD.width * 0.5;
+				}
 
 				if (drawOdd && (boardOdd != drawOdd)) {
 					this.topGridContainer.x += CARD.width * 0.25;
-				} else if (!drawOdd && (boardOdd == drawOdd) && (scaleOdd && levelData.piecesToDraw[0].length < 18)) {
+				} else if (!drawOdd && (boardOdd == drawOdd) && (scaleOdd && levelData.piecesToDraw[0].length < 20)) {
 					this.topGridContainer.x += CARD.width * 0.5;
-				}
+				} 
 			}
 			TweenMax.to(this.topGridContainer, 0.25, { alpha: 1 });
 			///////////////////this.topGridContainer.scale.set(0.5)
 			//////////////////TweenMax.to(this.topGridContainer.scale, 3, { x:1.1, y:1.1 });
 			////////
 
-			this.topGridContainer.scale.set(0.85)
-			TweenMax.to(this.topGridContainer.scale, 0.75, { x: 1.1, y: 1.1 });
+			this.topGridContainer.scale.set(1.1)
+			//TweenMax.to(this.topGridContainer.scale, 0.75, { x: 1.1, y: 1.1 });
 
 
 			setTimeout(() => {
@@ -205,12 +220,12 @@ export default class Grid extends PIXI.Container {
 			TweenMax.to(this.topGridContainer, 0.5, {
 				alpha: 0, delay: 1, onComplete: () => {
 					this.topGridContainer.removeChild(gridDrawContainer)
-
 				}
 			});
 
 			/////////
 		}
+		let backGridContainer = new PIXI.Container();
 		for (var i = GRID.i - 1; i >= 0; i--) {
 			let gridLine = [];
 			for (var j = GRID.j - 1; j >= 0; j--) {
@@ -225,17 +240,19 @@ export default class Grid extends PIXI.Container {
 				gridSquare.y = j * CARD.height;
 
 				gridSquare.alphaMin = Math.random() * 0.020 + 0.020 + colorScheme.minAlpha;
-				gridSquare.alpha = Math.random() * 0.08 + 0.08 + colorScheme.minAlpha
+				gridSquare.alpha = Math.random() * Math.abs(colorScheme.maxAlpha - colorScheme.minAlpha) + colorScheme.minAlpha
 				gridSquare.speed = 0.3;
 				gridSquare.startAlpha = gridSquare.alpha;
 				gridSquare.sin = Math.random() * Math.PI * 2;
 				gridSquare.tint = colorScheme.color;
-				gridContainer.addChild(gridSquare)
+				backGridContainer.addChild(gridSquare)
 
 				this.grids.push(gridSquare);
 
 				//let gridEffectSquare = PIXI.Sprite.fromFrame('gridSquare.png')
 				//let gridEffectSquare = PIXI.Sprite.fromFrame(colorScheme.spriteTile)
+
+				
 				let gridEffectSquare = new PIXI.mesh.NineSlicePlane(
 					PIXI.Texture.fromFrame(colorScheme.spriteTile), 20, 20, 20, 20)//PIXI.Sprite.fromFrame(colorScheme.sprite)
 
@@ -250,12 +267,17 @@ export default class Grid extends PIXI.Container {
 			}
 			this.gridsSquares.unshift(gridLine);
 		}
+		let texture = renderer.generateTexture(backGridContainer);
+
+		let gridSprite = new PIXI.Sprite()
+		gridSprite.setTexture(texture)
+		gridContainer.addChildAt(gridSprite, 0)
+
 
 		gridContainer.alpha = 0
 
 
 		TweenMax.to(gridContainer, 0.5, { alpha: 1, delay: 0.75 });
-
 		this.addChild(gridContainer);
 
 		//setTimeout(() => {
@@ -297,12 +319,12 @@ export default class Grid extends PIXI.Container {
 			shape.x += shape.width / 2
 			shape.y += shape.height / 2
 
-			this.game.backGridContainer.addChild(shape);
+			this.game.frontGridContainer.addChild(shape);
 			this.dropTiles.push(shape);
 			this.gridsSquares[card.pos.i][card.pos.j].card = null;
 			window.SOUND_MANAGER.play('dropTile', { volume: 0.5, speed: Math.random() * 0.2 + 0.8 })
 			if (this.cardsStartedOnGrid <= 0) {
-				console.log("All cards", this.cardsStartedOnGrid)
+				//console.log("All cards", this.cardsStartedOnGrid)
 				this.onDestroyAllStartedCards.dispatch();
 			}
 		}
