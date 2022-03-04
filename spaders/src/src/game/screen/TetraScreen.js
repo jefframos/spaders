@@ -79,33 +79,7 @@ export default class TetraScreen extends Screen {
 			}
 		}
 
-		const urlParams = new URLSearchParams(window.location.search);
-		if (urlParams) {
-			let levelRedirectParameters = urlParams.get('level')
-
-			if (levelRedirectParameters) {
-				levelRedirectParameters = levelRedirectParameters.split(',');
-
-				for (let index = 0; index < 3; index++) {
-					if (levelRedirectParameters.length < index + 1) {
-						levelRedirectParameters.push(null);
-					}
-				}
-				let parameters = window.getLevelData(levelRedirectParameters[0], levelRedirectParameters[1], levelRedirectParameters[2])
-				if (parameters.level) {
-					this.currentLevelData = parameters.level
-					this.hasHash = true;
-					this.currentLevelID = 0;
-				} else if (parameters.section) {
-					this.autoRedirectData.section = parameters.section;
-					this.autoRedirectData.tier = parameters.tier;
-					this.autoRedirectToLevelSelect = true;
-					this.hasHash = true;
-					this.currentLevelID = -1;
-				}
-			}
-		}
-
+		this.findURLParams()
 
 		this.updateGridDimensions();
 
@@ -150,6 +124,45 @@ export default class TetraScreen extends Screen {
 		this.gameplayState = 0;
 		//console.log(utils.convertNumToTime(1231))
 
+
+	}
+	findURLParams() {
+		const urlParams = new URLSearchParams(window.location.search);
+		if (urlParams) {
+
+
+			let levelRedirectParameters = urlParams.get('level')
+			if (levelRedirectParameters) {
+				levelRedirectParameters = levelRedirectParameters.split(',');
+
+				for (let index = 0; index < 3; index++) {
+					if (levelRedirectParameters.length < index + 1) {
+						levelRedirectParameters.push(null);
+					}
+				}
+				let parameters = window.getLevelData(levelRedirectParameters[0], levelRedirectParameters[1], levelRedirectParameters[2])
+				if (levelRedirectParameters[0] == 'tutorial') {
+					setTimeout(() => {
+						window.game.onTapUp();
+						this.openTutorial();
+					}, 10);
+				} else {
+
+					if (parameters.level) {
+						this.currentLevelData = parameters.level
+						this.hasHash = true;
+						this.currentLevelID = 0;
+					} else if (parameters.section) {
+						this.autoRedirectData.section = parameters.section;
+						this.autoRedirectData.tier = parameters.tier;
+						this.autoRedirectToLevelSelect = true;
+						this.hasHash = true;
+						this.currentLevelID = -1;
+					}
+				}
+
+			}
+		}
 
 	}
 	onDestroyAllStartedCards() {
@@ -489,6 +502,12 @@ export default class TetraScreen extends Screen {
 
 		this.mainMenuSettings = new MainMenu();
 		this.addChild(this.mainMenuSettings)
+
+
+		this.openTutorialButton = new UIButton1(config.colors.white, window.iconsData.question, config.colors.dark);
+		this.addChild(this.openTutorialButton)
+		this.openTutorialButton.onClick.add(()=>{this.openTutorial()});
+
 		this.endGameScreenContainer.hide(true);
 
 		this.hashUsed = false;
@@ -503,31 +522,7 @@ export default class TetraScreen extends Screen {
 		this.tutorialOverlay = new TutorialOverlay();
 		this.addChild(this.tutorialOverlay);
 		this.tutorialOverlay.visible = false;
-		this.currentTutorial = 0;
-		this.tutorial = [
-			{
-				position: { x: 200, y: 200 },
-				text: 'Tea a la la',
-				callback: null,
-				target: null
-			},
-			{
-				position: { x: 200, y: 200 },
-				text: 'Test la lala a la la',
-				callback: null,
-				target: null
-			}, {
-				position: { x: 200, y: 300 },
-				text: 'Test 2',
-				callback: null,
-				target: null
-			}]
 
-		if (this.isTutorial) {
-			setTimeout(() => {
-				this.nextTutorial();
-			}, 2000);
-		}
 
 
 		if (this.autoRedirectToLevelSelect) {
@@ -555,7 +550,12 @@ export default class TetraScreen extends Screen {
 	}
 	onUnPause() {
 		//this.gameRunning = true;
-
+	}
+	openTutorial() {
+		this.tutorialOverlay.visible = true;
+		this.tutorialOverlay.show()
+		this.gameRunning = false;
+		this.hideInGameElements();
 	}
 	updateColorScheme() {
 		let colorScheme = colorSchemes.getCurrentColorScheme();
@@ -574,15 +574,7 @@ export default class TetraScreen extends Screen {
 
 	}
 
-	nextTutorial() {
-		if (this.currentTutorial >= this.tutorial.length) {
-			this.tutorialOverlay.visible = false;
-			return;
-		}
-		this.tutorialOverlay.visible = true;
-		this.tutorialOverlay.popLabel(this.tutorial[this.currentTutorial], this.nextTutorial.bind(this));
-		this.currentTutorial++;
-	}
+
 	updateLabelsPosition() {
 
 		let nameLevelSize = { width: this.timeLabelStatic.x - this.pointsLabel.x, height: 40 }
@@ -627,6 +619,11 @@ export default class TetraScreen extends Screen {
 		this.mainMenuSettings.x = toLoc.x + this.innerResolution.width - scaledWidth;
 		this.mainMenuSettings.y = toLoc.y + scaledWidth;
 
+
+		this.openTutorialButton.scale.set(this.inGameMenu.scale.x);
+		this.openTutorialButton.x = toLoc.x + scaledWidth;
+		this.openTutorialButton.y = toLoc.y + scaledWidth;
+
 	}
 	hideInGameElements(delay = 0) {
 
@@ -650,6 +647,7 @@ export default class TetraScreen extends Screen {
 		TweenMax.killTweensOf(this.cardsContainer);
 		TweenMax.killTweensOf(this.gridContainer);
 		this.mainMenuSettings.visible = false;
+		this.openTutorialButton.visible = false;
 		TweenMax.to(this.cardsContainer, 0.5, { delay: 1.25, alpha: 1 })
 		TweenMax.to(this.gridContainer, 0.1, { alpha: 1 })
 		if (this.currentCard) {
@@ -665,6 +663,7 @@ export default class TetraScreen extends Screen {
 		this.startScreenContainer.show(force, force ? 0.2 : 0.75);
 		this.gameRunning = false;
 		this.mainMenuSettings.visible = true;
+		this.openTutorialButton.visible = true;
 		this.startScreenContainer.showCloseButton();
 		this.hideInGameElements();
 		window.SOUND_MANAGER.speedUpSoundTrack(1);
@@ -683,6 +682,7 @@ export default class TetraScreen extends Screen {
 		this.startScreenContainer.showFromGame(force, force ? 0.2 : 0.75, redirectData);
 		this.gameRunning = false;
 		this.mainMenuSettings.visible = true;
+		this.openTutorialButton.visible = true;
 		this.startScreenContainer.showCloseButton();
 		this.hideInGameElements();
 		window.SOUND_MANAGER.speedUpSoundTrack(1);
@@ -1529,6 +1529,9 @@ export default class TetraScreen extends Screen {
 		this.inGameMenu.update(delta)
 		this.mainMenuSettings.update(delta)
 		this.fxContainer.update(delta)
+		if (this.tutorialOverlay.visible) {
+			this.tutorialOverlay.update(delta);
+		}
 
 
 		if (this.blockGameTimer > 0) {
@@ -1708,8 +1711,8 @@ export default class TetraScreen extends Screen {
 			this.trailMarker.overShape.height = 0
 		} else {
 
-			let targetHeight = GRID.height - (lastPossible * CARD.height) + CARD.height + this.trailMarker.overShape.margin+ this.grid.backgroundOffset.y / 4
-			this.trailMarker.overShape.height = utils.lerp(this.trailMarker.overShape.height, targetHeight, 0.5);
+			let targetHeight = GRID.height - (lastPossible * CARD.height) + CARD.height + this.trailMarker.overShape.margin + this.grid.backgroundOffset.y / 4
+			this.trailMarker.overShape.height = targetHeight//utils.lerp(this.trailMarker.overShape.height, targetHeight, 0.5);
 		}
 
 		this.trailMarker.overShape.y = GRID.height - this.trailMarker.overShape.height + CARD.height - this.trailMarker.overShape.margin * 0.5 + this.grid.backgroundOffset.y / 4
@@ -2110,6 +2113,12 @@ export default class TetraScreen extends Screen {
 		this.debugLabel.x = this.gameCanvas.x + 20
 		this.debugLabel.y = this.gameCanvas.y + this.gameCanvas.height - this.debugLabel.height - 20
 		this.updateLabelsPosition();
+
+		if (this.tutorialOverlay.visible) {
+
+			this.tutorialOverlay.resize(this.gameCanvas, innerResolution);
+		}
+
 
 	}
 	shuffleText(label) {

@@ -59,7 +59,7 @@ window.getLevelData = function (sec, ti, lvl) {
 	let tier = null;
 	let level = null;
 
-	if (sec) {
+	if (sec != undefined) {
 
 		if (isNaN(sec)) {
 			window.levelSections.sections.forEach(element => {
@@ -73,7 +73,7 @@ window.getLevelData = function (sec, ti, lvl) {
 		}
 	}
 
-	if (ti) {
+	if (ti!= undefined) {
 		if (section) {
 			if (isNaN(ti)) {
 				section.levels.forEach(element => {
@@ -90,7 +90,7 @@ window.getLevelData = function (sec, ti, lvl) {
 		}
 	}
 
-	if (lvl && tier) {
+	if (lvl!= undefined && tier) {
 		if (isNaN(lvl)) {
 			tier.data.forEach(element => {
 				if (element.id == lvl) {
@@ -180,6 +180,7 @@ window.iconsData = {
 	highscore: iconPath + 'fire-96x96-1408702.png',
 	wipeData: iconPath + 'recycle-bin-96x96-1214299.png',
 	time: iconPath + 'time.png',
+	question: iconPath + 'question-mark-96x96-2194193.png'
 }
 window.getStyle = function (type, color) {
 	let style = window.textStyles[type];
@@ -477,7 +478,6 @@ function extractData(element, debug) {
 		data.colorPalletId = element.colorPalletId;
 		//data.customPallet = element.customPallet;
 		if (!element.isAddon) {
-
 			utils.trimMatrix(data.pieces)
 			utils.paddingMatrix(data.pieces, data.padding)
 			utils.trimMatrix(matrixCopy)

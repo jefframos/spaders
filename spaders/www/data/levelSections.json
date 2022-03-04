@@ -82,21 +82,7 @@
                     "dataPath": "how-to-play/pokemon2.json"
                 }
             ]
-        },
-        {
-            "color": "0xDDDDDD",
-            "ignore": true,
-            "name": "Bossa",
-            "displayName": "Video Game History",
-            "imageSrc": "",
-            "colorPalletId": 1,
-            "levels": [
-                {
-                    "name": "---",
-                    "dataPath": "how-to-play/bossa.json"
-                }
-            ]
-        },
+        },        
         {
             "color": "0xDDDDDD",
             "ignore": false,
@@ -138,6 +124,34 @@
                 {
                     "name": "gameboy",
                     "dataPath": "gameboy/gameboycreatures.json"
+                }
+            ]
+        },
+        {
+            "color": "0xDDDDDD",
+            "ignore": true,
+            "name": "Bossa",
+            "displayName": "Video Game History",
+            "imageSrc": "",
+            "colorPalletId": 1,
+            "levels": [
+                {
+                    "name": "---",
+                    "dataPath": "how-to-play/bossa.json"
+                }
+            ]
+        },
+        {
+            "color": "0xDDDDDD",
+            "ignore": true,
+            "name": "Tutorial",
+            "displayName": "Video Game History",
+            "imageSrc": "",
+            "colorPalletId": 0,
+            "levels": [
+                {
+                    "name": "---",
+                    "dataPath": "tutorial/tutorial.json"
                 }
             ]
         }

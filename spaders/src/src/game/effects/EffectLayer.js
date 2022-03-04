@@ -316,6 +316,9 @@ export default class EffectLayer extends PIXI.Container{
 		if(config.isJuicy == 0){
 	      //return;
 	    }
+		if(!container){
+			return
+		}
 		if(!force){
 			force = 1;
 		}

@@ -9,7 +9,8 @@
         "movies",
         "main",
         "gb",
-        "templates"
+        "templates",
+        "tutorial"
     ],
     "objectTypesFile": "",
     "propertyTypes": [

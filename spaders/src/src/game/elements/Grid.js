@@ -301,6 +301,7 @@ export default class Grid extends PIXI.Container {
 		}
 	}
 	destroyCard(card) {
+
 		if (this.gridsSquares[card.pos.i][card.pos.j].card) {
 			//this.gridsSquares[card.pos.i][card.pos.j].shape.alpha = 1;
 			this.cardsStartedOnGrid--;

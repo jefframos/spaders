@@ -140,8 +140,10 @@ export default class Card extends PIXI.Container {
 		//console.log(totalSides)
 		let order = null;
 		if (customData && customData.order) {
+			console.log(customData.order)
 			order = customData.order;
 		}
+
 		this.addActionZones(totalSides, order);
 	}
 	attacked(hits = 1) {

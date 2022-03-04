@@ -110,7 +110,7 @@ export default class StartScreenContainer extends PIXI.Container {
 		spadersContainer.rotation = -Math.PI * 0.25
 		spadersContainer.scale.set(0.65)
 		spadersContainer.x = -60
-		spadersContainer.y = -200
+		spadersContainer.y = -185
 		this.screenContainer.addChild(spadersContainer);
 
 		this.lines = [];
@@ -126,14 +126,20 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.stripsContainer.addChild(line3);
 		line3.y = height * 2;
 
+		// this.tutorialLine = new PIXI.Graphics().beginFill(0xffffff).drawRect(-width / 2, 0, width, height * 2);
+		// this.tutorialLine.y = height * 6;
+		// this.stripsContainer.addChild(this.tutorialLine);
+		
 		this.playLine = new PIXI.Graphics().beginFill(0xffffff).drawRect(-width / 2, 0, width, height * 3);
 		this.stripsContainer.addChild(this.playLine);
 		this.playLine.y = height * 3;
+
 
 		this.lines.push(line1)
 		this.lines.push(line2)
 		this.lines.push(line3)
 		this.lines.push(this.playLine)
+		//this.lines.push(this.tutorialLine)
 
 		this.stripsContainer.pivot.x = 0//this.stripsContainer.width / 2;
 		this.stripsContainer.pivot.y = this.stripsContainer.height / 2;
@@ -153,6 +159,16 @@ export default class StartScreenContainer extends PIXI.Container {
 		});
 		this.playLine.addChild(this.playLabel);
 		this.playLabel.y = this.playLine.height / 2 - 5
+		
+		// this.howToPlayLabel = new PIXI.Text("How to play", {
+		// 	font: '32px', fill: config.colors.background, align: 'center', fontFamily: window.LOGO_FONT,
+		// 	stroke: 0xFFFFFF,
+		// 	strokeThickness: 4
+		// });
+		// this.tutorialLine.addChild(this.howToPlayLabel);
+		// this.howToPlayLabel.y = this.tutorialLine.height / 2 - 5
+		// this.howToPlayLabel.pivot.x = this.howToPlayLabel.width / 2
+		// this.howToPlayLabel.pivot.y = this.howToPlayLabel.height / 2
 		//this.playLabel.rotation = Math.PI * -0.25;
 		//this.playLabel.x = -config.width / 2 + 80 + Math.cos(this.playLabel.rotation) * 200
 		//this.playLabel.y = config.height / 2 - 170 + Math.sin(this.playLabel.rotation) * 200

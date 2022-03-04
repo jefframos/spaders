@@ -109,7 +109,7 @@ export default class LevelSelectContainer extends PIXI.Container {
             this.refreshNavButtons();
 
 
-            console.log(this.currentGridOffset, this.unscaledLineButtonSize)
+            //console.log(this.currentGridOffset, this.unscaledLineButtonSize)
             this.dragPanel = new PIXI.Graphics().beginFill(0x000099).drawRect(-5000, -5000, 10000, 10000);
 
             this.addChild(this.dragPanel)
