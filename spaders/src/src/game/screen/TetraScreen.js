@@ -1656,10 +1656,10 @@ export default class TetraScreen extends Screen {
 		}
 		this.trailMarker.overShapeVisible = this.isTouchingDown
 		if (this.trailMarker.overShapeVisible) {
-			this.trailMarker.arrowsUp.alpha = utils.lerp(this.trailMarker.arrowsUp.alpha, 0.5, 0.1)
+			this.trailMarker.arrowsUp.alpha = utils.lerp(this.trailMarker.arrowsUp.alpha, 0.5, 0.2)
 
 		} else {
-			this.trailMarker.arrowsUp.alpha = utils.lerp(this.trailMarker.arrowsUp.alpha, 0, 0.1)
+			this.trailMarker.arrowsUp.alpha = utils.lerp(this.trailMarker.arrowsUp.alpha, 0, 0.05)
 		}
 
 		this.trailMarker.arrowsUp.tint = this.trailMarker.tint;
@@ -1708,19 +1708,20 @@ export default class TetraScreen extends Screen {
 			this.trailMarker.overShape.height = 0
 		} else {
 
-			this.trailMarker.overShape.height = GRID.height - (lastPossible * CARD.height) + CARD.height + this.trailMarker.overShape.margin+ this.grid.backgroundOffset.y / 4
+			let targetHeight = GRID.height - (lastPossible * CARD.height) + CARD.height + this.trailMarker.overShape.margin+ this.grid.backgroundOffset.y / 4
+			this.trailMarker.overShape.height = utils.lerp(this.trailMarker.overShape.height, targetHeight, 0.5);
 		}
 
 		this.trailMarker.overShape.y = GRID.height - this.trailMarker.overShape.height + CARD.height - this.trailMarker.overShape.margin * 0.5 + this.grid.backgroundOffset.y / 4
 		this.trailMarker.arrowsUp.scale.set(this.trailMarker.overShape.width / this.trailMarker.arrowsUp.width)
-		this.trailMarker.arrowsUp.height = this.trailMarker.overShape.height / this.trailMarker.arrowsUp.scale.y
+		this.trailMarker.arrowsUp.height = this.trailMarker.overShape.height / this.trailMarker.arrowsUp.scale.y - CARD.height * 2 - this.grid.backgroundOffset.y / 4
 		this.trailMarker.arrowsUp.y = this.trailMarker.overShape.y
 	}
 	updateTrailsPosition(force = false) {
 		this.trailMarker.positionSpringX.update();
 		if (this.latestCardPosition !== undefined && this.latestCardPosition >= 0) {
 			this.trailMarker.positionSpringX.tx = this.latestCardPosition;
-			this.trailMarker.x = utils.lerp(this.trailMarker.x, this.latestCardPosition, 0.4)
+			this.trailMarker.x = utils.lerp(this.trailMarker.x, this.latestCardPosition, 0.5)
 		}
 		if (this.currentCard && this.mousePosID >= 0 && this.mousePosID < GRID.i) {
 
@@ -1736,7 +1737,7 @@ export default class TetraScreen extends Screen {
 				this.trailMarker.alpha = 0.65//utils.lerp(this.trailMarker.alpha, 0.35, 0.1)
 				this.trailMarker.x = this.trailMarker.positionSpringX.tx;
 			} else {
-				this.trailMarker.alpha = utils.lerp(this.trailMarker.alpha, 0.65, 0.1)
+				this.trailMarker.alpha = utils.lerp(this.trailMarker.alpha, 0.65, 0.2)
 
 			}
 			this.trailHorizontal.alpha = this.trailMarker.alpha;

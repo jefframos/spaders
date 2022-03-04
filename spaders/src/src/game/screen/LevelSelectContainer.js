@@ -394,6 +394,7 @@ export default class LevelSelectContainer extends PIXI.Container {
             });
         } else {
             //ouch
+            this.hide();
             this.gameScreen.startScreenContainer.startState(0);
             this.currentUISection = 0;
             this.refreshNavButtons();
@@ -732,8 +733,14 @@ export default class LevelSelectContainer extends PIXI.Container {
         return new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, 100, 130);
     }
     show() {
+        this.shouldUpdate = true;
         this.backButton.visible = true;
         this.verticalBar.visible = true;
+    }
+    hide(){
+        this.shouldUpdate = false;
+        this.backButton.visible = false;
+        this.verticalBar.visible = false;
     }
     selectLevel(data) {
         if (this.disableClickCounter > 0) {
@@ -742,8 +749,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         this.gameScreen.mainMenuSettings.collapse();
         this.gameScreen.startNewLevel(data, false);
 
-        this.backButton.visible = false;
-        this.verticalBar.visible = false;
+        this.hide();
         //this.currentUISection = 0;
         this.resetDrags()
         this.resize(null, true)
@@ -837,11 +843,15 @@ export default class LevelSelectContainer extends PIXI.Container {
     }
     centerLevels() {
         //this.currentGridOffset.x = 0
-        this.drawGrid(this.sectionButtons, 20, this.unscaledLineButtonSize, true);
-        this.drawGrid(this.navButtons, 20, this.unscaledLineButtonSize, true);
-        this.drawGrid(this.levelCards, 20, this.unscaledCardSize, false);
 
-        this.updateDrag(this.draggables[this.currentUISection])
+        if(this.shouldUpdate){
+
+            this.drawGrid(this.sectionButtons, 20, this.unscaledLineButtonSize, true);
+            this.drawGrid(this.navButtons, 20, this.unscaledLineButtonSize, true);
+            this.drawGrid(this.levelCards, 20, this.unscaledCardSize, false);
+            
+            this.updateDrag(this.draggables[this.currentUISection])
+        }
         // if(this.currentUISection == 2){
         //     this.updateDrag(this.levelsView);
 
