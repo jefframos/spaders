@@ -155,7 +155,7 @@ export default class TutorialOverlay extends PIXI.Container {
                 requireSpecificAction: false,
                 useGlobalScale: false,
                 target: "backgroundInteractable",
-                centerBox: { x: 0.77, y: 0.52 }
+                centerBox: { x: 0.77, y: 0.55 }
             },
             {
                 textBoxOffset: { x: 0, y: 0 },
@@ -164,7 +164,7 @@ export default class TutorialOverlay extends PIXI.Container {
                 requireSpecificAction: false,
                 useGlobalScale: false,
                 target: "backgroundInteractable",
-                centerBox: { x: 0.5, y: 0.52 }
+                centerBox: { x: 0.5, y: 0.55 }
             },
             {
                 textBoxOffset: { x: 0, y: 0 },
@@ -185,7 +185,7 @@ export default class TutorialOverlay extends PIXI.Container {
             },
             {
                 textBoxOffset: { x: 0, y: -1.25 },
-                text: 'Every starter spader have a TILE behind',
+                text: 'Every starter spader\nhave a TILE behind',
                 callback: null,
                 requireSpecificAction: false,
                 target: "gridContainer",
@@ -194,24 +194,26 @@ export default class TutorialOverlay extends PIXI.Container {
             },
             {
                 textBoxOffset: { x: 0, y: -1.25 },
-                text: 'When you kill then, their TILE is removed',
+                text: 'When you kill then,\ntheir TILE is removed',
                 callback: this.shoot.bind(this),
                 requireSpecificAction: false,
+                hideNextButton: true,
                 target: "gridContainer",
                 centerBox: { x: 0.5, y: 0 },
                 delay: 0
             },
             {
                 textBoxOffset: { x: 0, y: -1.25 },
-                text: 'If you attack and the other spader have an\nopposite arrow, it will attack you back',
+                text: 'If you attack and the other spader\nhave an opposite arrow,\nit will attack you back',
                 callback: this.shoot.bind(this, true),
                 requireSpecificAction: false,
+                hideNextButton: true,
                 target: "gridContainer",
                 centerBox: { x: 0.5, y: 0 },
                 delay: 1.5
             }, {
                 textBoxOffset: { x: 0, y: -1.1 },
-                text: 'By using the counter attack, you wipe two\n at the same time',
+                text: 'By using the counter attack,\nyou wipe two at the same time',
                 callback: null,
                 requireSpecificAction: false,
                 target: "gridContainer",
@@ -220,7 +222,7 @@ export default class TutorialOverlay extends PIXI.Container {
             },
             {
                 textBoxOffset: { x: 0, y: -1.1 },
-                text: 'First, you should wipe all starters',
+                text: 'First,\nyou should wipe all starters',
                 callback: this.getNewPiece.bind(this),
                 requireSpecificAction: false,
                 target: "gridContainer",
@@ -231,6 +233,7 @@ export default class TutorialOverlay extends PIXI.Container {
                 textBoxOffset: { x: 0, y: -1.1 },
                 text: 'And then kill the leftovers',
                 callback: this.shoot.bind(this, true),
+                hideNextButton: true,
                 requireSpecificAction: false,
                 target: "gridContainer",
                 centerBox: { x: 0.5, y: 0 },
@@ -247,7 +250,7 @@ export default class TutorialOverlay extends PIXI.Container {
             },
             {
                 textBoxOffset: { x: 0, y: -1.1 },
-                text: 'Some spaders needs more than one attack',
+                text: 'Some spaders needs\nmore than one attack',
                 callback: null,
                 requireSpecificAction: false,
                 target: "gridContainer",
@@ -256,9 +259,10 @@ export default class TutorialOverlay extends PIXI.Container {
                 delay: 1
             },
             {
-                textBoxOffset: { x: 0, y:-1.1},
-                text: 'Try to attack as much as you can in one move',
+                textBoxOffset: { x: 0, y: -1.1 },
+                text: 'Try to attack as much\nas you can in one move',
                 callback: this.shoot.bind(this),
+                hideNextButton: true,
                 requireSpecificAction: false,
                 target: "gridContainer",
                 useGlobalScale: false,
@@ -266,8 +270,8 @@ export default class TutorialOverlay extends PIXI.Container {
                 delay: 0
             },
             {
-                textBoxOffset: { x: 0, y:-1.1},
-                text: 'High combos transform random spaders in bombs',
+                textBoxOffset: { x: 0, y: -1.1 },
+                text: 'High combos transform\nrandom spaders in bombs',
                 callback: this.allCrazy.bind(this),
                 requireSpecificAction: false,
                 target: "gridContainer",
@@ -275,9 +279,10 @@ export default class TutorialOverlay extends PIXI.Container {
                 delay: 2
             },
             {
-                textBoxOffset: { x: 0, y:-1.1},
+                textBoxOffset: { x: 0, y: -1.1 },
                 text: 'If you kill them, they will explode',
                 callback: this.shoot.bind(this, true),
+                hideNextButton: true,
                 requireSpecificAction: false,
                 target: "gridContainer",
                 centerBox: { x: 0.5, y: 0 },
@@ -294,8 +299,9 @@ export default class TutorialOverlay extends PIXI.Container {
             },
             {
                 textBoxOffset: { x: 0, y: -1.1 },
-                text: 'Try to use their arrows to counter\nattack you',
+                text: 'Try to use their arrows\nto counter attack you',
                 callback: this.shoot.bind(this, false),
+                hideNextButton: true,
                 requireSpecificAction: false,
                 target: "gridContainer",
                 centerBox: { x: 0.5, y: 0 },
@@ -305,6 +311,7 @@ export default class TutorialOverlay extends PIXI.Container {
                 textBoxOffset: { x: 0, y: -1.1 },
                 text: 'This is the best way to\nkeep the board cleaner',
                 callback: this.shoot.bind(this, false),
+                hideNextButton: true,
                 requireSpecificAction: false,
                 target: "gridContainer",
                 centerBox: { x: 0.5, y: 0 },
@@ -312,15 +319,16 @@ export default class TutorialOverlay extends PIXI.Container {
             },
             {
                 textBoxOffset: { x: 0, y: -1.1 },
-                text: 'And make easier to complete\nthe levels',
+                text: 'And make easier to\ncomplete the levels',
                 callback: this.shoot.bind(this, true),
+                hideNextButton: true,
                 requireSpecificAction: false,
                 target: "gridContainer",
                 centerBox: { x: 0.5, y: 0 },
                 delay: 2
             },
             {
-                textBoxOffset: { x: 0, y: 0},
+                textBoxOffset: { x: 0, y: 0 },
                 text: 'Have fun!',
                 callback: null,
                 requireSpecificAction: false,
@@ -328,16 +336,40 @@ export default class TutorialOverlay extends PIXI.Container {
                 centerBox: { x: 0.5, y: 0.5 },
                 delay: 2
             }]
-            
-            this.killTutorialButton = new UIButton1(config.colors.dark, window.iconsData.cancel, config.colors.white);
-            this.addChild(this.killTutorialButton)
-            this.killTutorialButton.onClick.add(()=>{this.killTutorial()});
-            this.killTutorialButton.scale.set(0.5)
+
+        this.killTutorialButton = new UIButton1(config.colors.dark, window.iconsData.cancel, config.colors.white);
+        this.addChild(this.killTutorialButton)
+        this.killTutorialButton.onClick.add(() => { this.killTutorial() });
+        this.killTutorialButton.scale.set(0.5)
+
+        this.nextStepTutorial = new UIButton1(config.colors.white, window.iconsData.next, config.colors.background);
+        this.nextStepTutorial.onClick.add(() => {
+            this.nextStepTutorial.interactive = false;
+            setTimeout(() => {
+                this.nextStepTutorial.interactive = true;
+            }, 500);
+            this.tutorialPopLabel.manageCallbacks();
+            //this.playnextStepTutorial()
+        });
+        this.addChild(this.nextStepTutorial);
+        this.nextStepTutorial.addLabelLeft("NEXT");
+        this.nextStepTutorial.scale.set(0.5)
+
+        this.arrowSprite = PIXI.Sprite.fromFrame(window.iconsData.next)
+        this.arrowSprite.tint = config.colors.white
+        this.arrowSprite.anchor.set(0.5);
+        this.arrowSprite.scale.set(0.5);
+        this.arrowSprite.rotation = -Math.PI / 2;
+        this.arrowSprite.offset = 0;
+        this.arrowSprite.speed = 3;
+
+        // this.cardsContainer.addChild(this.arrowSprite)
     }
     nextTutorial() {
 
+        this.arrowSprite.alpha = 0;
         if (this.currentTutorial >= this.tutorial.length) {
-            this.hide();
+            this.killTutorial();
             return;
         }
 
@@ -348,15 +380,21 @@ export default class TutorialOverlay extends PIXI.Container {
         if (action.targetSpeech && typeof action.targetSpeech === 'string') {
             action.targetSpeech = this[action.targetSpeech]
         }
+        this.nextStepTutorial.visible = !action.hideNextButton
+        this.arrowSprite.alpha = 0;
+        if (!this.nextStepTutorial.visible) {
+            TweenMax.to(this.arrowSprite, 0.5, { delay: 0.7 + action.delay ? action.delay : 0, alpha: 1 })
+        }
         this.tutorialPopLabel.popLabel(action, this.nextTutorial.bind(this));
         this.currentTutorial++;
     }
 
-    killTutorial(){
+    killTutorial() {
         this.cleanLevel();
         this.hide();
     }
     hide() {
+        this.tutorialPopLabel.visible = false;
         TweenMax.to(this, 0.5, {
             alpha: 0, onComplete: () => {
                 this.visible = false;
@@ -364,6 +402,7 @@ export default class TutorialOverlay extends PIXI.Container {
         })
     }
     show() {
+        this.tutorialPopLabel.visible = true;
         this.visible = true;
 
         this.currentTutorial = 0;
@@ -394,15 +433,15 @@ export default class TutorialOverlay extends PIXI.Container {
             card1.updateSprite(card1.life);
             card1.updateCard(true);
             this.firstCard.addChild(card1)
-            card1.x = CARD.width * index;
+            card1.x = (CARD.width + 5) * index;
             if (index % 2 != 0) {
                 card1.y = -CARD.width;
             }
-            TweenMax.from(card1, 0.5, { delay: index * 0.2 + 0.3, alpha: 0, y: card1.y + CARD.width, ease: Back.easeOut })
+            TweenMax.from(card1, 1, { delay: index * 0.3 + 0.3, alpha: 0, y: card1.y + CARD.width, ease: Back.easeOut })
             //TweenMax.from(card1.scale, 0.8, {delay:index * 0.2 + 0.3, x:0.5, y:1.5, ease:Elastic.easeOut})
         }
         this.cardsContainer.addChild(this.firstCard);
-        utils.resizeToFitAR({ width: this.gameCanvas.width * 0.7, height: this.gameCanvas.height * 0.3 }, this.firstCard)
+        utils.resizeToFitAR({ width: this.gameCanvas.width * 0.6, height: this.gameCanvas.height * 0.3 }, this.firstCard)
         this.firstCard.x = -this.firstCard.width / 2
         this.firstCard.y = -this.firstCard.height / 2
 
@@ -423,13 +462,22 @@ export default class TutorialOverlay extends PIXI.Container {
         }
         if (this.currentCard) {
             this.currentCard.update(delta);
+            this.arrowSprite.offset += delta * this.arrowSprite.speed
+            this.arrowSprite.offset %= Math.PI
+            this.arrowSprite.x = this.currentCard.x + CARD.width / 2
+
+            this.arrowSprite.y = this.currentCard.y + CARD.height * 1.5 + Math.sin(this.arrowSprite.offset) * CARD.height * 0.5
             this.currentCard.y = ((this.gridContainer.height) / this.gridContainer.scale.y) + this.offsetCard.y - CARD.height - 10;
             this.trailHorizontal.y = this.currentCard.y - this.offsetCard.y;
             this.trailHorizontal.tint = this.currentCard.currentColor;
             this.trailHorizontal.alpha = 0.35;
             this.trailVertical.tint = this.currentCard.currentColor;
-            this.trailVertical.alpha = 0.35;
-            this.trailVertical.x = utils.lerp(this.trailVertical.x, this.currentCard.x, 0.3);
+            if (this.trailVertical.visible) {
+
+                this.trailVertical.alpha = utils.lerp(this.trailVertical.alpha, 0.35, 0.3);
+            }
+            //this.trailVertical.alpha = 0.35;
+            this.trailVertical.x = this.currentCard.x//utils.lerp(this.trailVertical.x, this.currentCard.x, 0.3);
         } else {
             if (this.trailVertical) {
                 this.trailVertical.alpha = utils.lerp(this.trailVertical.alpha, 0, 0.3);
@@ -463,15 +511,18 @@ export default class TutorialOverlay extends PIXI.Container {
         this.tutorialPopLabel.y = this.gameCanvas.y
 
         let toLoc = this.toLocal({ x: 0, y: 0 });
-		this.killTutorialButton.x = toLoc.x + innerResolution.width - this.killTutorialButton.width;
-		this.killTutorialButton.y = toLoc.y + this.killTutorialButton.width;
+        this.killTutorialButton.x = toLoc.x + innerResolution.width - this.killTutorialButton.width;
+        this.killTutorialButton.y = toLoc.y + this.killTutorialButton.width;
+
+        this.nextStepTutorial.x = this.killTutorialButton.x//toLoc.x + innerResolution.width - this.killTutorialButton.width;
+        this.nextStepTutorial.y = toLoc.y + innerResolution.height - this.nextStepTutorial.height;
     }
 
 
 
 
     startNewTutorial(id) {
-        
+
         this.cleanLevel();
         this.currentTutorialLevel = id;
         this.showGameOverState = id > 2;
@@ -490,6 +541,9 @@ export default class TutorialOverlay extends PIXI.Container {
         setTimeout(() => {
             this.getNewPiece()
         }, 1000);
+
+        this.cardsContainer.addChild(this.arrowSprite)
+
 
         this.currentPositionID = 1;
         this.cardsContainer.alpha = 0;
@@ -531,6 +585,8 @@ export default class TutorialOverlay extends PIXI.Container {
             y: this.currentCard.pos.j * CARD.height
         }, 0.1);
         this.currentCard = null;
+        this.arrowSprite.alpha = 0;
+        this.trailVertical.visible = false;
 
         if (!ignoreSpawn) {
             setTimeout(() => {
@@ -573,7 +629,7 @@ export default class TutorialOverlay extends PIXI.Container {
         this.currentCard.updateSprite(this.currentCard.life);
 
 
-        console.log(tut.mine[tut.currentStep])
+        //console.log(tut.mine[tut.currentStep])
         this.currentCard.addActionZones(3, tut.mine[tut.currentShoot])
         this.currentPositionID = tut.shootCol[tut.currentShoot]
         tut.currentShoot++;
@@ -592,6 +648,11 @@ export default class TutorialOverlay extends PIXI.Container {
             this.frontGridContainer.addChild(this.currentCard);
 
             this.currentCard.x = this.currentPositionID * CARD.width
+
+            setTimeout(() => {
+                this.trailVertical.alpha = 0;
+                this.trailVertical.visible = true;
+            }, 500);
         }, 100);
 
     }
@@ -660,6 +721,8 @@ export default class TutorialOverlay extends PIXI.Container {
         this.trailVertical.width = CARD.width
         this.trailVertical.height = GRID.height + CARD.width + this.grid.backgroundOffset.y * 0.25
 
+        this.trailVertical.visible = false;
+
         this.cardsContainer.addChildAt(this.trailHorizontal, 0)
         this.cardsContainer.addChildAt(this.trailVertical, 0)
     }
@@ -677,12 +740,12 @@ export default class TutorialOverlay extends PIXI.Container {
             this.firstCard.parent.removeChild(this.firstCard)
         }
         for (let index = this.cardsContainer.children.length - 1; index >= 0; index--) {
-			this.cardsContainer.removeChildAt(0);
-		}
+            this.cardsContainer.removeChildAt(0);
+        }
 
         for (let index = this.grid.children.length - 1; index >= 0; index--) {
-			this.grid.removeChildAt(0);
-		}
+            this.grid.removeChildAt(0);
+        }
     }
 }
 

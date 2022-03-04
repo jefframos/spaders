@@ -2,6 +2,7 @@ import * as PIXI from 'pixi.js';
 import config from '../../config';
 import utils from '../../utils';
 import TweenMax from 'gsap';
+import UIButton1 from './UIButton1';
 
 
 export default class TutorialPopLabel extends PIXI.Container {
@@ -16,15 +17,17 @@ export default class TutorialPopLabel extends PIXI.Container {
 
         if(window.isMobile){
 
-            this.tutorialLabel = new PIXI.Text('', { font: '14px', fill: config.colors.background, align: 'center', fontWeight: '500', fontFamily: window.STANDARD_FONT1 });
+            this.tutorialLabel = new PIXI.Text('', { font: '13px', fill: config.colors.background, align: 'center', fontWeight: '500', fontFamily: window.STANDARD_FONT1 });
         }else{
 
-            this.tutorialLabel = new PIXI.Text('', { font: '18px', fill: config.colors.background, align: 'center', fontWeight: '500', fontFamily: window.STANDARD_FONT1 });
+            this.tutorialLabel = new PIXI.Text('', { font: '16px', fill: config.colors.background, align: 'center', fontWeight: '500', fontFamily: window.STANDARD_FONT1 });
         }
 
         this.textBoxContainer.addChild(this.tutorialLabel);
         this.addChild(this.textBoxContainer);
         this.textBoxContainer.scale.set(0);
+
+    
 
         //this.tutorialActionShape = new PIXI.Graphics().lineStyle(1,0x00FF00).drawRect(0, 0, 300, 300);
         this.tutorialActionShape = new PIXI.Graphics().beginFill(0x00FF00).drawRect(0, 0, 300, 300);
@@ -46,7 +49,7 @@ export default class TutorialPopLabel extends PIXI.Container {
         TweenMax.to(obj,targetTime , {delay: data.delay,chars:data.text.length, onUpdate:()=>{
 
             this.tutorialLabel.text = data.text.substring(0, Math.floor(obj.chars));
-            this.backShape.width = this.tutorialLabel.width + 20
+            this.backShape.width = this.tutorialLabel.width + 25
             this.backShape.height = this.tutorialLabel.height + 20
             this.backShape.alpha = 1
             this.tutorialLabel.x = 10
