@@ -88,6 +88,7 @@ export default class Board {
 		return firstLineShots
 	}
 	resetBoard() {
+		this.ignoreComboCards = false;
 		this.nextTurnTimer = 0;
 		this.cards = [];
 		this.allCards = [];
@@ -443,6 +444,9 @@ export default class Board {
 		}
 	}
 	addCrazyCards(numCards, cardToIgnore) {
+		if(this.ignoreComboCards){
+			return;
+		}
 		let tempCardList = [];
 		for (var i = 0; i < this.cards.length; i++) {
 			for (var j = 0; j < this.cards[i].length; j++) {

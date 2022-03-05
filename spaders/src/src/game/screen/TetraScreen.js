@@ -143,8 +143,10 @@ export default class TetraScreen extends Screen {
 				let parameters = window.getLevelData(levelRedirectParameters[0], levelRedirectParameters[1], levelRedirectParameters[2])
 				if (levelRedirectParameters[0] == 'tutorial') {
 					setTimeout(() => {
+						console.log(levelRedirectParameters)
 						window.game.onTapUp();
-						this.openTutorial();
+						this.openTutorial(levelRedirectParameters[1])
+						
 					}, 10);
 				} else {
 
@@ -551,9 +553,9 @@ export default class TetraScreen extends Screen {
 	onUnPause() {
 		//this.gameRunning = true;
 	}
-	openTutorial() {
+	openTutorial(id = 0) {
 		this.tutorialOverlay.visible = true;
-		this.tutorialOverlay.show()
+		this.tutorialOverlay.show(id)
 		this.gameRunning = false;
 		this.hideInGameElements();
 	}
