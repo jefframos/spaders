@@ -2052,7 +2052,7 @@ export default class TetraScreen extends Screen {
 
 
 		//utils.resizeToFitAR({width:this.bottomUICanvas.width * 0.8, height:this.bottomUICanvas.height * 0.4},this.containerQueue)
-		utils.resizeToFitAR({ width: this.gameCanvas.width * 0.95, height: this.gameCanvas.height * 0.73 }, this.gridContainer)
+		utils.resizeToFitAR({ width: this.gameCanvas.width * 0.95, height: this.gameCanvas.height * 0.82 }, this.gridContainer)
 
 		if (this.gridContainer.scale.x > 1) {
 			this.gridContainer.scale.set(1)
@@ -2079,6 +2079,8 @@ export default class TetraScreen extends Screen {
 		this.gridContainer.x = this.gameCanvas.x + this.gameCanvas.width / 2 - (this.gridContainer.width) / 2 + this.grid.backgroundOffset.x / 4
 		this.gridContainer.y = this.gameCanvas.y + this.gameCanvas.height / 2 - this.gridContainer.height / 2 - this.topCanvas.height + this.grid.backgroundOffset.y / 2
 		//utils.centerObject(this.gridContainer, this.gameCanvas)
+
+		this.gridContainer.y = Math.max(this.gameCanvas.y + (this.topCanvas.height * this.topUIContainer.scale.y),this.gridContainer.y) 
 
 		this.cardsContainer.x = this.gridContainer.x;
 		this.cardsContainer.y = this.gridContainer.y;

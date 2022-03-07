@@ -22,7 +22,7 @@ export default class Card extends PIXI.Container {
 		this.cardNumber = CARD_NUMBER;
 
 		this.realSpriteWidth = 72;
-		this.scaleRef = 0.7;
+		this.scaleRef = 0.8;
 
 		let card = new PIXI.Container();
 		this.counter = this.MAX_COUNTER;

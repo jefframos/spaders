@@ -1,12 +1,12 @@
 {
     "activeFile": "videogames/levels2.tmx",
     "expandedProjectPaths": [
-        "movies",
-        "main",
         "how-to-play",
+        "videogames",
+        "main",
         "gb",
-        "templates",
-        "videogames"
+        "movies",
+        "templates"
     ],
     "fileStates": {
         "D:/Projects/tetra/map/levels.tmx": {
@@ -291,7 +291,7 @@
         },
         "videogames/levels2.tmx": {
             "scale": 0.5,
-            "selectedLayer": 6,
+            "selectedLayer": 0,
             "viewCenter": {
                 "x": 389,
                 "y": 456
