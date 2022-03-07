@@ -207,6 +207,14 @@ export default class FXContainer extends PIXI.Container {
     }
     addParticlesToScore(totalParticles, from, target, color, speedScale = 1) {
 
+        //for (let index = 0; index < totalParticles; index++) {
+            // let particle = this.getParticle();
+            // this.addChild(particle)
+            // particle.x = from.x + Math.random() * 10 - 5
+            // particle.y = from.y + Math.random() * 10 - 5
+            // particle.tint = color;
+            // particle.alpha = 0.1
+        //}
         for (let index = 0; index < totalParticles; index++) {
             let particle = this.getParticle();
             particle.anchor.set(0.5)

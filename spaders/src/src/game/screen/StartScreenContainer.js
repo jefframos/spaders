@@ -90,7 +90,7 @@ export default class StartScreenContainer extends PIXI.Container {
 
 		this.screenContainer.addChild(this.stripsContainer);
 		this.screenContainer.addChild(this.logoLabel);
-		let height = 40;
+		let height = 35;
 		let width = 3000;
 		let spadersContainer = new PIXI.Container();
 		this.spadersList = [];
@@ -153,9 +153,9 @@ export default class StartScreenContainer extends PIXI.Container {
 
 
 		this.playLabel = new PIXI.Text("PLAY", {
-			font: '60px', fill: config.colors.background, align: 'center', fontFamily: window.LOGO_FONT,
+			font: '42px', fill: config.colors.background, align: 'center', fontFamily: window.LOGO_FONT,
 			stroke: 0xFFFFFF,
-			strokeThickness: 8
+			strokeThickness: 6
 		});
 		this.playLine.addChild(this.playLabel);
 		this.playLabel.y = this.playLine.height / 2 - 5
