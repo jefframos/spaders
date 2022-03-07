@@ -148,7 +148,7 @@
             "scale": 0.33,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 765.1515151515152,
+                "x": 768.1818181818181,
                 "y": 769.6969696969697
             }
         },
@@ -293,8 +293,8 @@
             "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 389,
-                "y": 456
+                "x": 767,
+                "y": 768
             }
         },
         "videogames/levels3.tmx": {

@@ -192,7 +192,14 @@ export default class Card extends PIXI.Container {
 		let imageID = Math.floor(level)
 		if (id >= 0) {
 			imageID = id
-			imageID %= window.IMAGE_DATA.enemyImagesFrame.length;
+			imageID %= window.IMAGE_DATA.enemyImagesFrame.length - 1;
+		}
+		if (data && data.hasWhite){
+			imageID = 9;
+			this.enemySpriteWhite.alpha = 1;
+		}else{
+		this.enemySpriteWhite.alpha = 0.65
+
 		}
 		this.enemySprite.setTexture(PIXI.Texture.fromFrame(window.IMAGE_DATA.enemyImagesFrame[imageID]));
 		this.enemySpriteWhite.setTexture(PIXI.Texture.fromFrame("w_" + window.IMAGE_DATA.enemyImagesFrame[imageID]));
@@ -210,7 +217,6 @@ export default class Card extends PIXI.Container {
 
 		// }
 		this.enemySpriteWhite.visible = true;
-		this.enemySpriteWhite.alpha = 0.65
 		this.enemySpriteWhite.anchor = this.enemySprite.anchor
 		if (data) {
 			this.enemySprite.tint = data.color;

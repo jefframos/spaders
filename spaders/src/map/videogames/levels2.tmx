@@ -9,7 +9,7 @@
  </properties>
  <tileset firstgid="1" source="../tilesets/spadersTileset.tsx"/>
  <tileset firstgid="65" source="../tilesets/videogames.tsx"/>
- <layer id="30" name="AllColors" width="24" height="24" visible="0">
+ <layer id="30" name="AllColors" width="24" height="24">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="8"/>
