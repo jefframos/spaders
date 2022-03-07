@@ -107,10 +107,10 @@ export default class Grid extends PIXI.Container {
 		let targetSprite = colorScheme.sprite;
 		let paddingSprite = 20;
 		
-		if(levelData.levelDataScale > 1){
-			paddingSprite = 10;
-			targetSprite = colorScheme.spriteDraw;
-		}
+		// if(levelData.levelDataScale > 1){
+		// 	paddingSprite = 10;
+		// 	targetSprite = colorScheme.spriteDraw;
+		// }
 		for (var i = piecesToTraw.length - 1; i >= 0; i--) {
 			for (var j = 0; j < piecesToTraw[i].length; j++) {
 				if (piecesToTraw[i][j] >= 0 && piecesToTraw[i][j] < scheme.block.id) {
@@ -119,8 +119,9 @@ export default class Grid extends PIXI.Container {
 					let gridSquare = new PIXI.mesh.NineSlicePlane(
 						PIXI.Texture.fromFrame(targetSprite), paddingSprite, paddingSprite, paddingSprite, paddingSprite);
 
-					gridSquare.width = GRID.widthDraw
-					gridSquare.height = GRID.heightDraw
+					gridSquare.width = GRID.widthDraw * levelData.levelDataScale
+					gridSquare.height = GRID.heightDraw  * levelData.levelDataScale
+					gridSquare.scale.set(1 / levelData.levelDataScale)
 					//gridSquare.scale.set(CARD.width / gridSquare.width);
 					gridSquare.x = j * GRID.widthDraw;
 					gridSquare.y = i * GRID.heightDraw;

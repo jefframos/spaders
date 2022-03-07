@@ -124,11 +124,20 @@ export default class TutorialOverlay extends PIXI.Container {
         this.tutorial = [
             {
                 textBoxOffset: { x: 0, y: 0 },
-                text: 'Hi, welcome to Spaders!',
+                text: 'Hi',
+                callback: null,
+                requireSpecificAction: false,
+                target: "backgroundInteractable",
+                centerBox: { x: 0.5, y: 0.5 },
+                delay: 0.5
+            },{
+                textBoxOffset: { x: 0, y: 0 },
+                text: 'Welcome to Spaders!',
                 callback: this.showFirstCard.bind(this, 0),
                 requireSpecificAction: false,
                 target: "backgroundInteractable",
-                centerBox: { x: 0.5, y: 0.3 }
+                centerBox: { x: 0.5, y: 0.3 },
+                delay: 0.5
             },
             {
                 textBoxOffset: { x: 0, y: 0 },
@@ -137,7 +146,8 @@ export default class TutorialOverlay extends PIXI.Container {
                 requireSpecificAction: false,
                 useGlobalScale: false,
                 target: "backgroundInteractable",
-                centerBox: { x: 0.5, y: 0.6 }
+                centerBox: { x: 0.5, y: 0.6 },
+                delay: 0.5
             },
             {
                 textBoxOffset: { x: 0, y: 0 },
@@ -146,7 +156,8 @@ export default class TutorialOverlay extends PIXI.Container {
                 requireSpecificAction: false,
                 useGlobalScale: false,
                 target: "backgroundInteractable",
-                centerBox: { x: 0.5, y: 0.65 }
+                centerBox: { x: 0.5, y: 0.65 },
+                delay: 0.5
             },
             {
                 textBoxOffset: { x: 0, y: 0 },
@@ -155,7 +166,8 @@ export default class TutorialOverlay extends PIXI.Container {
                 requireSpecificAction: false,
                 useGlobalScale: false,
                 target: "backgroundInteractable",
-                centerBox: { x: 0.77, y: 0.55 }
+                centerBox: { x: 0.77, y: 0.55 },
+                delay: 0.5
             },
             {
                 textBoxOffset: { x: 0, y: 0 },
@@ -164,7 +176,8 @@ export default class TutorialOverlay extends PIXI.Container {
                 requireSpecificAction: false,
                 useGlobalScale: false,
                 target: "backgroundInteractable",
-                centerBox: { x: 0.5, y: 0.55 }
+                centerBox: { x: 0.5, y: 0.55 },
+                delay: 0.5
             },
             {
                 textBoxOffset: { x: 0, y: 0 },
@@ -172,7 +185,8 @@ export default class TutorialOverlay extends PIXI.Container {
                 callback: this.startNewTutorial.bind(this, 0),
                 requireSpecificAction: false,
                 target: "backgroundInteractable",
-                centerBox: { x: 0.5, y: 0.6 }
+                centerBox: { x: 0.5, y: 0.6 },
+                delay: 0.5
             },
             {
                 textBoxOffset: { x: 0, y: -1.25 },
@@ -275,7 +289,7 @@ export default class TutorialOverlay extends PIXI.Container {
                 textBoxOffset: { x: 0, y: -1.1 },
                 text: 'High combos transform\nrandom spaders in bombs',
                 callback: null,
-                highlightElementParameters: [1, Math.PI * 0.25 +  Math.PI],
+                highlightElementParameters: [1, Math.PI * 0.25 + Math.PI],
                 highlightElement: this.getFirstBoardPiece,
                 requireSpecificAction: false,
                 target: "gridContainer",
@@ -286,7 +300,7 @@ export default class TutorialOverlay extends PIXI.Container {
                 textBoxOffset: { x: 0, y: -1.1 },
                 text: 'If you kill them, they will explode\nand give +1 damage on\nall spaders around',
                 callback: this.shoot.bind(this, true),
-                highlightElementParameters: [1, Math.PI * 0.25 +  Math.PI],
+                highlightElementParameters: [1, Math.PI * 0.25 + Math.PI],
                 highlightElement: this.getFirstBoardPiece,
                 hideNextButton: true,
                 requireSpecificAction: false,
@@ -403,7 +417,7 @@ export default class TutorialOverlay extends PIXI.Container {
             if (typeof this.currentHighlight === 'string') {
                 this.currentHighlight = this[this.currentHighlight]
             } else if (typeof this.currentHighlight === 'function') {
-                this.currentHighlight = this.currentHighlight(action.highlightElementParameters[0],action.highlightElementParameters[1]);
+                this.currentHighlight = this.currentHighlight(action.highlightElementParameters[0], action.highlightElementParameters[1]);
             }
         }
 
@@ -453,7 +467,7 @@ export default class TutorialOverlay extends PIXI.Container {
         return this.board.allCards[id];
     }
     allCrazy() {
-        this.board.setCardToCrazy(2,0);
+        this.board.setCardToCrazy(2, 0);
     }
     shootAndCrazy() {
         this.shoot()
@@ -596,7 +610,7 @@ export default class TutorialOverlay extends PIXI.Container {
         this.cardsContainer.addChild(this.arrowSpriteCard)
         this.cardsContainer.addChild(this.arrowSpriteElements)
 
-        if(this.currentTutorialLevel == 1){
+        if (this.currentTutorialLevel == 1) {
             this.board.ignoreComboCards = true;
         }
         this.currentPositionID = 1;

@@ -90,7 +90,7 @@ export default class StartScreenContainer extends PIXI.Container {
 
 		this.screenContainer.addChild(this.stripsContainer);
 		this.screenContainer.addChild(this.logoLabel);
-		let height = 50;
+		let height = 40;
 		let width = 3000;
 		let spadersContainer = new PIXI.Container();
 		this.spadersList = [];
@@ -107,11 +107,11 @@ export default class StartScreenContainer extends PIXI.Container {
 		}
 		spadersContainer.pivot.x = spadersContainer.width / 2
 		spadersContainer.pivot.y = spadersContainer.height / 2
-		spadersContainer.rotation = -Math.PI * 0.25
+		//spadersContainer.rotation = -Math.PI * 0.25
 		spadersContainer.scale.set(0.65)
-		spadersContainer.x = -60
-		spadersContainer.y = -185
-		this.screenContainer.addChild(spadersContainer);
+		spadersContainer.x = 0
+		spadersContainer.y = 110
+		this.logoLabel.addChild(spadersContainer);
 
 		this.lines = [];
 
@@ -259,12 +259,12 @@ export default class StartScreenContainer extends PIXI.Container {
 		for (let index = 0; index < this.spadersList.length; index++) {
 			const element = this.spadersList[index];
 
-			if (scheme.list[index].hasWhite) {
-				element.white.visible = true;
-				element.white.tint = scheme.list[index].hasWhite;
-			} else {
-				element.white.visible = false;
-			}
+			element.white.visible = true;
+			// if (scheme.list[index].hasWhite) {
+			// 	element.white.tint = scheme.list[index].hasWhite;
+			// } else {
+			// 	element.white.visible = false;
+			// }
 
 			element.tint = colors.list[index].color;
 		}

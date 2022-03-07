@@ -22,7 +22,7 @@ export default class Card extends PIXI.Container {
 		this.cardNumber = CARD_NUMBER;
 
 		this.realSpriteWidth = 72;
-		this.scaleRef = 0.75;
+		this.scaleRef = 0.7;
 
 		let card = new PIXI.Container();
 		this.counter = this.MAX_COUNTER;
@@ -41,7 +41,7 @@ export default class Card extends PIXI.Container {
 		this.enemySpriteWhite.visible = false;
 		this.enemySprite.addChild(this.enemySpriteWhite);
 		this.enemySprite.scale.set(this.realSpriteWidth / this.enemySprite.width * this.scaleRef)
-		this.enemySprite.anchor.set(0.5);
+		this.enemySprite.anchor.set(0.5,0.6);
 
 		this.cardForeground.alpha = 1;
 		this.circleBackground.alpha = 0;
@@ -63,13 +63,16 @@ export default class Card extends PIXI.Container {
 
 		this.lifeContainer = new PIXI.Container();
 		cardContainer.addChild(this.lifeContainer);
-		this.lifeLabel = new PIXI.Text(this.life, { font: '20px', fontWeight: '200', fill: 0x000000, fontFamily: window.STANDARD_FONT2 });
+		this.lifeLabel = new PIXI.Text(this.life, { font: '14px', fontWeight: '200', fill: 0x000000, fontFamily: window.STANDARD_FONT2 });
 		this.lifeLabel.pivot.x = this.lifeLabel.width / 2
 		this.lifeLabel.pivot.y = this.lifeLabel.height / 2
-		this.lifeContainerBackground = PIXI.Sprite.fromFrame('backLabel.png')
-		this.lifeContainerBackground.anchor.x = 0.5
-		this.lifeContainerBackground.anchor.y = 0.5
-		this.lifeContainerBackground.scale.set(1.4)
+
+				this.lifeContainerBackground = new PIXI.mesh.NineSlicePlane(
+            PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
+		this.lifeContainerBackground.pivot.x = this.lifeContainerBackground.width / 2
+		this.lifeContainerBackground.pivot.y = this.lifeContainerBackground.height / 2
+		this.lifeContainerBackground.scale.set(0.8)
+
 
 		this.lifeContainer.addChild(this.lifeContainerBackground);
 		this.lifeContainer.addChild(this.lifeLabel);
@@ -189,22 +192,26 @@ export default class Card extends PIXI.Container {
 		let imageID = Math.floor(level)
 		if (id >= 0) {
 			imageID = id
-			imageID %= 10;
+			imageID %= window.IMAGE_DATA.enemyImagesFrame.length;
 		}
 		this.enemySprite.setTexture(PIXI.Texture.fromFrame(window.IMAGE_DATA.enemyImagesFrame[imageID]));
 		this.enemySpriteWhite.setTexture(PIXI.Texture.fromFrame("w_" + window.IMAGE_DATA.enemyImagesFrame[imageID]));
-		this.enemySpriteWhite.visible = false;
+		//this.enemySpriteWhite.setTexture(PIXI.Texture.fromFrame(window.IMAGE_DATA.enemyImagesFrame[imageID]));
+		//this.enemySpriteWhite.visible = false;
 
 
-		if (data && data.hasWhite) {
-			this.enemySpriteWhite.anchor = this.enemySprite.anchor;
-			this.enemySpriteWhite.tint = data.hasWhite;
+		// if (data && data.hasWhite) {
+		// 	this.enemySpriteWhite.anchor = this.enemySprite.anchor;
+		// 	this.enemySpriteWhite.tint = data.hasWhite;
 
-			this.enemySpriteWhite.visible = true;
-		} else {
-			this.enemySpriteWhite.visible = false;
+		// 	this.enemySpriteWhite.visible = true;
+		// } else {
+		// 	this.enemySpriteWhite.visible = false;
 
-		}
+		// }
+		this.enemySpriteWhite.visible = true;
+		this.enemySpriteWhite.alpha = 0.65
+		this.enemySpriteWhite.anchor = this.enemySprite.anchor
 		if (data) {
 			this.enemySprite.tint = data.color;
 			this.currentColor = this.enemySprite.tint;
@@ -214,18 +221,18 @@ export default class Card extends PIXI.Container {
 	}
 	updateCard(isCurrent = false, data = null) {
 
-		this.starterScale = CARD.width / this.realSpriteWidth * 0.55
+		this.starterScale = CARD.width / this.realSpriteWidth * this.scaleRef// * 0.55
 		for (var i = 0; i < ENEMIES.list.length; i++) {
 			if (ENEMIES.list[i].life == this.life) {
 				this.enemySprite.tint = ENEMIES.list[i].color;
-				if (ENEMIES.list[i].hasWhite) {
-					//this.enemySpriteWhite.setTexture(PIXI.Texture.fromFrame("w_" + window.IMAGE_DATA.enemyImagesFrame[Math.floor(ENEMIES.list[i].life)]));
-					this.enemySpriteWhite.anchor = this.enemySprite.anchor;
-					this.enemySpriteWhite.tint = ENEMIES.list[i].hasWhite;
-					this.enemySpriteWhite.visible = true;
-				} else {
-					this.enemySpriteWhite.visible = false;
-				}
+				// if (ENEMIES.list[i].hasWhite) {
+				// 	//this.enemySpriteWhite.setTexture(PIXI.Texture.fromFrame("w_" + window.IMAGE_DATA.enemyImagesFrame[Math.floor(ENEMIES.list[i].life)]));
+				// 	this.enemySpriteWhite.anchor = this.enemySprite.anchor;
+				// 	this.enemySpriteWhite.tint = ENEMIES.list[i].hasWhite;
+				// 	this.enemySpriteWhite.visible = true;
+				// } else {
+				// 	this.enemySpriteWhite.visible = false;
+				// }
 			}
 		}
 
@@ -519,7 +526,7 @@ export default class Card extends PIXI.Container {
 		// this.particleSystem.update(delta);
 		this.enemySprite.y = CARD.height / 2 + Math.sin(this.initGridAcc) * 2;
 		this.cardBack3.y = this.enemySprite.y - 10;
-		this.initGridAcc += 0.05
+		this.initGridAcc += delta
 
 
 		// this.horizontalSpring.update();
@@ -529,15 +536,15 @@ export default class Card extends PIXI.Container {
 		// }
 		// this.y = utils.lerp(this.y, this.targetY, 0.2)
 
-		this.enemySprite.scale.x = this.starterScale + Math.cos(this.initGridAcc) * 0.05
-		this.enemySprite.scale.y = this.starterScale + Math.sin(this.initGridAcc) * 0.05
+		//this.enemySprite.scale.x = this.starterScale + Math.cos(this.initGridAcc) * 0.05
+		//this.enemySprite.scale.y = this.starterScale + Math.sin(this.initGridAcc) * 0.05
 		if (this.crazyMood) {
 
 			this.initGridAcc += delta * (60 * 0.25)
 
-			this.enemySprite.y = CARD.height / 2 + Math.sin(this.initGridAcc) * 5;
-			this.enemySprite.scale.x = this.starterScale + Math.cos(this.initGridAcc) * 0.1
-			this.enemySprite.scale.y = this.starterScale + Math.sin(this.initGridAcc) * 0.1
+			//this.enemySprite.y = CARD.height / 2 + Math.sin(this.initGridAcc) * 5;
+			this.enemySprite.scale.x = this.starterScale + Math.cos(this.initGridAcc) * 0.075
+			this.enemySprite.scale.y = this.starterScale + Math.sin(this.initGridAcc) * 0.075
 
 			this.circleBackground.alpha = 0.2 + 0.1 * Math.cos(this.initGridAcc);
 

@@ -73,7 +73,7 @@ window.getLevelData = function (sec, ti, lvl) {
 		}
 	}
 
-	if (ti!= undefined) {
+	if (ti != undefined) {
 		if (section) {
 			if (isNaN(ti)) {
 				section.levels.forEach(element => {
@@ -90,7 +90,7 @@ window.getLevelData = function (sec, ti, lvl) {
 		}
 	}
 
-	if (lvl!= undefined && tier) {
+	if (lvl != undefined && tier) {
 		if (isNaN(lvl)) {
 			tier.data.forEach(element => {
 				if (element.id == lvl) {
@@ -270,8 +270,10 @@ window.IMAGE_DATA.enemyBombImages = ['bomb.png']
 
 window.IMAGE_DATA.enemyImagesFrame = []
 
-for (let index = 0; index < 10; index++) {
-	window.IMAGE_DATA.enemyImagesFrame.push('pixil-layer-' + index + '.png');
+for (let index = 1; index <= 10; index++) {
+	window.IMAGE_DATA.enemyImagesFrame.push('spader' + index + '.png');
+	//window.IMAGE_DATA.enemyImagesFrame.push('spaderTest' + index + '.png');
+	//window.IMAGE_DATA.enemyImagesFrame.push('pixil-layer-' + index + '.png');
 
 }
 
@@ -340,7 +342,7 @@ const jsonPath = "./data/"
 
 function loadJsons() {
 
-	
+
 
 	window.levelSections = PIXI.loader.resources[jsonPath + "levelSections.json"].data
 

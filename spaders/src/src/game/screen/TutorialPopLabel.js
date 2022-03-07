@@ -49,10 +49,13 @@ export default class TutorialPopLabel extends PIXI.Container {
         TweenMax.to(obj,targetTime , {delay: data.delay,chars:data.text.length, onUpdate:()=>{
 
             this.tutorialLabel.text = data.text.substring(0, Math.floor(obj.chars));
+            if(this.tutorialLabel.text.length == 1 || this.tutorialLabel.text.length %4 == 0){
+                window.SOUND_MANAGER.play('place', { volume: 0.3 + Math.random()*0.2, speed: 0.85 + Math.random() * 0.75 })
+            }
             this.backShape.width = this.tutorialLabel.width + 25
             this.backShape.height = this.tutorialLabel.height + 20
             this.backShape.alpha = 1
-            this.tutorialLabel.x = 10
+            this.tutorialLabel.x = 8
             this.tutorialLabel.y = 10
             if(this.trackingData.useGlobalScale){
                 this.backShape.x = 0
