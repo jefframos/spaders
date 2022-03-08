@@ -40,6 +40,8 @@ export default class TetraScreen extends Screen {
 		this.colorTween = new ColorTweens();
 
 		this.colorTweenBomb = new ColorTweens();
+		window.colorTweenBomb = this.colorTweenBomb;
+
 
 		this.levels = window.levelData;//window.levelsJson.levels;
 
@@ -84,6 +86,8 @@ export default class TetraScreen extends Screen {
 		this.updateGridDimensions();
 
 		window.CARD_POOL = [];
+		window.ARROW_UP_POOL = [];
+		window.ARROW_CORNER_POOL = [];
 
 		window.CARD_NUMBER = 0;
 
@@ -146,7 +150,7 @@ export default class TetraScreen extends Screen {
 						console.log(levelRedirectParameters)
 						window.game.onTapUp();
 						this.openTutorial(levelRedirectParameters[1])
-						
+
 					}, 10);
 				} else {
 
@@ -508,7 +512,7 @@ export default class TetraScreen extends Screen {
 
 		this.openTutorialButton = new UIButton1(config.colors.white, window.iconsData.question, config.colors.dark);
 		this.addChild(this.openTutorialButton)
-		this.openTutorialButton.onClick.add(()=>{this.openTutorial()});
+		this.openTutorialButton.onClick.add(() => { this.openTutorial() });
 
 		this.endGameScreenContainer.hide(true);
 
@@ -1174,6 +1178,26 @@ export default class TetraScreen extends Screen {
 		// for (let index = Math.ceil(lastRow.length * 0.8); index >= 0; index--) {
 		// 	lastRow.shift();
 		// }
+		let hasAddon = false;
+		let countAdd = 0;
+
+
+		for (var i = 0; i < this.currentLevelData.addOn.length; i++) {
+			for (var j = 0; j < this.currentLevelData.addOn[i].length; j++) {
+				let id = this.currentLevelData.addOn[i][j];
+				if (id == 32) {
+					hasAddon = true;
+					countAdd++;
+				} else if (id == 33) {
+					hasAddon = true;
+				}
+			}
+		}
+		if (hasAddon) {
+			//utils.trimMatrix(this.currentLevelData.addOn)
+			let pad = { left: -this.currentLevelData.offset.left, top: -this.currentLevelData.offset.top, right: 0, bottom: 0 }
+			utils.paddingMatrix(this.currentLevelData.addOn, pad)
+		}
 
 		for (var i = 0; i < this.currentLevelData.pieces.length; i++) {
 			for (var j = 0; j < this.currentLevelData.pieces[i].length; j++) {
@@ -1191,8 +1215,15 @@ export default class TetraScreen extends Screen {
 								}
 							}
 						});
-						let card = this.placeCard(j, i, ENEMIES.list[this.currentLevelData.pieces[i][j]], customData, this.currentLevelData.pieces[i][j])
-						this.cardsContainer.addChild(card);
+						if (hasAddon && this.currentLevelData.addOn[i][j] == 33) {
+							//dont add if the addon remove
+						} else {
+							let card = this.placeCard(j, i, ENEMIES.list[this.currentLevelData.pieces[i][j]], customData, this.currentLevelData.pieces[i][j])
+							this.cardsContainer.addChild(card);
+							if (hasAddon && this.currentLevelData.addOn[i][j] == 32) {
+								card.startCrazyMood();
+							}
+						}
 					}
 				} else if (this.currentLevelData.pieces[i][j] == -2) {
 					this.cardsContainer.addChild(this.placeBlock(j, i));
@@ -1200,22 +1231,6 @@ export default class TetraScreen extends Screen {
 			}
 		}
 
-		///ADD ONS
-		let hasAddon = false;
-		let countAdd = 0;
-		for (var i = 0; i < this.currentLevelData.addOn.length; i++) {
-			for (var j = 0; j < this.currentLevelData.addOn[i].length; j++) {
-				let id = this.currentLevelData.addOn[i][j];
-				if (id == 32) {
-					hasAddon = true;
-					this.board.setCardToCrazy(j, i, 900 + countAdd * 100);
-					countAdd++;
-				} else if (id == 33) {
-					this.board.removeCard(j, i);
-					this.grid.removeCard(j, i);
-				}
-			}
-		}
 
 		this.currentPoints = 0;
 		this.currentPointsLabel = 0;
@@ -1263,7 +1278,9 @@ export default class TetraScreen extends Screen {
 		console.log(this.currentLevelData)
 
 	}
+	setAddons() {
 
+	}
 	updateUI() {
 		this.pointsLabel.text = utils.formatPointsLabel(Math.ceil(this.currentPointsLabel));
 		this.roundsLabel.text = utils.formatPointsLabel(Math.ceil(this.currentRound));
@@ -1355,10 +1372,12 @@ export default class TetraScreen extends Screen {
 		for (var i = 0; i < this.cardQueue.length; i++) {
 			TweenMax.to(this.cardQueue[i], 0.3, { x: CARD.width * (this.cardQueue.length - i - 1), ease: Back.easeOut })
 			this.cardQueue[i].y = 0
+			this.cardQueue[i].update(1/60)
 			// this.cardQueue[i].y = ;
 		}
 
 		this.cardQueue[1].mark();
+		this.cardQueue[1].update(1/60)
 
 	}
 	OnGameOver() {
@@ -1635,6 +1654,12 @@ export default class TetraScreen extends Screen {
 			this.trailMarker.arrowsUp.tint = this.trailHorizontal.tint;
 			//console.log(this.trailHorizontal)
 		}
+
+		// if(this.cardQueue){
+		// 	this.cardQueue.forEach(element => {
+		// 		element.update(delta);
+		// 	});
+		// }
 		////console.log(this.mousePosition)
 		this.currentTime += delta * window.TIME_SCALE * window.TIME_SCALE;
 
@@ -2080,7 +2105,7 @@ export default class TetraScreen extends Screen {
 		this.gridContainer.y = this.gameCanvas.y + this.gameCanvas.height / 2 - this.gridContainer.height / 2 - this.topCanvas.height + this.grid.backgroundOffset.y / 2
 		//utils.centerObject(this.gridContainer, this.gameCanvas)
 
-		this.gridContainer.y = Math.max(this.gameCanvas.y + (this.topCanvas.height * this.topUIContainer.scale.y),this.gridContainer.y) 
+		this.gridContainer.y = Math.max(this.gameCanvas.y + (this.topCanvas.height * this.topUIContainer.scale.y), this.gridContainer.y)
 
 		this.cardsContainer.x = this.gridContainer.x;
 		this.cardsContainer.y = this.gridContainer.y;

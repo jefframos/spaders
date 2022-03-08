@@ -45,7 +45,9 @@ export default class TutorialOverlay extends PIXI.Container {
 
         this.fxContainer = new FXContainer(this.frontGridContainer)
         this.addChild(this.fxContainer);
-        this.addChild(this.tutorialPopLabel);
+
+
+       
 
         this.first = true;
 
@@ -130,7 +132,7 @@ export default class TutorialOverlay extends PIXI.Container {
                 target: "backgroundInteractable",
                 centerBox: { x: 0.5, y: 0.5 },
                 delay: 0.5
-            },{
+            }, {
                 textBoxOffset: { x: 0, y: 0 },
                 text: 'Welcome to Spaders!',
                 callback: this.showFirstCard.bind(this, 0),
@@ -315,7 +317,7 @@ export default class TutorialOverlay extends PIXI.Container {
                 requireSpecificAction: false,
                 target: "backgroundInteractable",
                 centerBox: { x: 0.5, y: 0.5 },
-                delay: 1
+                delay: 2
             },
             {
                 textBoxOffset: { x: 0, y: -1.1 },
@@ -344,7 +346,7 @@ export default class TutorialOverlay extends PIXI.Container {
                 hideNextButton: true,
                 requireSpecificAction: false,
                 target: "gridContainer",
-                centerBox: { x: 0.5, y: 0 },
+                centerBox: { x: 0.5, y: 0.6 },
                 delay: 2
             },
             {
@@ -357,10 +359,7 @@ export default class TutorialOverlay extends PIXI.Container {
                 delay: 2
             }]
 
-        this.killTutorialButton = new UIButton1(config.colors.dark, window.iconsData.cancel, config.colors.white);
-        this.addChild(this.killTutorialButton)
-        this.killTutorialButton.onClick.add(() => { this.killTutorial() });
-        this.killTutorialButton.scale.set(0.5)
+
 
         this.nextStepTutorial = new UIButton1(config.colors.white, window.iconsData.next, config.colors.background);
         this.nextStepTutorial.onClick.add(() => {
@@ -392,8 +391,32 @@ export default class TutorialOverlay extends PIXI.Container {
         this.arrowSpriteElements.rotation = 0;
         this.arrowSpriteElements.offset = 0;
         this.arrowSpriteElements.speed = 3;
+        
+        this.addChild(this.tutorialPopLabel);
+
+        this.killTutorialButton = new UIButton1(config.colors.dark, window.iconsData.cancel, config.colors.white);
+        this.addChild(this.killTutorialButton)
+        this.killTutorialButton.onClick.add(() => { this.killTutorial() });
+        this.killTutorialButton.scale.set(0.5)
+        
+        this.toggleSound = new UIButton1(config.colors.dark, window.iconsData.soundOn, config.colors.white);
+        this.toggleSound.onClick.add(() => this.toggleSoundButton());
+        this.addChild(this.toggleSound);
+        this.toggleSound.scale.set(0.5)
+
 
         // this.cardsContainer.addChild(this.arrowSpriteCard)
+    }
+    toggleSoundButton() {
+        window.SOUND_MANAGER.toggleMute();
+        this.updateSoundButton();
+    }
+    updateSoundButton() {
+        if (window.SOUND_MANAGER.isMute) {
+            this.toggleSound.updateTexture(window.iconsData.soundOff);
+        } else {
+            this.toggleSound.updateTexture(window.iconsData.soundOn);
+        }
     }
     nextTutorial() {
 
@@ -449,7 +472,7 @@ export default class TutorialOverlay extends PIXI.Container {
     show(id = 0) {
         this.tutorialPopLabel.visible = true;
         this.visible = true;
-
+        this.updateSoundButton();
         this.currentTutorial = id ? id : 0;
         console.log(this.currentTutorial)
 
@@ -578,6 +601,9 @@ export default class TutorialOverlay extends PIXI.Container {
         let toLoc = this.toLocal({ x: 0, y: 0 });
         this.killTutorialButton.x = toLoc.x + innerResolution.width - this.killTutorialButton.width;
         this.killTutorialButton.y = toLoc.y + this.killTutorialButton.width;
+
+        this.toggleSound.x = this.killTutorialButton.x;
+        this.toggleSound.y = this.killTutorialButton.y +this.killTutorialButton.width ;
 
         this.nextStepTutorial.x = this.killTutorialButton.x//toLoc.x + innerResolution.width - this.killTutorialButton.width;
         this.nextStepTutorial.y = toLoc.y + innerResolution.height - this.nextStepTutorial.height;

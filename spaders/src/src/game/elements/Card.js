@@ -21,8 +21,8 @@ export default class Card extends PIXI.Container {
 		this.life = 2;
 		this.cardNumber = CARD_NUMBER;
 
-		this.realSpriteWidth = 72;
-		this.scaleRef = 0.8;
+		this.realSpriteWidth = 72 * 2;
+		this.scaleRef = 0.7;
 
 		let card = new PIXI.Container();
 		this.counter = this.MAX_COUNTER;
@@ -41,13 +41,13 @@ export default class Card extends PIXI.Container {
 		this.enemySpriteWhite.visible = false;
 		this.enemySprite.addChild(this.enemySpriteWhite);
 		this.enemySprite.scale.set(this.realSpriteWidth / this.enemySprite.width * this.scaleRef)
-		this.enemySprite.anchor.set(0.5,0.6);
+		this.enemySprite.anchor.set(0.5, 0.85);
 
 		this.cardForeground.alpha = 1;
 		this.circleBackground.alpha = 0;
 
 		this.enemySprite.x = CARD.width / 2;
-		this.enemySprite.y = CARD.height / 2;
+		this.enemySprite.y = CARD.height * 0.65;
 
 		this.circleBackground.x = CARD.width / 2;
 		this.circleBackground.y = CARD.height / 2;
@@ -67,8 +67,8 @@ export default class Card extends PIXI.Container {
 		this.lifeLabel.pivot.x = this.lifeLabel.width / 2
 		this.lifeLabel.pivot.y = this.lifeLabel.height / 2
 
-				this.lifeContainerBackground = new PIXI.mesh.NineSlicePlane(
-            PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
+		this.lifeContainerBackground = new PIXI.mesh.NineSlicePlane(
+			PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
 		this.lifeContainerBackground.pivot.x = this.lifeContainerBackground.width / 2
 		this.lifeContainerBackground.pivot.y = this.lifeContainerBackground.height / 2
 		this.lifeContainerBackground.scale.set(0.8)
@@ -76,8 +76,8 @@ export default class Card extends PIXI.Container {
 
 		this.lifeContainer.addChild(this.lifeContainerBackground);
 		this.lifeContainer.addChild(this.lifeLabel);
-		this.lifeContainer.x = CARD.width * 0.75;
-		this.lifeContainer.y = CARD.height * 0.75;
+		this.lifeContainer.x = CARD.width * 0.7;
+		this.lifeContainer.y = CARD.height * 0.7;
 
 		this.label = new PIXI.Text(this.counter, { font: '32px', fill: 0x000000, align: 'right' });
 		// cardContainer.addChild(this.label);
@@ -97,9 +97,34 @@ export default class Card extends PIXI.Container {
 
 		this.starterScale = this.enemySprite.scale.x;
 		this.isBomb = false;
+
+		this.idleAnimationLayer1 = [];
+		this.idleAnimationLayer2 = [];
+
+		for (let index = 1; index <= 5; index++) {
+			this.idleAnimationLayer1.push("l0_spader_1_" + index + ".png")
+			this.idleAnimationLayer2.push("l1_spader_1_" + index + ".png")
+		}
+
+		this.frameTime = 1/10;
+		this.currentAnimationTime = 0;
+		this.currentFrame = Math.floor(Math.random() * this.idleAnimationLayer1.length);
 		// this.particleSystem = new ParticleSystem();
 		// this.particleSystem.createParticles({x:0, y:0},4, './assets/images/particle1.png')
 		// this.addChild(this.particleSystem)
+	}
+	updateAnimation(delta) {
+		if (this.currentAnimationTime >= 0) {
+			this.currentAnimationTime -= delta;
+			if (this.currentAnimationTime < 0) {
+				this.currentFrame++;
+				this.currentFrame %= this.idleAnimationLayer1.length;
+				this.currentAnimationTime = this.frameTime;
+			}
+		}
+
+		this.enemySprite.setTexture(PIXI.Texture.fromFrame(this.idleAnimationLayer1[this.currentFrame]));
+		this.enemySpriteWhite.setTexture(PIXI.Texture.fromFrame(this.idleAnimationLayer2[this.currentFrame]));
 	}
 	forceNewColor(color) {
 		this.enemySprite.tint = color;
@@ -170,6 +195,7 @@ export default class Card extends PIXI.Container {
 	}
 	removeActionZones() {
 		while (this.cardActions.children.length > 0) {
+			ARROW_UP_POOL.push(this.cardActions.children[0])
 			this.cardActions.removeChildAt(0);
 		}
 
@@ -194,67 +220,46 @@ export default class Card extends PIXI.Container {
 			imageID = id
 			imageID %= window.IMAGE_DATA.enemyImagesFrame.length - 1;
 		}
-		if (data && data.hasWhite){
-			imageID = 9;
-			this.enemySpriteWhite.alpha = 1;
-		}else{
-		this.enemySpriteWhite.alpha = 0.65
-
+		// if (data && data.hasWhite){
+		// 	imageID = 9;
+		// 	this.enemySpriteWhite.alpha = 1;
+		// }else{
+		// }
+		let targetID = imageID
+		targetID %=2;
+		targetID++
+		this.idleAnimationLayer1 = []
+		this.idleAnimationLayer2 = []
+		for (let index = 1; index <= 5; index++) {
+			this.idleAnimationLayer1.push("l0_spader_"+targetID+"_" + index + ".png")
+			this.idleAnimationLayer2.push("l1_spader_"+targetID+"_" + index + ".png")
 		}
+
+		this.enemySpriteWhite.alpha = 0.65
 		this.enemySprite.setTexture(PIXI.Texture.fromFrame(window.IMAGE_DATA.enemyImagesFrame[imageID]));
 		this.enemySpriteWhite.setTexture(PIXI.Texture.fromFrame("w_" + window.IMAGE_DATA.enemyImagesFrame[imageID]));
-		//this.enemySpriteWhite.setTexture(PIXI.Texture.fromFrame(window.IMAGE_DATA.enemyImagesFrame[imageID]));
-		//this.enemySpriteWhite.visible = false;
 
-
-		// if (data && data.hasWhite) {
-		// 	this.enemySpriteWhite.anchor = this.enemySprite.anchor;
-		// 	this.enemySpriteWhite.tint = data.hasWhite;
-
-		// 	this.enemySpriteWhite.visible = true;
-		// } else {
-		// 	this.enemySpriteWhite.visible = false;
-
-		// }
 		this.enemySpriteWhite.visible = true;
 		this.enemySpriteWhite.anchor = this.enemySprite.anchor
+
 		if (data) {
-			this.enemySprite.tint = data.color;
-			this.currentColor = this.enemySprite.tint;
+			this.currentTileColor = data.color;
 		}
-		//this.enemySprite.tint = data.color;
 
 	}
 	updateCard(isCurrent = false, data = null) {
 
-		this.starterScale = CARD.width / this.realSpriteWidth * this.scaleRef// * 0.55
+		this.starterScale = CARD.width / this.realSpriteWidth * this.scaleRef
 		for (var i = 0; i < ENEMIES.list.length; i++) {
 			if (ENEMIES.list[i].life == this.life) {
-				this.enemySprite.tint = ENEMIES.list[i].color;
-				// if (ENEMIES.list[i].hasWhite) {
-				// 	//this.enemySpriteWhite.setTexture(PIXI.Texture.fromFrame("w_" + window.IMAGE_DATA.enemyImagesFrame[Math.floor(ENEMIES.list[i].life)]));
-				// 	this.enemySpriteWhite.anchor = this.enemySprite.anchor;
-				// 	this.enemySpriteWhite.tint = ENEMIES.list[i].hasWhite;
-				// 	this.enemySpriteWhite.visible = true;
-				// } else {
-				// 	this.enemySpriteWhite.visible = false;
-				// }
+				this.enemySprite.tint = ENEMIES.list[i].hasWhite ? ENEMIES.list[i].hasWhite : ENEMIES.list[i].color;
 			}
 		}
 
-		// if (data && data.hasWhite) {
-		// 	this.enemySpriteWhite.anchor = this.enemySprite.anchor;
-		// 	this.enemySpriteWhite.tint = data.hasWhite;
-
-		// 	this.enemySpriteWhite.setTexture(PIXI.Texture.fromFrame("w_" + window.IMAGE_DATA.enemyImagesFrame[Math.floor(level)]));
-		// 	this.enemySpriteWhite.visible = true;
-		// }else{
-		// 	this.enemySpriteWhite.visible = false;
-
-		// }
 
 		if (data) {
-			this.enemySprite.tint = data.color;
+			this.currentTileColor = data.color;
+			this.enemySprite.tint = data.hasWhite ? data.hasWhite : data.color;
 		}
 		this.currentColor = this.enemySprite.tint;
 		if (this.life < 1) {
@@ -273,27 +278,7 @@ export default class Card extends PIXI.Container {
 			if (this.backshape && this.backshape.parent) {
 				this.backshape.parent.removeChild(this.backshape)
 			}
-
-			// this.backshape = new PIXI.Graphics();
-			// this.backshape.lineStyle(3, this.enemySprite.tint, 1);
-			// this.backshape.beginFill(this.enemySprite.tint);
-			// //this.backshape.drawCircle(0, 0, CARD.width * 0.5);
-			// this.backshape.drawRect(CARD.width * -0.5, CARD.width * -0.5, CARD.width, CARD.width);
-			// this.backshape.endFill();
-
-			// let scheme = colorSchemes.getCurrentColorScheme().grid;
-
-			// this.backshape = new PIXI.mesh.NineSlicePlane(
-			// 	PIXI.Texture.fromFrame(scheme.spriteTile), 20, 20, 20, 20)
-			// this.backshape.width = CARD.width
-			// this.backshape.height = CARD.height
-			// this.backshape.tint = this.enemySprite.tint;
-			// this.addChildAt(this.backshape, 0);
-			// this.backshape.x = this.enemySprite.x
-			// this.backshape.y = this.enemySprite.y
-			// this.backshape.alpha = 0.25
 		}
-		//this.life = Math.floor(this.life)
 	}
 	convertCard() {
 		//this.type = this.type == 1 ? 0 : 1;
@@ -361,46 +346,37 @@ export default class Card extends PIXI.Container {
 			totalSides = customOrder.length;
 		}
 
+
 		let arrowSize = 12 * this.starterScale;
 		for (var i = totalSides - 1; i >= 0; i--) {
 
-			let arrowContainer = new PIXI.Container();
-			let arrow = new PIXI.Graphics().beginFill(0xFFFFFF);
-			arrow.moveTo(-arrowSize, 0);
-			arrow.lineTo(arrowSize, 0);
-			arrow.lineTo(0, -arrowSize);
-
-
-			arrowContainer.addChild(arrow);
-
-			// arrow.lineTo(0,-5);
 
 			this.zonesID.push(orderArray[i]);
 			let zone = ACTION_ZONES[orderArray[i]];
+			let arrowSprite = this.getArrowSprite()//PIXI.Sprite.fromFrame(zone.sprite);
+			arrowSprite.setTexture(PIXI.Texture.fromFrame(zone.sprite))
+			arrowSprite.anchor.set(0.5)
+			arrowSprite.scale.set(
+				arrowSprite.width / arrowSprite.scale.x / this.circleBackground.width * 0.7)
 
+			//console.log(this.circleBackground.width )
+
+
+			this.cardActions.addChild(arrowSprite)
 			this.zones.push(zone);
 
 			let tempX = (zone.pos.x / 2) * this.cardForeground.width;
 			let tempY = (zone.pos.y / 2) * this.cardForeground.height;
-			arrowContainer.x = tempX;
-			arrowContainer.y = tempY;
-
-			this.arrows.push({ arrow: arrowContainer, zone: zone.label });
+			this.arrows.push({ arrow: arrowSprite, zone: zone.label });
 
 			let centerPos = { x: this.cardForeground.width / 2, y: this.cardForeground.height / 2 };
 			let angle = Math.atan2(tempY - centerPos.y, tempX - centerPos.x) + Math.PI / 2;
 
 			angle = (Math.round((angle * 180 / Math.PI) / 45) * 45) / 180 * Math.PI;
-			arrowContainer.rotation = angle;
-			this.cardActions.addChild(arrowContainer);
+			arrowSprite.rotation = angle + zone.offsetRotation;
 
-			arrowContainer.x -= Math.sin(angle) * (arrowSize + 1);
-			arrowContainer.y += Math.cos(angle) * (arrowSize + 1);
-
-			let arrowLine = new PIXI.Graphics().lineStyle(2, 0xFFFFFF);
-			arrowLine.moveTo(0, 0);
-			arrowLine.lineTo(0, CARD.width / 2);
-			arrowContainer.addChild(arrowLine);
+			arrowSprite.x = CARD.width / 2 // arrowSprite.scale.x
+			arrowSprite.y = CARD.height / 2 // arrowSprite.scale.y
 		}
 		// console.log("ADD ACTION ZONES", this.zones, this.arrows);
 	}
@@ -504,8 +480,8 @@ export default class Card extends PIXI.Container {
 		this.backshape.tint = this.enemySprite.tint;
 		this.backshape.pivot.set(CARD.width / 2)
 		this.addChildAt(this.backshape, 0);
-		this.backshape.x = this.enemySprite.x
-		this.backshape.y = this.enemySprite.y
+		this.backshape.x = CARD.width / 2
+		this.backshape.y = CARD.height / 2
 		this.backshape.alpha = 0.5
 		this.cardForeground.alpha = 0;
 		this.updateSize();
@@ -528,9 +504,23 @@ export default class Card extends PIXI.Container {
 			window.CARD_POOL.push(this);
 		}
 	}
+	getArrowSprite() {
+		let sprite = null
+		if (ARROW_UP_POOL.length) {
+			sprite = ARROW_UP_POOL[0];
+			ARROW_UP_POOL.shift();
+		} else {
+			sprite = new PIXI.Sprite();
+		}
+
+
+		return sprite;
+	}
 	update(delta) {
 		// this.particleSystem.update(delta);
-		this.enemySprite.y = CARD.height / 2 + Math.sin(this.initGridAcc) * 2;
+		this.updateAnimation(delta);
+		this.enemySprite.y = CARD.height * 0.7 //+ Math.sin(this.initGridAcc) * 2;
+		//this.enemySprite.y = Math.floor(CARD.height * 0.7 + Math.sin(this.initGridAcc) * 2);
 		this.cardBack3.y = this.enemySprite.y - 10;
 		this.initGridAcc += delta
 
@@ -541,18 +531,20 @@ export default class Card extends PIXI.Container {
 
 		// }
 		// this.y = utils.lerp(this.y, this.targetY, 0.2)
-
-		//this.enemySprite.scale.x = this.starterScale + Math.cos(this.initGridAcc) * 0.05
-		//this.enemySprite.scale.y = this.starterScale + Math.sin(this.initGridAcc) * 0.05
+		//this.enemySprite.scale.y = 0.2
+		//this.enemySprite.scale.x = this.starterScale + Math.cos(this.initGridAcc) * 0.1//0.05
+		//this.enemySprite.scale.y = this.starterScale + Math.sin(this.initGridAcc) * 0.1//0.05
 		if (this.crazyMood) {
 
 			this.initGridAcc += delta * (60 * 0.25)
 
 			//this.enemySprite.y = CARD.height / 2 + Math.sin(this.initGridAcc) * 5;
-			this.enemySprite.scale.x = this.starterScale + Math.cos(this.initGridAcc) * 0.075
-			this.enemySprite.scale.y = this.starterScale + Math.sin(this.initGridAcc) * 0.075
-
+			//this.enemySprite.scale.x = this.starterScale + Math.cos(this.initGridAcc) * 0.075
+			//this.enemySprite.scale.y = this.starterScale + Math.sin(this.initGridAcc) * 0.075
+			this.updateAnimation(delta * 0.5)
 			this.circleBackground.alpha = 0.2 + 0.1 * Math.cos(this.initGridAcc);
+
+			this.enemySprite.tint = window.colorTweenBomb.currentColor;
 
 		} else if ((this.enemySprite.scale.x != this.starterScale) || (this.enemySprite.scale.y != this.starterScale)) {
 

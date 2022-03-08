@@ -336,7 +336,7 @@ export default class Grid extends PIXI.Container {
 		let colorScheme = colorSchemes.getCurrentColorScheme().grid;
 
 		this.gridsSquares[card.pos.i][card.pos.j].card = card;
-		let color = card.currentColor;
+		let color = card.currentTileColor;
 		let alpha = 0.45 + colorScheme.extraTileAlpha;
 		if (color == config.colors.dark) {
 			color = 0x000000;

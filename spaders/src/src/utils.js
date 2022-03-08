@@ -114,6 +114,8 @@ export default {
             pieces[i].splice(pieces[i].length - padding.right, padding.right);
         }
 
+
+            return padding
         // console.log(lineCounters);
         // console.log(colCounters);
         // console.log(padding);
@@ -131,12 +133,30 @@ export default {
             return;
         }
         //console.log(pieces)
-        for (let i = 0; i < pieces.length; i++) {
-            for (let p = 0; p < padding.left; p++) {
-                pieces[i].unshift(-1);
+        if(padding.left < 0){
+            for (let i = 0; i < pieces.length; i++) {
+                for (let p = 0; p < Math.abs(padding.left); p++) {
+                    pieces[i].shift();
+                }
             }
-            for (let p = 0; p < padding.right; p++) {
-                pieces[i].push(-1);
+        }else{
+
+            for (let i = 0; i < pieces.length; i++) {
+                for (let p = 0; p < padding.left; p++) {
+                    pieces[i].unshift(-1);
+                }
+                for (let p = 0; p < padding.right; p++) {
+                    pieces[i].push(-1);
+                }
+            }
+        }
+        
+        if(padding.top < 0){
+            for (let i = 0; i < Math.abs(padding.top); i++) {
+                let colCounters = [];
+                for (let index = 0; index < pieces[0].length; index++) {
+                    colCounters.shift();
+                }
             }
         }
         for (let i = 0; i < padding.top; i++) {
@@ -146,6 +166,7 @@ export default {
             }
             pieces.unshift(colCounters);
         }
+
         for (let i = 0; i < padding.bottom; i++) {
             let colCounters = [];
             for (let index = 0; index < pieces[0].length; index++) {

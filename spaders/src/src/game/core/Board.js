@@ -40,7 +40,7 @@ export default class Board {
 
 		if (this.nextTurnTimer > 0) {
 			this.nextTurnTimer -= delta;
-			
+
 			if (this.nextTurnTimer <= 0) {
 				this.nextRound();
 			}
@@ -181,7 +181,7 @@ export default class Board {
 			this.canGoNext = false;
 		}
 	}
-	getLastCardPosition(laneID){
+	getLastCardPosition(laneID) {
 		laneID = Math.min(laneID, this.cards.length)
 		laneID = Math.max(laneID, 0)
 		let spaceID = -1;
@@ -263,6 +263,7 @@ export default class Board {
 						autoDestroyCardData = {
 							card: card,
 							zone: tempZone,
+							cardFound: cardFound,
 							hits: (cardFound.life + 1)
 						}
 					} else if (tempZone && autoDestroyCardData) {
@@ -364,7 +365,11 @@ export default class Board {
 
 				let style = window.getStyle('areaAttack', colorSchemes.colorSchemes[window.COOKIE_MANAGER.stats.colorPalletID].list[4].color)
 
-				this.popLabel(this.game.toLocal(cardGlobal), "+" + points, 0.1, 0.5, 0.5, style);
+				let hitOffset = {
+					x: cardGlobal.x,
+					y: cardGlobal.y - CARD.height
+				}
+				this.popLabel(this.game.toLocal(hitOffset), "+" + points, 0.1, 0.5, 0.5, style);
 				//cardsToDestroy.push({cardFound:cardFound, currentCard: card, attackZone:zones[i]});
 
 				let globalPosTemp = element.getGlobalPosition({ x: 0, y: 0 })
@@ -444,7 +449,7 @@ export default class Board {
 		}
 	}
 	addCrazyCards(numCards, cardToIgnore) {
-		if(this.ignoreComboCards){
+		if (this.ignoreComboCards) {
 			return;
 		}
 		let tempCardList = [];
@@ -544,11 +549,11 @@ export default class Board {
 
 						arrow.tint = card.currentColor;
 
+						TweenMax.killTweensOf(arrow);
+						let targetScale = arrow.scale.x
 						TweenMax.to(arrow.scale, 0.3, { x: 0, y: 0, ease: Back.easeIn })
 						TweenMax.to(arrow.scale, 0.3, {
-							delay: 0.3, x: 1, y: 1, ease: Back.easeOut, onStart: () => {
-
-
+							delay: 0.3, x: targetScale, y: targetScale, ease: Back.easeOut, onStart: () => {
 							}
 						})
 
@@ -567,10 +572,7 @@ export default class Board {
 								arrow.tint = 0xFFFFFF;
 							}
 						})
-						let screenPos = {
-							x: arrowGlobal.x / config.width,
-							y: arrowGlobal.y / config.height
-						}
+
 
 
 						//window.EFFECTS.addShockwave(screenPos.x, screenPos.y, 2);
@@ -586,8 +588,11 @@ export default class Board {
 							this.game.scoreRect,
 							cardFound.currentColor
 						)
-
-						this.popLabel(this.game.toLocal(arrowGlobal), "+" + 10 * id, 0, 1, 0.5 + id * 0.2, window.textStyles.normalAttack);
+						let hitOffset = {
+							x: arrowGlobal.x,
+							y: arrowGlobal.y - CARD.height
+						}
+						this.popLabel(this.game.toLocal(hitOffset), "+" + 10 * id, 0, 1, 0.5 + id * 0.2, window.textStyles.normalAttack);
 
 					}
 				}.bind(this),
@@ -620,11 +625,40 @@ export default class Board {
 		if (autoDestroyCardData) {
 			this.addTurnTime(list.length * 0.2)
 			setTimeout(function () {
-				let arrow = autoDestroyCardData.card.getArrow(this.getOpposite(autoDestroyCardData.zone.label));
+				// let arrow = autoDestroyCardData.card.getArrow(this.getOpposite(autoDestroyCardData.zone.label));
+				let arrow = autoDestroyCardData.cardFound.getArrow(autoDestroyCardData.zone.label);
 				if (!arrow) {
 					return;
 				}
+
+
 				let arrowGlobal = arrow.getGlobalPosition({ x: 0, y: 0 });
+				let zone = autoDestroyCardData.zone
+				arrow.tint = autoDestroyCardData.cardFound.currentColor;
+
+				TweenMax.killTweensOf(arrow);
+				let targetScale = arrow.scale.x
+
+				TweenMax.to(arrow.scale, 0.3, { x: 0, y: 0, ease: Back.easeIn })
+				TweenMax.to(arrow.scale, 0.3, {
+					delay: 0.5, x: targetScale, y: targetScale, ease: Back.easeOut, onStart: () => {
+					}
+				})
+
+				TweenMax.to(arrow, 0.05, {
+					x: arrow.x + 10 * zone.dir.x, y: arrow.y + 10 * zone.dir.y,
+					ease: Back.easeIn, onComplete: () => {
+						let arrowGlobal2 = arrow.getGlobalPosition({ x: 0, y: 0 });
+						this.popCircle(arrowGlobal2, card.currentColor);
+					}
+				})
+				TweenMax.to(arrow, 0.2, {
+					delay: 0.4, x: arrow.x, y: arrow.y, ease: Back.easeIn, onComplete: () => {
+						arrow.tint = 0xFFFFFF;
+					}
+				})
+
+
 				this.delayedDestroy(card, autoDestroyCardData.hits);
 
 				let counterHits = (list.length + 1);
@@ -649,7 +683,11 @@ export default class Board {
 				let style = window.textStyles.counter
 
 				style.fill = autoDestroyCardData.card.currentColor
-				this.popLabel(this.game.toLocal(arrowGlobal), "+" + 10 * counterHits, 0.2, 0, 0.3 + counterHits * 0.1, style);
+				let hitOffset = {
+					x: arrowGlobal.x,
+					y: arrowGlobal.y - CARD.height
+				}
+				this.popLabel(this.game.toLocal(hitOffset), "+" + 10 * counterHits, 0.2, 0, 0.3 + counterHits * 0.1, style);
 				window.EFFECTS.shake(0.2, 5, 0.3, this.game.gameContainer);
 
 				//when has an attack
@@ -660,7 +698,7 @@ export default class Board {
 				// }, list.length * 200 / window.TIME_SCALE);
 
 
-			}.bind(this), list.length * 200 / window.TIME_SCALE);
+			}.bind(this), list.length * 200 / window.TIME_SCALE + 100);
 		} else {
 			card.convertCard();
 			this.addTurnTime(0.1)
@@ -688,6 +726,7 @@ export default class Board {
 		}
 	}
 	popCircle(pos, color = 0xFFFFFF) {
+		return;
 		let convertedPosition = this.game.toLocal(pos)
 		let realRadius = CARD.width / 2 * this.game.gridContainer.scale.x * 0.25;
 		let external = new PIXI.Graphics().lineStyle(3, color).drawCircle(0, 0, realRadius);

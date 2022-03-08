@@ -144,14 +144,14 @@ window.ENEMIES = {
 	]
 }
 window.ACTION_ZONES = [
-	{ label: "TOP_LEFT", pos: { x: 0, y: 0 }, dir: { x: -1, y: -1 } },
-	{ label: "TOP_CENTER", pos: { x: 1, y: 0 }, dir: { x: 0, y: -1 } },
-	{ label: "TOP_RIGHT", pos: { x: 2, y: 0 }, dir: { x: 1, y: -1 } },
-	{ label: "CENTER_RIGHT", pos: { x: 2, y: 1 }, dir: { x: 1, y: 0 } },
-	{ label: "BOTTOM_RIGHT", pos: { x: 2, y: 2 }, dir: { x: 1, y: 1 } },
-	{ label: "BOTTOM_CENTER", pos: { x: 1, y: 2 }, dir: { x: 0, y: 1 } },
-	{ label: "BOTTOM_LEFT", pos: { x: 0, y: 2 }, dir: { x: -1, y: 1 } },
-	{ label: "CENTER_LEFT", pos: { x: 0, y: 1 }, dir: { x: -1, y: 0 } }
+	{ label: "TOP_LEFT", pos: { x: 0, y: 0 }, dir: { x: -1, y: -1 }, sprite: "arrowTopLeft.png", offsetRotation: Math.PI * 0.25 },
+	{ label: "TOP_CENTER", pos: { x: 1, y: 0 }, dir: { x: 0, y: -1 }, sprite: "arrowUp.png", offsetRotation: 0 },
+	{ label: "TOP_RIGHT", pos: { x: 2, y: 0 }, dir: { x: 1, y: -1 }, sprite: "arrowTopLeft.png", offsetRotation: Math.PI * 0.25 },
+	{ label: "CENTER_RIGHT", pos: { x: 2, y: 1 }, dir: { x: 1, y: 0 }, sprite: "arrowUp.png", offsetRotation: 0 },
+	{ label: "BOTTOM_RIGHT", pos: { x: 2, y: 2 }, dir: { x: 1, y: 1 }, sprite: "arrowTopLeft.png", offsetRotation: Math.PI * 0.25 },
+	{ label: "BOTTOM_CENTER", pos: { x: 1, y: 2 }, dir: { x: 0, y: 1 }, sprite: "arrowUp.png", offsetRotation: 0 },
+	{ label: "BOTTOM_LEFT", pos: { x: 0, y: 2 }, dir: { x: -1, y: 1 }, sprite: "arrowTopLeft.png", offsetRotation: Math.PI * 0.25 },
+	{ label: "CENTER_LEFT", pos: { x: 0, y: 1 }, dir: { x: -1, y: 0 }, sprite: "arrowUp.png", offsetRotation: 0 }
 ]
 
 window.colorsOrder = [
@@ -197,7 +197,7 @@ window.textStyles = {
 		fontWeight: '800',
 		fontFamily: window.STANDARD_FONT1,
 		stroke: 0x000000,
-		strokeThickness: 4
+		strokeThickness: 3
 	},
 	areaAttack: {
 		font: '48px',
@@ -206,7 +206,7 @@ window.textStyles = {
 		fontWeight: '800',
 		fontFamily: window.STANDARD_FONT1,
 		stroke: 0xFFFFFF,
-		strokeThickness: 5
+		strokeThickness: 3
 	},
 	counter: {
 		font: '48px',
@@ -215,7 +215,7 @@ window.textStyles = {
 		fontWeight: '800',
 		fontFamily: window.STANDARD_FONT1,
 		stroke: 0x000000,
-		strokeThickness: 5
+		strokeThickness: 3
 	},
 	explosion: {
 		font: '52px',
@@ -224,7 +224,7 @@ window.textStyles = {
 		fontWeight: '800',
 		fontFamily: window.STANDARD_FONT1,
 		stroke: 0x000000,
-		strokeThickness: 5
+		strokeThickness: 3
 	}
 },
 
@@ -482,7 +482,8 @@ function extractData(element, debug) {
 		if (!element.isAddon) {
 			utils.trimMatrix(data.pieces)
 			utils.paddingMatrix(data.pieces, data.padding)
-			utils.trimMatrix(matrixCopy)
+			let offset = utils.trimMatrix(matrixCopy)
+			data.offset = offset
 			let scalePadding = {
 				left: data.padding.left * data.levelDataScale,
 				right: data.padding.right * data.levelDataScale,

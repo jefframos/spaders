@@ -1,12 +1,12 @@
 {
-    "activeFile": "gb/gameboyWeapon1.tmx",
+    "activeFile": "how-to-play/simple-shapes-synt.tmx",
     "expandedProjectPaths": [
-        "gb",
-        "movies",
         "videogames",
-        "templates",
         "how-to-play",
-        "main"
+        "gb",
+        "main",
+        "templates",
+        "movies"
     ],
     "fileStates": {
         "D:/Projects/tetra/map/levels.tmx": {
@@ -68,7 +68,7 @@
             "scale": 0.9014204545454545,
             "selectedLayer": 8,
             "viewCenter": {
-                "x": 352.2218720453829,
+                "x": 352.22187204538295,
                 "y": 384.9479987393634
             }
         },
@@ -117,7 +117,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 352.51044954363215,
-                "y": 385.5395376610083
+                "y": 384.33847991128556
             }
         },
         "how-to-play/pokemon22.tmx": {
@@ -146,7 +146,7 @@
         },
         "how-to-play/simple-shapes-synt.tmx": {
             "scale": 0.33,
-            "selectedLayer": 9,
+            "selectedLayer": 7,
             "viewCenter": {
                 "x": 765.1515151515152,
                 "y": 769.6969696969697
@@ -226,8 +226,8 @@
             "scale": 0.33,
             "selectedLayer": 6,
             "viewCenter": {
-                "x": 768.1818181818181,
-                "y": 833.3333333333334
+                "x": 768.1818181818182,
+                "y": 833.3333333333333
             }
         },
         "movies/spadersTileset.tsx": {
@@ -246,9 +246,9 @@
         },
         "templates/template.tmx": {
             "scale": 1.1045496323529411,
-            "selectedLayer": 0,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 479.38090285001044,
+                "x": 479.3809028500104,
                 "y": 511.52069898065326
             }
         },
@@ -352,10 +352,10 @@
         "videogames/levels2.tmx",
         "movies/movies1.tmx",
         "how-to-play/simple-shapes.tmx",
-        "how-to-play/simple-shapes-synt.tmx",
-        "how-to-play/pokemon2.tmx",
-        "how-to-play/pokemon22.tmx",
-        "how-to-play/bossa.tmx"
+        "templates/template.tmx",
+        "movies/moviesAdventure.tmx",
+        "how-to-play/question-mark.tmx",
+        "how-to-play/pokemons.tmx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",
