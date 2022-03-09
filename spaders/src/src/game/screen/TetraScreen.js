@@ -136,8 +136,9 @@ export default class TetraScreen extends Screen {
 
 		let y = 0;
 		let x = 0;
+		let card
 		for (let index = 0; index < scheme.length; index++) {
-			let card = new Card(this);
+			card = new Card(this);
 			if (index > 0) {
 				if (index % 4 == 0) {
 					y += card.height
@@ -161,9 +162,22 @@ export default class TetraScreen extends Screen {
 
 			this.debugCardsContainer.addChild(card);
 
-			//console.log(element)
-
 		}
+
+		let blocker = new Block(this);
+		if (scheme.length % 4 == 0) {
+			y += card.height
+			x = 0;
+		} else {
+
+			x += card.width
+		}
+
+
+		this.debugCardsContainer.addChild(blocker);
+		blocker.scale.set(2)
+		blocker.x = x
+		blocker.y = y;
 
 		let background = new PIXI.mesh.NineSlicePlane(
 			PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)

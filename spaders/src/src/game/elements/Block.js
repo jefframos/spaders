@@ -55,6 +55,50 @@ export default class Card extends PIXI.Container{
 		cardContainer.pivot.x = CARD.width / 2;
 		cardContainer.x = CARD.width / 2;
 
+		this.idleAnimationLayer1 = [];
+		this.idleAnimationLayer2 = [];
+
+
+		let stopFrames = [1, 4,6,9, 11]
+		for (let index = 1; index <= 12; index++) {
+			let id = index;
+			if(index < 10){
+				id = "0"+index;
+			}
+			this.idleAnimationLayer1.push("l0_blocker_" + id + ".png")
+			this.idleAnimationLayer2.push("l1_blocker_" + id + ".png")
+
+			if(stopFrames.includes(index)){
+				this.idleAnimationLayer1.push("l0_blocker_" + id + ".png")
+			this.idleAnimationLayer2.push("l1_blocker_" + id + ".png")
+			this.idleAnimationLayer1.push("l0_blocker_" + id + ".png")
+			this.idleAnimationLayer2.push("l1_blocker_" + id + ".png")
+			this.idleAnimationLayer1.push("l0_blocker_" + id + ".png")
+			this.idleAnimationLayer2.push("l1_blocker_" + id + ".png")
+			}
+		}
+
+		this.frameTime = 1/10;
+		this.currentAnimationTime = 0;
+		this.currentFrame = Math.floor(Math.random() * this.idleAnimationLayer1.length);
+
+	}
+
+	updateAnimation(delta) {
+		if (this.currentAnimationTime >= 0) {
+			this.currentAnimationTime -= delta;
+			if (this.currentAnimationTime < 0) {
+				this.currentFrame++;
+				this.currentFrame %= this.idleAnimationLayer1.length;
+				this.currentAnimationTime = this.frameTime;
+			}
+		}
+
+		this.sprite.setTexture(PIXI.Texture.fromFrame(this.idleAnimationLayer1[this.currentFrame]));
+		this.enemySpriteWhite.setTexture(PIXI.Texture.fromFrame(this.idleAnimationLayer2[this.currentFrame]));
+	}
+	update(delta){
+		this.updateAnimation(delta);
 	}
 	setZeroLife(){
 

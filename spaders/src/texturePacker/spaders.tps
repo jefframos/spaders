@@ -187,7 +187,41 @@
         <map type="IndividualSpriteSettingsMap">
             <key type="filename">arrowTopLeft.png</key>
             <key type="filename">arrowUp.png</key>
+            <key type="filename">blocker/l0_blocker_01.png</key>
+            <key type="filename">blocker/l0_blocker_02.png</key>
+            <key type="filename">blocker/l0_blocker_03.png</key>
+            <key type="filename">blocker/l0_blocker_04.png</key>
+            <key type="filename">blocker/l0_blocker_05.png</key>
+            <key type="filename">blocker/l0_blocker_06.png</key>
+            <key type="filename">blocker/l0_blocker_07.png</key>
+            <key type="filename">blocker/l0_blocker_08.png</key>
+            <key type="filename">blocker/l0_blocker_09.png</key>
+            <key type="filename">blocker/l0_blocker_10.png</key>
+            <key type="filename">blocker/l0_blocker_11.png</key>
+            <key type="filename">blocker/l0_blocker_12.png</key>
+            <key type="filename">blocker/l1_blocker_01.png</key>
+            <key type="filename">blocker/l1_blocker_02.png</key>
+            <key type="filename">blocker/l1_blocker_03.png</key>
+            <key type="filename">blocker/l1_blocker_04.png</key>
+            <key type="filename">blocker/l1_blocker_05.png</key>
+            <key type="filename">blocker/l1_blocker_06.png</key>
+            <key type="filename">blocker/l1_blocker_07.png</key>
+            <key type="filename">blocker/l1_blocker_08.png</key>
+            <key type="filename">blocker/l1_blocker_09.png</key>
+            <key type="filename">blocker/l1_blocker_10.png</key>
+            <key type="filename">blocker/l1_blocker_11.png</key>
+            <key type="filename">blocker/l1_blocker_12.png</key>
             <key type="filename">newEnemies/pixil-layer-9.png</key>
+            <key type="filename">spader1/l0_spader_1_1.png</key>
+            <key type="filename">spader1/l0_spader_1_2.png</key>
+            <key type="filename">spader1/l0_spader_1_3.png</key>
+            <key type="filename">spader1/l0_spader_1_4.png</key>
+            <key type="filename">spader1/l0_spader_1_5.png</key>
+            <key type="filename">spader1/l1_spader_1_1.png</key>
+            <key type="filename">spader1/l1_spader_1_2.png</key>
+            <key type="filename">spader1/l1_spader_1_3.png</key>
+            <key type="filename">spader1/l1_spader_1_4.png</key>
+            <key type="filename">spader1/l1_spader_1_5.png</key>
             <key type="filename">spader2/l0_spader_2_1.png</key>
             <key type="filename">spader2/l0_spader_2_2.png</key>
             <key type="filename">spader2/l0_spader_2_3.png</key>
@@ -198,16 +232,16 @@
             <key type="filename">spader2/l1_spader_2_3.png</key>
             <key type="filename">spader2/l1_spader_2_4.png</key>
             <key type="filename">spader2/l1_spader_2_5.png</key>
-            <key type="filename">spaderTest1/l0_spader_1_1.png</key>
-            <key type="filename">spaderTest1/l0_spader_1_2.png</key>
-            <key type="filename">spaderTest1/l0_spader_1_3.png</key>
-            <key type="filename">spaderTest1/l0_spader_1_4.png</key>
-            <key type="filename">spaderTest1/l0_spader_1_5.png</key>
-            <key type="filename">spaderTest1/l1_spader_1_1.png</key>
-            <key type="filename">spaderTest1/l1_spader_1_2.png</key>
-            <key type="filename">spaderTest1/l1_spader_1_3.png</key>
-            <key type="filename">spaderTest1/l1_spader_1_4.png</key>
-            <key type="filename">spaderTest1/l1_spader_1_5.png</key>
+            <key type="filename">spader3/l0_spader_3_1.png</key>
+            <key type="filename">spader3/l0_spader_3_2.png</key>
+            <key type="filename">spader3/l0_spader_3_3.png</key>
+            <key type="filename">spader3/l0_spader_3_4.png</key>
+            <key type="filename">spader3/l0_spader_3_5.png</key>
+            <key type="filename">spader3/l1_spader_3_1.png</key>
+            <key type="filename">spader3/l1_spader_3_2.png</key>
+            <key type="filename">spader3/l1_spader_3_3.png</key>
+            <key type="filename">spader3/l1_spader_3_4.png</key>
+            <key type="filename">spader3/l1_spader_3_5.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -877,8 +911,10 @@
             <filename>smallCard.png</filename>
             <filename>arrowTopLeft.png</filename>
             <filename>arrowUp.png</filename>
-            <filename>spaderTest1</filename>
             <filename>spader2</filename>
+            <filename>spader1</filename>
+            <filename>spader3</filename>
+            <filename>blocker</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
