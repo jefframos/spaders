@@ -547,8 +547,23 @@ export default class TetraScreen extends Screen {
 
 		this.chargeBombBar = new ProgressBar(sizeBar);
 
+		this.fallBar = new ProgressBar(sizeBar);
+
 
 		this.UIInGame.addChild(this.chargeBombBar)
+		this.gameContainer.addChild(this.fallBar)
+
+		this.fallBar.visible = false;
+
+		let spaderIcon = new PIXI.Sprite.fromFrame("l0_spader_1_1.png");
+		spaderIcon.anchor.set(0, 0.5);
+		spaderIcon.scale.set(0.35);
+		spaderIcon.rotation = Math.PI / 2
+		spaderIcon.x = 310;
+		spaderIcon.y = - 15;
+		this.fallBar.icon = spaderIcon;
+		this.fallBar.addChild(spaderIcon);
+
 
 		this.chargeBombBar.visible = false;
 
@@ -669,6 +684,7 @@ export default class TetraScreen extends Screen {
 		this.movesRect.scale.set(this.timerRect.scale.x)
 		this.scoreRect.scale.set(this.timerRect.scale.x * 1.5)
 		this.chargeBombBar.scale.set(this.scoreRect.scale.x)
+		this.fallBar.scale.set(this.scoreRect.scale.x)
 		this.timerRect.x = this.bottomUICanvas.x + this.bottomUICanvas.width - this.timerRect.width - this.bottomUICanvas.height * 0.1
 		this.movesRect.x = this.bottomUICanvas.x + this.bottomUICanvas.width - this.timerRect.width - this.bottomUICanvas.height * 0.1
 
@@ -682,6 +698,12 @@ export default class TetraScreen extends Screen {
 		this.scoreRect.x = this.topCanvas.x + 20;
 		this.chargeBombBar.x = this.topCanvas.x + this.topCanvas.width / 2 - this.chargeBombBar.width / 2;
 		this.chargeBombBar.y = this.scoreRect.y + this.scoreRect.height / 2 - this.chargeBombBar.height * 0.12
+
+		this.fallBar.rotation = -Math.PI / 2;
+		this.fallBar.x = this.topCanvas.x + this.gridContainer.x + this.gridContainer.width + (40 * this.scoreRect.scale.x);
+		this.fallBar.y = this.gridContainer.y + this.gridContainer.height - 5;
+		this.fallBar.alpha = this.cardsContainer.alpha;
+
 
 		this.containerQueue.scale.set(this.bottomUICanvas.height / CARD.height * 0.5)
 		this.containerQueue.x = this.bottomUICanvas.height * 0.1
@@ -1231,31 +1253,38 @@ export default class TetraScreen extends Screen {
 
 		//console.log(this.currentLevelData.pieces)
 
-		for (let index = 0; index < GRID.i; index++) {
-			rows.push(-1);
-		}
-
-		for (let index = 0; index < rows.length; index++) {
-			for (let line = GRID.j - 1; line >= 0; line--) {
-
-				if (this.currentLevelData.pieces[line][index] >= 0 && rows[index] < 0) {
-					rows[index] = line
+		if (this.currentLevelData.gameMode == 1) {
+			for (let i = 0; i < GRID.i; i++) {
+				for (let j = 0; j < GRID.j; j++) {
+					lastRow.push({ j: i, i: j })
 				}
+
+			}
+		} else {
+
+			for (let index = 0; index < GRID.i; index++) {
+				rows.push(-1);
 			}
 
-		}
-		for (let index = 0; index < rows.length; index++) {
-			const element = rows[index];
-			if (element > 0) {
-				lastRow.push({ j: index, i: element })
-			}
+			for (let index = 0; index < rows.length; index++) {
+				for (let line = GRID.j - 1; line >= 0; line--) {
 
+					if (this.currentLevelData.pieces[line][index] >= 0 && rows[index] < 0) {
+						rows[index] = line
+					}
+				}
+
+			}
+			for (let index = 0; index < rows.length; index++) {
+				const element = rows[index];
+				if (element > 0) {
+					lastRow.push({ j: index, i: element })
+				}
+
+			}
 		}
-		//console.log('lastRow', rows, lastRow)
-		// utils.shuffle(lastRow);
-		// for (let index = Math.ceil(lastRow.length * 0.8); index >= 0; index--) {
-		// 	lastRow.shift();
-		// }
+
+
 		let hasAddon = false;
 		let countAdd = 0;
 
@@ -1271,10 +1300,12 @@ export default class TetraScreen extends Screen {
 				}
 			}
 		}
-		if (hasAddon) {
+		if (hasAddon && !this.currentLevelData.addOnDirty) {
 			//utils.trimMatrix(this.currentLevelData.addOn)
 			let pad = { left: -this.currentLevelData.offset.left, top: -this.currentLevelData.offset.top, right: 0, bottom: 0 }
 			utils.paddingMatrix(this.currentLevelData.addOn, pad)
+
+			this.currentLevelData.addOnDirty = true;
 		}
 
 		for (var i = 0; i < this.currentLevelData.pieces.length; i++) {
@@ -1298,7 +1329,7 @@ export default class TetraScreen extends Screen {
 						} else {
 							let card = this.placeCard(j, i, ENEMIES.list[this.currentLevelData.pieces[i][j]], customData, this.currentLevelData.pieces[i][j])
 							this.cardsContainer.addChild(card);
-							if(this.currentLevelData.gameMode == 0){
+							if (this.currentLevelData.gameMode == 0) {
 								this.grid.paintTile(card)
 							}
 							if (hasAddon && this.currentLevelData.addOn[i][j] == 32) {
@@ -1357,6 +1388,14 @@ export default class TetraScreen extends Screen {
 		window.SOUND_MANAGER.play('startLevel');
 
 		console.log(this.currentLevelData)
+
+		if (this.currentLevelData.gameMode == 1) {
+			this.fallBar.visible = true;
+
+			this.fallBar.icon.tint = colorSchemes.colorSchemes[scheme].list[0].color
+		} else {
+			this.fallBar.visible = false;
+		}
 
 	}
 	setAddons() {
@@ -1495,21 +1534,32 @@ export default class TetraScreen extends Screen {
 				this.getNextPieceRound();
 			} else {
 
-				if(this.currentRound > 0 && this.currentRound % 8 == 0){
+				let t = this.currentRound % this.currentLevelData.fallTurns
+				let turnN = t / this.currentLevelData.fallTurns
+				console.log(turnN)
+
+
+				this.fallBar.setProgressBar2(turnN)
+
+				if (this.currentRound > 0 && this.currentRound % this.currentLevelData.fallTurns == 0) {
 					this.board.moveCardsDown();
 
-					for (let index = 0; index < GRID.i; index++) {						
-						
+					this.fallBar.setProgressBar2(1);
+					setTimeout(() => {
+						this.fallBar.setProgressBar2(0.01);
+					}, 500);
+					for (let index = 0; index < GRID.i; index++) {
+
 						let card = this.placeCard(index, 0, ENEMIES.list[Math.floor(Math.random() * 2)])
-						
-						TweenMax.from(card.scale, 0.2, {x:0, y:0, ease:Back.easeOut, delay:index/GRID.i * 0.5})
-						
+
+						TweenMax.from(card.scale, 0.2, { x: 0, y: 0, ease: Back.easeOut, delay: index / GRID.i * 0.5 })
+
 						this.cardsContainer.addChild(card);
 					}
-					setTimeout(() => {	
+					setTimeout(() => {
 						this.getNextPieceRound();
 					}, 1000);
-				}else{
+				} else {
 					this.getNextPieceRound();
 				}
 			}
@@ -1614,7 +1664,7 @@ export default class TetraScreen extends Screen {
 		card.pos.j = j;
 		card.updateCard(false, data);
 		this.board.addCard(card);
-		
+
 		// this.CARD_POOL.push(card);
 		return card;
 	}

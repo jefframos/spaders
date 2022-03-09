@@ -169,7 +169,7 @@ export default class Card extends PIXI.Container {
 		//console.log(totalSides)
 		let order = null;
 		if (customData && customData.order) {
-			console.log(customData.order)
+			//console.log(customData.order)
 			order = customData.order;
 		}
 

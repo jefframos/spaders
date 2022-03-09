@@ -422,6 +422,7 @@ function extractData(element, debug) {
 		}
 		data.setAutoBlocker = findPropertyValue(element.properties, "autoPlaceBlockers")
 		data.gameMode = findPropertyValue(element.properties, "gameMode")
+		data.fallTurns = findPropertyValue(element.properties, "fallTurns")
 
 		let tempArr = [];
 		let levelMatrix = [];

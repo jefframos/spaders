@@ -104,7 +104,7 @@ export default class Board {
 	}
 
 	setFinalState() {
-		//console.log("FINAL STATE")
+		////console.log("FINAL STATE")
 		//utils.shuffle(this.allCards);
 		//let tm = 1000 / this.allCards.length;
 		this.isFinalState = true;
@@ -175,7 +175,7 @@ export default class Board {
 		return false;
 	}
 	nextRound() {
-		console.log("next round")
+		//console.log("next round")
 		if (this.canGoNext) {
 			this.OnStartNextRound.dispatch();
 			this.canGoNext = false;
@@ -288,7 +288,7 @@ export default class Board {
 				this.setCardToCrazy(card.pos.i, card.pos.j, 100);
 			}
 			//when nothing happens
-			console.log("nothi explode", tempBombDelay)
+			//console.log("nothi explode", tempBombDelay)
 			// setTimeout(() => {
 			// 	this.nextRound();
 
@@ -307,7 +307,7 @@ export default class Board {
 	areaAttack(card, cardToIgnore) {
 		let zones = card.zones;
 		let cardFound = null;
-		////console.log("AREA ATTACK", zones);
+		//////console.log("AREA ATTACK", zones);
 
 		let allZones = [];
 		ACTION_ZONES.forEach(element => {
@@ -495,7 +495,7 @@ export default class Board {
 		cardGlobal.x += 20;
 		cardGlobal.y += 30;
 		//this.game.addPoints(100);
-		console.log("PLAY EXPLOSION")
+		//console.log("PLAY EXPLOSION")
 		window.COOKIE_MANAGER.addExplosion();
 		this.playDelayedCoins(4);
 		this.game.fxContainer.addParticlesToScore(
@@ -514,6 +514,8 @@ export default class Board {
 		this.explosionChain.push(cardFound)
 
 		this.chainTimer += this.chainExplosionTime;
+
+		this.chainTimer = Math.min(this.chainTimer, this.chainExplosionTime * 5);
 		this.addTurnTime(this.chainTimer * 0.01)
 
 	}
@@ -691,7 +693,7 @@ export default class Board {
 				window.EFFECTS.shake(0.2, 5, 0.3, this.game.gameContainer);
 
 				//when has an attack
-				console.log("when has explosion 2", hasExplosionTime)
+				//console.log("when has explosion 2", hasExplosionTime)
 
 				// setTimeout(() => {
 				// 	this.nextRound();
@@ -702,7 +704,7 @@ export default class Board {
 		} else {
 			card.convertCard();
 			this.addTurnTime(0.1)
-			console.log("when has explosion old", hasExplosionTime)
+			//console.log("when has explosion old", hasExplosionTime)
 			// setTimeout(() => {
 			// 	this.nextRound();
 			// }, hasExplosionTime / window.TIME_SCALE);
@@ -827,7 +829,7 @@ export default class Board {
 
 	}
 	findOutGameOver() {
-		console.log("findOutGameOver", this.firstLineShots())
+		//console.log("findOutGameOver", this.firstLineShots())
 		if (this.firstLineShots() <= 0) {
 			this.OnGameOver.dispatch();
 		}
@@ -952,7 +954,7 @@ export default class Board {
 			this.OnGameOver.dispatch();
 			return;
 		}
-		//console.log("2",card.pos)
+		////console.log("2",card.pos)
 		this.addCard(card);
 		card.move({
 			x: card.pos.i * CARD.width,
@@ -980,7 +982,7 @@ export default class Board {
 		let isolated = this.findOneIsolated();
 
 		if (isolated) {
-			////console.log("FOUND ISOLATED", isolated.pos)
+			//////console.log("FOUND ISOLATED", isolated.pos)
 			if (this.isPossibleShot(isolated.pos.i - 1)) {
 				if (this.getWhereWillStop(isolated.pos.i - 1) <= isolated.pos.j) {
 					return isolated.pos.i - 1;
