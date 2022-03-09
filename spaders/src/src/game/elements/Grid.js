@@ -226,6 +226,8 @@ export default class Grid extends PIXI.Container {
 
 			/////////
 		}
+console.log(levelData)
+
 		let backGridContainer = new PIXI.Container();
 		for (var i = GRID.i - 1; i >= 0; i--) {
 			let gridLine = [];
@@ -246,9 +248,15 @@ export default class Grid extends PIXI.Container {
 				gridSquare.startAlpha = gridSquare.alpha;
 				gridSquare.sin = Math.random() * Math.PI * 2;
 				gridSquare.tint = colorScheme.color;
-				backGridContainer.addChild(gridSquare)
 
-				this.grids.push(gridSquare);
+				if(levelData && levelData.pieces[j][i] == 32){
+					//console.log("BLOCKER")
+				}else{
+
+					backGridContainer.addChild(gridSquare)
+					this.grids.push(gridSquare);
+				}
+
 
 				//let gridEffectSquare = PIXI.Sprite.fromFrame('gridSquare.png')
 				//let gridEffectSquare = PIXI.Sprite.fromFrame(colorScheme.spriteTile)
