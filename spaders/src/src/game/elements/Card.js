@@ -35,13 +35,14 @@ export default class Card extends PIXI.Container {
 		this.cardForeground = new PIXI.mesh.NineSlicePlane(
 			PIXI.Texture.fromFrame('largeCardBackPixel.png'), 20, 20, 20, 20)//new PIXI.Graphics().beginFill(0xFFFFFF).drawRoundedRect(0, 0, CARD.width, CARD.height, 0);
 		this.circleBackground = new PIXI.Graphics().beginFill(0xFFFFFF).drawCircle(0, 0, CARD.width / 2);
-		this.cardBack3 = new PIXI.Graphics().beginFill(0x000000).drawRect(CARD.width / 2 - 10, CARD.height / 2, 19, 10);
+		this.cardBack3 = PIXI.Sprite.fromFrame('base.png');
 		this.enemySprite = PIXI.Sprite.fromFrame('enemy.png');
 		this.enemySpriteWhite = PIXI.Sprite.fromFrame('enemy.png');
 		this.enemySpriteWhite.visible = false;
 		this.enemySprite.addChild(this.enemySpriteWhite);
 		this.enemySprite.scale.set(this.realSpriteWidth / this.enemySprite.width * this.scaleRef)
 		this.enemySprite.anchor.set(0.5, 0.85);
+		this.cardBack3.anchor.set(0.5, 0.85);
 
 		this.cardForeground.alpha = 1;
 		this.circleBackground.alpha = 0;
@@ -56,8 +57,8 @@ export default class Card extends PIXI.Container {
 		this.cardActions = new PIXI.Container();
 		card.addChild(cardContainer);
 		cardContainer.addChild(this.circleBackground);
+		cardContainer.addChild(this.cardBack3);
 		cardContainer.addChild(this.cardActions);
-		// cardContainer.addChild(this.cardBack3);
 		cardContainer.addChild(this.enemySprite);
 
 
@@ -283,6 +284,9 @@ export default class Card extends PIXI.Container {
 				this.backshape.parent.removeChild(this.backshape)
 			}
 		}
+
+		this.cardBack3.tint = 0;
+		this.cardBack3.alpha = 0.25;
 	}
 	convertCard() {
 		//this.type = this.type == 1 ? 0 : 1;
@@ -537,10 +541,12 @@ export default class Card extends PIXI.Container {
 		this.updateAnimation(delta);
 		this.enemySprite.y = CARD.height * 0.7 //+ Math.sin(this.initGridAcc) * 2;
 		//this.enemySprite.y = Math.floor(CARD.height * 0.7 + Math.sin(this.initGridAcc) * 2);
-		this.cardBack3.y = this.enemySprite.y - 10;
+		//this.cardBack3.y = this.enemySprite.y - 10;
 		this.initGridAcc += delta
 
-
+		this.cardBack3.position = this.enemySprite.position
+		this.cardBack3.scale.x = this.enemySprite.scale.x * 2
+		this.cardBack3.scale.y = this.enemySprite.scale.y * 2
 		// this.horizontalSpring.update();
 		// if (this.isCurrent) {
 		// 	this.x = this.horizontalSpring.x
