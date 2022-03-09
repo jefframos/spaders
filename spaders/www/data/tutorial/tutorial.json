@@ -3235,7 +3235,7 @@
          "value":"Tutorial"
         }],
  "renderorder":"right-down",
- "tiledversion":"1.7.2",
+ "tiledversion":"1.8.1",
  "tileheight":64,
  "tilesets":[
         {
@@ -3248,6 +3248,6 @@
         }],
  "tilewidth":64,
  "type":"map",
- "version":"1.6",
+ "version":"1.8",
  "width":16
 }

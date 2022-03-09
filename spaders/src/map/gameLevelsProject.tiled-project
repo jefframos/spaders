@@ -10,7 +10,8 @@
         "main",
         "gb",
         "templates",
-        "tutorial"
+        "tutorial",
+        "debug"
     ],
     "objectTypesFile": "",
     "propertyTypes": [

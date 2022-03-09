@@ -154,6 +154,20 @@
                     "dataPath": "tutorial/tutorial.json"
                 }
             ]
+        },
+        {
+            "color": "0xDDDDDD",
+            "ignore": true,
+            "name": "Debug",
+            "displayName": "Video Game History",
+            "imageSrc": "",
+            "colorPalletId": 0,
+            "levels": [
+                {
+                    "name": "---",
+                    "dataPath": "debug/debug.json"
+                }
+            ]
         }
     ]
 }

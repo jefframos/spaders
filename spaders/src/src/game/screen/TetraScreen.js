@@ -1298,6 +1298,9 @@ export default class TetraScreen extends Screen {
 						} else {
 							let card = this.placeCard(j, i, ENEMIES.list[this.currentLevelData.pieces[i][j]], customData, this.currentLevelData.pieces[i][j])
 							this.cardsContainer.addChild(card);
+							if(this.currentLevelData.gameMode == 0){
+								this.grid.paintTile(card)
+							}
 							if (hasAddon && this.currentLevelData.addOn[i][j] == 32) {
 								card.startCrazyMood();
 							}
@@ -1492,11 +1495,23 @@ export default class TetraScreen extends Screen {
 				this.getNextPieceRound();
 			} else {
 
-				this.board.moveCardsDown();
-				setTimeout(() => {
+				if(this.currentRound > 0 && this.currentRound % 8 == 0){
+					this.board.moveCardsDown();
 
+					for (let index = 0; index < GRID.i; index++) {						
+						
+						let card = this.placeCard(index, 0, ENEMIES.list[Math.floor(Math.random() * 2)])
+						
+						TweenMax.from(card.scale, 0.2, {x:0, y:0, ease:Back.easeOut, delay:index/GRID.i * 0.5})
+						
+						this.cardsContainer.addChild(card);
+					}
+					setTimeout(() => {	
+						this.getNextPieceRound();
+					}, 1000);
+				}else{
 					this.getNextPieceRound();
-				}, 1000);
+				}
 			}
 		}
 	}
@@ -1599,7 +1614,7 @@ export default class TetraScreen extends Screen {
 		card.pos.j = j;
 		card.updateCard(false, data);
 		this.board.addCard(card);
-		this.grid.paintTile(card)
+		
 		// this.CARD_POOL.push(card);
 		return card;
 	}

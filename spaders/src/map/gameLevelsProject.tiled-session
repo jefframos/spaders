@@ -24,6 +24,14 @@
         "E:/projects/spaders/spaders/src/tilesets/spadersTileset.tsx": {
             "scaleInDock": 1
         },
+        "debug/debug.tmx": {
+            "scale": 0.6522518382352941,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 480.6425702811245,
+                "y": 512.0721482420912
+            }
+        },
         "gb/gameboyCreatures.tmx": {
             "scale": 0.5,
             "selectedLayer": 7,
@@ -149,7 +157,7 @@
             "selectedLayer": 7,
             "viewCenter": {
                 "x": -19.696969696969745,
-                "y": 575.7575757575758
+                "y": 572.7272727272727
             }
         },
         "how-to-play/simple-shapes.tmx": {
@@ -291,7 +299,7 @@
         },
         "videogames/levels2.tmx": {
             "scale": 0.5,
-            "selectedLayer": 1,
+            "selectedLayer": 7,
             "viewCenter": {
                 "x": 389,
                 "y": 456
@@ -311,7 +319,7 @@
             "scaleInEditor": 1
         }
     },
-    "last.exportedFilePath": "D:/projects/spaders/spaders/www/data/tutorial",
+    "last.exportedFilePath": "D:/projects/spaders/spaders/www/data/debug",
     "last.externalTilesetPath": "E:/projects/spaders/spaders/src/map/tilesets",
     "last.imagePath": "D:/projects/spaders/spaders/src/map/tilesets",
     "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",

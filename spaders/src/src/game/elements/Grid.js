@@ -250,13 +250,14 @@ console.log(levelData)
 				gridSquare.tint = colorScheme.color;
 
 				if(levelData && levelData.pieces[j][i] == 32){
-					//console.log("BLOCKER")
+					console.log("BLOCKER", levelData.pieces[j][i])
+					gridSquare.alpha = 0;
 				}else{
 
-					backGridContainer.addChild(gridSquare)
-					this.grids.push(gridSquare);
 				}
-
+				
+				backGridContainer.addChild(gridSquare)
+				this.grids.push(gridSquare);
 
 				//let gridEffectSquare = PIXI.Sprite.fromFrame('gridSquare.png')
 				//let gridEffectSquare = PIXI.Sprite.fromFrame(colorScheme.spriteTile)

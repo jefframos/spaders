@@ -901,21 +901,22 @@ export default class Board {
 	}
 
 
-	//move cards down
+
 	moveCardsDown(value, card) {
 		let cardsToMove = [];
+		//console.log(this.cards)
 		for (var i = 0; i < this.cards.length; i++) {
 			for (var j = 0; j < this.cards[i].length; j++) {
-				if (this.cards[i][j]) {
+				if (this.cards[i][j] && this.cards[i][j].isCard) {
 					// let tcard = this.cards[i][j].updateCounter(value);
 					// if (tcard) {
-					// 	////console.log(tcard);
+					//// 	////console.log(tcard);
 					cardsToMove.push(this.cards[i][j])
 					// }
 				}
 			}
 		}
-		// //console.log(cardsToMove);
+		//// // //console.log(cardsToMove);
 		let moveDownList = [];
 
 		// for (var i = 0; i < cardsToMove.length; i++) {
@@ -938,11 +939,12 @@ export default class Board {
 			}
 		}
 		for (var i = moveDownList.length - 1; i >= 0; i--) {
-			this.moveCardDown(moveDownList[i]);
+			this.moveCardDown(moveDownList[i], (i / moveDownList.length) * 0.5);
 		}
 	}
 
-	moveCardDown(card) {
+	moveCardDown(card, delay) {
+		//console.log(card)
 		this.cards[card.pos.i][card.pos.j] = 0;
 		card.pos.j++;
 		if (card.pos.j >= GRID.j) {
@@ -950,11 +952,12 @@ export default class Board {
 			this.OnGameOver.dispatch();
 			return;
 		}
+		//console.log("2",card.pos)
 		this.addCard(card);
 		card.move({
 			x: card.pos.i * CARD.width,
 			y: card.pos.j * CARD.height
-		}, 0.2, 0.5);
+		}, 0.2, delay);
 	}
 
 	getWhereWillStop(laneID) {
