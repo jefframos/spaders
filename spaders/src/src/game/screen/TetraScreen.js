@@ -130,10 +130,71 @@ export default class TetraScreen extends Screen {
 
 
 	}
+	drawDebugCharacters() {
+		let scheme = colorSchemes.getCurrentColorScheme().list;
+		this.debugCardsContainer = new PIXI.Container();
+
+		let y = 0;
+		let x = 0;
+		for (let index = 0; index < scheme.length; index++) {
+			let card = new Card(this);
+			if (index > 0) {
+				if (index % 4 == 0) {
+					y += card.height
+					x = 0;
+				} else {
+
+					x += card.width
+				}
+			}
+			const element = scheme[index];
+
+			card.life = 0;
+			card.createCard(0);
+			card.updateSprite(card.life, element, index);
+			card.updateCard(false, element);
+			card.removeActionZones();
+			card.update(0.1);
+			card.x = x
+			card.y = y;
+			card.scale.set(2)
+
+			this.debugCardsContainer.addChild(card);
+
+			//console.log(element)
+
+		}
+
+		let background = new PIXI.mesh.NineSlicePlane(
+			PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
+
+		this.debugCardsContainer.addChildAt(background, 0)
+
+		background.width = this.debugCardsContainer.width
+		background.height = this.debugCardsContainer.height
+
+		background.tint = colorSchemes.getCurrentColorScheme().dark
+
+		this.debugCardsContainer.pivot.x = this.debugCardsContainer.width / 2
+		this.debugCardsContainer.pivot.y = this.debugCardsContainer.height / 2
+		this.addChild(this.debugCardsContainer)
+	}
 	findURLParams() {
 		const urlParams = new URLSearchParams(window.location.search);
 		if (urlParams) {
 
+			if (urlParams.get('debug')) {
+				let debugParameters = urlParams.get('debug')
+				debugParameters = debugParameters.split(',');
+
+				if (debugParameters[0]) {
+					setTimeout(() => {
+						window.game.onTapUp();
+						this.drawDebugCharacters()
+
+					}, 10);
+				}
+			}
 
 			let levelRedirectParameters = urlParams.get('level')
 			if (levelRedirectParameters) {
@@ -149,6 +210,9 @@ export default class TetraScreen extends Screen {
 					setTimeout(() => {
 						console.log(levelRedirectParameters)
 						window.game.onTapUp();
+
+						this.colorTweenBomb.startTween(0)
+
 						this.openTutorial(levelRedirectParameters[1])
 
 					}, 10);
@@ -1241,7 +1305,7 @@ export default class TetraScreen extends Screen {
 		if (hasAddon) {
 			setTimeout(() => {
 				this.OnStartNextRound(null, true);
-			}, 1500 + countAdd * 100);
+			}, Math.min(1500, 1200 + countAdd * 100));
 		} else {
 			setTimeout(() => {
 				this.OnStartNextRound(null, true);
@@ -1372,12 +1436,12 @@ export default class TetraScreen extends Screen {
 		for (var i = 0; i < this.cardQueue.length; i++) {
 			TweenMax.to(this.cardQueue[i], 0.3, { x: CARD.width * (this.cardQueue.length - i - 1), ease: Back.easeOut })
 			this.cardQueue[i].y = 0
-			this.cardQueue[i].update(1/60)
+			this.cardQueue[i].update(1 / 60)
 			// this.cardQueue[i].y = ;
 		}
 
 		this.cardQueue[1].mark();
-		this.cardQueue[1].update(1/60)
+		this.cardQueue[1].update(1 / 60)
 
 	}
 	OnGameOver() {
@@ -1550,6 +1614,16 @@ export default class TetraScreen extends Screen {
 		this.inGameMenu.update(delta)
 		this.mainMenuSettings.update(delta)
 		this.fxContainer.update(delta)
+
+		if (this.debugCardsContainer) {
+			for (let index = 0; index < this.debugCardsContainer.children.length; index++) {
+				const element = this.debugCardsContainer.children[index];
+				if (element.update) {
+					element.update(delta);
+				}
+			}
+		}
+
 		if (this.tutorialOverlay.visible) {
 			this.tutorialOverlay.update(delta);
 		}
@@ -2141,6 +2215,13 @@ export default class TetraScreen extends Screen {
 
 		this.debugLabel.x = this.gameCanvas.x + 20
 		this.debugLabel.y = this.gameCanvas.y + this.gameCanvas.height - this.debugLabel.height - 20
+
+		if (this.debugCardsContainer) {
+			this.debugCardsContainer.x = this.gameCanvas.x + this.gameCanvas.width / 2
+			this.debugCardsContainer.y = this.gameCanvas.y + this.gameCanvas.height / 2
+
+		}
+
 		this.updateLabelsPosition();
 
 		if (this.tutorialOverlay.visible) {

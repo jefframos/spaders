@@ -9,7 +9,7 @@
  </properties>
  <tileset firstgid="1" source="../tilesets/spadersTileset.tsx"/>
  <tileset firstgid="65" source="../tilesets/videogames.tsx"/>
- <layer id="30" name="AllColors" width="24" height="24">
+ <layer id="30" name="AllColors" width="24" height="24" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="1"/>
    <property name="i" type="int" value="8"/>
@@ -48,7 +48,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="31" name="_ADDON" width="24" height="24">
+ <layer id="31" name="_ADDON" width="24" height="24" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="8"/>
@@ -126,7 +126,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="2" name="Plumber" width="24" height="24" visible="0">
+ <layer id="2" name="Plumber" width="24" height="24">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="8"/>
@@ -165,7 +165,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="23" name="Gradius" width="24" height="24" visible="0">
+ <layer id="23" name="Gradius" width="24" height="24">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="8"/>
@@ -204,7 +204,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="8" name="Inky" width="24" height="24" visible="0">
+ <layer id="8" name="Inky" width="24" height="24">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="9"/>
@@ -243,7 +243,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="10" name="E.T." width="24" height="24" visible="0">
+ <layer id="10" name="E.T." width="24" height="24">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="7"/>
@@ -321,7 +321,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="27" name="Ultima IV" width="24" height="24" visible="0">
+ <layer id="27" name="Ultima IV" width="24" height="24">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="8"/>
@@ -360,7 +360,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="26" name="Outrun" width="24" height="24" visible="0">
+ <layer id="26" name="Outrun" width="24" height="24">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="8"/>
@@ -399,7 +399,7 @@
 72,72,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,72,72,72,80,80
 </data>
  </layer>
- <layer id="29" name="_ADDON Outrun" width="24" height="24" visible="0">
+ <layer id="29" name="_ADDON Outrun" width="24" height="24">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="8"/>
@@ -438,7 +438,7 @@
 0,0,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,0,0,0,34,34
 </data>
  </layer>
- <layer id="9" name="Tetris" width="24" height="24" visible="0">
+ <layer id="9" name="Tetris" width="24" height="24">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="7"/>
@@ -477,7 +477,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="28" name="Maniac Mansion" width="24" height="24" visible="0">
+ <layer id="28" name="Maniac Mansion" width="24" height="24">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="8"/>
@@ -516,7 +516,7 @@
 0,0,0,0,0,0,0,88,88,88,88,88,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="20" name="Duck Hunt" width="24" height="24" visible="0">
+ <layer id="20" name="Duck Hunt" width="24" height="24">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="9"/>
@@ -555,7 +555,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="25" name="Gauntlet" width="24" height="24" visible="0">
+ <layer id="25" name="Gauntlet" width="24" height="24">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="8"/>

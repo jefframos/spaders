@@ -37,7 +37,7 @@
             "selectedLayer": 21,
             "viewCenter": {
                 "x": 480.30303030303025,
-                "y": 515.1515151515152
+                "y": 512.1212121212122
             }
         },
         "gb/gameboyMisc2.tmx": {
@@ -52,16 +52,16 @@
             "scale": 0.33,
             "selectedLayer": 8,
             "viewCenter": {
-                "x": 513.6363636363637,
-                "y": 515.1515151515152
+                "x": 513.6363636363636,
+                "y": 512.1212121212122
             }
         },
         "gb/gameboyWeapon2.tmx": {
             "scale": 0.33,
             "selectedLayer": 19,
             "viewCenter": {
-                "x": 513.6363636363637,
-                "y": 515.1515151515152
+                "x": 513.6363636363636,
+                "y": 512.1212121212122
             }
         },
         "how-to-play/bossa.tmx": {
@@ -148,8 +148,8 @@
             "scale": 0.33,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 765.1515151515152,
-                "y": 769.6969696969697
+                "x": -19.696969696969745,
+                "y": 575.7575757575758
             }
         },
         "how-to-play/simple-shapes.tmx": {
@@ -218,7 +218,7 @@
             "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 735,
+                "x": 767,
                 "y": 768
             }
         },
@@ -226,8 +226,8 @@
             "scale": 0.33,
             "selectedLayer": 6,
             "viewCenter": {
-                "x": 768.1818181818182,
-                "y": 833.3333333333333
+                "x": 768.1818181818181,
+                "y": 833.3333333333334
             }
         },
         "movies/spadersTileset.tsx": {
@@ -248,7 +248,7 @@
             "scale": 1.1045496323529411,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 479.3809028500104,
+                "x": 479.38090285001044,
                 "y": 511.52069898065326
             }
         },
@@ -291,7 +291,7 @@
         },
         "videogames/levels2.tmx": {
             "scale": 0.5,
-            "selectedLayer": 0,
+            "selectedLayer": 1,
             "viewCenter": {
                 "x": 389,
                 "y": 456

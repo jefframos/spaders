@@ -195,7 +195,11 @@ export default class Card extends PIXI.Container {
 	}
 	removeActionZones() {
 		while (this.cardActions.children.length > 0) {
-			ARROW_UP_POOL.push(this.cardActions.children[0])
+			let element = this.cardActions.children[0];
+			TweenMax.killTweensOf(element)
+			TweenMax.killTweensOf(element.scale)
+			element.scale.set(1);
+			ARROW_UP_POOL.push(element)
 			this.cardActions.removeChildAt(0);
 		}
 
@@ -309,6 +313,9 @@ export default class Card extends PIXI.Container {
 		this.cardForeground.scale.set(1);
 		this.cardForeground.width = CARD.width
 		this.cardForeground.height = CARD.height
+
+		//this.cardActions.scale.set(0.7)
+		//this.cardActions.scale.set(this.cardActions.width / CARD.width)
 	}
 	addExtraZone(ids) {
 		let currentZones = [];;
@@ -355,9 +362,11 @@ export default class Card extends PIXI.Container {
 			let zone = ACTION_ZONES[orderArray[i]];
 			let arrowSprite = this.getArrowSprite()//PIXI.Sprite.fromFrame(zone.sprite);
 			arrowSprite.setTexture(PIXI.Texture.fromFrame(zone.sprite))
+			arrowSprite.tint = 0xFFFFFF;
 			arrowSprite.anchor.set(0.5)
-			arrowSprite.scale.set(
-				arrowSprite.width / arrowSprite.scale.x / this.circleBackground.width * 0.7)
+			arrowSprite.scale.set(0.84 * this.cardContainer.scale.x)
+			//arrowSprite.scale.set(
+			//	arrowSprite.width  / this.width * 0.7)
 
 			//console.log(this.circleBackground.width )
 
@@ -378,7 +387,14 @@ export default class Card extends PIXI.Container {
 			arrowSprite.x = CARD.width / 2 // arrowSprite.scale.x
 			arrowSprite.y = CARD.height / 2 // arrowSprite.scale.y
 		}
-		// console.log("ADD ACTION ZONES", this.zones, this.arrows);
+
+		this.cardActions.scale.set(CARD.width / Math.floor(this.cardActions.width / this.cardActions.scale.x))
+
+		this.cardActions.pivot.x = this.cardActions.width / 2
+		this.cardActions.pivot.y = this.cardActions.height / 2
+
+		this.cardActions.x = this.cardActions.width / 2
+		this.cardActions.y = this.cardActions.height / 2
 	}
 	isABomb() {
 		this.isBomb = true;
