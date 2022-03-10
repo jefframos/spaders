@@ -11,7 +11,8 @@
         "gb",
         "templates",
         "tutorial",
-        "debug"
+        "debug",
+        "basics"
     ],
     "objectTypesFile": "",
     "propertyTypes": [

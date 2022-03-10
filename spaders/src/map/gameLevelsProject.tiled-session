@@ -1,14 +1,15 @@
 {
-    "activeFile": "debug/debug.tmx",
+    "activeFile": "basics/food1.tmx",
     "expandedProjectPaths": [
-        "movies",
-        "gb",
-        "main",
         "templates",
-        "tutorial",
+        "gb",
         "debug",
-        "videogames",
-        "how-to-play"
+        "basics",
+        "main",
+        "movies",
+        "tutorial",
+        "how-to-play",
+        "videogames"
     ],
     "fileStates": {
         "D:/Projects/tetra/map/levels.tmx": {
@@ -25,6 +26,14 @@
         },
         "E:/projects/spaders/spaders/src/tilesets/spadersTileset.tsx": {
             "scaleInDock": 1
+        },
+        "basics/food1.tmx": {
+            "scale": 0.6522518382352941,
+            "selectedLayer": 32,
+            "viewCenter": {
+                "x": 480.6425702811245,
+                "y": 512.0721482420912
+            }
         },
         "debug/debug.tmx": {
             "scale": 0.6522518382352941,
@@ -158,8 +167,8 @@
             "scale": 0.33,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": -19.696969696969745,
-                "y": 572.7272727272727
+                "x": 768.1818181818181,
+                "y": 769.6969696969697
             }
         },
         "how-to-play/simple-shapes.tmx": {
@@ -287,8 +296,8 @@
             "scale": 1.1045496323529411,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 480.2862492198877,
-                "y": 174.73184938631164
+                "x": 479.38090285001044,
+                "y": 511.52069898065326
             }
         },
         "videogames/levels.tmx": {
@@ -303,8 +312,8 @@
             "scale": 0.5,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 389,
-                "y": 456
+                "x": 767,
+                "y": 768
             }
         },
         "videogames/levels3.tmx": {
@@ -321,7 +330,7 @@
             "scaleInEditor": 1
         }
     },
-    "last.exportedFilePath": "D:/projects/spaders/spaders/www/data/debug",
+    "last.exportedFilePath": "D:/projects/spaders/spaders/www/data/basics",
     "last.externalTilesetPath": "E:/projects/spaders/spaders/src/map/tilesets",
     "last.imagePath": "D:/projects/spaders/spaders/src/map/tilesets",
     "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
@@ -351,7 +360,8 @@
         "movies/moviesAdventure.tmx",
         "templates/template.tmx",
         "debug/debug.tmx",
-        "tutorial/tutorial.tmx"
+        "tutorial/tutorial.tmx",
+        "basics/food1.tmx"
     ],
     "project": "gameLevelsProject.tiled-project",
     "property.type": "int",

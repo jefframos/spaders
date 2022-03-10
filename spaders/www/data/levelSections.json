@@ -26,6 +26,10 @@
                 {
                     "name": "---",
                     "dataPath": "how-to-play/things.json"
+                },
+                {
+                    "name": "---",
+                    "dataPath": "basics/food.json"
                 }
             ]
         },
