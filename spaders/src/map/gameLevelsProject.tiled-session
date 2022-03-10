@@ -1,12 +1,14 @@
 {
-    "activeFile": "how-to-play/simple-shapes-synt.tmx",
+    "activeFile": "debug/debug.tmx",
     "expandedProjectPaths": [
-        "videogames",
-        "how-to-play",
+        "movies",
         "gb",
         "main",
         "templates",
-        "movies"
+        "tutorial",
+        "debug",
+        "videogames",
+        "how-to-play"
     ],
     "fileStates": {
         "D:/Projects/tetra/map/levels.tmx": {
@@ -26,7 +28,7 @@
         },
         "debug/debug.tmx": {
             "scale": 0.6522518382352941,
-            "selectedLayer": 1,
+            "selectedLayer": 2,
             "viewCenter": {
                 "x": 480.6425702811245,
                 "y": 512.0721482420912
@@ -347,7 +349,9 @@
         "how-to-play/pokemons.tmx",
         "how-to-play/question-mark.tmx",
         "movies/moviesAdventure.tmx",
-        "templates/template.tmx"
+        "templates/template.tmx",
+        "debug/debug.tmx",
+        "tutorial/tutorial.tmx"
     ],
     "project": "gameLevelsProject.tiled-project",
     "property.type": "int",
@@ -360,10 +364,10 @@
         "videogames/levels2.tmx",
         "movies/movies1.tmx",
         "how-to-play/simple-shapes.tmx",
-        "templates/template.tmx",
-        "movies/moviesAdventure.tmx",
-        "how-to-play/question-mark.tmx",
-        "how-to-play/pokemons.tmx"
+        "how-to-play/simple-shapes-synt.tmx",
+        "how-to-play/pokemon2.tmx",
+        "how-to-play/pokemon22.tmx",
+        "how-to-play/bossa.tmx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",

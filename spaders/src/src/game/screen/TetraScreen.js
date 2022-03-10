@@ -1522,7 +1522,7 @@ export default class TetraScreen extends Screen {
 		this.newRound(first);
 	}
 	newRound(first = false) {
-		console.log("newRound", first);
+		//console.log("newRound", first);
 		if (this.currentLevelData.gameMode == 0) {
 
 			this.getNextPieceRound(first);
@@ -1536,8 +1536,6 @@ export default class TetraScreen extends Screen {
 
 				let t = this.currentRound % this.currentLevelData.fallTurns
 				let turnN = t / this.currentLevelData.fallTurns
-				console.log(turnN)
-
 
 				this.fallBar.setProgressBar2(turnN)
 

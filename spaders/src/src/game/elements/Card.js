@@ -231,7 +231,7 @@ export default class Card extends PIXI.Container {
 		// }else{
 		// }
 		let targetID = imageID
-		targetID %=3;
+		targetID %=4;
 		targetID++
 		this.idleAnimationLayer1 = []
 		this.idleAnimationLayer2 = []

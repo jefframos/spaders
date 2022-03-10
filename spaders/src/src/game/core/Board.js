@@ -623,42 +623,41 @@ export default class Board {
 		}
 
 
-
+		console.log(list, autoDestroyCardData)
 		if (autoDestroyCardData) {
 			this.addTurnTime(list.length * 0.2)
 			setTimeout(function () {
 				// let arrow = autoDestroyCardData.card.getArrow(this.getOpposite(autoDestroyCardData.zone.label));
 				let arrow = autoDestroyCardData.cardFound.getArrow(autoDestroyCardData.zone.label);
-				if (!arrow) {
-					return;
+				let arrowGlobal = arrow.getGlobalPosition({ x: 0, y: 0 });
+				if (arrow) {
+					let zone = autoDestroyCardData.zone
+					arrow.tint = autoDestroyCardData.cardFound.currentColor;
+	
+					TweenMax.killTweensOf(arrow);
+					let targetScale = arrow.scale.x
+	
+					TweenMax.to(arrow.scale, 0.3, { x: 0, y: 0, ease: Back.easeIn })
+					TweenMax.to(arrow.scale, 0.3, {
+						delay: 0.5, x: targetScale, y: targetScale, ease: Back.easeOut, onStart: () => {
+						}
+					})
+	
+					TweenMax.to(arrow, 0.05, {
+						x: arrow.x + 10 * zone.dir.x, y: arrow.y + 10 * zone.dir.y,
+						ease: Back.easeIn, onComplete: () => {
+							let arrowGlobal2 = arrow.getGlobalPosition({ x: 0, y: 0 });
+							this.popCircle(arrowGlobal2, card.currentColor);
+						}
+					})
+					TweenMax.to(arrow, 0.2, {
+						delay: 0.4, x: arrow.x, y: arrow.y, ease: Back.easeIn, onComplete: () => {
+							arrow.tint = 0xFFFFFF;
+						}
+					})
 				}
 
 
-				let arrowGlobal = arrow.getGlobalPosition({ x: 0, y: 0 });
-				let zone = autoDestroyCardData.zone
-				arrow.tint = autoDestroyCardData.cardFound.currentColor;
-
-				TweenMax.killTweensOf(arrow);
-				let targetScale = arrow.scale.x
-
-				TweenMax.to(arrow.scale, 0.3, { x: 0, y: 0, ease: Back.easeIn })
-				TweenMax.to(arrow.scale, 0.3, {
-					delay: 0.5, x: targetScale, y: targetScale, ease: Back.easeOut, onStart: () => {
-					}
-				})
-
-				TweenMax.to(arrow, 0.05, {
-					x: arrow.x + 10 * zone.dir.x, y: arrow.y + 10 * zone.dir.y,
-					ease: Back.easeIn, onComplete: () => {
-						let arrowGlobal2 = arrow.getGlobalPosition({ x: 0, y: 0 });
-						this.popCircle(arrowGlobal2, card.currentColor);
-					}
-				})
-				TweenMax.to(arrow, 0.2, {
-					delay: 0.4, x: arrow.x, y: arrow.y, ease: Back.easeIn, onComplete: () => {
-						arrow.tint = 0xFFFFFF;
-					}
-				})
 
 
 				this.delayedDestroy(card, autoDestroyCardData.hits);
