@@ -629,8 +629,11 @@ export default class Board {
 			setTimeout(function () {
 				// let arrow = autoDestroyCardData.card.getArrow(this.getOpposite(autoDestroyCardData.zone.label));
 				let arrow = autoDestroyCardData.cardFound.getArrow(autoDestroyCardData.zone.label);
-				let arrowGlobal = arrow.getGlobalPosition({ x: 0, y: 0 });
+				let arrowGlobal = card.getGlobalPosition({ x: 0, y: 0 });
 				if (arrow) {
+
+					arrowGlobal = arrow.getGlobalPosition({ x: 0, y: 0 });
+
 					let zone = autoDestroyCardData.zone
 					arrow.tint = autoDestroyCardData.cardFound.currentColor;
 	
