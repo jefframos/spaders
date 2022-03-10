@@ -240,7 +240,7 @@ export default class Card extends PIXI.Container {
 			this.idleAnimationLayer2.push("l1_spader_"+targetID+"_" + index + ".png")
 		}
 
-		this.enemySpriteWhite.alpha = 0.65
+		this.enemySpriteWhite.alpha = 0.85
 		this.enemySprite.setTexture(PIXI.Texture.fromFrame(window.IMAGE_DATA.enemyImagesFrame[imageID]));
 		this.enemySpriteWhite.setTexture(PIXI.Texture.fromFrame("w_" + window.IMAGE_DATA.enemyImagesFrame[imageID]));
 
