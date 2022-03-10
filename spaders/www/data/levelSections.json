@@ -43,6 +43,10 @@
             "levels": [
                 {
                     "name": "2nd gen",
+                    "dataPath": "videogames/spaders.json"
+                },
+                {
+                    "name": "2nd gen",
                     "dataPath": "videogames/videogamesLevels1.json"
                 },
                 {

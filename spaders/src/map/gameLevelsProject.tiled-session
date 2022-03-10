@@ -1,15 +1,14 @@
 {
-    "activeFile": "basics/food1.tmx",
+    "activeFile": "videogames/levels3.tmx",
     "expandedProjectPaths": [
+        "videogames",
         "templates",
+        "tutorial",
         "gb",
-        "debug",
-        "basics",
         "main",
         "movies",
-        "tutorial",
-        "how-to-play",
-        "videogames"
+        "basics",
+        "debug"
     ],
     "fileStates": {
         "D:/Projects/tetra/map/levels.tmx": {
@@ -317,11 +316,11 @@
             }
         },
         "videogames/levels3.tmx": {
-            "scale": 0.8275390625,
-            "selectedLayer": 18,
+            "scale": 0.75,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 320.8307764928015,
-                "y": 384.27189048855325
+                "x": 319.3333333333333,
+                "y": 594.6666666666665
             }
         },
         "videogames/spadersTileset.tsx": {
@@ -330,7 +329,7 @@
             "scaleInEditor": 1
         }
     },
-    "last.exportedFilePath": "D:/projects/spaders/spaders/www/data/basics",
+    "last.exportedFilePath": "D:/projects/spaders/spaders/www/data/videogames",
     "last.externalTilesetPath": "E:/projects/spaders/spaders/src/map/tilesets",
     "last.imagePath": "D:/projects/spaders/spaders/src/map/tilesets",
     "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
