@@ -252,6 +252,16 @@
             <key type="filename">spader4/l1_spader_4_3.png</key>
             <key type="filename">spader4/l1_spader_4_4.png</key>
             <key type="filename">spader4/l1_spader_4_5.png</key>
+            <key type="filename">spader5/l0_spader_5_1.png</key>
+            <key type="filename">spader5/l0_spader_5_2.png</key>
+            <key type="filename">spader5/l0_spader_5_3.png</key>
+            <key type="filename">spader5/l0_spader_5_4.png</key>
+            <key type="filename">spader5/l0_spader_5_5.png</key>
+            <key type="filename">spader5/l1_spader_5_1.png</key>
+            <key type="filename">spader5/l1_spader_5_2.png</key>
+            <key type="filename">spader5/l1_spader_5_3.png</key>
+            <key type="filename">spader5/l1_spader_5_4.png</key>
+            <key type="filename">spader5/l1_spader_5_5.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -928,6 +938,7 @@
             <filename>blocker</filename>
             <filename>base.png</filename>
             <filename>spader4</filename>
+            <filename>spader5</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

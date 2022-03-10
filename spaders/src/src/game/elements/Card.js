@@ -231,7 +231,7 @@ export default class Card extends PIXI.Container {
 		// }else{
 		// }
 		let targetID = imageID
-		targetID %=4;
+		targetID %=5;
 		targetID++
 		this.idleAnimationLayer1 = []
 		this.idleAnimationLayer2 = []
@@ -286,7 +286,7 @@ export default class Card extends PIXI.Container {
 		}
 
 		this.cardBack3.tint = 0;
-		this.cardBack3.alpha = 0.25;
+		this.cardBack3.alpha = 0.2;
 	}
 	convertCard() {
 		//this.type = this.type == 1 ? 0 : 1;
@@ -544,7 +544,8 @@ export default class Card extends PIXI.Container {
 		//this.cardBack3.y = this.enemySprite.y - 10;
 		this.initGridAcc += delta
 
-		this.cardBack3.position = this.enemySprite.position
+		this.cardBack3.position.x = this.enemySprite.position.x
+		this.cardBack3.position.y = this.enemySprite.position.y + this.enemySprite.scale.y * 10
 		this.cardBack3.scale.x = this.enemySprite.scale.x * 2
 		this.cardBack3.scale.y = this.enemySprite.scale.y * 2
 		// this.horizontalSpring.update();

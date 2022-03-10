@@ -94,17 +94,32 @@ export default class StartScreenContainer extends PIXI.Container {
 		let width = 3000;
 		let spadersContainer = new PIXI.Container();
 		this.spadersList = [];
+
+		let order = [8,3,6,4,0,1,7,2,5,9]
+		//let order = [3,6,4,1,0,2,5,9]
 		for (let index = 0; index < window.IMAGE_DATA.enemyImagesFrame.length; index++) {
-			const element = window.IMAGE_DATA.enemyImagesFrame[index];
+			const element = window.IMAGE_DATA.enemyImagesFrame[order[index]];
 			let sprite = new PIXI.Sprite.fromFrame(element);
-			sprite.tint = window.colorsOrder[index]
+			sprite.tint = window.colorsOrder[order[index]]
 			spadersContainer.addChild(sprite);
-			sprite.x += 80 * index;
+			if(index > 0){
+				sprite.x += this.spadersList[index - 1].x + this.spadersList[index - 1].width / 2;
+
+			}
 			let spriteWhite = new PIXI.Sprite.fromFrame("w_" + element);
 			sprite.addChild(spriteWhite);
 			sprite.white = spriteWhite;
 			this.spadersList.push(sprite);
+
+			let n = ((index+1) / window.IMAGE_DATA.enemyImagesFrame.length)
+			sprite.y = Math.cos(n * Math.PI) *Math.cos(n * Math.PI) * -80 + 80
+
+			sprite.scale.set( Math.sin(n * Math.PI) * 0.25 + 0.75)
 		}
+
+		spadersContainer.children.sort((a,b) => (a.y > b.y) ? 1 : ((b.y > a.y) ? -1 : 0))
+
+
 		spadersContainer.pivot.x = spadersContainer.width / 2
 		spadersContainer.pivot.y = spadersContainer.height / 2
 		//spadersContainer.rotation = -Math.PI * 0.25
@@ -140,6 +155,7 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.lines.push(line3)
 		this.lines.push(this.playLine)
 		//this.lines.push(this.tutorialLine)
+
 
 		this.stripsContainer.pivot.x = 0//this.stripsContainer.width / 2;
 		this.stripsContainer.pivot.y = this.stripsContainer.height / 2;
