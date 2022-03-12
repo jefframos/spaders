@@ -54,11 +54,30 @@ window.getNextLevel = function (data) {
 
 }
 
+window.getTier = function (ti) {
+	let tier;
+	window.levelSections.sections.forEach(section => {
+		if (isNaN(ti)) {
+			section.levels.forEach(element => {
+				if (element.id == ti) {
+					tier = element;
+				}
+			});
+		} else {
+			ti = Math.min(ti, section.levels.length - 1)
+			tier = section.levels[ti]
+		}
+	});
+
+	return tier;
+}
+
 window.getLevelData = function (sec, ti, lvl) {
 	let section = null;
 	let tier = null;
 	let level = null;
 
+	console.log(sec, ti, lvl)
 	if (sec != undefined) {
 
 		if (isNaN(sec)) {
@@ -424,6 +443,15 @@ function extractData(element, debug) {
 		data.gameMode = findPropertyValue(element.properties, "gameMode")
 		data.fallTurns = findPropertyValue(element.properties, "fallTurns")
 
+		data.splitData = null;
+		if (findPropertyValue(element.properties, "split_i")) {
+			data.splitData = {
+				i: findPropertyValue(element.properties, "split_i"),
+				j: findPropertyValue(element.properties, "split_j"),
+				scale: findPropertyValue(element.properties, "split_scale"),
+			}
+		}
+
 		let tempArr = [];
 		let levelMatrix = [];
 		let levelMatrixDraw = [];
@@ -470,31 +498,36 @@ function extractData(element, debug) {
 			matrixCopy.push(cp)
 		}
 
-
-		if (data.levelDataScale) {
-			data.pieces = utils.scaleLevel(data.pieces, data.levelDataScale)
-			data.scaled = true;
+		if (data.splitData) {
+			//console.log(data);
+			splitables.push(data);
 		} else {
-			data.levelDataScale = 1;
+
+			if (data.levelDataScale) {
+				data.pieces = utils.scaleLevel(data.pieces, data.levelDataScale)
+				data.scaled = true;
+			} else {
+				data.levelDataScale = 1;
+			}
+
+			//data.customPallet = element.customPallet;
+			if (!element.isAddon) {
+				utils.trimMatrix(data.pieces)
+				utils.paddingMatrix(data.pieces, data.padding)
+				let offset = utils.trimMatrix(matrixCopy)
+				data.offset = offset
+				let scalePadding = {
+					left: data.padding.left * data.levelDataScale,
+					right: data.padding.right * data.levelDataScale,
+					top: data.padding.top * data.levelDataScale,
+					bottom: data.padding.bottom * data.levelDataScale
+				}
+				utils.paddingMatrix(matrixCopy, scalePadding);
+
+			}
 		}
 
 		data.colorPalletId = element.colorPalletId;
-		//data.customPallet = element.customPallet;
-		if (!element.isAddon) {
-			utils.trimMatrix(data.pieces)
-			utils.paddingMatrix(data.pieces, data.padding)
-			let offset = utils.trimMatrix(matrixCopy)
-			data.offset = offset
-			let scalePadding = {
-				left: data.padding.left * data.levelDataScale,
-				right: data.padding.right * data.levelDataScale,
-				top: data.padding.top * data.levelDataScale,
-				bottom: data.padding.bottom * data.levelDataScale
-			}
-			utils.paddingMatrix(matrixCopy, scalePadding);
-
-		}
-
 		if (!element.isAddon && data.setAutoBlocker > 0) {
 			//if(debug)
 			// console.log("AddBlocker",data.colorPalletId)
@@ -506,9 +539,126 @@ function extractData(element, debug) {
 	}
 
 }
-
+let splitables = [];
 window.allEstimate = 0;
 window.allEstimateHard = 0;
+
+function splitLargeImage(level) {
+	console.log("SPLIT HERE", level)
+
+	let iTotal = level.pieces.length / level.splitData.i;
+	let jTotal = level.pieces[0].length / level.splitData.j;
+	console.log("SPLIT HERE", iTotal, jTotal)
+	let newLevels = []
+
+
+	for (let i = 0; i < level.splitData.i; i++) {
+		for (let j = 0; j < level.splitData.j; j++) {
+			let clone = {};
+			for (const key in level) {
+				if (Object.hasOwnProperty.call(level, key)) {
+					clone[key] = level[key];
+				}
+			}
+			let tempSplit = []
+			for (let isp = 0; isp < iTotal; isp++) {
+				level.pieces[isp + iTotal * i];
+
+				let tempLine = []
+				for (let jip = 0; jip < jTotal; jip++) {
+					tempLine.push(level.pieces[isp + iTotal * i][jip + jTotal * j]);
+				}
+
+				tempSplit.push(tempLine);
+			}
+
+			clone.addOn = [];
+			clone.levelName += "#" + i + " , " + j
+
+			let nameID = clone.levelName;
+			nameID = nameID.toLowerCase();
+			nameID = nameID.split(' ').join('')
+			nameID = nameID.replace(/\s/g, '')
+			clone.id = nameID;
+
+			let idToSave = clone.sectionName + '-' + clone.tierName + '-' + clone.levelName;
+			idToSave = idToSave.toLowerCase();
+			idToSave = idToSave.split(' ').join('')
+			idToSave = idToSave.replace(/\s/g, '')
+
+			clone.idSaveData = idToSave;
+
+			clone.pieces = tempSplit;
+			clone.piecesToDraw = tempSplit;
+
+			clone.levelDataScale = level.splitData.scale;
+
+			//utils.trimMatrix(clone.pieces)
+			clone.pieces = utils.scaleLevel(clone.pieces, level.splitData.scale)
+
+			utils.paddingMatrix(clone.pieces, clone.padding)
+			//clone.pieces = utils.paddingMatrix(clone.pieces, level.splitData.scale)
+
+			calcEstimatedTime(clone)
+			newLevels.push(tempSplit);
+
+			level.tier.data.push(clone);
+		}
+	}
+	level.tier.data.shift();
+	console.log("NEW STUFF", newLevels)
+
+
+}
+function calcEstimatedTime(data) {
+
+	data.totalPieces = 0;
+	data.totalEmptySpaces = 0;
+	data.totalBoardLife = 0;
+	for (let index = 0; index < data.pieces.length; index++) {
+		for (let j = 0; j < data.pieces[index].length; j++) {
+			const element = data.pieces[index][j];
+			if (element >= 0) {
+				data.totalPieces++;
+				if (colorSchemes.colorSchemes[data.colorPalletId].list[element]) {
+
+					let life = Math.floor(colorSchemes.colorSchemes[data.colorPalletId].list[element].life) + 1;
+					if (life) {
+						data.totalBoardLife += life;
+					}
+				}
+			} else {
+				data.totalEmptySpaces++;
+			}
+		}
+
+	}
+
+	data.estimateTime = data.totalBoardLife / 0.45 + 30;
+	data.estimateTimeHard = data.totalBoardLife / 0.4 + 30;
+	data.emptySpaceByPieces = data.totalEmptySpaces / data.totalPieces;
+
+	if (data.emptySpaceByPieces < 1) {
+		data.estimateTimeHard /= Math.max(0.45, data.emptySpaceByPieces);
+	}
+	if (data.estimateTimeHard > 1200) {
+		data.estimateTimeHard = Math.floor(data.estimateTimeHard / 300) * 300;
+	} else {
+
+		data.estimateTimeHard = Math.floor(data.estimateTimeHard / 30) * 30;
+	}
+
+
+	if (data.estimateTime > 1200) {
+		data.estimateTime = Math.floor(data.estimateTime / 300) * 300;
+	} else {
+
+		data.estimateTime = Math.floor(data.estimateTime / 30) * 30;
+	}
+	data.estimateTime = Math.max(data.estimateTime, 60);
+	data.estimateTime2 = utils.convertNumToTime(data.estimateTime);
+
+}
 function configGame() {
 
 
@@ -568,6 +718,7 @@ function configGame() {
 			}
 			customPallet = level.customPallet;
 			level.sectionName = section.name;
+			level.section = section;
 			res.layers.forEach(layer => {
 
 				let isAddon = layer.visible && layer.name.search("_ADDON") >= 0
@@ -588,6 +739,8 @@ function configGame() {
 					data.idSaveData = idToSave;
 					data.sectionName = section.name;
 					data.tierName = level.name;
+					data.tierName = level.name;
+					data.tier = level;
 					//console.log(level.name)
 
 					data.sectionName = section.name;
@@ -599,49 +752,10 @@ function configGame() {
 						data.colorPalletId = palletID
 					}
 
-					data.totalPieces = 0;
-					data.totalEmptySpaces = 0;
-					for (let index = 0; index < data.pieces.length; index++) {
-						for (let j = 0; j < data.pieces[index].length; j++) {
-							const element = data.pieces[index][j];
-							if (element >= 0) {
-								data.totalPieces++;
-								if (colorSchemes.colorSchemes[palletID].list[element]) {
-
-									let life = Math.floor(colorSchemes.colorSchemes[palletID].list[element].life) + 1;
-									if (life) {
-										data.totalBoardLife += life;
-									}
-								}
-							} else {
-								data.totalEmptySpaces++;
-							}
-						}
-
-					}
-					data.estimateTime = data.totalBoardLife / 0.45 + 30;
-					data.estimateTimeHard = data.totalBoardLife / 0.4 + 30;
-					data.emptySpaceByPieces = data.totalEmptySpaces / data.totalPieces;
-
-					if (data.emptySpaceByPieces < 1) {
-						data.estimateTimeHard /= Math.max(0.45, data.emptySpaceByPieces);
-					}
-					if (data.estimateTimeHard > 1200) {
-						data.estimateTimeHard = Math.floor(data.estimateTimeHard / 300) * 300;
-					} else {
-
-						data.estimateTimeHard = Math.floor(data.estimateTimeHard / 30) * 30;
-					}
 
 
-					if (data.estimateTime > 1200) {
-						data.estimateTime = Math.floor(data.estimateTime / 300) * 300;
-					} else {
+					calcEstimatedTime(data);
 
-						data.estimateTime = Math.floor(data.estimateTime / 30) * 30;
-					}
-					data.estimateTime = Math.max(data.estimateTime, 60);
-					data.estimateTime2 = utils.convertNumToTime(data.estimateTime);
 					window.allEstimate += data.estimateTime;
 					window.allEstimateHard += data.estimateTimeHard;
 					sectionLevels.push(data);
@@ -743,11 +857,14 @@ function configGame() {
 			});
 		});
 	});
+
 	//console.log("ALL DATA", window.levelSections)
 	//create screen manager
+	splitLargeImage(splitables[0])
 
 	game.onCompleteLoad();
 
+	console.log("splitables-------", splitables[0])
 	//window.BACKGROUND_EFFECTS = new BackgroundEffects()
 	//add screens
 	let screenManager = game.screenManager;
