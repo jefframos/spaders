@@ -400,6 +400,7 @@ export default class TetraScreen extends Screen {
 	}
 	generateImage(levelData, size = 24, paddingBottom = 0, schemeID = 0) {
 
+		size = 6
 		if (window.imageThumbs[levelData.idSaveData]) {
 			let sprite = window.imageThumbs[levelData.idSaveData]
 			sprite.scale.set(1);

@@ -1,14 +1,14 @@
 {
     "activeFile": "debug/debug2.tmx",
     "expandedProjectPaths": [
-        "tutorial",
-        "movies",
-        "templates",
-        "debug",
         "videogames",
-        "gb",
+        "debug",
         "basics",
-        "main"
+        "templates",
+        "gb",
+        "tutorial",
+        "main",
+        "movies"
     ],
     "fileStates": {
         "D:/Projects/tetra/map/levels.tmx": {
@@ -44,10 +44,10 @@
         },
         "debug/debug2.tmx": {
             "scale": 0.0625,
-            "selectedLayer": 0,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 1848,
-                "y": -864
+                "x": 632,
+                "y": 3248
             }
         },
         "gb/gameboyCreatures.tmx": {
@@ -275,10 +275,20 @@
             "selectedLayer": 1,
             "viewCenter": {
                 "x": 479.38090285001044,
-                "y": 511.5206989806532
+                "y": 511.97337216559185
             }
         },
+        "tilesets/References.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
         "tilesets/gb.tsx": {
+            "scaleInDock": 0.5,
+            "scaleInEditor": 1
+        },
+        "tilesets/monalisaTileset.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 0.5,
             "scaleInEditor": 1
         },
@@ -312,7 +322,7 @@
             "selectedLayer": 6,
             "viewCenter": {
                 "x": 770,
-                "y": 770
+                "y": 772
             }
         },
         "videogames/levels2.tmx": {
@@ -327,8 +337,8 @@
             "scale": 0.75,
             "selectedLayer": 10,
             "viewCenter": {
-                "x": 319.33333333333326,
-                "y": 593.3333333333334
+                "x": 351.33333333333326,
+                "y": 383.3333333333333
             }
         },
         "videogames/spadersTileset.tsx": {
@@ -339,7 +349,7 @@
     },
     "last.exportedFilePath": "C:/Users/jfbod/Documents/projects/spaders/spaders/www/data/debug",
     "last.externalTilesetPath": "E:/projects/spaders/spaders/src/map/tilesets",
-    "last.imagePath": "D:/projects/spaders/spaders/src/map/tilesets",
+    "last.imagePath": "C:/Users/jfbod/Documents/projects/spaders/spaders/src/map",
     "map.lastUsedExportFilter": "All Files (*)",
     "map.lastUsedFormat": "tmx",
     "openFiles": [
@@ -392,5 +402,6 @@
     "tileset.tileSize": {
         "height": 64,
         "width": 64
-    }
+    },
+    "tileset.type": 1
 }
