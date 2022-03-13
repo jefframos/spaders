@@ -550,12 +550,42 @@
                 },
                 {
                     "hasWhite": false,
-                    "color": "0x786048",
+                    "color": "0x827949",
                     "life": 4.3
                 },
                 {
                     "hasWhite": false,
-                    "color": "0x786048",
+                    "color": "0xc07e45",
+                    "life": 3.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x96b2df",
+                    "life": 3.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x5c5782",
+                    "life": 3.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x6ba3a8",
+                    "life": 3.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xababab",
+                    "life": 3.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xc07e45",
+                    "life": 3.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xc07e45",
                     "life": 3.3
                 }
             ],

@@ -83,11 +83,15 @@
             "levels": [
                 {
                     "name": "pokemon",
-                    "dataPath": "how-to-play/pokemon.json"
+                    "dataPath": "pokemon/pokemon1-25.json"
                 },
                 {
                     "name": "pokemon",
-                    "dataPath": "how-to-play/pokemon2.json"
+                    "dataPath": "pokemon/pokemon26-50.json"
+                },
+                {
+                    "name": "pokemon",
+                    "dataPath": "pokemon/pokemon51-75.json"
                 }
             ]
         },        

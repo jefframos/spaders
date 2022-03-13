@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.1" orientation="orthogonal" renderorder="right-down" width="11" height="12" tilewidth="64" tileheight="64" infinite="0" nextlayerid="130" nextobjectid="1">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="11" height="12" tilewidth="64" tileheight="64" infinite="0" nextlayerid="130" nextobjectid="1">
  <editorsettings>
-  <export target="../../../www/data/how-to-play/pokemon2.json" format="json"/>
+  <export target="../../../www/data/pokemon/pokemon26-50.json" format="json"/>
  </editorsettings>
  <properties>
   <property name="coverID" type="int" value="10"/>
@@ -695,10 +695,10 @@
    <property name="tier" type="int" value="0"/>
   </properties>
   <data encoding="csv">
-0,0,77,77,0,0,0,0,0,0,0,
-0,0,66,77,0,0,0,0,0,0,0,
-0,75,77,75,73,0,0,0,0,0,0,
-0,73,75,75,75,0,0,0,0,0,0,
+0,0,83,83,0,0,0,0,0,0,0,
+0,0,66,83,0,0,0,0,0,0,0,
+0,75,83,82,81,0,0,0,0,0,0,
+0,81,82,82,82,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,

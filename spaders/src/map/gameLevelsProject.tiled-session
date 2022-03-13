@@ -1,14 +1,15 @@
 {
-    "activeFile": "debug/debug2.tmx",
+    "activeFile": "how-to-play/pokemon76-100.tmx",
     "expandedProjectPaths": [
-        "videogames",
-        "debug",
-        "basics",
-        "templates",
-        "gb",
-        "tutorial",
         "main",
-        "movies"
+        "gb",
+        "videogames",
+        "tutorial",
+        "debug",
+        "how-to-play",
+        "movies",
+        "basics",
+        "templates"
     ],
     "fileStates": {
         "D:/Projects/tetra/map/levels.tmx": {
@@ -30,7 +31,7 @@
             "scale": 0.6522518382352941,
             "selectedLayer": 32,
             "viewCenter": {
-                "x": 479.1094201366871,
+                "x": 479.10942013668716,
                 "y": 511.3055731698725
             }
         },
@@ -38,7 +39,7 @@
             "scale": 0.6522518382352941,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 479.1094201366871,
+                "x": 479.10942013668716,
                 "y": 511.3055731698725
             }
         },
@@ -78,7 +79,7 @@
             "scale": 0.33,
             "selectedLayer": 8,
             "viewCenter": {
-                "x": 513.6363636363636,
+                "x": 513.6363636363637,
                 "y": 513.6363636363636
             }
         },
@@ -86,7 +87,7 @@
             "scale": 0.33,
             "selectedLayer": 19,
             "viewCenter": {
-                "x": 513.6363636363636,
+                "x": 513.6363636363637,
                 "y": 513.6363636363636
             }
         },
@@ -94,7 +95,7 @@
             "scale": 0.9014204545454545,
             "selectedLayer": 8,
             "viewCenter": {
-                "x": 351.11251181846836,
+                "x": 351.1125118184683,
                 "y": 383.2839583989915
             }
         },
@@ -102,7 +103,7 @@
             "scale": 0.75,
             "selectedLayer": 14,
             "viewCenter": {
-                "x": 319.33333333333326,
+                "x": 319.3333333333333,
                 "y": 383.3333333333333
             }
         },
@@ -138,20 +139,52 @@
                 "y": 382.26244343891403
             }
         },
+        "how-to-play/pokemon1-25.tmx": {
+            "scale": 0.35624999999999996,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 350.8771929824562,
+                "y": 384.56140350877206
+            }
+        },
         "how-to-play/pokemon2.tmx": {
             "scale": 0.8325994318181819,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 351.3093917939094,
-                "y": 383.7379510364241
+                "x": 351.30939179390936,
+                "y": 384.3384799112855
             }
         },
         "how-to-play/pokemon22.tmx": {
             "scale": 0.8325994318181819,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 351.3093917939094,
-                "y": 383.7379510364241
+                "x": 351.30939179390936,
+                "y": 384.3384799112855
+            }
+        },
+        "how-to-play/pokemon26-50.tmx": {
+            "scale": 0.35624999999999996,
+            "selectedLayer": 24,
+            "viewCenter": {
+                "x": 350.8771929824562,
+                "y": 384.56140350877206
+            }
+        },
+        "how-to-play/pokemon51-75.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 23,
+            "viewCenter": {
+                "x": 62,
+                "y": 290
+            }
+        },
+        "how-to-play/pokemon76-100.tmx": {
+            "scale": 0.16193181818181815,
+            "selectedLayer": 24,
+            "viewCenter": {
+                "x": 478.5964912280703,
+                "y": 389.0526315789473
             }
         },
         "how-to-play/pokemons.tmx": {
@@ -174,7 +207,7 @@
             "scale": 0.33,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 765.1515151515151,
+                "x": 765.1515151515152,
                 "y": 768.1818181818182
             }
         },
@@ -252,7 +285,7 @@
             "scale": 0.33,
             "selectedLayer": 6,
             "viewCenter": {
-                "x": 765.1515151515151,
+                "x": 765.1515151515152,
                 "y": 834.8484848484849
             }
         },
@@ -322,7 +355,7 @@
             "selectedLayer": 6,
             "viewCenter": {
                 "x": 770,
-                "y": 772
+                "y": 770
             }
         },
         "videogames/levels2.tmx": {
@@ -337,7 +370,7 @@
             "scale": 0.75,
             "selectedLayer": 10,
             "viewCenter": {
-                "x": 351.33333333333326,
+                "x": 351.3333333333333,
                 "y": 383.3333333333333
             }
         },
@@ -347,7 +380,7 @@
             "scaleInEditor": 1
         }
     },
-    "last.exportedFilePath": "C:/Users/jfbod/Documents/projects/spaders/spaders/www/data/debug",
+    "last.exportedFilePath": "C:/Users/jfbod/Documents/projects/spaders/spaders/www/data/pokemon",
     "last.externalTilesetPath": "E:/projects/spaders/spaders/src/map/tilesets",
     "last.imagePath": "C:/Users/jfbod/Documents/projects/spaders/spaders/src/map",
     "map.lastUsedExportFilter": "All Files (*)",
@@ -379,7 +412,11 @@
         "debug/debug.tmx",
         "tutorial/tutorial.tmx",
         "basics/food1.tmx",
-        "debug/debug2.tmx"
+        "debug/debug2.tmx",
+        "how-to-play/pokemon51-75.tmx",
+        "how-to-play/pokemon26-50.tmx",
+        "how-to-play/pokemon1-25.tmx",
+        "how-to-play/pokemon76-100.tmx"
     ],
     "project": "gameLevelsProject.tiled-project",
     "property.type": "int",
