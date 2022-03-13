@@ -1,0 +1,712 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="11" height="12" tilewidth="64" tileheight="64" infinite="0" nextlayerid="131" nextobjectid="1">
+ <editorsettings>
+  <export target="../../../www/data/pokemon/pokemon51-75.json" format="json"/>
+ </editorsettings>
+ <properties>
+  <property name="coverID" type="int" value="10"/>
+  <property name="sectionName" value="#26 - #50"/>
+ </properties>
+ <tileset firstgid="1" source="../tilesets/spadersTileset.tsx"/>
+ <tileset firstgid="65" source="../tilesets/poke.tsx"/>
+ <layer id="127" name="Golem" width="11" height="12">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="6"/>
+   <property name="j" type="int" value="6"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="104" name="Ponyta" width="11" height="12">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="6"/>
+   <property name="j" type="int" value="5"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="105" name="Rapidash" width="11" height="12">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="5"/>
+   <property name="j" type="int" value="8"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="0"/>
+   <property name="padding-right" type="int" value="0"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="106" name="Slowpoke" width="11" height="12">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="6"/>
+   <property name="j" type="int" value="6"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="107" name="Slowbro" width="11" height="12">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="8"/>
+   <property name="j" type="int" value="7"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="108" name="Magnemite" width="11" height="12">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="10"/>
+   <property name="j" type="int" value="10"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="0"/>
+   <property name="padding-right" type="int" value="0"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="109" name="Magneton" width="11" height="12">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="6"/>
+   <property name="j" type="int" value="6"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="0"/>
+   <property name="padding-right" type="int" value="0"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="110" name="Farfetchd" width="11" height="12">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="7"/>
+   <property name="j" type="int" value="7"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="111" name="Doduo" width="11" height="12">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="10"/>
+   <property name="j" type="int" value="10"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="112" name="Dodtrio" width="11" height="12">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="5"/>
+   <property name="j" type="int" value="6"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="0"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="113" name="Seel" width="11" height="12">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="9"/>
+   <property name="j" type="int" value="8"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="0"/>
+   <property name="padding-right" type="int" value="0"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="114" name="Dewgong" width="11" height="12">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="7"/>
+   <property name="j" type="int" value="7"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="115" name="Grimer" width="11" height="12">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="8"/>
+   <property name="j" type="int" value="8"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="129" name="Muk" width="11" height="12">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="7"/>
+   <property name="j" type="int" value="8"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="0"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="128" name="Shellder" width="11" height="12">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="7"/>
+   <property name="j" type="int" value="10"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="118" name="Cloyster" width="11" height="12">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="7"/>
+   <property name="j" type="int" value="6"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="119" name="Gastly" width="11" height="12">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="9"/>
+   <property name="j" type="int" value="9"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="120" name="Haunter" width="11" height="12">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="6"/>
+   <property name="j" type="int" value="7"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="121" name="Gengar" width="11" height="12">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="7"/>
+   <property name="j" type="int" value="8"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="122" name="Onix" width="11" height="12">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="6"/>
+   <property name="j" type="int" value="9"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="123" name="Drowzee" width="11" height="12">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="7"/>
+   <property name="j" type="int" value="6"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="124" name="Hypno" width="11" height="12">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="8"/>
+   <property name="j" type="int" value="8"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="125" name="Krabby" width="11" height="12">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="9"/>
+   <property name="j" type="int" value="7"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="126" name="Kingler" width="11" height="12">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="8"/>
+   <property name="j" type="int" value="9"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="0"/>
+   <property name="padding-right" type="int" value="0"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="130" name="Voltorb" width="11" height="12">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="6"/>
+   <property name="j" type="int" value="6"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="1"/>
+   <property name="padding-right" type="int" value="1"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+</map>
