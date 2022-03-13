@@ -1,15 +1,15 @@
 {
-    "activeFile": "how-to-play/pokemon76-100.tmx",
+    "activeFile": "basics/food1.tmx",
     "expandedProjectPaths": [
+        "templates",
         "main",
         "gb",
         "videogames",
-        "tutorial",
-        "debug",
         "how-to-play",
-        "movies",
         "basics",
-        "templates"
+        "tutorial",
+        "movies",
+        "debug"
     ],
     "fileStates": {
         "D:/Projects/tetra/map/levels.tmx": {
@@ -31,23 +31,23 @@
             "scale": 0.6522518382352941,
             "selectedLayer": 32,
             "viewCenter": {
-                "x": 479.10942013668716,
-                "y": 511.3055731698725
+                "x": 478.34284506446835,
+                "y": 512.0721482420911
             }
         },
         "debug/debug.tmx": {
             "scale": 0.6522518382352941,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 479.10942013668716,
-                "y": 511.3055731698725
+                "x": 479.10942013668705,
+                "y": 512.0721482420911
             }
         },
         "debug/debug2.tmx": {
             "scale": 0.0625,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 632,
+                "x": 640,
                 "y": 3248
             }
         },
@@ -56,15 +56,15 @@
             "selectedLayer": 7,
             "viewCenter": {
                 "x": 735,
-                "y": 767
+                "y": 768
             }
         },
         "gb/gameboyMisc.tmx": {
             "scale": 0.33,
             "selectedLayer": 21,
             "viewCenter": {
-                "x": 480.30303030303025,
-                "y": 513.6363636363636
+                "x": 477.27272727272725,
+                "y": 512.1212121212122
             }
         },
         "gb/gameboyMisc2.tmx": {
@@ -72,23 +72,23 @@
             "selectedLayer": 28,
             "viewCenter": {
                 "x": 479,
-                "y": 513
+                "y": 512
             }
         },
         "gb/gameboyWeapon1.tmx": {
             "scale": 0.33,
             "selectedLayer": 8,
             "viewCenter": {
-                "x": 513.6363636363637,
-                "y": 513.6363636363636
+                "x": 510.6060606060606,
+                "y": 512.1212121212122
             }
         },
         "gb/gameboyWeapon2.tmx": {
             "scale": 0.33,
             "selectedLayer": 19,
             "viewCenter": {
-                "x": 513.6363636363637,
-                "y": 513.6363636363636
+                "x": 510.6060606060606,
+                "y": 512.1212121212122
             }
         },
         "how-to-play/bossa.tmx": {
@@ -96,7 +96,7 @@
             "selectedLayer": 8,
             "viewCenter": {
                 "x": 351.1125118184683,
-                "y": 383.2839583989915
+                "y": 384.94799873936336
             }
         },
         "how-to-play/creatures.tmx": {
@@ -104,7 +104,7 @@
             "selectedLayer": 14,
             "viewCenter": {
                 "x": 319.3333333333333,
-                "y": 383.3333333333333
+                "y": 384
             }
         },
         "how-to-play/gameboy.tmx": {
@@ -112,15 +112,15 @@
             "selectedLayer": 2,
             "viewCenter": {
                 "x": 479,
-                "y": 513
+                "y": 512
             }
         },
         "how-to-play/how-to-play-medium.tmx": {
             "scale": 1.0512073863636362,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 351.50057428552134,
-                "y": 383.8443348422404
+                "x": 351.5005742855213,
+                "y": 383.36869130464163
             }
         },
         "how-to-play/how-to-play-small.tmx": {
@@ -136,14 +136,14 @@
             "selectedLayer": 4,
             "viewCenter": {
                 "x": 351.77899499880925,
-                "y": 382.26244343891403
+                "y": 384.0914503453203
             }
         },
         "how-to-play/pokemon1-25.tmx": {
             "scale": 0.35624999999999996,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 350.8771929824562,
+                "x": 349.47368421052636,
                 "y": 384.56140350877206
             }
         },
@@ -167,7 +167,7 @@
             "scale": 0.35624999999999996,
             "selectedLayer": 24,
             "viewCenter": {
-                "x": 350.8771929824562,
+                "x": 349.47368421052636,
                 "y": 384.56140350877206
             }
         },
@@ -175,15 +175,15 @@
             "scale": 0.5,
             "selectedLayer": 23,
             "viewCenter": {
-                "x": 62,
-                "y": 290
+                "x": 351,
+                "y": 384
             }
         },
         "how-to-play/pokemon76-100.tmx": {
             "scale": 0.16193181818181815,
             "selectedLayer": 24,
             "viewCenter": {
-                "x": 478.5964912280703,
+                "x": 1673.5438596491233,
                 "y": 389.0526315789473
             }
         },
@@ -192,23 +192,23 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 351.3093917939094,
-                "y": 383.7379510364241
+                "y": 384.3384799112855
             }
         },
         "how-to-play/question-mark.tmx": {
-            "scale": 1.008025568181818,
+            "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 351.67758754315514,
-                "y": 383.42281406327066
+                "x": 412,
+                "y": 382
             }
         },
         "how-to-play/simple-shapes-synt.tmx": {
             "scale": 0.33,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 765.1515151515152,
-                "y": 768.1818181818182
+                "x": 765.1515151515151,
+                "y": 769.6969696969695
             }
         },
         "how-to-play/simple-shapes.tmx": {
@@ -216,7 +216,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 639,
-                "y": 639
+                "y": 640
             }
         },
         "how-to-play/spadersTileset.tsx": {
@@ -226,8 +226,8 @@
             "scale": 0.5,
             "selectedLayer": 10,
             "viewCenter": {
-                "x": 353,
-                "y": 385
+                "x": 351,
+                "y": 384
             }
         },
         "levels.tmx": {
@@ -278,15 +278,15 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 767,
-                "y": 767
+                "y": 768
             }
         },
         "movies/moviesAdventure.tmx": {
             "scale": 0.33,
             "selectedLayer": 6,
             "viewCenter": {
-                "x": 765.1515151515152,
-                "y": 834.8484848484849
+                "x": 765.1515151515151,
+                "y": 833.3333333333335
             }
         },
         "movies/spadersTileset.tsx": {
@@ -307,8 +307,8 @@
             "scale": 1.1045496323529411,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 479.38090285001044,
-                "y": 511.97337216559185
+                "x": 479.3809028500104,
+                "y": 511.5206989806532
             }
         },
         "tilesets/References.tsx": {
@@ -346,16 +346,16 @@
             "scale": 1.1045496323529411,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 479.38090285001044,
-                "y": 511.97337216559185
+                "x": 479.3809028500104,
+                "y": 511.5206989806532
             }
         },
         "videogames/levels.tmx": {
             "scale": 0.25,
             "selectedLayer": 6,
             "viewCenter": {
-                "x": 770,
-                "y": 770
+                "x": 766,
+                "y": 768
             }
         },
         "videogames/levels2.tmx": {
@@ -363,7 +363,7 @@
             "selectedLayer": 7,
             "viewCenter": {
                 "x": 767,
-                "y": 767
+                "y": 768
             }
         },
         "videogames/levels3.tmx": {
@@ -371,7 +371,7 @@
             "selectedLayer": 10,
             "viewCenter": {
                 "x": 351.3333333333333,
-                "y": 383.3333333333333
+                "y": 384
             }
         },
         "videogames/spadersTileset.tsx": {
@@ -380,7 +380,7 @@
             "scaleInEditor": 1
         }
     },
-    "last.exportedFilePath": "C:/Users/jfbod/Documents/projects/spaders/spaders/www/data/pokemon",
+    "last.exportedFilePath": "C:/Users/jfbod/Documents/projects/spaders/spaders/www/data/basics",
     "last.externalTilesetPath": "E:/projects/spaders/spaders/src/map/tilesets",
     "last.imagePath": "C:/Users/jfbod/Documents/projects/spaders/spaders/src/map",
     "map.lastUsedExportFilter": "All Files (*)",
@@ -395,8 +395,6 @@
         "movies/movies1.tmx",
         "how-to-play/simple-shapes.tmx",
         "how-to-play/simple-shapes-synt.tmx",
-        "how-to-play/pokemon2.tmx",
-        "how-to-play/pokemon22.tmx",
         "how-to-play/bossa.tmx",
         "how-to-play/gameboy.tmx",
         "gb/gameboyMisc.tmx",
@@ -419,7 +417,7 @@
         "how-to-play/pokemon76-100.tmx"
     ],
     "project": "gameLevelsProject.tiled-project",
-    "property.type": "int",
+    "property.type": "string",
     "recentFiles": [
         "how-to-play/people-set-1.tmx",
         "how-to-play/how-to-play-medium.tmx",
@@ -430,9 +428,9 @@
         "movies/movies1.tmx",
         "how-to-play/simple-shapes.tmx",
         "how-to-play/simple-shapes-synt.tmx",
-        "how-to-play/pokemon2.tmx",
-        "how-to-play/pokemon22.tmx",
-        "how-to-play/bossa.tmx"
+        "how-to-play/bossa.tmx",
+        "how-to-play/gameboy.tmx",
+        "gb/gameboyMisc.tmx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",

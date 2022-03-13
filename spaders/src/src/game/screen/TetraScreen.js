@@ -30,6 +30,8 @@ export default class TetraScreen extends Screen {
 	constructor(label) {
 		super(label);
 
+		this.generateImage(window.questionMark)
+
 		window.AUTO_PLAY_HARD = false;
 		window.AUTO_PLAY = false;
 
@@ -398,7 +400,7 @@ export default class TetraScreen extends Screen {
 	getCircle(size = 4, color = 0xFFFFFF) {
 		return new PIXI.Graphics().beginFill(color).drawCircle(0, 0, size * 0.5);
 	}
-	generateImage(levelData, size = 24, paddingBottom = 0, schemeID = 0) {
+	generateImage(levelData, size = 24, paddingBottom = 0, schemeID = 0, addPadding = true) {
 
 		size = 6
 		if (window.imageThumbs[levelData.idSaveData]) {
@@ -421,7 +423,10 @@ export default class TetraScreen extends Screen {
 			level.push(temp);
 		}
 		utils.trimMatrix(level, true)
-		utils.paddingMatrix(level, { left: 1, right: 1, top: 1, bottom: 1 })
+
+		if(addPadding){
+			utils.paddingMatrix(level, { left: 1, right: 1, top: 1, bottom: 1 })
+		}
 
 
 		let tempRect = null;

@@ -4,10 +4,10 @@
   <export target="../../../www/data/debug/debug2.json" format="json"/>
  </editorsettings>
  <properties>
-  <property name="coverID" type="int" value="0"/>
-  <property name="customPallet" type="int" value="1"/>
+  <property name="coverID" type="int" value="4"/>
+  <property name="customPallet" value="monalisa"/>
   <property name="iconURL" value=""/>
-  <property name="sectionName" value="Large"/>
+  <property name="sectionName" value="Monalisa"/>
  </properties>
  <tileset firstgid="1" source="../tilesets/spadersTileset.tsx"/>
  <tileset firstgid="65" source="../tilesets/gb.tsx"/>

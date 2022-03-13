@@ -1,6 +1,6 @@
 import config from './config';
 export default {
-
+    
     colorSchemes:[],
     //  [
     //     {
@@ -286,6 +286,20 @@ export default {
 
         return this.colorSchemes[scheme];
 
+    },
+    findPallet(id){
+
+        let toReturn = id;
+        if(isNaN(id)){
+			for (let index = 0; index < this.colorSchemes.length; index++) {
+                const element = this.colorSchemes[index];
+                if(element.name == id){
+                    toReturn = index
+                }            
+            }
+		}
+        //console.log(id,toReturn, this.colorSchemes)
+        return toReturn;
     },
 
 }

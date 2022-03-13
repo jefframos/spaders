@@ -30,6 +30,10 @@
                 {
                     "name": "---",
                     "dataPath": "basics/food.json"
+                },
+                {
+                    "name": "---",
+                    "dataPath": "debug/debug2.json"
                 }
             ]
         },
@@ -115,7 +119,7 @@
             "name": "Game Boy",
             "displayName": "Video Game History",
             "imageSrc": "",
-            "colorPalletId": 2,
+            "colorPalletId": "gameboy",
             "levels": [
                 {
                     "name": "gameboy",
@@ -178,11 +182,7 @@
                 {
                     "name": "---",
                     "dataPath": "debug/debug.json"
-                },
-                {
-                    "name": "---",
-                    "dataPath": "debug/debug2.json"
-                }
+                }                
             ]
         }
     ]

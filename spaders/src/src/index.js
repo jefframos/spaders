@@ -526,8 +526,9 @@ function extractData(element, debug) {
 
 			}
 		}
-
 		data.colorPalletId = element.colorPalletId;
+		//data.colorPalletId = colorSchemes.findPallet(element.colorPalletId);
+
 		if (!element.isAddon && data.setAutoBlocker > 0) {
 			//if(debug)
 			// console.log("AddBlocker",data.colorPalletId)
@@ -603,6 +604,8 @@ function splitLargeImage(level) {
 			newLevels.push(tempSplit);
 
 			level.tier.data.push(clone);
+
+			level.tier.splitData = clone.splitData;
 		}
 	}
 	level.tier.data.shift();
@@ -676,16 +679,17 @@ function configGame() {
 		nameID = nameID.replace(/\s/g, '')
 		section.id = nameID;
 
-		let palletID = section.colorPalletId;
+
+		let palletID = colorSchemes.findPallet(section.colorPalletId);
+		//console.log("PALLET", palletID)
 		let customPallet = -1;
 
 		if (palletID === undefined) {
 			palletID = 0;
 		}
+		section.colorPalletId = palletID;
 		////////////level is tier
 		section.levels.forEach(level => {
-
-
 
 
 			let res = PIXI.loader.resources[jsonPath + level.dataPath].data
@@ -741,17 +745,16 @@ function configGame() {
 					data.tierName = level.name;
 					data.tierName = level.name;
 					data.tier = level;
-					//console.log(level.name)
+					////console.log(level.name)
 
 					data.sectionName = section.name;
 
-					if (customPallet >= 0) {
-						data.colorPalletId = customPallet
+					if (customPallet >= 0 || isNaN(customPallet)) {
+						data.colorPalletId = colorSchemes.findPallet(customPallet);
 					} else {
 
 						data.colorPalletId = palletID
 					}
-
 
 
 					calcEstimatedTime(data);
@@ -768,7 +771,7 @@ function configGame() {
 			level.colorPalletId = palletID
 			level.data = sectionLevels
 
-			//console.log(sectionLevels)
+			//console.log(level.colorPalletId)
 
 			sectionLevels.forEach(element => {
 				if (element.scaled && element.addOn) {
@@ -801,7 +804,7 @@ function configGame() {
 		element.levels.forEach(dataLevel => {
 			if (rawData.includes(dataLevel.dataPath)) {
 				// console.log(dataLevel)
-				targetColorPallet = dataLevel.colorPalletId;
+				targetColorPallet = colorSchemes.findPallet(dataLevel.colorPalletId);
 			}
 		});
 	});

@@ -789,6 +789,144 @@
                 "maxAlpha": 0.1,
                 "extraTileAlpha": 0
             }
+        },
+        {
+            "name": "monalisa",
+            "block": {
+                "id": 32,
+                "hasWhite": false,
+                "isBlock": true,
+                "color": "0x111111"
+            },
+            "list": [
+                {
+                    "hasWhite": false,
+                    "color": "0xdeb85f",
+                    "life": 0
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xae833e",
+                    "life": 1
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x7b532c",
+                    "life": 2
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x545740",
+                    "life": 3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x858b59",
+                    "life": 4
+                },
+                {
+                    "hasWhite": "0xa26f54",
+                    "color": "0x4d3427",
+                    "life": 5
+                },
+                {
+                    "hasWhite": "0x93687f",
+                    "color": "0x301d27",
+                    "life": 6
+                },
+                {
+                    "hasWhite": "0xb396d5",
+                    "color": "0x160e1f",
+                    "life": 7
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x9a9d66",
+                    "life": 8
+                },
+                {
+                    "hasWhite": "0xbad1b8",
+                    "color": "0x252b25",
+                    "life": 5.1
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x555a56",
+                    "life": 9.1
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xddd3ab",
+                    "life": 9.2
+                },
+                {
+                    "hasWhite": "0xbad1b8",
+                    "color": "0x3b3c2e",
+                    "life": 9.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x37b05b",
+                    "life": 5.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x7552cf",
+                    "life": 6.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x3b3c2e",
+                    "life": 7.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x3b3c2e",
+                    "life": 8.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x3b3c2e",
+                    "life": 4.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x3b3c2e",
+                    "life": 3.3
+                }
+            ],
+            "dark": "0x182018",
+            "fillBarColor": "0x37764a",
+            "fillBarCompleteColor": "0xFFFFFF",
+            "background": "0xCADCA0",
+            "fontColor": "0x182018",
+            "arrowTrailColor": "0x182018",
+            "buttonData": {
+                "fontColor": "0xFFFFFF",
+                "levelCompleteColor": "0x89c077",
+                "tierCompleteColor": "0x65b26f",
+                "buttonStandardColor": "0x3f7e5d",
+                "buttonStandardDarkColor": "0x252b25",
+                "buttonBackTitleColor": "0x285746"
+            },
+            "grid": {
+                "color": "0xFFFFFF",
+                "background": "0x3b3c2e",
+                "sprite": "gbGridTile.png",
+                "spriteTile": "gbGrid.png",
+                "spriteDraw": "gbGrid.png",
+                "spriteTrail": "gbGrid.png",
+                "spriteRect": "gbGrid.png",
+                "scaleTrail": false,
+                "minAlpha": 0.05,
+                "maxAlpha": 0.1,
+                "extraTileAlpha": 0.5
+            },
+            "backgroundAssets": {
+                "bottomBackground": "gbBackground.png",
+                "bottomBackgroundPosition": 0.01,
+                "alpha": 0.75
+            }
         }
     ]
 }
