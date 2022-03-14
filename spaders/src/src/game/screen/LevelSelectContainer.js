@@ -555,6 +555,28 @@ export default class LevelSelectContainer extends PIXI.Container {
             return;
         }
 
+
+        let targetPallet = tier[0].tier.customPallet
+
+        console.log(targetPallet)
+        
+        if (targetPallet != undefined) {
+            if(isNaN(targetPallet)){
+                targetPallet = colorSchemes.findPallet(targetPallet)
+                console.log(targetPallet)
+            }
+
+            if(targetPallet >= 0){
+                window.COOKIE_MANAGER.updateColorPallete(targetPallet);
+            }
+        }
+
+        if (targetPallet != undefined && targetPallet < 0){
+            if(this.currentSection){
+                window.COOKIE_MANAGER.updateColorPallete(this.currentSection.colorPalletId);
+            }
+        }
+
         this.show();
 
         window.SOUND_MANAGER.play('shoosh', { volume: 0.1 })

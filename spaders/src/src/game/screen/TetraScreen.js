@@ -30,7 +30,9 @@ export default class TetraScreen extends Screen {
 	constructor(label) {
 		super(label);
 
-		this.generateImage(window.questionMark)
+		this.generateImage(window.questionMark,24,0,0,true, true);
+
+		//levelData, size = 24, paddingBottom = 0, schemeID = 0, addPadding = true, ignoreEmpty = false)
 
 		window.AUTO_PLAY_HARD = false;
 		window.AUTO_PLAY = false;
@@ -400,7 +402,7 @@ export default class TetraScreen extends Screen {
 	getCircle(size = 4, color = 0xFFFFFF) {
 		return new PIXI.Graphics().beginFill(color).drawCircle(0, 0, size * 0.5);
 	}
-	generateImage(levelData, size = 24, paddingBottom = 0, schemeID = 0, addPadding = true) {
+	generateImage(levelData, size = 24, paddingBottom = 0, schemeID = 0, addPadding = true, ignoreEmpty = false) {
 
 		size = 6
 		if (window.imageThumbs[levelData.idSaveData]) {
@@ -424,7 +426,7 @@ export default class TetraScreen extends Screen {
 		}
 		utils.trimMatrix(level, true)
 
-		if(addPadding){
+		if (addPadding) {
 			utils.paddingMatrix(level, { left: 1, right: 1, top: 1, bottom: 1 })
 		}
 
@@ -450,20 +452,28 @@ export default class TetraScreen extends Screen {
 						tempRect.x = j * size + size * 0.5;
 						tempRect.y = i * size + size * 0.5;
 					}
-				} else if (level[i][j] == -2) {
-					tempRect = this.getRect(size, colors.dark)
-					container.addChild(tempRect)
-					allSprites.push(tempRect);
-					tempRect.x = j * size + size * 0.5;
-					tempRect.y = i * size + size * 0.5;
-				} else {
-					tempRect = this.getRect(size, colors.dark)
-					container.addChild(tempRect)
-					allSprites.push(tempRect);
-					tempRect.x = j * size + size * 0.5;
-					tempRect.y = i * size + size * 0.5;
+				} else				if (level[i][j] == -2) {
+						tempRect = this.getRect(size, colors.dark)
+						container.addChild(tempRect)
+						allSprites.push(tempRect);
+						tempRect.x = j * size + size * 0.5;
+						tempRect.y = i * size + size * 0.5;
+						if (ignoreEmpty){
+							//tempRect.alpha = 0;
+						}
+					} else {
+						tempRect = this.getRect(size, colors.dark)
+						container.addChild(tempRect)
+						allSprites.push(tempRect);
+						tempRect.x = j * size + size * 0.5;
+						tempRect.y = i * size + size * 0.5;
+
+						if (ignoreEmpty){
+							//tempRect.alpha = 0;
+						}
+					}
 				}
-			}
+			
 		}
 
 		// let background = this.getRoundRect2(level[0].length * size + size, container.height + size + paddingBottom, 0x222222)
@@ -818,8 +828,15 @@ export default class TetraScreen extends Screen {
 			targetPallet = this.currentLevelData.customPallet;
 		}
 
-		let img = this.generateImage(this.currentLevelData, 24, 0, targetPallet);
-		img = this.generateImage(this.currentLevelData, 24, 0, targetPallet);
+		let addPaddingOnImage = true;
+
+		if (this.currentLevelData.splitData) {
+			addPaddingOnImage = false;
+		}
+		let img = this.generateImage(this.currentLevelData, 24, 0, targetPallet, addPaddingOnImage);
+		img = this.generateImage(this.currentLevelData, 24, 0, targetPallet, addPaddingOnImage);
+
+
 		this.endGameScreenContainer.setStats(
 			this.currentPoints,
 			this.currentRound,

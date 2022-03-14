@@ -106,7 +106,7 @@ export default class LargeImageButton extends PIXI.Container {
         this.currentLevels = [];
         this.offset = { x: 0, y: 0 }
 
-        this.slotSize = {width:0, height:0}
+        this.slotSize = { width: 0, height: 0 }
         this.updateColorScheme();
 
         this.onLevelSelect = new signals.Signal()
@@ -146,12 +146,12 @@ export default class LargeImageButton extends PIXI.Container {
 
         let levelData = null;
         this.currentLevels.forEach(element => {
-            if(element.currentSprite == levelSprite){
+            if (element.currentSprite == levelSprite) {
                 levelData = element;
             }
         });
 
-        if(levelData){
+        if (levelData) {
             this.onLevelSelect.dispatch(levelData);
         }
         //console.log(levelData);
@@ -169,23 +169,31 @@ export default class LargeImageButton extends PIXI.Container {
     hideProgressBar(progression = 0) {
         this.progressBar.visible = false;
     }
-    reset(){
+    reset() {
 
     }
     refreshCard(sprite, id, isQuestion) {
         this.currentLevels[id].currentSprite.setTexture(sprite.texture);
 
-        if(!isQuestion){
+        if (!isQuestion) {
 
             this.currentLevels[id].currentSprite.height = this.slotSize.height
-            this.currentLevels[id].currentSprite.width =this.slotSize.width
-        }else{
-            utils.resizeToFitAR(this.slotSize, this.currentLevels[id].currentSprite)
+            this.currentLevels[id].currentSprite.width = this.slotSize.width
+
+            this.currentLevels[id].currentSprite.x = this.currentLevels[id].offset.x * this.slotSize.width
+            this.currentLevels[id].currentSprite.y = this.currentLevels[id].offset.y * this.slotSize.height
+
+        } else {
+            //utils.resizeToFitAR(this.slotSize, this.currentLevels[id].currentSprite)
+            utils.resizeToFitAR({ width: this.slotSize.width * 0.5, height: this.slotSize.height * 0.5 }, this.currentLevels[id].currentSprite)
+
+            this.currentLevels[id].currentSprite.x = this.currentLevels[id].offset.x * this.slotSize.width + this.slotSize.width / 2 - this.currentLevels[id].currentSprite.width / 2
+            this.currentLevels[id].currentSprite.y = this.currentLevels[id].offset.y * this.slotSize.height + this.slotSize.height / 2 - this.currentLevels[id].currentSprite.height / 2
         }
 
 
         this.iconBackground.width = this.iconContainer.width + 20;
-        this.iconBackground.height = this.iconContainer.height+ 20;
+        this.iconBackground.height = this.iconContainer.height + 20;
 
         this.iconContainer.x = this.unscaledCardSize.width / 2 - this.iconContainer.width / 2
         this.iconContainer.y = this.unscaledCardSize.height - this.iconContainer.height - this.unscaledCardSize.height * 0.15
@@ -205,10 +213,22 @@ export default class LargeImageButton extends PIXI.Container {
 
         this.slotSize.width = (this.unscaledCardSize.width * 0.9) / level.splitData.j
         this.slotSize.height = ((this.unscaledCardSize.height - this.labelTop.y + this.labelTop.height) * 0.7) / level.splitData.i
-        this.slotSize.width = this.slotSize.height = Math.min(this.slotSize.height,this.slotSize.width)
+        this.slotSize.width = this.slotSize.height = Math.min(this.slotSize.height, this.slotSize.width)
         this.iconContainer.addChild(levelSprite)
 
+        let backTest = new PIXI.mesh.NineSlicePlane(
+            PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
+            this.iconContainer.addChildAt(backTest, 0)
+
         utils.resizeToFitAR(this.slotSize, levelSprite)
+
+        backTest.width = this.slotSize.width;
+        backTest.height = this.slotSize.height;
+
+        backTest.x = this.offset.x * this.slotSize.width;
+        backTest.y = this.offset.y * this.slotSize.height;
+
+        backTest.alpha = 0.25
 
         levelSprite.x = this.offset.x * this.slotSize.width;
         levelSprite.y = this.offset.y * this.slotSize.height;
@@ -218,7 +238,8 @@ export default class LargeImageButton extends PIXI.Container {
         levelSprite.on('pointerup', this.onPointerUp.bind(this, levelSprite));
 
         level.currentSprite = levelSprite;
-
+        
+        level.offset = { x: this.offset.x, y: this.offset.y }
         this.currentLevels.push(level)
 
         if (this.currentLevels.length > 0) {
@@ -230,8 +251,9 @@ export default class LargeImageButton extends PIXI.Container {
             }
         }
 
+
         this.iconBackground.width = this.iconContainer.width + 20;
-        this.iconBackground.height = this.slotSize.height * level.splitData.i+ 20;
+        this.iconBackground.height = this.slotSize.height * level.splitData.i + 20;
 
         this.iconContainer.x = this.unscaledCardSize.width / 2 - this.iconContainer.width / 2
         this.iconContainer.y = this.unscaledCardSize.height - this.iconContainer.height - this.unscaledCardSize.height * 0.15
