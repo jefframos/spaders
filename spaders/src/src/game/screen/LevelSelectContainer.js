@@ -57,10 +57,6 @@ export default class LevelSelectContainer extends PIXI.Container {
         setTimeout(() => {
             this.addChild(this.newContainer)
 
-           
-
-
-
             this.sectionsContainer.addChild(this.sectionsView)
             this.newContainer.addChild(this.sectionsContainer)
 
@@ -70,11 +66,7 @@ export default class LevelSelectContainer extends PIXI.Container {
             this.levelsContainer.addChild(this.levelsView)
             this.newContainer.addChild(this.levelsContainer)
 
-
-
             this.resize({ width: window.innerWidth, height: window.innerHeight }, true)
-
-
 
             if (window.isMobile) {
 
@@ -96,28 +88,10 @@ export default class LevelSelectContainer extends PIXI.Container {
 
             }
 
-
-
-            
-
-            //this.unscaledCardSize.width = Math.min(80, this.unscaledCardSize.width);
-
-            if (window.isMobile) {
-
-                //this.unscaledCardSize.width = Math.max(80, this.unscaledCardSize.width);
-            } else {
-                //this.unscaledCardSize.width = Math.max(180, this.unscaledCardSize.width);
-
-            }
-
-            //this.unscaledCardSize.height = this.unscaledCardSize.width;
-
-
             this.buildSections();
             this.refreshNavButtons();
 
 
-            //console.log(this.currentGridOffset, this.unscaledLineButtonSize)
             this.dragPanel = new PIXI.Graphics().beginFill(0x000099).drawRect(-5000, -5000, 10000, 10000);
 
             this.addChild(this.dragPanel)
@@ -757,7 +731,7 @@ export default class LevelSelectContainer extends PIXI.Container {
     addSplitCard(tier) {
 
         let unscaledSplitSize = {
-            width: (this.unscaledCardSize.width + 10) * tier.splitData.j,
+            width: (this.unscaledCardSize.width) * tier.splitData.j,
             height: this.unscaledCardSize.height * tier.splitData.i,
         }
 
