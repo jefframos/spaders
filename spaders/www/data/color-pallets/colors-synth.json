@@ -1,0 +1,188 @@
+{
+    "pallete": [     
+        {
+            "name": "synth",
+            "block": {
+                "id": 32,
+                "hasWhite": false,
+                "isBlock": true,
+                "color": "0x111111"
+            },
+            "list": [
+                {
+                    "hasWhite": false,
+                    "color": "0xffd319",
+                    "life": 0
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xff901f",
+                    "life": 1
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xff2975",
+                    "life": 2
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xf222ff",
+                    "life": 3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x8c1eff",
+                    "life": 4
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x6df1d8",
+                    "life": 5
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x5c2c6d",
+                    "life": 6
+                },
+                {
+                    "hasWhite": "0xffffff",
+                    "color": "0x3c345c",
+                    "life": 7
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xffffff",
+                    "life": 8
+                },
+                {
+                    "hasWhite": "0xffffff",
+                    "color": "0x333333",
+                    "life": 9
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xb8aec8",
+                    "life": 9.1
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x5da4a6",
+                    "life": 9.2
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xd30cb8",
+                    "life": 5.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xef281e",
+                    "life": 5.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xff6861",
+                    "life": 6.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xee5dc0",
+                    "life": 7.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x844f58",
+                    "life": 7.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x831732",
+                    "life": 5.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xff3b72",
+                    "life": 4.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xff5c8f",
+                    "life": 3.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xfc92cf",
+                    "life": 2.3
+                },
+                {
+                    "hasWhite": "0xfc92cf",
+                    "color": "0x300837",
+                    "life": 9.3
+                },
+                {
+                    "hasWhite": "0x8ad2f4",
+                    "color": "0x1e1a69",
+                    "life": 8.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x524977",
+                    "life": 7.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x3484f5",
+                    "life": 4.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x8ad2f4",
+                    "life": 3.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xf4d28a",
+                    "life": 3.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x98e826",
+                    "life": 3.3
+                }
+            ],
+            "dark": "0x111111",
+            "logoColor": "0xFFFFFF",
+            "fillBarColor": "0xffd319",
+            "fillBarCompleteColor": "0xFFFFFF",
+            "background": "0x151515",
+            "fontColor": "0xFFFFFF",
+            "arrowTrailColor": "0xFFFFFF",
+            "buttonData": {
+                "fontColor": "0xFFFFFF",
+                "levelCompleteColor": "0x1376B9",
+                "tierCompleteColor": "0x8957c7",
+                "buttonStandardColor": "0x333333",
+                "buttonStandardDarkColor": "0x030303",
+                "buttonBackTitleColor": "0x222222"
+            },
+            "grid": {
+                "color": "0xFFFFFF",
+                "background": "0x222222",
+                "sprite": "pixelSquare.png",
+                "spriteTile": "pixelSquare.png",
+                "spriteDraw": "pixelSquare.png",
+                "spriteTrail": "pixelSquare.png",
+                "spriteRect": "pixelSquare.png",
+                "scaleTrail": false,
+                "minAlpha": 0,
+                "maxAlpha": 0.1,
+                "extraTileAlpha": 0
+            },
+            "backgroundAssets": {
+                "bottomBackground": "game_bg.png",
+                "bottomBackgroundPosition": -0.2,
+                "alpha": 0
+            }
+        }
+    ]
+}

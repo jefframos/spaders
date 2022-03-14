@@ -1,0 +1,168 @@
+{
+    "pallete": [
+        {
+            "name": "pokemon",
+            "block": {
+                "id": 32,
+                "hasWhite": false,
+                "isBlock": true,
+                "color": "0x111111"
+            },
+            "list": [
+                {
+                    "hasWhite": false,
+                    "color": "0x4890a8",
+                    "life": 0
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xf06060",
+                    "life": 1
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xf0d818",
+                    "life": 2
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x75bf8b",
+                    "life": 3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x1471b0",
+                    "life": 4
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xe9bbe9",
+                    "life": 5
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xf07848",
+                    "life": 6
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xc078d8",
+                    "life": 7
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xd8d8d8",
+                    "life": 8
+                },
+                {
+                    "hasWhite": "0xFFFFFF",
+                    "color": "0x333333",
+                    "life": 9
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x888888",
+                    "life": 9.1
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xcfbda9",
+                    "life": 9.2
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x786048",
+                    "life": 9.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x37b05b",
+                    "life": 5.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x7552cf",
+                    "life": 6.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x7b7caf",
+                    "life": 7.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xeee19b",
+                    "life": 8.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x827949",
+                    "life": 4.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xc07e45",
+                    "life": 3.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x96b2df",
+                    "life": 3.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x5c5782",
+                    "life": 3.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x6ba3a8",
+                    "life": 3.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xababab",
+                    "life": 3.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xc07e45",
+                    "life": 3.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xc07e45",
+                    "life": 3.3
+                }
+            ],
+            "dark": "0x333333",
+            "logoColor": "0xFFFFFF",
+            "fillBarColor": "0x4890a8",
+            "fillBarCompleteColor": "0xFFFFFF",
+            "background": "0x333333",
+            "fontColor": "0xFFFFFF",
+            "arrowTrailColor": "0xFFFFFF",
+            "buttonData": {
+                "fontColor": "0xFFFFFF",
+                "levelCompleteColor": "0x1376B9",
+                "tierCompleteColor": "0x8957c7",
+                "buttonStandardColor": "0x444444",
+                "buttonStandardDarkColor": "0x333333",
+                "buttonBackTitleColor": "0x222222"
+            },
+            "grid": {
+                "color": "0xFFFFFF",
+                "background": "0x231f20",
+                "sprite": "largeCard.png",
+                "spriteTile": "largeCard.png",
+                "spriteDraw": "smallCard.png",
+                "spriteTrail": "largeCard.png",
+                "spriteRect": "largeCard.png",
+                "scaleTrail": false,
+                "minAlpha": 0.05,
+                "maxAlpha": 0.1,
+                "extraTileAlpha": 0
+            }
+        }
+    ]
+}

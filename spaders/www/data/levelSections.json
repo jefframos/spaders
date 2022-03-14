@@ -110,6 +110,14 @@
                 {
                     "name": "---",
                     "dataPath": "how-to-play/shapes-synt.json"
+                },
+                {
+                    "name": "---",
+                    "dataPath": "synth/synth1.json"
+                },
+                {
+                    "name": "---",
+                    "dataPath": "synth/sunset.json"
                 }
             ]
         },

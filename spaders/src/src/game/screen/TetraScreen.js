@@ -620,7 +620,7 @@ export default class TetraScreen extends Screen {
 
 
 		this.openTutorialButton = new UIButton1(config.colors.white, window.iconsData.question, config.colors.dark);
-		this.addChild(this.openTutorialButton)
+		//this.addChild(this.openTutorialButton)
 		this.openTutorialButton.onClick.add(() => { this.openTutorial() });
 
 		this.endGameScreenContainer.hide(true);

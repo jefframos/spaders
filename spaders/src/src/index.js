@@ -326,14 +326,31 @@ PIXI.loader
 	.add('./data/colors.json')
 	.load(setUpColors)
 
+let mainColors = null;
 function setUpColors() {
 
 	let colors = PIXI.loader.resources['./data/colors.json']
-	console.log(colors.data)
-	//window.levelsRawJson = PIXI.loader.resources["./assets/levelsRaw.json"].data
+
+	for (let index = 0; index < colors.data.colorPaths.length; index++) {
+		const element = colors.data.colorPaths[index];
+		PIXI.loader.add('./data/' + element);
+	}
+
+	mainColors = colors.data;
 	colorSchemes.colorSchemes = colors.data.colorSchemes
 
-	console.log(colorSchemes)
+	PIXI.loader.load(setUpSchemes)
+
+}
+function setUpSchemes() {
+
+	colorSchemes.colorSchemes = [];
+	for (let index = 0; index < mainColors.colorPaths.length; index++) {
+		const element = mainColors.colorPaths[index];
+
+		let pallet = PIXI.loader.resources['./data/' + element].data
+		colorSchemes.colorSchemes.push(pallet.pallete[0]);
+	}
 
 	window.game = new Game(config);
 
@@ -353,7 +370,6 @@ function setUpColors() {
 			}
 		});
 }
-
 window.levelsJson = ""
 
 window.TIME_SCALE = 1;
@@ -863,11 +879,13 @@ function configGame() {
 
 	//console.log("ALL DATA", window.levelSections)
 	//create screen manager
-	splitLargeImage(splitables[0])
+	splitables.forEach(element => {		
+		splitLargeImage(element)
+	});
 
 	game.onCompleteLoad();
 
-	console.log("splitables-------", splitables[0])
+	//console.log("splitables-------", splitables[0])
 	//window.BACKGROUND_EFFECTS = new BackgroundEffects()
 	//add screens
 	let screenManager = game.screenManager;

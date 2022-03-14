@@ -1,0 +1,138 @@
+{
+    "pallete": [
+        {
+            "name": "standard",
+            "block": {
+                "id": 32,
+                "hasWhite": false,
+                "isBlock": true,
+                "color": "0x111111"
+            },
+            "list": [
+                {
+                    "hasWhite": false,
+                    "color": "0x61C6CE",
+                    "life": 0
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xD81639",
+                    "life": 1
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xE2C756",
+                    "life": 2
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x7BCA93",
+                    "life": 3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x1376B9",
+                    "life": 4
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xDD6290",
+                    "life": 5
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xdf6b33",
+                    "life": 6
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x8957c7",
+                    "life": 7
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xDDDDDD",
+                    "life": 8.1
+                },
+                {
+                    "hasWhite": "0xFFFFFF",
+                    "color": "0x333333",
+                    "life": 4.1
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x888888",
+                    "life": 5.1
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xceb8ad",
+                    "life": 6.2
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x4f382a",
+                    "life": 6.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x4f382a",
+                    "life": 5.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x4f382a",
+                    "life": 6.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x4f382a",
+                    "life": 7.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x4f382a",
+                    "life": 8.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x4f382a",
+                    "life": 4.3
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x4f382a",
+                    "life": 3.3
+                }
+            ],
+            "dark": "0x111111",
+            "logoColor": "0xFFFFFF",
+            "fillBarColor": "0x7BCA93",
+            "fillBarCompleteColor": "0x8957c7",
+            "background": "0x151515",
+            "fontColor": "0xFFFFFF",
+            "arrowTrailColor": "0xFFFFFF",
+            "buttonData": {
+                "fontColor": "0xFFFFFF",
+                "levelCompleteColor": "0x1376B9",
+                "tierCompleteColor": "0x8957c7",
+                "buttonStandardColor": "0x333333",
+                "buttonStandardDarkColor": "0x111111",
+                "buttonBackTitleColor": "0x222222"
+            },
+            "grid": {
+                "color": "0xFFFFFF",
+                "background": "0x231f20",
+                "sprite": "largeCard.png",
+                "spriteTile": "largeCard.png",
+                "spriteDraw": "smallCard.png",
+                "spriteTrail": "largeCard.png",
+                "spriteRect": "largeCard.png",
+                "scaleTrail": false,
+                "minAlpha": 0.05,
+                "maxAlpha": 0.1,
+                "extraTileAlpha": 0
+            }
+        }
+    ]
+}

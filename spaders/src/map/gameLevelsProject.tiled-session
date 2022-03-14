@@ -44,11 +44,11 @@
             }
         },
         "debug/debug2.tmx": {
-            "scale": 0.0625,
+            "scale": 0.125,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 648,
-                "y": 3248
+                "x": 3596,
+                "y": 2440
             }
         },
         "gb/gameboyCreatures.tmx": {
@@ -183,7 +183,7 @@
             "scale": 0.16193181818181815,
             "selectedLayer": 24,
             "viewCenter": {
-                "x": 324.2105263157896,
+                "x": 1676.6315789473688,
                 "y": 389.0526315789475
             }
         },
@@ -303,6 +303,22 @@
         "spadersTileset.tsx": {
             "scaleInDock": 1
         },
+        "synth/betoSynth.tmx": {
+            "scale": 0.6240312499999999,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 736.3413290600431,
+                "y": 769.1922479843759
+            }
+        },
+        "synth/sunset.tmx": {
+            "scale": 0.1759602864583333,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 2304.4972712977533,
+                "y": 3074.557395245584
+            }
+        },
         "templates/template.tmx": {
             "scale": 1.1045496323529411,
             "selectedLayer": 1,
@@ -380,10 +396,10 @@
             "scaleInEditor": 1
         }
     },
-    "last.exportedFilePath": "C:/Users/jfbod/Documents/projects/spaders/spaders/www/data/basics",
+    "last.exportedFilePath": "D:/projects/spaders/spaders/www/data/synth",
     "last.externalTilesetPath": "E:/projects/spaders/spaders/src/map/tilesets",
     "last.imagePath": "C:/Users/jfbod/Documents/projects/spaders/spaders/src/map",
-    "map.lastUsedExportFilter": "All Files (*)",
+    "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
     "map.lastUsedFormat": "tmx",
     "openFiles": [
         "how-to-play/people-set-1.tmx",
@@ -419,6 +435,7 @@
     "project": "gameLevelsProject.tiled-project",
     "property.type": "string",
     "recentFiles": [
+        "tilesets/References.tsx",
         "how-to-play/people-set-1.tmx",
         "how-to-play/how-to-play-medium.tmx",
         "how-to-play/creatures.tmx",
@@ -429,8 +446,7 @@
         "how-to-play/simple-shapes.tmx",
         "how-to-play/simple-shapes-synt.tmx",
         "how-to-play/bossa.tmx",
-        "how-to-play/gameboy.tmx",
-        "gb/gameboyMisc.tmx"
+        "how-to-play/gameboy.tmx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",

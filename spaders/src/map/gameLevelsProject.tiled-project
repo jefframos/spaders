@@ -12,7 +12,8 @@
         "templates",
         "tutorial",
         "debug",
-        "basics"
+        "basics",
+        "synth"
     ],
     "objectTypesFile": "",
     "propertyTypes": [

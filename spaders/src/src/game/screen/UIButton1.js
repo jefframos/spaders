@@ -54,9 +54,13 @@ export default class UIButton1 extends PIXI.Container {
 		this.interactive = true;
 		this.buttonMode = true;
 	}
-	updateRotation(rot){
+	updateRotation(rot, invertIcon = false){
 		this.backShapeBorder.rotation = rot
 		this.backShape.rotation = rot
+
+		if(invertIcon){
+			this.icon.rotation = -rot
+		}
 	}
 	setIconColor(color) {
 		this.icon.tint = color;
@@ -80,7 +84,15 @@ export default class UIButton1 extends PIXI.Container {
 		this.movesLabel.x = -this.mainContainer.width * 0.75;
 		this.addChild(this.movesLabel);
 	}
-
+	addLabelLeftMenu(label) {
+		this.movesLabel = new PIXI.Text(label, {
+			font: '32px', fill: this.backShape.tint, align: 'right', fontWeight: '800', fontFamily: window.STANDARD_FONT1
+		});
+		this.movesLabel.pivot.x = this.movesLabel.width;
+		this.movesLabel.pivot.y = this.movesLabel.height / 2;
+		this.movesLabel.x = -this.mainContainer.width * 0.55;
+		this.addChild(this.movesLabel);
+	}
 	updateTexture(texture) {
 		this.icon.texture = PIXI.Texture.fromFrame(texture);
 		this.icon.scale.set(this.backShape.height / this.icon.height * 0.7 * this.icon.scale.x);

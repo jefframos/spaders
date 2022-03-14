@@ -216,26 +216,26 @@ export default class LargeImageButton extends PIXI.Container {
         this.slotSize.width = this.slotSize.height = Math.min(this.slotSize.height, this.slotSize.width)
         this.iconContainer.addChild(levelSprite)
 
-        let backTest = new PIXI.mesh.NineSlicePlane(
+        let backSlot = new PIXI.mesh.NineSlicePlane(
             PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
-            this.iconContainer.addChildAt(backTest, 0)
+            this.iconContainer.addChildAt(backSlot, 0)
 
         utils.resizeToFitAR(this.slotSize, levelSprite)
 
-        backTest.width = this.slotSize.width;
-        backTest.height = this.slotSize.height;
+        backSlot.width = this.slotSize.width;
+        backSlot.height = this.slotSize.height;
 
-        backTest.x = this.offset.x * this.slotSize.width;
-        backTest.y = this.offset.y * this.slotSize.height;
+        backSlot.x = this.offset.x * this.slotSize.width;
+        backSlot.y = this.offset.y * this.slotSize.height;
 
-        backTest.alpha = 0.25
+        backSlot.alpha = 0.25
 
         levelSprite.x = this.offset.x * this.slotSize.width;
         levelSprite.y = this.offset.y * this.slotSize.height;
 
-        levelSprite.interactive = true;
-        levelSprite.buttonMode = true;
-        levelSprite.on('pointerup', this.onPointerUp.bind(this, levelSprite));
+        backSlot.interactive = true;
+        backSlot.buttonMode = true;
+        backSlot.on('pointerup', this.onPointerUp.bind(this, levelSprite));
 
         level.currentSprite = levelSprite;
         
