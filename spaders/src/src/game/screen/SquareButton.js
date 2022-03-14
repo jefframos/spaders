@@ -143,13 +143,13 @@ export default class SquareButton extends PIXI.Container {
         this.iconBackground.x = 10;
         this.iconBackground.y = 10;
 
-        this.iconBackground.width = this.squareButtonShape.height - 20
-        this.iconBackground.height = this.squareButtonShape.height - 20
-        this.resizeIconToFitOnLarge()
+        this.iconBackground.width = this.squareButtonShape.height *0.5
+        this.iconBackground.height = this.squareButtonShape.height *0.5
+        this.resizeIconToFitOnLarge2()
 
-        this.progressBar.x = this.iconBackground.x + this.iconBackground.width + 10;
-        this.progressBar.y = this.iconBackground.y + this.iconBackground.height - this.progressBar.height;
-        this.progressBar.resizeBar(this.squareButtonShape.width - 20 - this.progressBar.x, this.squareButtonShape.height * 0.2);
+        this.progressBar.resizeBar(this.squareButtonShape.width - 20, this.squareButtonShape.height * 0.2);
+        this.progressBar.x = this.iconBackground.x //+ this.iconBackground.width + 10;
+        this.progressBar.y = this.iconBackground.y + this.iconBackground.height+5// - this.progressBar.height;
 
 
         utils.resizeToFitAR(
@@ -169,12 +169,12 @@ export default class SquareButton extends PIXI.Container {
 
         this.labelTop.pivot.x = 0
         this.labelTop.pivot.y = 0//this.labelTop.height / this.labelTop.scale.y;
-        this.labelTop.x = this.progressBar.x + 10 // this.container.scale.x
-        this.labelTop.y = this.iconBackground.y + 5//+ this.labelTop.height / this.labelTop.scale.y// this.container.scale.y
+        this.labelTop.x = this.iconBackground.x +this.iconBackground.width+ 15 // this.container.scale.x
+        this.labelTop.y = this.iconBackground.y+5//this.iconBackground.y + 5//+ this.labelTop.height / this.labelTop.scale.y// this.container.scale.y
 
         this.backTop.x = this.labelTop.x - 10
         this.backTop.y = this.labelTop.y - 5
-        this.backTop.width = this.squareButtonBackShape.width  - this.iconBackground.width - 40
+        this.backTop.width = this.progressBar.width - this.iconBackground.width - 5
         this.backTop.height = this.labelTop.height + 10
     }
 
@@ -363,6 +363,17 @@ export default class SquareButton extends PIXI.Container {
             this.iconBackground.height = 0
         }
         //this.icon.mask = this.buttonMask
+    }
+
+    resizeIconToFitOnLarge2() {
+        utils.resizeToFitAR(
+            {
+                width: this.iconBackground.width -10,
+                height: this.iconBackground.height -10
+            }, this.icon)
+
+        this.icon.x = this.iconBackground.width / 2 - this.icon.width / 2
+        this.icon.y = this.iconBackground.height / 2 - this.icon.height / 2
     }
 
     resizeIconToFitOnLarge() {

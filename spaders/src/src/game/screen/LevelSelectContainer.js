@@ -57,20 +57,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         setTimeout(() => {
             this.addChild(this.newContainer)
 
-            this.unscaledCardSize = { width: window.innerWidth / 4, height: window.innerWidth / 4 }
-
-
-            this.unscaledCardSize.width = Math.min(80, this.unscaledCardSize.width);
-
-            if (window.isMobile) {
-
-                this.unscaledCardSize.width = Math.max(80, this.unscaledCardSize.width);
-            } else {
-                this.unscaledCardSize.width = Math.max(180, this.unscaledCardSize.width);
-
-            }
-
-            this.unscaledCardSize.height = this.unscaledCardSize.width;
+           
 
 
 
@@ -91,20 +78,39 @@ export default class LevelSelectContainer extends PIXI.Container {
 
             if (window.isMobile) {
 
-                this.unscaledLineButtonSize = { width: window.innerWidth * 0.9, height: 80 }
+                this.unscaledLineButtonSize = { width: (window.innerWidth - this.currentGridOffset.x * 2) * 0.9 / 2, height: 80 }
                 this.unscaledLineButtonSize.width = Math.min(config.width, this.unscaledLineButtonSize.width)
-                this.unscaledLineButtonSize.width = Math.max(200, this.unscaledLineButtonSize.width);
-                this.unscaledLineButtonSize.width -= this.currentGridOffset.x;
+                this.unscaledLineButtonSize.width = Math.max((window.innerWidth) * 0.9 / 2, this.unscaledLineButtonSize.width);
+                this.unscaledLineButtonSize.width -= this.currentGridOffset.x /2;
 
+                this.unscaledCardSize = { width:(window.innerWidth - this.currentGridOffset.x * 2) * 0.9 / 3, height: 80 }
+                
+                
             } else {
-                this.unscaledLineButtonSize = { width: window.innerWidth * 0.9, height: 120 }
+                this.unscaledLineButtonSize = { width: (window.innerWidth - this.currentGridOffset.x * 2) * 0.9 / 2, height: 120 }
                 this.unscaledLineButtonSize.width = Math.min(config.width, this.unscaledLineButtonSize.width)
                 this.unscaledLineButtonSize.width = Math.max(200, this.unscaledLineButtonSize.width);
-                this.unscaledLineButtonSize.width -= this.currentGridOffset.x;
-
+                this.unscaledLineButtonSize.width -= this.currentGridOffset.x/2;
+                
+                this.unscaledCardSize = { width:(window.innerWidth - this.currentGridOffset.x * 2) * 0.9 / 3, height: 120 }
 
             }
 
+
+
+            
+
+            //this.unscaledCardSize.width = Math.min(80, this.unscaledCardSize.width);
+
+            if (window.isMobile) {
+
+                //this.unscaledCardSize.width = Math.max(80, this.unscaledCardSize.width);
+            } else {
+                //this.unscaledCardSize.width = Math.max(180, this.unscaledCardSize.width);
+
+            }
+
+            //this.unscaledCardSize.height = this.unscaledCardSize.width;
 
 
             this.buildSections();
@@ -837,11 +843,12 @@ export default class LevelSelectContainer extends PIXI.Container {
         this.resetDrags()
         this.resize(null, true)
     }
-    drawGrid(elements, margin, size, isVertical) {
+    drawGrid(elements, margin, size, isVertical, lineOverride = 1) {
         let maxPerLine = Math.floor((this.mainCanvas.width - this.currentGridOffset.x) / (size.width + margin * 2.5)) + 1
         if (isVertical) {
-            maxPerLine = 1;
+            maxPerLine = lineOverride;
         }
+
         let fullWidth = (this.mainCanvas.width - this.currentGridOffset.x) - margin * 2
         let distance = fullWidth / maxPerLine
         let line = -1
@@ -929,8 +936,8 @@ export default class LevelSelectContainer extends PIXI.Container {
 
         if (this.shouldUpdate) {
 
-            this.drawGrid(this.sectionButtons, 20, this.unscaledLineButtonSize, true);
-            this.drawGrid(this.navButtons, 20, this.unscaledLineButtonSize, true);
+            this.drawGrid(this.sectionButtons, 20, this.unscaledLineButtonSize, true, 2);
+            this.drawGrid(this.navButtons, 20, this.unscaledLineButtonSize, true, 2);
             this.drawGrid(this.levelCards, 20, this.unscaledCardSize, false);
             if (this.levelSplitCards.length > 0) {
 
