@@ -1,15 +1,16 @@
 {
-    "activeFile": "basics/food1.tmx",
+    "activeFile": "synth/betoSynth.tmx",
     "expandedProjectPaths": [
+        "how-to-play",
+        "gb",
+        "basics",
         "templates",
         "main",
-        "gb",
-        "videogames",
-        "how-to-play",
-        "basics",
+        "synth",
         "tutorial",
-        "movies",
-        "debug"
+        "videogames",
+        "debug",
+        "movies"
     ],
     "fileStates": {
         "D:/Projects/tetra/map/levels.tmx": {
@@ -305,7 +306,7 @@
         },
         "synth/betoSynth.tmx": {
             "scale": 0.6240312499999999,
-            "selectedLayer": 0,
+            "selectedLayer": 23,
             "viewCenter": {
                 "x": 736.3413290600431,
                 "y": 769.1922479843759
@@ -430,12 +431,13 @@
         "how-to-play/pokemon51-75.tmx",
         "how-to-play/pokemon26-50.tmx",
         "how-to-play/pokemon1-25.tmx",
-        "how-to-play/pokemon76-100.tmx"
+        "how-to-play/pokemon76-100.tmx",
+        "synth/betoSynth.tmx",
+        "synth/sunset.tmx"
     ],
     "project": "gameLevelsProject.tiled-project",
     "property.type": "string",
     "recentFiles": [
-        "tilesets/References.tsx",
         "how-to-play/people-set-1.tmx",
         "how-to-play/how-to-play-medium.tmx",
         "how-to-play/creatures.tmx",
@@ -446,7 +448,8 @@
         "how-to-play/simple-shapes.tmx",
         "how-to-play/simple-shapes-synt.tmx",
         "how-to-play/bossa.tmx",
-        "how-to-play/gameboy.tmx"
+        "how-to-play/gameboy.tmx",
+        "gb/gameboyMisc.tmx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",
