@@ -1,16 +1,16 @@
 {
-    "activeFile": "synth/betoSynth.tmx",
+    "activeFile": "debug/debug2.tmx",
     "expandedProjectPaths": [
-        "how-to-play",
         "gb",
-        "basics",
-        "templates",
-        "main",
         "synth",
         "tutorial",
+        "main",
         "videogames",
         "debug",
-        "movies"
+        "movies",
+        "how-to-play",
+        "templates",
+        "basics"
     ],
     "fileStates": {
         "D:/Projects/tetra/map/levels.tmx": {
@@ -46,7 +46,7 @@
         },
         "debug/debug2.tmx": {
             "scale": 0.125,
-            "selectedLayer": 1,
+            "selectedLayer": 0,
             "viewCenter": {
                 "x": 3596,
                 "y": 2440
@@ -343,6 +343,7 @@
             "scaleInEditor": 1
         },
         "tilesets/poke.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 0.5,
             "scaleInEditor": 1
         },
@@ -385,10 +386,18 @@
         },
         "videogames/levels3.tmx": {
             "scale": 0.5,
-            "selectedLayer": 9,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 763,
-                "y": 694
+                "x": 385,
+                "y": 384
+            }
+        },
+        "videogames/spadersLarge.tmx": {
+            "scale": 0.125,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 2308,
+                "y": 3072
             }
         },
         "videogames/spadersTileset.tsx": {
@@ -397,9 +406,9 @@
             "scaleInEditor": 1
         }
     },
-    "last.exportedFilePath": "D:/projects/spaders/spaders/www/data/synth",
+    "last.exportedFilePath": "D:/projects/spaders/spaders/www/data/videogames",
     "last.externalTilesetPath": "E:/projects/spaders/spaders/src/map/tilesets",
-    "last.imagePath": "C:/Users/jfbod/Documents/projects/spaders/spaders/src/map",
+    "last.imagePath": "D:/projects/spaders/spaders/src/map",
     "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
     "map.lastUsedFormat": "tmx",
     "openFiles": [
@@ -433,7 +442,8 @@
         "how-to-play/pokemon1-25.tmx",
         "how-to-play/pokemon76-100.tmx",
         "synth/betoSynth.tmx",
-        "synth/sunset.tmx"
+        "synth/sunset.tmx",
+        "videogames/spadersLarge.tmx"
     ],
     "project": "gameLevelsProject.tiled-project",
     "property.type": "int",

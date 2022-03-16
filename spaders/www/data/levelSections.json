@@ -51,6 +51,10 @@
                 },
                 {
                     "name": "2nd gen",
+                    "dataPath": "videogames/largeSpaders.json"
+                },
+                {
+                    "name": "2nd gen",
                     "dataPath": "videogames/videogamesLevels1.json"
                 },
                 {
