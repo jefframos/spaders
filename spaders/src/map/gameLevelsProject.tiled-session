@@ -1,16 +1,16 @@
 {
-    "activeFile": "debug/debug2.tmx",
+    "activeFile": "debug/debug.tmx",
     "expandedProjectPaths": [
-        "gb",
+        "templates",
+        "movies",
+        "debug",
+        "how-to-play",
         "synth",
         "tutorial",
-        "main",
         "videogames",
-        "debug",
-        "movies",
-        "how-to-play",
-        "templates",
-        "basics"
+        "gb",
+        "basics",
+        "main"
     ],
     "fileStates": {
         "D:/Projects/tetra/map/levels.tmx": {
@@ -38,7 +38,7 @@
         },
         "debug/debug.tmx": {
             "scale": 0.6522518382352941,
-            "selectedLayer": 4,
+            "selectedLayer": 6,
             "viewCenter": {
                 "x": 480.64257028112445,
                 "y": 512.0721482420912
