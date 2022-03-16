@@ -436,7 +436,7 @@
         "synth/sunset.tmx"
     ],
     "project": "gameLevelsProject.tiled-project",
-    "property.type": "string",
+    "property.type": "int",
     "recentFiles": [
         "how-to-play/people-set-1.tmx",
         "how-to-play/how-to-play-medium.tmx",

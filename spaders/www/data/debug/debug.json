@@ -224,6 +224,11 @@
                  "value":2
                 }, 
                 {
+                 "name":"gameMode",
+                 "type":"int",
+                 "value":2
+                }, 
+                {
                  "name":"i",
                  "type":"int",
                  "value":11

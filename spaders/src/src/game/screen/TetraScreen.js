@@ -1556,7 +1556,7 @@ export default class TetraScreen extends Screen {
 	}
 	newRound(first = false) {
 		//console.log("newRound", first);
-		if (this.currentLevelData.gameMode == 0) {
+		if (this.currentLevelData.gameMode == 0 || this.currentLevelData.gameMode == 2) {
 			if (first) {
 				this.getNextPieceRound(first);
 			}else{

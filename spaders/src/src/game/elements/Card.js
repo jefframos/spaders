@@ -154,6 +154,7 @@ export default class Card extends PIXI.Container {
 	setCountdown(baseCountdown) {
 
 		this.isCountdown = true;
+		
 		this.currentCountdown = baseCountdown;
 		this.baseCountdown = baseCountdown;
 		this.countdowLabel.text = this.currentCountdown;
@@ -166,6 +167,10 @@ export default class Card extends PIXI.Container {
 		this.countdowLabel.x = CARD.width / 2;
 		this.countdowLabel.y = CARD.height / 2 - CARD.height * 0.08;
 		this.cardContainer.addChild(this.countdowLabel);
+
+		if (this.life < 1){
+			this.startCrazyMood();
+		}
 	}
 	startCrazyMood() {
 		this.crazyMood = true;
@@ -215,6 +220,11 @@ export default class Card extends PIXI.Container {
 		this.life = Math.floor(this.life)
 		this.updateCard()
 
+		if(this.isCountdown){
+			if (this.life < 1){
+				this.startCrazyMood();
+			}
+		}
 		if (this.life < 0) {
 			return true;
 		}
@@ -529,6 +539,12 @@ export default class Card extends PIXI.Container {
 		if (this.life < 1) {
 			this.lifeContainer.alpha = 0;
 		}
+
+		if(this.isCountdown){
+			this.isCountdown = false;
+			this.countdowLabel.text = "-";
+		}
+		
 	}
 	mark() {
 
@@ -599,6 +615,10 @@ export default class Card extends PIXI.Container {
 		//this.enemySprite.scale.y = 0.2
 		//this.enemySprite.scale.x = this.starterScale + Math.cos(this.initGridAcc) * 0.1//0.05
 		//this.enemySprite.scale.y = this.starterScale + Math.sin(this.initGridAcc) * 0.1//0.05
+
+		if(this.isCountdown){
+			//this.enemySprite.tint = window.colorTweenBomb.currentColor;
+		}
 		if (this.crazyMood) {
 
 			this.initGridAcc += delta * (60 * 0.25)
