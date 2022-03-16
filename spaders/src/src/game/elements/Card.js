@@ -62,6 +62,11 @@ export default class Card extends PIXI.Container {
 		cardContainer.addChild(this.enemySprite);
 
 
+		this.countdowLabel = new PIXI.Text(this.life, { font: '14px', fontWeight: '200', fill: 0xFFFFFF, fontFamily: window.STANDARD_FONT2 });
+		this.countdowLabel.pivot.x = this.countdowLabel.width / 2
+		this.countdowLabel.pivot.y = this.countdowLabel.height / 2
+		//cardContainer.addChild(this.countdowLabel);
+
 		this.lifeContainer = new PIXI.Container();
 		cardContainer.addChild(this.lifeContainer);
 		this.lifeLabel = new PIXI.Text(this.life, { font: '14px', fontWeight: '200', fill: 0x000000, fontFamily: window.STANDARD_FONT2 });
@@ -107,7 +112,7 @@ export default class Card extends PIXI.Container {
 			this.idleAnimationLayer2.push("l1_spader_1_" + index + ".png")
 		}
 
-		this.frameTime = 1/10;
+		this.frameTime = 1 / 10;
 		this.currentAnimationTime = 0;
 		this.currentFrame = Math.floor(Math.random() * this.idleAnimationLayer1.length);
 		// this.particleSystem = new ParticleSystem();
@@ -126,6 +131,16 @@ export default class Card extends PIXI.Container {
 
 		this.enemySprite.setTexture(PIXI.Texture.fromFrame(this.idleAnimationLayer1[this.currentFrame]));
 		this.enemySpriteWhite.setTexture(PIXI.Texture.fromFrame(this.idleAnimationLayer2[this.currentFrame]));
+
+		if (this.isCountdown) {
+			if (this.currentFrame == 1 || this.currentFrame == 2) {
+
+				this.countdowLabel.y = CARD.height / 2 - CARD.height * 0.06;
+			} else {
+
+				this.countdowLabel.y = CARD.height / 2 - CARD.height * 0.08;
+			}
+		}
 	}
 	forceNewColor(color) {
 		this.enemySprite.tint = color;
@@ -135,6 +150,22 @@ export default class Card extends PIXI.Container {
 		}
 
 		this.currentColor = color;
+	}
+	setCountdown(baseCountdown) {
+
+		this.isCountdown = true;
+		this.currentCountdown = baseCountdown;
+		this.baseCountdown = baseCountdown;
+		this.countdowLabel.text = this.currentCountdown;
+		this.idleAnimationLayer1 = [];
+		this.idleAnimationLayer2 = [];
+		for (let index = 1; index <= 5; index++) {
+			this.idleAnimationLayer1.push("l0_spader_countdown_" + index + ".png")
+			this.idleAnimationLayer2.push("l1_spader_countdown_" + index + ".png")
+		}
+		this.countdowLabel.x = CARD.width / 2;
+		this.countdowLabel.y = CARD.height / 2 - CARD.height * 0.08;
+		this.cardContainer.addChild(this.countdowLabel);
 	}
 	startCrazyMood() {
 		this.crazyMood = true;
@@ -147,7 +178,11 @@ export default class Card extends PIXI.Container {
 		this.circleBackground.alpha = 0.0
 	}
 	createCard(totalSides = 0, customData) {
+		if (this.countdowLabel.parent) {
+			this.countdowLabel.parent.removeChild(this.countdowLabel)
+		}
 		this.alpha = 1;
+		this.isCountdown = false;
 		this.crazyMood = false;
 		this.removeCrazyMood();
 
@@ -209,9 +244,16 @@ export default class Card extends PIXI.Container {
 	}
 	updateCounter(value) {
 		//this.counter += value;
-		this.label.text = this.counter;
-		if (this.counter <= 0) {
-			this.counter = this.MAX_COUNTER;
+		if(!this.isCountdown){
+			return null;
+		}
+		this.isCountdown = true;
+		this.currentCountdown -= value;
+		
+		this.countdowLabel.text = this.currentCountdown;
+		if (this.currentCountdown <= 0) {
+			this.currentCountdown = this.baseCountdown;
+			this.countdowLabel.text = this.currentCountdown;
 			return this;
 			//this.game.board.moveLaneDown(this);
 		}
@@ -231,13 +273,13 @@ export default class Card extends PIXI.Container {
 		// }else{
 		// }
 		let targetID = imageID
-		targetID %=5;
+		targetID %= 5;
 		targetID++
 		this.idleAnimationLayer1 = []
 		this.idleAnimationLayer2 = []
 		for (let index = 1; index <= 5; index++) {
-			this.idleAnimationLayer1.push("l0_spader_"+targetID+"_" + index + ".png")
-			this.idleAnimationLayer2.push("l1_spader_"+targetID+"_" + index + ".png")
+			this.idleAnimationLayer1.push("l0_spader_" + targetID + "_" + index + ".png")
+			this.idleAnimationLayer2.push("l1_spader_" + targetID + "_" + index + ".png")
 		}
 
 		this.enemySpriteWhite.alpha = 0.85

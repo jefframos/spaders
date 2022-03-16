@@ -25,13 +25,14 @@ import colorSchemes from '../../colorSchemes';
 import PopUpOverlay from './PopUpOverlay';
 import ProgressBar from './ProgressBar';
 import Spring from '../effects/Spring';
+import SpecialCardsManager from '../core/SpecialCardsManager';
 
 export default class TetraScreen extends Screen {
 	constructor(label) {
 		super(label);
 
 		this.generateImage(window.questionMark,24,0,0,true, true);
-
+		this.specialCardsManager = new SpecialCardsManager();
 		//levelData, size = 24, paddingBottom = 0, schemeID = 0, addPadding = true, ignoreEmpty = false)
 
 		window.AUTO_PLAY_HARD = false;
@@ -643,9 +644,9 @@ export default class TetraScreen extends Screen {
 		if (this.autoRedirectToLevelSelect) {
 			this.autoRedirectToLevelSelect = false;
 			setTimeout(() => {
-				console.log(this.autoRedirectData)
+				console.log("AUTO REDIRECTH", this.autoRedirectData)
 				this.mainmenuStateFromGame(false, this.autoRedirectData);
-			}, 100);
+			}, 200);
 		}
 
 		window.COOKIE_MANAGER.onChangeColors.add(() => {
@@ -780,6 +781,9 @@ export default class TetraScreen extends Screen {
 	}
 	mainmenuState(force = false) {
 		this.removeTrails();
+
+		console.log("TO MAIN MENU ONE")
+
 		window.SOUND_MANAGER.playMainMenu();
 		this.endGameScreenContainer.hide(force);
 		this.startScreenContainer.show(force, force ? 0.2 : 0.75);
@@ -1335,7 +1339,10 @@ export default class TetraScreen extends Screen {
 			for (var j = 0; j < this.currentLevelData.pieces[i].length; j++) {
 				if (this.currentLevelData.pieces[i][j] >= 0) {
 					//console.log("block",this.currentLevelData.pieces[i][j], window.ENEMIES.block.id)
+					//if (this.currentLevelData.pieces[i][j] == window.ENEMIES.block.id) {
 					if (this.currentLevelData.pieces[i][j] == window.ENEMIES.block.id) {
+						this.cardsContainer.addChild(this.placeBlock(j, i));
+					}else if (hasAddon && this.specialCardsManager.isBlock(this.currentLevelData.addOn[i][j])) {
 						this.cardsContainer.addChild(this.placeBlock(j, i));
 					} else {
 						let customData = null;
@@ -1347,6 +1354,7 @@ export default class TetraScreen extends Screen {
 								}
 							}
 						});
+
 						if (hasAddon && this.currentLevelData.addOn[i][j] == 33) {
 							//dont add if the addon remove
 						} else {
@@ -1355,8 +1363,10 @@ export default class TetraScreen extends Screen {
 							if (this.currentLevelData.gameMode == 0) {
 								this.grid.paintTile(card)
 							}
-							if (hasAddon && this.currentLevelData.addOn[i][j] == 32) {
-								card.startCrazyMood();
+							if (hasAddon && this.currentLevelData.addOn[i][j] >= 32) {
+
+								this.specialCardsManager.sortCardEffect(card, this.currentLevelData.addOn[i][j])
+								//card.startCrazyMood();
 							}
 						}
 					}
@@ -1547,11 +1557,18 @@ export default class TetraScreen extends Screen {
 	newRound(first = false) {
 		//console.log("newRound", first);
 		if (this.currentLevelData.gameMode == 0) {
+			if (first) {
+				this.getNextPieceRound(first);
+			}else{
 
-			this.getNextPieceRound(first);
-
-
-
+				if(this.board.updateCounters(1)){
+					setTimeout(() => {
+						this.getNextPieceRound();
+					}, 1000);
+				}else{
+					this.getNextPieceRound();
+				}
+			}
 		} else if (this.currentLevelData.gameMode == 1) {
 			if (first) {
 				this.getNextPieceRound();
@@ -1561,6 +1578,7 @@ export default class TetraScreen extends Screen {
 				let turnN = t / this.currentLevelData.fallTurns
 
 				this.fallBar.setProgressBar2(turnN)
+
 
 				if (this.currentRound > 0 && this.currentRound % this.currentLevelData.fallTurns == 0) {
 					this.board.moveCardsDown();

@@ -184,6 +184,7 @@ export default class LevelSelectContainer extends PIXI.Container {
 
     }
     setRedirectData(redirectData) {
+        this.disableClickCounter = 0;
         if (redirectData.tier) {
             this.openLevelTier(redirectData.tier.data)
         } else if (redirectData.section) {
@@ -817,7 +818,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         return new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, 100, 130);
     }
     show() {
-        this.disableClickCounter = 5;
+        this.disableClickCounter = 10;
         this.shouldUpdate = true;
         this.backButton.visible = true;
         this.verticalBar.visible = true;
