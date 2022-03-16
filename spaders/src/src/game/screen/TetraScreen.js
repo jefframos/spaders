@@ -1322,7 +1322,7 @@ export default class TetraScreen extends Screen {
 				if (id == 32) {
 					hasAddon = true;
 					countAdd++;
-				} else if (id == 33) {
+				} else if (id >= 33) {
 					hasAddon = true;
 				}
 			}

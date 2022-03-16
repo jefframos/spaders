@@ -976,6 +976,7 @@ export default class Board {
 
 	moveCardDown(card, delay) {
 		//console.log(card)
+		this.game.grid.destroyCard(card)
 		this.cards[card.pos.i][card.pos.j] = 0;
 		card.pos.j++;
 		if (card.pos.j >= GRID.j) {

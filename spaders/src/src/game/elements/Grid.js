@@ -333,7 +333,8 @@ console.log(levelData)
 			this.game.frontGridContainer.addChild(shape);
 			this.dropTiles.push(shape);
 			this.gridsSquares[card.pos.i][card.pos.j].card = null;
-			window.SOUND_MANAGER.play('dropTile', { volume: 0.5, speed: Math.random() * 0.2 + 0.8 })
+			window.SOUND_MANAGER.play('dropTile', { volume: 0.5, speed: Math.random() * 0.2 + 0.8, singleInstance:true })
+			
 			if (this.cardsStartedOnGrid <= 0) {
 				//console.log("All cards", this.cardsStartedOnGrid)
 				this.onDestroyAllStartedCards.dispatch();

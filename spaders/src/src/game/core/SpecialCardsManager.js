@@ -53,6 +53,7 @@ export default class SpecialCardsManager{
         return false;
     }
     sortCardEffect(card, id){
+        console.log(id)
         let element = this.effects["_"+id]
         if(element){
             if(card[element.cardFunction]){
