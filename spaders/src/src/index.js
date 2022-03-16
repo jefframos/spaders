@@ -866,11 +866,17 @@ function configGame() {
 
 	console.log("ALL DATA", window.levelSections)
 
+
+	splitables.forEach(element => {		
+		splitLargeImage(element)
+	});
+	
 	window.levelSections.sections.forEach(sections => {
 		sections.levels.forEach(levels => {
 			levels.data.forEach(levelsData => {
+				//console.log(levelsData)
 				//let max = Math.max(levelsData.pieces[0].length, levelsData.pieces.length);
-				if (levelsData.pieces[0].length > 10 || levelsData.pieces.lengt > 12) {
+				if (levelsData.pieces[0].length > 10 || levelsData.pieces.length > 12) {
 					console.log(levelsData.tierName + ' - ' + levelsData.levelName, levelsData.pieces[0].length + ' x ' + levelsData.pieces.length);
 				}
 			});
@@ -879,9 +885,7 @@ function configGame() {
 
 	//console.log("ALL DATA", window.levelSections)
 	//create screen manager
-	splitables.forEach(element => {		
-		splitLargeImage(element)
-	});
+
 
 	game.onCompleteLoad();
 

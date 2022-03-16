@@ -265,6 +265,7 @@ export default class Card extends PIXI.Container {
 
 		if (this.currentCountdown <= 0) {
 			this.currentCountdown = this.baseCountdown;
+			this.shake(0.2, 6, 0.2);
 			setTimeout(() => {
 				
 				this.countdowLabel.text = this.currentCountdown;

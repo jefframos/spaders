@@ -911,6 +911,10 @@ export default class Board {
 		console.log(cardsToMove);
 		let moveDownList = [];
 
+		let byCol = [];
+		for (let index = 0; index < GRID.i; index++) {
+			byCol.push([]);
+		}
 		// for (let index = 0; index < cardsToMove.length; index++) {
 		// 	moveDownList.push(cardsToMove[index]);			
 		// }
@@ -923,14 +927,42 @@ export default class Board {
 
 				console.log(tempCard, id, j);
 
+				byCol[id].push(tempCard);
 
-				if (tempCard && !tempCard.isBlock) {
+				if (tempCard) {
 					moveDownList.push(tempCard);
-				} else if (tempCard && tempCard.isBlock) {
-					
 				}
 				else {
 					break
+				}
+			}
+		}
+
+		//if find a block, this removes it
+		let toRemove = []
+		for (let index = 0; index < moveDownList.length; index++) {
+			const element = moveDownList[index];
+			if(element.isBlock){
+				toRemove.push(element);				
+				let old = element.pos.j;
+				for (let j = element.pos.j; j >= 0; j--) {
+					const element2 = byCol[element.pos.i][j];
+					if(element2 && element2.pos.j == old){
+						toRemove.push(element2);
+						old --
+					}else{
+						//break;
+					}
+					
+				}
+			}
+		}
+
+		for (var i = moveDownList.length - 1; i >= 0; i--) {
+			for (let j = 0; j < toRemove.length; j++) {
+				const element = toRemove[j];
+				if(moveDownList[i] == element){
+					moveDownList.splice(i, 1);
 				}
 			}
 		}

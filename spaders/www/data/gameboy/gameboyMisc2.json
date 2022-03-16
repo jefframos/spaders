@@ -979,7 +979,7 @@
                 {
                  "name":"padding-bottom",
                  "type":"int",
-                 "value":2
+                 "value":1
                 }, 
                 {
                  "name":"padding-left",
