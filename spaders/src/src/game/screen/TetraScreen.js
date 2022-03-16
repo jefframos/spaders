@@ -1486,6 +1486,10 @@ export default class TetraScreen extends Screen {
 					//change frequecy of high level cards
 					this.cardQueueData.counter = 2 + Math.floor(Math.random() * 2)
 
+					if(this.currentLevelData.gameMode != 0){
+						this.cardQueueData.counter += 3;
+					}
+
 					if (Math.random() < 0.1) {
 						nextLife++;
 					}
@@ -1605,7 +1609,9 @@ export default class TetraScreen extends Screen {
 		}
 	}
 	getNextPieceRound(first = false) {
-
+		if (!this.gameRunning) {
+			return;
+		}
 		this.blockGameTimer = 0.2;
 		this.updateQueue();
 		this.currentCard = this.cardQueue[0];

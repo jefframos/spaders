@@ -113,7 +113,7 @@
  <layer id="74" name="Countdown Pieces" width="16" height="16">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
-   <property name="gameMode" type="int" value="2"/>
+   <property name="gameMode" type="int" value="0"/>
    <property name="i" type="int" value="11"/>
    <property name="j" type="int" value="11"/>
    <property name="padding-bottom" type="int" value="3"/>
@@ -190,8 +190,8 @@
    <property name="tier" type="int" value="0"/>
   </properties>
   <data encoding="csv">
-2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,
-2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,
+2,2,4,2,4,2,0,0,0,0,0,0,0,0,0,0,
+2,0,2,2,0,2,0,0,0,0,0,0,0,0,0,0,
 0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

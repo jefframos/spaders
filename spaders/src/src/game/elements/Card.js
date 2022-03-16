@@ -154,7 +154,7 @@ export default class Card extends PIXI.Container {
 	setCountdown(baseCountdown) {
 
 		this.isCountdown = true;
-		
+
 		this.currentCountdown = baseCountdown;
 		this.baseCountdown = baseCountdown;
 		this.countdowLabel.text = this.currentCountdown;
@@ -168,9 +168,11 @@ export default class Card extends PIXI.Container {
 		this.countdowLabel.y = CARD.height / 2 - CARD.height * 0.08;
 		this.cardContainer.addChild(this.countdowLabel);
 
-		if (this.life < 1){
-			this.startCrazyMood();
-		}
+		this.life = 0;
+		this.updateCurrentLife();
+		// if (this.life < 1) {
+		// 	this.startCrazyMood();
+		// }
 	}
 	startCrazyMood() {
 		this.crazyMood = true;
@@ -220,9 +222,9 @@ export default class Card extends PIXI.Container {
 		this.life = Math.floor(this.life)
 		this.updateCard()
 
-		if(this.isCountdown){
-			if (this.life < 1){
-				this.startCrazyMood();
+		if (this.isCountdown) {
+			if (this.life < 1) {
+				//this.startCrazyMood();
 			}
 		}
 		if (this.life < 0) {
@@ -254,19 +256,33 @@ export default class Card extends PIXI.Container {
 	}
 	updateCounter(value) {
 		//this.counter += value;
-		if(!this.isCountdown){
+		if (!this.isCountdown) {
 			return null;
 		}
 		this.isCountdown = true;
 		this.currentCountdown -= value;
-		
-		this.countdowLabel.text = this.currentCountdown;
+
+
 		if (this.currentCountdown <= 0) {
 			this.currentCountdown = this.baseCountdown;
-			this.countdowLabel.text = this.currentCountdown;
+			setTimeout(() => {
+				
+				this.countdowLabel.text = this.currentCountdown;
+				TweenMax.killTweensOf(this.countdowLabel.scale);
+				this.countdowLabel.scale.set(0, 1.5);
+				TweenMax.to(this.countdowLabel.scale, 0.5, { delay: 0.75, x: 1, y: 1, ease: Elastic.easeOut })
+			}, 100);
+			
 			return this;
 			//this.game.board.moveLaneDown(this);
 		}
+		
+		
+		this.countdowLabel.text = this.currentCountdown;
+		TweenMax.killTweensOf(this.countdowLabel.scale);
+		this.countdowLabel.scale.set(0, 1.5);
+		TweenMax.to(this.countdowLabel.scale, 0.5, { delay: 0.5, x: 1, y: 1, ease: Elastic.easeOut })
+
 		return null;
 	}
 	updateSprite(level, data, id = -1) {
@@ -319,16 +335,9 @@ export default class Card extends PIXI.Container {
 			this.enemySprite.tint = data.hasWhite ? data.hasWhite : data.color;
 		}
 		this.currentColor = this.enemySprite.tint;
-		if (this.life < 1) {
-			this.lifeContainer.alpha = 0;
-		} else {
-			this.lifeContainer.alpha = 1;
-			this.lifeLabel.text = Math.floor(this.life);
-			this.lifeContainer.x = CARD.width * 0.75;
-			this.lifeContainer.y = CARD.height * 0.75;
 
-			this.lifeContainer.scale.set(CARD.width / this.lifeContainerBackground.width * 0.3)
-		}
+		this.updateCurrentLife();
+
 
 		this.isCurrent = isCurrent;
 		if (isCurrent) {
@@ -339,6 +348,18 @@ export default class Card extends PIXI.Container {
 
 		this.cardBack3.tint = 0;
 		this.cardBack3.alpha = 0.2;
+	}
+	updateCurrentLife() {
+		if (this.life < 1) {
+			this.lifeContainer.alpha = 0;
+		} else {
+			this.lifeContainer.alpha = 1;
+			this.lifeLabel.text = Math.floor(this.life);
+			this.lifeContainer.x = CARD.width * 0.75;
+			this.lifeContainer.y = CARD.height * 0.75;
+
+			this.lifeContainer.scale.set(CARD.width / this.lifeContainerBackground.width * 0.3)
+		}
 	}
 	convertCard() {
 		//this.type = this.type == 1 ? 0 : 1;
@@ -540,11 +561,11 @@ export default class Card extends PIXI.Container {
 			this.lifeContainer.alpha = 0;
 		}
 
-		if(this.isCountdown){
+		if (this.isCountdown) {
 			this.isCountdown = false;
 			this.countdowLabel.text = "-";
 		}
-		
+
 	}
 	mark() {
 
@@ -616,7 +637,7 @@ export default class Card extends PIXI.Container {
 		//this.enemySprite.scale.x = this.starterScale + Math.cos(this.initGridAcc) * 0.1//0.05
 		//this.enemySprite.scale.y = this.starterScale + Math.sin(this.initGridAcc) * 0.1//0.05
 
-		if(this.isCountdown){
+		if (this.isCountdown) {
 			//this.enemySprite.tint = window.colorTweenBomb.currentColor;
 		}
 		if (this.crazyMood) {

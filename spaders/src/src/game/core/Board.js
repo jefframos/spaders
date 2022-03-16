@@ -636,16 +636,16 @@ export default class Board {
 
 					let zone = autoDestroyCardData.zone
 					arrow.tint = autoDestroyCardData.cardFound.currentColor;
-	
+
 					TweenMax.killTweensOf(arrow);
 					let targetScale = arrow.scale.x
-	
+
 					TweenMax.to(arrow.scale, 0.3, { x: 0, y: 0, ease: Back.easeIn })
 					TweenMax.to(arrow.scale, 0.3, {
 						delay: 0.5, x: targetScale, y: targetScale, ease: Back.easeOut, onStart: () => {
 						}
 					})
-	
+
 					TweenMax.to(arrow, 0.05, {
 						x: arrow.x + 10 * zone.dir.x, y: arrow.y + 10 * zone.dir.y,
 						ease: Back.easeIn, onComplete: () => {
@@ -907,29 +907,35 @@ export default class Board {
 
 
 	sortMoveDown(cardsToMove) {
+
+		console.log(cardsToMove);
 		let moveDownList = [];
+
+		// for (let index = 0; index < cardsToMove.length; index++) {
+		// 	moveDownList.push(cardsToMove[index]);			
+		// }
 
 		// for (var i = 0; i < cardsToMove.length; i++) {
 		for (var i = 0; i < cardsToMove.length; i++) {
 			let id = cardsToMove[i].pos.i;
 			for (var j = cardsToMove[i].pos.j; j < GRID.j; j++) {
 				let tempCard = this.cards[id][j];
-				if (tempCard) {
-					let canAdd = true;
-					for (var k = 0; k < moveDownList.length; k++) {
-						if ((moveDownList[k].pos.i == tempCard.pos.i) && (moveDownList[k].pos.j == tempCard.pos.j)) {
-							canAdd = false;
-							break;
-						}
-					}
-					if (canAdd) {
-						moveDownList.push(tempCard);
-					}
+
+				console.log(tempCard, id, j);
+
+
+				if (tempCard && !tempCard.isBlock) {
+					moveDownList.push(tempCard);
+				} else if (tempCard && tempCard.isBlock) {
+					
+				}
+				else {
+					break
 				}
 			}
 		}
 		for (var i = moveDownList.length - 1; i >= 0; i--) {
-			this.moveCardDown(moveDownList[i], (i / moveDownList.length) * 0.5);
+			this.moveCardDown(moveDownList[i], (i / moveDownList.length) * 0.5 + 0.25);
 		}
 	}
 	updateCounters(value = 1) {
@@ -948,9 +954,9 @@ export default class Board {
 
 		this.sortMoveDown(cardsToMove)
 
-		if(cardsToMove.length > 0){
+		if (cardsToMove.length > 0) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
@@ -971,7 +977,7 @@ export default class Board {
 
 		this.sortMoveDown(cardsToMove)
 		//// // //console.log(cardsToMove);
-		
+
 	}
 
 	moveCardDown(card, delay) {
