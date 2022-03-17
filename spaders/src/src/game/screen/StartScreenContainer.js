@@ -26,6 +26,18 @@ export default class StartScreenContainer extends PIXI.Container {
 
 		this.logoLayers = [];
 
+		this.planet = new PIXI.Sprite.fromFrame("l0_planet_1_1.png");
+
+		this.planet.anchor.set(0.5)
+		this.planet.layers = [];
+		
+		for (let index = 1; index <= 6; index++) {
+			let sprite = new PIXI.Sprite.fromFrame("l"+index+"_planet_1_1.png");
+			sprite.anchor.set(0.5)
+			this.planet.addChild(sprite);
+			this.planet.layers.push(sprite);
+		}
+
 
 		this.logoLabel = new PIXI.Text(this.currentButtonLabel, { font: '64px', fill: config.colors.white, align: 'center', fontWeight: '800', fontFamily: window.LOGO_FONT, stroke:0, strokeThickness:8 });
 		//this.logoLabel = new PIXI.Sprite()//.fromFrame("logo1.png");
@@ -36,6 +48,8 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.gameBy = new PIXI.Text("by jeff ramos", { font: '18px', fill: config.colors.white, align: 'center', fontFamily: window.LOGO_FONT });
 		this.gameBy.pivot.x = this.gameBy.width / 2;
 		this.logoLabel.addChild(this.gameBy);
+		//this.logoLabel.visible = false;
+		//this.logoLabel.addChild(this.planet);
 		this.gameBy.y = this.logoLabel.height / 2 // + 70
 		
 		
@@ -52,6 +66,9 @@ export default class StartScreenContainer extends PIXI.Container {
 		let height = 35;
 		let width = 3000;
 		this.spadersContainer = new PIXI.Container();
+
+		this.spadersContainer.addChild(this.planet);
+
 		this.spadersList = [];
 		
 		let order = [8,3,6,4,0,1,7,2,5,9]
@@ -80,8 +97,13 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.spadersContainer.children.sort((a,b) => (a.y > b.y) ? 1 : ((b.y > a.y) ? -1 : 0))
 		
 		this.spadersOfset = 0;
+
 		
 		this.spadersContainer.rotation = -Math.PI * 0.25
+		this.planet.rotation = -this.spadersContainer.rotation
+		this.planet.x = 50
+		this.planet.scale.set(2)
+		this.planet.sin = 0;
 
 		this.spadersContainer.x = 60
 		this.spadersContainer.y = - 350
@@ -93,7 +115,8 @@ export default class StartScreenContainer extends PIXI.Container {
 		//this.spadersContainer.x = 0
 		//this.spadersContainer.y = 110
 		this.spadersContainer.addChild(this.logoLabel);
-		this.logoLabel.x = 70
+		this.logoLabel.x = 20
+		this.logoLabel.y = 220
 		this.logoLabel.scale.set(1.5)
 		this.screenContainer.addChild(this.spadersContainer);
 
@@ -155,15 +178,23 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.howToPlayButton.scale.set(0.85)
 		this.howToPlayButton.onClick.add(this.onHowToPlay.bind(this))
 
+		this.settingsButton = new UIButton1(config.colors.dark, window.iconsData.settings, config.colors.white);
+		this.settingsButton.addLabelLeftMenu("SETTINGS");
+		this.settingsButton.updateRotation(0, true);		
+		//this.settingsButton.icon.rotation = Math.PI / 4
+		this.settingsButton.scale.set(0.85)
+		this.settingsButton.onClick.add(this.onSettings.bind(this))
+
 		this.mainMenuButtons.push(this.chooseLevelButton);
 		this.mainMenuButtons.push(this.howToPlayButton);
+		this.mainMenuButtons.push(this.settingsButton);
 		
 		for (let index = 0; index < this.mainMenuButtons.length; index++) {
 			const element = this.mainMenuButtons[index];
 			
 			this.mainMenucontainer.addChild(element)
-			element.x = 120 - index * 80
-			element.y = 130 + index * 80
+			element.x = 190 - index * 70
+			element.y = 130 + index * 70
 		}
 		this.playLine.addChild(this.mainMenucontainer)
 		
@@ -237,7 +268,10 @@ export default class StartScreenContainer extends PIXI.Container {
 		}
 
 		this.mainMenuButtons.forEach(element => {
-			element.updateTextColor(colorScheme.fontColor);
+			element.updateMenuColors(colorScheme.background, colorScheme.fontColor);
+
+			//element.updateMenuColors(colorScheme.fontColor, colorScheme.background);
+			
 		});
 		this.updateLinesColor();
 		//this.staticLogo.tint = colorScheme.fontColor;
@@ -247,6 +281,14 @@ export default class StartScreenContainer extends PIXI.Container {
 		let colors = colorSchemes.colorSchemes[window.COOKIE_MANAGER.stats.colorPalletID]
 
 		this.gameScreen.background.updateColors(colors.list)
+
+
+		this.planet.tint = colors.list[0].color;
+		for (let index = 0; index < this.planet.layers.length - 1; index++) {
+
+			const element = this.planet.layers[index];
+			element.tint = colors.list[index + 1].color;
+		}
 
 		for (let index = 0; index < this.lines.length; index++) {
 			const element = this.lines[index];
@@ -270,6 +312,9 @@ export default class StartScreenContainer extends PIXI.Container {
 		}
 
 	}
+	onSettings(){
+		this.gameScreen.mainMenuSettings.open()
+	}
 	onHowToPlay(){
 		this.gameScreen.openTutorial();
 	}
@@ -288,15 +333,25 @@ export default class StartScreenContainer extends PIXI.Container {
 	}
 	updateSpadersPosition(delta){
 
-		this.spadersOfset += delta;
+
+		this.planet.sin += delta;
+
+		this.planet.sin %= Math.PI * 2
+
+		this.planet.x = 60
+		this.planet.y = Math.floor(Math.sin(this.planet.sin) * 10)
+
+		this.spadersOfset += delta  * 0.1;
 		this.spadersOfset %= Math.PI * 2;
+		let w = 200 + Math.sin(this.planet.sin) * 40
+		let h = 120
 		for (let index = 0; index < this.spadersList.length; index++) {
 			const element = this.spadersList[index];
 			let n = ((index+1) / this.spadersList.length) + this.spadersOfset + Math.PI / 4;
-			element.x = Math.sin(n * (Math.PI * 2)) * 300 //+ 280
-			element.y = Math.cos(n * Math.PI) *Math.cos(n * Math.PI) * -120 + 60
+			element.x = Math.sin(n * (Math.PI * 2)) * w //+ 280
+			element.y = Math.cos(n * Math.PI) *Math.cos(n * Math.PI) * -h + (h/2)
 
-			element.scale.set( (element.y / 120) * 0.35 + 0.85)
+			element.scale.set( ((element.y / 120) * 0.35 + 0.85) * 0.75)
 		}
 
 		this.spadersContainer.children.sort((a,b) => (a.y > b.y) ? 1 : ((b.y > a.y) ? -1 : 0))
@@ -425,7 +480,7 @@ export default class StartScreenContainer extends PIXI.Container {
 
 		if (this.screenState == 1) {
 
-			this.updateSpadersPosition(delta * 0.05);
+			this.updateSpadersPosition(delta);
 		}
 
 	}

@@ -65,7 +65,7 @@
         },
         {
             "color": "0xDDDDDD",
-            "ignore": false,
+            "ignore": true,
             "name": "Movies",
             "displayName": "Video Game History",
             "imageSrc": "",

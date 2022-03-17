@@ -14,7 +14,7 @@ export default class Board {
 		this.allCards = [];
 		this.resetBoard();
 
-		window.board = this;
+		
 
 		this.totalCards = 0;
 		this.newGameFinished = true;
@@ -26,6 +26,7 @@ export default class Board {
 		this.nextTurnTimer = 0;
 
 		this.chainExplosionTime = 300;
+
 	}
 	update(delta) {
 		for (var i = 0; i < this.cards.length; i++) {
@@ -49,6 +50,8 @@ export default class Board {
 	startNewGame() {
 		this.updateNumberOfEntities();
 		this.newGameFinished = false;
+
+		
 	}
 	updateNumberOfEntities() {
 		this.totalCards = 0;
@@ -138,10 +141,6 @@ export default class Board {
 								movers++;
 								break;
 							}
-
-							// if (!this.cards[card.pos.i][card.pos.j - 1]) {
-
-							// }
 						}
 					}
 
@@ -155,8 +154,9 @@ export default class Board {
 
 			this.allCards.push(card);
 		}
-
-		////console.log(card)
+		this.allCards = this.allCards.filter(function(item, pos, self) {
+			return self.indexOf(item) == pos;
+		})
 	}
 
 	isPossibleShot(laneID) {
@@ -805,6 +805,16 @@ export default class Board {
 			}
 		})
 	}
+	removeCardFromList(card){
+		for (let index = 0; index < this.allCards.length; index++) {
+			const element = this.allCards[index];
+			if (element.cardID == card.cardID) {
+				this.allCards.splice(index, 1);
+				break;
+			}
+
+		}
+	}
 	attackCard(card, hits) {
 		// //console.log(card);
 		if (card.attacked && card.attacked(hits)) {
@@ -813,21 +823,16 @@ export default class Board {
 
 			this.cards[card.pos.i][card.pos.j] = 0;
 
-			for (let index = 0; index < this.allCards.length; index++) {
-				const element = this.allCards[index];
-				if (element.cardID == card.cardID) {
-					this.allCards.splice(index, 1);
-					break;
-				}
-
-			}
+			this.removeCardFromList(card)
 			card.destroy();
 			card.convertCard();
 
+			//this.debugBoard2();
 			//this.findOutGameOver();
 
 			return true;
 		}
+		//this.debugBoard2();
 
 	}
 	findOutGameOver() {
@@ -890,7 +895,7 @@ export default class Board {
 			for (var j = 0; j < this.cards[i].length; j++) {
 				str += (this.cards[i][j] || "0") + ' - ';
 			}
-			//console.log(str);
+			console.log(str);
 		}
 	}
 
@@ -900,7 +905,7 @@ export default class Board {
 			for (var j = 0; j < this.cards[i].length; j++) {
 				str += (this.cards[i][j] || "0") + ' - ';
 			}
-			//console.log(str);
+			console.log(str);
 		}
 	}
 
@@ -908,28 +913,19 @@ export default class Board {
 
 	sortMoveDown(cardsToMove) {
 
-		console.log(cardsToMove);
 		let moveDownList = [];
 
 		let byCol = [];
 		for (let index = 0; index < GRID.i; index++) {
 			byCol.push([]);
 		}
-		// for (let index = 0; index < cardsToMove.length; index++) {
-		// 	moveDownList.push(cardsToMove[index]);			
-		// }
-
-		// for (var i = 0; i < cardsToMove.length; i++) {
 		for (var i = 0; i < cardsToMove.length; i++) {
 			let id = cardsToMove[i].pos.i;
 			for (var j = cardsToMove[i].pos.j; j < GRID.j; j++) {
 				let tempCard = this.cards[id][j];
-
-				console.log(tempCard, id, j);
-
 				byCol[id].push(tempCard);
-
 				if (tempCard) {
+					
 					moveDownList.push(tempCard);
 				}
 				else {
@@ -966,6 +962,12 @@ export default class Board {
 				}
 			}
 		}
+
+		moveDownList = moveDownList.filter(function(item, pos, self) {
+			return self.indexOf(item) == pos;
+		})
+
+		//console.log("Move Down List",moveDownList)
 		for (var i = moveDownList.length - 1; i >= 0; i--) {
 			this.moveCardDown(moveDownList[i], (i / moveDownList.length) * 0.5 + 0.25);
 		}
@@ -994,15 +996,10 @@ export default class Board {
 	}
 	moveCardsDown(value, card) {
 		let cardsToMove = [];
-		//console.log(this.cards)
 		for (var i = 0; i < this.cards.length; i++) {
 			for (var j = 0; j < this.cards[i].length; j++) {
 				if (this.cards[i][j] && this.cards[i][j].isCard) {
-					// let tcard = this.cards[i][j].updateCounter(value);
-					// if (tcard) {
-					//// 	////console.log(tcard);
 					cardsToMove.push(this.cards[i][j])
-					// }
 				}
 			}
 		}
@@ -1016,18 +1013,20 @@ export default class Board {
 		//console.log(card)
 		this.game.grid.destroyCard(card)
 		this.cards[card.pos.i][card.pos.j] = 0;
+
+		this.removeCardFromList(card)
 		card.pos.j++;
 		if (card.pos.j >= GRID.j) {
 			card.destroy();
 			this.OnGameOver.dispatch();
 			return;
 		}
-		////console.log("2",card.pos)
 		this.addCard(card);
 		card.move({
 			x: card.pos.i * CARD.width,
 			y: card.pos.j * CARD.height
 		}, 0.2, delay);
+
 	}
 
 	getWhereWillStop(laneID) {

@@ -11,6 +11,11 @@ import SoundManager from './game/SoundManager';
 import colorSchemes from './colorSchemes';
 
 window.LOGO_FONT = "round_popregular"
+
+//pixolletta8pxmedium
+//retro_gamingregular
+//pixellarimedium
+//early_gameboyregular
 window.STANDARD_FONT1 = "pixolletta8pxmedium"
 window.STANDARD_FONT2 = "round_popregular"
 window.COOKIE_MANAGER = new CookieManager();

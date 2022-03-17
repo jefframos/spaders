@@ -211,7 +211,25 @@
             <key type="filename">blocker/l1_blocker_10.png</key>
             <key type="filename">blocker/l1_blocker_11.png</key>
             <key type="filename">blocker/l1_blocker_12.png</key>
-            <key type="filename">newEnemies/pixil-layer-9.png</key>
+            <key type="filename">newEnemies/spader1.png</key>
+            <key type="filename">newEnemies/spader10.png</key>
+            <key type="filename">newEnemies/spader2.png</key>
+            <key type="filename">newEnemies/spader3.png</key>
+            <key type="filename">newEnemies/spader4.png</key>
+            <key type="filename">newEnemies/spader5.png</key>
+            <key type="filename">newEnemies/spader6 - Copy.png</key>
+            <key type="filename">newEnemies/spader7.png</key>
+            <key type="filename">newEnemies/spader8.png</key>
+            <key type="filename">newEnemies/spader9.png</key>
+            <key type="filename">newEnemies/w_spader1.png</key>
+            <key type="filename">newEnemies/w_spader10.png</key>
+            <key type="filename">newEnemies/w_spader2.png</key>
+            <key type="filename">newEnemies/w_spader3.png</key>
+            <key type="filename">newEnemies/w_spader4.png</key>
+            <key type="filename">newEnemies/w_spader5.png</key>
+            <key type="filename">newEnemies/w_spader7.png</key>
+            <key type="filename">newEnemies/w_spader8.png</key>
+            <key type="filename">newEnemies/w_spader9.png</key>
             <key type="filename">spader1/l0_spader_1_1.png</key>
             <key type="filename">spader1/l0_spader_1_2.png</key>
             <key type="filename">spader1/l0_spader_1_3.png</key>
@@ -262,6 +280,16 @@
             <key type="filename">spader5/l1_spader_5_3.png</key>
             <key type="filename">spader5/l1_spader_5_4.png</key>
             <key type="filename">spader5/l1_spader_5_5.png</key>
+            <key type="filename">spaderCountdown/l0_spader_countdown_1.png</key>
+            <key type="filename">spaderCountdown/l0_spader_countdown_2.png</key>
+            <key type="filename">spaderCountdown/l0_spader_countdown_3.png</key>
+            <key type="filename">spaderCountdown/l0_spader_countdown_4.png</key>
+            <key type="filename">spaderCountdown/l0_spader_countdown_5.png</key>
+            <key type="filename">spaderCountdown/l1_spader_countdown_1.png</key>
+            <key type="filename">spaderCountdown/l1_spader_countdown_2.png</key>
+            <key type="filename">spaderCountdown/l1_spader_countdown_3.png</key>
+            <key type="filename">spaderCountdown/l1_spader_countdown_4.png</key>
+            <key type="filename">spaderCountdown/l1_spader_countdown_5.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -292,28 +320,6 @@
                 <false/>
             </struct>
             <key type="filename">base.png</key>
-            <key type="filename">newEnemies/spader1.png</key>
-            <key type="filename">newEnemies/spader10.png</key>
-            <key type="filename">newEnemies/spader2.png</key>
-            <key type="filename">newEnemies/spader3.png</key>
-            <key type="filename">newEnemies/spader4.png</key>
-            <key type="filename">newEnemies/spader5.png</key>
-            <key type="filename">newEnemies/spader6 - Copy.png</key>
-            <key type="filename">newEnemies/spader6.png</key>
-            <key type="filename">newEnemies/spader7.png</key>
-            <key type="filename">newEnemies/spader8.png</key>
-            <key type="filename">newEnemies/spader9.png</key>
-            <key type="filename">newEnemies/w_spader1.png</key>
-            <key type="filename">newEnemies/w_spader10.png</key>
-            <key type="filename">newEnemies/w_spader2.png</key>
-            <key type="filename">newEnemies/w_spader3.png</key>
-            <key type="filename">newEnemies/w_spader4.png</key>
-            <key type="filename">newEnemies/w_spader5.png</key>
-            <key type="filename">newEnemies/w_spader6 - Copy.png</key>
-            <key type="filename">newEnemies/w_spader6.png</key>
-            <key type="filename">newEnemies/w_spader7.png</key>
-            <key type="filename">newEnemies/w_spader8.png</key>
-            <key type="filename">newEnemies/w_spader9.png</key>
             <key type="filename">whiteEnemies/w_pixil-layer-9.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -426,6 +432,13 @@
             </struct>
             <key type="filename">icons/icons8-back-128.png</key>
             <key type="filename">newIcons/time.png</key>
+            <key type="filename">planets/planet1/l0_planet_1_1.png</key>
+            <key type="filename">planets/planet1/l1_planet_1_1.png</key>
+            <key type="filename">planets/planet1/l2_planet_1_1.png</key>
+            <key type="filename">planets/planet1/l3_planet_1_1.png</key>
+            <key type="filename">planets/planet1/l4_planet_1_1.png</key>
+            <key type="filename">planets/planet1/l5_planet_1_1.png</key>
+            <key type="filename">planets/planet1/l6_planet_1_1.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -493,24 +506,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">newEnemies/block.png</key>
-            <key type="filename">whiteEnemies/w_block2.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>11,11,22,22</rect>
-                <key>scale9Paddings</key>
-                <rect>11,11,22,22</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">newEnemies/bomb.png</key>
-            <key type="filename">whiteEnemies/w_bomb.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -519,15 +515,14 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>17,22,33,45</rect>
+                <rect>34,45,67,89</rect>
                 <key>scale9Paddings</key>
-                <rect>17,22,33,45</rect>
+                <rect>34,45,67,89</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">newEnemies/pixil-layer-0.png</key>
-            <key type="filename">newEnemies/pixil-layer-4.png</key>
-            <key type="filename">newEnemies/pixil-layer-5.png</key>
+            <key type="filename">newEnemies/spader6.png</key>
+            <key type="filename">newEnemies/w_spader6.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -536,115 +531,9 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>28,30,56,60</rect>
+                <rect>38,38,76,76</rect>
                 <key>scale9Paddings</key>
-                <rect>28,30,56,60</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">newEnemies/pixil-layer-1.png</key>
-            <key type="filename">newEnemies/pixil-layer-6.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>26,30,52,60</rect>
-                <key>scale9Paddings</key>
-                <rect>26,30,52,60</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">newEnemies/pixil-layer-2.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>26,32,52,64</rect>
-                <key>scale9Paddings</key>
-                <rect>26,32,52,64</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">newEnemies/pixil-layer-3.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>24,28,48,56</rect>
-                <key>scale9Paddings</key>
-                <rect>24,28,48,56</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">newEnemies/pixil-layer-7.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>32,30,64,60</rect>
-                <key>scale9Paddings</key>
-                <rect>32,30,64,60</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">newEnemies/pixil-layer-8.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>24,30,48,60</rect>
-                <key>scale9Paddings</key>
-                <rect>24,30,48,60</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">newEnemies/spaderTest1.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>8,8,16,16</rect>
-                <key>scale9Paddings</key>
-                <rect>8,8,16,16</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">newEnemies/w_block.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>19,19,38,38</rect>
-                <key>scale9Paddings</key>
-                <rect>19,19,38,38</rect>
+                <rect>38,38,76,76</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -806,6 +695,36 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">whiteEnemies/w_block2.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>11,11,22,22</rect>
+                <key>scale9Paddings</key>
+                <rect>11,11,22,22</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">whiteEnemies/w_bomb.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>17,22,33,45</rect>
+                <key>scale9Paddings</key>
+                <rect>17,22,33,45</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">whiteEnemies/w_pixil-layer-0.png</key>
             <key type="filename">whiteEnemies/w_pixil-layer-4.png</key>
             <key type="filename">whiteEnemies/w_pixil-layer-5.png</key>
@@ -902,7 +821,6 @@
         </map>
         <key>fileList</key>
         <array>
-            <filename>newEnemies</filename>
             <filename>finish</filename>
             <filename>icons</filename>
             <filename>newIcons</filename>
@@ -939,6 +857,30 @@
             <filename>base.png</filename>
             <filename>spader4</filename>
             <filename>spader5</filename>
+            <filename>spaderCountdown</filename>
+            <filename>planets/planet1</filename>
+            <filename>newEnemies/spader1.png</filename>
+            <filename>newEnemies/spader10.png</filename>
+            <filename>newEnemies/spader2.png</filename>
+            <filename>newEnemies/spader3.png</filename>
+            <filename>newEnemies/spader4.png</filename>
+            <filename>newEnemies/spader5.png</filename>
+            <filename>newEnemies/spader6 - Copy.png</filename>
+            <filename>newEnemies/spader6.png</filename>
+            <filename>newEnemies/spader7.png</filename>
+            <filename>newEnemies/spader8.png</filename>
+            <filename>newEnemies/spader9.png</filename>
+            <filename>newEnemies/w_spader1.png</filename>
+            <filename>newEnemies/w_spader10.png</filename>
+            <filename>newEnemies/w_spader2.png</filename>
+            <filename>newEnemies/w_spader3.png</filename>
+            <filename>newEnemies/w_spader4.png</filename>
+            <filename>newEnemies/w_spader5.png</filename>
+            <filename>newEnemies/w_spader6.png</filename>
+            <filename>newEnemies/w_spader7.png</filename>
+            <filename>newEnemies/w_spader8.png</filename>
+            <filename>newEnemies/w_spader9.png</filename>
+            <filename>newEnemies/bomb.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

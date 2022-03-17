@@ -15,10 +15,17 @@ export default class MainMenu extends PIXI.Container {
 
         this.customWidth = 60;
 
+        this.blocker = new PIXI.Graphics().beginFill(0).drawRect(-5000, -5000, 10000, 10000);
+        this.mainContainer.addChild(this.blocker)
+        this.blocker.alpha = 0.5
+        this.blocker.interactive = true;
+
+        this.blocker.on('mousedown', this.collapse.bind(this)).on('touchstart', this.collapse.bind(this));
+
         this.backShape = new PIXI.mesh.NineSlicePlane(
             PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
-        this.backShape.width = 400
-        this.backShape.height = 400
+        this.backShape.width = config.width
+        this.backShape.height = config.height * 0.5
         this.backShape.tint = config.colors.white
 
         this.positionSpring = new Spring();
@@ -188,11 +195,15 @@ export default class MainMenu extends PIXI.Container {
         this.positionSpring.update();
         if (this.state == 1) {
             this.openMenu.updateTexture(window.iconsData.settings)
+            this.openMenu.visible = false;
+            this.blocker.visible = false;
             this.positionSpring.tx = this.backShape.width * this.mainContainer.scale.x + 50;
             this.mainContainer.x = this.positionSpring.x//utils.lerp(this.mainContainer.x, this.backShape.width * this.mainContainer.scale.x + 50, 0.5);
             this.mainContainer.alpha = utils.lerp(this.mainContainer.alpha, 0, 0.5);
         } else {
             this.openMenu.updateTexture(window.iconsData.cancel)
+            this.openMenu.visible = true;
+            this.blocker.visible = true;
             this.positionSpring.tx = -this.backShape.width * this.mainContainer.scale.x
             this.mainContainer.x = this.positionSpring.x//utils.lerp(this.mainContainer.x, -this.backShape.width * this.mainContainer.scale.x, 0.5);
             this.mainContainer.alpha = utils.lerp(this.mainContainer.alpha, 1, 0.5);

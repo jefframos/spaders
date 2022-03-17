@@ -38,8 +38,8 @@ export default class UIButton1 extends PIXI.Container {
 		//this.backShape.anchor.set(0.5)
 		this.backShape.tint = color;
 
-		this.updateRotation( Math.PI * 0.25)
-		
+		this.updateRotation(Math.PI * 0.25)
+
 		this.icon.anchor.set(0.5);
 
 		this.icon.scale.set(this.backShape.height / this.icon.height * 0.7)
@@ -54,11 +54,11 @@ export default class UIButton1 extends PIXI.Container {
 		this.interactive = true;
 		this.buttonMode = true;
 	}
-	updateRotation(rot, invertIcon = false){
+	updateRotation(rot, invertIcon = false) {
 		this.backShapeBorder.rotation = rot
 		this.backShape.rotation = rot
 
-		if(invertIcon){
+		if (invertIcon) {
 			this.icon.rotation = -rot
 		}
 	}
@@ -77,6 +77,20 @@ export default class UIButton1 extends PIXI.Container {
 			this.movesLabel.style.fill = color;
 		}
 	}
+	updateMenuColors(textColor, backgroundColor){
+		this.backShapeBorder.tint = backgroundColor;
+		this.icon.tint = backgroundColor;
+
+		if(this.backLabelLeft){
+			this.backLabelLeft.tint = backgroundColor;
+		}
+
+		if (this.movesLabel) {
+			this.movesLabel.style.fill = textColor;
+		}
+
+		this.backShape.tint = textColor;
+	}
 	addLabelLeft(label) {
 		this.movesLabel = new PIXI.Text(label, { font: '18px', fill: this.backShape.tint, align: 'right', fontWeight: '300', fontFamily: window.STANDARD_FONT1 });
 		this.movesLabel.pivot.x = this.movesLabel.width;
@@ -91,6 +105,18 @@ export default class UIButton1 extends PIXI.Container {
 		this.movesLabel.pivot.x = this.movesLabel.width;
 		this.movesLabel.pivot.y = this.movesLabel.height / 2;
 		this.movesLabel.x = -this.mainContainer.width * 0.55;
+
+		if (!this.backLabelLeft) {
+			this.backLabelLeft = new PIXI.mesh.NineSlicePlane(
+				PIXI.Texture.fromFrame('smallButton.png'), 10, 10, 10, 10)
+			this.backLabelLeft.tint = this.icon.tint;
+		}
+
+		this.backLabelLeft.width = this.movesLabel.width - this.movesLabel.x;
+		this.backLabelLeft.height = this.backShape.height;
+		this.backLabelLeft.x = - this.backLabelLeft.width - this.backShape.width / 2
+		this.backLabelLeft.y = -this.backLabelLeft.height / 2// - this.backShape.height / 2
+		this.addChildAt(this.backLabelLeft,0);
 		this.addChild(this.movesLabel);
 	}
 	updateTexture(texture) {

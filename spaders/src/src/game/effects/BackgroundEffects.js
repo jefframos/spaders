@@ -149,7 +149,7 @@ export default class BackgroundEffects extends PIXI.Container {
 				window.fxSpeed = 1;
 			}
 		}
-		this.currentSpeed.y = this.innerResolution.height * 0.05 * window.fxSpeed
+		this.currentSpeed.y = this.innerResolution.height * 0.02 * (window.fxSpeed * 2)
 
 		//console.log(this.currentSpeed.y, delta)
 		let spd = this.currentSpeed.y * delta;
@@ -164,12 +164,12 @@ export default class BackgroundEffects extends PIXI.Container {
 
 		totalStars = Math.min(40, totalStars);
 		let l = this.innerResolution.width * 0.001
-		l = Math.max(l, 1)
+		l = Math.max(l, 1.5)
 		this.stars = [];
 		for (var i = 0; i < totalStars; i++) {
 			let dist = Math.random() * (l * 2) + l;
 			let tempStar = new StarParticle(dist);
-			tempStar.alpha = (Math.min(dist, 3) / 3 * 0.4) + 0.2
+			tempStar.alpha = (Math.min(dist, 3) / 3 * 0.5) + 0.2
 			let toClose = true;
 			let acc = 5;
 			while (toClose || acc > 0) {

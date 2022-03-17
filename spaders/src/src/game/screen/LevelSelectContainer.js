@@ -76,6 +76,8 @@ export default class LevelSelectContainer extends PIXI.Container {
                 this.unscaledLineButtonSize.width -= this.currentGridOffset.x /2;
 
                 this.unscaledCardSize = { width:(window.innerWidth - this.currentGridOffset.x * 2) * 0.9 / 3, height: 80 }
+
+                
                 
                 
             } else {
@@ -85,8 +87,9 @@ export default class LevelSelectContainer extends PIXI.Container {
                 this.unscaledLineButtonSize.width -= this.currentGridOffset.x/2;
                 
                 this.unscaledCardSize = { width:(window.innerWidth - this.currentGridOffset.x * 2) * 0.9 / 3, height: 120 }
-
+                
             }
+            this.unscaledLinePlanetSize = { width: this.unscaledLineButtonSize.width, height:this.unscaledLineButtonSize.width }
 
             this.buildSections();
             this.refreshNavButtons();
@@ -414,7 +417,7 @@ export default class LevelSelectContainer extends PIXI.Container {
                 navButton.buttonMode = true;
                 this.navButtons.push(navButton);
 
-                navButton.setPallet(this.drawColorPallet(section.colorPalletId));
+                navButton.setPallet(this.drawColorPallet(section.colorPalletId), colorSchemes.colorSchemes[section.colorPalletId]);
                 //navButton.setColor(window.colorsOrder[this.navButtons.length % window.colorsOrder.length])
                 navButton.on('mouseup', this.openSection.bind(this, section)).on('touchend', this.openSection.bind(this, section));
             }
@@ -435,12 +438,12 @@ export default class LevelSelectContainer extends PIXI.Container {
     }
 
     buildSectionButton(section) {
-        let secButton = new SquareButton(this.unscaledLineButtonSize);
+        let secButton = new SquareButton(this.unscaledLinePlanetSize, true);
         secButton.updateLabelTop(section.name);
         if (section.imageSrc)
             secButton.updateIcon(PIXI.Sprite.fromImage('./assets/' + section.imageSrc));
 
-        this.gameScreen.resizeToFitAR(this.unscaledLineButtonSize, secButton)
+        this.gameScreen.resizeToFitAR(this.unscaledLinePlanetSize, secButton)
 
         //secButton.setLargeButtonMode();
 
@@ -862,37 +865,49 @@ export default class LevelSelectContainer extends PIXI.Container {
             }
             let chunck = distance
             let adj = -(chunck * maxPerLine) / 2//0//(margin - fullWidth) * 0.5
-            element.x = (index % maxPerLine) * chunck + adj + chunck / 2 - element.width / 2 + this.currentGridOffset.x//+ distance * 0.5 - fullWidth * 0.5///+ element.width / 2 + margin * 0.5
-
-            // // if(!element.debug){
-            // //     element.debug = new PIXI.Graphics().beginFill(0xff0066).drawRect(0,0,chunck,element.height);
-            // //     element.parent.addChild(element.debug)
-            // //     element.debug.position = element.position
-            // // }
-
-            //element.scale.set(0.8)
+            element.x = (index % maxPerLine) * chunck + adj + chunck / 2 - element.width / 2 + this.currentGridOffset.x
             if (index >= maxPerLine) {
                 element.y = 20 + lines[index - maxPerLine]
             } else {
 
                 element.y = 50
             }
-
-            // if(!element.debug){
-            //     element.debug = new PIXI.Graphics().beginFill(0xff0066 * Math.random()).drawRect(0,0,chunck,element.height);
-            //     element.parent.addChild(element.debug)
-            //     element.debug.position = element.position
-            //     element.debug.alpha = 0.5
-            // }else{
-            //     element.debug.position = element.position
-
-            // }
-
             lines.push(element.y + size.height)
 
         }
 
     }
+
+    drawPlanets(elements, margin, size, isVertical, lineOverride = 1) {
+        let maxPerLine = Math.floor((this.mainCanvas.width - this.currentGridOffset.x) / (size.width + margin * 2.5)) + 1
+        if (isVertical) {
+            maxPerLine = lineOverride;
+        }
+
+        let fullWidth = (this.mainCanvas.width - this.currentGridOffset.x) - margin * 2
+        let distance = fullWidth / maxPerLine
+        let line = -1
+        let col = 0
+
+        let lines = []
+
+        for (let index = 0; index < elements.length; index++) {
+            const element = elements[index];
+
+            if (index % maxPerLine == 0) {
+                line++
+            }
+            let chunck = distance
+            let adj = -(chunck * maxPerLine) / 2//0//(margin - fullWidth) * 0.5
+            element.x = (index % maxPerLine) * chunck + adj + chunck / 2 - element.width / 2 + this.currentGridOffset.x
+            element.y = 50 + index * size.height
+            
+            lines.push(element.y + size.height)
+
+        }
+
+    }
+
     resize(innerResolution, force) {
         if (!force && (this.currentResolution.width == innerResolution.width && this.currentResolution.height == innerResolution.height)) {
             //return;
@@ -934,8 +949,8 @@ export default class LevelSelectContainer extends PIXI.Container {
 
         if (this.shouldUpdate) {
 
+            this.drawPlanets(this.navButtons, 20, this.unscaledLineButtonSize, true, 2);
             this.drawGrid(this.sectionButtons, 20, this.unscaledLineButtonSize, true, 2);
-            this.drawGrid(this.navButtons, 20, this.unscaledLineButtonSize, true, 2);
             this.drawGrid(this.levelCards, 20, this.unscaledCardSize, false);
             if (this.levelSplitCards.length > 0) {
 

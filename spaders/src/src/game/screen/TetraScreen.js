@@ -100,6 +100,7 @@ export default class TetraScreen extends Screen {
 		this.grid.onDestroyAllStartedCards.add(() => this.onDestroyAllStartedCards());
 
 		this.board = new Board(this);
+		window.board = this.board;
 		this.board.onDestroyCard.add((card) => this.onDestroyCard(card));
 		this.board.OnStartNextRound.add((card) => this.OnStartNextRound(card));
 		this.board.OnGameOver.add((card) => this.OnGameOver(card));

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.1" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="64" tileheight="64" infinite="0" nextlayerid="118" nextobjectid="1">
+<map version="1.8" tiledversion="1.8.1" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="64" tileheight="64" infinite="0" nextlayerid="120" nextobjectid="1">
  <editorsettings>
   <export target="../../../www/data/debug/debug.json" format="json"/>
  </editorsettings>
@@ -13,7 +13,7 @@
  <layer id="74" name="Falling Pieces" width="16" height="16">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="0"/>
-   <property name="fallTurns" type="int" value="15"/>
+   <property name="fallTurns" type="int" value="1"/>
    <property name="gameMode" type="int" value="1"/>
    <property name="i" type="int" value="11"/>
    <property name="j" type="int" value="11"/>
@@ -31,6 +31,72 @@
 6,6,6,6,6,6,0,0,0,0,0,0,0,0,0,0,
 1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,
 1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="118" name="Copy of Falling Pieces" width="16" height="16" visible="0">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="0"/>
+   <property name="fallTurns" type="int" value="1"/>
+   <property name="gameMode" type="int" value="0"/>
+   <property name="i" type="int" value="11"/>
+   <property name="j" type="int" value="11"/>
+   <property name="padding-bottom" type="int" value="5"/>
+   <property name="padding-left" type="int" value="2"/>
+   <property name="padding-right" type="int" value="0"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="119" name="Copy of _ADDON" width="16" height="16" visible="0">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="11"/>
+   <property name="j" type="int" value="11"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="2"/>
+   <property name="padding-right" type="int" value="0"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,48,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

@@ -109,14 +109,14 @@
             "logoColor": "0xFFFFFF",
             "fillBarColor": "0x7BCA93",
             "fillBarCompleteColor": "0x8957c7",
-            "background": "0x151515",
+            "background": "0x222222",
             "fontColor": "0xFFFFFF",
             "arrowTrailColor": "0xFFFFFF",
             "buttonData": {
                 "fontColor": "0xFFFFFF",
                 "levelCompleteColor": "0x1376B9",
                 "tierCompleteColor": "0x8957c7",
-                "buttonStandardColor": "0x333333",
+                "buttonStandardColor": "0x444444",
                 "buttonStandardDarkColor": "0x111111",
                 "buttonBackTitleColor": "0x222222"
             },

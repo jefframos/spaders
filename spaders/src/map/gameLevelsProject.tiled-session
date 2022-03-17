@@ -1,16 +1,16 @@
 {
     "activeFile": "debug/debug.tmx",
     "expandedProjectPaths": [
-        "templates",
-        "movies",
-        "debug",
         "how-to-play",
-        "synth",
-        "tutorial",
-        "videogames",
+        "movies",
         "gb",
         "basics",
-        "main"
+        "debug",
+        "templates",
+        "synth",
+        "main",
+        "videogames",
+        "tutorial"
     ],
     "fileStates": {
         "D:/Projects/tetra/map/levels.tmx": {
@@ -38,7 +38,7 @@
         },
         "debug/debug.tmx": {
             "scale": 0.6522518382352941,
-            "selectedLayer": 6,
+            "selectedLayer": 5,
             "viewCenter": {
                 "x": 480.64257028112445,
                 "y": 512.0721482420912
@@ -48,8 +48,8 @@
             "scale": 0.125,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 3596,
-                "y": 2440
+                "x": 2308,
+                "y": 3072
             }
         },
         "gb/gameboyCreatures.tmx": {

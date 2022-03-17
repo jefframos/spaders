@@ -36,8 +36,8 @@ export default class Card extends PIXI.Container {
 			PIXI.Texture.fromFrame('largeCardBackPixel.png'), 20, 20, 20, 20)//new PIXI.Graphics().beginFill(0xFFFFFF).drawRoundedRect(0, 0, CARD.width, CARD.height, 0);
 		this.circleBackground = new PIXI.Graphics().beginFill(0xFFFFFF).drawCircle(0, 0, CARD.width / 2);
 		this.cardBack3 = PIXI.Sprite.fromFrame('base.png');
-		this.enemySprite = PIXI.Sprite.fromFrame('enemy.png');
-		this.enemySpriteWhite = PIXI.Sprite.fromFrame('enemy.png');
+		this.enemySprite = PIXI.Sprite.fromFrame('l0_spader_1_1.png');
+		this.enemySpriteWhite = PIXI.Sprite.fromFrame('l0_spader_1_1.png');
 		this.enemySpriteWhite.visible = false;
 		this.enemySprite.addChild(this.enemySpriteWhite);
 		this.enemySprite.scale.set(this.realSpriteWidth / this.enemySprite.width * this.scaleRef)
