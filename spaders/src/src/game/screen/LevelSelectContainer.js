@@ -70,23 +70,23 @@ export default class LevelSelectContainer extends PIXI.Container {
 
             if (window.isMobile) {
 
-                this.unscaledLineButtonSize = { width: (config.width - this.currentGridOffset.x * 2) * 0.9 / 2, height: 80 }
+                this.unscaledLineButtonSize = { width: (window.innerWidth - this.currentGridOffset.x * 2) * 0.9 / 2, height: 80 }
                 this.unscaledLineButtonSize.width = Math.min(config.width, this.unscaledLineButtonSize.width)
-                this.unscaledLineButtonSize.width = Math.max((config.width) * 0.9 / 2, this.unscaledLineButtonSize.width);
+                this.unscaledLineButtonSize.width = Math.max((window.innerWidth) * 0.9 / 2, this.unscaledLineButtonSize.width);
                 this.unscaledLineButtonSize.width -= this.currentGridOffset.x /2;
 
-                this.unscaledCardSize = { width:(config.width - this.currentGridOffset.x * 2) * 0.9 / 3, height: 80 }
+                this.unscaledCardSize = { width:(window.innerWidth - this.currentGridOffset.x * 2) * 0.9 / 3, height: 80 }
 
                 
                 
                 
             } else {
-                this.unscaledLineButtonSize = { width: (config.width - this.currentGridOffset.x * 2) * 0.9 / 2, height: 120 }
+                this.unscaledLineButtonSize = { width: (window.innerWidth - this.currentGridOffset.x * 2) * 0.9 / 2, height: 120 }
                 this.unscaledLineButtonSize.width = Math.min(config.width, this.unscaledLineButtonSize.width)
                 this.unscaledLineButtonSize.width = Math.max(200, this.unscaledLineButtonSize.width);
                 this.unscaledLineButtonSize.width -= this.currentGridOffset.x/2;
                 
-                this.unscaledCardSize = { width:(config.width - this.currentGridOffset.x * 2) * 0.9 / 3, height: 120 }
+                this.unscaledCardSize = { width:(window.innerWidth - this.currentGridOffset.x * 2) * 0.9 / 3, height: 120 }
                 
             }
             this.unscaledLinePlanetSize = { width: this.unscaledLineButtonSize.width, height:this.unscaledLineButtonSize.width }
@@ -901,6 +901,8 @@ export default class LevelSelectContainer extends PIXI.Container {
             let adj = -(chunck * maxPerLine) / 2//0//(margin - fullWidth) * 0.5
             element.x = (index % maxPerLine) * chunck + adj + chunck / 2 - element.width / 2 + this.currentGridOffset.x
             element.y = 50 + index * size.height
+
+    
             
             lines.push(element.y + size.height)
 
