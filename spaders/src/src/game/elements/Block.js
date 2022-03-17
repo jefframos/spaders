@@ -20,14 +20,14 @@ export default class Card extends PIXI.Container {
 		// this.sprite.width = CARD.width;
 		// this.sprite.height = CARD.height;
 
-		this.sprite = PIXI.Sprite.fromFrame(window.IMAGE_DATA.enemyBlockImages[0]);
+		this.sprite = PIXI.Sprite.fromFrame('l0_blocker_01.png');
 
 		this.sprite.scale.set(CARD.width / this.realSpriteWidth * 0.8)
 		this.sprite.tint = 0x333333;
 		this.sprite.anchor.set(0.5);
 
 
-		this.enemySpriteWhite = PIXI.Sprite.fromFrame("w_" + window.IMAGE_DATA.enemyBlockImages[0]);
+		this.enemySpriteWhite = PIXI.Sprite.fromFrame('l0_blocker_01.png');
 		this.enemySpriteWhite.anchor = this.sprite.anchor;
 
 		this.sprite.addChild(this.enemySpriteWhite)

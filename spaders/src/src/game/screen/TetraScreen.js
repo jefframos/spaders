@@ -272,6 +272,7 @@ export default class TetraScreen extends Screen {
 		setTimeout(() => {
 
 			this.board.setFinalState();
+			this.grid.endGameMode();
 		}, 500);
 
 		if (this.currentCard) {

@@ -229,6 +229,7 @@ export default class Grid extends PIXI.Container {
 console.log(levelData)
 
 		let backGridContainer = new PIXI.Container();
+		let backGridContainerBlocker = new PIXI.Container();
 		for (var i = GRID.i - 1; i >= 0; i--) {
 			let gridLine = [];
 			for (var j = GRID.j - 1; j >= 0; j--) {
@@ -248,15 +249,15 @@ console.log(levelData)
 				gridSquare.startAlpha = gridSquare.alpha;
 				gridSquare.sin = Math.random() * Math.PI * 2;
 				gridSquare.tint = colorScheme.color;
-
+				
+				backGridContainer.addChild(gridSquare)
 				if(levelData && levelData.pieces[j][i] == 32){
-					console.log("BLOCKER", levelData.pieces[j][i])
-					gridSquare.alpha = 0;
+					//gridSquare.alpha = 0;
+					backGridContainerBlocker.addChild(gridSquare)
 				}else{
 
 				}
 				
-				backGridContainer.addChild(gridSquare)
 				this.grids.push(gridSquare);
 
 				//let gridEffectSquare = PIXI.Sprite.fromFrame('gridSquare.png')
@@ -278,14 +279,19 @@ console.log(levelData)
 			this.gridsSquares.unshift(gridLine);
 		}
 		let texture = renderer.generateTexture(backGridContainer);
+		let textureBlocker = renderer.generateTexture(backGridContainerBlocker);
 
 		let gridSprite = new PIXI.Sprite()
 		gridSprite.setTexture(texture)
 		gridContainer.addChildAt(gridSprite, 0)
 
+		this.gridSpriteBlockers = new PIXI.Sprite()
+		this.gridSpriteBlockers.setTexture(textureBlocker)
+		gridContainer.addChildAt(this.gridSpriteBlockers, 0)
 
 		gridContainer.alpha = 0
 
+		this.gridSpriteBlockers.alpha = 0;
 
 		TweenMax.to(gridContainer, 0.5, { alpha: 1, delay: 0.75 });
 		this.addChild(gridContainer);
@@ -301,6 +307,9 @@ console.log(levelData)
 			back.y = -this.backgroundOffset.y / 4
 			gridContainer.addChildAt(back, 0);
 		//}, 100);
+	}
+	endGameMode(){
+		this.gridSpriteBlockers.alpha = 1;
 	}
 	removeCard(i, j) {
 		let tile = this.gridsSquares[i][j]
