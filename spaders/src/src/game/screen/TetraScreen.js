@@ -673,6 +673,9 @@ export default class TetraScreen extends Screen {
 		this.tutorialOverlay.visible = true;
 		this.tutorialOverlay.show(id)
 		this.gameRunning = false;
+
+		this.colorTweenBomb.startTween(window.COOKIE_MANAGER.stats.colorPalletID)
+
 		this.hideInGameElements();
 	}
 	updateColorScheme() {

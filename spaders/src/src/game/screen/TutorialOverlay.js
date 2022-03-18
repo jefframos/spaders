@@ -451,7 +451,7 @@ export default class TutorialOverlay extends PIXI.Container {
             TweenMax.to(this.arrowSpriteElements, 0.5, { delay: 0.7 + action.delay ? action.delay : 0, alpha: 1 })
         }
         if (!this.nextStepTutorial.visible) {
-            TweenMax.to(this.arrowSpriteCard, 0.5, { delay: 0.7 + action.delay ? action.delay : 0, alpha: 1 })
+            TweenMax.to(this.arrowSpriteCard, 0.5, { delay: 3 + action.delay ? action.delay : 0, alpha: 1 })
         }
         this.tutorialPopLabel.popLabel(action, this.nextTutorial.bind(this));
         this.currentTutorial++;
@@ -554,7 +554,7 @@ export default class TutorialOverlay extends PIXI.Container {
             this.arrowSpriteCard.offset %= Math.PI
             this.arrowSpriteCard.x = this.currentCard.x + CARD.width / 2
 
-            this.arrowSpriteCard.y = this.currentCard.y + CARD.height * 1.5 + Math.sin(this.arrowSpriteCard.offset) * CARD.height * 0.5
+            this.arrowSpriteCard.y = utils.lerp(this.trailHorizontal.y + CARD.height * 1.5 + Math.sin(this.arrowSpriteCard.offset) * CARD.height * 0.5,this.arrowSpriteCard.y, 0.3)
             this.currentCard.y = ((this.gridContainer.height) / this.gridContainer.scale.y) + this.offsetCard.y - CARD.height - 10;
             this.trailHorizontal.y = this.currentCard.y - this.offsetCard.y;
             this.trailHorizontal.tint = this.currentCard.currentColor;
