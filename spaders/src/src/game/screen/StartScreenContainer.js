@@ -26,7 +26,7 @@ export default class StartScreenContainer extends PIXI.Container {
 
 		this.logoLayers = [];
 
-		this.planet = new PIXI.Sprite.fromFrame("l0_planet_1_1.png");
+		this.planet = new PIXI.Sprite()//.fromFrame("l0_planet_1_1.png");
 
 		this.planet.anchor.set(0.5)
 		this.planet.layers = [];
@@ -102,7 +102,7 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.spadersContainer.rotation = -Math.PI * 0.25
 		this.planet.rotation = -this.spadersContainer.rotation
 		this.planet.x = 50
-		this.planet.scale.set(2)
+		//this.planet.scale.set(2)
 		this.planet.sin = 0;
 
 		this.spadersContainer.x = 60
@@ -284,10 +284,10 @@ export default class StartScreenContainer extends PIXI.Container {
 
 
 		this.planet.tint = colors.list[0].color;
-		for (let index = 0; index < this.planet.layers.length - 1; index++) {
+		for (let index = 0; index < this.planet.layers.length; index++) {
 
 			const element = this.planet.layers[index];
-			element.tint = colors.list[index + 1].color;
+			element.tint = colors.list[index].color;
 		}
 
 		for (let index = 0; index < this.lines.length; index++) {

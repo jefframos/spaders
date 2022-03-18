@@ -67,6 +67,7 @@ export default class LevelSelectContainer extends PIXI.Container {
             this.newContainer.addChild(this.levelsContainer)
 
             this.resize({ width: window.innerWidth, height: window.innerHeight }, true)
+            //this.resize({ width: config.width, height: config.height }, true)
 
             if (window.isMobile) {
 
@@ -77,19 +78,20 @@ export default class LevelSelectContainer extends PIXI.Container {
 
                 this.unscaledCardSize = { width:(window.innerWidth - this.currentGridOffset.x * 2) * 0.9 / 3, height: 80 }
 
+                let planetTarget = Math.min((window.innerWidth) * 0.3, this.unscaledLineButtonSize.width)
                 
-                
+                this.unscaledLinePlanetSize = { width: planetTarget, height:planetTarget }
                 
             } else {
-                this.unscaledLineButtonSize = { width: (window.innerWidth - this.currentGridOffset.x * 2) * 0.9 / 2, height: 120 }
+                this.unscaledLineButtonSize = { width: (config.width - this.currentGridOffset.x * 2) * 0.9 / 2, height: 120 }
                 this.unscaledLineButtonSize.width = Math.min(config.width / 2, this.unscaledLineButtonSize.width)
                 this.unscaledLineButtonSize.width = Math.max(200, this.unscaledLineButtonSize.width);
                 this.unscaledLineButtonSize.width -= this.currentGridOffset.x/2;
                 
-                this.unscaledCardSize = { width:(window.innerWidth - this.currentGridOffset.x * 2) * 0.9 / 3, height: 120 }
+                this.unscaledCardSize = { width:(config.width - this.currentGridOffset.x * 2) * 0.9 / 3, height: 120 }
                 
+                this.unscaledLinePlanetSize = { width: this.unscaledLineButtonSize.width, height:this.unscaledLineButtonSize.width }
             }
-            this.unscaledLinePlanetSize = { width: this.unscaledLineButtonSize.width, height:this.unscaledLineButtonSize.width }
 
             this.buildSections();
             this.refreshNavButtons();
@@ -263,7 +265,7 @@ export default class LevelSelectContainer extends PIXI.Container {
                 navButton.updateLabelTop(navButton.section.name);
             }
 
-            navButton.setSectionButtonMode();
+            navButton.setSectionButtonMode(index);
         }
 
     }
@@ -932,6 +934,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         this.mainCanvas.width = this.currentResolution.width
         this.mainCanvas.height = this.currentResolution.height
 
+        //this.mainCanvas.x = this.currentResolution.width/2 - config.width/2
         this.centerLevels();
 
         this.newContainer.y = this.mainCanvas.y - 20;

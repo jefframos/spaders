@@ -28,14 +28,14 @@ export default class SquareButton extends PIXI.Container {
             this.squareButtonBackShape.width = this.unscaledCardSize.width
             this.squareButtonBackShape.height = this.unscaledCardSize.height
         } else {
-            this.squareButtonShape = new PIXI.Sprite.fromFrame('l0_planet_1_1.png')
+            this.squareButtonShape = new PIXI.Sprite()//.fromFrame('l0_planet_1_1.png')
             this.squareButtonBackShape = new PIXI.Sprite.fromFrame('l0_planet_1_1.png')
 
             this.squareButtonShape = new PIXI.Sprite.fromFrame("l0_planet_1_1.png");
 
             this.squareButtonShape.layers = [];
 
-            for (let index = 1; index <= 5; index++) {
+            for (let index = 1; index <= 6; index++) {
                 let sprite = new PIXI.Sprite.fromFrame("l" + index + "_planet_1_1.png");
                 this.squareButtonShape.addChild(sprite);
                 this.squareButtonShape.layers.push(sprite);
@@ -210,7 +210,7 @@ export default class SquareButton extends PIXI.Container {
         this.backTop.height = this.labelTop.height + 10
     }
 
-    setSectionButtonMode() {
+    setSectionButtonMode(index) {
         // if (!this.iconBackground) return;
         // this.iconBackground.x = 10;
         // this.iconBackground.y = 10;
@@ -220,9 +220,8 @@ export default class SquareButton extends PIXI.Container {
         // this.resizeIconToFitOnLarge()
 
         //console.log(this.squareButtonShape.height)
-        this.progressBar.resizeBar(this.squareButtonShape.width - 60, this.squareButtonShape.height * 0.1);
-        this.progressBar.x = 30;
-        this.progressBar.y = this.squareButtonShape.height /2 + this.progressBar.height;
+        this.progressBar.resizeBar(this.squareButtonShape.width - 80, this.squareButtonShape.height * 0.1);
+       
 
 
         utils.resizeToFitAR(
@@ -231,8 +230,7 @@ export default class SquareButton extends PIXI.Container {
                 height: this.progressBar.height * 0.8
             }, this.label)
 
-        this.label.x = this.progressBar.x + this.progressBar.width / 2;
-        this.label.y = this.progressBar.y + this.progressBar.height / 2;
+        
 
         utils.resizeToFitAR(
             {
@@ -240,14 +238,28 @@ export default class SquareButton extends PIXI.Container {
                 height: (this.squareButtonShape.height - 20) * 0.12
             }, this.labelTop)
 
-        let marginBack = this.labelTop.height * 0.2
-        this.labelTop.y = this.squareButtonShape.height / 2 - this.labelTop.height / 2
+            let marginBack = this.labelTop.height * 0.2
+
+            if(index % 2 == 0){
+
+                this.labelTop.x = this.squareButtonBackShape.width * 1.25
+            }else{
+                this.labelTop.x = -this.squareButtonBackShape.width * 0.25//this.squareButtonBackShape.width * 1.25
+                this.squareButtonShape.x = this.squareButtonBackShape.width * 0.5
+            }
+        this.labelTop.y = this.labelTop.height//this.squareButtonShape.height / 2 - this.labelTop.height
         this.backTop.height = this.labelTop.height + marginBack
         this.backTop.width = this.squareButtonBackShape.width - 40
         this.backTop.x = this.labelTop.x - this.backTop.width / 2
         this.backTop.y = this.labelTop.y - marginBack * 0.5
 
         this.backTop.alpha = 1;
+
+        this.progressBar.x = this.backTop.x + 20;
+        this.progressBar.y = this.backTop.y + this.progressBar.height * 1.5;
+
+        this.label.x = this.progressBar.x + this.progressBar.width / 2;
+        this.label.y = this.progressBar.y + this.progressBar.height / 2;
         // this.labelTop.pivot.x = 0
         // this.labelTop.pivot.y = 0//this.labelTop.height / this.labelTop.scale.y;
         // this.labelTop.x = this.progressBar.x // this.container.scale.x
@@ -313,9 +325,9 @@ export default class SquareButton extends PIXI.Container {
         if(this.isPlanet){
             //console.log(colorList.list)
             this.squareButtonShape.tint = colorList.list[0].color;
-            for (let index = 0; index < this.squareButtonShape.layers.length - 1; index++) {
+            for (let index = 0; index < this.squareButtonShape.layers.length; index++) {
                 const element = this.squareButtonShape.layers[index];
-                element.tint = colorList.list[index + 1].color
+                element.tint = colorList.list[index].color
             }
             
             return;
