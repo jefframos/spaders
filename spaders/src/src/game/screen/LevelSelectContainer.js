@@ -82,7 +82,7 @@ export default class LevelSelectContainer extends PIXI.Container {
                 
             } else {
                 this.unscaledLineButtonSize = { width: (window.innerWidth - this.currentGridOffset.x * 2) * 0.9 / 2, height: 120 }
-                this.unscaledLineButtonSize.width = Math.min(config.width, this.unscaledLineButtonSize.width)
+                this.unscaledLineButtonSize.width = Math.min(config.width / 2, this.unscaledLineButtonSize.width)
                 this.unscaledLineButtonSize.width = Math.max(200, this.unscaledLineButtonSize.width);
                 this.unscaledLineButtonSize.width -= this.currentGridOffset.x/2;
                 
@@ -900,7 +900,7 @@ export default class LevelSelectContainer extends PIXI.Container {
             let chunck = distance
             let adj = -(chunck * maxPerLine) / 2//0//(margin - fullWidth) * 0.5
             element.x = (index % maxPerLine) * chunck + adj + chunck / 2 - element.width / 2 + this.currentGridOffset.x
-            element.y = 50 + index * size.height
+            element.y = 50 + index * size.height * 0.5
 
     
             
@@ -951,7 +951,7 @@ export default class LevelSelectContainer extends PIXI.Container {
 
         if (this.shouldUpdate) {
 
-            this.drawPlanets(this.navButtons, 20, this.unscaledLineButtonSize, true, 2);
+            this.drawPlanets(this.navButtons, 20, this.unscaledLinePlanetSize, true, 2);
             this.drawGrid(this.sectionButtons, 20, this.unscaledLineButtonSize, true, 2);
             this.drawGrid(this.levelCards, 20, this.unscaledCardSize, false);
             if (this.levelSplitCards.length > 0) {

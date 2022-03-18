@@ -69,7 +69,13 @@ export default class SquareButton extends PIXI.Container {
             // strokeThickness: 12
         });
 
-        this.squareButtonBackShape.y = this.unscaledCardSize.height * 0.075
+        if(this.isPlanet){
+
+            this.squareButtonBackShape.y = this.unscaledCardSize.height * 0.025
+        }else{
+
+            this.squareButtonBackShape.y = this.unscaledCardSize.height * 0.075
+        }
 
         this.container.addChild(this.squareButtonBackShape)
         //this.container.addChild(this.innerBorder)
@@ -147,7 +153,13 @@ export default class SquareButton extends PIXI.Container {
     }
     onPointerOver() {
         TweenMax.killTweensOf(this.squareButtonShape)
-        TweenMax.to(this.squareButtonShape, 0.2, { y: this.unscaledCardSize.height * 0.075, ease: Back.easeOut })
+
+        if(this.isPlanet){
+            TweenMax.to(this.squareButtonShape, 0.6, { y: this.unscaledCardSize.height * 0.015, ease: Elastic.easeOut })
+        }else{
+
+            TweenMax.to(this.squareButtonShape, 0.2, { y: this.unscaledCardSize.height * 0.075, ease: Back.easeOut })
+        }
         //this.squareButtonShape.y = 10;
 
     }
