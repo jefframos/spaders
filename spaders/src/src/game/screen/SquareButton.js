@@ -216,11 +216,7 @@ export default class SquareButton extends PIXI.Container {
        
 
 
-        utils.resizeToFitAR(
-            {
-                width: this.progressBar.width,
-                height: this.progressBar.height * 0.8
-            }, this.label)
+        
 
         
 
@@ -251,6 +247,12 @@ export default class SquareButton extends PIXI.Container {
 
         this.progressBar.x = this.backTop.x + 20;
         this.progressBar.y = this.backTop.y + this.progressBar.height * 1.5;
+
+        utils.resizeToFitAR(
+            {
+                width: this.progressBar.width,
+                height: this.progressBar.height * 0.8
+            }, this.label)
 
         this.label.x = this.progressBar.x + this.progressBar.width / 2;
         this.label.y = this.progressBar.y + this.progressBar.height / 2;
