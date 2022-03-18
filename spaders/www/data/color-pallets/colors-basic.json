@@ -132,7 +132,8 @@
                 "minAlpha": 0.05,
                 "maxAlpha": 0.1,
                 "extraTileAlpha": 0
-            }
+            },
+            "planetID":1
         }
     ]
 }

@@ -657,6 +657,10 @@ export default class LevelSelectContainer extends PIXI.Container {
 
         this.centerLevels();
 
+        this.navButtons.forEach(element => {
+            element.update(delta);
+        });
+
         this.tempBlockPanel.visible = this.showingBlockTime > 0;
 
         if (this.showingBlockTime > 0) {

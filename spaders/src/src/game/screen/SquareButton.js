@@ -4,6 +4,7 @@ import colorSchemes from '../../colorSchemes';
 import config from '../../config';
 import utils from '../../utils';
 import ParticleSystem from '../effects/ParticleSystem';
+import Planet from './Planet';
 import ProgressBar from './ProgressBar';
 export default class SquareButton extends PIXI.Container {
     constructor(unscaledCardSize, isPlanet) {
@@ -28,19 +29,11 @@ export default class SquareButton extends PIXI.Container {
             this.squareButtonBackShape.width = this.unscaledCardSize.width
             this.squareButtonBackShape.height = this.unscaledCardSize.height
         } else {
-            this.squareButtonShape = new PIXI.Sprite()//.fromFrame('l0_planet_1_1.png')
-            this.squareButtonBackShape = new PIXI.Sprite.fromFrame('l0_planet_1_1.png')
+            this.squareButtonShape = new Planet()//.fromFrame('l0_planet_2_1.png')
+            this.squareButtonBackShape = new PIXI.Sprite.fromFrame('l0_planet_2_1.png')
 
-            this.squareButtonShape = new PIXI.Sprite.fromFrame("l0_planet_1_1.png");
-
-            this.squareButtonShape.layers = [];
-
-            for (let index = 1; index <= 6; index++) {
-                let sprite = new PIXI.Sprite.fromFrame("l" + index + "_planet_1_1.png");
-                this.squareButtonShape.addChild(sprite);
-                this.squareButtonShape.layers.push(sprite);
-            }
-
+            this.squareButtonShape.sin = Math.random() * Math.PI * 2;
+           
             //this.squareButtonShape.scale.set(this.unscaledCardSize.width / this.squareButtonShape.width)
             //this.squareButtonBackShape.scale.set(this.unscaledCardSize.width / this.squareButtonBackShape.width)
             this.squareButtonBackShape.alpha = 0;
@@ -220,7 +213,6 @@ export default class SquareButton extends PIXI.Container {
         // this.resizeIconToFitOnLarge()
 
         //console.log(this.squareButtonShape.height)
-        this.progressBar.resizeBar(this.squareButtonShape.width - 80, this.squareButtonShape.height * 0.1);
        
 
 
@@ -254,6 +246,8 @@ export default class SquareButton extends PIXI.Container {
         this.backTop.y = this.labelTop.y - marginBack * 0.5
 
         this.backTop.alpha = 1;
+
+        this.progressBar.resizeBar(this.backTop.width - 40, this.squareButtonShape.height * 0.1);
 
         this.progressBar.x = this.backTop.x + 20;
         this.progressBar.y = this.backTop.y + this.progressBar.height * 1.5;
@@ -317,6 +311,18 @@ export default class SquareButton extends PIXI.Container {
         this.backTop.y = this.labelTop.y - marginBack * 0.5
 
     }
+    update(delta){
+
+        if(!delta){
+            delta = 1/60
+        }
+        if(this.isPlanet){
+
+            this.squareButtonShape.sin += delta * 0.5;
+            this.squareButtonShape.sin %= Math.PI * 2
+            this.squareButtonShape.y = Math.floor(Math.sin(this.squareButtonShape.sin) * 5) //- 120
+        }
+    }
     setPallet(colors, colorList) {
         if (this.pallet && this.pallet.parent) {
             this.pallet.parent.removeChild(this.pallet);
@@ -324,11 +330,15 @@ export default class SquareButton extends PIXI.Container {
 
         if(this.isPlanet){
             //console.log(colorList.list)
-            this.squareButtonShape.tint = colorList.list[0].color;
-            for (let index = 0; index < this.squareButtonShape.layers.length; index++) {
-                const element = this.squareButtonShape.layers[index];
-                element.tint = colorList.list[index].color
+            
+            this.squareButtonShape.updateColors(colorList)
+            
+            if(colorList.planetID){
+                this.squareButtonShape.updateMapTextures(colorList.planetID);
+            }else{
+                this.squareButtonShape.updateMapTextures(0);
             }
+          
             
             return;
         }

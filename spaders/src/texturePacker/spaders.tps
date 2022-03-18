@@ -136,11 +136,11 @@
             <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>../../www/assets/images/game.json</filename>
+                <filename>../../www/assets/images/game-{n}.json</filename>
             </struct>
         </map>
         <key>multiPack</key>
-        <false/>
+        <true/>
         <key>forceIdenticalLayout</key>
         <false/>
         <key>outputFormat</key>
@@ -664,6 +664,48 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">planets/planet2/l0_planet_2_1.png</key>
+            <key type="filename">planets/planet2/l1_planet_2_1.png</key>
+            <key type="filename">planets/planet2/l2_planet_2_1.png</key>
+            <key type="filename">planets/planet2/l3_planet_2_1.png</key>
+            <key type="filename">planets/planet2/l4_planet_2_1.png</key>
+            <key type="filename">planets/planet2/l5_planet_2_1.png</key>
+            <key type="filename">planets/planet2/l6_planet_2_1.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>64,64,128,128</rect>
+                <key>scale9Paddings</key>
+                <rect>64,64,128,128</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">planets/planetZero/l0_planet_0_1.png</key>
+            <key type="filename">planets/planetZero/l1_planet_0_1.png</key>
+            <key type="filename">planets/planetZero/l2_planet_0_1.png</key>
+            <key type="filename">planets/planetZero/l3_planet_0_1.png</key>
+            <key type="filename">planets/planetZero/l4_planet_0_1.png</key>
+            <key type="filename">planets/planetZero/l5_planet_0_1.png</key>
+            <key type="filename">planets/planetZero/l6_planet_0_1.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0,0</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>64,64,128,128</rect>
+                <key>scale9Paddings</key>
+                <rect>64,64,128,128</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">progressBarSmall.png</key>
             <key type="filename">smallButton.png</key>
             <struct type="IndividualSpriteSettings">
@@ -881,6 +923,8 @@
             <filename>newEnemies/w_spader8.png</filename>
             <filename>newEnemies/w_spader9.png</filename>
             <filename>newEnemies/bomb.png</filename>
+            <filename>planets/planet2</filename>
+            <filename>planets/planetZero</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

@@ -6,6 +6,7 @@ import UIButton1 from './UIButton1';
 import Spring from '../effects/Spring';
 import LevelSelectContainer from './LevelSelectContainer'
 import colorSchemes from '../../colorSchemes';
+import Planet from './Planet';
 export default class StartScreenContainer extends PIXI.Container {
 	constructor(screen) {
 		super();
@@ -26,17 +27,9 @@ export default class StartScreenContainer extends PIXI.Container {
 
 		this.logoLayers = [];
 
-		this.planet = new PIXI.Sprite()//.fromFrame("l0_planet_1_1.png");
+		this.planet = new Planet()// new PIXI.Sprite()//.fromFrame("l0_planet_2_1.png");
 
-		this.planet.anchor.set(0.5)
-		this.planet.layers = [];
-		
-		for (let index = 1; index <= 6; index++) {
-			let sprite = new PIXI.Sprite.fromFrame("l"+index+"_planet_1_1.png");
-			sprite.anchor.set(0.5)
-			this.planet.addChild(sprite);
-			this.planet.layers.push(sprite);
-		}
+	
 
 
 		this.logoLabel = new PIXI.Text(this.currentButtonLabel, { font: '64px', fill: config.colors.white, align: 'center', fontWeight: '800', fontFamily: window.LOGO_FONT, stroke:0, strokeThickness:8 });
@@ -284,10 +277,12 @@ export default class StartScreenContainer extends PIXI.Container {
 
 
 		this.planet.tint = colors.list[0].color;
-		for (let index = 0; index < this.planet.layers.length; index++) {
+		this.planet.updateColors(colors)
 
-			const element = this.planet.layers[index];
-			element.tint = colors.list[index].color;
+		if(colors.planetID){
+			this.planet.updateMapTextures(colors.planetID);
+		}else{
+			this.planet.updateMapTextures(0);
 		}
 
 		for (let index = 0; index < this.lines.length; index++) {
@@ -339,7 +334,9 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.planet.sin %= Math.PI * 2
 
 		this.planet.x = 60
-		this.planet.y = Math.floor(Math.sin(this.planet.sin) * 10)
+		this.planet.pivot.x = 150
+		this.planet.pivot.y = 150
+		this.planet.y = Math.floor(Math.sin(this.planet.sin) * 10) //- 120
 
 		this.spadersOfset += delta  * 0.1;
 		this.spadersOfset %= Math.PI * 2;
