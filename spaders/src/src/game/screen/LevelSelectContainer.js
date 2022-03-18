@@ -845,9 +845,13 @@ export default class LevelSelectContainer extends PIXI.Container {
         this.resize(null, true)
     }
     drawGrid(elements, margin, size, isVertical, lineOverride = 1) {
-        let maxPerLine = Math.floor((this.mainCanvas.width - this.currentGridOffset.x) / (size.width + margin * 2.5)) + 1
+        let maxPerLine = Math.floor((this.mainCanvas.width - this.currentGridOffset.x - 20) / (size.width + margin * 3)) + 1
         if (isVertical) {
             maxPerLine = lineOverride;
+        }
+
+        if(lineOverride > 1){
+            maxPerLine = Math.min(lineOverride, maxPerLine) 
         }
 
         let fullWidth = (this.mainCanvas.width - this.currentGridOffset.x) - margin * 2
@@ -953,7 +957,7 @@ export default class LevelSelectContainer extends PIXI.Container {
 
             this.drawPlanets(this.navButtons, 20, this.unscaledLinePlanetSize, true, 2);
             this.drawGrid(this.sectionButtons, 20, this.unscaledLineButtonSize, true, 2);
-            this.drawGrid(this.levelCards, 20, this.unscaledCardSize, false);
+            this.drawGrid(this.levelCards, 20, this.unscaledCardSize, false, 3);
             if (this.levelSplitCards.length > 0) {
 
                 this.drawGrid(this.levelSplitCards, 20, this.levelSplitCards[0].customSize, true);
