@@ -11,9 +11,13 @@ export default class SquareButton extends PIXI.Container {
         super();
 
         this.unscaledCardSize = unscaledCardSize;
-        this.container = new PIXI.Container();
         this.isPlanet = isPlanet;
-        if (!isPlanet) {
+        
+        this.buildBase();
+    }
+    buildBase(){
+        this.container = new PIXI.Container();
+        if (!this.isPlanet) {
             this.squareButtonBackShape = new PIXI.mesh.NineSlicePlane(
                 PIXI.Texture.fromFrame('largeCardBackPixel.png'), 20, 20, 20, 20)//= PIXI.Sprite.fromFrame('largeCardBack.png');
             this.squareButtonShape = new PIXI.mesh.NineSlicePlane(
