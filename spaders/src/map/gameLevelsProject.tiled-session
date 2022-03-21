@@ -3,20 +3,24 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "videogames/levels2.tmx",
+    "activeFile": "world/testWorld1.tmx",
     "expandedProjectPaths": [
-        "movies",
-        "basics",
-        "main",
-        "videogames",
-        "debug",
         "gb",
-        "tutorial",
         "synth",
+        "videogames",
+        "main",
+        "basics",
+        "tutorial",
+        "templates",
+        "world",
+        "debug",
         "how-to-play",
-        "templates"
+        "movies"
     ],
     "fileStates": {
+        "": {
+            "scaleInEditor": 1
+        },
         "D:/Projects/tetra/map/levels.tmx": {
             "scale": 0.75,
             "selectedLayer": 2,
@@ -419,7 +423,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 467.33333333333326,
-                "y": 292
+                "y": 290.6666666666666
             }
         },
         "world/testWorld1.tmx#WorldTiles": {
@@ -479,23 +483,24 @@
         "how-to-play/pokemon76-100.tmx",
         "synth/betoSynth.tmx",
         "synth/sunset.tmx",
-        "videogames/spadersLarge.tmx"
+        "world/testWorld1.tmx",
+        "world/worldSynth.tmx"
     ],
     "project": "gameLevelsProject.tiled-project",
     "property.type": "int",
     "recentFiles": [
-        "videogames/spadersLarge.tmx",
         "how-to-play/people-set-1.tmx",
         "how-to-play/how-to-play-medium.tmx",
         "how-to-play/creatures.tmx",
         "how-to-play/things.tmx",
         "videogames/levels.tmx",
-        "synth/sunset.tmx",
-        "synth/betoSynth.tmx",
-        "how-to-play/pokemon76-100.tmx",
-        "how-to-play/pokemon1-25.tmx",
-        "how-to-play/pokemon26-50.tmx",
-        "how-to-play/pokemon51-75.tmx"
+        "videogames/levels2.tmx",
+        "movies/movies1.tmx",
+        "how-to-play/simple-shapes.tmx",
+        "how-to-play/simple-shapes-synt.tmx",
+        "how-to-play/bossa.tmx",
+        "how-to-play/gameboy.tmx",
+        "gb/gameboyMisc.tmx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",
