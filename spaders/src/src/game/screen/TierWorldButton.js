@@ -85,12 +85,11 @@ export default class TierWorldButton extends SquareButton {
     setLargeButtonMode() {
         if (!this.iconBackground) return;
 
-        if (!this.iconBackgroundWhite) {
-            this.iconBackgroundWhite = new PIXI.mesh.NineSlicePlane(
-                PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
+        let border = 4
+        let extraBorderBottom = (border * 2) + this.iconBackground.height * 0.15 + border
+        let color = colorSchemes.getCurrentColorScheme()
 
-            this.squareButtonShape.addChildAt(this.iconBackgroundWhite, 0)
-        }
+       
 
 
         this.iconBackground.x = 0;
@@ -99,18 +98,58 @@ export default class TierWorldButton extends SquareButton {
         this.iconBackground.width = this.squareButtonShape.height// * 0.5
         this.iconBackground.height = this.squareButtonShape.height// * 0.5
 
-        this.iconBackgroundWhite.width = this.squareButtonShape.height + 4// * 0.5
-        this.iconBackgroundWhite.height = this.squareButtonShape.height + 4// * 0.5
+        if (!this.iconBackgroundWhite) {
 
-        this.iconBackgroundWhite.x = -2
-        this.iconBackgroundWhite.y = -2
-        this.iconBackgroundWhite.tint = 0xFFFFFF;
+            this.iconBackgroundWhite = new PIXI.Sprite();
+            if (window.imageThumbs['tierCardBackgroundTexture']) {
+                this.iconBackgroundWhite.setTexture(window.imageThumbs['tierCardBackgroundTexture'])
+            } else {
+
+
+                let back1 = new PIXI.mesh.NineSlicePlane(
+                    PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
+
+                let backWhite = new PIXI.mesh.NineSlicePlane(
+                    PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
+
+                back1.addChild(backWhite)
+
+                back1.width = this.squareButtonShape.height + border * 4
+                back1.height = this.squareButtonShape.height + extraBorderBottom + border * 2 + border
+
+                backWhite.width = this.squareButtonShape.height + border * 2 // * 0.5
+                backWhite.height = this.squareButtonShape.height + extraBorderBottom+ border
+
+                backWhite.x = border
+                backWhite.y = border
+
+
+                backWhite.tint = 0xFFFFFF//color.buttonData.tierButtonBackground;
+                back1.tint = 0;
+
+                let texture = renderer.generateTexture(back1);
+
+                window.imageThumbs['tierCardBackgroundTexture'] = texture;
+
+                this.iconBackgroundWhite.setTexture(texture)
+            }
+
+            this.squareButtonShape.addChildAt(this.iconBackgroundWhite, 0)
+        }
+
+        this.iconBackground.x = border * 2
+        this.iconBackground.y = border * 2
+
+        this.icon.y = border
+        //this.iconBackgroundWhite.x = -border
+        //this.iconBackgroundWhite.y = -border
+        this.iconBackgroundWhite.tint = color.buttonData.tierButtonBackground;
+
         this.resizeIconToFitOnLarge2()
 
-        this.progressBar.resizeBar(this.iconBackground.width * 0.9, this.iconBackground.height * 0.15);
-        this.progressBar.x = this.iconBackground.x + this.iconBackground.width * 0.05//+ this.iconBackground.width + 10;
-        this.progressBar.y = this.iconBackground.y + this.iconBackground.height - this.iconBackground.width * 0.05 - this.progressBar.height;
-
+        this.progressBar.resizeBar(this.iconBackground.width, this.iconBackground.height * 0.15, true);
+        this.progressBar.x = this.iconBackground.x//+ this.iconBackground.width + 10;
+        this.progressBar.y = this.iconBackground.y + this.iconBackground.height + border//(extraBorderBottom - border) * 0.5 - this.progressBar.height * 0.5
 
         // utils.resizeToFitAR(
         //     {

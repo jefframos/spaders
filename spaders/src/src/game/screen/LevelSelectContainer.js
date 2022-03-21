@@ -102,7 +102,7 @@ export default class LevelSelectContainer extends PIXI.Container {
                 this.unscaledLinePlanetSize = { width: this.unscaledplanetButtonSize.width, height: this.unscaledplanetButtonSize.width }
             }
 
-            this.unscaledTierButtonSize = { width: 68, height: 68 }
+            this.unscaledTierButtonSize = { width: 72, height: 72 }
 
             this.buildSections();
             this.refreshNavButtons();

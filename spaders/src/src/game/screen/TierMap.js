@@ -52,7 +52,7 @@ export default class TierMap extends PIXI.Container {
                 gridSquare.height = this.sizeTile.height
                 //gridSquare.scale.set(CARD.width / gridSquare.width);
                 gridSquare.x = j * this.sizeTile.width;
-                gridSquare.y = i * this.sizeTile.height;
+                gridSquare.y = i * this.sizeTile.height
                 gridSquare.alpha = 0
                 this.mapContainer.addChild(gridSquare);
                 line.push(gridSquare);
@@ -65,7 +65,7 @@ export default class TierMap extends PIXI.Container {
     addTierLevel(tierButton, pos) {
         this.buttonsContainer.addChild(tierButton);
         tierButton.x = pos.i * this.sizeTile.width + this.sizeTile.width / 2 - tierButton.width / 2;
-        tierButton.y = pos.j * this.sizeTile.height + this.sizeTile.height / 2 - tierButton.height / 2;
+        tierButton.y = pos.j * this.sizeTile.height + this.sizeTile.height - tierButton.height;
     }
     cleanMap() {
         for (let index = 0; index < this.terrainLayers.length; index++) {
@@ -102,7 +102,7 @@ export default class TierMap extends PIXI.Container {
     }
     drawMap(mapData) {
         console.log(mapData, this.layers);
-
+        //CACHE HERE
         this.cleanMap()
 
         let colors = colorSchemes.getCurrentColorScheme();

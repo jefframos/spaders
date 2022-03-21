@@ -119,7 +119,8 @@
                 "tierCompleteColor": "0x65b26f",
                 "buttonStandardColor": "0x4d3427",
                 "buttonStandardDarkColor": "0x252b25",
-                "buttonBackTitleColor": "0x9a9d66"
+                "buttonBackTitleColor": "0x9a9d66",
+                "tierButtonBackground": "0xFFFFFF"
             },
             "grid": {
                 "color": "0xFFFFFF",

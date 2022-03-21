@@ -88,7 +88,7 @@ export default class ProgressBar extends PIXI.Container {
             this.currentColor = colorScheme.fillBarCompleteColor;
         }
     }
-    resizeBar(width, height = 30){
+    resizeBar(width, height = 30, hideBorder = false){
         if(width == this.sizeWidth){
             return;
         }
@@ -96,12 +96,19 @@ export default class ProgressBar extends PIXI.Container {
         this.sizeWidth = width;
         this.loadingBar.width = this.sizeWidth
         this.loadingBar.height = this.sizeHeight
-        this.loadingBarFillBack.width = this.sizeWidth- this.round / 2
-        this.loadingBarFillBack.height = this.sizeHeight- this.round / 2
-        this.loadingBarFill.width = this.sizeWidth- this.round / 2
-        this.loadingBarFill.height = this.sizeHeight- this.round / 2
 
+        let add = this.round / 2
+        if(hideBorder){
+            add = 0;
+            this.loadingBarFillBack.position.set(0)
+            this.loadingBarFill.position.set(0)
+        }
+        this.loadingBarFillBack.width = this.sizeWidth- add
+        this.loadingBarFillBack.height = this.sizeHeight- add
+        this.loadingBarFill.width = this.sizeWidth- add
+        this.loadingBarFill.height = this.sizeHeight- add
 
+        this.loadingBar.visible = !hideBorder
         this.setProgressBar(this.currentValue);
 
     }
