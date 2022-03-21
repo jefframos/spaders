@@ -110,6 +110,7 @@
             "fillBarColor": "0x37764a",
             "fillBarCompleteColor": "0xFFFFFF",
             "background": "0xCADCA0",
+            "worldBackground": "0xbad1b8",
             "fontColor": "0x182018",
             "arrowTrailColor": "0x182018",
             "buttonData": {
@@ -136,7 +137,7 @@
             "backgroundAssets": {
                 "bottomBackground": "gbBackground.png",
                 "bottomBackgroundPosition": 0.01,
-                "alpha": 0.75
+                "alpha": 0
             },
             "planetID":2
         }

@@ -67,27 +67,30 @@ export default class BackgroundEffects extends PIXI.Container {
 	updateBackgroundColor() {
 
 		this.currentScheme = colorSchemes.getCurrentColorScheme();
-		window.colorTweenManager.killColorTween(this.backgroundShape);
-		window.colorTweenManager.addColorTween(
-			this.backgroundShape,
-			this.backgroundShape.tint,
-			this.currentScheme.background)
-
+		this.updateMainBackgroundColor(this.currentScheme.background)
+		
 		if (this.currentScheme.backgroundAssets && this.currentScheme.backgroundAssets.bottomBackground) {
 
 			this.bottomBackground.y = this.innerResolution.height;
 			this.bottomBackground.texture = PIXI.Texture.fromFrame(this.currentScheme.backgroundAssets.bottomBackground);
 			this.bottomBackground.visible = true;
 
-			if(this.currentScheme.backgroundAssets.alpha != undefined){
+			if (this.currentScheme.backgroundAssets.alpha != undefined) {
 				this.bottomBackground.alpha = this.currentScheme.backgroundAssets.alpha;
-			}else{
+			} else {
 				this.bottomBackground.alpha = 1;
 			}
 		} else {
 			this.bottomBackground.visible = false;
 		}
 		//this.backgroundShape.tint = colorSchemes.getCurrentColorScheme().background;
+	}
+	updateMainBackgroundColor(targetColor) {
+		window.colorTweenManager.killColorTween(this.backgroundShape);
+		window.colorTweenManager.addColorTween(
+			this.backgroundShape,
+			this.backgroundShape.tint,
+			targetColor)
 	}
 	resize(scaledResolution, innerResolution, bottomBackgroundPosition, bottomHeight) {
 
@@ -103,14 +106,14 @@ export default class BackgroundEffects extends PIXI.Container {
 
 			let backPos = this.toLocal(bottomBackgroundPosition);
 			let targetAnchor = 0.1;
-			if(this.currentScheme.backgroundAssets && this.currentScheme.backgroundAssets.bottomBackgroundPosition){
+			if (this.currentScheme.backgroundAssets && this.currentScheme.backgroundAssets.bottomBackgroundPosition) {
 				targetAnchor = this.currentScheme.backgroundAssets.bottomBackgroundPosition
 			}
 
 			this.bottomBackground.anchor.y = targetAnchor;
 			this.bottomBackground.y = backPos.y;
 
-			utils.resizeToFitMaxAR({width:innerResolution.width, height:bottomHeight},this.bottomBackground)
+			utils.resizeToFitMaxAR({ width: innerResolution.width, height: bottomHeight }, this.bottomBackground)
 		}
 
 		//this.starsContainer.width = innerResolution.width

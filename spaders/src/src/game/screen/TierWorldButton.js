@@ -84,11 +84,27 @@ export default class TierWorldButton extends SquareButton {
     }
     setLargeButtonMode() {
         if (!this.iconBackground) return;
+
+        if (!this.iconBackgroundWhite) {
+            this.iconBackgroundWhite = new PIXI.mesh.NineSlicePlane(
+                PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
+
+            this.squareButtonShape.addChildAt(this.iconBackgroundWhite, 0)
+        }
+
+
         this.iconBackground.x = 0;
         this.iconBackground.y = 0;
 
         this.iconBackground.width = this.squareButtonShape.height// * 0.5
         this.iconBackground.height = this.squareButtonShape.height// * 0.5
+
+        this.iconBackgroundWhite.width = this.squareButtonShape.height + 4// * 0.5
+        this.iconBackgroundWhite.height = this.squareButtonShape.height + 4// * 0.5
+
+        this.iconBackgroundWhite.x = -2
+        this.iconBackgroundWhite.y = -2
+        this.iconBackgroundWhite.tint = 0xFFFFFF;
         this.resizeIconToFitOnLarge2()
 
         this.progressBar.resizeBar(this.iconBackground.width * 0.9, this.iconBackground.height * 0.15);

@@ -149,7 +149,8 @@
             "logoColor": "0xFFFFFF",
             "fillBarColor": "0x71bf45",
             "fillBarCompleteColor": "0x00a1e5",
-            "background": "0x0160BD",
+            "background": "0x111111",
+            "worldBackground": "0x0160BD",
             "fontColor": "0xFFFFFF",
             "arrowTrailColor": "0xFFFFFF",
             "buttonData": {

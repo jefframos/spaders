@@ -1,6 +1,7 @@
 {
     "question": {
-        "dataPath": "question.json"
+        "dataPath": "question.json",
+        "order": -1
     },
     "sections": [
         {
@@ -8,32 +9,49 @@
             "ignore": false,
             "name": "Basics",
             "displayName": "Video Game History",
+            "tilemapPath": "worldMaps/world1.json",
             "imageSrc": "",
             "colorPalletId": 0,
             "levels": [
                 {
                     "name": "---",
-                    "dataPath": "how-to-play/shapes.json"
+                    "dataPath": "how-to-play/shapes.json",
+                    "order": -1
                 },
                 {
                     "name": "---",
-                    "dataPath": "how-to-play/creatures.json"
+                    "dataPath": "how-to-play/creatures.json",
+                    "order": -1
                 },
                 {
                     "name": "---",
-                    "dataPath": "how-to-play/people-set-1.json"
+                    "dataPath": "how-to-play/people-set-1.json",
+                    "order": -1
                 },
                 {
                     "name": "---",
-                    "dataPath": "how-to-play/things.json"
+                    "dataPath": "how-to-play/things.json",
+                    "order": -1
                 },
                 {
                     "name": "---",
-                    "dataPath": "basics/food.json"
+                    "dataPath": "basics/food.json",
+                    "order": -1
                 },
                 {
                     "name": "---",
-                    "dataPath": "debug/debug2.json"
+                    "dataPath": "debug/debug2.json",
+                    "order": -1
+                },
+                {
+                    "name": "2nd gen",
+                    "dataPath": "videogames/spaders.json",
+                    "order": -1
+                },
+                {
+                    "name": "2nd gen",
+                    "dataPath": "videogames/largeSpaders.json",
+                    "order": -1
                 }
             ]
         },
@@ -42,24 +60,19 @@
             "ignore": false,
             "name": "Video Games",
             "displayName": "Video Game History",
+            "tilemapPath": "worldMaps/world1.json",
             "imageSrc": "",
             "colorPalletId": 4,
-            "levels": [
+            "levels": [                
                 {
                     "name": "2nd gen",
-                    "dataPath": "videogames/spaders.json"
+                    "dataPath": "videogames/videogamesLevels1.json",
+                    "order": -1
                 },
                 {
                     "name": "2nd gen",
-                    "dataPath": "videogames/largeSpaders.json"
-                },
-                {
-                    "name": "2nd gen",
-                    "dataPath": "videogames/videogamesLevels1.json"
-                },
-                {
-                    "name": "2nd gen",
-                    "dataPath": "videogames/videogamesLevels2.json"
+                    "dataPath": "videogames/videogamesLevels2.json",
+                    "order": 2
                 }
             ]
         },
@@ -68,16 +81,19 @@
             "ignore": true,
             "name": "Movies",
             "displayName": "Video Game History",
+            "tilemapPath": "worldMaps/world1.json",
             "imageSrc": "",
             "colorPalletId": 0,
             "levels": [
                 {
                     "name": "2nd gen",
-                    "dataPath": "movies/moviesLevels1.json"
+                    "dataPath": "movies/moviesLevels1.json",
+                    "order": -1
                 },
                 {
                     "name": "2nd gen",
-                    "dataPath": "movies/moviesLevelsAdventure.json"
+                    "dataPath": "movies/moviesLevelsAdventure.json",
+                    "order": -1
                 }
             ]
         },
@@ -86,20 +102,24 @@
             "ignore": false,
             "name": "Pokemon",
             "displayName": "Video Game History",
+            "tilemapPath": "worldMaps/world1.json",
             "imageSrc": "",
             "colorPalletId": 3,
             "levels": [
                 {
                     "name": "pokemon",
-                    "dataPath": "pokemon/pokemon1-25.json"
+                    "dataPath": "pokemon/pokemon1-25.json",
+                    "order": 0
                 },
                 {
                     "name": "pokemon",
-                    "dataPath": "pokemon/pokemon26-50.json"
+                    "dataPath": "pokemon/pokemon26-50.json",
+                    "order": 2
                 },
                 {
                     "name": "pokemon",
-                    "dataPath": "pokemon/pokemon51-75.json"
+                    "dataPath": "pokemon/pokemon51-75.json",
+                    "order": 4
                 }
             ]
         },        
@@ -108,20 +128,24 @@
             "ignore": false,
             "name": "Synthwave",
             "displayName": "Video Game History",
+            "tilemapPath": "worldMaps/worldSynth.json",
             "imageSrc": "",
             "colorPalletId": 1,
             "levels": [
                 {
                     "name": "---",
-                    "dataPath": "how-to-play/shapes-synt.json"
+                    "dataPath": "how-to-play/shapes-synt.json",
+                    "order": 1
                 },
                 {
                     "name": "---",
-                    "dataPath": "synth/synth1.json"
+                    "dataPath": "synth/synth1.json",
+                    "order": 2
                 },
                 {
                     "name": "---",
-                    "dataPath": "synth/sunset.json"
+                    "dataPath": "synth/sunset.json",
+                    "order": 3
                 }
             ]
         },
@@ -130,28 +154,34 @@
             "ignore": false,
             "name": "Game Boy",
             "displayName": "Video Game History",
+            "tilemapPath": "worldMaps/world1.json",
             "imageSrc": "",
             "colorPalletId": "gameboy",
             "levels": [
                 {
                     "name": "gameboy",
-                    "dataPath": "gameboy/gameboy1.json"
+                    "dataPath": "gameboy/gameboy1.json",
+                    "order": 0
                 },
                 {
                     "name": "gameboy",
-                    "dataPath": "gameboy/gameboyWeapons2.json"
+                    "dataPath": "gameboy/gameboyWeapons2.json",
+                    "order": 2
                 },
                 {
                     "name": "gameboy",
-                    "dataPath": "gameboy/gameboyMisc.json"
+                    "dataPath": "gameboy/gameboyMisc.json",
+                    "order": 4
                 },
                 {
                     "name": "gameboy",
-                    "dataPath": "gameboy/gameboyMisc2.json"
+                    "dataPath": "gameboy/gameboyMisc2.json",
+                    "order": 5
                 },
                 {
                     "name": "gameboy",
-                    "dataPath": "gameboy/gameboycreatures.json"
+                    "dataPath": "gameboy/gameboycreatures.json",
+                    "order": 6
                 }
             ]
         },
@@ -160,12 +190,14 @@
             "ignore": true,
             "name": "Bossa",
             "displayName": "Video Game History",
+            "tilemapPath": "worldMaps/world1.json",
             "imageSrc": "",
             "colorPalletId": 1,
             "levels": [
                 {
                     "name": "---",
-                    "dataPath": "how-to-play/bossa.json"
+                    "dataPath": "how-to-play/bossa.json",
+                    "order": -1
                 }
             ]
         },
@@ -174,12 +206,14 @@
             "ignore": true,
             "name": "Tutorial",
             "displayName": "Video Game History",
+            "tilemapPath": "worldMaps/world1.json",
             "imageSrc": "",
             "colorPalletId": 0,
             "levels": [
                 {
                     "name": "---",
-                    "dataPath": "tutorial/tutorial.json"
+                    "dataPath": "tutorial/tutorial.json",
+                    "order": -1
                 }
             ]
         },
@@ -188,12 +222,14 @@
             "ignore": true,
             "name": "Debug",
             "displayName": "Video Game History",
+            "tilemapPath": "worldMaps/world1.json",
             "imageSrc": "",
             "colorPalletId": 0,
             "levels": [
                 {
                     "name": "---",
-                    "dataPath": "debug/debug.json"
+                    "dataPath": "debug/debug.json",
+                    "order": -1
                 }                
             ]
         }

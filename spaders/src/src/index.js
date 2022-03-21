@@ -363,6 +363,7 @@ function setUpSchemes() {
 		.add('./assets/images/game-0.json')
 		.add('./assets/images/game-1.json')
 		//.add('./assets/images/logo.json')
+		.add('./assets/images/tilemap.json')
 		.add('./assets/images/arrowsUp.png')
 		.add('./data/levelSections.json')
 		.add('./assets/fonts/stylesheet.css')
@@ -401,11 +402,18 @@ function loadJsons() {
 
 	}
 
+	let avoidRepetition = {}
 	// console.log("--", window.levelSections)
 	window.levelSections.sections.forEach(section => {
 		//console.log(section)
 		if (section.imageSrc) {
 			PIXI.loader.add('./assets/' + section.imageSrc)
+		}
+		if (section.tilemapPath) {
+			if(!avoidRepetition[section.tilemapPath]){
+				PIXI.loader.add(jsonPath + section.tilemapPath)
+				avoidRepetition[section.tilemapPath] = true;
+			}
 		}
 		section.levels.forEach(level => {
 			PIXI.loader.add(jsonPath + level.dataPath)
@@ -567,11 +575,9 @@ window.allEstimate = 0;
 window.allEstimateHard = 0;
 
 function splitLargeImage(level) {
-	console.log("SPLIT HERE", level)
-
 	let iTotal = level.pieces.length / level.splitData.i;
 	let jTotal = level.pieces[0].length / level.splitData.j;
-	console.log("SPLIT HERE", iTotal, jTotal)
+	
 	let newLevels = []
 
 
@@ -631,7 +637,6 @@ function splitLargeImage(level) {
 		}
 	}
 	level.tier.data.shift();
-	console.log("NEW STUFF", newLevels)
 
 
 }
@@ -684,6 +689,66 @@ function calcEstimatedTime(data) {
 	data.estimateTime2 = utils.convertNumToTime(data.estimateTime);
 
 }
+function arrayToMatrix(array, i, j) {
+	let levelMatrix = [];
+	
+	let tempArr = [];
+	for (let index = 0; index < array.length; index++) {
+		let id = array[index];
+		tempArr.push(id);
+		if (tempArr.length >= i) {
+			levelMatrix.push(tempArr)
+			if (levelMatrix.length >= j) {
+				break;
+			}
+			tempArr = []
+		}
+	}
+
+	return levelMatrix
+}
+
+function extractMap(data) {
+
+	let tilesData = data.tilesets[0].tiles;
+	
+	let usedTiles = []
+	tilesData.forEach(element => {
+		usedTiles.push(element.image.split('/').pop())
+	});
+	let mapData = {
+		terrainLayers: [],
+		pathLayers: [],
+		levelLayers: [],
+		tiles:usedTiles
+	}
+
+	data.layers.forEach(element => {
+		if (element.visible && element.name.toLowerCase().includes("terrain")) {
+			mapData.terrainLayers.push(arrayToMatrix(element.data, data.height, data.width))
+		}
+		if (element.visible && element.name.toLowerCase().includes("path")) {
+			mapData.pathLayers.push(arrayToMatrix(element.data, data.height, data.width))
+		}
+		if (element.visible && element.name.toLowerCase().includes("level")) {
+
+			let matrix = arrayToMatrix(element.data, data.height, data.width);
+
+			for (let j = 0; j < matrix.length; j++) {
+				for (let i = 0; i < matrix[j].length; i++) {
+					if(matrix[j][i] > 0){
+						mapData.levelLayers.push({i,j})
+					}
+					
+				}
+			}
+
+		}
+	});
+
+	return mapData
+
+}
 function configGame() {
 
 
@@ -694,6 +759,10 @@ function configGame() {
 	window.levelSections.sections.forEach(section => {
 
 		//show the main sections
+
+		if (section.tilemapPath) {
+			section.mapData = extractMap(PIXI.loader.resources[jsonPath + section.tilemapPath].data);
+		}
 
 		let nameID = section.name;
 		nameID = nameID.toLowerCase();
@@ -737,6 +806,7 @@ function configGame() {
 			nameID = nameID.split(' ').join('')
 			nameID = nameID.replace(/\s/g, '')
 			level.id = nameID;
+			level.order = level.order;
 
 
 			if (level.coverID == undefined) {
@@ -820,7 +890,7 @@ function configGame() {
 
 	window.levelsJson = PIXI.loader.resources["./assets/levels.json"].data
 
-	// console.log("SECTIONS", window.levelSections.sections)
+	console.log("SECTIONS", window.levelSections.sections)
 	let targetColorPallet = 0;
 	window.levelSections.sections.forEach(element => {
 		element.levels.forEach(dataLevel => {
@@ -873,10 +943,10 @@ function configGame() {
 	console.log("ALL DATA", window.levelSections)
 
 
-	splitables.forEach(element => {		
+	splitables.forEach(element => {
 		splitLargeImage(element)
 	});
-	
+
 	window.levelSections.sections.forEach(sections => {
 		sections.levels.forEach(levels => {
 			levels.data.forEach(levelsData => {

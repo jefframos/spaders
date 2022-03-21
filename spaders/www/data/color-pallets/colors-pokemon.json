@@ -140,11 +140,12 @@
             "fillBarColor": "0x4890a8",
             "fillBarCompleteColor": "0xFFFFFF",
             "background": "0x333333",
+            "worldBackground": "0x1376B9",
             "fontColor": "0xFFFFFF",
             "arrowTrailColor": "0xFFFFFF",
             "buttonData": {
                 "fontColor": "0xFFFFFF",
-                "levelCompleteColor": "0x1376B9",
+                "levelCompleteColor": "0x4890a8",
                 "tierCompleteColor": "0x8957c7",
                 "buttonStandardColor": "0x444444",
                 "buttonStandardDarkColor": "0x333333",

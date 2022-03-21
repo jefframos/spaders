@@ -566,6 +566,8 @@ export default class StartScreenContainer extends PIXI.Container {
 		
 		this.chooseLevelPanel.showingBlockTime = 0.5;
 		TweenLite.to(this.screenContainer, force ? 0 : 0.2, { alpha: 1 })
+
+		this.chooseLevelPanel.addWorldBackgroundColor();
 	}
 	hide(force = false) {
 		TweenLite.killTweensOf(this.screenContainer)

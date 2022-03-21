@@ -1,4 +1,8 @@
 {
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
     "activeFile": "videogames/levels2.tmx",
     "expandedProjectPaths": [
         "movies",
@@ -334,6 +338,7 @@
             "scaleInEditor": 1
         },
         "tilesets/gb.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 0.5,
             "scaleInEditor": 1
         },
@@ -357,6 +362,7 @@
             "scaleInEditor": 1
         },
         "tilesets/videogames.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
@@ -404,13 +410,43 @@
             "dynamicWrapping": true,
             "scaleInDock": 1,
             "scaleInEditor": 1
+        },
+        "world/WorldTiles.tsx": {
+            "dynamicWrapping": true
+        },
+        "world/testWorld1.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 467.33333333333326,
+                "y": 292
+            }
+        },
+        "world/testWorld1.tmx#WorldTiles": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "world/worldSynth.tmx": {
+            "scale": 0.853515625,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 103.68878718535467,
+                "y": 318.68192219679634
+            }
+        },
+        "world/worldSynth.tmx#WorldTiles": {
+            "dynamicWrapping": true,
+            "scaleInDock": 0.75
         }
     },
-    "last.exportedFilePath": "D:/projects/spaders/spaders/www/data/videogames",
+    "last.exportedFilePath": "D:/projects/spaders/spaders/www/data/worldMaps",
     "last.externalTilesetPath": "E:/projects/spaders/spaders/src/map/tilesets",
-    "last.imagePath": "D:/projects/spaders/spaders/src/map",
+    "last.imagePath": "D:/projects/spaders/spaders/src/map/world/Tiles",
     "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
     "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
     "openFiles": [
         "how-to-play/people-set-1.tmx",
         "how-to-play/how-to-play-medium.tmx",
@@ -448,12 +484,12 @@
     "project": "gameLevelsProject.tiled-project",
     "property.type": "int",
     "recentFiles": [
+        "videogames/spadersLarge.tmx",
         "how-to-play/people-set-1.tmx",
         "how-to-play/how-to-play-medium.tmx",
         "how-to-play/creatures.tmx",
         "how-to-play/things.tmx",
         "videogames/levels.tmx",
-        "videogames/spadersLarge.tmx",
         "synth/sunset.tmx",
         "synth/betoSynth.tmx",
         "how-to-play/pokemon76-100.tmx",

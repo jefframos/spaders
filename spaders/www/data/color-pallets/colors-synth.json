@@ -155,6 +155,7 @@
             "fillBarColor": "0xffd319",
             "fillBarCompleteColor": "0xFFFFFF",
             "background": "0x151515",
+            "worldBackground": "0x030303",
             "fontColor": "0xFFFFFF",
             "arrowTrailColor": "0xFFFFFF",
             "buttonData": {

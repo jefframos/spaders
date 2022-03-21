@@ -19,7 +19,7 @@ export default class ProgressBar extends PIXI.Container {
         this.infoLabel.x = 125
         this.infoLabel.y = 19
 
-        this.round = size.height / 4
+        this.round = size.height / 2
         this.sizeHeight = size.height
         this.sizeWidth = size.width
 
