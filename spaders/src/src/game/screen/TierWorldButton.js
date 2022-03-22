@@ -89,11 +89,13 @@ export default class TierWorldButton extends SquareButton {
         let extraBorderBottom = (border * 2) + this.iconBackground.height * 0.15 + border
         let color = colorSchemes.getCurrentColorScheme()
 
-       
+
 
 
         this.iconBackground.x = 0;
         this.iconBackground.y = 0;
+
+
 
         this.iconBackground.width = this.squareButtonShape.height// * 0.5
         this.iconBackground.height = this.squareButtonShape.height// * 0.5
@@ -112,22 +114,33 @@ export default class TierWorldButton extends SquareButton {
                 let backWhite = new PIXI.mesh.NineSlicePlane(
                     PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
 
-                back1.addChild(backWhite)
+                let backBackWhite = new PIXI.mesh.NineSlicePlane(
+                    PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
 
-                back1.width = this.squareButtonShape.height + border * 4
-                back1.height = this.squareButtonShape.height + extraBorderBottom + border * 2 + border
+                    
+                    back1.width = this.squareButtonShape.height + border * 4
+                    back1.height = this.squareButtonShape.height + extraBorderBottom + border * 2 + border
+                    
+                    backWhite.width = this.squareButtonShape.height + border * 2 // * 0.5
+                    backWhite.height = this.squareButtonShape.height + extraBorderBottom + border
+                    
+                    backBackWhite.width = back1.width + border * 2 
+                    backBackWhite.height = back1.height + border * 2 
+                    
+                    backWhite.x = border
+                    backWhite.y = border
 
-                backWhite.width = this.squareButtonShape.height + border * 2 // * 0.5
-                backWhite.height = this.squareButtonShape.height + extraBorderBottom+ border
+                    back1.x = border
+                    back1.y = border
+                    
+                    backBackWhite.addChild(back1);
+                    back1.addChild(backWhite)
 
-                backWhite.x = border
-                backWhite.y = border
-
-
+                    backBackWhite.tint = 0xFFFFFF//color.buttonData.tierButtonBackground;
                 backWhite.tint = 0xFFFFFF//color.buttonData.tierButtonBackground;
                 back1.tint = 0;
 
-                let texture = renderer.generateTexture(back1);
+                let texture = renderer.generateTexture(backBackWhite);
 
                 window.imageThumbs['tierCardBackgroundTexture'] = texture;
 
@@ -137,10 +150,10 @@ export default class TierWorldButton extends SquareButton {
             this.squareButtonShape.addChildAt(this.iconBackgroundWhite, 0)
         }
 
-        this.iconBackground.x = border * 2
-        this.iconBackground.y = border * 2
+        this.iconBackground.x = border * 3
+        this.iconBackground.y = border * 3
 
-        this.icon.y = border
+        this.icon.y = border * 2
         //this.iconBackgroundWhite.x = -border
         //this.iconBackgroundWhite.y = -border
         this.iconBackgroundWhite.tint = color.buttonData.tierButtonBackground;
@@ -177,7 +190,51 @@ export default class TierWorldButton extends SquareButton {
         this.backTop.y = this.labelTop.y - 5
         this.backTop.width = this.progressBar.width - this.iconBackground.width - 5
         this.backTop.height = this.labelTop.height + 10
+
+        this.iconBackground.tint = 0xFFFFFF
     }
+
+    updateIcon(graphic, scale = 0.4, offset = { x: 0, y: 0 }, hideBackground = false) {
+        if (this.icon && this.icon.parent) {
+            this.icon.parent.removeChild(this.icon);
+        }
+
+        if (!this.iconBackground) {
+            this.iconBackground = new PIXI.mesh.NineSlicePlane(
+                PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
+
+            this.squareButtonShape.addChildAt(this.iconBackground, 0)
+        }
+        this.icon = graphic
+        this.icon.scale.set(1)
+        this.iconBackground.addChild(this.icon)
+        //this.icon.x = offset.x
+        //this.icon.y = offset.y
+        utils.resizeToFitAR(
+            {
+                width: this.squareButtonBackShape.width * 0.8,
+                height: this.squareButtonBackShape.height * scale
+            }, this.icon)
+        // if (graphic.width > graphic.height) {
+        //     this.icon.scale.set(this.squareButtonBackShape.width / (this.icon.width / this.icon.scale.x) * scale);
+        // } else {
+        //     this.icon.scale.set(this.squareButtonBackShape.height / (this.icon.height / this.icon.scale.y) * scale);
+        // }
+
+        this.iconBackground.width = this.icon.width + 10;
+        this.iconBackground.height = this.icon.height + 10
+        this.icon.x = 5;
+        this.icon.y = 5;
+        this.iconBackground.x = this.squareButtonShape.width / 2 - this.iconBackground.width / 2 + offset.x
+        this.iconBackground.y = this.squareButtonShape.height / 2 - this.iconBackground.height / 2 + offset.y
+
+        if (hideBackground) {
+            this.iconBackground.width = 0
+            this.iconBackground.height = 0
+        }
+        //this.icon.mask = this.buttonMask
+    }
+
     setProgressBar(progression = 0) {
         this.progressBar.visible = true;
         this.progressBar.setProgressBar(progression)

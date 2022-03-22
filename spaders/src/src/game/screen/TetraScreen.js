@@ -31,7 +31,7 @@ export default class TetraScreen extends Screen {
 	constructor(label) {
 		super(label);
 
-		this.generateImage(window.questionMark,24,0,0,true, true);
+		this.generateImage(window.questionMark, 24, 0, 0, true, true);
 		this.specialCardsManager = new SpecialCardsManager();
 		//levelData, size = 24, paddingBottom = 0, schemeID = 0, addPadding = true, ignoreEmpty = false)
 
@@ -407,6 +407,7 @@ export default class TetraScreen extends Screen {
 	}
 	generateImage(levelData, size = 24, paddingBottom = 0, schemeID = 0, addPadding = true, ignoreEmpty = false) {
 
+		ignoreEmpty = true;
 		size = 6
 		if (window.imageThumbs[levelData.idSaveData]) {
 			let sprite = window.imageThumbs[levelData.idSaveData]
@@ -455,28 +456,28 @@ export default class TetraScreen extends Screen {
 						tempRect.x = j * size + size * 0.5;
 						tempRect.y = i * size + size * 0.5;
 					}
-				} else				if (level[i][j] == -2) {
-						tempRect = this.getRect(size, colors.dark)
-						container.addChild(tempRect)
-						allSprites.push(tempRect);
-						tempRect.x = j * size + size * 0.5;
-						tempRect.y = i * size + size * 0.5;
-						if (ignoreEmpty){
-							//tempRect.alpha = 0;
-						}
-					} else {
-						tempRect = this.getRect(size, colors.dark)
-						container.addChild(tempRect)
-						allSprites.push(tempRect);
-						tempRect.x = j * size + size * 0.5;
-						tempRect.y = i * size + size * 0.5;
-
-						if (ignoreEmpty){
-							//tempRect.alpha = 0;
-						}
+				} else if (level[i][j] == -2) {
+					tempRect = this.getRect(size, colors.dark)
+					container.addChild(tempRect)
+					allSprites.push(tempRect);
+					tempRect.x = j * size + size * 0.5;
+					tempRect.y = i * size + size * 0.5;
+					if (ignoreEmpty) {
+						//tempRect.alpha = 0;
 					}
+				} else {
+					// tempRect = this.getRect(size, colors.dark)
+					// container.addChild(tempRect)
+					// allSprites.push(tempRect);
+					// tempRect.x = j * size + size * 0.5;
+					// tempRect.y = i * size + size * 0.5;
+
+					// if (ignoreEmpty) {
+					// 	tempRect.alpha = 0.5;
+					// }
 				}
-			
+			}
+
 		}
 
 		// let background = this.getRoundRect2(level[0].length * size + size, container.height + size + paddingBottom, 0x222222)
@@ -1347,7 +1348,7 @@ export default class TetraScreen extends Screen {
 					//if (this.currentLevelData.pieces[i][j] == window.ENEMIES.block.id) {
 					if (this.currentLevelData.pieces[i][j] == window.ENEMIES.block.id) {
 						this.cardsContainer.addChild(this.placeBlock(j, i));
-					}else if (hasAddon && this.specialCardsManager.isBlock(this.currentLevelData.addOn[i][j])) {
+					} else if (hasAddon && this.specialCardsManager.isBlock(this.currentLevelData.addOn[i][j])) {
 						this.cardsContainer.addChild(this.placeBlock(j, i));
 					} else {
 						let customData = null;
@@ -1491,7 +1492,7 @@ export default class TetraScreen extends Screen {
 					//change frequecy of high level cards
 					this.cardQueueData.counter = 2 + Math.floor(Math.random() * 2)
 
-					if(this.currentLevelData.gameMode != 0){
+					if (this.currentLevelData.gameMode != 0) {
 						this.cardQueueData.counter += 3;
 					}
 
@@ -1568,13 +1569,13 @@ export default class TetraScreen extends Screen {
 		if (this.currentLevelData.gameMode == 0 || this.currentLevelData.gameMode == 2) {
 			if (first) {
 				this.getNextPieceRound(first);
-			}else{
+			} else {
 
-				if(this.board.updateCounters(1)){
+				if (this.board.updateCounters(1)) {
 					setTimeout(() => {
 						this.getNextPieceRound();
 					}, 1000);
-				}else{
+				} else {
 					this.getNextPieceRound();
 				}
 			}
