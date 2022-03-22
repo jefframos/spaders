@@ -120,8 +120,8 @@ export default class SquareButton extends PIXI.Container {
 
         this.label.style.fill = colorScheme.fontColor;
         this.label.style.fontWeight = 800;
-        this.label.style.stroke = colorScheme.buttonStandardDarkColor;
-        this.label.style.strokeThickness = 8
+        //this.label.style.stroke = colorScheme.buttonStandardDarkColor;
+        //this.label.style.strokeThickness = 8
         this.labelTop.style.fill = colorScheme.fontColor;
 
         //this.backTop.tint = colorScheme.buttonBackTitleColor;

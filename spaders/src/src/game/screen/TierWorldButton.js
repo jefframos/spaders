@@ -30,12 +30,12 @@ export default class TierWorldButton extends SquareButton {
 
         this.label = new PIXI.Text("", {
             font: '32px',
-            fill: 0xFFFFFF,
+            fill: 0x134143,
             align: 'center',
             //fontWeight: '200',
             fontFamily: window.STANDARD_FONT1,
-            stroke: 0x000000,
-            strokeThickness: 4
+            // stroke: 0x000000,
+            // strokeThickness: 4
         });
 
         this.labelTop = new PIXI.Text("", {
@@ -122,7 +122,7 @@ export default class TierWorldButton extends SquareButton {
                     back1.height = this.squareButtonShape.height + extraBorderBottom + border * 2 + border
                     
                     backWhite.width = this.squareButtonShape.height + border * 2 // * 0.5
-                    backWhite.height = this.squareButtonShape.height + extraBorderBottom + border
+                    backWhite.height = this.squareButtonShape.height + extraBorderBottom + border - 20
                     
                     backBackWhite.width = back1.width + border * 2 
                     backBackWhite.height = back1.height + border * 2 
@@ -164,15 +164,16 @@ export default class TierWorldButton extends SquareButton {
         this.progressBar.x = this.iconBackground.x//+ this.iconBackground.width + 10;
         this.progressBar.y = this.iconBackground.y + this.iconBackground.height + border//(extraBorderBottom - border) * 0.5 - this.progressBar.height * 0.5
 
-        // utils.resizeToFitAR(
-        //     {
-        //         width: this.progressBar.width,
-        //         height: this.progressBar.height * 0.8
-        //     }, this.label)
+        this.progressBar.visible = false;
+        this.label.visible = true
+        utils.resizeToFitAR(
+            {
+                width: this.progressBar.width,
+                height: extraBorderBottom + border
+            }, this.label)
 
         this.label.x = this.progressBar.x + this.progressBar.width / 2;
-        this.label.y = this.progressBar.y + this.progressBar.height / 2;
-        this.label.visible = false
+        this.label.y = this.progressBar.y + this.progressBar.height / 2 + 1;
         // utils.resizeToFitAR(
         //     {
         //         width: this.squareButtonBackShape.width - this.iconBackground.width - 20,
