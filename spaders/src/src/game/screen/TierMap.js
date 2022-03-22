@@ -21,15 +21,16 @@ export default class TierMap extends PIXI.Container {
         this.sizeTile = { width: 64, height: 64 }
         this.mapContainer = new PIXI.Container();
         this.buttonsContainer = new PIXI.Container();
-        this.terrainLayers = [[], []]
-        this.pathLayer = [[]]
-
-        this.addLayer(this.terrainLayers, 0)
-        this.addLayer(this.terrainLayers, 1)
-        this.addLayer(this.pathLayer, 0)
+        this.mapRenderContainer = new PIXI.Container();
+        this.mapRenderSprite = new PIXI.Sprite();
 
         this.addChild(this.mapContainer)
+        this.mapContainer.addChild(this.mapRenderSprite)
         this.addChild(this.buttonsContainer)
+
+        this.terrainLayers = []
+        this.pathLayer = []
+
 
         let center = new PIXI.Graphics().beginFill(0xFF0000).drawCircle(0, 0, this.width / 4);
         center.x = this.width / 2
@@ -40,7 +41,8 @@ export default class TierMap extends PIXI.Container {
         this.addChild(center)
     }
 
-    addLayer(target, id) {
+    addLayer(target) {
+        let newLayer = []
         for (var i = 0; i < this.sizeGrid.i; i++) {
 
             let line = [];
@@ -54,12 +56,15 @@ export default class TierMap extends PIXI.Container {
                 gridSquare.x = j * this.sizeTile.width;
                 gridSquare.y = i * this.sizeTile.height
                 gridSquare.alpha = 0
-                this.mapContainer.addChild(gridSquare);
+                this.mapRenderContainer.addChild(gridSquare);
                 line.push(gridSquare);
             }
 
-            target[id].push(line);
+            newLayer.push(line);
         }
+        target.push(newLayer)
+
+        return newLayer;
     }
 
     addTierLevel(tierButton, pos) {
@@ -68,6 +73,11 @@ export default class TierMap extends PIXI.Container {
         tierButton.y = pos.j * this.sizeTile.height + this.sizeTile.height - tierButton.height;
     }
     cleanMap() {
+        if(this.mapRenderSprite.parent){
+            this.mapRenderSprite.parent.removeChild(this.mapRenderSprite)
+        }
+
+
         for (let index = 0; index < this.terrainLayers.length; index++) {
 
             let layer1 = this.terrainLayers[index];
@@ -100,29 +110,42 @@ export default class TierMap extends PIXI.Container {
 
         }
     }
-    drawMap(mapData) {
-        console.log(mapData, this.layers);
-        //CACHE HERE
+
+    drawMap(mapData, tileSize = { width: 64, height: 64 }, customTotalLevels = -1) {
+
         this.cleanMap()
+        this.mapContainer.addChild(this.mapRenderSprite)
 
-        let colors = colorSchemes.getCurrentColorScheme();
+        this.sizeTile = tileSize
 
-        let layer1 = this.terrainLayers;
+        this.sizeGrid = { i: mapData.height, j: mapData.width }
+
+        if (window.tilemapRenders[mapData.name]) {
+            this.mapRenderSprite.setTexture(window.tilemapRenders[mapData.name])
+            return;
+        }
+
+        this.terrainLayers = []
+        this.pathLayer = []
+
+        this.mapRenderContainer = new PIXI.Container();
+
+        //CACHE HERE
+        
+        this.paths = []
 
         for (let index = 0; index < mapData.terrainLayers.length; index++) {
 
-            layer1 = this.terrainLayers[index];
+            let layer1 = this.addLayer(this.terrainLayers);
 
             for (let i = 0; i < layer1.length; i++) {
                 for (let j = 0; j < layer1[i].length; j++) {
 
                     let id = mapData.terrainLayers[index][i][j] - 1;
                     if (id >= 0) {
-
                         layer1[i][j].setTexture(PIXI.Texture.fromFrame(mapData.tiles[id]))
                         layer1[i][j].alpha = 1;
-
-                        layer1[i][j].tint = colors.list[index > 0 ? 3 : 0].color
+                        layer1[i][j].tint = mapData.terrainColors[index % mapData.terrainColors.length]
                     }
                 }
             }
@@ -130,22 +153,35 @@ export default class TierMap extends PIXI.Container {
         }
 
 
+        let tempPaths = []
+        let totalPaths = customTotalLevels < 0 ? 99999 : customTotalLevels;
+        for (let index = 0; index < mapData.pathLayers.length; index++) {
+            let layer2 = this.addLayer(this.pathLayer);
+            for (let i = 0; i < layer2.length; i++) {
 
-        let layer2 = this.pathLayer[0];
 
-        for (let i = 0; i < layer2.length; i++) {
-            for (let j = 0; j < layer2[i].length; j++) {
-                let id = mapData.pathLayers[0][i][j] - 1;
-                if (id >= 0) {
+                for (let j = layer2[i].length-1; j >=0 ; j--) {
+                    let id = mapData.pathLayers[index][i][j] - 1;
+                    if (id >= 0) {
+                        layer2[i][j].setTexture(PIXI.Texture.fromFrame(mapData.tiles[id]))
+                        layer2[i][j].alpha = 1;
+                        layer2[i][j].tint = mapData.pathColors[index % mapData.pathColors.length]                        
 
-                    layer2[i][j].setTexture(PIXI.Texture.fromFrame(mapData.tiles[id]))
-                    layer2[i][j].alpha = 1;
-
-                    // layer1[i][j].tint = colors.list[1].color
+                        tempPaths.push(layer2[i][j]);
+                    }
                 }
             }
         }
 
+        while (tempPaths.length > totalPaths) {
+            tempPaths[0].visible = false;
+            tempPaths.shift()
+        }
+        let texture = renderer.generateTexture(this.mapRenderContainer);
 
+
+        this.mapRenderSprite.setTexture(texture)
+
+        window.tilemapRenders[mapData.name] = texture;
     }
 }

@@ -140,7 +140,19 @@
                 "bottomBackgroundPosition": 0.01,
                 "alpha": 0
             },
-            "planetID":2
+            "map": {
+                "terrainColors": [
+                    "0x7BCA93",
+                    "0x8957c7",
+                    "0xE2C756"
+                ],
+                "pathColors": [
+                    "0x7BCA93",
+                    "0x8957c7",
+                    "0xE2C756"
+                ]
+            },
+            "planetID": 2
         }
     ]
 }

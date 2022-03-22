@@ -21,6 +21,25 @@
         "": {
             "scaleInEditor": 1
         },
+        "C:/Users/Jeff/Downloads/1bitpack_kenney_1.2/Tilemap/sample_fantasy.tmx": {
+            "scale": 5.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 152.54545454545456,
+                "y": 182.1818181818182
+            }
+        },
+        "C:/Users/Jeff/Downloads/1bitpack_kenney_1.2/Tilemap/sample_urban.tmx": {
+            "scale": 0.8856770833333333,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 385.0161717142018,
+                "y": 193.07262569832398
+            }
+        },
+        "C:/Users/Jeff/Downloads/1bitpack_kenney_1.2/Tilemap/tileset_colored.tsx": {
+            "scaleInDock": 1
+        },
         "D:/Projects/tetra/map/levels.tmx": {
             "scale": 0.75,
             "selectedLayer": 2,
@@ -192,7 +211,7 @@
             "scale": 0.16193181818181815,
             "selectedLayer": 24,
             "viewCenter": {
-                "x": 324.2105263157896,
+                "x": 324.21052631578937,
                 "y": 389.0526315789475
             }
         },
@@ -316,7 +335,7 @@
             "scale": 0.6240312499999999,
             "selectedLayer": 23,
             "viewCenter": {
-                "x": 736.3413290600431,
+                "x": 736.3413290600432,
                 "y": 769.1922479843759
             }
         },
@@ -324,8 +343,8 @@
             "scale": 0.1759602864583333,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2304.497271297753,
-                "y": 2293.131070206272
+                "x": 2298.814170752012,
+                "y": 3066.0327444269733
             }
         },
         "templates/template.tmx": {
@@ -349,6 +368,16 @@
         "tilesets/monalisaTileset.tsx": {
             "dynamicWrapping": false,
             "scaleInDock": 0.5,
+            "scaleInEditor": 1
+        },
+        "tilesets/numbers.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tilesets/oneDimensionTileset.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
             "scaleInEditor": 1
         },
         "tilesets/poke.tsx": {
@@ -420,10 +449,10 @@
         },
         "world/testWorld1.tmx": {
             "scale": 0.75,
-            "selectedLayer": 0,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 320.66666666666663,
-                "y": 320.66666666666663
+                "x": 427.33333333333326,
+                "y": 586.6666666666665
             }
         },
         "world/testWorld1.tmx#WorldTiles": {
@@ -431,12 +460,26 @@
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
+        "world/tier1BasicMap.tmx#WorldTiles": {
+            "dynamicWrapping": true
+        },
+        "world/tiniMap.tmx": {
+            "scale": 2,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 157,
+                "y": 268
+            }
+        },
+        "world/tiniMap.tmx#WorldTiles": {
+            "scaleInDock": 1
+        },
         "world/worldSynth.tmx": {
             "scale": 0.853515625,
-            "selectedLayer": 1,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 288.8054919908467,
-                "y": 321.02517162471395
+                "x": 405.96796338672766,
+                "y": 333.9130434782609
             }
         },
         "world/worldSynth.tmx#WorldTiles": {
@@ -444,9 +487,9 @@
             "scaleInDock": 0.75
         }
     },
-    "last.exportedFilePath": "D:/projects/spaders/spaders/www/data/worldMaps",
+    "last.exportedFilePath": "D:/projects/spaders/spaders/www/data/basics",
     "last.externalTilesetPath": "E:/projects/spaders/spaders/src/map/tilesets",
-    "last.imagePath": "D:/projects/spaders/spaders/src/map/world/Tiles",
+    "last.imagePath": "D:/projects/spaders/spaders/src/map/tilesets",
     "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
@@ -489,24 +532,24 @@
     "project": "gameLevelsProject.tiled-project",
     "property.type": "int",
     "recentFiles": [
+        "synth/sunset.tmx",
+        "synth/betoSynth.tmx",
+        "how-to-play/pokemon76-100.tmx",
+        "how-to-play/pokemon1-25.tmx",
+        "how-to-play/pokemon26-50.tmx",
+        "how-to-play/pokemon51-75.tmx",
         "how-to-play/people-set-1.tmx",
-        "how-to-play/how-to-play-medium.tmx",
-        "how-to-play/creatures.tmx",
-        "how-to-play/things.tmx",
-        "videogames/levels.tmx",
-        "videogames/levels2.tmx",
-        "movies/movies1.tmx",
-        "how-to-play/simple-shapes.tmx",
-        "how-to-play/simple-shapes-synt.tmx",
-        "how-to-play/bossa.tmx",
-        "how-to-play/gameboy.tmx",
-        "gb/gameboyMisc.tmx"
+        "debug/debug2.tmx",
+        "basics/food1.tmx",
+        "tutorial/tutorial.tmx",
+        "debug/debug.tmx",
+        "templates/template.tmx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
-        "height": 64,
-        "width": 64
+        "height": 16,
+        "width": 16
     },
-    "tileset.type": 1
+    "tileset.type": 0
 }

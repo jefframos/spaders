@@ -135,7 +135,19 @@
                 "maxAlpha": 0.1,
                 "extraTileAlpha": 0
             },
-            "planetID":1
+            "map": {
+                "terrainColors": [
+                    "0x4bc16f",
+                    "0x8957c7",
+                    "0xE2C756"
+                ],
+                "pathColors": [
+                    "0xFFFFFF",
+                    "0x8957c7",
+                    "0xE2C756"
+                ]
+            },
+            "planetID": 1
         }
     ]
 }

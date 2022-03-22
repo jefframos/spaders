@@ -30,7 +30,7 @@ export default class TierWorldButton extends SquareButton {
 
         this.label = new PIXI.Text("", {
             font: '32px',
-            fill: 0x134143,
+            fill: 0xFFFFFF,
             align: 'center',
             //fontWeight: '200',
             fontFamily: window.STANDARD_FONT1,
@@ -82,20 +82,62 @@ export default class TierWorldButton extends SquareButton {
         this.updateColorScheme();
 
     }
-    setLargeButtonMode() {
+    updateColorScheme() {
+        let colorScheme = colorSchemes.getCurrentColorScheme().buttonData;
+
+        this.label.style.fill = colorScheme.fontColor;
+        this.label.style.fontWeight = 800;
+        this.labelTop.style.fill = colorScheme.fontColor;
+
+
+        this.progressBar.updateBackgroundColor(colorScheme.buttonStandardDarkColor)
+        if (this.iconBackground) {
+            this.iconBackground.tint = colorScheme.buttonStandardDarkColor;
+        }
+        switch (this.currentState) {
+            case 0:
+                this.setColor(colorScheme.buttonStandardColor);
+                break;
+            case 1:
+                this.setColor(colorScheme.tierCompleteColor);
+                break;
+            case 2:
+                this.setColor(colorScheme.levelCompleteColor);
+                break;
+            default:
+                break;
+        }
+    }
+    removeDarkMode(){
+        if (this.isPlanet || !this.iconBackgroundWhite) {
+            return
+        }
+
+        this.iconBackgroundWhite.tint = 0xFFFFFF; 
+    }
+    darkMode(){
+        if (this.isPlanet || !this.iconBackgroundWhite) {
+            return
+        }
+        let colorScheme = colorSchemes.getCurrentColorScheme().buttonData;
+
+        this.iconBackgroundWhite.tint = colorScheme.buttonStandardDarkColor;
+    }
+    setColor(color) {
+        if (this.isPlanet || !this.iconBackgroundWhite) {
+            return
+        }
+        this.iconBackgroundWhite.tint = color
+    }
+    setLargeButtonMode(addBottomBorder = true) {
         if (!this.iconBackground) return;
 
         let border = 4
-        let extraBorderBottom = (border * 2) + this.iconBackground.height * 0.15 + border
+        let extraBorderBottom = addBottomBorder ? (border * 2) + this.iconBackground.height * 0.15 + border : 0
         let color = colorSchemes.getCurrentColorScheme()
-
-
-
 
         this.iconBackground.x = 0;
         this.iconBackground.y = 0;
-
-
 
         this.iconBackground.width = this.squareButtonShape.height// * 0.5
         this.iconBackground.height = this.squareButtonShape.height// * 0.5
@@ -103,8 +145,8 @@ export default class TierWorldButton extends SquareButton {
         if (!this.iconBackgroundWhite) {
 
             this.iconBackgroundWhite = new PIXI.Sprite();
-            if (window.imageThumbs['tierCardBackgroundTexture']) {
-                this.iconBackgroundWhite.setTexture(window.imageThumbs['tierCardBackgroundTexture'])
+            if (window.imageThumbs['tierCardBackgroundTexture'+addBottomBorder]) {
+                this.iconBackgroundWhite.setTexture(window.imageThumbs['tierCardBackgroundTexture'+addBottomBorder])
             } else {
 
 
@@ -122,10 +164,10 @@ export default class TierWorldButton extends SquareButton {
                     back1.height = this.squareButtonShape.height + extraBorderBottom + border * 2 + border
                     
                     backWhite.width = this.squareButtonShape.height + border * 2 // * 0.5
-                    backWhite.height = this.squareButtonShape.height + extraBorderBottom + border - 20
+                    backWhite.height = this.squareButtonShape.height + extraBorderBottom + border - 19
                     
                     backBackWhite.width = back1.width + border * 2 
-                    backBackWhite.height = back1.height + border * 2 
+                    backBackWhite.height = back1.height + border * 3 
                     
                     backWhite.x = border
                     backWhite.y = border
@@ -153,19 +195,20 @@ export default class TierWorldButton extends SquareButton {
         this.iconBackground.x = border * 3
         this.iconBackground.y = border * 3
 
-        this.icon.y = border * 2
+        //this.icon.y = border
         //this.iconBackgroundWhite.x = -border
         //this.iconBackgroundWhite.y = -border
         this.iconBackgroundWhite.tint = color.buttonData.tierButtonBackground;
 
         this.resizeIconToFitOnLarge2()
+        this.icon.y -= border / 2;
 
         this.progressBar.resizeBar(this.iconBackground.width, this.iconBackground.height * 0.15, true);
         this.progressBar.x = this.iconBackground.x//+ this.iconBackground.width + 10;
         this.progressBar.y = this.iconBackground.y + this.iconBackground.height + border//(extraBorderBottom - border) * 0.5 - this.progressBar.height * 0.5
 
         this.progressBar.visible = false;
-        this.label.visible = true
+        this.label.visible = addBottomBorder
         utils.resizeToFitAR(
             {
                 width: this.progressBar.width,

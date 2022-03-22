@@ -26,6 +26,7 @@ console.log('version', version);
 window.CARD_ID = 0;
 
 window.imageThumbs = {};
+window.tilemapRenders = {};
 
 window.colorTweenManager = new ColorTweenManager();
 
@@ -405,7 +406,7 @@ function loadJsons() {
 	let avoidRepetition = {}
 	// console.log("--", window.levelSections)
 	window.levelSections.sections.forEach(section => {
-		//console.log(section)
+		console.log(section)
 		if (section.imageSrc) {
 			PIXI.loader.add('./assets/' + section.imageSrc)
 		}
@@ -416,12 +417,17 @@ function loadJsons() {
 			}
 		}
 		section.levels.forEach(level => {
+
+			if(!avoidRepetition[level.levelOrderMap]){
+				PIXI.loader.add(jsonPath + level.levelOrderMap)
+				avoidRepetition[level.levelOrderMap] = true;
+			}
 			PIXI.loader.add(jsonPath + level.dataPath)
 		});
 
 	});
 
-
+	//levelOrderMap
 
 	PIXI.loader.load(configGame).onProgress.add(() => {
 		//console.log(PIXI.loader.progress);
@@ -689,16 +695,16 @@ function calcEstimatedTime(data) {
 	data.estimateTime2 = utils.convertNumToTime(data.estimateTime);
 
 }
-function arrayToMatrix(array, i, j) {
+function arrayToMatrix(array, i, j, mod = 136) {
 	let levelMatrix = [];
 	
 	let tempArr = [];
 	for (let index = 0; index < array.length; index++) {
 		let id = array[index];
-		tempArr.push(id);
-		if (tempArr.length >= i) {
+		tempArr.push(id% mod);
+		if (tempArr.length >= j) {
 			levelMatrix.push(tempArr)
-			if (levelMatrix.length >= j) {
+			if (levelMatrix.length >= i) {
 				break;
 			}
 			tempArr = []
@@ -720,7 +726,10 @@ function extractMap(data) {
 		terrainLayers: [],
 		pathLayers: [],
 		levelLayers: [],
-		tiles:usedTiles
+		tiles:usedTiles,
+		width:data.width,
+		height:data.height,
+		name:""
 	}
 
 	data.layers.forEach(element => {
@@ -737,11 +746,16 @@ function extractMap(data) {
 			for (let j = 0; j < matrix.length; j++) {
 				for (let i = 0; i < matrix[j].length; i++) {
 					if(matrix[j][i] > 0){
-						mapData.levelLayers.push({i,j})
+
+						let id = matrix[j][i]// % 136
+
+						mapData.levelLayers.push({id, i,j})
 					}
 					
 				}
 			}
+
+			mapData.levelLayers.sort((a,b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0))
 
 		}
 	});
@@ -762,6 +776,7 @@ function configGame() {
 
 		if (section.tilemapPath) {
 			section.mapData = extractMap(PIXI.loader.resources[jsonPath + section.tilemapPath].data);
+			section.mapData.name = section.name + Math.random();
 		}
 
 		let nameID = section.name;
@@ -815,6 +830,12 @@ function configGame() {
 			customPallet = level.customPallet;
 			level.sectionName = section.name;
 			level.section = section;
+
+			if (level.levelOrderMap) {
+				level.mapData = extractMap(PIXI.loader.resources[jsonPath + level.levelOrderMap].data);
+				level.mapData.name = level.name + Math.random();
+			}
+
 			res.layers.forEach(layer => {
 
 				let isAddon = layer.visible && layer.name.search("_ADDON") >= 0

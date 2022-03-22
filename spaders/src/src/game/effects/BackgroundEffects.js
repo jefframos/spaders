@@ -124,9 +124,9 @@ export default class BackgroundEffects extends PIXI.Container {
 
 	}
 	updateColors(colorList) {
-		for (var i = 0; i < this.stars.length; i++) {
-			this.stars[i].graphics.tint = colorList[Math.floor(Math.random() * colorList.length * 0.5)].color;
-		}
+		// for (var i = 0; i < this.stars.length; i++) {
+		// 	this.stars[i].graphics.tint = colorList[Math.floor(Math.random() * colorList.length * 0.5)].color;
+		// }
 	}
 	changeStates(type = 'start') {
 		return

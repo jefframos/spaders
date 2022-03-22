@@ -1,5 +1,5 @@
 {
-    "pallete": [     
+    "pallete": [
         {
             "name": "synth",
             "block": {
@@ -184,6 +184,21 @@
                 "bottomBackground": "game_bg.png",
                 "bottomBackgroundPosition": -0.2,
                 "alpha": 0
+            },
+            "map": {
+                "terrainColors": [
+                    "0xffd319",
+                    "0xff901f",
+                    "0xff2975",
+                    "0xf222ff",
+                    "0x8c1eff",
+                    "0x6df1d8"
+                ],
+                "pathColors": [
+                    "0xFFFFFF",
+                    "0x8957c7",
+                    "0xE2C756"
+                ]
             }
         }
     ]

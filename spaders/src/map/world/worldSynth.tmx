@@ -414,6 +414,8 @@
    <image width="64" height="64" source="Tiles/tile_0135.png"/>
   </tile>
  </tileset>
+ <tileset firstgid="137" source="../tilesets/numbers.tsx"/>
+ <tileset firstgid="201" source="../tilesets/oneDimensionTileset.tsx"/>
  <layer id="1" name="Terrain1" width="10" height="10">
   <data encoding="csv">
 0,8,9,10,0,0,0,8,9,10,
@@ -459,13 +461,13 @@
  <layer id="2" name="Levels" width="10" height="10">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,134,0,
-0,134,0,0,134,0,0,0,0,0,
+0,0,0,0,0,0,0,0,144,0,
+0,137,0,0,138,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,
-0,0,134,0,0,0,0,134,0,0,
+0,0,139,0,0,0,0,143,0,0,
 0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,
-0,134,0,0,134,0,0,134,0,0,
+0,140,0,0,141,0,0,142,0,0,
 0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0
 </data>

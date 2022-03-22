@@ -419,7 +419,8 @@ export default class StartScreenContainer extends PIXI.Container {
 			this.screenContainer.positionSpringX.tx = this.mainCanvas.width / 2 + this.mainCanvas.x;
 			this.screenContainer.x = this.screenContainer.positionSpringX.x;
 
-			this.screenContainer.positionSpringY.tx = this.mainCanvas.y - 17 * this.screenContainer.scale.x;
+			//this.screenContainer.positionSpringY.tx = this.mainCanvas.y - 17 * this.screenContainer.scale.x;
+			this.screenContainer.positionSpringY.tx = this.mainCanvas.y - (35 * 3) * this.screenContainer.scale.x;
 			this.screenContainer.y = this.screenContainer.positionSpringY.x;
 
 			this.backButton.scale.set(this.screenContainer.scale.x)
@@ -445,7 +446,7 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.backButton.y = this.mainCanvas.y + this.backButton.height
 
 		let lineConvertedPosition = this.mainCanvas.toLocal(this.playLine.getGlobalPosition())
-		this.chooseLevelPanel.y = lineConvertedPosition.y + 50 * this.screenContainer.scale.x;
+		this.chooseLevelPanel.y = lineConvertedPosition.y + (35 * 3) * this.screenContainer.scale.x;
 		this.chooseLevelPanel.resize(innerResolution);
 
 

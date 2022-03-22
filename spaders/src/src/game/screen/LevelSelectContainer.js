@@ -72,7 +72,6 @@ export default class LevelSelectContainer extends PIXI.Container {
             //this.resize({ width: config.width, height: config.height }, true)
 
             if (window.isMobile) {
-                this.unscaledTierButtonSize = { width: window.innerWidth / 5, height: window.innerWidth / 5 }
 
                 this.unscaledplanetButtonSize = { width: (window.innerWidth - this.currentGridOffset.x * 2) * 0.9 / 2, height: 80 }
                 this.unscaledplanetButtonSize.width = Math.min(config.width, this.unscaledplanetButtonSize.width)
@@ -85,13 +84,12 @@ export default class LevelSelectContainer extends PIXI.Container {
 
                 this.unscaledLinePlanetSize = { width: planetTarget, height: planetTarget }
 
+                this.unscaledTierButtonSize = { width: 48, height: 48 }
+                this.newUnscaledLevelButtonSize = { width: 64, height: 64 }
+
+
             } else {
 
-                this.unscaledTierButtonSize = { width: 80, height: 80 }
-
-                this.unscaledTierButtonSize = { width: config.width / 5, height: config.width / 5 }
-
-                console.log(this.unscaledTierButtonSize)
                 this.unscaledplanetButtonSize = { width: (config.width - this.currentGridOffset.x * 2) * 0.9 / 2, height: 120 }
                 this.unscaledplanetButtonSize.width = Math.min(config.width / 2, this.unscaledplanetButtonSize.width)
                 this.unscaledplanetButtonSize.width = Math.max(200, this.unscaledplanetButtonSize.width);
@@ -100,9 +98,10 @@ export default class LevelSelectContainer extends PIXI.Container {
                 this.unscaledCardSize = { width: (config.width - this.currentGridOffset.x * 2) * 0.9 / 3, height: 120 }
 
                 this.unscaledLinePlanetSize = { width: this.unscaledplanetButtonSize.width, height: this.unscaledplanetButtonSize.width }
+                this.unscaledTierButtonSize = { width: 64, height: 64 }
+                this.newUnscaledLevelButtonSize = { width: 64, height: 64 }
             }
 
-            this.unscaledTierButtonSize = { width: 64, height: 64 }
 
             this.buildSections();
             this.refreshNavButtons();
@@ -205,8 +204,10 @@ export default class LevelSelectContainer extends PIXI.Container {
         this.updateColorScheme();
 
         this.tierMap = new TierMap()
+        this.levelMap = new TierMap()
 
         this.tiersView.addChild(this.tierMap)
+        this.levelsView.addChild(this.levelMap)
         let center = new PIXI.Graphics().beginFill(0xFF00FF).drawCircle(0, 0, 20)
         //this.tiersView.addChild(center)
 
@@ -331,47 +332,36 @@ export default class LevelSelectContainer extends PIXI.Container {
                 element.x = target;
             }
 
-
-            //console.log("TARGE",element.targetX)
-
         });
+
+        if(this.levelMap)console.log(this.levelMap.scale)
+        if(this.levelMap){
+            console.log(this.levelMap.height, this.levelMap.scale)
+            let levelYStart = - this.levelMap.height + window.innerHeight           
+            this.draggables[2].y = levelYStart
+            this.draggables[2].spring.x = levelYStart
+            this.draggables[2].spring.tx = levelYStart
+        }
         //this.dragSpeed = { x: 0, y: 0 }
     }
     updateMapDrag(element) {
-        //console.log(this.newContainer.getGlobalPosition())
-        let cElementH = element.height//- this.newContainer.y;
-        let cCanvasH = this.mainCanvas.height - this.y//this.newContainer.getGlobalPosition().y//+ this.newContainer.y;
         if (this.dragSpeed.y != 0) {
             element.spring.tx = element.dragPosition.y + this.dragSpeed.y;
-            //element.spring.tx = Math.min(element.spring.tx, 0);
-            //element.spring.tx = Math.max(element.spring.tx, cCanvasH - cElementH - this.unscaledCardSize.height * 0.5);
         } else {
-            //element.spring.tx = 0;
         }
 
         if (this.dragSpeed.x != 0) {
-            //                if (element.x <= element.targetX) {
             element.springX.tx = element.dragPosition.x + this.dragSpeed.x;
-            //element.springX.tx = Math.max((element.width / this.tierMap.scale.x) - element.targetX, element.springX.tx);
-            // } else {
-            //     //element.springX.x = element.targetX;
-            // }
-
         } else {
-            // element.springX.tx = element.targetX;
-
         }
-
-
 
         element.springX.update();
         element.x = element.springX.tx
 
-
         element.spring.update();
         element.y = element.spring.x
-
     }
+
     updateDrag(element) {
         //console.log(this.newContainer.getGlobalPosition())
         let cElementH = element.height//- this.newContainer.y;
@@ -543,6 +533,37 @@ export default class LevelSelectContainer extends PIXI.Container {
 
         return secButton
     }
+    addCard(data) {
+
+        //console.log(data);
+
+        let levelButton = new TierWorldButton(this.newUnscaledLevelButtonSize);//= new SquareButton(this.unscaledCardSize);
+        levelButton.updateLabel(data.levelName);
+
+        let order = this.currentTier[0].tier.mapData.levelLayers[data.order >= 0 ? level.order : this.levelCards.length]
+
+        //console.log(order)
+        this.levelMap.addTierLevel(levelButton, order)
+        //
+        this.refreshCard(levelButton, data);
+
+        let resize = { width: this.newUnscaledLevelButtonSize.width, height: this.newUnscaledLevelButtonSize.height * 2 }
+        this.gameScreen.resizeToFitAR(resize, levelButton)
+        levelButton.data = data;
+
+        levelButton.on('mouseup', this.selectLevel.bind(this, data)).on('touchend', this.selectLevel.bind(this, data));
+        levelButton.interactive = true;
+        levelButton.buttonMode = true;
+
+
+
+        // if (!this.levelsView.children.includes(levelButton)) {
+        //     this.levelsView.addChild(levelButton)
+        // }
+
+
+        this.levelCards.push(levelButton)
+    }
     buildLevelTierButton(level, index) {
 
         let coverID = level.coverID;
@@ -623,6 +644,12 @@ export default class LevelSelectContainer extends PIXI.Container {
         // this.tierButtons.push(backButton);
 
 
+        if (!section.mapData.terrainColors) {
+            let colors = colorSchemes.getCurrentColorScheme();
+            section.mapData.terrainColors = colors.map.terrainColors;
+            section.mapData.pathColors = colors.map.pathColors;
+        }
+        this.tierMap.drawMap(section.mapData, this.unscaledTierButtonSize)
 
 
         for (let index = 0; index < section.levels.length; index++) {
@@ -640,13 +667,15 @@ export default class LevelSelectContainer extends PIXI.Container {
 
 
 
-            this.tierMap.addTierLevel(levelTierButton, section.mapData.levelLayers[level.order >= 0 ? level.order : this.tierButtons.length])
+            let order = section.mapData.levelLayers[level.order >= 0 ? level.order : this.tierButtons.length];
+            //console.log(order)
+
+            this.tierMap.addTierLevel(levelTierButton, order)
             this.tierButtons.push(levelTierButton);
 
             //this.refreshTier(levelTierButton, levelTierButton.data);
         }
 
-        this.tierMap.drawMap(section.mapData)
         this.resize(null, true);
 
 
@@ -733,23 +762,29 @@ export default class LevelSelectContainer extends PIXI.Container {
 
         this.levelCards = [];
         this.levelSplitCards = []
-        // let backButton = this.buildBackButton();
-        // this.levelsView.addChild(backButton);
-        // this.levelCards.push(backButton);
-
+        console.log(this.currentTier[0].tier)
 
         if (tier[0].tier.splitData) {
-            //console.log("ADD SPLIT STUFF")
             this.addSplitCard(tier[0].tier);
+            this.levelMap.cleanMap();
         } else {
 
+
+            if (!this.currentTier[0].tier.mapData.terrainColors) {
+                let colors = colorSchemes.getCurrentColorScheme();
+                this.currentTier[0].tier.mapData.terrainColors = colors.map.terrainColors
+                this.currentTier[0].tier.mapData.pathColors = [0xFFFFFF]
+            }
+
+            this.levelMap.drawMap(this.currentTier[0].tier.mapData, this.newUnscaledLevelButtonSize, this.currentTier.length - 1)
             tier.forEach(element => {
                 this.addCard(element);
             });
+
+            setTimeout(() => {
+                this.resetDrags();                
+            }, 30);
         }
-
-        //console.log("tier", tier)
-
 
     }
 
@@ -765,6 +800,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         }
 
         this.tiersView.visible = this.currentUISection == 1
+        this.levelsView.visible = this.currentUISection == 2
         this.centerLevels();
 
         this.planetButtons.forEach(element => {
@@ -860,15 +896,20 @@ export default class LevelSelectContainer extends PIXI.Container {
                 //new PIXI.Sprite.fromImage(window.iconsData.time));
             }
 
-            levelButton.setCompleteStateLevel()
+            levelButton.setLargeButtonMode(false);
+            //levelButton.setCompleteStateLevel()
+            levelButton.removeDarkMode()
             //levelButton.setColor(colorSchemes.colorSchemes[data.colorPalletId].list[4].color)
         } else {
             levelButton.updateLabelTop("~" + data.estimateTime2)//,
             //new PIXI.Sprite.fromImage(window.iconsData.time));
             levelButton.updateIcon(this.gameScreen.generateImage(window.questionMark));
             levelButton.updateIcon(this.gameScreen.generateImage(window.questionMark));
-            levelButton.setStandardState()
+            //levelButton.setStandardState()
+            levelButton.setLargeButtonMode(false);
+            levelButton.darkMode();
         }
+
     }
     addSplitCard(tier) {
 
@@ -907,32 +948,12 @@ export default class LevelSelectContainer extends PIXI.Container {
         levelSplitButton.onLevelSelect.add(this.selectLevel.bind(this))
         this.levelSplitCards.push(levelSplitButton)
 
+
         setTimeout(() => {
             this.refreshSplitCard(levelSplitButton, tier.data);
         }, 60);
     }
-    addCard(data) {
 
-        //console.log(data);
-
-        let levelButton = new SquareButton(this.unscaledCardSize);
-        levelButton.updateLabel(data.levelName);
-        //
-        this.refreshCard(levelButton, data);
-
-        this.gameScreen.resizeToFitAR(this.unscaledCardSize, levelButton)
-        levelButton.data = data;
-
-        levelButton.on('mouseup', this.selectLevel.bind(this, data)).on('touchend', this.selectLevel.bind(this, data));
-        levelButton.interactive = true;
-        levelButton.buttonMode = true;
-
-        if (!this.levelsView.children.includes(levelButton)) {
-            this.levelsView.addChild(levelButton)
-        }
-
-        this.levelCards.push(levelButton)
-    }
     getGridGraphic() {
         return new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, 100, 130);
     }
@@ -995,7 +1016,6 @@ export default class LevelSelectContainer extends PIXI.Container {
                 element.y = 50
             }
             lines.push(element.y + size.height)
-
         }
 
     }
@@ -1024,22 +1044,11 @@ export default class LevelSelectContainer extends PIXI.Container {
             element.x = (index % maxPerLine) * chunck + adj + chunck / 2 - element.width / 2 + this.currentGridOffset.x
             element.y = 50 + index * size.height * 0.5
 
-
-
             lines.push(element.y + size.height)
-
         }
-
     }
 
     resize(innerResolution, force) {
-        if (!force && (this.currentResolution.width == innerResolution.width && this.currentResolution.height == innerResolution.height)) {
-            //return;
-        }
-
-        // if (this.currentResolution.width != innerResolution.width || this.currentResolution.height != innerResolution.height) {
-        //     //return;
-        // }
 
         if (innerResolution) {
             this.currentResolution = innerResolution
@@ -1051,8 +1060,6 @@ export default class LevelSelectContainer extends PIXI.Container {
         this.mainCanvas.height = this.currentResolution.height
 
 
-
-        //this.mainCanvas.x = this.currentResolution.width/2 - config.width/2
         this.centerLevels();
 
         this.newContainer.y = this.mainCanvas.y - 20;
@@ -1086,11 +1093,20 @@ export default class LevelSelectContainer extends PIXI.Container {
         this.tierMap.x += this.currentGridOffset.x
         this.tierMap.y = this.mainCanvas.y + 50 * targetScale
 
+        targetScale = wdth / (this.levelMap.width) * this.levelMap.scale.x
+
+        if (window.isMobile) {
+
+        } else {
+            targetScale = Math.min(1, targetScale)
+        }
+        this.levelMap.scale.set(targetScale)
+        this.levelMap.x = this.tierMap.x - 50 * this.levelMap.scale.x
+        this.levelMap.y = this.tierMap.y
+
 
     }
     centerLevels() {
-        //this.currentGridOffset.x = 0
-
         if (this.shouldUpdate) {
 
             this.drawPlanets(this.planetButtons, 20, this.unscaledLinePlanetSize, true, 2);
@@ -1098,25 +1114,20 @@ export default class LevelSelectContainer extends PIXI.Container {
             //REMOVE THIS
             //this.tierMap.visible = false;
             //this.drawGrid(this.tierButtons, 20, this.unscaledTierButtonSize, false);
+            //this.drawGrid(this.levelCards, 20, this.unscaledCardSize, false, 3);
+            //this.drawGrid(this.levelCards, 20, this.unscaledCardSize, true);
 
-
-
-            this.drawGrid(this.levelCards, 20, this.unscaledCardSize, false, 3);
             if (this.levelSplitCards.length > 0) {
-
                 this.drawGrid(this.levelSplitCards, 20, this.levelSplitCards[0].customSize, true);
-            }
-
-            if (this.currentUISection == 1) {
-                this.updateMapDrag(this.draggables[this.currentUISection])
-            } else {
                 this.updateDrag(this.draggables[this.currentUISection])
+            } else {
+                if (this.currentUISection >= 1) {
+                    this.updateMapDrag(this.draggables[this.currentUISection])
+                } else {
+                    this.updateDrag(this.draggables[this.currentUISection])
+                }
             }
         }
-        // if(this.currentUISection == 2){
-        //     this.updateDrag(this.levelsView);
-
-        // }
 
         this.levelsView.pivot.x = this.mainCanvas.width / 2
         this.levelsView.x = this.mainCanvas.x + this.mainCanvas.width
@@ -1126,7 +1137,6 @@ export default class LevelSelectContainer extends PIXI.Container {
 
         this.tiersView.pivot.x = this.mainCanvas.width / 2
         this.tiersView.targetX = this.mainCanvas.x + this.mainCanvas.width//- this.unscaledButtonSize.width / 2
-        //this.tiersView.y = this.mainCanvas.y //- this.mainCanvas.height * 0.5;
 
     }
 }
