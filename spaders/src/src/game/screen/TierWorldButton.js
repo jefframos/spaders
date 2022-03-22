@@ -133,7 +133,7 @@ export default class TierWorldButton extends SquareButton {
         if (!this.iconBackground) return;
 
         let border = 4
-        let extraBorderBottom = addBottomBorder ? (border * 2) + this.iconBackground.height * 0.15 + border : 0
+        let extraBorderBottom = addBottomBorder ? (border * 2) + this.iconBackground.height * 0.15 + border : border
         let color = colorSchemes.getCurrentColorScheme()
 
         this.iconBackground.x = 0;
@@ -176,7 +176,10 @@ export default class TierWorldButton extends SquareButton {
                     back1.y = border
                     
                     backBackWhite.addChild(back1);
-                    back1.addChild(backWhite)
+
+                    if(addBottomBorder){
+                        back1.addChild(backWhite)
+                    }
 
                     backBackWhite.tint = 0xFFFFFF//color.buttonData.tierButtonBackground;
                 backWhite.tint = 0xFFFFFF//color.buttonData.tierButtonBackground;

@@ -172,13 +172,24 @@ export default class LevelSelectContainer extends PIXI.Container {
         this.endTouch = { x: -9999, y: -9999 }
         this.dragSpeed = { x: 0, y: 0 }
 
+
+        this.tierMap = new TierMap()
+        this.levelMap = new TierMap()
+
         this.tiersView.isHorizontal = true;
+        this.tiersView.map = this.tierMap;
+        this.levelsView.map = this.levelMap;
         this.draggables = [this.sectionsView, this.tiersView, this.levelsView]
         this.draggables.forEach(element => {
             element.dragPosition = { x: element.x, y: element.y }
             element.spring = new Spring();
             element.springX = new Spring();
 
+            element.spring.springiness = 0.5;
+            element.spring.damp = 0.1;
+
+            element.springX.springiness = 0.5;
+            element.springX.damp = 0.1;
         });
 
         this.resetDrags();
@@ -203,8 +214,7 @@ export default class LevelSelectContainer extends PIXI.Container {
 
         this.updateColorScheme();
 
-        this.tierMap = new TierMap()
-        this.levelMap = new TierMap()
+
 
         this.tiersView.addChild(this.tierMap)
         this.levelsView.addChild(this.levelMap)
@@ -334,9 +344,9 @@ export default class LevelSelectContainer extends PIXI.Container {
 
         });
 
-        if(this.levelMap)console.log(this.levelMap.scale)
+       // if(this.levelMap)console.log(this.levelMap.scale)
         if(this.levelMap){
-            console.log(this.levelMap.height, this.levelMap.scale)
+            //console.log(this.levelMap.height, this.levelMap.scale)
             let levelYStart = - this.levelMap.height + window.innerHeight           
             this.draggables[2].y = levelYStart
             this.draggables[2].spring.x = levelYStart
@@ -354,12 +364,27 @@ export default class LevelSelectContainer extends PIXI.Container {
             element.springX.tx = element.dragPosition.x + this.dragSpeed.x;
         } else {
         }
+        if (!this.isHolding) {
 
+            //HERE
+            // let bottomLimmit = element.map.height + window.innerHeight  
+
+            // //console.log(bottomLimmit, element.spring.tx)
+
+            // element.spring.tx = Math.max(0,element.spring.tx)
+            // element.springX.tx = Math.max(0,element.springX.tx)
+
+            // element.spring.tx = Math.min(bottomLimmit,element.spring.tx)
+            // //element.springX.tx = Math.min(0,element.springX.tx)
+
+        }
+        
         element.springX.update();
-        element.x = element.springX.tx
-
+        element.x = element.springX.x
+        
         element.spring.update();
         element.y = element.spring.x
+        
     }
 
     updateDrag(element) {

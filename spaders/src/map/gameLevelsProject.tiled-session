@@ -3,19 +3,19 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "world/testWorld1.tmx",
+    "activeFile": "world/tier1BasicMap.tmx",
     "expandedProjectPaths": [
-        "gb",
+        "basics",
+        "movies",
         "synth",
         "videogames",
-        "main",
-        "basics",
-        "tutorial",
-        "templates",
         "world",
         "debug",
+        "main",
+        "tutorial",
+        "templates",
         "how-to-play",
-        "movies"
+        "gb"
     ],
     "fileStates": {
         "": {
@@ -377,7 +377,7 @@
         },
         "tilesets/oneDimensionTileset.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 1,
+            "scaleInDock": 2,
             "scaleInEditor": 1
         },
         "tilesets/poke.tsx": {
@@ -460,8 +460,17 @@
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
+        "world/tier1BasicMap.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 424,
+                "y": 504
+            }
+        },
         "world/tier1BasicMap.tmx#WorldTiles": {
-            "dynamicWrapping": true
+            "dynamicWrapping": true,
+            "scaleInDock": 1
         },
         "world/tiniMap.tmx": {
             "scale": 2,
@@ -495,43 +504,16 @@
     "map.tileHeight": 16,
     "map.tileWidth": 16,
     "openFiles": [
-        "how-to-play/people-set-1.tmx",
-        "how-to-play/how-to-play-medium.tmx",
-        "how-to-play/creatures.tmx",
-        "how-to-play/things.tmx",
-        "videogames/levels.tmx",
-        "videogames/levels2.tmx",
-        "movies/movies1.tmx",
-        "how-to-play/simple-shapes.tmx",
-        "how-to-play/simple-shapes-synt.tmx",
-        "how-to-play/bossa.tmx",
-        "how-to-play/gameboy.tmx",
-        "gb/gameboyMisc.tmx",
-        "gb/gameboyCreatures.tmx",
-        "gb/gameboyMisc2.tmx",
-        "gb/gameboyWeapon1.tmx",
-        "gb/gameboyWeapon2.tmx",
-        "videogames/levels3.tmx",
-        "how-to-play/pokemons.tmx",
-        "how-to-play/question-mark.tmx",
-        "movies/moviesAdventure.tmx",
-        "templates/template.tmx",
-        "debug/debug.tmx",
-        "tutorial/tutorial.tmx",
-        "basics/food1.tmx",
-        "debug/debug2.tmx",
-        "how-to-play/pokemon51-75.tmx",
-        "how-to-play/pokemon26-50.tmx",
-        "how-to-play/pokemon1-25.tmx",
-        "how-to-play/pokemon76-100.tmx",
-        "synth/betoSynth.tmx",
-        "synth/sunset.tmx",
         "world/testWorld1.tmx",
-        "world/worldSynth.tmx"
+        "world/worldSynth.tmx",
+        "world/tier1BasicMap.tmx"
     ],
     "project": "gameLevelsProject.tiled-project",
     "property.type": "int",
     "recentFiles": [
+        "world/testWorld1.tmx",
+        "world/worldSynth.tmx",
+        "world/tier1BasicMap.tmx",
         "synth/sunset.tmx",
         "synth/betoSynth.tmx",
         "how-to-play/pokemon76-100.tmx",
@@ -540,10 +522,7 @@
         "how-to-play/pokemon51-75.tmx",
         "how-to-play/people-set-1.tmx",
         "debug/debug2.tmx",
-        "basics/food1.tmx",
-        "tutorial/tutorial.tmx",
-        "debug/debug.tmx",
-        "templates/template.tmx"
+        "basics/food1.tmx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",
