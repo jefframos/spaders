@@ -1,0 +1,587 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "world/testWorld1.tmx",
+    "expandedProjectPaths": [
+        "D:/projects/spaders/spaders/src/map/gb",
+        "D:/projects/spaders/spaders/src/map/world",
+        "D:/projects/spaders/spaders/src/map/how-to-play",
+        "D:/projects/spaders/spaders/src/map/videogames",
+        "D:/projects/spaders/spaders/src/map/main",
+        "D:/projects/spaders/spaders/src/map/synth",
+        "world",
+        "D:/projects/spaders/spaders/src/map/basics",
+        "D:/projects/spaders/spaders/src/map/movies",
+        "D:/projects/spaders/spaders/src/map/debug",
+        "D:/projects/spaders/spaders/src/map/templates",
+        "D:/projects/spaders/spaders/src/map/tutorial"
+    ],
+    "fileStates": {
+        "": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "C:/Users/Jeff/Downloads/1bitpack_kenney_1.2/Tilemap/sample_fantasy.tmx": {
+            "scale": 5.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 152.54545454545456,
+                "y": 182.1818181818182
+            }
+        },
+        "C:/Users/Jeff/Downloads/1bitpack_kenney_1.2/Tilemap/sample_urban.tmx": {
+            "scale": 0.8856770833333333,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 385.0161717142018,
+                "y": 193.07262569832398
+            }
+        },
+        "C:/Users/Jeff/Downloads/1bitpack_kenney_1.2/Tilemap/tileset_colored.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/Projects/tetra/map/levels.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 276.66666666666663,
+                "y": 404
+            }
+        },
+        "D:/Projects/tetra/map/spadersTileset.tsx": {
+            "scaleInDock": 0.75,
+            "scaleInEditor": 1
+        },
+        "D:/projects/spaders/spaders/src/map/basics/food1.tmx": {
+            "scale": 0.6522518382352941,
+            "selectedLayer": 32,
+            "viewCenter": {
+                "x": 480.6425702811245,
+                "y": 512.0721482420912
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/debug/debug.tmx": {
+            "scale": 0.6522518382352941,
+            "selectedLayer": 5,
+            "viewCenter": {
+                "x": 480.6425702811245,
+                "y": 512.0721482420912
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/debug/debug2.tmx": {
+            "scale": 0.125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 2308,
+                "y": 1972
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/gb/gameboyCreatures.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 7,
+            "viewCenter": {
+                "x": 737,
+                "y": 768
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/gb/gameboyMisc.tmx": {
+            "scale": 0.33,
+            "selectedLayer": 21,
+            "viewCenter": {
+                "x": 480.30303030303025,
+                "y": 512.1212121212122
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/gb/gameboyMisc2.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 14,
+            "viewCenter": {
+                "x": 481,
+                "y": 512
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/gb/gameboyWeapon1.tmx": {
+            "scale": 0.33,
+            "selectedLayer": 8,
+            "viewCenter": {
+                "x": 513.6363636363636,
+                "y": 512.1212121212122
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/gb/gameboyWeapon2.tmx": {
+            "scale": 0.33,
+            "selectedLayer": 19,
+            "viewCenter": {
+                "x": 513.6363636363636,
+                "y": 512.1212121212122
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/how-to-play/bossa.tmx": {
+            "scale": 0.9014204545454545,
+            "selectedLayer": 8,
+            "viewCenter": {
+                "x": 352.22187204538295,
+                "y": 384.9479987393634
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/how-to-play/creatures.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 14,
+            "viewCenter": {
+                "x": 320.66666666666663,
+                "y": 384
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/how-to-play/gameboy.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 481,
+                "y": 512
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/how-to-play/how-to-play-medium.tmx": {
+            "scale": 1.0512073863636362,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 352.4518613607189,
+                "y": 384.3199783798393
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/how-to-play/how-to-play-small.tmx": {
+            "scale": 0.8201171875,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 352.9983329364134,
+                "y": 384.09145034532025
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/how-to-play/people-set-1.tmx": {
+            "scale": 0.8201171875,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 352.9983329364134,
+                "y": 384.09145034532037
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/how-to-play/pokemon1-25.tmx": {
+            "scale": 0.35624999999999996,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 352.2807017543861,
+                "y": 384.56140350877195
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/how-to-play/pokemon2.tmx": {
+            "scale": 0.8325994318181819,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 351.30939179390936,
+                "y": 384.3384799112855
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/how-to-play/pokemon22.tmx": {
+            "scale": 0.8325994318181819,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 351.30939179390936,
+                "y": 384.3384799112855
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/how-to-play/pokemon26-50.tmx": {
+            "scale": 0.35624999999999996,
+            "selectedLayer": 24,
+            "viewCenter": {
+                "x": 352.2807017543861,
+                "y": 384.56140350877195
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/how-to-play/pokemon51-75.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 23,
+            "viewCenter": {
+                "x": 353,
+                "y": 385
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/how-to-play/pokemon76-100.tmx": {
+            "scale": 0.16193181818181815,
+            "selectedLayer": 24,
+            "viewCenter": {
+                "x": 324.21052631578937,
+                "y": 389.0526315789475
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/how-to-play/pokemons.tmx": {
+            "scale": 0.8325994318181819,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 352.51044954363215,
+                "y": 384.33847991128556
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/how-to-play/question-mark.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 353,
+                "y": 384
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/how-to-play/simple-shapes-synt.tmx": {
+            "scale": 0.33,
+            "selectedLayer": 7,
+            "viewCenter": {
+                "x": 768.1818181818181,
+                "y": 769.6969696969697
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/how-to-play/simple-shapes.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 641,
+                "y": 640
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/how-to-play/spadersTileset.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/projects/spaders/spaders/src/map/how-to-play/things.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 10,
+            "viewCenter": {
+                "x": 353,
+                "y": 384
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/levels.tmx": {
+            "scale": 0.9681423611111112,
+            "selectedLayer": 7,
+            "viewCenter": {
+                "x": 407.9978481126154,
+                "y": 364.6157984398816
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/levels2.tmx": {
+            "scale": 1.0266927083333333,
+            "selectedLayer": 12,
+            "viewCenter": {
+                "x": 320.4464172479392,
+                "y": 384.73050095117316
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/levels3.tmx": {
+            "scale": 1.0266927083333333,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 320.4464172479392,
+                "y": 384.73050095117316
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/main/mainSectionsConfig.tmx": {
+            "scale": 0.8275390625,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 253.16025489733295,
+                "y": 546.1977814491385
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/main/tilesets/spadersTileset.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/projects/spaders/spaders/src/map/mainSectionsConfig.tmx": {
+            "scale": 0.8275390625,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 320.8307764928015,
+                "y": 549.8229879631814
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/movies/movies1.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 769,
+                "y": 768
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/movies/moviesAdventure.tmx": {
+            "scale": 0.33,
+            "selectedLayer": 6,
+            "viewCenter": {
+                "x": 768.1818181818181,
+                "y": 833.3333333333334
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/movies/spadersTileset.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/projects/spaders/spaders/src/map/movies1.tmx": {
+            "scale": 1.0266927083333333,
+            "selectedLayer": 5,
+            "viewCenter": {
+                "x": 320.4464172479392,
+                "y": 383.7564996829423
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/spadersTileset.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/projects/spaders/spaders/src/map/synth/betoSynth.tmx": {
+            "scale": 0.6240312499999999,
+            "selectedLayer": 23,
+            "viewCenter": {
+                "x": 736.3413290600432,
+                "y": 769.1922479843759
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/synth/sunset.tmx": {
+            "scale": 0.1759602864583333,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 2298.814170752012,
+                "y": 3066.0327444269733
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/templates/template.tmx": {
+            "scale": 1.1045496323529411,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 479.3809028500104,
+                "y": 511.52069898065326
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/tilesets/References.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "D:/projects/spaders/spaders/src/map/tilesets/gb.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 0.5,
+            "scaleInEditor": 1
+        },
+        "D:/projects/spaders/spaders/src/map/tilesets/monalisaTileset.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 0.5,
+            "scaleInEditor": 1
+        },
+        "D:/projects/spaders/spaders/src/map/tilesets/numbers.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "D:/projects/spaders/spaders/src/map/tilesets/oneDimensionTileset.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 2,
+            "scaleInEditor": 1
+        },
+        "D:/projects/spaders/spaders/src/map/tilesets/poke.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 0.5,
+            "scaleInEditor": 1
+        },
+        "D:/projects/spaders/spaders/src/map/tilesets/spadersTileset.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 0.5,
+            "scaleInEditor": 1
+        },
+        "D:/projects/spaders/spaders/src/map/tilesets/synt.tsx": {
+            "scaleInDock": 0.75,
+            "scaleInEditor": 1
+        },
+        "D:/projects/spaders/spaders/src/map/tilesets/videogames.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "D:/projects/spaders/spaders/src/map/tutorial/tutorial.tmx": {
+            "scale": 1.1045496323529411,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 479.3809028500104,
+                "y": 511.52069898065326
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/videogames/levels.tmx": {
+            "scale": 0.25,
+            "selectedLayer": 6,
+            "viewCenter": {
+                "x": 770,
+                "y": 768
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/videogames/levels2.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 7,
+            "viewCenter": {
+                "x": 769,
+                "y": 768
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/videogames/levels3.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 5,
+            "viewCenter": {
+                "x": 385,
+                "y": 384
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/videogames/spadersLarge.tmx": {
+            "scale": 0.125,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 2308,
+                "y": 3072
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/videogames/spadersTileset.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "D:/projects/spaders/spaders/src/map/world/Tilemap_1.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "D:/projects/spaders/spaders/src/map/world/WorldTiles.tsx": {
+            "dynamicWrapping": true
+        },
+        "D:/projects/spaders/spaders/src/map/world/testWorld1.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 319.33333333333326,
+                "y": 502.6666666666666
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/world/testWorld1.tmx#WorldTiles": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "D:/projects/spaders/spaders/src/map/world/tier1BasicMap.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 5,
+            "viewCenter": {
+                "x": 136.66666666666669,
+                "y": 498.6666666666666
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/world/tier1BasicMap.tmx#WorldTiles": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1
+        },
+        "D:/projects/spaders/spaders/src/map/world/tiniMap.tmx": {
+            "scale": 2,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 116.75,
+                "y": 236
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/world/tiniMap.tmx#WorldTiles": {
+            "scaleInDock": 1
+        },
+        "D:/projects/spaders/spaders/src/map/world/worldSynth.tmx": {
+            "scale": 0.853515625,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 405.96796338672766,
+                "y": 495.0114416475973
+            }
+        },
+        "D:/projects/spaders/spaders/src/map/world/worldSynth.tmx#WorldTiles": {
+            "dynamicWrapping": true,
+            "scaleInDock": 0.75
+        },
+        "E:/projects/spaders/spaders/src/tilesets/spadersTileset.tsx": {
+            "scaleInDock": 1
+        },
+        "tilesets/numbers.tsx": {
+            "scaleInDock": 1
+        },
+        "world/Tilemap_1.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 0.75
+        },
+        "world/testWorld1.tmx": {
+            "scale": 0.7453683035714286,
+            "selectedLayer": 8,
+            "viewCenter": {
+                "x": 448.7714307104889,
+                "y": 513.8399341169423
+            }
+        },
+        "world/testWorld1.tmx#WorldTiles": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1
+        },
+        "world/testWorldSynth.tmx": {
+            "scale": 0.6956770833333333,
+            "selectedLayer": 9,
+            "viewCenter": {
+                "x": 416.141349105338,
+                "y": 528.9810586209478
+            }
+        },
+        "world/tier1BasicMap.tmx": {
+            "scale": 0.8890624999999999,
+            "selectedLayer": 8,
+            "viewCenter": {
+                "x": 192.89982425307556,
+                "y": 1130.4042179261864
+            }
+        },
+        "world/tiniMap.tmx": {
+            "scale": 0.9486505681818181,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 288.30425993860894,
+                "y": 320.45519203413943
+            }
+        },
+        "world/tiniMap.tmx#WorldTiles": {
+            "scaleInDock": 1
+        }
+    },
+    "last.exportedFilePath": "D:/projects/spaders/spaders/www/data/worldMaps",
+    "last.externalTilesetPath": "E:/projects/spaders/spaders/src/map/tilesets",
+    "last.imagePath": "D:/projects/spaders/spaders/www/assets/images",
+    "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "openFiles": [
+        "world/tier1BasicMap.tmx",
+        "world/testWorldSynth.tmx",
+        "world/testWorld1.tmx"
+    ],
+    "project": "worldsProject.tiled-project",
+    "property.type": "int",
+    "recentFiles": [
+        "world/tier1BasicMap.tmx",
+        "world/testWorldSynth.tmx",
+        "world/testWorld1.tmx",
+        "D:/projects/spaders/spaders/src/map/videogames/levels.tmx",
+        "world/tiniMap.tmx",
+        "D:/projects/spaders/spaders/src/map/world/tier1BasicMap.tmx",
+        "D:/projects/spaders/spaders/src/map/world/tiniMap.tmx",
+        "D:/projects/spaders/spaders/src/map/world/worldSynth.tmx",
+        "D:/projects/spaders/spaders/src/map/world/testWorld1.tmx",
+        "D:/projects/spaders/spaders/src/map/tilesets/oneDimensionTileset.tsx",
+        "D:/projects/spaders/spaders/src/map/world/Tilemap_1.tsx",
+        "D:/projects/spaders/spaders/src/map/synth/sunset.tmx"
+    ],
+    "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 64,
+        "width": 64
+    },
+    "tileset.type": 0
+}

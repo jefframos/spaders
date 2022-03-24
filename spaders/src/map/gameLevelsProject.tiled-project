@@ -13,8 +13,7 @@
         "tutorial",
         "debug",
         "basics",
-        "synth",
-        "world"
+        "synth"
     ],
     "objectTypesFile": "",
     "propertyTypes": [

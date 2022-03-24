@@ -10,6 +10,27 @@ import Pool from './game/core/Pool';
 import SoundManager from './game/SoundManager';
 import colorSchemes from './colorSchemes';
 
+
+window.SAVE_DATA = function (data, filename, type = 'text/plain') {
+	var file = new Blob([data], { type: type });
+	if (window.navigator.msSaveOrOpenBlob) // IE10+
+		window.navigator.msSaveOrOpenBlob(file, filename);
+	else { // Others
+		var a = document.createElement("a"),
+			url = URL.createObjectURL(file);
+		a.href = url;
+		a.download = filename;
+		document.body.appendChild(a);
+		a.click();
+		setTimeout(function () {
+			document.body.removeChild(a);
+			window.URL.revokeObjectURL(url);
+		}, 0);
+	}
+
+}
+
+
 window.LOGO_FONT = "round_popregular"
 
 //pixolletta8pxmedium
@@ -31,7 +52,32 @@ window.tilemapRenders = {};
 window.colorTweenManager = new ColorTweenManager();
 
 
+let obj = {}
+let acc = 0
+let size = 64
+obj.frames = {}
+obj.meta = {
+	image:'tile_1.png',
+	size:{ w: size * 8, h: size *8},
+	format:"RGBA8888",
+	scale:1
+}
 
+for (let i = 0; i < 32; i++) {
+	for (let j = 0; j < 32; j++) {
+		obj.frames["tile_1_" + acc + ".png"]={}
+		obj.frames["tile_1_" + acc + ".png"].frame = { x: size * j, y: size * i, w: size, h: size }
+		obj.frames["tile_1_" + acc + ".png"].rotated = false
+		obj.frames["tile_1_" + acc + ".png"].trimmed = false
+		obj.frames["tile_1_" + acc + ".png"].spriteSourceSize = { x: 0, y: 0, w: size, h: size }
+		obj.frames["tile_1_" + acc + ".png"].sourceSize = { w: size, h: size }
+		acc++
+	}
+}
+
+
+//
+//window.SAVE_DATA(JSON.stringify(obj), "test.json")
 window.getNextLevel = function (data) {
 	console.log('getNextLevel', data)
 	console.log(window.levelSections.sections)
@@ -302,25 +348,6 @@ for (let index = 1; index <= 10; index++) {
 
 }
 
-window.SAVE_DATA = function (data, filename, type) {
-	var file = new Blob([data], { type: type });
-	if (window.navigator.msSaveOrOpenBlob) // IE10+
-		window.navigator.msSaveOrOpenBlob(file, filename);
-	else { // Others
-		var a = document.createElement("a"),
-			url = URL.createObjectURL(file);
-		a.href = url;
-		a.download = filename;
-		document.body.appendChild(a);
-		a.click();
-		setTimeout(function () {
-			document.body.removeChild(a);
-			window.URL.revokeObjectURL(url);
-		}, 0);
-	}
-
-}
-
 const sManager = new SoundManager();
 window.SOUND_MANAGER = sManager;
 
@@ -365,6 +392,7 @@ function setUpSchemes() {
 		.add('./assets/images/game-1.json')
 		//.add('./assets/images/logo.json')
 		.add('./assets/images/tilemap.json')
+		.add('./assets/images/tilemap_1.json')
 		.add('./assets/images/arrowsUp.png')
 		.add('./data/levelSections.json')
 		.add('./assets/fonts/stylesheet.css')
@@ -389,36 +417,22 @@ function loadJsons() {
 
 	window.levelSections = PIXI.loader.resources[jsonPath + "levelSections.json"].data
 
-	//window.questionMark = PIXI.loader.resources[jsonPath + "levelSections.json"].data.question
-
 	PIXI.loader.add(jsonPath + window.levelSections.question.dataPath)
 
-
-	for (let index = window.levelSections.sections.length - 1; index >= 0; index--) {
-		const element = window.levelSections.sections[index];
-		//console.log(element)
-		//if (element.ignore) {
-		//window.levelSections.sections.splice(index, 1)
-		//}
-
-	}
-
 	let avoidRepetition = {}
-	// console.log("--", window.levelSections)
 	window.levelSections.sections.forEach(section => {
-		console.log(section)
 		if (section.imageSrc) {
 			PIXI.loader.add('./assets/' + section.imageSrc)
 		}
 		if (section.tilemapPath) {
-			if(!avoidRepetition[section.tilemapPath]){
+			if (!avoidRepetition[section.tilemapPath]) {
 				PIXI.loader.add(jsonPath + section.tilemapPath)
 				avoidRepetition[section.tilemapPath] = true;
 			}
 		}
 		section.levels.forEach(level => {
 
-			if(!avoidRepetition[level.levelOrderMap]){
+			if (!avoidRepetition[level.levelOrderMap]) {
 				PIXI.loader.add(jsonPath + level.levelOrderMap)
 				avoidRepetition[level.levelOrderMap] = true;
 			}
@@ -583,7 +597,7 @@ window.allEstimateHard = 0;
 function splitLargeImage(level) {
 	let iTotal = level.pieces.length / level.splitData.i;
 	let jTotal = level.pieces[0].length / level.splitData.j;
-	
+
 	let newLevels = []
 
 
@@ -697,11 +711,11 @@ function calcEstimatedTime(data) {
 }
 function arrayToMatrix(array, i, j, mod = 136) {
 	let levelMatrix = [];
-	
+
 	let tempArr = [];
 	for (let index = 0; index < array.length; index++) {
 		let id = array[index];
-		tempArr.push(id% mod);
+		tempArr.push(id % mod);
 		if (tempArr.length >= j) {
 			levelMatrix.push(tempArr)
 			if (levelMatrix.length >= i) {
@@ -716,46 +730,61 @@ function arrayToMatrix(array, i, j, mod = 136) {
 
 function extractMap(data) {
 
+	let largeTilemap = 32 * 32
 	let tilesData = data.tilesets[0].tiles;
-	
+
 	let usedTiles = []
-	tilesData.forEach(element => {
-		usedTiles.push(element.image.split('/').pop())
-	});
+	if(tilesData){
+
+		tilesData.forEach(element => {
+			usedTiles.push(element.image.split('/').pop())
+		});
+	}else{
+
+		usedTiles = []
+		for (let index = 0; index < largeTilemap; index++) {
+			usedTiles.push('tile_1_'+index+'.png')
+			
+		}
+	}
 	let mapData = {
 		terrainLayers: [],
 		pathLayers: [],
 		levelLayers: [],
-		tiles:usedTiles,
-		width:data.width,
-		height:data.height,
-		name:""
+		tiles: usedTiles,
+		width: data.width,
+		height: data.height,
+		name: ""
 	}
 
 	data.layers.forEach(element => {
 		if (element.visible && element.name.toLowerCase().includes("terrain")) {
-			mapData.terrainLayers.push(arrayToMatrix(element.data, data.height, data.width))
+			let matrix = arrayToMatrix(element.data, data.height, data.width, tilesData?tilesData.lenght : largeTilemap);
+
+			mapData.terrainLayers.push({tiles:matrix, offsetx:element.offsetx| 0, offsety:element.offsety| 0})
 		}
 		if (element.visible && element.name.toLowerCase().includes("path")) {
-			mapData.pathLayers.push(arrayToMatrix(element.data, data.height, data.width))
+			let matrix = arrayToMatrix(element.data, data.height, data.width,   tilesData?tilesData.lenght : largeTilemap);
+
+			mapData.pathLayers.push({tiles:matrix, offsetx:element.offsetx | 0, offsety:element.offsety| 0})
 		}
 		if (element.visible && element.name.toLowerCase().includes("level")) {
 
-			let matrix = arrayToMatrix(element.data, data.height, data.width);
+			let matrix = arrayToMatrix(element.data, data.height, data.width,  tilesData?tilesData.lenght :  largeTilemap);
 
 			for (let j = 0; j < matrix.length; j++) {
 				for (let i = 0; i < matrix[j].length; i++) {
-					if(matrix[j][i] > 0){
+					if (matrix[j][i] > 0) {
 
 						let id = matrix[j][i]// % 136
 
-						mapData.levelLayers.push({id, i,j})
+						mapData.levelLayers.push({ id, i, j })
 					}
-					
+
 				}
 			}
 
-			mapData.levelLayers.sort((a,b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0))
+			mapData.levelLayers.sort((a, b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0))
 
 		}
 	});
@@ -974,21 +1003,15 @@ function configGame() {
 				//console.log(levelsData)
 				//let max = Math.max(levelsData.pieces[0].length, levelsData.pieces.length);
 				if (levelsData.pieces[0].length > 10 || levelsData.pieces.length > 12) {
-					console.log(levelsData.tierName + ' - ' + levelsData.levelName, levelsData.pieces[0].length + ' x ' + levelsData.pieces.length);
+					//console.log(levelsData.tierName + ' - ' + levelsData.levelName, levelsData.pieces[0].length + ' x ' + levelsData.pieces.length);
 				}
 			});
 		});
 	});
 
-	//console.log("ALL DATA", window.levelSections)
-	//create screen manager
-
 
 	game.onCompleteLoad();
 
-	//console.log("splitables-------", splitables[0])
-	//window.BACKGROUND_EFFECTS = new BackgroundEffects()
-	//add screens
 	let screenManager = game.screenManager;
 	let gameScreen = new TetraScreen('GameScreen');
 
@@ -1004,8 +1027,6 @@ function configGame() {
 
 
 	game.addTapToStart();
-	//game.update()
-
 }
 
 

@@ -16,7 +16,6 @@ export default class TierMap extends PIXI.Container {
 
     buildBase() {
 
-        console.log("BUILD")
         this.sizeGrid = { i: 10, j: 10 }
         this.sizeTile = { width: 64, height: 64 }
         this.mapContainer = new PIXI.Container();
@@ -32,15 +31,42 @@ export default class TierMap extends PIXI.Container {
         this.pathLayer = []
 
 
-        let center = new PIXI.Graphics().beginFill(0xFF0000).drawCircle(0, 0, this.width / 4);
+        this.boundPointsGraphics = { minx: null, maxx: null, miny: null, maxy: null }
+        this.boundPoints = { minx: 0, maxx: 0, miny: 0, maxy: 0 }
+        let center = new PIXI.Graphics().beginFill(0xFF0000).drawCircle(0, 0, 20);
         center.x = this.width / 2
         center.y = this.height / 2
 
-        center.alpha = 0
+        center.alpha = 1
 
-        this.addChild(center)
+        //this.addChild(center)
     }
+    drawBounds() {
+        let center = { x: this.width / 2, y: this.height / 2 }
+        if (!this.boundPointsGraphics.minx) {
 
+            this.boundPointsGraphics.minx = new PIXI.Graphics().beginFill(0xFF0000).drawCircle(0, 0, 20);
+            this.boundPointsGraphics.maxx = new PIXI.Graphics().beginFill(0xFF0000).drawCircle(0, 0, 20);
+            this.boundPointsGraphics.miny = new PIXI.Graphics().beginFill(0xFF0000).drawCircle(0, 0, 20);
+            this.boundPointsGraphics.maxy = new PIXI.Graphics().beginFill(0xFF0000).drawCircle(0, 0, 20);
+
+            this.boundPointsGraphics.minx.position = center
+            this.boundPointsGraphics.maxx.position = center
+            this.boundPointsGraphics.miny.position = center
+            this.boundPointsGraphics.maxy.position = center
+
+            this.addChild(this.boundPointsGraphics.minx)
+            this.addChild(this.boundPointsGraphics.maxx)
+            this.addChild(this.boundPointsGraphics.miny)
+            this.addChild(this.boundPointsGraphics.maxy)
+
+        }
+        this.boundPointsGraphics.minx.x = this.boundPoints.minx
+        this.boundPointsGraphics.maxx.x = this.boundPoints.maxx
+        this.boundPointsGraphics.miny.y = this.boundPoints.miny
+        this.boundPointsGraphics.maxy.y = this.boundPoints.maxy
+
+    }
     addLayer(target) {
         let newLayer = []
         for (var i = 0; i < this.sizeGrid.i; i++) {
@@ -73,7 +99,7 @@ export default class TierMap extends PIXI.Container {
         tierButton.y = pos.j * this.sizeTile.height + this.sizeTile.height - tierButton.height;
     }
     cleanMap() {
-        if(this.mapRenderSprite.parent){
+        if (this.mapRenderSprite.parent) {
             this.mapRenderSprite.parent.removeChild(this.mapRenderSprite)
         }
 
@@ -111,8 +137,12 @@ export default class TierMap extends PIXI.Container {
         }
     }
 
-    drawMap(mapData, tileSize = { width: 64, height: 64 }, customTotalLevels = -1) {
+    removeEmpty(){
 
+    }
+
+    drawMap(mapData, tileSize = { width: 64, height: 64 }, customTotalLevels = -1) {
+       // console.log(mapData)
         this.cleanMap()
         this.mapContainer.addChild(this.mapRenderSprite)
 
@@ -131,9 +161,9 @@ export default class TierMap extends PIXI.Container {
         this.mapRenderContainer = new PIXI.Container();
 
         //CACHE HERE
-        
-        this.paths = []
 
+        this.paths = []
+        console.log(mapData.terrainLayers)
         for (let index = 0; index < mapData.terrainLayers.length; index++) {
 
             let layer1 = this.addLayer(this.terrainLayers);
@@ -141,11 +171,20 @@ export default class TierMap extends PIXI.Container {
             for (let i = 0; i < layer1.length; i++) {
                 for (let j = 0; j < layer1[i].length; j++) {
 
-                    let id = mapData.terrainLayers[index][i][j] - 1;
+                    let id = mapData.terrainLayers[index].tiles[i][j] - 1;
                     if (id >= 0) {
+
+
+                        layer1[i][j].x += mapData.terrainLayers[index].offsetx
+                        layer1[i][j].y += mapData.terrainLayers[index].offsety
+                        //layer1[i][j].setTexture(PIXI.Texture.fromFrame('tile_1_'+id%64+'.png'))
                         layer1[i][j].setTexture(PIXI.Texture.fromFrame(mapData.tiles[id]))
                         layer1[i][j].alpha = 1;
                         layer1[i][j].tint = mapData.terrainColors[index % mapData.terrainColors.length]
+                    }else{
+                        if(layer1[i][j].parent){
+                            layer1[i][j].parent.removeChild(layer1[i][j])
+                        }
                     }
                 }
             }
@@ -160,14 +199,22 @@ export default class TierMap extends PIXI.Container {
             for (let i = 0; i < layer2.length; i++) {
 
 
-                for (let j = layer2[i].length-1; j >=0 ; j--) {
-                    let id = mapData.pathLayers[index][i][j] - 1;
+                for (let j = layer2[i].length - 1; j >= 0; j--) {
+                    let id = mapData.pathLayers[index].tiles[i][j] - 1;
                     if (id >= 0) {
+
+                        layer2[i][j].x += mapData.pathLayers[index].offsetx
+                        layer2[i][j].y += mapData.pathLayers[index].offsety
+
                         layer2[i][j].setTexture(PIXI.Texture.fromFrame(mapData.tiles[id]))
                         layer2[i][j].alpha = 1;
-                        layer2[i][j].tint = mapData.pathColors[index % mapData.pathColors.length]                        
+                        layer2[i][j].tint = mapData.pathColors[index % mapData.pathColors.length]
 
                         tempPaths.push(layer2[i][j]);
+                    }else{
+                        if(layer2[i][j].parent){
+                            layer2[i][j].parent.removeChild(layer2[i][j])
+                        }
                     }
                 }
             }
@@ -183,5 +230,13 @@ export default class TierMap extends PIXI.Container {
         this.mapRenderSprite.setTexture(texture)
 
         window.tilemapRenders[mapData.name] = texture;
+
+
+        this.boundPoints.minx = this.width * 0.4
+        this.boundPoints.maxx = this.width * 0.6
+        this.boundPoints.miny = this.height * 0.4
+        this.boundPoints.maxy = this.height * 0.6
+       //not quite working
+        //this.drawBounds();
     }
 }
