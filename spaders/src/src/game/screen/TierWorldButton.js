@@ -13,20 +13,16 @@ export default class TierWorldButton extends SquareButton {
     }
     buildBase() {
         this.container = new PIXI.Container();
-        this.squareButtonBackShape = new PIXI.mesh.NineSlicePlane(
-            PIXI.Texture.fromFrame('largeCardBackPixel.png'), 20, 20, 20, 20)//= PIXI.Sprite.fromFrame('largeCardBack.png');
+     
         this.squareButtonShape = new PIXI.mesh.NineSlicePlane(
             PIXI.Texture.fromFrame('largeCardPixel.png'), 20, 20, 20, 20)//new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
         //this.squareButtonShape.scale.set(this.unscaledCardSize.width / this.squareButtonShape.width)
         this.squareButtonShape.tint = 0x333333
-        this.squareButtonBackShape.tint = 0x222222
 
         this.squareButtonShape.width = this.unscaledCardSize.width
         this.squareButtonShape.height = this.unscaledCardSize.height
 
 
-        this.squareButtonBackShape.width = this.unscaledCardSize.width
-        this.squareButtonBackShape.height = this.unscaledCardSize.height
 
         this.label = new PIXI.Text("", {
             font: '32px',
@@ -46,7 +42,6 @@ export default class TierWorldButton extends SquareButton {
             fontFamily: window.STANDARD_FONT1,
         });
 
-        this.container.addChild(this.squareButtonBackShape)
         this.container.addChild(this.squareButtonShape)
 
 
@@ -63,16 +58,34 @@ export default class TierWorldButton extends SquareButton {
         this.squareButtonShape.addChild(this.progressBar)
 
         this.currentState = 0;
-        this.squareButtonShape.addChild(this.label)
 
         this.backTop = new PIXI.mesh.NineSlicePlane(
-            PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
+            PIXI.Texture.fromFrame('tile_1_' + (32 * 8) + '.png'), 10, 10, 10, 10)
         this.backTop.width = 20;
         this.backTop.height = 20;
         this.squareButtonShape.addChild(this.backTop)
         this.backTop.tint = 0;
-        this.backTop.alpha = 0.25
+        this.backTop.alpha = 1
         this.squareButtonShape.addChild(this.labelTop)
+        this.squareButtonShape.addChild(this.label)
+        
+        this.lockState = PIXI.Sprite.fromFrame('tile_1_' + (32 * 8 + 4) + '.png')
+        this.squareButtonShape.addChild(this.lockState)
+        this.lockState.tint = 0
+
+        this.lockIcon = PIXI.Sprite.fromFrame('tile_1_' + (32 * 8 + 3) + '.png')
+        this.lockState.addChild(this.lockIcon)
+
+        this.incompleteState = PIXI.Sprite.fromFrame('tile_1_' + (32 * 8 + 4) + '.png')
+        this.squareButtonShape.addChild(this.incompleteState)
+        this.incompleteState.tint = 0
+        
+        this.questionIcon = PIXI.Sprite.fromFrame('tile_1_' + (32 * 8 + 2) + '.png')
+        this.questionIcon.sin = 0
+        this.incompleteState.addChild(this.questionIcon)
+        
+        let stateBorder = PIXI.Sprite.fromFrame('tile_1_' + (32 * 9) + '.png')
+        this.incompleteState.addChild(stateBorder)
 
 
         window.COOKIE_MANAGER.onChangeColors.add(() => {
@@ -80,6 +93,8 @@ export default class TierWorldButton extends SquareButton {
         })
 
         this.updateColorScheme();
+
+        this.buttonState = 0;
 
     }
     updateColorScheme() {
@@ -108,183 +123,166 @@ export default class TierWorldButton extends SquareButton {
                 break;
         }
     }
-    removeDarkMode(){
-        if (this.isPlanet || !this.iconBackgroundWhite) {
-            return
-        }
+    update(delta) {
+        
+        if(this.iconBackgroundWhite){
+            
+            this.incompleteState.visible = false;
+            this.icon.visible = false;
+            this.lockState.visible = false;
+            if(this.buttonState == 1){
 
-        this.iconBackgroundWhite.tint = 0xFFFFFF; 
-    }
-    darkMode(){
-        if (this.isPlanet || !this.iconBackgroundWhite) {
-            return
-        }
-        let colorScheme = colorSchemes.getCurrentColorScheme().buttonData;
+                this.incompleteState.visible = true;
+                //this.iconBackgroundWhite.tint = window.colorTweenBomb.currentColor
+                this.incompleteState.tint = window.colorTweenBomb.currentColor
 
-        this.iconBackgroundWhite.tint = colorScheme.buttonStandardDarkColor;
+                this.questionIcon.sin += delta *3;
+                this.questionIcon.sin%= Math.PI * 2
+                this.questionIcon.x = Math.sin(this.questionIcon.sin) * 10
+            }else if(this.buttonState == 0){
+                this.icon.visible = true;
+            }else if(this.buttonState == 2){
+                this.lockState.visible = true;
+            }
+
+            //this.iconBackgroundWhite.y = Math.random() * 10
+        }
     }
+    lockMode(){
+        this.buttonState = 2;
+    }
+    incompleteMode(){
+        this.buttonState = 1;
+    }
+    completeMode(){
+        this.buttonState = 0;
+    }
+    
     setColor(color) {
         if (this.isPlanet || !this.iconBackgroundWhite) {
             return
         }
-        this.iconBackgroundWhite.tint = color
+        //this.iconBackgroundWhite.tint = color
     }
     setLargeButtonMode(addBottomBorder = true) {
-        if (!this.iconBackground) return;
 
         let border = 4
-        let extraBorderBottom = addBottomBorder ? (border * 2) + this.iconBackground.height * 0.15 + border : border
+        let extraBorderBottom = 0
         let color = colorSchemes.getCurrentColorScheme()
-
-        this.iconBackground.x = 0;
-        this.iconBackground.y = 0;
-
-        this.iconBackground.width = this.squareButtonShape.height// * 0.5
-        this.iconBackground.height = this.squareButtonShape.height// * 0.5
 
         if (!this.iconBackgroundWhite) {
 
             this.iconBackgroundWhite = new PIXI.Sprite();
-            if (window.imageThumbs['tierCardBackgroundTexture'+addBottomBorder]) {
-                this.iconBackgroundWhite.setTexture(window.imageThumbs['tierCardBackgroundTexture'+addBottomBorder])
+            if (window.imageThumbs['tierCardBackgroundTexture' + addBottomBorder]) {
+                this.iconBackgroundWhite.setTexture(window.imageThumbs['tierCardBackgroundTexture' + addBottomBorder])
             } else {
-
-
-                let back1 = new PIXI.mesh.NineSlicePlane(
-                    PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
-
-                let backWhite = new PIXI.mesh.NineSlicePlane(
-                    PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
-
-                let backBackWhite = new PIXI.mesh.NineSlicePlane(
-                    PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
-
-                    
-                    back1.width = this.squareButtonShape.height + border * 4
-                    back1.height = this.squareButtonShape.height + extraBorderBottom + border * 2 + border
-                    
-                    backWhite.width = this.squareButtonShape.height + border * 2 // * 0.5
-                    backWhite.height = this.squareButtonShape.height + extraBorderBottom + border - 19
-                    
-                    backBackWhite.width = back1.width + border * 2 
-                    backBackWhite.height = back1.height + border * 3 
-                    
-                    backWhite.x = border
-                    backWhite.y = border
-
-                    back1.x = border
-                    back1.y = border
-                    
-                    backBackWhite.addChild(back1);
-
-                    if(addBottomBorder){
-                        back1.addChild(backWhite)
-                    }
-
-                    backBackWhite.tint = 0xFFFFFF//color.buttonData.tierButtonBackground;
-                backWhite.tint = 0xFFFFFF//color.buttonData.tierButtonBackground;
-                back1.tint = 0;
-
+                let backBackWhite = new PIXI.Sprite.fromFrame('tile_1_' + (32 * 8) + '.png')
                 let texture = renderer.generateTexture(backBackWhite);
-
                 window.imageThumbs['tierCardBackgroundTexture'] = texture;
-
                 this.iconBackgroundWhite.setTexture(texture)
             }
 
+
             this.squareButtonShape.addChildAt(this.iconBackgroundWhite, 0)
+
         }
 
-        this.iconBackground.x = border * 3
-        this.iconBackground.y = border * 3
-
-        //this.icon.y = border
-        //this.iconBackgroundWhite.x = -border
-        //this.iconBackgroundWhite.y = -border
-        this.iconBackgroundWhite.tint = color.buttonData.tierButtonBackground;
-
-        this.resizeIconToFitOnLarge2()
+        //this.resizeIconToFitOnLarge2()
         this.icon.y -= border / 2;
 
-        this.progressBar.resizeBar(this.iconBackground.width, this.iconBackground.height * 0.15, true);
-        this.progressBar.x = this.iconBackground.x//+ this.iconBackground.width + 10;
-        this.progressBar.y = this.iconBackground.y + this.iconBackground.height + border//(extraBorderBottom - border) * 0.5 - this.progressBar.height * 0.5
+        // this.progressBar.resizeBar(this.iconBackground.width, this.iconBackground.height * 0.15, true);
+        // this.progressBar.x = this.iconBackground.x//+ this.iconBackground.width + 10;
+        // this.progressBar.y = this.iconBackground.y + this.iconBackground.height + border//(extraBorderBottom - border) * 0.5 - this.progressBar.height * 0.5
 
         this.progressBar.visible = false;
-        this.label.visible = addBottomBorder
+
         utils.resizeToFitAR(
             {
-                width: this.progressBar.width,
-                height: extraBorderBottom + border
+                width: this.iconBackgroundWhite.width * 0.62,
+                height: this.iconBackgroundWhite.height * 0.62
+            }, this.icon)
+        utils.centerObject(this.icon, this.iconBackgroundWhite)
+
+        if (!addBottomBorder) {
+
+            this.label.visible = false
+            this.backTop.visible = false;
+            this.labelTop.visible = false;
+
+            return
+        }
+
+        utils.resizeToFitAR(
+            {
+                width: this.icon.width,
+                height: this.iconBackgroundWhite.height * 0.3
             }, this.label)
 
-        this.label.x = this.progressBar.x + this.progressBar.width / 2;
-        this.label.y = this.progressBar.y + this.progressBar.height / 2 + 1;
-        // utils.resizeToFitAR(
-        //     {
-        //         width: this.squareButtonBackShape.width - this.iconBackground.width - 20,
-        //         height: this.iconBackground.height * 0.28
-        //     }, this.labelTop)
-
         this.labelTop.visible = false;
-        this.backTop.visible = false;
+        this.backTop.visible = true;
         this.labelTop.pivot.x = 0
-        this.labelTop.pivot.y = 0//this.labelTop.height / this.labelTop.scale.y;
-        this.labelTop.x = this.iconBackground.x + this.iconBackground.width + 15 // this.container.scale.x
-        this.labelTop.y = this.iconBackground.y + 5//this.iconBackground.y + 5//+ this.labelTop.height / this.labelTop.scale.y// this.container.scale.y
+        this.labelTop.pivot.y = 0
 
-        this.backTop.x = this.labelTop.x - 10
-        this.backTop.y = this.labelTop.y - 5
-        this.backTop.width = this.progressBar.width - this.iconBackground.width - 5
-        this.backTop.height = this.labelTop.height + 10
+        utils.centerObject(this.label, this.iconBackgroundWhite)
 
-        this.iconBackground.tint = 0xFFFFFF
+        this.label.y += this.iconBackgroundWhite.height / 2 + this.label.height + 4
+        this.label.x = this.iconBackgroundWhite.x + this.iconBackgroundWhite.width / 2
+
+        this.backTop.x = this.iconBackgroundWhite.x + 4
+        this.backTop.y = this.label.y - this.label.height / 2 - 2
+        this.backTop.width = this.iconBackgroundWhite.width - 8
+        this.backTop.height = this.label.height + 4
+
     }
 
     updateIcon(graphic, scale = 0.4, offset = { x: 0, y: 0 }, hideBackground = false) {
         if (this.icon && this.icon.parent) {
             this.icon.parent.removeChild(this.icon);
         }
-
-        if (!this.iconBackground) {
-            this.iconBackground = new PIXI.mesh.NineSlicePlane(
-                PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
-
-            this.squareButtonShape.addChildAt(this.iconBackground, 0)
-        }
         this.icon = graphic
         this.icon.scale.set(1)
-        this.iconBackground.addChild(this.icon)
-        //this.icon.x = offset.x
-        //this.icon.y = offset.y
+        this.addChild(this.icon)
         utils.resizeToFitAR(
             {
-                width: this.squareButtonBackShape.width * 0.8,
-                height: this.squareButtonBackShape.height * scale
+                width: this.squareButtonShape.width * 0.81,
+                height: this.squareButtonShape.height * scale
             }, this.icon)
-        // if (graphic.width > graphic.height) {
-        //     this.icon.scale.set(this.squareButtonBackShape.width / (this.icon.width / this.icon.scale.x) * scale);
-        // } else {
-        //     this.icon.scale.set(this.squareButtonBackShape.height / (this.icon.height / this.icon.scale.y) * scale);
-        // }
-
-        this.iconBackground.width = this.icon.width + 10;
-        this.iconBackground.height = this.icon.height + 10
         this.icon.x = 5;
         this.icon.y = 5;
-        this.iconBackground.x = this.squareButtonShape.width / 2 - this.iconBackground.width / 2 + offset.x
-        this.iconBackground.y = this.squareButtonShape.height / 2 - this.iconBackground.height / 2 + offset.y
 
-        if (hideBackground) {
-            this.iconBackground.width = 0
-            this.iconBackground.height = 0
-        }
-        //this.icon.mask = this.buttonMask
+        // if (!this.iconShade) {
+
+        //     this.iconShade = new PIXI.Sprite.fromFrame('tile_1_' + (32 * 8 + 1) + '.png')
+        //     this.iconShade.alpha = 0.5
+        // } else {
+        //     this.iconShade.parent.removeChild(this.iconShade);
+        // }
+        // this.addChild(this.iconShade)
+
     }
-
+   
     setProgressBar(progression = 0) {
         this.progressBar.visible = true;
         this.progressBar.setProgressBar(progression)
     }
+    updateLabelTop(){}
 
+    updateLabel(text, offset = { x: 0, y: 0 }) {
+        this.label.text = text;
+        this.label.visible = true;
+
+        utils.resizeToFitAR(
+            {
+                width: this.squareButtonShape.width * 0.7,
+                height: this.squareButtonShape.height * 0.15
+            }, this.label)
+
+        this.label.pivot.x = this.label.width / 2 / this.label.scale.x
+        this.label.pivot.y = this.label.height / 2 / this.label.scale.y;
+        this.label.x = this.squareButtonShape.width / 2 + offset.x// this.container.scale.x
+        this.label.y = this.squareButtonShape.height - this.label.height + offset.y// this.container.scale.y
+
+
+
+    }
 }

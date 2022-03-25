@@ -37,7 +37,7 @@ export default class ColorTweens {
             TweenMax.killTweensOf(this.currentTween);
         }
         this.colorList = []
-        for (let index = 0; index < 9; index++) {
+        for (let index = 0; index < 7; index++) {
             const element = colorSchemes.colorSchemes[scheme].list[index].color;
             this.colorList.push(element);
         }

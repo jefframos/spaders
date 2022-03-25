@@ -596,15 +596,18 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.hide(true);
 		this.screenState = 1
 		this.gameScreen.resetGame()
+
+		this.gameScreen.currentGameState = 1
+		
 		console.log("GO TO LEVEL")
 		this.closeApplicationButton.visible = false;
-
-
+		
+		
 	}
 	resetGame() {
-
+		
 		window.SOUND_MANAGER.play('tapPlay', { volume: 0.65 })
-
+		
 		this.gameScreen.mainMenuSettings.collapse();
 		this.chooseLevelPanel.show();
 		this.startMenuState();

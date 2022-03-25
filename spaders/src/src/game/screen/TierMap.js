@@ -11,6 +11,7 @@ export default class TierMap extends PIXI.Container {
         super();
 
         this.unscaledTierSize = unscaledTierSize;
+        this.currentButtons = []
         this.buildBase();
     }
 
@@ -41,8 +42,16 @@ export default class TierMap extends PIXI.Container {
 
         //this.addChild(center)
     }
+    update(delta){
+        if(!this.parent.visible){
+            return;
+        }
+        this.currentButtons.forEach(element => {
+            element.update(delta);
+        });
+    }
     drawBounds() {
-        let center = { x: this.width / 2, y: this.height / 2 }
+        let center = { x: this.width / 2 / this.scale.x, y: this.height / 2 / this.scale.y }
         if (!this.boundPointsGraphics.minx) {
 
             this.boundPointsGraphics.minx = new PIXI.Graphics().beginFill(0xFF0000).drawCircle(0, 0, 20);
@@ -96,7 +105,9 @@ export default class TierMap extends PIXI.Container {
     addTierLevel(tierButton, pos) {
         this.buttonsContainer.addChild(tierButton);
         tierButton.x = pos.i * this.sizeTile.width + this.sizeTile.width / 2 - tierButton.width / 2;
-        tierButton.y = pos.j * this.sizeTile.height + this.sizeTile.height - tierButton.height;
+        tierButton.y = pos.j * this.sizeTile.height// + this.sizeTile.height - tierButton.height;
+
+        this.currentButtons.push(tierButton);
     }
     cleanMap() {
         if (this.mapRenderSprite.parent) {
@@ -135,14 +146,16 @@ export default class TierMap extends PIXI.Container {
             }
 
         }
+
+        this.currentButtons = []
     }
 
-    removeEmpty(){
+    removeEmpty() {
 
     }
 
     drawMap(mapData, tileSize = { width: 64, height: 64 }, customTotalLevels = -1) {
-       // console.log(mapData)
+        // console.log(mapData)
         this.cleanMap()
         this.mapContainer.addChild(this.mapRenderSprite)
 
@@ -181,8 +194,8 @@ export default class TierMap extends PIXI.Container {
                         layer1[i][j].setTexture(PIXI.Texture.fromFrame(mapData.tiles[id]))
                         layer1[i][j].alpha = 1;
                         layer1[i][j].tint = mapData.terrainColors[index % mapData.terrainColors.length]
-                    }else{
-                        if(layer1[i][j].parent){
+                    } else {
+                        if (layer1[i][j].parent) {
                             layer1[i][j].parent.removeChild(layer1[i][j])
                         }
                     }
@@ -211,8 +224,8 @@ export default class TierMap extends PIXI.Container {
                         layer2[i][j].tint = mapData.pathColors[index % mapData.pathColors.length]
 
                         tempPaths.push(layer2[i][j]);
-                    }else{
-                        if(layer2[i][j].parent){
+                    } else {
+                        if (layer2[i][j].parent) {
                             layer2[i][j].parent.removeChild(layer2[i][j])
                         }
                     }
@@ -232,11 +245,18 @@ export default class TierMap extends PIXI.Container {
         window.tilemapRenders[mapData.name] = texture;
 
 
-        this.boundPoints.minx = this.width * 0.4
-        this.boundPoints.maxx = this.width * 0.6
-        this.boundPoints.miny = this.height * 0.4
-        this.boundPoints.maxy = this.height * 0.6
-       //not quite working
-        //this.drawBounds();
+        this.calculateMapBounds();
+        // //not quite working
+        setTimeout(() => {
+            this.calculateMapBounds()
+            //this.drawBounds();
+        }, 100);
+    }
+
+    calculateMapBounds() {
+        this.boundPoints.minx = this.width * 0.4 / this.scale.x
+        this.boundPoints.maxx = this.width * 0.6/ this.scale.x
+        this.boundPoints.miny = this.height * 0.4/ this.scale.y
+        this.boundPoints.maxy = this.height * 0.6/ this.scale.y
     }
 }

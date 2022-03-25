@@ -134,6 +134,8 @@ export default class TetraScreen extends Screen {
 		this.gameplayState = 0;
 		//console.log(utils.convertNumToTime(1231))
 
+		this.colorTweenBomb.startTween(0)
+
 
 	}
 	drawDebugCharacters() {
@@ -248,7 +250,12 @@ export default class TetraScreen extends Screen {
 						this.autoRedirectToLevelSelect = true;
 						this.hasHash = true;
 						this.currentLevelID = -1;
+
+						this.colorTweenBomb.startTween(parameters.section.colorPalletId)
+
 					}
+
+
 				}
 
 			}
@@ -647,7 +654,7 @@ export default class TetraScreen extends Screen {
 		if (this.autoRedirectToLevelSelect) {
 			this.autoRedirectToLevelSelect = false;
 			setTimeout(() => {
-				console.log("AUTO REDIRECTH", this.autoRedirectData)
+				//console.log("AUTO REDIRECTH", this.autoRedirectData)
 				this.mainmenuStateFromGame(false, this.autoRedirectData);
 			}, 200);
 		}
@@ -802,6 +809,8 @@ export default class TetraScreen extends Screen {
 		this.mainMenuSettings.collapse();
 		this.removeEvents();
 		this.colorTween.stopTween();
+
+		
 
 	}
 	mainmenuStateFromGame(force = false, redirectData = null) {
