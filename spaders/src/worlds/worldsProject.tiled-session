@@ -3,20 +3,20 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "world/testWorld1.tmx",
+    "activeFile": "world/tier1BasicMap.tmx",
     "expandedProjectPaths": [
-        "D:/projects/spaders/spaders/src/map/gb",
-        "D:/projects/spaders/spaders/src/map/world",
         "D:/projects/spaders/spaders/src/map/how-to-play",
-        "D:/projects/spaders/spaders/src/map/videogames",
-        "D:/projects/spaders/spaders/src/map/main",
-        "D:/projects/spaders/spaders/src/map/synth",
-        "world",
-        "D:/projects/spaders/spaders/src/map/basics",
         "D:/projects/spaders/spaders/src/map/movies",
+        "D:/projects/spaders/spaders/src/map/tutorial",
+        "D:/projects/spaders/spaders/src/map/world",
+        "world",
+        "D:/projects/spaders/spaders/src/map/synth",
         "D:/projects/spaders/spaders/src/map/debug",
+        "D:/projects/spaders/spaders/src/map/gb",
+        "D:/projects/spaders/spaders/src/map/videogames",
+        "D:/projects/spaders/spaders/src/map/basics",
         "D:/projects/spaders/spaders/src/map/templates",
-        "D:/projects/spaders/spaders/src/map/tutorial"
+        "D:/projects/spaders/spaders/src/map/main"
     ],
     "fileStates": {
         "": {
@@ -542,7 +542,7 @@
             "selectedLayer": 8,
             "viewCenter": {
                 "x": 192.89982425307556,
-                "y": 1130.4042179261864
+                "y": 373.4270650263621
             }
         },
         "world/tiniMap.tmx": {
@@ -565,16 +565,18 @@
     "map.tileHeight": 16,
     "map.tileWidth": 16,
     "openFiles": [
-        "world/tier1BasicMap.tmx",
         "world/testWorldSynth.tmx",
-        "world/testWorld1.tmx"
+        "world/testWorld1.tmx",
+        "world/basicWorld.tmx",
+        "world/tier1BasicMap.tmx"
     ],
     "project": "worldsProject.tiled-project",
     "property.type": "int",
     "recentFiles": [
-        "world/tier1BasicMap.tmx",
         "world/testWorldSynth.tmx",
         "world/testWorld1.tmx",
+        "world/basicWorld.tmx",
+        "world/tier1BasicMap.tmx",
         "D:/projects/spaders/spaders/src/map/videogames/levels.tmx",
         "world/tiniMap.tmx",
         "D:/projects/spaders/spaders/src/map/world/tier1BasicMap.tmx",
@@ -582,8 +584,7 @@
         "D:/projects/spaders/spaders/src/map/world/worldSynth.tmx",
         "D:/projects/spaders/spaders/src/map/world/testWorld1.tmx",
         "D:/projects/spaders/spaders/src/map/tilesets/oneDimensionTileset.tsx",
-        "D:/projects/spaders/spaders/src/map/world/Tilemap_1.tsx",
-        "D:/projects/spaders/spaders/src/map/synth/sunset.tmx"
+        "D:/projects/spaders/spaders/src/map/world/Tilemap_1.tsx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",
