@@ -4,7 +4,8 @@
     ],
     "extensionsPath": "../map/extensions",
     "folders": [
-        "world"
+        "world",
+        "world/tier1"
     ],
     "objectTypesFile": "",
     "propertyTypes": [

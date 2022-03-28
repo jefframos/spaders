@@ -107,14 +107,9 @@ export default class Grid extends PIXI.Container {
 		let targetSprite = colorScheme.sprite;
 		let paddingSprite = 20;
 		
-		// if(levelData.levelDataScale > 1){
-		// 	paddingSprite = 10;
-		// 	targetSprite = colorScheme.spriteDraw;
-		// }
 		for (var i = piecesToTraw.length - 1; i >= 0; i--) {
 			for (var j = 0; j < piecesToTraw[i].length; j++) {
 				if (piecesToTraw[i][j] >= 0 && piecesToTraw[i][j] < scheme.block.id) {
-					//let gridSquare = PIXI.Sprite.fromFrame('gridSquare.png')
 
 					let gridSquare = new PIXI.mesh.NineSlicePlane(
 						PIXI.Texture.fromFrame(targetSprite), paddingSprite, paddingSprite, paddingSprite, paddingSprite);
@@ -122,13 +117,10 @@ export default class Grid extends PIXI.Container {
 					gridSquare.width = GRID.widthDraw * levelData.levelDataScale
 					gridSquare.height = GRID.heightDraw  * levelData.levelDataScale
 					gridSquare.scale.set(1 / levelData.levelDataScale)
-					//gridSquare.scale.set(CARD.width / gridSquare.width);
 					gridSquare.x = j * GRID.widthDraw;
 					gridSquare.y = i * GRID.heightDraw;
 
 					gridSquare.tint = colorSchemeList[piecesToTraw[i][j]].color
-					//gridSquare.alpha = 0;
-					//TweenMax.to(gridSquare, 0.5, { alpha: 1, delay: Math.random() * (1 - 0.6) });
 					gridDrawContainer.addChild(gridSquare)
 				}
 			}
@@ -144,6 +136,36 @@ export default class Grid extends PIXI.Container {
 		return gridSprite;
 
 	}
+
+	getGridBackground(levelData){
+
+		let colorScheme = colorSchemes.getCurrentColorScheme().grid;
+
+		let gridBackground = new PIXI.Container();
+		for (var i = GRID.i - 1; i >= 0; i--) {
+			for (var j = GRID.j - 1; j >= 0; j--) {
+				let gridSquare = new PIXI.mesh.NineSlicePlane(
+					PIXI.Texture.fromFrame('tile_1_0.png'), 20, 20, 20, 20)
+				gridSquare.tint = colorScheme.background
+				gridSquare.width = CARD.width
+				gridSquare.height = CARD.height
+				gridSquare.x = i * CARD.width;
+				gridSquare.y = j * CARD.height;
+
+				gridBackground.addChild(gridSquare)
+				if(levelData && (levelData.pieces[j][i] == 32 )){
+					gridSquare.alpha = 1;
+					//backGridContainerBlocker.addChild(gridSquare)
+				}else{
+
+				}
+	
+			}
+		}
+
+		return gridBackground;
+	}
+
 	createGrid(levelData) {
 
 		this.resetGrid();
@@ -227,18 +249,17 @@ export default class Grid extends PIXI.Container {
 			/////////
 		}
 
+		console.log(levelData)
 		let backGridContainer = new PIXI.Container();
 		let backGridContainerBlocker = new PIXI.Container();
 		for (var i = GRID.i - 1; i >= 0; i--) {
 			let gridLine = [];
 			for (var j = GRID.j - 1; j >= 0; j--) {
-				//let gridSquare = PIXI.Sprite.fromFrame('gridSquare.png')
 				let gridSquare = new PIXI.mesh.NineSlicePlane(
-					PIXI.Texture.fromFrame(colorScheme.sprite), 20, 20, 20, 20)//PIXI.Sprite.fromFrame(colorScheme.sprite)
+					PIXI.Texture.fromFrame(colorScheme.sprite), 20, 20, 20, 20)
 
 				gridSquare.width = CARD.width
 				gridSquare.height = CARD.height
-				//gridSquare.scale.set(CARD.width / gridSquare.width);
 				gridSquare.x = i * CARD.width;
 				gridSquare.y = j * CARD.height;
 
@@ -250,25 +271,20 @@ export default class Grid extends PIXI.Container {
 				gridSquare.tint = colorScheme.color;
 				
 				backGridContainer.addChild(gridSquare)
-				if(levelData && levelData.pieces[j][i] == 32){
-					//gridSquare.alpha = 0;
+				if(levelData && (levelData.pieces[j][i] == 32 )){
+					gridSquare.alpha = 0.5;
 					backGridContainerBlocker.addChild(gridSquare)
 				}else{
 
 				}
 				
 				this.grids.push(gridSquare);
-
-				//let gridEffectSquare = PIXI.Sprite.fromFrame('gridSquare.png')
-				//let gridEffectSquare = PIXI.Sprite.fromFrame(colorScheme.spriteTile)
-
 				
 				let gridEffectSquare = new PIXI.mesh.NineSlicePlane(
 					PIXI.Texture.fromFrame(colorScheme.spriteTile), 20, 20, 20, 20)//PIXI.Sprite.fromFrame(colorScheme.sprite)
 
 				gridEffectSquare.width = CARD.width
 				gridEffectSquare.height = CARD.height
-				//gridEffectSquare.scale.set(CARD.width / gridEffectSquare.width);
 				gridEffectSquare.x = i * CARD.width;
 				gridEffectSquare.y = j * CARD.height;
 				gridEffectSquare.alpha = 0;
@@ -278,6 +294,7 @@ export default class Grid extends PIXI.Container {
 			this.gridsSquares.unshift(gridLine);
 		}
 		let texture = renderer.generateTexture(backGridContainer);
+
 		let textureBlocker = renderer.generateTexture(backGridContainerBlocker);
 
 		let gridSprite = new PIXI.Sprite()
@@ -287,6 +304,7 @@ export default class Grid extends PIXI.Container {
 		this.gridSpriteBlockers = new PIXI.Sprite()
 		this.gridSpriteBlockers.setTexture(textureBlocker)
 		gridContainer.addChildAt(this.gridSpriteBlockers, 0)
+		//gridContainer.addChildAt(this.getGridBackground(), 0)
 
 		gridContainer.alpha = 0
 

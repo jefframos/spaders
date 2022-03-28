@@ -3,21 +3,22 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "world/tier1BasicMap.tmx",
+    "activeFile": "world/tier1/tier1-1.tmx",
     "expandedProjectPaths": [
-        "D:/projects/spaders/spaders/src/map/how-to-play",
-        "D:/projects/spaders/spaders/src/map/movies",
-        "D:/projects/spaders/spaders/src/map/tutorial",
-        "D:/projects/spaders/spaders/src/map/world",
-        "world",
-        "D:/projects/spaders/spaders/src/map/synth",
-        "D:/projects/spaders/spaders/src/map/debug",
-        "D:/projects/spaders/spaders/src/map/gb",
-        "D:/projects/spaders/spaders/src/map/videogames",
         "D:/projects/spaders/spaders/src/map/basics",
+        "D:/projects/spaders/spaders/src/map/movies",
+        "D:/projects/spaders/spaders/src/map/debug",
+        "world/tier1",
+        "D:/projects/spaders/spaders/src/map/videogames",
         "D:/projects/spaders/spaders/src/map/templates",
-        "D:/projects/spaders/spaders/src/map/main"
+        "D:/projects/spaders/spaders/src/map/world",
+        "D:/projects/spaders/spaders/src/map/how-to-play",
+        "D:/projects/spaders/spaders/src/map/main",
+        "D:/projects/spaders/spaders/src/map/synth",
+        "D:/projects/spaders/spaders/src/map/gb",
+        "D:/projects/spaders/spaders/src/map/tutorial"
     ],
+    "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
         "": {
             "scaleInDock": 1,
@@ -507,14 +508,14 @@
         },
         "world/Tilemap_1.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 0.75
+            "scaleInDock": 0.5
         },
         "world/basicWorld.tmx": {
-            "scale": 0.6956770833333333,
-            "selectedLayer": 0,
+            "scale": 0.5,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 416.141349105338,
-                "y": 528.9810586209478
+                "x": 416,
+                "y": 528
             }
         },
         "world/testWorld1.tmx": {
@@ -533,17 +534,31 @@
             "scale": 0.75,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 375.33333333333326,
-                "y": 297.33333333333337
+                "x": 576,
+                "y": 528
+            }
+        },
+        "world/tier1/Tilemap_1.tsx": {
+            "scaleInDock": 1
+        },
+        "world/tier1/tier1-1.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 7,
+            "viewCenter": {
+                "x": 388,
+                "y": 380
             }
         },
         "world/tier1BasicMap.tmx": {
             "scale": 0.8890624999999999,
             "selectedLayer": 8,
             "viewCenter": {
-                "x": 192.89982425307556,
-                "y": 373.4270650263621
+                "x": 192.3374340949033,
+                "y": 719.859402460457
             }
+        },
+        "world/tilesets/numbers.tsx": {
+            "scaleInDock": 1
         },
         "world/tiniMap.tmx": {
             "scale": 0.9486505681818181,
@@ -557,34 +572,34 @@
             "scaleInDock": 1
         }
     },
-    "last.exportedFilePath": "D:/projects/spaders/spaders/www/data/worldMaps",
-    "last.externalTilesetPath": "E:/projects/spaders/spaders/src/map/tilesets",
+    "last.exportedFilePath": "D:/projects/spaders/spaders/www/data/worldMaps/tier1",
+    "last.externalTilesetPath": "D:/projects/spaders/spaders/src/worlds/world",
     "last.imagePath": "D:/projects/spaders/spaders/www/assets/images",
     "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
     "map.tileWidth": 16,
     "openFiles": [
-        "world/testWorldSynth.tmx",
-        "world/testWorld1.tmx",
         "world/basicWorld.tmx",
-        "world/tier1BasicMap.tmx"
+        "world/tier1BasicMap.tmx",
+        "world/testWorldSynth.tmx",
+        "world/tier1/tier1-1.tmx"
     ],
     "project": "worldsProject.tiled-project",
     "property.type": "int",
     "recentFiles": [
-        "world/testWorldSynth.tmx",
-        "world/testWorld1.tmx",
         "world/basicWorld.tmx",
         "world/tier1BasicMap.tmx",
+        "world/testWorldSynth.tmx",
+        "world/tier1/tier1-1.tmx",
+        "world/testWorld1.tmx",
         "D:/projects/spaders/spaders/src/map/videogames/levels.tmx",
         "world/tiniMap.tmx",
         "D:/projects/spaders/spaders/src/map/world/tier1BasicMap.tmx",
         "D:/projects/spaders/spaders/src/map/world/tiniMap.tmx",
         "D:/projects/spaders/spaders/src/map/world/worldSynth.tmx",
         "D:/projects/spaders/spaders/src/map/world/testWorld1.tmx",
-        "D:/projects/spaders/spaders/src/map/tilesets/oneDimensionTileset.tsx",
-        "D:/projects/spaders/spaders/src/map/world/Tilemap_1.tsx"
+        "D:/projects/spaders/spaders/src/map/tilesets/oneDimensionTileset.tsx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",

@@ -89,6 +89,12 @@ export default class CookieManager {
 		this.onAddNewLevel = new signals.Signal()
 		this.onToggleDebug = new signals.Signal()
 		this.onChangeColors = new signals.Signal()
+
+		this.tierProgress = this.getCookie("tierProgress")
+		if (!this.tierProgress) {
+			this.tierProgress = {};
+			this.storeObject("tierProgress", this.tierProgress)
+		}
 	}
 	toogleDebug(id) {
 		this.debug.showAllThumbs = !this.debug.showAllThumbs;
@@ -96,7 +102,7 @@ export default class CookieManager {
 		this.onToggleDebug.dispatch();
 	}
 	updateColorPallete(id) {
-		if(this.stats.colorPalletID == id){
+		if (this.stats.colorPalletID == id) {
 			return;
 		}
 		this.stats.colorPalletID = id;
@@ -119,7 +125,68 @@ export default class CookieManager {
 			}
 		}
 	}
-	saveLevel(name, bestTime = 50, highscore = 50, bestMoves = 60, normalScore = 100, totalPoints = 0, currentSectionPiecesKilled = 0) {
+	forceCompleteTier(name){
+		if (!this.tierProgress[name]) {
+			this.tierProgress[name] = {
+				progress: 0,
+				complete: true
+			};
+		}
+
+		this.storeObject("tierProgress", this.tierProgress)
+
+	}
+	isTierLocked(tier) {
+		if (window.allTiers[tier.idSaveData].require < 0) {
+			return false
+		} else {
+			let sectionTiers = window.allTiers[tier.idSaveData].section.levels;
+			let currentTier = window.allTiers[tier.idSaveData]
+			if (currentTier.require >= sectionTiers.length) {
+				console.log(tier.idSaveData, "is requiring out of range", currentTier.require)
+				return false
+			}else{
+				return !this.isTierComplete(sectionTiers[currentTier.require])
+			}
+		}
+
+		return true;
+	}
+	isTierComplete(tier) {
+		if (this.tierProgress[tier.idSaveData]) {
+			return this.tierProgress[tier.idSaveData].complete
+		}
+
+		return false;
+	}
+	saveLevel(data, name, bestTime = 50, highscore = 50, bestMoves = 60, normalScore = 100, totalPoints = 0, currentSectionPiecesKilled = 0) {
+
+		if (data && data.tier) {
+
+			let idtier = data.tier.idSaveData;
+			if (!this.tierProgress[idtier]) {
+				this.tierProgress[idtier] = {
+					progress: 0,
+					total: window.allTiers[idtier].data.length,
+					complete: false
+				};
+			} else {
+				if (this.tierProgress[idtier].total != window.allTiers[idtier].data.length) {
+					this.tierProgress[idtier].total = window.allTiers[idtier].data.length
+				}
+			}
+
+			if (!this.tierProgress[idtier][name]) {
+				this.tierProgress[idtier].progress++;
+				this.tierProgress[idtier][name] = true;
+
+				if (this.tierProgress[idtier].progress >= this.tierProgress[idtier].total) {
+					this.tierProgress[idtier].complete = true;
+				}
+			}
+
+		}
+
 
 		let averageTimePoints = totalPoints / bestTime;
 		let levelsCompleted = {
@@ -188,6 +255,8 @@ export default class CookieManager {
 		this.storeObject("stats", this.stats)
 
 		this.onAddNewLevel.dispatch();
+
+		this.storeObject("tierProgress", this.tierProgress)
 
 		return isHighscore;
 

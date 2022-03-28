@@ -51,6 +51,7 @@ window.tilemapRenders = {};
 
 window.colorTweenManager = new ColorTweenManager();
 
+window.allTiers = {};
 
 let obj = {}
 let acc = 0
@@ -468,6 +469,9 @@ function findPropertyValue(data, propertyName) {
 
 }
 function extractData(element, debug) {
+	if(element.type == "objectgroup"){
+		return;
+	}
 	if (element.visible) {
 		let data = {}
 		data.levelName = element.name;
@@ -852,13 +856,19 @@ function configGame() {
 			level.id = nameID;
 			level.order = level.order;
 
-
+			
 			if (level.coverID == undefined) {
 				level.coverID = 0;
 			}
 			customPallet = level.customPallet;
 			level.sectionName = section.name;
 			level.section = section;
+
+			level.idSaveData = section.id+"-"+nameID;
+
+			if(!window.allTiers[level.idSaveData]){
+				window.allTiers[level.idSaveData] = level;
+			}
 
 			if (level.levelOrderMap) {
 				level.mapData = extractMap(PIXI.loader.resources[jsonPath + level.levelOrderMap].data);
@@ -885,8 +895,9 @@ function configGame() {
 					data.idSaveData = idToSave;
 					data.sectionName = section.name;
 					data.tierName = level.name;
-					data.tierName = level.name;
 					data.tier = level;
+
+				
 					////console.log(level.name)
 
 					data.sectionName = section.name;

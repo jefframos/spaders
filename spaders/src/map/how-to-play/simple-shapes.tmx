@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.1" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="64" tileheight="64" infinite="0" nextlayerid="110" nextobjectid="1">
+<map version="1.8" tiledversion="1.8.1" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="64" tileheight="64" infinite="0" nextlayerid="113" nextobjectid="1">
  <editorsettings>
   <export target="../../../www/data/how-to-play/shapes.json" format="json"/>
  </editorsettings>
@@ -46,7 +46,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="81" name="Square" width="20" height="20">
+ <layer id="81" name="Square" width="20" height="20" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="5"/>
@@ -82,7 +82,115 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="43" name="Triangle" width="20" height="20">
+ <layer id="110" name="Copy of Square" width="20" height="20" visible="0">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="5"/>
+   <property name="j" type="int" value="6"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="2"/>
+   <property name="padding-right" type="int" value="2"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="111" name="Copy of Copy of Square" width="20" height="20" visible="0">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="5"/>
+   <property name="j" type="int" value="6"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="2"/>
+   <property name="padding-right" type="int" value="2"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="112" name="Copy of Copy of Copy of Square" width="20" height="20" visible="0">
+  <properties>
+   <property name="autoPlaceBlockers" type="int" value="2"/>
+   <property name="i" type="int" value="5"/>
+   <property name="j" type="int" value="6"/>
+   <property name="padding-bottom" type="int" value="2"/>
+   <property name="padding-left" type="int" value="2"/>
+   <property name="padding-right" type="int" value="2"/>
+   <property name="padding-top" type="int" value="0"/>
+   <property name="startI" type="int" value="0"/>
+   <property name="startJ" type="int" value="0"/>
+   <property name="tier" type="int" value="0"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="43" name="Triangle" width="20" height="20" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="5"/>
@@ -118,7 +226,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="80" name="_ADDON" width="20" height="20">
+ <layer id="80" name="_ADDON" width="20" height="20" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="5"/>
@@ -154,7 +262,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="100" name="Circle" width="20" height="20">
+ <layer id="100" name="Circle" width="20" height="20" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="5"/>
@@ -190,7 +298,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="103" name="Rhombus" width="20" height="20">
+ <layer id="103" name="Rhombus" width="20" height="20" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="5"/>
@@ -226,7 +334,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="104" name="Trapezoid" width="20" height="20">
+ <layer id="104" name="Trapezoid" width="20" height="20" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="5"/>
@@ -263,7 +371,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="106" name="Cube" width="20" height="20">
+ <layer id="106" name="Cube" width="20" height="20" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="5"/>
@@ -300,7 +408,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="105" name="Parallelogram" width="20" height="20">
+ <layer id="105" name="Parallelogram" width="20" height="20" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="5"/>
@@ -336,7 +444,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="107" name="Pentagon" width="20" height="20">
+ <layer id="107" name="Pentagon" width="20" height="20" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="5"/>
@@ -373,7 +481,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="108" name="Kite" width="20" height="20">
+ <layer id="108" name="Kite" width="20" height="20" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="5"/>
@@ -735,7 +843,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="96" name="_ADDON" width="20" height="20">
+ <layer id="96" name="_ADDON" width="20" height="20" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="6"/>
@@ -771,7 +879,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="99" name="Shape10" width="20" height="20">
+ <layer id="99" name="Shape10" width="20" height="20" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="6"/>
@@ -807,7 +915,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="82" name="Shape11" width="20" height="20">
+ <layer id="82" name="Shape11" width="20" height="20" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="6"/>

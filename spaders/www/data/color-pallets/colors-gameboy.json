@@ -143,12 +143,12 @@
             "map": {
                 "terrainColors": [
                     "0x7BCA93",
-                    "0x8957c7",
-                    "0xE2C756"
+                    "0x252b25",
+                    "0x65b26f"
                 ],
                 "pathColors": [
-                    "0x7BCA93",
-                    "0x8957c7",
+                    "0xbad1b8",
+                    "0xCADCA0",
                     "0xE2C756"
                 ]
             },

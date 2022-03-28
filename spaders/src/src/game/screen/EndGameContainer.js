@@ -149,16 +149,16 @@ export default class EndGameContainer extends PIXI.Container {
 
         this.nextLevel.updateTextColor(colorScheme.fontColor);
     }
-    updateLinesColor(){
+    updateLinesColor() {
         let scheme = window.COOKIE_MANAGER.stats.colorPalletID;
-		let colors = colorSchemes.colorSchemes[scheme == undefined ? 0 : scheme]
-		for (let index = 0; index < this.lines.length; index++) {
-			const element = this.lines[index];
+        let colors = colorSchemes.colorSchemes[scheme == undefined ? 0 : scheme]
+        for (let index = 0; index < this.lines.length; index++) {
+            const element = this.lines[index];
 
-			element.tint = colors.list[index].color;
-		}
+            element.tint = colors.list[index].color;
+        }
 
-	}
+    }
     resize(innerResolution) {
         this.mainCanvas.width = innerResolution.width;
         this.mainCanvas.height = innerResolution.height;
@@ -168,7 +168,7 @@ export default class EndGameContainer extends PIXI.Container {
 
         this.stripsContainer.x = 0
         this.stripsContainer.y = 0
-        
+
         this.gameScreen.resizeToFitAR({ width: this.mainCanvas.width, height: this.mainCanvas.height }, this.screenContainer, this.mainCanvas)
 
         this.screenContainer.x = this.mainCanvas.width / 2 + this.mainCanvas.x
@@ -249,6 +249,14 @@ export default class EndGameContainer extends PIXI.Container {
         if (this.currentLevelImage && this.currentLevelImage.parent) {
             this.currentLevelImage.parent.removeChild(this.currentLevelImage);
         }
+
+        if (!this.iconBackground) {
+            this.iconBackground = new PIXI.mesh.NineSlicePlane(
+                PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
+
+            this.line1.addChild(this.iconBackground)
+        }
+
         this.currentLevelImage = image;
         this.movesLabel.text = "MOVES: " + rounds;
         this.pointsLabel.text = "POINTS: " + points;
@@ -281,8 +289,6 @@ export default class EndGameContainer extends PIXI.Container {
         if (this.levelName.width > 300) {
 
             this.levelName.scale.set(300 / this.levelName.width / this.levelName.scale.x)
-
-            console.log("AHAYASHAS")
         }
         console.log(this.levelName.scale)
         //this.currentLevelImage.rotation = Math.PI * -0.25
@@ -303,10 +309,23 @@ export default class EndGameContainer extends PIXI.Container {
         this.currentLevelImage.x = 0//Math.cos(this.currentLevelImage.rotation) * -350
         this.currentLevelImage.y = -70//locStripe.y//-imageAspect.height + Math.sin(this.currentLevelImage.rotation) * -350
 
-        let imageAspect = { width: 250, height: 200 }
+
+
+
+        let imageAspect = { width: 250, height: 180 }
         this.gameScreen.resizeToFitAR(imageAspect, this.currentLevelImage)
 
         this.line1.addChild(this.currentLevelImage);
+
+
+        this.iconBackground.width = this.currentLevelImage.width + 12
+        this.iconBackground.height = this.currentLevelImage.height + 12
+
+        this.iconBackground.x = this.currentLevelImage.x - this.currentLevelImage.width / 2 - 6
+        this.iconBackground.y = this.currentLevelImage.y - this.currentLevelImage.height / 2 - 6
+
+
+        this.iconBackground.tint = colorSchemes.getCurrentColorScheme().background
         //this.line1.addChild(this.levelName);
 
         //this.currentLevelImage.addChild(this.youWinLabel)

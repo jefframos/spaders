@@ -288,7 +288,7 @@ export default class LevelSelectContainer extends PIXI.Container {
                 navButton.setCompleteState()
                 //navButton.setColor(config.colors.blue2)
                 //navButton.setColor(colorSchemes.colorSchemes[navButton.section.colorPalletId].list[3].color)
-                navButton.updateLabel('COMPLETED');
+                navButton.updateLabel("COMPLETED")//completeMode();
                 navButton.hideProgressBar();
             } else {
                 navButton.setStandardState();
@@ -380,11 +380,11 @@ export default class LevelSelectContainer extends PIXI.Container {
                 }
             }
 
-            if (element.spring.tx + element.map.boundPoints.maxy  * element.map.scale.x< 0) {
+            if (element.spring.tx + element.map.boundPoints.maxy * element.map.scale.x < 0) {
                 element.spring.tx = -element.map.boundPoints.maxy * element.map.scale.x
             }
 
-            if (element.spring.tx + element.map.boundPoints.miny  * element.map.scale.x> this.mainCanvas.height) {
+            if (element.spring.tx + element.map.boundPoints.miny * element.map.scale.x > this.mainCanvas.height) {
                 element.spring.tx = this.mainCanvas.height + -element.map.boundPoints.miny * element.map.scale.x
             }
 
@@ -860,7 +860,7 @@ export default class LevelSelectContainer extends PIXI.Container {
             this.disableClickCounter--;
         }
 
-        if(this.tierMap){
+        if (this.tierMap) {
             this.tierMap.update(delta);
             this.levelMap.update(delta);
         }
@@ -895,23 +895,33 @@ export default class LevelSelectContainer extends PIXI.Container {
 
         levelTierButton.updateIcon(this.gameScreen.generateImage(dataFirstLevel, 24, 0, dataFirstLevel.colorPalletId), 0.35, { x: 0, y: -10 });
 
-        if (count >= data.length) {
+
+
+        if (COOKIE_MANAGER.isTierComplete(data[0].tier)) {
 
             levelTierButton.setCompleteState()
             //levelTierButton.setColor(config.colors.purple)
-            levelTierButton.updateLabel('COMPLETED');
+            levelTierButton.tierCompleteMode();//updateLabel('COMPLETED');
             levelTierButton.hideProgressBar();
         } else {
 
+            //if(levelTierButton)
             // finishedLevels + "/" + countLevels
             levelTierButton.setProgressBar(count / data.length);
             levelTierButton.updateLabel(count + "/" + data.length, { x: 0, y: -25 });
 
-            levelTierButton.setStandardState()
+            if (COOKIE_MANAGER.isTierLocked(data[0].tier)) {
+                levelTierButton.lockMode()
+            } else {
+                levelTierButton.incompleteMode()
+            }
+
+            // levelTierButton.setStandardState()
         }
 
         let debugThumb = window.COOKIE_MANAGER.debug.showAllThumbs;
         if (debugThumb) {
+            levelTierButton.completeMode();
             levelTierButton.updateLabelTop(data[0].tierName + ' ~' + utils.convertNumToTime(Math.ceil(totalEstimatedTime)))// + '    ' + '~' + utils.convertNumToTime(Math.ceil(totalEstimatedTimeHard)));
         }
 
@@ -1133,7 +1143,7 @@ export default class LevelSelectContainer extends PIXI.Container {
                 targetScale = Math.min(1, targetScale)
 
             } else {
-               targetScale = Math.min(1, targetScale)
+                targetScale = Math.min(1, targetScale)
             }
             this.tierMap.scale.set(targetScale)
             this.levelMap.scale.set(targetScale)
@@ -1170,10 +1180,10 @@ export default class LevelSelectContainer extends PIXI.Container {
         this.sectionsView.pivot.x = this.mainCanvas.width / 2
         this.sectionsView.x = this.mainCanvas.x + this.mainCanvas.width
 
-        if(this.tiersView.width < window.innerWidth){
+        if (this.tiersView.width < window.innerWidth) {
 
             this.tiersView.targetX = this.mainCanvas.x + this.mainCanvas.width / 2 - this.tiersView.width / 2// - this.currentGridOffset.x//this.mainCanvas.x + this.currentGridOffset.x * 2
-        }else{
+        } else {
             this.tiersView.targetX = this.mainCanvas.x + this.currentGridOffset.x * 2
         }
 

@@ -7,6 +7,7 @@ import Spring from '../effects/Spring';
 import LevelSelectContainer from './LevelSelectContainer'
 import colorSchemes from '../../colorSchemes';
 import Planet from './Planet';
+import SprteSpritesheetAnimation from './SprteSpritesheetAnimation';
 export default class StartScreenContainer extends PIXI.Container {
 	constructor(screen) {
 		super();
@@ -67,19 +68,22 @@ export default class StartScreenContainer extends PIXI.Container {
 		let order = [8,3,6,4,0,1,7,2,5,9]
 		//let order = [3,6,4,1,0,2,5,9]
 		for (let index = 0; index < window.IMAGE_DATA.enemyImagesFrame.length; index++) {
-			const element = window.IMAGE_DATA.enemyImagesFrame[order[index]];
-			let sprite = new PIXI.Sprite.fromFrame(element);
+			let element = window.IMAGE_DATA.enemyImagesFrame[order[index]];
+
+			let sprite = new SprteSpritesheetAnimation();
+
+			let spaderID = (order[index])%5 + 1
+
+			sprite.addLayer("l0_spader_"+spaderID+"_", {min:1, max:5}, 0.15)
+			sprite.addLayer("l1_spader_"+spaderID+"_", {min:1, max:5}, 0.15)
+
 			sprite.tint = window.colorsOrder[order[index]]
 			this.spadersContainer.addChild(sprite);
 			if(index > 0){
 				sprite.x += this.spadersList[index - 1].x + this.spadersList[index - 1].width / 2;
 				
 			}
-			let spriteWhite = new PIXI.Sprite.fromFrame("w_" + element);
-			sprite.addChild(spriteWhite);
-			sprite.white = spriteWhite;
-			this.spadersList.push(sprite);
-			
+			this.spadersList.push(sprite)
 			let n = ((index+1) / window.IMAGE_DATA.enemyImagesFrame.length)
 			sprite.x = Math.sin(n * (Math.PI * 2)) * 300
 			sprite.y = Math.cos(n * Math.PI) *Math.cos(n * Math.PI) * -80 + 80
@@ -294,16 +298,8 @@ export default class StartScreenContainer extends PIXI.Container {
 		let scheme = colorSchemes.getCurrentColorScheme();
 
 		for (let index = 0; index < this.spadersList.length; index++) {
-			const element = this.spadersList[index];
-
-			element.white.visible = true;
-			// if (scheme.list[index].hasWhite) {
-			// 	element.white.tint = scheme.list[index].hasWhite;
-			// } else {
-			// 	element.white.visible = false;
-			// }
-
-			element.tint = colors.list[index].color;
+			const element = this.spadersList[index];		
+			element.tintLayer(0, colors.list[index].color);
 		}
 
 	}
@@ -349,6 +345,8 @@ export default class StartScreenContainer extends PIXI.Container {
 			element.y = Math.cos(n * Math.PI) *Math.cos(n * Math.PI) * -h + (h/2)
 
 			element.scale.set( ((element.y / 120) * 0.35 + 0.85) * 0.75)
+			element.update(delta)
+
 		}
 
 		this.spadersContainer.children.sort((a,b) => (a.y > b.y) ? 1 : ((b.y > a.y) ? -1 : 0))

@@ -76,6 +76,7 @@ export default class TierWorldButton extends SquareButton {
         this.lockIcon = PIXI.Sprite.fromFrame('tile_1_' + (32 * 8 + 3) + '.png')
         this.lockState.addChild(this.lockIcon)
 
+        
         this.incompleteState = PIXI.Sprite.fromFrame('tile_1_' + (32 * 8 + 4) + '.png')
         this.squareButtonShape.addChild(this.incompleteState)
         this.incompleteState.tint = 0
@@ -86,7 +87,11 @@ export default class TierWorldButton extends SquareButton {
         
         let stateBorder = PIXI.Sprite.fromFrame('tile_1_' + (32 * 9) + '.png')
         this.incompleteState.addChild(stateBorder)
+        
+        this.starIcon = PIXI.Sprite.fromFrame('tile_1_' + (32 * 8 + 5) + '.png')
+        this.squareButtonShape.addChild(this.starIcon)
 
+        this.starIcon.scale.set(0.5)
 
         window.COOKIE_MANAGER.onChangeColors.add(() => {
             this.updateColorScheme();
@@ -109,6 +114,9 @@ export default class TierWorldButton extends SquareButton {
         if (this.iconBackground) {
             this.iconBackground.tint = colorScheme.buttonStandardDarkColor;
         }
+
+        this.starIcon.tint = colorScheme.levelCompleteColor;
+
         switch (this.currentState) {
             case 0:
                 this.setColor(colorScheme.buttonStandardColor);
@@ -130,6 +138,8 @@ export default class TierWorldButton extends SquareButton {
             this.incompleteState.visible = false;
             this.icon.visible = false;
             this.lockState.visible = false;
+            this.starIcon.visible = false;
+            this.interactive = true;
             if(this.buttonState == 1){
 
                 this.incompleteState.visible = true;
@@ -141,8 +151,23 @@ export default class TierWorldButton extends SquareButton {
                 this.questionIcon.x = Math.sin(this.questionIcon.sin) * 10
             }else if(this.buttonState == 0){
                 this.icon.visible = true;
+                this.backTop.visible = false;
+                this.label.visible = false;
+
+                
             }else if(this.buttonState == 2){
                 this.lockState.visible = true;
+                this.backTop.visible = false;
+                this.label.visible = false;
+                this.interactive = false;
+
+            }else if(this.buttonState == 3){
+                this.icon.visible = true;
+                this.backTop.visible = false;
+                //this.starIcon.visible = true;
+
+                this.iconBackgroundWhite.tint = window.colorTweenBomb.currentColor
+                //this.starIcon.tint = window.colorTweenBomb.currentColor
             }
 
             //this.iconBackgroundWhite.y = Math.random() * 10
@@ -157,7 +182,9 @@ export default class TierWorldButton extends SquareButton {
     completeMode(){
         this.buttonState = 0;
     }
-    
+    tierCompleteMode(){
+        this.buttonState = 3;
+    }
     setColor(color) {
         if (this.isPlanet || !this.iconBackgroundWhite) {
             return
@@ -233,6 +260,9 @@ export default class TierWorldButton extends SquareButton {
         this.backTop.width = this.iconBackgroundWhite.width - 8
         this.backTop.height = this.label.height + 4
 
+        this.starIcon.x = this.iconBackgroundWhite.height / 2 - this.starIcon.width / 2
+        this.starIcon.y = - this.starIcon.height - 3
+
     }
 
     updateIcon(graphic, scale = 0.4, offset = { x: 0, y: 0 }, hideBackground = false) {
@@ -282,7 +312,7 @@ export default class TierWorldButton extends SquareButton {
         this.label.x = this.squareButtonShape.width / 2 + offset.x// this.container.scale.x
         this.label.y = this.squareButtonShape.height - this.label.height + offset.y// this.container.scale.y
 
-
+        this.backTop.visible = true;
 
     }
 }

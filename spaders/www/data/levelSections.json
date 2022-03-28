@@ -2,7 +2,8 @@
     "question": {
         "dataPath": "question.json",
         "levelOrderMap": "basics/tier-basic-1.json",
-        "order": -1
+        "order": -1,
+        "require": -1
     },
     "sections": [
         {
@@ -17,50 +18,58 @@
                 {
                     "name": "---",
                     "dataPath": "how-to-play/shapes.json",
-                    "levelOrderMap": "basics/tier-basic-1.json",
-                    "order": -1
+                    "levelOrderMap": "worldMaps/tier1/tier1-1.json",
+                    "order": -1,
+                    "require": -1
                 },
                 {
                     "name": "---",
                     "dataPath": "how-to-play/creatures.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
-                    "order": -1
+                    "order": -1,
+                    "require": 0
                 },
                 {
                     "name": "---",
                     "dataPath": "how-to-play/people-set-1.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
-                    "order": -1
+                    "order": -1,
+                    "require": 1
                 },
                 {
                     "name": "---",
                     "dataPath": "how-to-play/things.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
-                    "order": -1
+                    "order": -1,
+                    "require": 2
                 },
                 {
                     "name": "---",
                     "dataPath": "basics/food.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
-                    "order": -1
-                },
-                {
-                    "name": "---",
-                    "dataPath": "debug/debug2.json",
-                    "levelOrderMap": "basics/tier-basic-1.json",
-                    "order": -1
-                },
-                {
-                    "name": "2nd gen",
-                    "dataPath": "videogames/spaders.json",
-                    "levelOrderMap": "basics/tier-basic-1.json",
-                    "order": -1
+                    "order": -1,
+                    "require": 3
                 },
                 {
                     "name": "2nd gen",
                     "dataPath": "videogames/largeSpaders.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
-                    "order": -1
+                    "order": -1,
+                    "require": 6
+                },
+                {
+                    "name": "2nd gen",
+                    "dataPath": "videogames/spaders.json",
+                    "levelOrderMap": "basics/tier-basic-1.json",
+                    "order": -1,
+                    "require": 5
+                },
+                {
+                    "name": "---",
+                    "dataPath": "debug/debug2.json",
+                    "levelOrderMap": "basics/tier-basic-1.json",
+                    "order": -1,
+                    "require": 4
                 }
             ]
         },
@@ -77,13 +86,15 @@
                     "name": "2nd gen",
                     "dataPath": "videogames/videogamesLevels1.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
-                    "order": -1
+                    "order": -1,
+                    "require": -1
                 },
                 {
                     "name": "2nd gen",
                     "dataPath": "videogames/videogamesLevels2.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
-                    "order": -1
+                    "order": -1,
+                    "require": -1
                 }
             ]
         },
@@ -100,13 +111,15 @@
                     "name": "2nd gen",
                     "dataPath": "movies/moviesLevels1.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
-                    "order": -1
+                    "order": -1,
+                    "require": -1
                 },
                 {
                     "name": "2nd gen",
                     "dataPath": "movies/moviesLevelsAdventure.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
-                    "order": -1
+                    "order": -1,
+                    "require": -1
                 }
             ]
         },
@@ -123,19 +136,22 @@
                     "name": "pokemon",
                     "dataPath": "pokemon/pokemon1-25.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
-                    "order": -1
+                    "order": -1,
+                    "require": -1
                 },
                 {
                     "name": "pokemon",
                     "dataPath": "pokemon/pokemon26-50.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
-                    "order": -1
+                    "order": -1,
+                    "require": -1
                 },
                 {
                     "name": "pokemon",
                     "dataPath": "pokemon/pokemon51-75.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
-                    "order": -1
+                    "order": -1,
+                    "require": -1
                 }
             ]
         },
@@ -152,19 +168,22 @@
                     "name": "---",
                     "dataPath": "how-to-play/shapes-synt.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
-                    "order": -1
+                    "order": -1,
+                    "require": -1
                 },
                 {
                     "name": "---",
                     "dataPath": "synth/synth1.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
-                    "order": -1
+                    "order": -1,
+                    "require": -1
                 },
                 {
                     "name": "---",
                     "dataPath": "synth/sunset.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
-                    "order": -1
+                    "order": -1,
+                    "require": -1
                 }
             ]
         },
@@ -181,31 +200,36 @@
                     "name": "gameboy",
                     "dataPath": "gameboy/gameboy1.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
-                    "order": -1
+                    "order": -1,
+                    "require": -1
                 },
                 {
                     "name": "gameboy",
                     "dataPath": "gameboy/gameboyWeapons2.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
-                    "order": -1
+                    "order": -1,
+                    "require": -1
                 },
                 {
                     "name": "gameboy",
                     "dataPath": "gameboy/gameboyMisc.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
-                    "order": -1
+                    "order": -1,
+                    "require": -1
                 },
                 {
                     "name": "gameboy",
                     "dataPath": "gameboy/gameboyMisc2.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
-                    "order": -1
+                    "order": -1,
+                    "require": -1
                 },
                 {
                     "name": "gameboy",
                     "dataPath": "gameboy/gameboycreatures.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
-                    "order": -1
+                    "order": -1,
+                    "require": -1
                 }
             ]
         },
@@ -222,7 +246,8 @@
                     "name": "---",
                     "dataPath": "how-to-play/bossa.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
-                    "order": -1
+                    "order": -1,
+                    "require": -1
                 }
             ]
         },
@@ -239,7 +264,8 @@
                     "name": "---",
                     "dataPath": "tutorial/tutorial.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
-                    "order": -1
+                    "order": -1,
+                    "require": -1
                 }
             ]
         },
@@ -256,7 +282,8 @@
                     "name": "---",
                     "dataPath": "debug/debug.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
-                    "order": -1
+                    "order": -1,
+                    "require": -1
                 }
             ]
         }

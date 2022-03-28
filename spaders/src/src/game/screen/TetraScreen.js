@@ -72,7 +72,7 @@ export default class TetraScreen extends Screen {
 			} else if (hash == "a") {
 
 				this.hasHash = true;
-				this.currentLevelID = -1;
+				this.currentLevelID = 0;
 			} else if (hash == "m") {
 				this.autoRedirectToLevelSelect = true;
 			} else {
@@ -877,6 +877,7 @@ export default class TetraScreen extends Screen {
 		//console.log('moves per sec', mps, cp, actualScore)
 
 		let isHighscore = window.COOKIE_MANAGER.saveLevel(
+			this.currentLevelData,
 			this.dataToSave.idSaveData,
 			Math.ceil(this.currentTime),
 			this.currentPoints,

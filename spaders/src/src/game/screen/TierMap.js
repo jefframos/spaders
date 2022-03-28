@@ -232,11 +232,12 @@ export default class TierMap extends PIXI.Container {
                 }
             }
         }
+        
+        // while (tempPaths.length > totalPaths) {
+        //     tempPaths[0].visible = false;
+        //     tempPaths.shift()
+        // }
 
-        while (tempPaths.length > totalPaths) {
-            tempPaths[0].visible = false;
-            tempPaths.shift()
-        }
         let texture = renderer.generateTexture(this.mapRenderContainer);
 
 
