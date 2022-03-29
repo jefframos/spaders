@@ -453,8 +453,8 @@ function loadJsons() {
 	// .add('./data/levelSections.json')
 	// .load(configGame);
 }
-function findPropertyValue(data, propertyName) {
-	let valueToReturn = 0;
+function findPropertyValue(data, propertyName, defaultValue = 0) {
+	let valueToReturn = defaultValue;
 
 	for (let index = 0; index < data.length; index++) {
 		const element = data[index];
@@ -496,7 +496,13 @@ function extractData(element, debug) {
 		data.setAutoBlocker = findPropertyValue(element.properties, "autoPlaceBlockers")
 		data.gameMode = findPropertyValue(element.properties, "gameMode")
 		data.fallTurns = findPropertyValue(element.properties, "fallTurns")
-
+		data.isFinal = findPropertyValue(element.properties, "isFinal", false)
+		data.require = findPropertyValue(element.properties, "require", null)
+		if(data.require){
+			data.require = data.require.split(",");
+		}else{
+			data.require = [-1];
+		}
 		data.splitData = null;
 		if (findPropertyValue(element.properties, "split_i")) {
 			data.splitData = {

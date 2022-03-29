@@ -529,7 +529,7 @@
         "debug/debug2.tmx"
     ],
     "project": "gameLevelsProject.tiled-project",
-    "property.type": "int",
+    "property.type": "bool",
     "recentFiles": [
         "how-to-play/simple-shapes.tmx",
         "videogames/levels.tmx",

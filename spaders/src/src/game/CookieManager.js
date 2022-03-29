@@ -21,7 +21,8 @@ export default class CookieManager {
 			tutorial: false
 		}
 		let defaultDebug = {
-			showAllThumbs: false
+			showAllThumbs: false,
+			showAllNames: false,
 		}
 		let stats = this.getCookie("stats");
 		if (stats) {
@@ -88,6 +89,7 @@ export default class CookieManager {
 
 		this.onAddNewLevel = new signals.Signal()
 		this.onToggleDebug = new signals.Signal()
+		this.onToggleNames = new signals.Signal()
 		this.onChangeColors = new signals.Signal()
 
 		this.tierProgress = this.getCookie("tierProgress")
@@ -96,10 +98,15 @@ export default class CookieManager {
 			this.storeObject("tierProgress", this.tierProgress)
 		}
 	}
-	toogleDebug(id) {
+	toogleDebug() {
 		this.debug.showAllThumbs = !this.debug.showAllThumbs;
 		this.storeObject("debug", this.debug);
 		this.onToggleDebug.dispatch();
+	}
+	toogleNames() {
+		this.debug.showAllNames = !this.debug.showAllNames;
+		this.storeObject("debug", this.debug);
+		this.onToggleNames.dispatch();
 	}
 	updateColorPallete(id) {
 		if (this.stats.colorPalletID == id) {
@@ -152,6 +159,13 @@ export default class CookieManager {
 
 		return true;
 	}
+	getTierProgress(tier) {
+		if (this.tierProgress[tier.idSaveData]) {
+			return this.tierProgress[tier.idSaveData].progress / this.tierProgress[tier.idSaveData].total
+		}
+
+		return 0;
+	}
 	isTierComplete(tier) {
 		if (this.tierProgress[tier.idSaveData]) {
 			return this.tierProgress[tier.idSaveData].complete
@@ -180,7 +194,7 @@ export default class CookieManager {
 				this.tierProgress[idtier].progress++;
 				this.tierProgress[idtier][name] = true;
 
-				if (this.tierProgress[idtier].progress >= this.tierProgress[idtier].total) {
+				if (data.isFinal || this.tierProgress[idtier].progress >= this.tierProgress[idtier].total) {
 					this.tierProgress[idtier].complete = true;
 				}
 			}

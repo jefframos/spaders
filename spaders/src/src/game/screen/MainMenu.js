@@ -78,9 +78,19 @@ export default class MainMenu extends PIXI.Container {
 
 
         });
+
+        this.toggleDebugNames = new UIButton1(config.colors.green, window.iconsData.debugging, config.colors.white);
+        this.toggleDebugNames.onClick.add(() => {
+
+            window.COOKIE_MANAGER.toogleNames();
+            this.updateDebugColor()
+
+        });
+
         this.updateDebugColor()
 
         this.toggleDebug.updateRotation(0);
+        this.toggleDebugNames.updateRotation(0);
 
         if (!window.COOKIE_MANAGER.settings.sound) {
             this.toggleSound.updateTexture(window.iconsData.soundOff);
@@ -103,6 +113,10 @@ export default class MainMenu extends PIXI.Container {
         this.mainContainer.addChild(this.toggleDebug);
         this.toggleDebug.x = this.wipeDataButton.x + this.toggleDebug.width * 0.5 + 60
         this.toggleDebug.y = this.toggleSound.y;
+
+        this.mainContainer.addChild(this.toggleDebugNames);
+        this.toggleDebugNames.x = this.toggleDebug.x + this.toggleDebugNames.width * 0.5 + 60
+        this.toggleDebugNames.y = this.toggleSound.y;
 
         // this.autoPlayButton.x = this.wipeDataButton.x - 90;
         // this.autoPlayButton.y = this.refreshButton.y;
@@ -148,6 +162,12 @@ export default class MainMenu extends PIXI.Container {
             this.toggleDebug.setColor(config.colors.red)
         } else {
             this.toggleDebug.setColor(config.colors.green)
+        }
+
+        if (!window.COOKIE_MANAGER.debug.showAllNames) {
+            this.toggleDebugNames.setColor(config.colors.red)
+        } else {
+            this.toggleDebugNames.setColor(config.colors.green)
         }
     }
     fontStyle(size, color) {

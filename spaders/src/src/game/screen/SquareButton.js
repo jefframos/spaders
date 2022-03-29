@@ -86,13 +86,13 @@ export default class SquareButton extends PIXI.Container {
         this.squareButtonBackShape.on('pointerout', this.onPointerOut.bind(this)).on('touchend', this.onPointerOut.bind(this)).on('touchendoutside', this.onPointerOut.bind(this));
         this.squareButtonBackShape.on('pointerup', this.onPointerUp.bind(this));
 
-        let sizeBar = { width: this.squareButtonShape.width * 0.8, height: 20 }
+        let sizeBar = { width: this.unscaledCardSize.width * 0.8, height: 20 }
         this.progressBar = new ProgressBar(sizeBar);
 
         this.progressBar.visible = false;
 
-        this.progressBar.x = this.squareButtonShape.width / 2 - sizeBar.width / 2
-        this.progressBar.y = this.squareButtonShape.height - sizeBar.height * 1.5
+        this.progressBar.x = this.unscaledCardSize.width / 2 - sizeBar.width / 2
+        this.progressBar.y = this.unscaledCardSize.height - sizeBar.height * 1.5
         //this.updateLabel("round_ar rlar")
         this.squareButtonShape.addChild(this.progressBar)
 
@@ -172,11 +172,11 @@ export default class SquareButton extends PIXI.Container {
         this.iconBackground.x = 10;
         this.iconBackground.y = 10;
 
-        this.iconBackground.width = this.squareButtonShape.height * 0.5
-        this.iconBackground.height = this.squareButtonShape.height * 0.5
+        this.iconBackground.width = this.unscaledCardSize.height * 0.5
+        this.iconBackground.height = this.unscaledCardSize.height * 0.5
         this.resizeIconToFitOnLarge2()
 
-        this.progressBar.resizeBar(this.squareButtonShape.width - 20, this.squareButtonShape.height * 0.2);
+        this.progressBar.resizeBar(this.unscaledCardSize.width - 20, this.unscaledCardSize.height * 0.2);
         this.progressBar.x = this.iconBackground.x //+ this.iconBackground.width + 10;
         this.progressBar.y = this.iconBackground.y + this.iconBackground.height + 5// - this.progressBar.height;
 
@@ -192,7 +192,7 @@ export default class SquareButton extends PIXI.Container {
 
         utils.resizeToFitAR(
             {
-                width: this.squareButtonBackShape.width - this.iconBackground.width - 20,
+                width: this.unscaledCardSize.width - this.iconBackground.width - 20,
                 height: this.iconBackground.height * 0.28
             }, this.labelTop)
 
@@ -208,26 +208,10 @@ export default class SquareButton extends PIXI.Container {
     }
 
     setSectionButtonMode(index) {
-        // if (!this.iconBackground) return;
-        // this.iconBackground.x = 10;
-        // this.iconBackground.y = 10;
-
-        // this.iconBackground.width = this.squareButtonShape.height - 20
-        // this.iconBackground.height = this.squareButtonShape.height - 20
-        // this.resizeIconToFitOnLarge()
-
-        //console.log(this.squareButtonShape.height)
-       
-
-
-        
-
-        
-
         utils.resizeToFitAR(
             {
-                width: this.squareButtonShape.width,
-                height: (this.squareButtonShape.height - 20) * 0.12
+                width: this.squareButtonBackShape.width,
+                height: this.squareButtonBackShape.height * 0.1
             }, this.labelTop)
 
             let marginBack = this.labelTop.height * 0.2
@@ -236,7 +220,7 @@ export default class SquareButton extends PIXI.Container {
 
                 this.labelTop.x = this.squareButtonBackShape.width * 1.25
             }else{
-                this.labelTop.x = -this.squareButtonBackShape.width * 0.25//this.squareButtonBackShape.width * 1.25
+                this.labelTop.x = -this.squareButtonBackShape.width * 0.25//this.unscaledCardSize.width * 1.25
                 this.squareButtonShape.x = this.squareButtonBackShape.width * 0.5
             }
         this.labelTop.y = this.labelTop.height//this.squareButtonShape.height / 2 - this.labelTop.height
@@ -297,8 +281,8 @@ export default class SquareButton extends PIXI.Container {
 
         utils.resizeToFitAR(
             {
-                width: this.squareButtonBackShape.width * 0.7,
-                height: this.squareButtonBackShape.height * 0.15
+                width: this.unscaledCardSize.width,
+                height: this.unscaledCardSize.height * 0.15
             }, this.labelTop)
 
         this.labelTop.pivot.x = this.labelTop.width / 2 / this.labelTop.scale.x
@@ -356,8 +340,8 @@ export default class SquareButton extends PIXI.Container {
 
         utils.resizeToFitAR(
             {
-                width: this.squareButtonBackShape.width,
-                height: this.squareButtonBackShape.height * 0.15
+                width: this.unscaledCardSize.width,
+                height: this.unscaledCardSize.height * 0.15
             }, this.pallet)
 
 
@@ -383,8 +367,8 @@ export default class SquareButton extends PIXI.Container {
 
         utils.resizeToFitAR(
             {
-                width: this.squareButtonBackShape.width * 0.7,
-                height: this.squareButtonBackShape.height * 0.15
+                width: this.unscaledCardSize.width * 0.7,
+                height: this.unscaledCardSize.height * 0.15
             }, this.label)
 
         this.label.pivot.x = this.label.width / 2 / this.label.scale.x
@@ -425,8 +409,8 @@ export default class SquareButton extends PIXI.Container {
         //this.icon.y = offset.y
         utils.resizeToFitAR(
             {
-                width: this.squareButtonBackShape.width * 0.8,
-                height: this.squareButtonBackShape.height * scale
+                width: this.unscaledCardSize.width * 0.8,
+                height: this.unscaledCardSize.height * scale
             }, this.icon)
         // if (graphic.width > graphic.height) {
         //     this.icon.scale.set(this.squareButtonBackShape.width / (this.icon.width / this.icon.scale.x) * scale);
@@ -438,8 +422,8 @@ export default class SquareButton extends PIXI.Container {
         this.iconBackground.height = this.icon.height + 10
         this.icon.x = 5;
         this.icon.y = 5;
-        this.iconBackground.x = this.squareButtonShape.width / 2 - this.iconBackground.width / 2 + offset.x
-        this.iconBackground.y = this.squareButtonShape.height / 2 - this.iconBackground.height / 2 + offset.y
+        this.iconBackground.x = this.unscaledCardSize.width / 2 - this.iconBackground.width / 2 + offset.x
+        this.iconBackground.y = this.unscaledCardSize.height / 2 - this.iconBackground.height / 2 + offset.y
 
         if (hideBackground) {
             this.iconBackground.width = 0

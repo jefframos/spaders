@@ -13,9 +13,9 @@ export default class TierWorldButton extends SquareButton {
     }
     buildBase() {
         this.container = new PIXI.Container();
-     
+
         this.squareButtonShape = new PIXI.mesh.NineSlicePlane(
-            PIXI.Texture.fromFrame('largeCardPixel.png'), 20, 20, 20, 20)//new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
+            PIXI.Texture.EMPTY, 20, 20, 20, 20)//new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
         //this.squareButtonShape.scale.set(this.unscaledCardSize.width / this.squareButtonShape.width)
         this.squareButtonShape.tint = 0x333333
 
@@ -47,13 +47,13 @@ export default class TierWorldButton extends SquareButton {
 
         this.addChild(this.container);
 
-        let sizeBar = { width: this.squareButtonShape.width * 0.8, height: 20 }
+        let sizeBar = { width: this.unscaledCardSize.width * 0.8, height: 20 }
         this.progressBar = new ProgressBar(sizeBar);
 
         this.progressBar.visible = false;
 
-        this.progressBar.x = this.squareButtonShape.width / 2 - sizeBar.width / 2
-        this.progressBar.y = this.squareButtonShape.height - sizeBar.height * 1.5
+        this.progressBar.x = this.unscaledCardSize.width / 2 - sizeBar.width / 2
+        this.progressBar.y = this.unscaledCardSize.height - sizeBar.height * 1.5
         //this.updateLabel("round_ar rlar")
         this.squareButtonShape.addChild(this.progressBar)
 
@@ -68,7 +68,7 @@ export default class TierWorldButton extends SquareButton {
         this.backTop.alpha = 1
         this.squareButtonShape.addChild(this.labelTop)
         this.squareButtonShape.addChild(this.label)
-        
+
         this.lockState = PIXI.Sprite.fromFrame('tile_1_' + (32 * 8 + 4) + '.png')
         this.squareButtonShape.addChild(this.lockState)
         this.lockState.tint = 0
@@ -76,22 +76,22 @@ export default class TierWorldButton extends SquareButton {
         this.lockIcon = PIXI.Sprite.fromFrame('tile_1_' + (32 * 8 + 3) + '.png')
         this.lockState.addChild(this.lockIcon)
 
-        
+
         this.incompleteState = PIXI.Sprite.fromFrame('tile_1_' + (32 * 8 + 4) + '.png')
         this.squareButtonShape.addChild(this.incompleteState)
         this.incompleteState.tint = 0
-        
-        this.questionIcon = PIXI.Sprite.fromFrame('tile_1_' + (32 * 8 + 2) + '.png')
+
+        this.questionIcon = PIXI.Sprite.fromFrame('tile_1_' + (32 * 10 + 5) + '.png')
         this.questionIcon.sin = 0
         this.incompleteState.addChild(this.questionIcon)
-        
-        let stateBorder = PIXI.Sprite.fromFrame('tile_1_' + (32 * 9) + '.png')
-        this.incompleteState.addChild(stateBorder)
-        
-        this.starIcon = PIXI.Sprite.fromFrame('tile_1_' + (32 * 8 + 5) + '.png')
-        this.squareButtonShape.addChild(this.starIcon)
 
-        this.starIcon.scale.set(0.5)
+        let stateBorder = PIXI.Sprite.fromFrame('tile_1_' + (32 * 8 + 2) + '.png')
+        this.incompleteState.addChild(stateBorder)
+
+        this.crownIcon = PIXI.Sprite.fromFrame('tile_1_' + (32 * 10 + 6) + '.png')
+        this.squareButtonShape.addChild(this.crownIcon)
+
+        //this.crownIcon.scale.set(0.75)
 
         window.COOKIE_MANAGER.onChangeColors.add(() => {
             this.updateColorScheme();
@@ -115,7 +115,7 @@ export default class TierWorldButton extends SquareButton {
             this.iconBackground.tint = colorScheme.buttonStandardDarkColor;
         }
 
-        this.starIcon.tint = colorScheme.levelCompleteColor;
+        //this.crownIcon.tint = colorScheme.levelCompleteColor;
 
         switch (this.currentState) {
             case 0:
@@ -132,57 +132,72 @@ export default class TierWorldButton extends SquareButton {
         }
     }
     update(delta) {
-        
-        if(this.iconBackgroundWhite){
-            
+
+        if (this.iconBackgroundWhite) {
+
             this.incompleteState.visible = false;
             this.icon.visible = false;
             this.lockState.visible = false;
-            this.starIcon.visible = false;
+            this.crownIcon.visible = false;
             this.interactive = true;
-            if(this.buttonState == 1){
+            if (this.buttonState == 1) {
 
+
+                // this.backTop.visible = true;
+                // this.label.visible = true;
                 this.incompleteState.visible = true;
-                //this.iconBackgroundWhite.tint = window.colorTweenBomb.currentColor
                 this.incompleteState.tint = window.colorTweenBomb.currentColor
 
-                this.questionIcon.sin += delta *3;
-                this.questionIcon.sin%= Math.PI * 2
+                this.questionIcon.sin += delta * 3;
+                this.questionIcon.sin %= Math.PI * 2
                 this.questionIcon.x = Math.sin(this.questionIcon.sin) * 10
-            }else if(this.buttonState == 0){
+                //this.crownIcon.visible = true;
+            } else if (this.buttonState == 0) {
                 this.icon.visible = true;
                 this.backTop.visible = false;
                 this.label.visible = false;
 
-                
-            }else if(this.buttonState == 2){
+
+            } else if (this.buttonState == 2) {
                 this.lockState.visible = true;
                 this.backTop.visible = false;
                 this.label.visible = false;
                 this.interactive = false;
 
-            }else if(this.buttonState == 3){
+            } else if (this.buttonState == 3) {
                 this.icon.visible = true;
                 this.backTop.visible = false;
-                //this.starIcon.visible = true;
+                //this.crownIcon.visible = true;
 
                 this.iconBackgroundWhite.tint = window.colorTweenBomb.currentColor
-                //this.starIcon.tint = window.colorTweenBomb.currentColor
+                //this.crownIcon.tint = window.colorTweenBomb.currentColor
             }
-
+            if (this.forceLabel) {
+                this.label.visible = true;
+                this.label.scale.set(0.5)
+                this.label.y = this.unscaledCardSize.height + 10
+            }
             //this.iconBackgroundWhite.y = Math.random() * 10
+
+            if(this.showCrown){
+                this.crownIcon.visible = true;
+            }
         }
+
     }
-    lockMode(){
-        this.buttonState = 2;
+    setCrown(){
+        this.showCrown = true;
     }
-    incompleteMode(){
-        this.buttonState = 1;
-    }
-    completeMode(){
+    completeMode() {
         this.buttonState = 0;
     }
-    tierCompleteMode(){
+    incompleteMode() {
+        this.buttonState = 1;
+    }
+    lockMode() {
+        this.buttonState = 2;
+    }
+    tierCompleteMode() {
         this.buttonState = 3;
     }
     setColor(color) {
@@ -191,17 +206,23 @@ export default class TierWorldButton extends SquareButton {
         }
         //this.iconBackgroundWhite.tint = color
     }
-    setLargeButtonMode(addBottomBorder = true) {
+    updateDebugLabel(text) {
+
+        this.updateLabel(text);
+
+        this.forceLabel = true;
+
+        this.label.style.fill = 0xFF0000
+    }
+    setLargeButtonMode(addLabel = true) {
 
         let border = 4
-        let extraBorderBottom = 0
-        let color = colorSchemes.getCurrentColorScheme()
 
         if (!this.iconBackgroundWhite) {
 
             this.iconBackgroundWhite = new PIXI.Sprite();
-            if (window.imageThumbs['tierCardBackgroundTexture' + addBottomBorder]) {
-                this.iconBackgroundWhite.setTexture(window.imageThumbs['tierCardBackgroundTexture' + addBottomBorder])
+            if (window.imageThumbs['tierCardBackgroundTexture' + addLabel]) {
+                this.iconBackgroundWhite.setTexture(window.imageThumbs['tierCardBackgroundTexture' + addLabel])
             } else {
                 let backBackWhite = new PIXI.Sprite.fromFrame('tile_1_' + (32 * 8) + '.png')
                 let texture = renderer.generateTexture(backBackWhite);
@@ -225,12 +246,16 @@ export default class TierWorldButton extends SquareButton {
 
         utils.resizeToFitAR(
             {
-                width: this.iconBackgroundWhite.width * 0.62,
-                height: this.iconBackgroundWhite.height * 0.62
+                width: this.unscaledCardSize.width * 0.62,
+                height: this.unscaledCardSize.height * 0.62
             }, this.icon)
         utils.centerObject(this.icon, this.iconBackgroundWhite)
 
-        if (!addBottomBorder) {
+
+        this.crownIcon.x = this.unscaledCardSize.width / 2 - this.crownIcon.width / 2;
+        this.crownIcon.y = -this.crownIcon.height + 4;
+
+        if (!addLabel) {
 
             this.label.visible = false
             this.backTop.visible = false;
@@ -241,8 +266,8 @@ export default class TierWorldButton extends SquareButton {
 
         utils.resizeToFitAR(
             {
-                width: this.icon.width,
-                height: this.iconBackgroundWhite.height * 0.3
+                width: this.unscaledCardSize.width,
+                height: this.unscaledCardSize.height * 0.3
             }, this.label)
 
         this.labelTop.visible = false;
@@ -252,16 +277,15 @@ export default class TierWorldButton extends SquareButton {
 
         utils.centerObject(this.label, this.iconBackgroundWhite)
 
-        this.label.y += this.iconBackgroundWhite.height / 2 + this.label.height + 4
-        this.label.x = this.iconBackgroundWhite.x + this.iconBackgroundWhite.width / 2
+        this.label.y += this.unscaledCardSize.height / 2 + this.label.height + 4
+        this.label.x = this.iconBackgroundWhite.x + this.unscaledCardSize.width / 2
 
         this.backTop.x = this.iconBackgroundWhite.x + 4
         this.backTop.y = this.label.y - this.label.height / 2 - 2
-        this.backTop.width = this.iconBackgroundWhite.width - 8
+        this.backTop.width = this.unscaledCardSize.width - 8
         this.backTop.height = this.label.height + 4
 
-        this.starIcon.x = this.iconBackgroundWhite.height / 2 - this.starIcon.width / 2
-        this.starIcon.y = - this.starIcon.height - 3
+
 
     }
 
@@ -274,8 +298,8 @@ export default class TierWorldButton extends SquareButton {
         this.addChild(this.icon)
         utils.resizeToFitAR(
             {
-                width: this.squareButtonShape.width * 0.81,
-                height: this.squareButtonShape.height * scale
+                width: this.unscaledCardSize.width * 0.81,
+                height: this.unscaledCardSize.height * scale
             }, this.icon)
         this.icon.x = 5;
         this.icon.y = 5;
@@ -290,12 +314,12 @@ export default class TierWorldButton extends SquareButton {
         // this.addChild(this.iconShade)
 
     }
-   
+
     setProgressBar(progression = 0) {
         this.progressBar.visible = true;
         this.progressBar.setProgressBar(progression)
     }
-    updateLabelTop(){}
+    updateLabelTop() { }
 
     updateLabel(text, offset = { x: 0, y: 0 }) {
         this.label.text = text;
@@ -303,16 +327,18 @@ export default class TierWorldButton extends SquareButton {
 
         utils.resizeToFitAR(
             {
-                width: this.squareButtonShape.width * 0.7,
-                height: this.squareButtonShape.height * 0.15
+                width: this.unscaledCardSize.width,// * 0.7,
+                height: this.unscaledCardSize.height * 0.15
             }, this.label)
 
         this.label.pivot.x = this.label.width / 2 / this.label.scale.x
         this.label.pivot.y = this.label.height / 2 / this.label.scale.y;
-        this.label.x = this.squareButtonShape.width / 2 + offset.x// this.container.scale.x
-        this.label.y = this.squareButtonShape.height - this.label.height + offset.y// this.container.scale.y
+        this.label.x = this.unscaledCardSize.width / 2 + offset.x// this.container.scale.x
+        this.label.y = this.unscaledCardSize.height - this.label.height + offset.y// this.container.scale.y
 
         this.backTop.visible = true;
+
+        this.forceLabel = false;
 
     }
 }

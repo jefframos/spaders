@@ -5,18 +5,18 @@
     },
     "activeFile": "world/tier1/tier1-1.tmx",
     "expandedProjectPaths": [
+        "D:/projects/spaders/spaders/src/map/tutorial",
+        "D:/projects/spaders/spaders/src/map/main",
         "D:/projects/spaders/spaders/src/map/basics",
         "D:/projects/spaders/spaders/src/map/movies",
-        "D:/projects/spaders/spaders/src/map/debug",
         "world/tier1",
-        "D:/projects/spaders/spaders/src/map/videogames",
-        "D:/projects/spaders/spaders/src/map/templates",
-        "D:/projects/spaders/spaders/src/map/world",
-        "D:/projects/spaders/spaders/src/map/how-to-play",
-        "D:/projects/spaders/spaders/src/map/main",
         "D:/projects/spaders/spaders/src/map/synth",
+        "D:/projects/spaders/spaders/src/map/videogames",
         "D:/projects/spaders/spaders/src/map/gb",
-        "D:/projects/spaders/spaders/src/map/tutorial"
+        "D:/projects/spaders/spaders/src/map/how-to-play",
+        "D:/projects/spaders/spaders/src/map/debug",
+        "D:/projects/spaders/spaders/src/map/world",
+        "D:/projects/spaders/spaders/src/map/templates"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -508,7 +508,7 @@
         },
         "world/Tilemap_1.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 0.5
+            "scaleInDock": 0.75
         },
         "world/basicWorld.tmx": {
             "scale": 0.5,
@@ -545,8 +545,8 @@
             "scale": 0.75,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 388,
-                "y": 380
+                "x": 405.33333333333337,
+                "y": 402.6666666666666
             }
         },
         "world/tier1BasicMap.tmx": {

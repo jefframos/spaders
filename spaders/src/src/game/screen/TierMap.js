@@ -104,7 +104,7 @@ export default class TierMap extends PIXI.Container {
 
     addTierLevel(tierButton, pos) {
         this.buttonsContainer.addChild(tierButton);
-        tierButton.x = pos.i * this.sizeTile.width + this.sizeTile.width / 2 - tierButton.width / 2;
+        tierButton.x = pos.i * this.sizeTile.width + this.sizeTile.width / 2 - tierButton.unscaledCardSize.width / 2;
         tierButton.y = pos.j * this.sizeTile.height// + this.sizeTile.height - tierButton.height;
 
         this.currentButtons.push(tierButton);
