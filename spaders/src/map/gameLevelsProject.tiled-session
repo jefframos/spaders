@@ -3,19 +3,19 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "debug/debug.tmx",
+    "activeFile": "how-to-play/simple-shapes.tmx",
     "expandedProjectPaths": [
-        "basics",
-        "synth",
-        "movies",
-        "world",
         "tutorial",
-        "videogames",
-        "templates",
-        "debug",
-        "gb",
+        "synth",
+        "world",
         "main",
-        "how-to-play"
+        "how-to-play",
+        "gb",
+        "videogames",
+        "debug",
+        "basics",
+        "templates",
+        "movies"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -257,9 +257,9 @@
         },
         "how-to-play/simple-shapes.tmx": {
             "scale": 0.5,
-            "selectedLayer": 6,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 640,
+                "x": 641,
                 "y": 640
             }
         },
@@ -533,10 +533,10 @@
     "project": "gameLevelsProject.tiled-project",
     "property.type": "bool",
     "recentFiles": [
-        "how-to-play/simple-shapes.tmx",
-        "videogames/levels.tmx",
-        "debug/debug2.tmx",
         "debug/debug.tmx",
+        "debug/debug2.tmx",
+        "videogames/levels.tmx",
+        "how-to-play/simple-shapes.tmx",
         "tilesets/References.tsx",
         "D:/projects/spaders/spaders/src/worlds/world/tiniMap.tmx",
         "world/tier1BasicMap.tmx",
