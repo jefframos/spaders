@@ -4,6 +4,7 @@ import signals from 'signals';
 import colorSchemes from '../../colorSchemes';
 import config from '../../config';
 import utils from '../../utils';
+import TileDesigner from '../effects/TileDesigner';
 export default class Grid extends PIXI.Container {
 	constructor(game) {
 		super();
@@ -16,6 +17,8 @@ export default class Grid extends PIXI.Container {
 		this.topGridContainer = new PIXI.Container();
 
 		this.backgroundOffset = { x: 12, y: 16 }
+
+		this.tileDesigner = new TileDesigner();
 	}
 	start() {
 	}
@@ -106,7 +109,7 @@ export default class Grid extends PIXI.Container {
 
 		let targetSprite = colorScheme.sprite;
 		let paddingSprite = 20;
-		
+
 		for (var i = piecesToTraw.length - 1; i >= 0; i--) {
 			for (var j = 0; j < piecesToTraw[i].length; j++) {
 				if (piecesToTraw[i][j] >= 0 && piecesToTraw[i][j] < scheme.block.id) {
@@ -115,7 +118,7 @@ export default class Grid extends PIXI.Container {
 						PIXI.Texture.fromFrame(targetSprite), paddingSprite, paddingSprite, paddingSprite, paddingSprite);
 
 					gridSquare.width = GRID.widthDraw * levelData.levelDataScale
-					gridSquare.height = GRID.heightDraw  * levelData.levelDataScale
+					gridSquare.height = GRID.heightDraw * levelData.levelDataScale
 					gridSquare.scale.set(1 / levelData.levelDataScale)
 					gridSquare.x = j * GRID.widthDraw;
 					gridSquare.y = i * GRID.heightDraw;
@@ -137,29 +140,36 @@ export default class Grid extends PIXI.Container {
 
 	}
 
-	getGridBackground(levelData){
+	getGridBackground(levelData) {
 
+	
 		let colorScheme = colorSchemes.getCurrentColorScheme().grid;
-
 		let gridBackground = new PIXI.Container();
 		for (var i = GRID.i - 1; i >= 0; i--) {
 			for (var j = GRID.j - 1; j >= 0; j--) {
-				let gridSquare = new PIXI.mesh.NineSlicePlane(
-					PIXI.Texture.fromFrame('tile_1_0.png'), 20, 20, 20, 20)
-				gridSquare.tint = colorScheme.background
-				gridSquare.width = CARD.width
-				gridSquare.height = CARD.height
-				gridSquare.x = i * CARD.width;
-				gridSquare.y = j * CARD.height;
 
-				gridBackground.addChild(gridSquare)
-				if(levelData && (levelData.pieces[j][i] == 32 )){
-					gridSquare.alpha = 1;
-					//backGridContainerBlocker.addChild(gridSquare)
-				}else{
+		
+				let targetTile = this.tileDesigner.getTileSprite(i,j,levelData.pieces)
+		
+				if(targetTile){
 
-				}
+					let gridSquare = new PIXI.mesh.NineSlicePlane(
+						PIXI.Texture.fromFrame(targetTile), 20, 20, 20, 20)
+					gridSquare.tint = colorScheme.background
+					gridSquare.width = CARD.width
+					gridSquare.height = CARD.height
+					gridSquare.x = i * CARD.width;
+					gridSquare.y = j * CARD.height;
 	
+					gridBackground.addChild(gridSquare)
+					if (levelData && (levelData.pieces[j][i] == 32)) {
+						//gridSquare.alpha = 0;
+						//backGridContainerBlocker.addChild(gridSquare)
+					} else {
+	
+					}
+				}
+
 			}
 		}
 
@@ -219,7 +229,7 @@ export default class Grid extends PIXI.Container {
 					this.topGridContainer.x += CARD.width * 0.25;
 				} else if (!drawOdd && (boardOdd == drawOdd) && (scaleOdd && levelData.piecesToDraw[0].length < 20)) {
 					this.topGridContainer.x += CARD.width * 0.5;
-				} 
+				}
 			}
 			TweenMax.to(this.topGridContainer, 0.25, { alpha: 1 });
 			///////////////////this.topGridContainer.scale.set(0.5)
@@ -269,17 +279,17 @@ export default class Grid extends PIXI.Container {
 				gridSquare.startAlpha = gridSquare.alpha;
 				gridSquare.sin = Math.random() * Math.PI * 2;
 				gridSquare.tint = colorScheme.color;
-				
+
 				backGridContainer.addChild(gridSquare)
-				if(levelData && (levelData.pieces[j][i] == 32 )){
-					gridSquare.alpha = 0.5;
-					backGridContainerBlocker.addChild(gridSquare)
-				}else{
+				if (levelData && (levelData.pieces[j][i] == 32)) {
+					//gridSquare.alpha = 0.5;
+					//backGridContainerBlocker.addChild(gridSquare)
+				} else {
 
 				}
-				
+
 				this.grids.push(gridSquare);
-				
+
 				let gridEffectSquare = new PIXI.mesh.NineSlicePlane(
 					PIXI.Texture.fromFrame(colorScheme.spriteTile), 20, 20, 20, 20)//PIXI.Sprite.fromFrame(colorScheme.sprite)
 
@@ -304,7 +314,10 @@ export default class Grid extends PIXI.Container {
 		this.gridSpriteBlockers = new PIXI.Sprite()
 		this.gridSpriteBlockers.setTexture(textureBlocker)
 		gridContainer.addChildAt(this.gridSpriteBlockers, 0)
-		//gridContainer.addChildAt(this.getGridBackground(), 0)
+
+		if(levelData){
+			//gridContainer.addChildAt(this.getGridBackground(levelData), 0)
+		}
 
 		gridContainer.alpha = 0
 
@@ -315,17 +328,17 @@ export default class Grid extends PIXI.Container {
 
 		//setTimeout(() => {
 
-			let back = new PIXI.mesh.NineSlicePlane(
-				PIXI.Texture.fromFrame(colorScheme.spriteTile), 20, 20, 20, 20)
-			back.tint = colorScheme.background;
-			back.width = gridContainer.width + this.backgroundOffset.x
-			back.height = gridContainer.height + this.backgroundOffset.y + CARD.height
-			back.x = -this.backgroundOffset.x / 2
-			back.y = -this.backgroundOffset.y / 4
-			gridContainer.addChildAt(back, 0);
+		let back = new PIXI.mesh.NineSlicePlane(
+			PIXI.Texture.fromFrame(colorScheme.spriteTile), 20, 20, 20, 20)
+		back.tint = colorScheme.background;
+		back.width = gridContainer.width + this.backgroundOffset.x
+		back.height = gridContainer.height + this.backgroundOffset.y + CARD.height
+		back.x = -this.backgroundOffset.x / 2
+		back.y = -this.backgroundOffset.y / 4
+		gridContainer.addChildAt(back, 0);
 		//}, 100);
 	}
-	endGameMode(){
+	endGameMode() {
 		this.gridSpriteBlockers.alpha = 1;
 	}
 	removeCard(i, j) {
@@ -359,8 +372,8 @@ export default class Grid extends PIXI.Container {
 			this.game.frontGridContainer.addChild(shape);
 			this.dropTiles.push(shape);
 			this.gridsSquares[card.pos.i][card.pos.j].card = null;
-			window.SOUND_MANAGER.play('dropTile', { volume: 0.5, speed: Math.random() * 0.2 + 0.8, singleInstance:true })
-			
+			window.SOUND_MANAGER.play('dropTile', { volume: 0.5, speed: Math.random() * 0.2 + 0.8, singleInstance: true })
+
 			if (this.cardsStartedOnGrid <= 0) {
 				//console.log("All cards", this.cardsStartedOnGrid)
 				this.onDestroyAllStartedCards.dispatch();

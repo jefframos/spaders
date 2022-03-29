@@ -3,18 +3,19 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "debug/debug2.tmx",
+    "activeFile": "debug/debug.tmx",
     "expandedProjectPaths": [
         "basics",
+        "synth",
         "movies",
-        "debug",
+        "world",
+        "tutorial",
         "videogames",
         "templates",
-        "world",
-        "main",
-        "synth",
+        "debug",
         "gb",
-        "tutorial"
+        "main",
+        "how-to-play"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -80,9 +81,9 @@
         },
         "debug/debug.tmx": {
             "scale": 0.6522518382352941,
-            "selectedLayer": 5,
+            "selectedLayer": 10,
             "viewCenter": {
-                "x": 480.6425702811245,
+                "x": 481.40914535334326,
                 "y": 512.0721482420912
             }
         },
@@ -90,8 +91,8 @@
             "scale": 0.125,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 2096,
-                "y": 4520
+                "x": 2304,
+                "y": 3072
             }
         },
         "gb/gameboyCreatures.tmx": {
@@ -256,7 +257,7 @@
         },
         "how-to-play/simple-shapes.tmx": {
             "scale": 0.5,
-            "selectedLayer": 22,
+            "selectedLayer": 6,
             "viewCenter": {
                 "x": 642,
                 "y": 640
@@ -426,8 +427,8 @@
             "scale": 0.25,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 752,
-                "y": 764
+                "x": 768,
+                "y": 768
             }
         },
         "videogames/levels2.tmx": {
@@ -526,7 +527,8 @@
     "openFiles": [
         "how-to-play/simple-shapes.tmx",
         "videogames/levels.tmx",
-        "debug/debug2.tmx"
+        "debug/debug2.tmx",
+        "debug/debug.tmx"
     ],
     "project": "gameLevelsProject.tiled-project",
     "property.type": "bool",
@@ -534,6 +536,7 @@
         "how-to-play/simple-shapes.tmx",
         "videogames/levels.tmx",
         "debug/debug2.tmx",
+        "debug/debug.tmx",
         "tilesets/References.tsx",
         "D:/projects/spaders/spaders/src/worlds/world/tiniMap.tmx",
         "world/tier1BasicMap.tmx",
@@ -541,8 +544,7 @@
         "world/worldSynth.tmx",
         "world/testWorld1.tmx",
         "tilesets/oneDimensionTileset.tsx",
-        "world/Tilemap_1.tsx",
-        "synth/sunset.tmx"
+        "world/Tilemap_1.tsx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",

@@ -1357,7 +1357,7 @@ export default class TetraScreen extends Screen {
 					//console.log("block",this.currentLevelData.pieces[i][j], window.ENEMIES.block.id)
 					//if (this.currentLevelData.pieces[i][j] == window.ENEMIES.block.id) {
 					if (this.currentLevelData.pieces[i][j] == window.ENEMIES.block.id) {
-						this.cardsContainer.addChild(this.placeBlock(j, i));
+						this.cardsContainer.addChild(this.placeBlock(j, i, false));
 					} else if (hasAddon && this.specialCardsManager.isBlock(this.currentLevelData.addOn[i][j])) {
 						this.cardsContainer.addChild(this.placeBlock(j, i));
 					} else {
@@ -1730,7 +1730,7 @@ export default class TetraScreen extends Screen {
 		return card;
 	}
 
-	placeBlock(i, j) {
+	placeBlock(i, j, visible = true) {
 		console.log("BLOCK")
 		let block;
 		block = new Block(this);
@@ -1741,6 +1741,7 @@ export default class TetraScreen extends Screen {
 		TweenMax.to(block, 0.5, { alpha: 1, delay: i * 0.05 + 1, ease: Back.easeOut })
 		block.pos.i = i;
 		block.pos.j = j;
+		block.visible = visible;
 		this.board.addCard(block);
 		return block;
 	}
