@@ -28,7 +28,7 @@ export default class TileDesigner {
             DEBUG2: 'tile_1_5.png',
         }
     }
-    getTileSprite(j, i, pieces) {
+    getTileSprite(j, i, pieces, baseLayer = false) {
         if (pieces[i][j] != 32) {
 
 
@@ -50,30 +50,31 @@ export default class TileDesigner {
                // console.log(i, j)
 
             }
+            let targetAssets = baseLayer? this.tilesID : this.tilesIDBorder
             if (!theresUp) {
                 if (!theresLeft) {
-                    return this.tilesIDBorder.TOP_LEFT;
+                    return targetAssets.TOP_LEFT;
                 } else if (!theresRight) {
 
-                    return this.tilesIDBorder.TOP_RIGHT;
+                    return targetAssets.TOP_RIGHT;
                 } else {
-                    return this.tilesIDBorder.TOP;
+                    return targetAssets.TOP;
                 }
             } else if (!theresDown) {
                 if (!theresLeft) {
-                    return this.tilesIDBorder.BOTTOM_LEFT;
+                    return targetAssets.BOTTOM_LEFT;
                 } else if (!theresRight) {
-                    return this.tilesIDBorder.BOTTOM_RIGHT;
+                    return targetAssets.BOTTOM_RIGHT;
                 } else {
-                    return this.tilesIDBorder.BOTTOM;
+                    return targetAssets.BOTTOM;
                 }
             }else if (!theresRight){
-                return this.tilesIDBorder.CENTER_RIGHT;
+                return targetAssets.CENTER_RIGHT;
             }else if (!theresLeft){
-                return this.tilesIDBorder.CENTER_LEFT;
+                return targetAssets.CENTER_LEFT;
             }
 
-            return this.tilesIDBorder.CENTER;
+            return targetAssets.CENTER;
 
         } else {
 

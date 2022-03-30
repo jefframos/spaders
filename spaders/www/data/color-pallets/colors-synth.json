@@ -173,7 +173,7 @@
                 "sprite": "pixelSquare.png",
                 "spriteTile": "pixelSquare.png",
                 "spriteDraw": "pixelSquare.png",
-                "spriteTrail": "pixelSquare.png",
+                "spriteTrail": "tile_1_22.png",
                 "spriteRect": "pixelSquare.png",
                 "scaleTrail": false,
                 "minAlpha": 0,

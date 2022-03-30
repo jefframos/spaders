@@ -42,8 +42,8 @@ export default class TierMap extends PIXI.Container {
 
         //this.addChild(center)
     }
-    update(delta){
-        if(!this.parent.visible){
+    update(delta) {
+        if (!this.parent.visible) {
             return;
         }
         this.currentButtons.forEach(element => {
@@ -177,6 +177,8 @@ export default class TierMap extends PIXI.Container {
 
         this.paths = []
         console.log(mapData.terrainLayers)
+
+        let tintId = 0;
         for (let index = 0; index < mapData.terrainLayers.length; index++) {
 
             let layer1 = this.addLayer(this.terrainLayers);
@@ -193,7 +195,10 @@ export default class TierMap extends PIXI.Container {
                         //layer1[i][j].setTexture(PIXI.Texture.fromFrame('tile_1_'+id%64+'.png'))
                         layer1[i][j].setTexture(PIXI.Texture.fromFrame(mapData.tiles[id]))
                         layer1[i][j].alpha = 1;
-                        layer1[i][j].tint = mapData.terrainColors[index % mapData.terrainColors.length]
+                        if (!mapData.terrainLayers[index].noColor) {
+                            layer1[i][j].tint = mapData.terrainColors[tintId % mapData.terrainColors.length]
+                            
+                        }
                     } else {
                         if (layer1[i][j].parent) {
                             layer1[i][j].parent.removeChild(layer1[i][j])
@@ -202,9 +207,13 @@ export default class TierMap extends PIXI.Container {
                 }
             }
 
+            if (!mapData.terrainLayers[index].noColor) {
+                tintId++
+            }
+
         }
 
-
+        tintId = 0
         let tempPaths = []
         let totalPaths = customTotalLevels < 0 ? 99999 : customTotalLevels;
         for (let index = 0; index < mapData.pathLayers.length; index++) {
@@ -221,7 +230,10 @@ export default class TierMap extends PIXI.Container {
 
                         layer2[i][j].setTexture(PIXI.Texture.fromFrame(mapData.tiles[id]))
                         layer2[i][j].alpha = 1;
-                        layer2[i][j].tint = mapData.pathColors[index % mapData.pathColors.length]
+
+                        if (!mapData.pathColors[index].noColor) {
+                            layer2[i][j].tint = mapData.pathColors[tintId % mapData.pathColors.length]
+                        }
 
                         tempPaths.push(layer2[i][j]);
                     } else {
@@ -231,8 +243,12 @@ export default class TierMap extends PIXI.Container {
                     }
                 }
             }
+
+            if (!mapData.pathColors[index].noColor) {
+                tintId++
+            }
         }
-        
+
         // while (tempPaths.length > totalPaths) {
         //     tempPaths[0].visible = false;
         //     tempPaths.shift()
@@ -256,8 +272,8 @@ export default class TierMap extends PIXI.Container {
 
     calculateMapBounds() {
         this.boundPoints.minx = this.width * 0.4 / this.scale.x
-        this.boundPoints.maxx = this.width * 0.6/ this.scale.x
-        this.boundPoints.miny = this.height * 0.4/ this.scale.y
-        this.boundPoints.maxy = this.height * 0.6/ this.scale.y
+        this.boundPoints.maxx = this.width * 0.6 / this.scale.x
+        this.boundPoints.miny = this.height * 0.4 / this.scale.y
+        this.boundPoints.maxy = this.height * 0.6 / this.scale.y
     }
 }

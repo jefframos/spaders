@@ -46,13 +46,6 @@ export default class Grid extends PIXI.Container {
 			}
 
 		}
-		// this.grids.forEach(element => {
-		// 	element.sin += delta * element.speed;
-		// 	element.alpha = element.startAlpha * Math.sin(element.sin);
-
-		// 	element.alpha = Math.max(element.alphaMin, element.alpha);
-
-		// });
 	}
 	resetGrid() {
 		this.cardsStartedOnGrid = 0;
@@ -145,9 +138,30 @@ export default class Grid extends PIXI.Container {
 	
 		let colorScheme = colorSchemes.getCurrentColorScheme().grid;
 		let gridBackground = new PIXI.Container();
+
+		// for (var i = GRID.i - 1; i >= 0; i--) {
+		// 	for (var j = GRID.j - 1; j >= 0; j--) {
+		
+		// 		let targetTile = this.tileDesigner.getTileSprite(i,j,levelData.pieces, true)
+		
+		// 		if(targetTile){
+
+		// 			let gridSquare = new PIXI.mesh.NineSlicePlane(
+		// 				PIXI.Texture.fromFrame(targetTile), 20, 20, 20, 20)
+		// 			gridSquare.tint = colorScheme.background
+		// 			gridSquare.width = CARD.width + 4
+		// 			gridSquare.height = CARD.height + 4
+		// 			gridSquare.x = i * CARD.width;
+		// 			gridSquare.y = j * CARD.height;
+	
+		// 			gridBackground.addChild(gridSquare)					
+		// 		}
+
+		// 	}
+		// }
+
 		for (var i = GRID.i - 1; i >= 0; i--) {
 			for (var j = GRID.j - 1; j >= 0; j--) {
-
 		
 				let targetTile = this.tileDesigner.getTileSprite(i,j,levelData.pieces)
 		
@@ -156,8 +170,8 @@ export default class Grid extends PIXI.Container {
 					let gridSquare = new PIXI.mesh.NineSlicePlane(
 						PIXI.Texture.fromFrame(targetTile), 20, 20, 20, 20)
 					//gridSquare.tint = colorScheme.background
-					gridSquare.width = CARD.width
-					gridSquare.height = CARD.height
+					gridSquare.width = CARD.width + 4
+					gridSquare.height = CARD.height + 4
 					gridSquare.x = i * CARD.width;
 					gridSquare.y = j * CARD.height;
 	
@@ -317,9 +331,9 @@ export default class Grid extends PIXI.Container {
 
 		if(levelData){
 			let levelShape = this.getGridBackground(levelData)
-			levelShape.width += 8
+			levelShape.width += 4
 			levelShape.x -= 4
-			levelShape.height += 8
+			levelShape.height += 4
 			levelShape.y -= 4
 			this.gridSpriteBlockers.addChildAt(levelShape, 0)
 		}

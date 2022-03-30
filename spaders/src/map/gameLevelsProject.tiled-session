@@ -5,17 +5,17 @@
     },
     "activeFile": "how-to-play/simple-shapes.tmx",
     "expandedProjectPaths": [
-        "tutorial",
-        "synth",
-        "world",
         "main",
-        "how-to-play",
-        "gb",
         "videogames",
-        "debug",
-        "basics",
+        "gb",
         "templates",
-        "movies"
+        "movies",
+        "basics",
+        "synth",
+        "how-to-play",
+        "debug",
+        "tutorial",
+        "world"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -83,8 +83,8 @@
             "scale": 0.6522518382352941,
             "selectedLayer": 10,
             "viewCenter": {
-                "x": 508.23927288099765,
-                "y": 512.0721482420911
+                "x": 481.40914535334326,
+                "y": 512.0721482420912
             }
         },
         "debug/debug2.tmx": {
@@ -259,7 +259,7 @@
             "scale": 0.5,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 641,
+                "x": 642,
                 "y": 640
             }
         },

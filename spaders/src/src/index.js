@@ -58,15 +58,15 @@ let acc = 0
 let size = 64
 obj.frames = {}
 obj.meta = {
-	image:'tile_1.png',
-	size:{ w: size * 8, h: size *8},
-	format:"RGBA8888",
-	scale:1
+	image: 'tile_1.png',
+	size: { w: size * 8, h: size * 8 },
+	format: "RGBA8888",
+	scale: 1
 }
 
 for (let i = 0; i < 32; i++) {
 	for (let j = 0; j < 32; j++) {
-		obj.frames["tile_1_" + acc + ".png"]={}
+		obj.frames["tile_1_" + acc + ".png"] = {}
 		obj.frames["tile_1_" + acc + ".png"].frame = { x: size * j, y: size * i, w: size, h: size }
 		obj.frames["tile_1_" + acc + ".png"].rotated = false
 		obj.frames["tile_1_" + acc + ".png"].trimmed = false
@@ -469,7 +469,7 @@ function findPropertyValue(data, propertyName, defaultValue = 0) {
 
 }
 function extractData(element, debug) {
-	if(element.type == "objectgroup"){
+	if (element.type == "objectgroup") {
 		return;
 	}
 	if (element.visible) {
@@ -498,9 +498,9 @@ function extractData(element, debug) {
 		data.fallTurns = findPropertyValue(element.properties, "fallTurns")
 		data.isFinal = findPropertyValue(element.properties, "isFinal", false)
 		data.require = findPropertyValue(element.properties, "require", null)
-		if(data.require){
+		if (data.require) {
 			data.require = data.require.split(",");
-		}else{
+		} else {
 			data.require = [-1];
 		}
 		data.splitData = null;
@@ -744,17 +744,17 @@ function extractMap(data) {
 	let tilesData = data.tilesets[0].tiles;
 
 	let usedTiles = []
-	if(tilesData){
+	if (tilesData) {
 
 		tilesData.forEach(element => {
 			usedTiles.push(element.image.split('/').pop())
 		});
-	}else{
+	} else {
 
 		usedTiles = []
 		for (let index = 0; index < largeTilemap; index++) {
-			usedTiles.push('tile_1_'+index+'.png')
-			
+			usedTiles.push('tile_1_' + index + '.png')
+
 		}
 	}
 	let mapData = {
@@ -769,18 +769,19 @@ function extractMap(data) {
 
 	data.layers.forEach(element => {
 		if (element.visible && element.name.toLowerCase().includes("terrain")) {
-			let matrix = arrayToMatrix(element.data, data.height, data.width, tilesData?tilesData.lenght : largeTilemap);
-
-			mapData.terrainLayers.push({tiles:matrix, offsetx:element.offsetx| 0, offsety:element.offsety| 0})
+			let matrix = arrayToMatrix(element.data, data.height, data.width, tilesData ? tilesData.lenght : largeTilemap);
+			let noColor = element.name.toLowerCase().includes("nocolor")
+			mapData.terrainLayers.push({ tiles: matrix, offsetx: element.offsetx | 0, offsety: element.offsety | 0, noColor })
 		}
 		if (element.visible && element.name.toLowerCase().includes("path")) {
-			let matrix = arrayToMatrix(element.data, data.height, data.width,   tilesData?tilesData.lenght : largeTilemap);
+			let noColor = element.name.toLowerCase().includes("nocolor")
+			let matrix = arrayToMatrix(element.data, data.height, data.width, tilesData ? tilesData.lenght : largeTilemap, noColor);
 
-			mapData.pathLayers.push({tiles:matrix, offsetx:element.offsetx | 0, offsety:element.offsety| 0})
+			mapData.pathLayers.push({ tiles: matrix, offsetx: element.offsetx | 0, offsety: element.offsety | 0 })
 		}
 		if (element.visible && element.name.toLowerCase().includes("level")) {
 
-			let matrix = arrayToMatrix(element.data, data.height, data.width,  tilesData?tilesData.lenght :  largeTilemap);
+			let matrix = arrayToMatrix(element.data, data.height, data.width, tilesData ? tilesData.lenght : largeTilemap);
 
 			for (let j = 0; j < matrix.length; j++) {
 				for (let i = 0; i < matrix[j].length; i++) {
@@ -862,7 +863,7 @@ function configGame() {
 			level.id = nameID;
 			level.order = level.order;
 
-			
+
 			if (level.coverID == undefined) {
 				level.coverID = 0;
 			}
@@ -870,9 +871,9 @@ function configGame() {
 			level.sectionName = section.name;
 			level.section = section;
 
-			level.idSaveData = section.id+"-"+nameID;
+			level.idSaveData = section.id + "-" + nameID;
 
-			if(!window.allTiers[level.idSaveData]){
+			if (!window.allTiers[level.idSaveData]) {
 				window.allTiers[level.idSaveData] = level;
 			}
 
@@ -903,7 +904,7 @@ function configGame() {
 					data.tierName = level.name;
 					data.tier = level;
 
-				
+
 					////console.log(level.name)
 
 					data.sectionName = section.name;
