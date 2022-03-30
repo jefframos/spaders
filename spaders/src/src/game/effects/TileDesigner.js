@@ -13,6 +13,20 @@ export default class TileDesigner {
             DEBUG: 'tile_1_97.png',
             DEBUG2: 'tile_1_5.png',
         }
+
+        this.tilesIDBorder = {
+            TOP_LEFT: 'tile_1_'+(0+18)+'.png',
+            TOP: 'tile_1_'+(1+18)+'.png',
+            TOP_RIGHT: 'tile_1_'+(2+18)+'.png',
+            CENTER_LEFT: 'tile_1_'+(32+18)+'.png',
+            CENTER: 'tile_1_'+(33+18)+'.png',
+            CENTER_RIGHT: 'tile_1_'+(34+18)+'.png',
+            BOTTOM_LEFT: 'tile_1_'+(64+18)+'.png',
+            BOTTOM: 'tile_1_'+(65+18)+'.png',
+            BOTTOM_RIGHT: 'tile_1_'+(66+18)+'.png',
+            DEBUG: 'tile_1_97.png',
+            DEBUG2: 'tile_1_5.png',
+        }
     }
     getTileSprite(j, i, pieces) {
         if (pieces[i][j] != 32) {
@@ -38,28 +52,28 @@ export default class TileDesigner {
             }
             if (!theresUp) {
                 if (!theresLeft) {
-                    return this.tilesID.TOP_LEFT;
+                    return this.tilesIDBorder.TOP_LEFT;
                 } else if (!theresRight) {
 
-                    return this.tilesID.TOP_RIGHT;
+                    return this.tilesIDBorder.TOP_RIGHT;
                 } else {
-                    return this.tilesID.TOP;
+                    return this.tilesIDBorder.TOP;
                 }
             } else if (!theresDown) {
                 if (!theresLeft) {
-                    return this.tilesID.BOTTOM_LEFT;
+                    return this.tilesIDBorder.BOTTOM_LEFT;
                 } else if (!theresRight) {
-                    return this.tilesID.BOTTOM_RIGHT;
+                    return this.tilesIDBorder.BOTTOM_RIGHT;
                 } else {
-                    return this.tilesID.BOTTOM;
+                    return this.tilesIDBorder.BOTTOM;
                 }
             }else if (!theresRight){
-                return this.tilesID.CENTER_RIGHT;
+                return this.tilesIDBorder.CENTER_RIGHT;
             }else if (!theresLeft){
-                return this.tilesID.CENTER_LEFT;
+                return this.tilesIDBorder.CENTER_LEFT;
             }
 
-            return this.tilesID.CENTER;
+            return this.tilesIDBorder.CENTER;
 
         } else {
 

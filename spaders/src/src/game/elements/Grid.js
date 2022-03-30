@@ -155,7 +155,7 @@ export default class Grid extends PIXI.Container {
 
 					let gridSquare = new PIXI.mesh.NineSlicePlane(
 						PIXI.Texture.fromFrame(targetTile), 20, 20, 20, 20)
-					gridSquare.tint = colorScheme.background
+					//gridSquare.tint = colorScheme.background
 					gridSquare.width = CARD.width
 					gridSquare.height = CARD.height
 					gridSquare.x = i * CARD.width;
@@ -282,7 +282,7 @@ export default class Grid extends PIXI.Container {
 
 				backGridContainer.addChild(gridSquare)
 				if (levelData && (levelData.pieces[j][i] == 32)) {
-					//gridSquare.alpha = 0.5;
+					gridSquare.alpha = 0;
 					//backGridContainerBlocker.addChild(gridSquare)
 				} else {
 
@@ -307,35 +307,40 @@ export default class Grid extends PIXI.Container {
 
 		let textureBlocker = renderer.generateTexture(backGridContainerBlocker);
 
-		let gridSprite = new PIXI.Sprite()
-		gridSprite.setTexture(texture)
-		gridContainer.addChildAt(gridSprite, 0)
+		this.gridSprite = new PIXI.Sprite()
+		this.gridSprite.setTexture(texture)
+		gridContainer.addChildAt(this.gridSprite, 0)
 
 		this.gridSpriteBlockers = new PIXI.Sprite()
-		this.gridSpriteBlockers.setTexture(textureBlocker)
+		//this.gridSpriteBlockers.setTexture(textureBlocker)
 		gridContainer.addChildAt(this.gridSpriteBlockers, 0)
 
 		if(levelData){
-			//gridContainer.addChildAt(this.getGridBackground(levelData), 0)
+			let levelShape = this.getGridBackground(levelData)
+			levelShape.width += 8
+			levelShape.x -= 4
+			levelShape.height += 8
+			levelShape.y -= 4
+			this.gridSpriteBlockers.addChildAt(levelShape, 0)
 		}
 
 		gridContainer.alpha = 0
 
-		this.gridSpriteBlockers.alpha = 0;
+		//this.gridSpriteBlockers.alpha = 0;
 
 		TweenMax.to(gridContainer, 0.5, { alpha: 1, delay: 0.75 });
 		this.addChild(gridContainer);
 
 		//setTimeout(() => {
 
-		let back = new PIXI.mesh.NineSlicePlane(
-			PIXI.Texture.fromFrame(colorScheme.spriteTile), 20, 20, 20, 20)
-		back.tint = colorScheme.background;
-		back.width = gridContainer.width + this.backgroundOffset.x
-		back.height = gridContainer.height + this.backgroundOffset.y + CARD.height
-		back.x = -this.backgroundOffset.x / 2
-		back.y = -this.backgroundOffset.y / 4
-		gridContainer.addChildAt(back, 0);
+		// let back = new PIXI.mesh.NineSlicePlane(
+		// 	PIXI.Texture.fromFrame(colorScheme.spriteTile), 20, 20, 20, 20)
+		// back.tint = colorScheme.background;
+		// back.width = gridContainer.width + this.backgroundOffset.x
+		// back.height = gridContainer.height + this.backgroundOffset.y + CARD.height
+		// back.x = -this.backgroundOffset.x / 2
+		// back.y = -this.backgroundOffset.y / 4
+		// gridContainer.addChildAt(back, 0);
 		//}, 100);
 	}
 	endGameMode() {

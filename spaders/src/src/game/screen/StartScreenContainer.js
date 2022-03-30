@@ -358,6 +358,7 @@ export default class StartScreenContainer extends PIXI.Container {
 		// if(this.innerResolution && this.innerResolution.width == window.innerWidth && window.innerWidth.height == window.innerHeight){
 		// 	return
 		// }
+		this.innerResolution = innerResolution;
 		this.mainCanvas.width = innerResolution.width;
 		this.mainCanvas.height = innerResolution.height;
 
@@ -376,10 +377,29 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.backButton.y = this.mainCanvas.y + this.backButton.height
 
 
+		
+		////console.log(this.chooseLevelPanel.visible, this.screenState)
+
+		this.backButton.x = this.mainCanvas.x + this.backButton.width
+		this.backButton.y = this.mainCanvas.y + this.backButton.height
+
+		let lineConvertedPosition = this.mainCanvas.toLocal(this.playLine.getGlobalPosition())
+		this.chooseLevelPanel.y = lineConvertedPosition.y + (35 * 3) * this.screenContainer.scale.x;
+
+
+
+		this.closeApplicationButton.x = this.mainCanvas.x + this.closeApplicationButton.height * 0.75;
+		this.closeApplicationButton.y = this.mainCanvas.y + this.closeApplicationButton.height * 0.75;
+		this.closeApplicationButton.scale.set(0.75);
+
+	}
+	updatePositions(){
 		this.screenContainer.positionSpringX.update()
 		this.screenContainer.positionSpringY.update()
 		this.screenContainer.rotationSpring.update()
 		if (this.screenState == 1) {
+
+
 
 			this.closeApplicationButton.alpha = utils.lerp(this.closeApplicationButton.alpha, 1, 0.5)
 
@@ -434,28 +454,17 @@ export default class StartScreenContainer extends PIXI.Container {
 			this.mainMenucontainer.visible = this.mainMenucontainer.alpha > 0.2
 
 			this.playLabel.alpha = utils.lerp(this.playLabel.alpha, 1, 0.5)
+
+			this.chooseLevelPanel.resize(this.innerResolution);
+
 		}
 
 		this.chooseLevelPanel.visible = this.chooseLevelPanel.alpha > 0.1;
 
-		////console.log(this.chooseLevelPanel.visible, this.screenState)
-
-		this.backButton.x = this.mainCanvas.x + this.backButton.width
-		this.backButton.y = this.mainCanvas.y + this.backButton.height
-
-		let lineConvertedPosition = this.mainCanvas.toLocal(this.playLine.getGlobalPosition())
-		this.chooseLevelPanel.y = lineConvertedPosition.y + (35 * 3) * this.screenContainer.scale.x;
-		this.chooseLevelPanel.resize(innerResolution);
-
-
-
-		this.closeApplicationButton.x = this.mainCanvas.x + this.closeApplicationButton.height * 0.75;
-		this.closeApplicationButton.y = this.mainCanvas.y + this.closeApplicationButton.height * 0.75;
-		this.closeApplicationButton.scale.set(0.75);
-
 	}
 	update(delta) {
 
+		this.updatePositions();
 		if (this.changeLabelTimer <= 0) {
 			this.updateStartLabel();
 

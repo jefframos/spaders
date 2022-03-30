@@ -323,7 +323,7 @@ export default class TetraScreen extends Screen {
 		})
 
 		this.endGameLabel.x = this.gameCanvas.width / 2 + this.gameCanvas.x;
-		this.endGameLabel.y = this.gridContainer.y + this.gridContainer.height / this.gridContainer.scale.y / 2;
+		this.endGameLabel.y = this.gridContainer.y + this.grid.gridSprite.height / this.gridContainer.scale.y / 2;
 		this.addChild(this.endGameLabel);
 
 		let global = this.endGameLabel.getGlobalPosition({ x: 0, y: 0 });
@@ -731,7 +731,7 @@ export default class TetraScreen extends Screen {
 
 		this.fallBar.rotation = -Math.PI / 2;
 		this.fallBar.x = this.topCanvas.x + this.gridContainer.x + this.gridContainer.width + (40 * this.scoreRect.scale.x);
-		this.fallBar.y = this.gridContainer.y + this.gridContainer.height - 5;
+		this.fallBar.y = this.gridContainer.y + this.grid.gridSprite.height - 5;
 		this.fallBar.alpha = this.cardsContainer.alpha;
 
 
@@ -810,7 +810,7 @@ export default class TetraScreen extends Screen {
 		this.removeEvents();
 		this.colorTween.stopTween();
 
-		
+
 
 	}
 	mainmenuStateFromGame(force = false, redirectData = null) {
@@ -943,7 +943,7 @@ export default class TetraScreen extends Screen {
 	gameState() {
 
 
-
+		this.forceResize = 3;
 		setTimeout(() => {
 
 			this.gameRunning = true;
@@ -956,7 +956,7 @@ export default class TetraScreen extends Screen {
 		this.startScreenContainer.hide(true)
 		this.board.startNewGame();
 
-		////console.log("gameState")
+
 	}
 
 	build() {
@@ -1643,11 +1643,14 @@ export default class TetraScreen extends Screen {
 		TweenMax.killTweensOf(this.currentCard)
 		setTimeout(() => {
 			this.offsetCard.y = CARD.height * 3;
-			this.currentCard.visible = true;
-			TweenMax.to(this.offsetCard, 0.3, { y: 0, ease: Back.easeOut })
-			TweenMax.to(this.currentCard, 0.3, { delay: 0.1, alpha: 1, y: this.gridContainer.height + 20 })
+			if(this.currentCard){
+
+				this.currentCard.visible = true;
+				TweenMax.to(this.offsetCard, 0.3, { y: 0, ease: Back.easeOut })
+				TweenMax.to(this.currentCard, 0.3, { delay: 0.1, alpha: 1, y: this.grid.gridSprite.height + 20 })
+			}
 			this.frontGridContainer.addChild(this.currentCard);
-		}, 100);
+		}, 150);
 
 
 		this.firstLineShots = this.board.firstLineShots();
@@ -1865,10 +1868,10 @@ export default class TetraScreen extends Screen {
 		if (this.currentCard) {
 			this.currentCard.update(delta)
 			this.trailHorizontal.y = this.currentCard.y - this.offsetCard.y;
-			this.trailHorizontal.tint = this.currentCard.currentColor;
-			this.trailMarker.arrowsUp.tint = this.trailHorizontal.tint;
 			//console.log(this.trailHorizontal)
+			this.trailHorizontal.tint = this.currentCard.currentColor;
 		}
+		this.trailMarker.arrowsUp.tint = this.trailHorizontal.tint;
 
 		// if(this.cardQueue){
 		// 	this.cardQueue.forEach(element => {
@@ -1953,11 +1956,11 @@ export default class TetraScreen extends Screen {
 			this.trailMarker.overShape.height = 0
 		} else {
 
-			let targetHeight = GRID.height - (lastPossible * CARD.height) + CARD.height + this.trailMarker.overShape.margin + this.grid.backgroundOffset.y / 4
+			let targetHeight = GRID.height - (lastPossible * CARD.height) //+ CARD.height + this.trailMarker.overShape.margin + this.grid.backgroundOffset.y / 4
 			this.trailMarker.overShape.height = targetHeight//utils.lerp(this.trailMarker.overShape.height, targetHeight, 0.5);
 		}
 
-		this.trailMarker.overShape.y = GRID.height - this.trailMarker.overShape.height + CARD.height - this.trailMarker.overShape.margin * 0.5 + this.grid.backgroundOffset.y / 4
+		this.trailMarker.overShape.y = GRID.height - this.trailMarker.overShape.height// - this.trailMarker.overShape.height + CARD.height - this.trailMarker.overShape.margin * 0.5 + this.grid.backgroundOffset.y / 4
 		this.trailMarker.arrowsUp.scale.set(this.trailMarker.overShape.width / this.trailMarker.arrowsUp.width)
 		this.trailMarker.arrowsUp.height = this.trailMarker.overShape.height / this.trailMarker.arrowsUp.scale.y - CARD.height * 2 - this.grid.backgroundOffset.y / 4
 		this.trailMarker.arrowsUp.y = this.trailMarker.overShape.y
@@ -2247,12 +2250,17 @@ export default class TetraScreen extends Screen {
 		element.scale.set(sclX, sclY)
 	}
 	resize(scaledResolution, innerResolution, force) {
-		if (this.innerResolution && this.innerResolution.width == window.innerWidth && this.innerResolution.height == window.innerHeight) {
-			//return
+
+
+		if (this.innerResolution && this.innerResolution.width != window.innerWidth || this.innerResolution.height != window.innerHeight) {
+			//
 		}
+
 		//console.log(resolution, innerResolution)
 		let offset = this.toLocal(new PIXI.Point())
-		this.innerResolution = innerResolution;
+		if (innerResolution) {
+			this.innerResolution = innerResolution;
+		}
 
 
 		this.fxContainer.resize(innerResolution);
@@ -2289,8 +2297,6 @@ export default class TetraScreen extends Screen {
 
 
 		utils.scaleSize(this.gameCanvas, innerResolution, this.ratio)
-
-
 		//utils.resizeToFitAR({width:this.bottomUICanvas.width * 0.8, height:this.bottomUICanvas.height * 0.4},this.containerQueue)
 		utils.resizeToFitAR({ width: this.gameCanvas.width * 0.95, height: this.gameCanvas.height * 0.82 }, this.gridContainer)
 
@@ -2342,7 +2348,7 @@ export default class TetraScreen extends Screen {
 
 		if (this.currentCard) {
 			//13 is the width of the border on the grid
-			this.currentCard.y = ((this.gridContainer.height) / this.gridContainer.scale.y) + this.offsetCard.y - CARD.height - 10;
+			this.currentCard.y = (this.grid.gridSprite.height + this.offsetCard.y - CARD.height);//this.gridContainer.scale.y
 		}
 
 
@@ -2371,30 +2377,6 @@ export default class TetraScreen extends Screen {
 		}
 
 
-	}
-	shuffleText(label) {
-		let rnd1 = String.fromCharCode(Math.floor(Math.random() * 20) + 65);
-		let rnd2 = Math.floor(Math.random() * 9);
-		let rnd3 = String.fromCharCode(Math.floor(Math.random() * 20) + 65);
-		let tempLabel = label.split('');
-		let rndPause = Math.random();
-		if (rndPause < 0.2) {
-			let pos1 = Math.floor(Math.random() * tempLabel.length);
-			let pos2 = Math.floor(Math.random() * tempLabel.length);
-			if (tempLabel[pos1] != '\n')
-				tempLabel[pos1] = rnd2;
-			if (tempLabel[pos2] != '\n')
-				tempLabel[pos2] = rnd3;
-		} else if (rndPause < 0.5) {
-			let pos3 = Math.floor(Math.random() * tempLabel.length);
-			if (tempLabel[pos3] != '\n')
-				tempLabel[pos3] = rnd3;
-		}
-		let returnLabel = '';
-		for (var i = 0; i < tempLabel.length; i++) {
-			returnLabel += tempLabel[i];
-		}
-		return returnLabel
 	}
 
 	closeApplication() {
