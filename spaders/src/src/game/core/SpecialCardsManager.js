@@ -11,6 +11,18 @@ export default class SpecialCardsManager{
             _34:{
                 isBlock:true,
             },
+            _35:{
+                cardFunction:"itCannotDie",
+            },
+            _36:{
+                cardFunction:"itEndGameIfDie",
+            },
+            _37:{
+                cardFunction:"blockHorizontalPivot",
+            },
+            _38:{
+                cardFunction:"blockVerticalPivot",
+            },
             _40:{
                 cardFunction:"setCountdown",
                 parameter:9
@@ -53,7 +65,6 @@ export default class SpecialCardsManager{
         return false;
     }
     sortCardEffect(card, id){
-        console.log(id)
         let element = this.effects["_"+id]
         if(element){
             if(card[element.cardFunction]){

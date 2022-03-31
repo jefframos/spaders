@@ -6,17 +6,17 @@
     "activeFile": "world/testWorld1.tmx",
     "expandedProjectPaths": [
         "D:/projects/spaders/spaders/src/map/main",
-        "D:/projects/spaders/spaders/src/map/videogames",
-        "world/tier1",
-        "D:/projects/spaders/spaders/src/map/movies",
-        "D:/projects/spaders/spaders/src/map/templates",
-        "D:/projects/spaders/spaders/src/map/gb",
         "D:/projects/spaders/spaders/src/map/basics",
-        "D:/projects/spaders/spaders/src/map/synth",
-        "D:/projects/spaders/spaders/src/map/debug",
         "D:/projects/spaders/spaders/src/map/how-to-play",
+        "D:/projects/spaders/spaders/src/map/gb",
         "D:/projects/spaders/spaders/src/map/world",
-        "D:/projects/spaders/spaders/src/map/tutorial"
+        "D:/projects/spaders/spaders/src/map/debug",
+        "D:/projects/spaders/spaders/src/map/movies",
+        "world/tier1",
+        "D:/projects/spaders/spaders/src/map/templates",
+        "D:/projects/spaders/spaders/src/map/synth",
+        "D:/projects/spaders/spaders/src/map/tutorial",
+        "D:/projects/spaders/spaders/src/map/videogames"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -523,7 +523,7 @@
             "scale": 0.7453683035714286,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 449.44224002395754,
+                "x": 450.7838586508947,
                 "y": 513.8399341169423
             }
         },
@@ -546,8 +546,8 @@
             "scale": 0.75,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 405.33333333333337,
-                "y": 402.6666666666666
+                "x": 192,
+                "y": 464
             }
         },
         "world/tier1BasicMap.tmx": {

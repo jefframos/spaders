@@ -83,7 +83,9 @@ export default class Card extends PIXI.Container {
 		this.currentFrame = Math.floor(Math.random() * this.idleAnimationLayer1.length);
 
 	}
-
+	hasAnyBlocker(){
+		return true
+	}
 	updateAnimation(delta) {
 		if (this.currentAnimationTime >= 0) {
 			this.currentAnimationTime -= delta;

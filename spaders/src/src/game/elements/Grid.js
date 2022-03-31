@@ -394,7 +394,6 @@ export default class Grid extends PIXI.Container {
 			window.SOUND_MANAGER.play('dropTile', { volume: 0.5, speed: Math.random() * 0.2 + 0.8, singleInstance: true })
 
 			if (this.cardsStartedOnGrid <= 0) {
-				//console.log("All cards", this.cardsStartedOnGrid)
 				this.onDestroyAllStartedCards.dispatch();
 			}
 		}

@@ -104,6 +104,7 @@ export default class TetraScreen extends Screen {
 		this.board.onDestroyCard.add((card) => this.onDestroyCard(card));
 		this.board.OnStartNextRound.add((card) => this.OnStartNextRound(card));
 		this.board.OnGameOver.add((card) => this.OnGameOver(card));
+		this.board.OnWin.add((card) => this.OnWin(card));
 
 		this.totalLines = 6;
 
@@ -263,6 +264,9 @@ export default class TetraScreen extends Screen {
 
 	}
 	onDestroyAllStartedCards() {
+		if(!this.gameRunning){
+			return;
+		}
 		this.blockGameTimer = 1;
 
 		let targetPallet = this.currentLevelData.colorPalletId
@@ -1391,7 +1395,8 @@ export default class TetraScreen extends Screen {
 				}
 			}
 		}
-
+	
+		this.board.postProcessAddons();
 
 		this.currentPoints = 0;
 		this.currentPointsLabel = 0;
@@ -1552,6 +1557,15 @@ export default class TetraScreen extends Screen {
 		this.cardQueue[1].mark();
 		this.cardQueue[1].update(1 / 60)
 
+	}
+	OnWin(card){
+		if (!this.gameRunning) {
+			return;
+		}
+		this.gameRunning = false;
+		this.board.removeAllStates();
+		this.board.destroyAllCards();
+		this.endGameState();
 	}
 	OnGameOver() {
 		if (!this.gameRunning) {

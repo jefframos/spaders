@@ -5,17 +5,17 @@
     },
     "activeFile": "how-to-play/simple-shapes.tmx",
     "expandedProjectPaths": [
-        "main",
-        "videogames",
-        "gb",
         "templates",
-        "movies",
-        "basics",
         "synth",
-        "how-to-play",
-        "debug",
+        "basics",
+        "videogames",
+        "main",
+        "world",
+        "movies",
+        "gb",
         "tutorial",
-        "world"
+        "how-to-play",
+        "debug"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {

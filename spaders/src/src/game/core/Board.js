@@ -14,7 +14,7 @@ export default class Board {
 		this.allCards = [];
 		this.resetBoard();
 
-		
+
 
 		this.totalCards = 0;
 		this.newGameFinished = true;
@@ -22,6 +22,7 @@ export default class Board {
 		this.onDestroyCard = new signals();
 		this.OnStartNextRound = new signals();
 		this.OnGameOver = new signals();
+		this.OnWin = new signals();
 
 		this.nextTurnTimer = 0;
 
@@ -51,7 +52,52 @@ export default class Board {
 		this.updateNumberOfEntities();
 		this.newGameFinished = false;
 
-		
+
+	}
+	postProcessAddons() {
+		this.blockLists = {
+			horizontal: [],
+			vertical: []
+		}
+
+		for (var i = 0; i < this.allCards.length; i++) {
+			if (this.allCards[i] && this.allCards[i].isBlockHorizontalPivot) {
+				this.blockLists.horizontal.push({ pivot: this.allCards[i], list: [] })
+			}
+		}
+		for (var i = 0; i < this.allCards.length; i++) {
+			if (this.allCards[i] && this.allCards[i].isBlockVerticalPivot) {
+				this.blockLists.vertical.push({ pivot: this.allCards[i], list: [] })
+			}
+		}
+
+		for (let index = 0; index < this.blockLists.vertical.length; index++) {
+			const pivot = this.blockLists.vertical[index];
+
+			for (let j = 0; j < this.cards[pivot.pivot.pos.i].length; j++) {
+				const blocked = this.cards[pivot.pivot.pos.i][j];
+				if (blocked && !blocked.isBlock && !blocked.isBlockVerticalPivot) {
+					blocked.blockVertical();
+					pivot.list.push(blocked)
+				}
+			}
+
+		}
+
+
+		for (let index = 0; index < this.blockLists.horizontal.length; index++) {
+			const pivot = this.blockLists.horizontal[index];
+
+			for (let j = 0; j < this.cards.length; j++) {
+				const blocked = this.cards[j][pivot.pivot.pos.j];
+				if (blocked && !blocked.isBlock && !blocked.isBlockHorizontalPivot) {
+					blocked.blockHorizontal();
+					pivot.list.push(blocked)
+				}
+			}
+
+		}
+
 	}
 	updateNumberOfEntities() {
 		this.totalCards = 0;
@@ -154,7 +200,7 @@ export default class Board {
 
 			this.allCards.push(card);
 		}
-		this.allCards = this.allCards.filter(function(item, pos, self) {
+		this.allCards = this.allCards.filter(function (item, pos, self) {
 			return self.indexOf(item) == pos;
 		})
 	}
@@ -255,7 +301,7 @@ export default class Board {
 			if ((actionPosId.i >= 0 && actionPosId.i < window.GRID.i) &&
 				(actionPosId.j >= 0 && actionPosId.j < window.GRID.j)) {
 				cardFound = this.cards[actionPosId.i][actionPosId.j];
-				if (cardFound && cardFound.isCard) {
+				if (cardFound && cardFound.isCard && cardFound.canBeAttacked) {
 					findCards = true;
 
 					let tempZone = cardFound.hasZone(this.getOpposite(zones[i].label));
@@ -337,7 +383,7 @@ export default class Board {
 
 		if (areaAttacksCards.length > 0) {
 			window.SOUND_MANAGER.play('kill')
-			this.addTurnTime(0.1 + this.chainTimer * 0.01)
+			this.addTurnTime(0.3)
 			setTimeout(() => {
 				window.SOUND_MANAGER.play('explosion', { singleInstance: true })
 			}, 100 + this.chainTimer);
@@ -519,10 +565,21 @@ export default class Board {
 		this.addTurnTime(this.chainTimer * 0.01)
 
 	}
+	removeAllStates() {
+		for (let index = this.allCards.length - 1; index >= 0; index--) {
+			const element = this.allCards[index];
+			if (element.removeAllStates) {
+				element.removeAllStates();
+			}
+		}
+	}
 	destroyAllCards() {
 		for (let index = this.allCards.length - 1; index >= 0; index--) {
 			const element = this.allCards[index];
-			this.attackCard(element, 1000);
+			setTimeout(() => {
+
+				this.attackCard(element, 1000);
+			}, index / this.allCards.length * 1000);
 		}
 	}
 	destroyCards(list, card, autoDestroyCardData, hits) {
@@ -623,7 +680,7 @@ export default class Board {
 		}
 
 
-		console.log(list, autoDestroyCardData)
+		//console.log(list, autoDestroyCardData)
 		if (autoDestroyCardData) {
 			this.addTurnTime(list.length * 0.2)
 			setTimeout(function () {
@@ -805,7 +862,7 @@ export default class Board {
 			}
 		})
 	}
-	removeCardFromList(card){
+	removeCardFromList(card) {
 		for (let index = 0; index < this.allCards.length; index++) {
 			const element = this.allCards[index];
 			if (element.cardID == card.cardID) {
@@ -815,17 +872,59 @@ export default class Board {
 
 		}
 	}
+	destroyBlockers(card) {
+		if (this.blockLists) {
+			if (card.isBlockHorizontalPivot) {
+				this.blockLists.horizontal.forEach(element => {
+					if (element.pivot == card) {
+						if(element.list.length){
+							this.addTurnTime(1);
+						}
+						element.list.forEach(blocked => {
+							if(blocked.removeBlockState){
+								blocked.removeBlockState();
+							}
+						});
+					}
+				});
+			}else if(card.isBlockVerticalPivot){
+				this.blockLists.vertical.forEach(element => {
+					if (element.pivot == card) {
+						if(element.list.length){
+							this.addTurnTime(1);
+						}
+						element.list.forEach(blocked => {
+							if(blocked.removeBlockState){
+								blocked.removeBlockState();
+							}
+						});
+					}
+				});
+			}
+		}
+	}
 	attackCard(card, hits) {
 		// //console.log(card);
 		if (card.attacked && card.attacked(hits)) {
 
 			this.onDestroyCard.dispatch(card);
 
+			if (card.isBlockHorizontalPivot || card.isBlockVerticalPivot) {
+				this.destroyBlockers(card);
+			}
+
 			this.cards[card.pos.i][card.pos.j] = 0;
 
 			this.removeCardFromList(card)
 			card.destroy();
 			card.convertCard();
+
+			console.log(card.endGameIfDie)
+			if (!card.canDie) {
+				this.OnGameOver.dispatch();
+			} else if (card.endGameIfDie) {
+				this.OnWin.dispatch(card);
+			}
 
 			//this.debugBoard2();
 			//this.findOutGameOver();
@@ -925,7 +1024,7 @@ export default class Board {
 				let tempCard = this.cards[id][j];
 				byCol[id].push(tempCard);
 				if (tempCard) {
-					
+
 					moveDownList.push(tempCard);
 				}
 				else {
@@ -938,18 +1037,18 @@ export default class Board {
 		let toRemove = []
 		for (let index = 0; index < moveDownList.length; index++) {
 			const element = moveDownList[index];
-			if(element.isBlock){
-				toRemove.push(element);				
+			if (element.hasAnyBlocker() ) {
+				toRemove.push(element);
 				let old = element.pos.j;
 				for (let j = element.pos.j; j >= 0; j--) {
 					const element2 = byCol[element.pos.i][j];
-					if(element2 && element2.pos.j == old){
+					if (element2 && element2.pos.j == old) {
 						toRemove.push(element2);
-						old --
-					}else{
+						old--
+					} else {
 						//break;
 					}
-					
+
 				}
 			}
 		}
@@ -957,13 +1056,13 @@ export default class Board {
 		for (var i = moveDownList.length - 1; i >= 0; i--) {
 			for (let j = 0; j < toRemove.length; j++) {
 				const element = toRemove[j];
-				if(moveDownList[i] == element){
+				if (moveDownList[i] == element) {
 					moveDownList.splice(i, 1);
 				}
 			}
 		}
 
-		moveDownList = moveDownList.filter(function(item, pos, self) {
+		moveDownList = moveDownList.filter(function (item, pos, self) {
 			return self.indexOf(item) == pos;
 		})
 
@@ -1174,7 +1273,7 @@ export default class Board {
 			if ((actionPosId.i >= 0 && actionPosId.i < window.GRID.i) &&
 				(actionPosId.j >= 0 && actionPosId.j < window.GRID.j)) {
 				cardFound = this.cards[actionPosId.i][actionPosId.j];
-				if (cardFound && cardFound.isCard) {
+				if (cardFound && cardFound.isCard && cardFound.canBeAttacked) {
 					findCards = true;
 
 					value += 50 - cardFound.life;
