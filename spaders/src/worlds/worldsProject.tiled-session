@@ -521,9 +521,9 @@
         },
         "world/testWorld1.tmx": {
             "scale": 0.7453683035714286,
-            "selectedLayer": 7,
+            "selectedLayer": 6,
             "viewCenter": {
-                "x": 432.0011978737741,
+                "x": 433.34281650071125,
                 "y": 528.5977390132515
             }
         },
@@ -555,7 +555,7 @@
             "selectedLayer": 8,
             "viewCenter": {
                 "x": 192.3374340949033,
-                "y": 719.859402460457
+                "y": 718.7346221441126
             }
         },
         "world/tilesets/numbers.tsx": {

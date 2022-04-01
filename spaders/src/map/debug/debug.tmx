@@ -13,7 +13,7 @@
  <layer id="74" name="Falling Pieces" width="16" height="16">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="0"/>
-   <property name="fallTurns" type="int" value="1"/>
+   <property name="fallTurns" type="int" value="10"/>
    <property name="gameMode" type="int" value="1"/>
    <property name="i" type="int" value="11"/>
    <property name="j" type="int" value="11"/>
