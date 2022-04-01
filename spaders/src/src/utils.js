@@ -44,6 +44,52 @@ export default {
             nextPosition += length
         }
     },
+    uniq_fast(a) {
+		var seen = {};
+		var out = [];
+		var len = a.length;
+		var j = 0;
+		for(var i = 0; i < len; i++) {
+			 var item = a[i];
+			 if(seen[item] !== 1) {
+				   seen[item] = 1;
+				   out[j++] = item;
+			 }
+		}
+		return out;
+	},
+    flat3Arrays(array1, array2, array3){
+        var comb6 = array3.flatMap(t => array1.flatMap(d => array2.map(v => [t, d, v])))
+		comb6.forEach(element => {
+			element.sort()
+		});
+		comb6 = this.uniq_fast(comb6)
+
+		for (let index = comb6.length - 1; index >= 0; index--) {
+			if (comb6[index][0] == comb6[index][1] || comb6[index][2] == comb6[index][1] || comb6[index][0] == comb6[index][2]) {
+				comb6.splice(index, 1)
+			}
+		}
+
+        return comb6
+
+    },
+    flat2Arrays(array1, array2){
+        var comb6 = array1.flatMap(d => array2.map(v => [d, v]))
+		comb6.forEach(element => {
+			element.sort()
+		});
+		comb6 = this.uniq_fast(comb6)
+
+		for (let index = comb6.length - 1; index >= 0; index--) {
+			if (comb6[index][0] == comb6[index][1] ) {
+				comb6.splice(index, 1)
+			}
+		}
+
+        return comb6
+
+    },
     trimMatrix(pieces, ignoreBlocker = false) {
         if (pieces.length <= 0) {
             return;

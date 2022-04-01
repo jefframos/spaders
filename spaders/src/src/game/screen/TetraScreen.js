@@ -139,17 +139,63 @@ export default class TetraScreen extends Screen {
 
 
 	}
+	uniq_fast(a) {
+		var seen = {};
+		var out = [];
+		var len = a.length;
+		var j = 0;
+		for(var i = 0; i < len; i++) {
+			 var item = a[i];
+			 if(seen[item] !== 1) {
+				   seen[item] = 1;
+				   out[j++] = item;
+			 }
+		}
+		return out;
+	}
 	drawDebugCharacters() {
+
+
 		let scheme = colorSchemes.getCurrentColorScheme().list;
 		this.debugCardsContainer = new PIXI.Container();
 
 		let y = 0;
 		let x = 0;
+
+		let orders = [];
+
+		for (let index = 0; index < 8; index++) {
+			orders.push([index])
+		}
+
+		var array1 = [0, 2, 4, 6];
+		var array2 = [1, 3, 5, 7];
+
+		utils.flat2Arrays(array1, array1).forEach(element => {
+			orders.push(element)
+		});
+		utils.flat2Arrays(array2, array2).forEach(element => {
+			orders.push(element)
+		});
+		utils.flat2Arrays(array2, array1).forEach(element => {
+			orders.push(element)
+		});
+		utils.flat3Arrays(array1, array1, array1).forEach(element => {
+			orders.push(element)
+		});
+		utils.flat3Arrays(array2, array2, array2).forEach(element => {
+			orders.push(element)
+		});
+		utils.flat3Arrays(array2, array2, array1).forEach(element => {
+			orders.push(element)
+		});
+		orders = utils.uniq_fast(orders);
+		console.log(orders)
 		let card
-		for (let index = 0; index < scheme.length; index++) {
+		for (let index = 0; index < orders.length; index++) {
 			card = new Card(this);
 			if (index > 0) {
-				if (index % 4 == 0) {
+				if (index % 8 == 0) {
 					y += card.height
 					x = 0;
 				} else {
@@ -157,36 +203,37 @@ export default class TetraScreen extends Screen {
 					x += card.width
 				}
 			}
-			const element = scheme[index];
+			const element = 0//scheme[index];
 
 			card.life = 0;
-			card.createCard(0);
+			card.createCard(0, { order: orders[index % orders.length] });
 			card.updateSprite(card.life, element, index);
 			card.updateCard(false, element);
-			card.removeActionZones();
+			//card.removeActionZones();
 			card.update(0.1);
 			card.x = x
 			card.y = y;
-			card.scale.set(2)
-
+			card.scale.set(1.75)
+			card.cardBack3.visible = false;
+			card.enemySprite.visible = false;
 			this.debugCardsContainer.addChild(card);
 
 		}
 
-		let blocker = new Block(this);
-		if (scheme.length % 4 == 0) {
-			y += card.height
-			x = 0;
-		} else {
+		// let blocker = new Block(this);
+		// if (scheme.length % 4 == 0) {
+		// 	y += card.height
+		// 	x = 0;
+		// } else {
 
-			x += card.width
-		}
+		// 	x += card.width
+		// }
 
 
-		this.debugCardsContainer.addChild(blocker);
-		blocker.scale.set(2)
-		blocker.x = x
-		blocker.y = y;
+		// this.debugCardsContainer.addChild(blocker);
+		// blocker.scale.set(2)
+		// blocker.x = x
+		// blocker.y = y;
 
 		let background = new PIXI.mesh.NineSlicePlane(
 			PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
@@ -196,7 +243,7 @@ export default class TetraScreen extends Screen {
 		background.width = this.debugCardsContainer.width
 		background.height = this.debugCardsContainer.height
 
-		background.tint = colorSchemes.getCurrentColorScheme().dark
+		background.tint = 0xFF00FF//colorSchemes.getCurrentColorScheme().dark
 
 		this.debugCardsContainer.pivot.x = this.debugCardsContainer.width / 2
 		this.debugCardsContainer.pivot.y = this.debugCardsContainer.height / 2
@@ -1989,7 +2036,7 @@ export default class TetraScreen extends Screen {
 
 		this.trailMarker.overShape.y = GRID.height - this.trailMarker.overShape.height// - this.trailMarker.overShape.height + CARD.height - this.trailMarker.overShape.margin * 0.5 + this.grid.backgroundOffset.y / 4
 		this.trailMarker.arrowsUp.scale.set(this.trailMarker.overShape.width / this.trailMarker.arrowsUp.width)
-		this.trailMarker.arrowsUp.height = this.trailMarker.overShape.height / this.trailMarker.arrowsUp.scale.y - CARD.height * 2 - this.grid.backgroundOffset.y / 4
+		this.trailMarker.arrowsUp.height = this.trailMarker.overShape.height / this.trailMarker.arrowsUp.scale.y - this.grid.backgroundOffset.y / 4
 		this.trailMarker.arrowsUp.y = this.trailMarker.overShape.y
 	}
 	updateTrailsPosition(force = false) {
@@ -2325,7 +2372,7 @@ export default class TetraScreen extends Screen {
 
 		utils.scaleSize(this.gameCanvas, innerResolution, this.ratio)
 		//utils.resizeToFitAR({width:this.bottomUICanvas.width * 0.8, height:this.bottomUICanvas.height * 0.4},this.containerQueue)
-		utils.resizeToFitAR({ width: this.gameCanvas.width * 0.95, height: this.gameCanvas.height * 0.82 }, this.gridContainer)
+		utils.resizeToFitAR({ width: this.gameCanvas.width * 0.95, height: this.gameCanvas.height * 0.75 }, this.gridContainer)
 
 		if (this.gridContainer.scale.x > 1) {
 			this.gridContainer.scale.set(1)

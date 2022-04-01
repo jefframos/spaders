@@ -5,17 +5,17 @@
     },
     "activeFile": "debug/debug.tmx",
     "expandedProjectPaths": [
+        "tutorial",
+        "templates",
+        "world",
         "how-to-play",
-        "gb",
         "videogames",
         "debug",
-        "movies",
-        "templates",
-        "tutorial",
         "synth",
+        "gb",
         "basics",
-        "world",
-        "main"
+        "main",
+        "movies"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -81,7 +81,7 @@
         },
         "debug/debug.tmx": {
             "scale": 0.6522518382352941,
-            "selectedLayer": 12,
+            "selectedLayer": 16,
             "viewCenter": {
                 "x": 482.94229549778055,
                 "y": 512.0721482420912
@@ -259,8 +259,8 @@
             "scale": 0.5,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 638,
-                "y": 638
+                "x": 640,
+                "y": 640
             }
         },
         "how-to-play/spadersTileset.tsx": {
@@ -374,6 +374,10 @@
         "tilesets/References.tsx": {
             "dynamicWrapping": true,
             "scaleInDock": 0.015625,
+            "scaleInEditor": 1
+        },
+        "tilesets/arrowsPieces.tsx": {
+            "scaleInDock": 1,
             "scaleInEditor": 1
         },
         "tilesets/gb.tsx": {
@@ -519,7 +523,7 @@
     },
     "last.exportedFilePath": "D:/projects/spaders/spaders/www/data/basics",
     "last.externalTilesetPath": "E:/projects/spaders/spaders/src/map/tilesets",
-    "last.imagePath": "D:/projects/spaders/spaders/src/map/refs",
+    "last.imagePath": "D:/projects/spaders/spaders/src/map/tilesets",
     "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
@@ -537,14 +541,14 @@
         "videogames/levels.tmx",
         "debug/debug2.tmx",
         "debug/debug.tmx",
+        "tilesets/arrowsPieces.tsx",
         "tilesets/References.tsx",
         "D:/projects/spaders/spaders/src/worlds/world/tiniMap.tmx",
         "world/tier1BasicMap.tmx",
         "world/tiniMap.tmx",
         "world/worldSynth.tmx",
         "world/testWorld1.tmx",
-        "tilesets/oneDimensionTileset.tsx",
-        "world/Tilemap_1.tsx"
+        "tilesets/oneDimensionTileset.tsx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",

@@ -58,7 +58,7 @@ export default class Grid extends PIXI.Container {
 		for (let index = this.topGridContainer.children.length - 1; index >= 0; index--) {
 			this.topGridContainer.removeChildAt(index);
 		}
-		if (!this.topGridContainer.parent) {
+		if (this.game && !this.topGridContainer.parent && this.game.frontGridContainer) {
 			this.game.frontGridContainer.addChild(this.topGridContainer)
 		}
 
@@ -388,7 +388,9 @@ export default class Grid extends PIXI.Container {
 			shape.x += shape.width / 2
 			shape.y += shape.height / 2
 
-			this.game.frontGridContainer.addChild(shape);
+			if(shape && this.game.frontGridContainer){
+				this.game.frontGridContainer.addChild(shape);
+			}
 			this.dropTiles.push(shape);
 			this.gridsSquares[card.pos.i][card.pos.j].card = null;
 			window.SOUND_MANAGER.play('dropTile', { volume: 0.5, speed: Math.random() * 0.2 + 0.8, singleInstance: true })
