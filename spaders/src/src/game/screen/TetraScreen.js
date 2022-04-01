@@ -2217,18 +2217,18 @@ export default class TetraScreen extends Screen {
 		this.gridContainer.on('mousedown', this.onTapDown.bind(this)).on('touchstart', this.onTapDown.bind(this));
 		this.on('mouseup', this.onTapUp.bind(this)).on('touchend', this.onTapUp.bind(this));
 
-		//this.trailHorizontal.interactive = true;
+		this.trailHorizontal.interactive = true;
 		this.trailHorizontal.on('mousedown', this.onTapDown.bind(this)).on('touchstart', this.onTapDown.bind(this));
-		//this.trailHorizontal.on('mouseup', this.onTapUp.bind(this)).on('touchend', this.onTapUp.bind(this));
+		this.trailHorizontal.on('mouseup', this.onTapUp.bind(this)).on('touchend', this.onTapUp.bind(this));
 		this.trailHorizontal.on('touchmove', this.onTouchMove.bind(this));
 		this.gridContainer.on('touchmove', this.onTouchMove.bind(this));
 
 		if (!window.isMobile) {
 			this.gridContainer.on('mouseover', this.mouseOver.bind(this));
-			//this.trailHorizontal.on('mouseover', this.mouseOver.bind(this));
+			this.trailHorizontal.on('mouseover', this.mouseOver.bind(this));
 
 			this.gridContainer.on('mouseout', this.mouseOut.bind(this));
-			//this.trailHorizontal.on('mouseout', this.mouseOut.bind(this));
+			this.trailHorizontal.on('mouseout', this.mouseOut.bind(this));
 		}
 
 		this.startScreenContainer.addEvents();
@@ -2362,7 +2362,7 @@ export default class TetraScreen extends Screen {
 
 		if (this.currentCard) {
 			//13 is the width of the border on the grid
-			this.currentCard.y = (this.grid.gridSprite.height + this.offsetCard.y - CARD.height);//this.gridContainer.scale.y
+			this.currentCard.y = (this.grid.gridSprite.height + this.offsetCard.y + 4);//this.gridContainer.scale.y
 		}
 
 
