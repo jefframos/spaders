@@ -369,7 +369,7 @@ export default class Board {
 				(actionPosId.i >= 0 && actionPosId.i < window.GRID.i) &&
 				(actionPosId.j >= 0 && actionPosId.j < window.GRID.j)) {
 				cardFound = this.cards[actionPosId.i][actionPosId.j];
-				if (cardFound && !cardFound.dead && !this.explosionAreaChain.includes(cardFound)) {//} && !cardFound.isCard) {
+				if (cardFound && !cardFound.dead && cardFound.canBeAttacked && !this.explosionAreaChain.includes(cardFound)) {//} && !cardFound.isCard) {
 					// findCards = true;					
 					//this.cards[actionPosId.i][actionPosId.j] = 0
 					this.explosionAreaChain.push(cardFound);
@@ -501,7 +501,7 @@ export default class Board {
 		let tempCardList = [];
 		for (var i = 0; i < this.cards.length; i++) {
 			for (var j = 0; j < this.cards[i].length; j++) {
-				if (this.cards[i][j] && !this.cards[i][j].crazyMood && cardToIgnore != this.cards[i][j]) {
+				if (this.cards[i][j] && !this.cards[i][j].crazyMood && cardToIgnore != this.cards[i][j] && !this.cards[i][j].isBlockerPivot()) {
 					tempCardList.push(this.cards[i][j]);
 				}
 			}
@@ -881,8 +881,8 @@ export default class Board {
 							this.addTurnTime(1);
 						}
 						element.list.forEach(blocked => {
-							if(blocked.removeBlockState){
-								blocked.removeBlockState();
+							if(blocked.removeBlockStateHorizontal){
+								blocked.removeBlockStateHorizontal();
 							}
 						});
 					}
@@ -894,8 +894,8 @@ export default class Board {
 							this.addTurnTime(1);
 						}
 						element.list.forEach(blocked => {
-							if(blocked.removeBlockState){
-								blocked.removeBlockState();
+							if(blocked.removeBlockStateVertical){
+								blocked.removeBlockStateVertical();
 							}
 						});
 					}

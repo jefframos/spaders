@@ -392,7 +392,7 @@ function setUpSchemes() {
 		.add('./assets/images/game-0.json')
 		.add('./assets/images/game-1.json')
 		//.add('./assets/images/logo.json')
-		.add('./assets/images/tilemap.json')
+		//.add('./assets/images/tilemap.json')
 		.add('./assets/images/tilemap_1.json')
 		.add('./assets/images/arrowsUp.png')
 		.add('./data/levelSections.json')

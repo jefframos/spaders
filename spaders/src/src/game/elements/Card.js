@@ -39,6 +39,7 @@ export default class Card extends PIXI.Container {
 		this.enemySprite = PIXI.Sprite.fromFrame('l0_spader_1_1.png');
 		this.enemySpriteWhite = PIXI.Sprite.fromFrame('l0_spader_1_1.png');
 		this.cardStats = new PIXI.Sprite();
+		this.cardBlocks = new PIXI.Sprite();
 		this.enemySpriteWhite.visible = false;
 		this.enemySprite.addChild(this.enemySpriteWhite);
 		this.enemySprite.scale.set(this.realSpriteWidth / this.enemySprite.width * this.scaleRef)
@@ -62,6 +63,7 @@ export default class Card extends PIXI.Container {
 		cardContainer.addChild(this.cardActions);
 		cardContainer.addChild(this.enemySprite);
 		cardContainer.addChild(this.cardStats);
+		cardContainer.addChild(this.cardBlocks);
 
 
 		this.countdowLabel = new PIXI.Text(this.life, { font: '14px', fontWeight: '200', fill: 0xFFFFFF, fontFamily: window.STANDARD_FONT2 });
@@ -176,50 +178,85 @@ export default class Card extends PIXI.Container {
 		// 	this.startCrazyMood();
 		// }
 	}
-	hasAnyBlocker(){
-		return this.isBlockHorizontalPivot ||this.isBlockedByPivot ||this.isBlockVerticalPivot
+	isBlockerPivot(){
+		return this.isBlockHorizontalPivot || this.isBlockVerticalPivot
 
+	}
+	hasAnyBlocker() {
+		return this.isBlockHorizontalPivot || this.isBlockedByPivotVertical || this.isBlockedByPivotHorizontal || this.isBlockVerticalPivot
+
+	}
+	updateBlockAsset() {
+		this.cardBlocks.visible = true;
+
+		if (this.isBlockedByPivotVertical && this.isBlockedByPivotHorizontal) {
+			this.cardBlocks.setTexture(PIXI.Texture.fromFrame('tile_1_' + (32 * 8 + 13) + '.png'));
+		} else if (this.isBlockedByPivotVertical) {
+			this.cardBlocks.setTexture(PIXI.Texture.fromFrame('tile_1_' + (32 * 9 + 13) + '.png'));
+		} else if (this.isBlockedByPivotHorizontal) {
+			this.cardBlocks.setTexture(PIXI.Texture.fromFrame('tile_1_' + (32 * 10 + 13) + '.png'));
+		} else if (this.isBlockVerticalPivot) {
+			this.cardBlocks.setTexture(PIXI.Texture.fromFrame('tile_1_' + (32 * 9 + 12) + '.png'));
+		} else if (this.isBlockHorizontalPivot) {
+			this.cardBlocks.setTexture(PIXI.Texture.fromFrame('tile_1_' + (32 * 10 + 12) + '.png'));
+		} else {
+			this.cardBlocks.setTexture(PIXI.Texture.EMPTY);
+			this.cardBlocks.visible = false;
+
+		}
+		this.cardBlocks.scale.set(CARD.width / this.cardBlocks.width * this.cardBlocks.scale.x)
 	}
 	blockHorizontalPivot() {
 		this.isBlockHorizontalPivot = true;
-		this.cardStats.setTexture(PIXI.Texture.fromFrame('tile_1_' + (32 * 10 + 12) + '.png'));
-		this.cardStats.scale.set(CARD.width / this.cardStats.width)
+		this.updateBlockAsset();
 		this.removeActionZones();
+		this.cardBlocks.visible = true;
+
 	}
 	blockHorizontal() {
 		this.canBeAttacked = false;
-		if(this.isBlockedByPivot){
-			this.cardStats.setTexture(PIXI.Texture.fromFrame('tile_1_' + (32 * 8 + 13) + '.png'));
-		}else{
-			this.cardStats.setTexture(PIXI.Texture.fromFrame('tile_1_' + (32 * 10 + 13) + '.png'));
-			this.cardStats.scale.set(CARD.width / this.cardStats.width / this.cardStats.scale.x)
-		}
-		this.isBlockedByPivot = true;
+		this.isBlockedByPivotHorizontal = true;
+		this.updateBlockAsset();
 		this.cardActions.alpha = 0;
+
 	}
 	blockVerticalPivot() {
 		this.isBlockVerticalPivot = true;
-		this.cardStats.setTexture(PIXI.Texture.fromFrame('tile_1_' + (32 * 9 + 12) + '.png'));
-		this.cardStats.scale.set(CARD.width / this.cardStats.width)
+		this.updateBlockAsset();
 		this.removeActionZones();
+		this.cardBlocks.visible = true;
 	}
 	blockVertical() {
 		this.canBeAttacked = false;
-		if(this.isBlockedByPivot){
-			this.cardStats.setTexture(PIXI.Texture.fromFrame('tile_1_' + (32 * 8 + 13) + '.png'));
-		}else{
-			this.cardStats.setTexture(PIXI.Texture.fromFrame('tile_1_' + (32 * 9 + 13) + '.png'));
-			this.cardStats.scale.set(CARD.width / this.cardStats.width / this.cardStats.scale.x)
-		}
-		this.isBlockedByPivot = true;
+		this.isBlockedByPivotVertical = true;
+		this.updateBlockAsset();
 		this.cardActions.alpha = 0;
 	}
-	removeBlockState() {
+	removeBlockStateVertical() {
+		this.isBlockedByPivotVertical = false;
+
+		if(!this.isBlockedByPivotHorizontal){
+			this.enableAfterBlock();
+		}else{
+			this.updateBlockAsset();
+		}
+	}
+	removeBlockStateHorizontal() {
+		this.isBlockedByPivotHorizontal = false;
+
+		if(!this.isBlockedByPivotVertical){
+			this.enableAfterBlock();
+		}else{
+			this.updateBlockAsset();
+		}
+	}
+	enableAfterBlock(){
 		this.canBeAttacked = true;
-		this.isBlockedByPivot = false;
-		this.cardStats.setTexture(PIXI.Texture.EMPTY);
+	
+		this.cardBlocks.setTexture(PIXI.Texture.EMPTY);
 		this.shake(0.2, 6, 0.2);
-		TweenMax.to(this.cardActions, 0.5,{delay:0.5, alpha:1})
+		TweenMax.to(this.cardActions, 0.5, { delay: 0.5, alpha: 1 })
+
 	}
 	itCannotDie() {
 		this.cardStats.setTexture(PIXI.Texture.fromFrame('tile_1_' + (32 * 10 + 9) + '.png'));
@@ -227,6 +264,7 @@ export default class Card extends PIXI.Container {
 		this.cardStats.scale.set(0.5)
 		this.cardStats.x = 5
 		this.cardStats.y = 5
+		this.cardStats.visible = true;
 	}
 	itEndGameIfDie() {
 		this.cardStats.setTexture(PIXI.Texture.fromFrame('tile_1_' + (32 * 10 + 7) + '.png'));
@@ -234,6 +272,7 @@ export default class Card extends PIXI.Container {
 		this.cardStats.scale.set(0.35)
 		this.cardStats.x = 5
 		this.cardStats.y = 5
+		this.cardStats.visible = true;
 	}
 	startCrazyMood() {
 		this.crazyMood = true;
@@ -256,7 +295,16 @@ export default class Card extends PIXI.Container {
 		this.isBlockHorizontalPivot = false;
 		this.isBlockVerticalPivot = false;
 		this.canBeAttacked = true;
-		this.isBlockedByPivot = false;
+
+		this.isBlockedByPivotHorizontal = false;
+		this.isBlockedByPivotVertical = false;
+
+		this.cardStats.scale.set(1)
+		this.cardStats.position.set(0)
+		this.cardStats.setTexture(PIXI.Texture.EMPTY);
+		this.cardStats.visible = false;
+		this.cardBlocks.visible = false;
+
 	}
 	createCard(totalSides = 0, customData) {
 		if (this.countdowLabel.parent) {
@@ -264,11 +312,9 @@ export default class Card extends PIXI.Container {
 		}
 		this.alpha = 1;
 		this.removeAllStates();
-		this.cardStats.scale.set(1)
-		this.cardStats.position.set(0)
 
 
-		this.cardStats.setTexture(PIXI.Texture.EMPTY);
+
 
 		this.removeCrazyMood();
 
