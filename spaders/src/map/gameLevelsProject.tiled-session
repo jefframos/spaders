@@ -259,8 +259,8 @@
             "scale": 0.5,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 638,
-                "y": 638
+                "x": 640,
+                "y": 640
             }
         },
         "how-to-play/spadersTileset.tsx": {
@@ -531,7 +531,7 @@
         "debug/debug.tmx"
     ],
     "project": "gameLevelsProject.tiled-project",
-    "property.type": "bool",
+    "property.type": "int",
     "recentFiles": [
         "how-to-play/simple-shapes.tmx",
         "videogames/levels.tmx",

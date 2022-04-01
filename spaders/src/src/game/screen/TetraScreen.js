@@ -264,7 +264,7 @@ export default class TetraScreen extends Screen {
 
 	}
 	onDestroyAllStartedCards() {
-		if(!this.gameRunning){
+		if (!this.gameRunning) {
 			return;
 		}
 		this.blockGameTimer = 1;
@@ -1300,7 +1300,7 @@ export default class TetraScreen extends Screen {
 
 		//console.log(this.currentLevelData.pieces)
 
-		if (this.currentLevelData.gameMode == 1) {
+		if (this.currentLevelData.gameMode == 1 || this.currentLevelData.gameMode == 3) {
 			for (let i = 0; i < GRID.i; i++) {
 				for (let j = 0; j < GRID.j; j++) {
 					lastRow.push({ j: i, i: j })
@@ -1395,7 +1395,7 @@ export default class TetraScreen extends Screen {
 				}
 			}
 		}
-	
+
 		this.board.postProcessAddons();
 
 		this.currentPoints = 0;
@@ -1443,7 +1443,7 @@ export default class TetraScreen extends Screen {
 
 		console.log(this.currentLevelData)
 
-		if (this.currentLevelData.gameMode == 1) {
+		if (this.currentLevelData.gameMode == 1 || this.currentLevelData.gameMode == 3) {
 			this.fallBar.visible = true;
 
 			this.fallBar.icon.tint = colorSchemes.colorSchemes[scheme].list[0].color
@@ -1558,7 +1558,7 @@ export default class TetraScreen extends Screen {
 		this.cardQueue[1].update(1 / 60)
 
 	}
-	OnWin(card){
+	OnWin(card) {
 		if (!this.gameRunning) {
 			return;
 		}
@@ -1589,6 +1589,11 @@ export default class TetraScreen extends Screen {
 		this.newRound(first);
 	}
 	newRound(first = false) {
+
+		//gamemode: 0 - standard
+		//gamemode: 1 - fallpieces
+		//gamemode: 2 - no tiles
+		//gamemode: 3 - move limit
 		//console.log("newRound", first);
 		if (this.currentLevelData.gameMode == 0 || this.currentLevelData.gameMode == 2) {
 			if (first) {
@@ -1603,7 +1608,7 @@ export default class TetraScreen extends Screen {
 					this.getNextPieceRound();
 				}
 			}
-		} else if (this.currentLevelData.gameMode == 1) {
+		} else if (this.currentLevelData.gameMode == 1 || this.currentLevelData.gameMode == 3) {
 			if (first) {
 				this.getNextPieceRound();
 			} else {
@@ -1615,23 +1620,31 @@ export default class TetraScreen extends Screen {
 
 
 				if (this.currentRound > 0 && this.currentRound % this.currentLevelData.fallTurns == 0) {
-					this.board.moveCardsDown();
 
-					this.fallBar.setProgressBar2(1);
-					setTimeout(() => {
-						this.fallBar.setProgressBar2(0.01);
-					}, 500);
-					for (let index = 0; index < GRID.i; index++) {
+					if (this.currentLevelData.gameMode == 3) {
+						this.fallBar.setProgressBar2(1);
+						this.OnGameOver();
 
-						let card = this.placeCard(index, 0, ENEMIES.list[Math.floor(Math.random() * 2)])
+					} else {
 
-						TweenMax.from(card.scale, 0.2, { x: 0, y: 0, ease: Back.easeOut, delay: index / GRID.i * 0.5 })
+						this.board.moveCardsDown();
 
-						this.cardsContainer.addChild(card);
+						this.fallBar.setProgressBar2(1);
+						setTimeout(() => {
+							this.fallBar.setProgressBar2(0.01);
+						}, 500);
+						for (let index = 0; index < GRID.i; index++) {
+
+							let card = this.placeCard(index, 0, ENEMIES.list[Math.floor(Math.random() * 2)])
+
+							TweenMax.from(card.scale, 0.2, { x: 0, y: 0, ease: Back.easeOut, delay: index / GRID.i * 0.5 })
+
+							this.cardsContainer.addChild(card);
+						}
+						setTimeout(() => {
+							this.getNextPieceRound();
+						}, 1000);
 					}
-					setTimeout(() => {
-						this.getNextPieceRound();
-					}, 1000);
 				} else {
 					this.getNextPieceRound();
 				}
@@ -1657,7 +1670,7 @@ export default class TetraScreen extends Screen {
 		TweenMax.killTweensOf(this.currentCard)
 		setTimeout(() => {
 			this.offsetCard.y = CARD.height * 3;
-			if(this.currentCard){
+			if (this.currentCard) {
 
 				this.currentCard.visible = true;
 				TweenMax.to(this.offsetCard, 0.3, { y: 0, ease: Back.easeOut })

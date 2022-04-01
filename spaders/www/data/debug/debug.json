@@ -811,6 +811,16 @@
                  "value":2
                 }, 
                 {
+                 "name":"fallTurns",
+                 "type":"int",
+                 "value":10
+                }, 
+                {
+                 "name":"gameMode",
+                 "type":"int",
+                 "value":3
+                }, 
+                {
                  "name":"i",
                  "type":"int",
                  "value":11
