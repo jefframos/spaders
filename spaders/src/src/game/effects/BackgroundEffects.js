@@ -27,7 +27,7 @@ export default class BackgroundEffects extends PIXI.Container {
 
 		//this.backgroundImage.blendMode = PIXI.BLEND_MODES.ADD
 
-		this.bottomBackground = PIXI.Sprite.fromFrame("game_bg.png");
+		this.bottomBackground = new PIXI.Sprite()
 		this.addChild(this.bottomBackground);
 
 		this.bottomBackground.anchor.set(0.5, 0);
@@ -69,7 +69,7 @@ export default class BackgroundEffects extends PIXI.Container {
 		this.currentScheme = colorSchemes.getCurrentColorScheme();
 		this.updateMainBackgroundColor(this.currentScheme.background)
 		
-		if (this.currentScheme.backgroundAssets && this.currentScheme.backgroundAssets.bottomBackground) {
+		if (this.currentScheme.backgroundAssets && this.currentScheme.backgroundAssets.enabled && this.currentScheme.backgroundAssets.bottomBackground) {
 
 			this.bottomBackground.y = this.innerResolution.height;
 			this.bottomBackground.texture = PIXI.Texture.fromFrame(this.currentScheme.backgroundAssets.bottomBackground);
@@ -102,7 +102,7 @@ export default class BackgroundEffects extends PIXI.Container {
 		this.background.x = -innerResolution.width / 2
 		this.background.y = -innerResolution.height / 2
 
-		if (this.bottomBackground.visible) {
+		if (this.bottomBackground.visible ) {
 
 			let backPos = this.toLocal(bottomBackgroundPosition);
 			let targetAnchor = 0.1;

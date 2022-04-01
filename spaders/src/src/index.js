@@ -388,7 +388,8 @@ function setUpSchemes() {
 
 	window.game = new Game(config);
 
-	PIXI.loader.add('./assets/images/backgrounds.json')
+	PIXI.loader
+		//.add('./assets/images/backgrounds.json')
 		.add('./assets/images/game-0.json')
 		.add('./assets/images/game-1.json')
 		//.add('./assets/images/logo.json')

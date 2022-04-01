@@ -138,7 +138,8 @@
             "backgroundAssets": {
                 "bottomBackground": "gbBackground.png",
                 "bottomBackgroundPosition": 0.01,
-                "alpha": 0
+                "alpha": 0,
+                "enabled": false
             },
             "map": {
                 "terrainColors": [

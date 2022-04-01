@@ -5,17 +5,17 @@
     },
     "activeFile": "debug/debug.tmx",
     "expandedProjectPaths": [
-        "templates",
-        "gb",
-        "main",
         "synth",
+        "videogames",
+        "gb",
         "movies",
+        "tutorial",
+        "world",
+        "main",
         "debug",
         "how-to-play",
-        "tutorial",
         "basics",
-        "videogames",
-        "world"
+        "templates"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -81,7 +81,7 @@
         },
         "debug/debug.tmx": {
             "scale": 0.6522518382352941,
-            "selectedLayer": 12,
+            "selectedLayer": 13,
             "viewCenter": {
                 "x": 482.94229549778055,
                 "y": 512.0721482420912
@@ -259,8 +259,8 @@
             "scale": 0.5,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 640,
-                "y": 640
+                "x": 638,
+                "y": 638
             }
         },
         "how-to-play/spadersTileset.tsx": {

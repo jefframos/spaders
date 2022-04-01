@@ -183,7 +183,8 @@
             "backgroundAssets": {
                 "bottomBackground": "game_bg.png",
                 "bottomBackgroundPosition": -0.2,
-                "alpha": 0
+                "alpha": 0,
+                "enabled": false
             },
             "map": {
                 "terrainColors": [
