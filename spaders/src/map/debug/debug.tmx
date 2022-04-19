@@ -11,7 +11,7 @@
  <tileset firstgid="1" source="../tilesets/spadersTileset.tsx"/>
  <tileset firstgid="65" source="../tilesets/gb.tsx"/>
  <tileset firstgid="129" source="../tilesets/arrowsPieces.tsx"/>
- <layer id="74" name="Falling Pieces" width="16" height="16">
+ <layer id="74" name="Falling Pieces" width="16" height="16" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="0"/>
    <property name="fallTurns" type="int" value="10"/>
@@ -111,7 +111,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="115" name="Falling Pieces 2" width="16" height="16">
+ <layer id="115" name="Falling Pieces 2" width="16" height="16" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="0"/>
    <property name="fallTurns" type="int" value="20"/>
@@ -145,7 +145,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="74" name="Countdown Pieces" width="16" height="16">
+ <layer id="74" name="Countdown Pieces" width="16" height="16" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="gameMode" type="int" value="0"/>
@@ -178,7 +178,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="106" name="_ADDON" width="16" height="16">
+ <layer id="106" name="_ADDON" width="16" height="16" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="11"/>
@@ -210,7 +210,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="116" name="Countdown Pieces 2" width="16" height="16">
+ <layer id="116" name="Countdown Pieces 2" width="16" height="16" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="gameMode" type="int" value="2"/>
@@ -243,7 +243,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="117" name="_ADDON_" width="16" height="16">
+ <layer id="117" name="_ADDON_" width="16" height="16" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="11"/>
@@ -275,7 +275,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="74" name="Countdown Pieces 3" width="16" height="16">
+ <layer id="74" name="Countdown Pieces 3" width="16" height="16" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="11"/>
@@ -307,7 +307,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="106" name="_ADDON" width="16" height="16">
+ <layer id="106" name="_ADDON" width="16" height="16" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="11"/>
@@ -339,7 +339,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="74" name="Empty_Teste_NewMech" width="16" height="16">
+ <layer id="74" name="Empty_Teste_NewMech" width="16" height="16" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="11"/>
@@ -371,7 +371,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="106" name="_ADDON_Teste_NewMech" width="16" height="16">
+ <layer id="106" name="_ADDON_Teste_NewMech" width="16" height="16" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="11"/>
@@ -403,7 +403,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="74" name="Empty" width="16" height="16">
+ <layer id="74" name="Empty" width="16" height="16" visible="0">
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="i" type="int" value="11"/>
@@ -471,7 +471,7 @@
   <properties>
    <property name="autoPlaceBlockers" type="int" value="2"/>
    <property name="fallTurns" type="int" value="10"/>
-   <property name="gameMode" type="int" value="3"/>
+   <property name="gameMode" type="int" value="2"/>
    <property name="i" type="int" value="11"/>
    <property name="j" type="int" value="11"/>
    <property name="padding-bottom" type="int" value="2"/>
@@ -487,7 +487,7 @@
 1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,
 1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,
 1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -515,9 +515,9 @@
    <property name="tier" type="int" value="0"/>
   </properties>
   <data encoding="csv">
-38,0,37,0,0,0,0,0,0,0,0,0,0,0,0,0,
+38,48,37,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,39,36,39,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+48,0,0,0,48,0,0,0,0,0,0,0,0,0,0,0,
 0,0,38,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

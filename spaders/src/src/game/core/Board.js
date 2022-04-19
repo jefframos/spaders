@@ -877,24 +877,24 @@ export default class Board {
 			if (card.isBlockHorizontalPivot) {
 				this.blockLists.horizontal.forEach(element => {
 					if (element.pivot == card) {
-						if(element.list.length){
+						if (element.list.length) {
 							this.addTurnTime(1);
 						}
 						element.list.forEach(blocked => {
-							if(blocked.removeBlockStateHorizontal){
+							if (blocked.removeBlockStateHorizontal) {
 								blocked.removeBlockStateHorizontal();
 							}
 						});
 					}
 				});
-			}else if(card.isBlockVerticalPivot){
+			} else if (card.isBlockVerticalPivot) {
 				this.blockLists.vertical.forEach(element => {
 					if (element.pivot == card) {
-						if(element.list.length){
+						if (element.list.length) {
 							this.addTurnTime(1);
 						}
 						element.list.forEach(blocked => {
-							if(blocked.removeBlockStateVertical){
+							if (blocked.removeBlockStateVertical) {
 								blocked.removeBlockStateVertical();
 							}
 						});
@@ -1015,16 +1015,18 @@ export default class Board {
 		let moveDownList = [];
 
 		let byCol = [];
+		let byColDebug = [];
 		for (let index = 0; index < GRID.i; index++) {
 			byCol.push([]);
+			byColDebug.push([]);
 		}
 		for (var i = 0; i < cardsToMove.length; i++) {
 			let id = cardsToMove[i].pos.i;
-			for (var j = cardsToMove[i].pos.j; j < GRID.j; j++) {
+			for (var j = cardsToMove[i].pos.j; j < GRID.i; j++) {
 				let tempCard = this.cards[id][j];
-				byCol[id].push(tempCard);
 				if (tempCard) {
-
+					byCol[id].push(tempCard);
+					byColDebug[id].push(tempCard.pos);
 					moveDownList.push(tempCard);
 				}
 				else {
@@ -1032,12 +1034,11 @@ export default class Board {
 				}
 			}
 		}
-
 		//if find a block, this removes it
 		let toRemove = []
 		for (let index = 0; index < moveDownList.length; index++) {
 			const element = moveDownList[index];
-			if (element.hasAnyBlocker() ) {
+			if (element.hasAnyBlocker()) {
 				toRemove.push(element);
 				let old = element.pos.j;
 				for (let j = element.pos.j; j >= 0; j--) {
@@ -1045,14 +1046,25 @@ export default class Board {
 					if (element2 && element2.pos.j == old) {
 						toRemove.push(element2);
 						old--
-					} else {
-						//break;
 					}
-
 				}
 			}
 		}
 
+		
+
+		byCol.forEach(colList => {
+			let blocker = false;
+			colList.forEach(element => {
+				if(blocker || element.hasAnyBlocker()){
+					blocker = true;
+					toRemove.push(element)
+				}
+			});
+		});
+		toRemove = toRemove.filter(function (item, pos, self) {
+			return self.indexOf(item) == pos;
+		})
 		for (var i = moveDownList.length - 1; i >= 0; i--) {
 			for (let j = 0; j < toRemove.length; j++) {
 				const element = toRemove[j];
@@ -1061,6 +1073,24 @@ export default class Board {
 				}
 			}
 		}
+
+		// for (let index = 0; index < moveDownList.length; index++) {
+		// 	const element = moveDownList[index];
+		// 	if (element.hasAnyBlocker() ) {
+		// 		toRemove.push(element);
+		// 		let old = element.pos.j;
+		// 		for (let j = element.pos.j; j >= 0; j--) {
+		// 			const element2 = byCol[element.pos.i][j];
+		// 			if (element2 && element2.pos.j == old) {
+		// 				toRemove.push(element2);
+		// 				old--
+		// 			} else {
+		// 				//break;
+		// 			}
+
+		// 		}
+		// 	}
+		// }
 
 		moveDownList = moveDownList.filter(function (item, pos, self) {
 			return self.indexOf(item) == pos;
