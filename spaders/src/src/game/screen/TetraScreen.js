@@ -1650,7 +1650,7 @@ export default class TetraScreen extends Screen {
 				if (this.board.updateCounters(1)) {
 					setTimeout(() => {
 						this.getNextPieceRound();
-					}, 1000);
+					}, 1100);
 				} else {
 					this.getNextPieceRound();
 				}

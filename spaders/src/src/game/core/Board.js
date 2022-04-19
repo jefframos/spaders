@@ -773,9 +773,9 @@ export default class Board {
 
 	}
 	addTurnTime(value) {
-		this.nextTurnTimer = value + 0.01;
+		this.nextTurnTimer = value + 0.05;
 		this.nextTurnTimer = Math.max(this.nextTurnTimer, 0.1)
-		this.nextTurnTimer = Math.min(this.nextTurnTimer, 1)
+		this.nextTurnTimer = Math.min(this.nextTurnTimer, 1.25)
 	}
 	playDelayedCoins(total) {
 		for (let index = 0; index < total; index++) {
