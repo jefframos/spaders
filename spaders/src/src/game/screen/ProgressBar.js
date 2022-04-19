@@ -113,7 +113,7 @@ export default class ProgressBar extends PIXI.Container {
 
     }
     setProgressBar2(value = 0, color = null) {
-        if (value <= 0) {
+        if (value < 0) {
             return;
         }
         if (color === null) {

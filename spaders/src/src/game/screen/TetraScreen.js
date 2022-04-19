@@ -643,14 +643,14 @@ export default class TetraScreen extends Screen {
 		this.fallBar.addChild(spaderIcon);
 
 
-		this.chargeBombBar.visible = false;
+		this.chargeBombBar.visible = true;
 
 		this.chargeBombBar.currentChargeValue = 0;
 		this.chargeBombBar.maxValue = 1000;
 
 		let bombIcon = new PIXI.Sprite.fromFrame(window.IMAGE_DATA.enemyBombImages);
 		bombIcon.anchor.set(0, 0.5);
-		bombIcon.scale.set(0.5);
+		bombIcon.scale.set(0.25);
 		bombIcon.x = 305;
 		bombIcon.y = 10;
 		this.chargeBombBar.icon = bombIcon;
@@ -660,8 +660,8 @@ export default class TetraScreen extends Screen {
 
 
 
-		this.backButton = new UIButton1(config.colors.white, 'icons8-menu-48.png', config.colors.dark);
-		this.backButton.onClick.add(() => this.mainmenuState());
+		// this.backButton = new UIButton1(config.colors.white, 'icons8-menu-48.png', config.colors.dark);
+		// this.backButton.onClick.add(() => this.mainmenuState());
 
 
 		this.inGameMenu = new InGameMenu(config.colors.green);
@@ -681,9 +681,9 @@ export default class TetraScreen extends Screen {
 		this.addChild(this.mainMenuSettings)
 
 
-		this.openTutorialButton = new UIButton1(config.colors.white, window.iconsData.question, config.colors.dark);
-		//this.addChild(this.openTutorialButton)
-		this.openTutorialButton.onClick.add(() => { this.openTutorial() });
+		this.useBomb = new UIButton1(config.colors.white, window.IMAGE_DATA.enemyBombImages, config.colors.white);
+		this.bottomUINewContainer.addChild(this.useBomb)
+		this.useBomb.onClick.add(() => { this.replaceForBomb() });
 
 		this.endGameScreenContainer.hide(true);
 
@@ -791,9 +791,9 @@ export default class TetraScreen extends Screen {
 		this.containerQueue.y = this.timerRect.y + 8//this.movesRect.y + this.movesRect.height - this.containerQueue.height
 
 		//console.log()
-		this.backButton.scale.set(this.topCanvas.height / (this.backButton.height / this.backButton.scale.y) * 0.7)// / this.backButton.scale.y)
-		this.backButton.x = this.topCanvas.x + this.topCanvas.width - this.backButton.width * 0.5 - this.backButton.width * 0.25;
-		this.backButton.y = this.backButton.height * 0.5 + this.backButton.width * 0.25
+		// // // // this.backButton.scale.set(this.topCanvas.height / (this.backButton.height / this.backButton.scale.y) * 0.7)// / this.backButton.scale.y)
+		// // // this.backButton.x = this.topCanvas.x + this.topCanvas.width - this.backButton.width * 0.5 - this.backButton.width * 0.25;
+		// // // this.backButton.y = this.backButton.height * 0.5 + this.backButton.width * 0.25
 
 		let scaledWidth = this.inGameMenu.customWidth * this.inGameMenu.scale.x
 		this.inGameMenu.scale.set(this.topCanvas.height / (this.inGameMenu.customWidth) * 0.5)// / this.inGameMenu.scale.y)
@@ -807,9 +807,11 @@ export default class TetraScreen extends Screen {
 		this.mainMenuSettings.y = toLoc.y + scaledWidth;
 
 
-		this.openTutorialButton.scale.set(this.inGameMenu.scale.x);
-		this.openTutorialButton.x = toLoc.x + scaledWidth;
-		this.openTutorialButton.y = toLoc.y + scaledWidth;
+		this.useBomb.x = this.bottomUICanvas.width / 2
+		this.useBomb.y = this.bottomUICanvas.height / 2
+		//this.useBomb.scale.set(this.inGameMenu.scale.x);
+		// this.useBomb.x = toLoc.x + scaledWidth;
+		// this.useBomb.y = toLoc.y + scaledWidth;
 
 	}
 	hideInGameElements(delay = 0) {
@@ -834,7 +836,7 @@ export default class TetraScreen extends Screen {
 		TweenMax.killTweensOf(this.cardsContainer);
 		TweenMax.killTweensOf(this.gridContainer);
 		this.mainMenuSettings.visible = false;
-		this.openTutorialButton.visible = false;
+		this.useBomb.visible = true;
 		TweenMax.to(this.cardsContainer, 0.5, { delay: 1.25, alpha: 1 })
 		TweenMax.to(this.gridContainer, 0.1, { alpha: 1 })
 		if (this.currentCard) {
@@ -853,7 +855,7 @@ export default class TetraScreen extends Screen {
 		this.startScreenContainer.show(force, force ? 0.2 : 0.75);
 		this.gameRunning = false;
 		this.mainMenuSettings.visible = true;
-		this.openTutorialButton.visible = true;
+		this.useBomb.visible = true;
 		this.startScreenContainer.showCloseButton();
 		this.hideInGameElements();
 		window.SOUND_MANAGER.speedUpSoundTrack(1);
@@ -874,7 +876,7 @@ export default class TetraScreen extends Screen {
 		this.startScreenContainer.showFromGame(force, force ? 0.2 : 0.75, redirectData);
 		this.gameRunning = false;
 		this.mainMenuSettings.visible = true;
-		this.openTutorialButton.visible = true;
+		this.useBomb.visible = true;
 		this.startScreenContainer.showCloseButton();
 		this.hideInGameElements();
 		window.SOUND_MANAGER.speedUpSoundTrack(1);
@@ -1197,6 +1199,13 @@ export default class TetraScreen extends Screen {
 		this.trailMarker.arrowsUp.tint = colorScheme.arrowTrailColor;
 
 	}
+	replaceForBomb(){
+		if(this.currentCard){
+			this.currentCard.isABomb();
+			this.chargeBombBar.currentChargeValue = 0;
+			this.chargeBombBar.setProgressBar2(0)
+		}
+	}
 	startNewLevel(data, isEasy) {
 		this.currentLevelData = data;
 		this.startScreenContainer.newLevelStarted();
@@ -1264,7 +1273,7 @@ export default class TetraScreen extends Screen {
 
 
 		this.chargeBombBar.currentChargeValue = 0;
-		this.chargeBombBar.maxValue = 100;
+		this.chargeBombBar.maxValue = 1000;
 
 		this.blockGameTimer = 0;
 		this.currentSectionPiecesKilled = 0;
@@ -1520,6 +1529,8 @@ export default class TetraScreen extends Screen {
 		this.chargeBombBar.currentChargeValue += points;
 
 		let targetBar = Math.min(1, this.chargeBombBar.currentChargeValue / this.chargeBombBar.maxValue)
+
+		this.useBomb.visible = targetBar >= 1;
 		this.chargeBombBar.setProgressBar2(targetBar)
 
 		TweenMax.to(this, 0.2, {
@@ -1862,9 +1873,9 @@ export default class TetraScreen extends Screen {
 			this.hashUsed = true;
 		}
 
-		if (this.colorTweenBomb.isActive && this.chargeBombBar.visible) {
-			this.chargeBombBar.icon.tint = this.colorTweenBomb.currentColor;
-		}
+		// if (this.colorTweenBomb.isActive && this.chargeBombBar.visible) {
+		// 	this.chargeBombBar.icon.tint = this.colorTweenBomb.currentColor;
+		// }
 
 		if (this.colorTween.isActive) {
 			if (this.fireworksTimer <= 0) {
@@ -1926,17 +1937,18 @@ export default class TetraScreen extends Screen {
 
 		if (this.chargeBombBar.visible) {
 
-			if (targetBar >= 1) {
-				this.chargeBombBar.sin += delta * 5;
-				this.chargeBombBar.icon.scale.x = utils.lerp(this.chargeBombBar.icon.scale.x, 0.75 + this.chargeBombBar.scaleOffset.x, 0.1)
-				this.chargeBombBar.icon.scale.y = utils.lerp(this.chargeBombBar.icon.scale.y, 0.75 + this.chargeBombBar.scaleOffset.y, 0.1)
-			} else {
-				this.chargeBombBar.sin += delta;
-				this.chargeBombBar.icon.scale.x = utils.lerp(this.chargeBombBar.icon.scale.x, 0.5 + this.chargeBombBar.scaleOffset.x, 0.1)
-				this.chargeBombBar.icon.scale.y = utils.lerp(this.chargeBombBar.icon.scale.y, 0.5 + this.chargeBombBar.scaleOffset.y, 0.1)
-			}
-			this.chargeBombBar.scaleOffset.x = Math.cos(this.chargeBombBar.sin) * 0.1
-			this.chargeBombBar.scaleOffset.y = Math.sin(this.chargeBombBar.sin) * 0.1
+			this.useBomb.visible = targetBar >= 1;
+			// if (targetBar >= 1) {
+			// 	this.chargeBombBar.sin += delta * 5;
+			// 	this.chargeBombBar.icon.scale.x = utils.lerp(this.chargeBombBar.icon.scale.x, 0.75 + this.chargeBombBar.scaleOffset.x, 0.1)
+			// 	this.chargeBombBar.icon.scale.y = utils.lerp(this.chargeBombBar.icon.scale.y, 0.75 + this.chargeBombBar.scaleOffset.y, 0.1)
+			// } else {
+			// 	this.chargeBombBar.sin += delta;
+			// 	this.chargeBombBar.icon.scale.x = utils.lerp(this.chargeBombBar.icon.scale.x, 0.5 + this.chargeBombBar.scaleOffset.x, 0.1)
+			// 	this.chargeBombBar.icon.scale.y = utils.lerp(this.chargeBombBar.icon.scale.y, 0.5 + this.chargeBombBar.scaleOffset.y, 0.1)
+			// }
+			// this.chargeBombBar.scaleOffset.x = Math.cos(this.chargeBombBar.sin) * 0.1
+			// this.chargeBombBar.scaleOffset.y = Math.sin(this.chargeBombBar.sin) * 0.1
 		}
 
 		if (this.currentCard) {
