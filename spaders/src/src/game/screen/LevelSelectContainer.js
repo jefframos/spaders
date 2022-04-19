@@ -21,6 +21,8 @@ export default class LevelSelectContainer extends PIXI.Container {
 
         this.planetButtons = [];
 
+        this.isSinglePlanet = null;
+
 
         this.levelBackShape = new PIXI.Graphics().beginFill(0xFF0000).drawRect(0, 0, config.width, config.height * 0.8);
         this.addChild(this.levelBackShape)
@@ -242,7 +244,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         this.tierButtons.forEach(element => {
             if (element.data) {
                 this.refreshTier(element, element.data, orderTier);
-                orderTier ++;
+                orderTier++;
             }
         });
         this.levelCards.forEach(element => {
@@ -482,9 +484,14 @@ export default class LevelSelectContainer extends PIXI.Container {
 
 
         this.gameScreen.mainMenuSettings.collapse();
-        if (this.currentUISection > 0) {
+
+        let firstId = 0;
+        if (this.isSinglePlanet) {
+            firstId = 1
+        }
+        if (this.currentUISection > firstId) {
             this.currentUISection--
-            window.SOUND_MANAGER.play('shoosh', { volume: 0.1 })
+            window.SOUND_MANAGER.play('shoosh', { volume: 0.2 })
             if (this.currentUISection <= 0) {
                 this.verticalBar.setSectionLabel("")
                 this.refreshNavButtons()
@@ -497,7 +504,7 @@ export default class LevelSelectContainer extends PIXI.Container {
             this.tierButtons.forEach(element => {
                 if (element.data) {
                     this.refreshTier(element, element.data, orderTier);
-                    orderTier ++
+                    orderTier++
                 }
             });
         } else {
@@ -549,6 +556,10 @@ export default class LevelSelectContainer extends PIXI.Container {
                 //sectionButton.setColor(window.colorsOrder[this.planetButtons.length % window.colorsOrder.length])
                 sectionButton.on('mouseup', this.openSection.bind(this, section)).on('touchend', this.openSection.bind(this, section));
             }
+        }
+        if (this.planetButtons.length <= 1) {
+
+            this.isSinglePlanet = this.planetButtons[0].section;
         }
     }
 
@@ -651,7 +662,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         }
         window.COOKIE_MANAGER.updateColorPallete(targetPallet);
         this.gameScreen.startScreenContainer.updateLinesColor();
-        window.SOUND_MANAGER.play('shoosh', { volume: 0.1 })
+        window.SOUND_MANAGER.play('shoosh', { volume: 0.2 })
         this.gameScreen.mainMenuSettings.collapse();
         this.currentUISection = 1
 
@@ -773,7 +784,7 @@ export default class LevelSelectContainer extends PIXI.Container {
 
         this.addWorldBackgroundColor();
 
-        window.SOUND_MANAGER.play('shoosh', { volume: 0.1 })
+        window.SOUND_MANAGER.play('shoosh', { volume: 0.2 })
         this.gameScreen.mainMenuSettings.collapse();
         this.currentUISection = 2
 
@@ -851,6 +862,9 @@ export default class LevelSelectContainer extends PIXI.Container {
             element.x = element.spring.x//utils.lerp(element.x, index * this.mainCanvas.width - this.currentUISection * this.mainCanvas.width, 0.5)
         }
 
+        // if(this.currentUISection){
+        //     console.log(this.mainCanvas.width - this.currentUISection * this.mainCanvas.width, this.tiersView.x)
+        // }
         this.tiersView.visible = this.currentUISection == 1
         this.levelsView.visible = this.currentUISection == 2
         this.centerLevels();
@@ -909,7 +923,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         if (COOKIE_MANAGER.isTierComplete(data[0].tier)) {
 
             let progress = COOKIE_MANAGER.getTierProgress(data[0].tier)
-            if(progress >= 1){                
+            if (progress >= 1) {
                 levelTierButton.setCrown()
             }
             levelTierButton.setCompleteState()
@@ -941,7 +955,7 @@ export default class LevelSelectContainer extends PIXI.Container {
 
         levelTierButton.setLargeButtonMode();
         let debugNames = window.COOKIE_MANAGER.debug.showAllNames;
-        if(debugNames){
+        if (debugNames) {
             levelTierButton.updateDebugLabel(data[0].tierName + " - " + tierOrder)
         }
     }
@@ -982,39 +996,39 @@ export default class LevelSelectContainer extends PIXI.Container {
             let levelEnabled = false;
             if (data.require[0] < 0) {
                 levelEnabled = true;
-            }else{
+            } else {
                 levelEnabled = false;
                 data.require.forEach(element => {
-                    if(element < 0 || element >= data.tier.data.length){
+                    if (element < 0 || element >= data.tier.data.length) {
                         console.log("Required level doesnt exist", element, data.tier.data);
                         levelEnabled = true;
-                    }else{
+                    } else {
                         let idSave = data.tier.data[element].idSaveData;
-                        if(window.COOKIE_MANAGER.findLevel(idSave)){
+                        if (window.COOKIE_MANAGER.findLevel(idSave)) {
                             levelEnabled = true;
                         }
                     }
                 });
             }
             levelButton.updateIcon(new PIXI.Sprite());
-            if(levelEnabled){
+            if (levelEnabled) {
 
                 levelButton.updateLabel("~" + data.estimateTime2)//,
                 levelButton.incompleteMode();
-            }else{
+            } else {
                 levelButton.lockMode();
 
             }
             levelButton.setLargeButtonMode(false);
         }
 
-        if(debugNames){
-        console.log(data, data.require)
+        if (debugNames) {
+            console.log(data, data.require)
 
             let findID = 0;
             for (let index = 0; index < data.tier.data.length; index++) {
                 const element = data.tier.data[index];
-                if(element.id == data.id){
+                if (element.id == data.id) {
                     findID = index
                 }
             }
@@ -1205,16 +1219,26 @@ export default class LevelSelectContainer extends PIXI.Container {
 
 
     }
+
+    updateStartState() {
+        if (this.isSinglePlanet) {
+            this.currentUISection = 1
+            this.disableClickCounter = 0;
+            this.openSection(this.isSinglePlanet)
+            setTimeout(() => {
+                
+                this.centerLevels()
+
+                this.resetDrags();
+            }, 30);
+        }
+    }
     centerLevels() {
         if (this.shouldUpdate) {
 
-            this.drawPlanets(this.planetButtons, 20, this.unscaledLinePlanetSize, true, 2);
-
-            //REMOVE THIS
-            //this.tierMap.visible = false;
-            //this.drawGrid(this.tierButtons, 20, this.unscaledTierButtonSize, false);
-            //this.drawGrid(this.levelCards, 20, this.unscaledCardSize, false, 3);
-            //this.drawGrid(this.levelCards, 20, this.unscaledCardSize, true);
+            if (!this.isSinglePlanet){
+                this.drawPlanets(this.planetButtons, 20, this.unscaledLinePlanetSize, true, 2);
+            }
 
             if (this.levelSplitCards.length > 0 && this.currentUISection == 2) {
                 this.drawGrid(this.levelSplitCards, 20, this.levelSplitCards[0].customSize, true);
@@ -1234,7 +1258,6 @@ export default class LevelSelectContainer extends PIXI.Container {
         this.sectionsView.x = this.mainCanvas.x + this.mainCanvas.width
 
         if (this.tiersView.width < window.innerWidth) {
-
             this.tiersView.targetX = this.mainCanvas.x + this.mainCanvas.width / 2 - this.tiersView.width / 2// - this.currentGridOffset.x//this.mainCanvas.x + this.currentGridOffset.x * 2
         } else {
             this.tiersView.targetX = this.mainCanvas.x + this.currentGridOffset.x * 2

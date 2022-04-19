@@ -503,6 +503,7 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.playLine.interactive = false;
 		this.backButton.interactive = true;
 
+		this.chooseLevelPanel.updateStartState();
 		this.chooseLevelPanel.visible = true;
 		this.levelSelectionContainer.visible = true;
 		//this.levelSelectionContainer.y = -this.y;

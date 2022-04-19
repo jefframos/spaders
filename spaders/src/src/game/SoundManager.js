@@ -41,6 +41,11 @@ export default class SoundManager {
         if(!window.COOKIE_MANAGER.settings.sound){
             this.mute();
         }
+
+        this.thisLoopPlay = {}
+    }
+    update(){
+        this.thisLoopPlay = {};
     }
     mute(){
         this.sound.muteAll();
@@ -70,6 +75,13 @@ export default class SoundManager {
         let soundData = this.findById(id)
         if (!soundData) {
             return;
+        }
+
+        //this avoinds the same sound to be played on the same loop, update needs to be called for this to work
+        if(this.thisLoopPlay[id]){
+            return
+        }else{
+            this.thisLoopPlay[id] = true;
         }
 
         if(data.volume){

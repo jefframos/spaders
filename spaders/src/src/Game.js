@@ -263,6 +263,10 @@ export default class Game {
 		this.screenManager.update(this.dt)
 		this.renderer.render(this.stage);
 		requestAnimationFrame(this.update.bind(this));
+
+		if(window.SOUND_MANAGER && window.SOUND_MANAGER.update){
+			window.SOUND_MANAGER.update();
+		}
 	}
 	resize2() {
 		if(this.innerResolution && this.innerResolution.width == window.innerWidth && this.innerResolution.height == window.innerHeight){
