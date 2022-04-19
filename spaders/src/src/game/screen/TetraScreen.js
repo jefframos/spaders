@@ -624,7 +624,8 @@ export default class TetraScreen extends Screen {
 		let sizeBar = { width: 300, height: 20 }
 
 		this.chargeBombBar = new ProgressBar(sizeBar);
-
+		this.chargeBombBar.currentChargeValue = 0;
+		this.chargeBombBar.maxValue = 1000;
 		this.fallBar = new ProgressBar(sizeBar);
 
 
@@ -645,8 +646,7 @@ export default class TetraScreen extends Screen {
 
 		this.chargeBombBar.visible = true;
 
-		this.chargeBombBar.currentChargeValue = 0;
-		this.chargeBombBar.maxValue = 100;
+	
 
 		let bombIcon = new PIXI.Sprite.fromFrame(window.IMAGE_DATA.enemyBombImages);
 		bombIcon.anchor.set(0, 0.5);
@@ -1270,10 +1270,7 @@ export default class TetraScreen extends Screen {
 		this.topUIContainer.y = this.gameCanvas.y - 500
 		this.bottomUIContainer.y = this.gameCanvas.y + this.gameCanvas.height - this.bottomUICanvas.height + 500
 
-
-
 		this.chargeBombBar.currentChargeValue = 0;
-		this.chargeBombBar.maxValue = 100;
 
 		this.blockGameTimer = 0;
 		this.currentSectionPiecesKilled = 0;
@@ -1715,7 +1712,7 @@ export default class TetraScreen extends Screen {
 			return;
 		}
 		let isBombPossible = (this.chargeBombBar.currentChargeValue / this.chargeBombBar.maxValue) >= 1
-		
+
 		if(!isBombPossible){
 			if (!first && this.board.findOutGameOver()) {
 				return;
