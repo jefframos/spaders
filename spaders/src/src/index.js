@@ -695,7 +695,7 @@ function calcEstimatedTime(data) {
 
 	}
 
-	data.estimateTime = data.totalBoardLife / 0.45 + 30;
+	data.estimateTime = data.totalBoardLife / 0.54 + 30;
 	data.estimateTimeHard = data.totalBoardLife / 0.4 + 30;
 	data.emptySpaceByPieces = data.totalEmptySpaces / data.totalPieces;
 

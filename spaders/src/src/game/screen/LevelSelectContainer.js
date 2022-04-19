@@ -956,7 +956,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         levelTierButton.setLargeButtonMode();
         let debugNames = window.COOKIE_MANAGER.debug.showAllNames;
         if (debugNames) {
-            levelTierButton.updateDebugLabel(data[0].tierName + " - " + tierOrder)
+            levelTierButton.updateDebugLabel(data[0].tierName + " - " + tierOrder + "\n" +utils.convertNumToTime(Math.ceil(totalEstimatedTime)))
         }
     }
     refreshSplitCard(levelButton, data) {
@@ -1032,7 +1032,7 @@ export default class LevelSelectContainer extends PIXI.Container {
                     findID = index
                 }
             }
-            levelButton.updateDebugLabel(data.id + " - " + findID)
+            levelButton.updateDebugLabel(data.id + " - " + findID + "\n"+ data.estimateTime2)
         }
 
     }
