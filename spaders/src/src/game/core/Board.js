@@ -28,6 +28,8 @@ export default class Board {
 
 		this.chainExplosionTime = 300;
 
+		this.explosionAreaChain=[];
+
 	}
 	update(delta) {
 		for (var i = 0; i < this.cards.length; i++) {
@@ -41,6 +43,7 @@ export default class Board {
 		this.updateNumberOfEntities();
 
 		if (this.nextTurnTimer > 0) {
+			console.log(this.nextTurnTimer)
 			this.nextTurnTimer -= delta;
 
 			if (this.nextTurnTimer <= 0) {
@@ -51,7 +54,8 @@ export default class Board {
 	startNewGame() {
 		this.updateNumberOfEntities();
 		this.newGameFinished = false;
-
+		this.explosionAreaChain=[];
+		this.explosionChain=[];
 
 	}
 	postProcessAddons() {
@@ -131,10 +135,9 @@ export default class Board {
 				}
 
 			}
-			//console.log('firstLineShots', firstLineShots)
 		}
 
-		return firstLineShots
+		return availableSpaces
 	}
 	resetBoard() {
 		this.ignoreComboCards = false;
@@ -204,7 +207,9 @@ export default class Board {
 			return self.indexOf(item) == pos;
 		})
 	}
-
+	getLastCardOnLane(laneID){
+		return this.cards[laneID][this.cards[laneID].length - 1]
+	}
 	isPossibleShot(laneID) {
 		if (laneID >= this.cards.length || laneID < 0) {
 			return false;
@@ -369,7 +374,7 @@ export default class Board {
 				(actionPosId.i >= 0 && actionPosId.i < window.GRID.i) &&
 				(actionPosId.j >= 0 && actionPosId.j < window.GRID.j)) {
 				cardFound = this.cards[actionPosId.i][actionPosId.j];
-				if (cardFound && !cardFound.dead && cardFound.canBeAttacked && !this.explosionAreaChain.includes(cardFound)) {//} && !cardFound.isCard) {
+				if (cardFound && !cardFound.dead && cardFound.canBeAttacked && (this.explosionAreaChain && !this.explosionAreaChain.includes(cardFound))) {//} && !cardFound.isCard) {
 					// findCards = true;					
 					//this.cards[actionPosId.i][actionPosId.j] = 0
 					this.explosionAreaChain.push(cardFound);
@@ -534,7 +539,7 @@ export default class Board {
 		)
 	}
 	explodeCard(cardFound, customPosition) {
-		if (this.explosionChain.includes(cardFound)) {
+		if (this.explosionChain && this.explosionChain.includes(cardFound)) {
 			return;
 		}
 		let cardGlobal = customPosition ? customPosition : cardFound.getGlobalPosition({ x: 0, y: 0 });
@@ -682,7 +687,7 @@ export default class Board {
 
 		//console.log(list, autoDestroyCardData)
 		if (autoDestroyCardData) {
-			this.addTurnTime(list.length * 0.2)
+			this.addTurnTime(list.length * 0.21)
 			setTimeout(function () {
 				// let arrow = autoDestroyCardData.card.getArrow(this.getOpposite(autoDestroyCardData.zone.label));
 				let arrow = autoDestroyCardData.cardFound.getArrow(autoDestroyCardData.zone.label);
@@ -762,7 +767,7 @@ export default class Board {
 			}.bind(this), list.length * 200 / window.TIME_SCALE + 100);
 		} else {
 			card.convertCard();
-			this.addTurnTime(0.1)
+			this.addTurnTime(0.2)
 			//console.log("when has explosion old", hasExplosionTime)
 			// setTimeout(() => {
 			// 	this.nextRound();
@@ -863,6 +868,7 @@ export default class Board {
 		})
 	}
 	removeCardFromList(card) {
+		this.cards[card.pos.i][card.pos.j] = 0;
 		for (let index = 0; index < this.allCards.length; index++) {
 			const element = this.allCards[index];
 			if (element.cardID == card.cardID) {
@@ -919,7 +925,6 @@ export default class Board {
 			card.destroy();
 			card.convertCard();
 
-			console.log(card.endGameIfDie)
 			if (!card.canDie) {
 				this.OnGameOver.dispatch();
 			} else if (card.endGameIfDie) {
@@ -938,7 +943,9 @@ export default class Board {
 		//console.log("findOutGameOver", this.firstLineShots())
 		if (this.firstLineShots() <= 0) {
 			this.OnGameOver.dispatch();
+			return true;
 		}
+		return false
 	}
 	removeCard(i, j) {
 		if (this.cards[i][j]) {

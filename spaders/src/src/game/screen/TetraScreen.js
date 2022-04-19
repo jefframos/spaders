@@ -144,12 +144,12 @@ export default class TetraScreen extends Screen {
 		var out = [];
 		var len = a.length;
 		var j = 0;
-		for(var i = 0; i < len; i++) {
-			 var item = a[i];
-			 if(seen[item] !== 1) {
-				   seen[item] = 1;
-				   out[j++] = item;
-			 }
+		for (var i = 0; i < len; i++) {
+			var item = a[i];
+			if (seen[item] !== 1) {
+				seen[item] = 1;
+				out[j++] = item;
+			}
 		}
 		return out;
 	}
@@ -646,7 +646,7 @@ export default class TetraScreen extends Screen {
 		this.chargeBombBar.visible = true;
 
 		this.chargeBombBar.currentChargeValue = 0;
-		this.chargeBombBar.maxValue = 1000;
+		this.chargeBombBar.maxValue = 100;
 
 		let bombIcon = new PIXI.Sprite.fromFrame(window.IMAGE_DATA.enemyBombImages);
 		bombIcon.anchor.set(0, 0.5);
@@ -1199,8 +1199,8 @@ export default class TetraScreen extends Screen {
 		this.trailMarker.arrowsUp.tint = colorScheme.arrowTrailColor;
 
 	}
-	replaceForBomb(){
-		if(this.currentCard){
+	replaceForBomb() {
+		if (this.currentCard) {
 			this.currentCard.isABomb();
 			this.chargeBombBar.currentChargeValue = 0;
 			this.chargeBombBar.setProgressBar2(0)
@@ -1273,7 +1273,7 @@ export default class TetraScreen extends Screen {
 
 
 		this.chargeBombBar.currentChargeValue = 0;
-		this.chargeBombBar.maxValue = 1000;
+		this.chargeBombBar.maxValue = 100;
 
 		this.blockGameTimer = 0;
 		this.currentSectionPiecesKilled = 0;
@@ -1530,7 +1530,7 @@ export default class TetraScreen extends Screen {
 
 		let targetBar = Math.min(1, this.chargeBombBar.currentChargeValue / this.chargeBombBar.maxValue)
 
-		this.useBomb.visible = targetBar >= 1;
+		//this.useBomb.visible = targetBar >= 1;
 		this.chargeBombBar.setProgressBar2(targetBar)
 
 		TweenMax.to(this, 0.2, {
@@ -1641,6 +1641,7 @@ export default class TetraScreen extends Screen {
 		}, 750);
 	}
 	OnStartNextRound(card, first = false) {
+		console.log("NEXT")
 		if (!this.gameRunning) {
 			return;
 		}
@@ -1713,6 +1714,13 @@ export default class TetraScreen extends Screen {
 		if (!this.gameRunning) {
 			return;
 		}
+		let isBombPossible = (this.chargeBombBar.currentChargeValue / this.chargeBombBar.maxValue) >= 1
+		
+		if(!isBombPossible){
+			if (!first && this.board.findOutGameOver()) {
+				return;
+			}
+		}
 		this.blockGameTimer = 0.2;
 		this.updateQueue();
 		this.currentCard = this.cardQueue[0];
@@ -1752,7 +1760,7 @@ export default class TetraScreen extends Screen {
 
 			// setTimeout(() => {
 			// 	this.board.findOutGameOver();
-			// }, 1000);
+			// }, 500);
 		} else {
 
 		}
@@ -1937,7 +1945,7 @@ export default class TetraScreen extends Screen {
 
 		if (this.chargeBombBar.visible) {
 
-			this.useBomb.visible = targetBar >= 1;
+			//this.useBomb.visible = targetBar >= 1;
 			// if (targetBar >= 1) {
 			// 	this.chargeBombBar.sin += delta * 5;
 			// 	this.chargeBombBar.icon.scale.x = utils.lerp(this.chargeBombBar.icon.scale.x, 0.75 + this.chargeBombBar.scaleOffset.x, 0.1)
@@ -2210,14 +2218,33 @@ export default class TetraScreen extends Screen {
 
 
 		if (!this.board.isPossibleShot(this.mousePosID)) {
-			console.log("isPossibleShot")
+			if(this.currentCard.isBomb){
+				let cardLast = this.board.getLastCardOnLane(this.mousePosID)
+				//if player have bomb and theres no space to shoot
+				if(cardLast){
+					this.board.canGoNext = true;
+					cardLast.isABomb();
+					this.board.explodeCard(cardLast);
+					this.board.removeCardFromList(cardLast);
+					cardLast.destroy();
+					
+					this.currentCard.destroy();
+					this.currentCard = null;
+	
+					this.board.addTurnTime(0.3)
+	
+					this.isFirstClick = false;
+					this.currentRound++;
+				}
+			}
 			return;
 		}
 
 
 		this.isFirstClick = false;
 		this.currentRound++;
-		let nextRoundTimer = this.board.shootCard(this.mousePosID, this.currentCard);
+		
+		this.board.shootCard(this.mousePosID, this.currentCard);
 
 		this.cardsContainer.addChild(this.currentCard)
 
