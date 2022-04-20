@@ -5,7 +5,7 @@ import config from '../../config';
 import utils from '../../utils';
 
 export default class ProgressBar extends PIXI.Container {
-    constructor(size) {
+    constructor(size, border = 0) {
         super();
 
         this.tapToStart = new PIXI.Container();
@@ -19,7 +19,7 @@ export default class ProgressBar extends PIXI.Container {
         this.infoLabel.x = 125
         this.infoLabel.y = 19
 
-        this.round = size.height / 2
+        this.round = border?border:size.height / 2
         this.sizeHeight = size.height
         this.sizeWidth = size.width
 
@@ -72,8 +72,9 @@ export default class ProgressBar extends PIXI.Container {
         this.updateColor();
         this.setProgressBar(this.currentValue, this.currentColor)
     }
-    updateBackgroundColor(color){
+    updateBackgroundColor(color, alpha = 1){
         this.loadingBarFillBack.tint = color;
+        this.loadingBarFillBack.alpha = alpha;
     }
     updateBackgroundFront(color){
         this.currentColor = color;

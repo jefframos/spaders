@@ -30,7 +30,7 @@ export default class UIRectLabel extends PIXI.Container {
         this.backShape.height = 60
 
 
-		this.label = new PIXI.Text("name", { font: '30px', fill: 0xFFFFFF, align: center?'center':'left', fontFamily: window.STANDARD_FONT1 });
+		this.label = new PIXI.Text("name", { font: '30px', wight: '800',fill: 0xFFFFFF, align: center?'center':'left', fontFamily: window.STANDARD_FONT1});
 		this.title = new PIXI.Text("title", {
 			font: '20px',
 			fill: 0x000000,
@@ -58,6 +58,10 @@ export default class UIRectLabel extends PIXI.Container {
     }
     updateFontSize(size) {
 		this.label.style.fontSize = size;
+	}
+	addStroke(stroke, strokeThickness) {
+		this.label.style.stroke = stroke;
+		this.label.style.strokeThickness = strokeThickness;
 	}
     updateColorScheme() {
         let colorScheme = colorSchemes.getCurrentColorScheme();

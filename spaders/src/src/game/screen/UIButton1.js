@@ -20,12 +20,12 @@ export default class UIButton1 extends PIXI.Container {
 		// this.backShape.endFill();
 		// this.backShape.alpha = 1
 
-		let padding = 8;
+		this.padding = 8;
 		this.backShapeBorder = new PIXI.mesh.NineSlicePlane(
 			PIXI.Texture.fromFrame('smallButton.png'), 10, 10, 10, 10)
-		this.backShapeBorder.width = width + padding
-		this.backShapeBorder.height = width + padding
-		this.backShapeBorder.pivot.set((width + padding) / 2)
+		this.backShapeBorder.width = width + this.padding
+		this.backShapeBorder.height = width + this.padding
+		this.backShapeBorder.pivot.set((width + this.padding) / 2)
 		this.backShapeBorder.tint = iconColor;
 
 		//this.backShape = PIXI.Sprite.fromFrame('largeCard.png')
@@ -54,6 +54,21 @@ export default class UIButton1 extends PIXI.Container {
 		this.interactive = true;
 		this.buttonMode = true;
 	}
+	resize(width, height){
+		if(!width || !height){
+			return
+		}
+		this.backShapeBorder.width = width + this.padding
+		this.backShapeBorder.height = height + this.padding
+		this.backShapeBorder.pivot.set((width + this.padding) / 2)
+
+		this.backShape.width = width
+		this.backShape.height = height
+		this.backShape.pivot.set(width / 2)
+
+		this.icon.scale.set(this.backShape.height / this.icon.height * 0.7 * this.icon.scale.x)
+
+	}
 	updateRotation(rot, invertIcon = false) {
 		this.backShapeBorder.rotation = rot
 		this.backShape.rotation = rot
@@ -76,6 +91,14 @@ export default class UIButton1 extends PIXI.Container {
 		if (this.movesLabel) {
 			this.movesLabel.style.fill = color;
 		}
+	}
+	replaceIcon(icon){
+		if(this.icon && this.icon.parent){
+			this.icon.parent.removeChild(this.icon);
+		}
+		this.icon = icon;		
+		this.mainContainer.addChild(this.icon);
+
 	}
 	updateMenuColors(textColor, backgroundColor){
 		this.backShapeBorder.tint = backgroundColor;

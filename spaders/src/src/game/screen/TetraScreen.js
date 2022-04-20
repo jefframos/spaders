@@ -621,19 +621,20 @@ export default class TetraScreen extends Screen {
 		this.movesRect = new UIRectLabel(config.colors.green, 'fire-96x96-1408702.png');
 		this.bottomUINewContainer.addChild(this.movesRect)
 
-		this.scoreRect = new UIRectLabel(config.colors.red2, 'icons8-star-48.png', false);
-		this.UIInGame.addChild(this.scoreRect)
-		this.scoreRect.updateFontSize(20);
-
-		let sizeBar = { width: 300, height: 20 }
-
-		this.chargeBombBar = new ProgressBar(sizeBar);
+		
+		let sizeBar = { width: config.width, height: 50 }
+		
+		this.chargeBombBar = new ProgressBar(sizeBar, 16);
 		this.chargeBombBar.currentChargeValue = 0;
 		this.chargeBombBar.maxValue = 1000;
+		this.chargeBombBar.updateBackgroundColor(0, 0.2)
 		this.fallBar = new ProgressBar(sizeBar);
-
-
-		this.UIInGame.addChild(this.chargeBombBar)
+		this.bottomUINewContainer.addChild(this.chargeBombBar)
+		
+		this.scoreRect = new UIRectLabel(config.colors.red2, 'icons8-star-48.png', false);
+		this.scoreRect.backShape.visible = false;
+		this.bottomUINewContainer.addChild(this.scoreRect)
+		this.scoreRect.updateFontSize(20);
 		this.gameContainer.addChild(this.fallBar)
 
 		this.fallBar.visible = false;
@@ -651,21 +652,22 @@ export default class TetraScreen extends Screen {
 		this.chargeBombBar.visible = true;
 
 
+	
+		//bombIconTop.scale = bombIcon.scale
+
 		let nuke = new SprteSpritesheetAnimation()
 
 
 		nuke.addLayer("l0_nuke_", {min:1, max:5}, 0.15)
 		nuke.addLayer("l1_nuke_", {min:1, max:5}, 0.15)	
 
-		nuke.pivot.y = 64
-		nuke.scale.set(0.25);
-		nuke.x = 305;
-		nuke.y = 10;
-		//bombIconTop.scale = bombIcon.scale
+		//nuke.scale.set(0.25);
+
+
 		this.chargeBombBar.icon = nuke;
 		this.chargeBombBar.sin = 0;
 		this.chargeBombBar.scaleOffset = { x: 0, y: 0 };
-		this.chargeBombBar.addChild(nuke);
+		//this.chargeBombBar.addChild(nuke);
 
 
 
@@ -691,9 +693,14 @@ export default class TetraScreen extends Screen {
 
 
 		this.useBomb = new UIButton1(config.colors.white, "l0_nuke_1.png", config.colors.white);
+		this.useBomb.resize(100, 100)
 		this.bottomUINewContainer.addChild(this.useBomb)
+		nuke.scale.set(0.5);
+		this.useBomb.replaceIcon(nuke);
+		nuke.x = -36
+		nuke.y = -36
 		this.useBomb.onClick.add(() => { this.replaceForBomb() });
-
+		this.useBomb.updateRotation(0);
 		this.endGameScreenContainer.hide(true);
 
 		this.hashUsed = false;
@@ -761,6 +768,11 @@ export default class TetraScreen extends Screen {
 		this.backQueueShape.tint = colorScheme.background;
 		this.backQueueShape.alpha = 0.75;
 
+		this.chargeBombBar.updateBackgroundColor(colorScheme.background)
+
+		this.scoreRect.addStroke(colorScheme.background, 4)
+
+
 	}
 
 
@@ -769,11 +781,13 @@ export default class TetraScreen extends Screen {
 		let nameLevelSize = { width: this.timeLabelStatic.x - this.pointsLabel.x, height: 40 }
 		nameLevelSize.width += this.timeLabelStatic.width
 
+		this.timerRect.visible = false;
+		this.movesRect.visible = false;
 
 		this.timerRect.scale.set(this.bottomUICanvas.height / this.timerRect.backShape.height * 0.3)
 		this.movesRect.scale.set(this.timerRect.scale.x)
-		this.scoreRect.scale.set(this.timerRect.scale.x * 1.5)
-		this.chargeBombBar.scale.set(this.scoreRect.scale.x)
+		this.scoreRect.scale.set(this.bottomUICanvas.height / this.scoreRect.backShape.height * 0.5)
+		this.chargeBombBar.scale.set(((this.bottomUICanvas.width - 20) * 0.85) / this.chargeBombBar.width * this.chargeBombBar.scale.x)
 		this.fallBar.scale.set(this.scoreRect.scale.x)
 		this.timerRect.x = this.bottomUICanvas.x + this.bottomUICanvas.width - this.timerRect.width - this.bottomUICanvas.height * 0.1
 		this.movesRect.x = this.bottomUICanvas.x + this.bottomUICanvas.width - this.timerRect.width - this.bottomUICanvas.height * 0.1
@@ -784,10 +798,18 @@ export default class TetraScreen extends Screen {
 		this.timerRect.y = this.movesRect.y - this.timerRect.height - 2 //- this.bottomUICanvas.height * 0.05
 
 
-		//this.scoreRect.y = this.mainMenuContainer.y//this.movesRect.y + (this.movesRect.height / this.movesRect.scale.y) - (this.scoreRect.height / this.scoreRect.scale.y)
-		this.scoreRect.x = this.topCanvas.x + 20;
-		this.chargeBombBar.x = this.topCanvas.x + this.topCanvas.width / 2 - this.chargeBombBar.width / 2;
-		this.chargeBombBar.y = this.scoreRect.y + this.scoreRect.height / 2 - this.chargeBombBar.height * 0.12
+		this.scoreRect.y = this.bottomUICanvas.height * 0.5
+		this.scoreRect.x = 15;
+		this.chargeBombBar.x = 10
+		this.chargeBombBar.y = this.scoreRect.y -  this.bottomUICanvas.height * 0.025//+ this.scoreRect.height / 2 - this.chargeBombBar.height * 0.12
+
+
+		this.useBomb.scale.set( (this.bottomUICanvas.width - 40) * 0.15 / this.useBomb.width * this.useBomb.scale.x);
+		this.useBomb.visible = true;
+
+		this.useBomb.x = this.chargeBombBar.x + this.chargeBombBar.width + this.useBomb.width / 2 + 5
+		this.useBomb.y = this.chargeBombBar.y - this.useBomb.height / 2 +this.chargeBombBar.height
+
 
 		this.fallBar.rotation = -Math.PI / 2;
 		this.fallBar.x = this.topCanvas.x + this.gridContainer.x + this.gridContainer.width + (40 * this.scoreRect.scale.x);
@@ -805,7 +827,7 @@ export default class TetraScreen extends Screen {
 			this.shootingGun.visible = false;
 			this.shootingGun.y = this.trailHorizontal.y;
 			this.containerQueue.visible = true;
-			this.containerQueue.x = this.bottomUICanvas.height * 0.1
+			this.containerQueue.x = 0//this.bottomUICanvas.height * 0.1
 			this.containerQueue.y = this.trailHorizontal.y + CARD.height//this.timerRect.y + 8//this.movesRect.y + this.movesRect.height - this.containerQueue.height
 		}else{
 			this.containerQueue.visible = false;
@@ -829,8 +851,7 @@ export default class TetraScreen extends Screen {
 		this.mainMenuSettings.y = toLoc.y + scaledWidth;
 
 
-		this.useBomb.x = this.bottomUICanvas.width / 2
-		this.useBomb.y = this.bottomUICanvas.height / 2
+		
 		//this.useBomb.scale.set(this.inGameMenu.scale.x);
 		// this.useBomb.x = toLoc.x + scaledWidth;
 		// this.useBomb.y = toLoc.y + scaledWidth;
@@ -858,7 +879,7 @@ export default class TetraScreen extends Screen {
 		TweenMax.killTweensOf(this.cardsContainer);
 		TweenMax.killTweensOf(this.gridContainer);
 		this.mainMenuSettings.visible = false;
-		this.useBomb.visible = true;
+		this.useBomb.visible = false;
 		TweenMax.to(this.cardsContainer, 0.5, { delay: 1.25, alpha: 1 })
 		TweenMax.to(this.gridContainer, 0.1, { alpha: 1 })
 		if (this.currentCard) {
@@ -877,7 +898,7 @@ export default class TetraScreen extends Screen {
 		this.startScreenContainer.show(force, force ? 0.2 : 0.75);
 		this.gameRunning = false;
 		this.mainMenuSettings.visible = true;
-		this.useBomb.visible = true;
+		this.useBomb.visible = false;
 		this.startScreenContainer.showCloseButton();
 		this.hideInGameElements();
 		window.SOUND_MANAGER.speedUpSoundTrack(1);
@@ -1541,7 +1562,7 @@ export default class TetraScreen extends Screen {
 
 		this.timerRect.updateLavel(utils.convertNumToTime(Math.ceil(this.currentTime)))
 		this.movesRect.updateLavel(utils.formatPointsLabel(Math.ceil(this.currentRound)))
-		this.scoreRect.updateLavel(Math.ceil(this.currentPointsLabel), '', false, { x: -10, y: 5 })
+		this.scoreRect.updateLavel(Math.ceil(this.currentPointsLabel), '', false, { x: -15, y: -4 })
 
 	}
 	addRandomPiece() {
@@ -1552,7 +1573,7 @@ export default class TetraScreen extends Screen {
 
 		let targetBar = Math.min(1, this.chargeBombBar.currentChargeValue / this.chargeBombBar.maxValue)
 
-		this.useBomb.visible = targetBar >= 1;
+		//this.useBomb.visible = targetBar >= 1;
 		this.chargeBombBar.setProgressBar2(targetBar)
 
 		TweenMax.to(this, 0.2, {
@@ -1959,11 +1980,20 @@ export default class TetraScreen extends Screen {
 
 
 		let targetBar = Math.min(1, this.chargeBombBar.currentChargeValue / this.chargeBombBar.maxValue)
-		this.useBomb.visible = targetBar >= 1;
+		// this.useBomb.visible = targetBar >= 1;
 
 		if (this.chargeBombBar.visible) {
 
 			this.chargeBombBar.icon.update(delta)
+
+			if(targetBar >= 1){				
+				this.chargeBombBar.icon.tintLayer(0,this.colorTweenBomb.currentColor)
+				this.useBomb.interactive = true
+			}else{
+				
+				this.useBomb.interactive = false
+				this.chargeBombBar.icon.tintLayer(0,0xDDDDDD)
+			}
 		}
 
 		if (this.currentCard) {
@@ -2426,8 +2456,8 @@ export default class TetraScreen extends Screen {
 		}
 
 
-		utils.resizeToFit({ width: this.gameCanvas.width, height: this.gameCanvas.height * 0.08 }, this.topCanvas)
-		utils.resizeToFit({ width: this.gameCanvas.width, height: this.gameCanvas.height * 0.125 }, this.bottomUICanvas)
+		utils.resizeToFit({ width: this.gameCanvas.width, height: this.gameCanvas.height * 0.06 }, this.topCanvas)
+		utils.resizeToFit({ width: this.gameCanvas.width, height: this.gameCanvas.height * 0.110 }, this.bottomUICanvas)
 
 
 		//console.log(this.bottomUICanvas.scale.y, this.bottomUICanvas.height)
@@ -2444,10 +2474,10 @@ export default class TetraScreen extends Screen {
 
 
 		this.gridContainer.x = this.gameCanvas.x + this.gameCanvas.width / 2 - (this.gridContainer.width) / 2 + this.grid.backgroundOffset.x / 4
-		this.gridContainer.y = this.gameCanvas.y + this.gameCanvas.height / 2 - this.gridContainer.height / 2 - this.topCanvas.height + this.grid.backgroundOffset.y / 2
+		this.gridContainer.y = this.gameCanvas.y + this.gameCanvas.height / 2 - this.gridContainer.height / 2 - this.topCanvas.height * 2//+ this.grid.backgroundOffset.y / 2
 		//utils.centerObject(this.gridContainer, this.gameCanvas)
 
-		this.gridContainer.y = Math.max(this.gameCanvas.y + (this.topCanvas.height * this.topUIContainer.scale.y), this.gridContainer.y)
+		this.gridContainer.y = Math.max(this.gameCanvas.y + this.topCanvas.height * 0.5, this.gridContainer.y)
 
 		this.cardsContainer.x = this.gridContainer.x;
 		this.cardsContainer.y = this.gridContainer.y;
