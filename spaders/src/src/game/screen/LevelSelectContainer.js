@@ -1094,7 +1094,6 @@ export default class LevelSelectContainer extends PIXI.Container {
         this.verticalBar.visible = false;
     }
     selectLevel(data) {
-        console.log(data)
         if (this.disableClickCounter > 0) {
             return;
         }

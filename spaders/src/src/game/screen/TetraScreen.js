@@ -757,7 +757,9 @@ export default class TetraScreen extends Screen {
 		let colorScheme = colorSchemes.getCurrentColorScheme();
 		this.timerRect.updateColor(colorScheme.fontColor);
 		this.movesRect.updateColor(colorScheme.fontColor);
-		this.scoreRect.updateColor(colorScheme.fontColor);
+		this.scoreRect.updateColor(0xFFFFFF);
+
+		this.useBomb.setColor(colorScheme.fontColor)
 
 		let colorSchemeGrid = colorScheme.grid;
 		this.backQueueShape.texture = PIXI.Texture.fromFrame(colorSchemeGrid.spriteRect)
@@ -912,7 +914,6 @@ export default class TetraScreen extends Screen {
 	mainmenuStateFromGame(force = false, redirectData = null) {
 
 		this.removeTrails();
-		console.log("TO MAIN MENU")
 		window.SOUND_MANAGER.playMainMenu();
 		this.mainMenuSettings.collapse();
 		this.endGameScreenContainer.hide(force);
@@ -1303,7 +1304,7 @@ export default class TetraScreen extends Screen {
 		// 	utils.addBlockers(this.currentLevelData.pieces, 2, 19, true)
 		// }
 		//this.chargeBombBar.visible = true;
-
+		this.updateColorScheme()
 		this.bottomUIContainer.visible = true;
 		this.chargeBombBar.sin = 0;
 		this.chargeBombBar.scaleOffset = { x: 0, y: 0 };
@@ -1315,6 +1316,9 @@ export default class TetraScreen extends Screen {
 
 		this.topUIContainer.y = this.gameCanvas.y - 500
 		this.bottomUIContainer.y = this.gameCanvas.y + this.gameCanvas.height - this.bottomUICanvas.height + 500
+
+
+		this.chargeBombBar.setProgressBar2(0)
 
 		this.chargeBombBar.currentChargeValue = 0;
 
@@ -1981,7 +1985,10 @@ export default class TetraScreen extends Screen {
 
 		let targetBar = Math.min(1, this.chargeBombBar.currentChargeValue / this.chargeBombBar.maxValue)
 		// this.useBomb.visible = targetBar >= 1;
-
+		for (let index = 0; index < this.cardQueue.length; index++) {
+			const element = this.cardQueue[index];
+			element.update(delta)
+		}
 		if (this.chargeBombBar.visible) {
 
 			this.chargeBombBar.icon.update(delta)

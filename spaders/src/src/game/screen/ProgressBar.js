@@ -130,7 +130,7 @@ export default class ProgressBar extends PIXI.Container {
         this.currentValue = value;
         this.loadingBarFill.tint = color;
         let targetWidth = (this.sizeWidth - this.round / 2) * this.currentValue;
-        targetWidth = Math.max(targetWidth, 10);
+        targetWidth = Math.max(targetWidth, 0);
         TweenMax.killTweensOf(this.loadingBarFill);
         TweenMax.to(this.loadingBarFill, 0.5, {width:targetWidth});
 
