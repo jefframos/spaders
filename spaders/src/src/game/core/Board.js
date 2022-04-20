@@ -43,7 +43,6 @@ export default class Board {
 		this.updateNumberOfEntities();
 
 		if (this.nextTurnTimer > 0) {
-			console.log(this.nextTurnTimer)
 			this.nextTurnTimer -= delta;
 
 			if (this.nextTurnTimer <= 0) {

@@ -26,6 +26,7 @@ import PopUpOverlay from './PopUpOverlay';
 import ProgressBar from './ProgressBar';
 import Spring from '../effects/Spring';
 import SpecialCardsManager from '../core/SpecialCardsManager';
+import SprteSpritesheetAnimation from './SprteSpritesheetAnimation';
 
 export default class TetraScreen extends Screen {
 	constructor(label) {
@@ -602,7 +603,10 @@ export default class TetraScreen extends Screen {
 		this.UIContainer.addChild(this.mainMenuContainer)
 
 		this.containerQueue = new PIXI.Container();
-		this.bottomUINewContainer.addChild(this.containerQueue)
+		this.frontGridContainer.addChild(this.containerQueue)
+
+		this.shootingGun = new PIXI.Sprite.fromFrame('shooting.png');
+		this.frontGridContainer.addChild(this.shootingGun)
 
 		let colorScheme = colorSchemes.getCurrentColorScheme().grid;
 		this.backQueueShape = new PIXI.mesh.NineSlicePlane(
@@ -646,17 +650,22 @@ export default class TetraScreen extends Screen {
 
 		this.chargeBombBar.visible = true;
 
-	
 
-		let bombIcon = new PIXI.Sprite.fromFrame(window.IMAGE_DATA.enemyBombImages);
-		bombIcon.anchor.set(0, 0.5);
-		bombIcon.scale.set(0.25);
-		bombIcon.x = 305;
-		bombIcon.y = 10;
-		this.chargeBombBar.icon = bombIcon;
+		let nuke = new SprteSpritesheetAnimation()
+
+
+		nuke.addLayer("l0_nuke_", {min:1, max:5}, 0.15)
+		nuke.addLayer("l1_nuke_", {min:1, max:5}, 0.15)	
+
+		nuke.pivot.y = 64
+		nuke.scale.set(0.25);
+		nuke.x = 305;
+		nuke.y = 10;
+		//bombIconTop.scale = bombIcon.scale
+		this.chargeBombBar.icon = nuke;
 		this.chargeBombBar.sin = 0;
 		this.chargeBombBar.scaleOffset = { x: 0, y: 0 };
-		this.chargeBombBar.addChild(bombIcon);
+		this.chargeBombBar.addChild(nuke);
 
 
 
@@ -681,7 +690,7 @@ export default class TetraScreen extends Screen {
 		this.addChild(this.mainMenuSettings)
 
 
-		this.useBomb = new UIButton1(config.colors.white, window.IMAGE_DATA.enemyBombImages, config.colors.white);
+		this.useBomb = new UIButton1(config.colors.white, "l0_nuke_1.png", config.colors.white);
 		this.bottomUINewContainer.addChild(this.useBomb)
 		this.useBomb.onClick.add(() => { this.replaceForBomb() });
 
@@ -786,10 +795,23 @@ export default class TetraScreen extends Screen {
 		this.fallBar.alpha = this.cardsContainer.alpha;
 
 
-		this.containerQueue.scale.set(this.bottomUICanvas.height / CARD.height * 0.5)
-		this.containerQueue.x = this.bottomUICanvas.height * 0.1
-		this.containerQueue.y = this.timerRect.y + 8//this.movesRect.y + this.movesRect.height - this.containerQueue.height
-
+		if(this.gameRunning && this.cardQueue.length > 0){
+			
+			
+			this.shootingGun.scale.set(CARD.height / this.shootingGun.height * this.shootingGun.scale.y)
+			if(this.currentCard){
+				this.shootingGun.x = this.currentCard.x
+			}
+			this.shootingGun.visible = false;
+			this.shootingGun.y = this.trailHorizontal.y;
+			this.containerQueue.visible = true;
+			this.containerQueue.x = this.bottomUICanvas.height * 0.1
+			this.containerQueue.y = this.trailHorizontal.y + CARD.height//this.timerRect.y + 8//this.movesRect.y + this.movesRect.height - this.containerQueue.height
+		}else{
+			this.containerQueue.visible = false;
+			this.shootingGun.visible = false;
+		}
+		
 		//console.log()
 		// // // // this.backButton.scale.set(this.topCanvas.height / (this.backButton.height / this.backButton.scale.y) * 0.7)// / this.backButton.scale.y)
 		// // // this.backButton.x = this.topCanvas.x + this.topCanvas.width - this.backButton.width * 0.5 - this.backButton.width * 0.25;
@@ -1198,6 +1220,9 @@ export default class TetraScreen extends Screen {
 		let colorScheme = colorSchemes.getCurrentColorScheme();
 		this.trailMarker.arrowsUp.tint = colorScheme.arrowTrailColor;
 
+		this.frontGridContainer.addChild(this.shootingGun)
+
+
 	}
 	replaceForBomb() {
 		if (this.currentCard) {
@@ -1527,7 +1552,7 @@ export default class TetraScreen extends Screen {
 
 		let targetBar = Math.min(1, this.chargeBombBar.currentChargeValue / this.chargeBombBar.maxValue)
 
-		//this.useBomb.visible = targetBar >= 1;
+		this.useBomb.visible = targetBar >= 1;
 		this.chargeBombBar.setProgressBar2(targetBar)
 
 		TweenMax.to(this, 0.2, {
@@ -1878,10 +1903,6 @@ export default class TetraScreen extends Screen {
 			this.hashUsed = true;
 		}
 
-		// if (this.colorTweenBomb.isActive && this.chargeBombBar.visible) {
-		// 	this.chargeBombBar.icon.tint = this.colorTweenBomb.currentColor;
-		// }
-
 		if (this.colorTween.isActive) {
 			if (this.fireworksTimer <= 0) {
 				this.spawnFireworks();
@@ -1938,27 +1959,18 @@ export default class TetraScreen extends Screen {
 
 
 		let targetBar = Math.min(1, this.chargeBombBar.currentChargeValue / this.chargeBombBar.maxValue)
-
+		this.useBomb.visible = targetBar >= 1;
 
 		if (this.chargeBombBar.visible) {
 
-			//this.useBomb.visible = targetBar >= 1;
-			// if (targetBar >= 1) {
-			// 	this.chargeBombBar.sin += delta * 5;
-			// 	this.chargeBombBar.icon.scale.x = utils.lerp(this.chargeBombBar.icon.scale.x, 0.75 + this.chargeBombBar.scaleOffset.x, 0.1)
-			// 	this.chargeBombBar.icon.scale.y = utils.lerp(this.chargeBombBar.icon.scale.y, 0.75 + this.chargeBombBar.scaleOffset.y, 0.1)
-			// } else {
-			// 	this.chargeBombBar.sin += delta;
-			// 	this.chargeBombBar.icon.scale.x = utils.lerp(this.chargeBombBar.icon.scale.x, 0.5 + this.chargeBombBar.scaleOffset.x, 0.1)
-			// 	this.chargeBombBar.icon.scale.y = utils.lerp(this.chargeBombBar.icon.scale.y, 0.5 + this.chargeBombBar.scaleOffset.y, 0.1)
-			// }
-			// this.chargeBombBar.scaleOffset.x = Math.cos(this.chargeBombBar.sin) * 0.1
-			// this.chargeBombBar.scaleOffset.y = Math.sin(this.chargeBombBar.sin) * 0.1
+			this.chargeBombBar.icon.update(delta)
 		}
 
 		if (this.currentCard) {
 			this.currentCard.update(delta)
 			this.trailHorizontal.y = this.currentCard.y - this.offsetCard.y;
+
+			this.containerQueue.y = this.trailHorizontal.y
 			//console.log(this.trailHorizontal)
 			this.trailHorizontal.tint = this.currentCard.currentColor;
 		}
@@ -2407,7 +2419,6 @@ export default class TetraScreen extends Screen {
 
 
 		utils.scaleSize(this.gameCanvas, innerResolution, this.ratio)
-		//utils.resizeToFitAR({width:this.bottomUICanvas.width * 0.8, height:this.bottomUICanvas.height * 0.4},this.containerQueue)
 		utils.resizeToFitAR({ width: this.gameCanvas.width * 0.95, height: this.gameCanvas.height * 0.75 }, this.gridContainer)
 
 		if (this.gridContainer.scale.x > 1) {

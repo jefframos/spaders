@@ -722,6 +722,45 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">shooting.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0,0</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>42,42,84,84</rect>
+                <key>scale9Paddings</key>
+                <rect>42,42,84,84</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">spaderBomb1/l0_nuke_1.png</key>
+            <key type="filename">spaderBomb1/l0_nuke_2.png</key>
+            <key type="filename">spaderBomb1/l0_nuke_3.png</key>
+            <key type="filename">spaderBomb1/l0_nuke_4.png</key>
+            <key type="filename">spaderBomb1/l0_nuke_5.png</key>
+            <key type="filename">spaderBomb1/l1_nuke_1.png</key>
+            <key type="filename">spaderBomb1/l1_nuke_2.png</key>
+            <key type="filename">spaderBomb1/l1_nuke_3.png</key>
+            <key type="filename">spaderBomb1/l1_nuke_4.png</key>
+            <key type="filename">spaderBomb1/l1_nuke_5.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0,0</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>36,36,72,72</rect>
+                <key>scale9Paddings</key>
+                <rect>36,36,72,72</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">verticalbar.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -925,6 +964,8 @@
             <filename>newEnemies/bomb.png</filename>
             <filename>planets/planet2</filename>
             <filename>planets/planetZero</filename>
+            <filename>shooting.png</filename>
+            <filename>spaderBomb1</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

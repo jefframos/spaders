@@ -5,17 +5,17 @@
     },
     "activeFile": "debug/debug.tmx",
     "expandedProjectPaths": [
-        "tutorial",
         "templates",
-        "world",
+        "tutorial",
         "how-to-play",
-        "videogames",
+        "world",
         "debug",
+        "basics",
+        "movies",
+        "main",
         "synth",
         "gb",
-        "basics",
-        "main",
-        "movies"
+        "videogames"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -81,7 +81,7 @@
         },
         "debug/debug.tmx": {
             "scale": 0.6522518382352941,
-            "selectedLayer": 16,
+            "selectedLayer": 14,
             "viewCenter": {
                 "x": 482.94229549778055,
                 "y": 512.0721482420912

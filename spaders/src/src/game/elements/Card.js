@@ -602,7 +602,14 @@ export default class Card extends PIXI.Container {
 	isABomb() {
 		this.isBomb = true;
 		//this.enemySprite.setTexture( PIXI.Texture.fromImage(window.IMAGE_DATA.enemyBombImages[0]));
-		this.enemySprite.setTexture(PIXI.Texture.fromFrame(window.IMAGE_DATA.enemyImagesFrame[Math.floor(0)]));
+		//this.enemySprite.setTexture(PIXI.Texture.fromFrame(window.IMAGE_DATA.enemyImagesFrame[Math.floor(0)]));
+
+		this.idleAnimationLayer1 = []
+		this.idleAnimationLayer2 = []
+		for (let index = 1; index <= 5; index++) {
+			this.idleAnimationLayer1.push("l0_nuke_" + index + ".png")
+			this.idleAnimationLayer2.push("l1_nuke_" + index + ".png")
+		}
 
 		this.startCrazyMood();
 		this.removeActionZones();
