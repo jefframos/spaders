@@ -505,7 +505,7 @@ export default class Board {
 		let tempCardList = [];
 		for (var i = 0; i < this.cards.length; i++) {
 			for (var j = 0; j < this.cards[i].length; j++) {
-				if (this.cards[i][j] && !this.cards[i][j].crazyMood && cardToIgnore != this.cards[i][j] && !this.cards[i][j].isBlockerPivot()) {
+				if (this.cards[i][j] && !this.cards[i][j].crazyMood && cardToIgnore != this.cards[i][j] && (this.cards[i][j].isBlockerPivot && !this.cards[i][j].isBlockerPivot())) {
 					tempCardList.push(this.cards[i][j]);
 				}
 			}

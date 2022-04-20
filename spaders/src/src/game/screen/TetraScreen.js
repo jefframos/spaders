@@ -628,7 +628,7 @@ export default class TetraScreen extends Screen {
 		this.chargeBombBar.currentChargeValue = 0;
 		this.chargeBombBar.maxValue = 1000;
 		this.chargeBombBar.updateBackgroundColor(0, 0.2)
-		this.fallBar = new ProgressBar(sizeBar);
+		this.fallBar = new ProgressBar(sizeBar, 16);
 		this.bottomUINewContainer.addChild(this.chargeBombBar)
 		
 		this.scoreRect = new UIRectLabel(config.colors.red2, 'icons8-star-48.png', false);
@@ -639,13 +639,21 @@ export default class TetraScreen extends Screen {
 
 		this.fallBar.visible = false;
 
-		let spaderIcon = new PIXI.Sprite.fromFrame("l0_spader_1_1.png");
-		spaderIcon.anchor.set(0, 0.5);
-		spaderIcon.scale.set(0.35);
-		spaderIcon.rotation = Math.PI / 2
-		spaderIcon.x = 310;
-		spaderIcon.y = - 15;
+
+		let spaderIcon = new SprteSpritesheetAnimation()
+
+
+		spaderIcon.addLayer("l0_spader_1_", {min:1, max:5}, 0.15)
+		spaderIcon.addLayer("l1_spader_1_", {min:1, max:5}, 0.15)	
+
+
 		this.fallBar.icon = spaderIcon;
+
+		spaderIcon.rotation = Math.PI / 2
+		spaderIcon.scale.set(0.35)
+		spaderIcon.x = 30
+
+
 		this.fallBar.addChild(spaderIcon);
 
 
@@ -771,6 +779,7 @@ export default class TetraScreen extends Screen {
 		this.backQueueShape.alpha = 0.75;
 
 		this.chargeBombBar.updateBackgroundColor(colorScheme.background)
+		this.fallBar.updateBackgroundColor(colorScheme.background)
 
 		this.scoreRect.addStroke(colorScheme.background, 4)
 
@@ -1319,8 +1328,9 @@ export default class TetraScreen extends Screen {
 
 
 		this.chargeBombBar.setProgressBar2(0)
-
 		this.chargeBombBar.currentChargeValue = 0;
+		this.fallBar.setProgressBar2(0)
+		this.fallBar.currentChargeValue = 0;
 
 		this.blockGameTimer = 0;
 		this.currentSectionPiecesKilled = 0;
@@ -1549,7 +1559,7 @@ export default class TetraScreen extends Screen {
 		if (this.currentLevelData.gameMode == 1 || this.currentLevelData.gameMode == 3) {
 			this.fallBar.visible = true;
 
-			this.fallBar.icon.tint = colorSchemes.colorSchemes[scheme].list[0].color
+			this.fallBar.icon.tintLayer(0, colorSchemes.colorSchemes[scheme].list[0].color)
 		} else {
 			this.fallBar.visible = false;
 		}
@@ -1988,6 +1998,9 @@ export default class TetraScreen extends Screen {
 		for (let index = 0; index < this.cardQueue.length; index++) {
 			const element = this.cardQueue[index];
 			element.update(delta)
+		}
+		if(this.fallBar.visible){
+			this.fallBar.icon.update(delta)
 		}
 		if (this.chargeBombBar.visible) {
 

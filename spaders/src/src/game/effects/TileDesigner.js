@@ -1,6 +1,7 @@
 export default class TileDesigner {
     constructor() {
         this.tilesID = {
+            TOP_ONLY: 'tile_1_4.png',
             TOP_LEFT: 'tile_1_0.png',
             TOP: 'tile_1_1.png',
             TOP_RIGHT: 'tile_1_2.png',
@@ -15,6 +16,7 @@ export default class TileDesigner {
         }
 
         this.tilesIDBorder = {
+            TOP_ONLY: 'tile_1_'+(0+21)+'.png',
             TOP_LEFT: 'tile_1_'+(0+18)+'.png',
             TOP: 'tile_1_'+(1+18)+'.png',
             TOP_RIGHT: 'tile_1_'+(2+18)+'.png',
@@ -53,6 +55,9 @@ export default class TileDesigner {
             let targetAssets = baseLayer? this.tilesID : this.tilesIDBorder
             if (!theresUp) {
                 if (!theresLeft) {
+                    if (!theresRight){
+                        return targetAssets.TOP_ONLY;
+                    }
                     return targetAssets.TOP_LEFT;
                 } else if (!theresRight) {
 
