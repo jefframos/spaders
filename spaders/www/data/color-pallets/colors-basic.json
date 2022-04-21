@@ -105,6 +105,7 @@
                     "life": 3.3
                 }
             ],
+            "bossColor": "0xFF5522",
             "dark": "0x111111",
             "logoColor": "0xFFFFFF",
             "fillBarColor": "0x7BCA93",

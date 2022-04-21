@@ -272,7 +272,28 @@ export default class Card extends PIXI.Container {
 		this.cardStats.scale.set(0.35)
 		this.cardStats.x = 5
 		this.cardStats.y = 5
-		this.cardStats.visible = true;
+		this.cardStats.visible = false;
+
+		this.idleAnimationLayer1 = [];
+		this.idleAnimationLayer2 = [];
+		for (let index = 1; index <= 5; index++) {
+			this.idleAnimationLayer1.push("l0_boss_0_" + index + ".png")
+			this.idleAnimationLayer2.push("l1_boss_0_" + index + ".png")
+		}
+
+		this.scaleRef = 1;
+
+
+		let bosscolor = colorSchemes.getCurrentColorScheme().bossColor;
+		if(bosscolor){
+
+			this.forceNewColor(bosscolor)
+		}
+
+		//this.life = 0;
+		this.removeActionZones();
+
+		this.updateSize()
 	}
 	startCrazyMood() {
 		this.crazyMood = true;
@@ -313,7 +334,7 @@ export default class Card extends PIXI.Container {
 		this.alpha = 1;
 		this.removeAllStates();
 
-
+		this.scaleRef = 0.7
 
 
 		this.removeCrazyMood();

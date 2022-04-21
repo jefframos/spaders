@@ -5,6 +5,7 @@ import { debug } from 'webpack';
 import colorSchemes from '../../colorSchemes';
 import config from '../../config';
 import utils from '../../utils';
+import Card from '../elements/Card';
 export default class Board {
 	constructor(game) {
 
@@ -31,11 +32,46 @@ export default class Board {
 		this.explosionAreaChain=[];
 
 	}
+	bossParticle(card, delta){
+		if(!card.particleTimer){
+			card.particleTimer = 2;
+//			card.particleTimer2 = 2;
+		}
+
+		card.particleTimer -= delta;
+//		card.particleTimer2 -= delta;
+		// if(card.particleTimer2 <= 0){
+		// 	card.particleTimer2 = 2.5;
+
+		// 	this.popCircle2(card.toGlobal({x:card.width/2, y:card.height/2}), card.currentColor);
+		// }
+		if(card.particleTimer <= 0){
+			card.particleTimer = 0.3;
+
+			let targetPos = card.enemySprite.toGlobal({x:card.enemySprite.width* Math.random() - card.enemySprite.width / 2, y:-card.enemySprite.height * 2})
+
+
+			this.game.fxContainer.addParticlesToScoreGravity(
+						1,
+						this.game.fxContainer.toLocal(targetPos),
+						null,
+						card.currentColor,
+						0,
+						-1.5 + 1 * Math.random(),
+						5 + 3 * Math.random(),
+						0.2 + 0.5 * Math.random()
+					)
+		}
+	}
 	update(delta) {
 		for (var i = 0; i < this.cards.length; i++) {
 			for (var j = 0; j < this.cards[i].length; j++) {
 				if (this.cards[i][j] && this.cards[i][j].update) {
 					this.cards[i][j].update(delta);
+
+					if(this.cards[i][j].endGameIfDie){
+						this.bossParticle(this.cards[i][j], delta)
+					}
 				}
 			}
 		}
@@ -625,7 +661,7 @@ export default class Board {
 							ease: Back.easeIn, onComplete: () => {
 								let arrowGlobal2 = arrow.getGlobalPosition({ x: 0, y: 0 });
 
-								this.popCircle(arrowGlobal2, card.currentColor);
+								//this.popCircle(arrowGlobal2, card.currentColor);
 
 
 							}
@@ -711,7 +747,7 @@ export default class Board {
 						x: arrow.x + 10 * zone.dir.x, y: arrow.y + 10 * zone.dir.y,
 						ease: Back.easeIn, onComplete: () => {
 							let arrowGlobal2 = arrow.getGlobalPosition({ x: 0, y: 0 });
-							this.popCircle(arrowGlobal2, card.currentColor);
+							//this.popCircle(arrowGlobal2, card.currentColor);
 						}
 					})
 					TweenMax.to(arrow, 0.2, {
@@ -790,10 +826,28 @@ export default class Board {
 
 		}
 	}
-	popCircle(pos, color = 0xFFFFFF) {
-		return;
+	popCircle2(pos, color = 0xFFFFFF) {
+		//return;
 		let convertedPosition = this.game.toLocal(pos)
-		let realRadius = CARD.width / 2 * this.game.gridContainer.scale.x * 0.25;
+		let realRadius = CARD.width / 2 * this.game.gridContainer.scale.x * 0.75;
+		let external = new PIXI.Graphics().lineStyle(1, color).drawCircle(0, 0, realRadius);
+		external.x = convertedPosition.x;
+		external.y = convertedPosition.y;
+		this.game.addChild(external);
+
+		external.alpha = 0.5
+		external.scale.set(0.5)
+		TweenMax.to(external.scale, 1, {
+			x: 1.5, y: 1.5, onComplete: () => {
+				external.parent.removeChild(external);
+
+			}
+		})
+	}
+	popCircle(pos, color = 0xFFFFFF) {
+		//return;
+		let convertedPosition = this.game.toLocal(pos)
+		let realRadius = CARD.width / 2 * this.game.gridContainer.scale.x * 0.35;
 		let external = new PIXI.Graphics().lineStyle(3, color).drawCircle(0, 0, realRadius);
 		external.x = convertedPosition.x;
 		external.y = convertedPosition.y;

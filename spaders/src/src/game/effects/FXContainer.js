@@ -247,20 +247,20 @@ export default class FXContainer extends PIXI.Container {
 
     }
 
-    addParticlesToScoreGravity(totalParticles, from, target, color, speedScale = 1) {
+    addParticlesToScoreGravity(totalParticles, from, target, color, speedScale = 1, customGravity = 0, customTimeToLive = 0, customScaleSpeed = 0) {
 
         for (let index = 0; index < totalParticles; index++) {
             let particle = this.getParticle();
             particle.anchor.set(0.5)
-            particle.scale.set(0.5)
+            particle.scale.set(0.35)
             particle.target = target;
             particle.targetPosition = target ? this.toLocal(target.getGlobalPosition()) : null;;
             particle.position = from;
             particle.tint = color;
             particle.alpha = 1;
-            particle.timeToLive = 4 + 2 * Math.random();
-            particle.scaleSpeed = target ? 0 : 1;
-            particle.gravity = this.particleSpeed * 0.01 + Math.random() * -this.particleSpeed * 0.005;
+            particle.timeToLive = customTimeToLive?customTimeToLive:4 + 2 * Math.random();
+            particle.scaleSpeed = customScaleSpeed?customScaleSpeed : (target ? 0 : 1);
+            particle.gravity = customGravity?customGravity : this.particleSpeed * 0.01 + Math.random() * -this.particleSpeed * 0.005;
             particle.speed = this.particleSpeedTarget;
             particle.acceleration = this.particleSpeedTarget * 0.5;
             particle.timeToStick = target ? Math.random() * 0.15 + 0.15 : 5;
