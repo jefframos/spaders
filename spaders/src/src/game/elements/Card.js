@@ -281,7 +281,7 @@ export default class Card extends PIXI.Container {
 			this.idleAnimationLayer2.push("l1_boss_0_" + index + ".png")
 		}
 
-		this.scaleRef = 1;
+		this.scaleRef = 0.7;
 
 
 		let bosscolor = colorSchemes.getCurrentColorScheme().bossColor;
