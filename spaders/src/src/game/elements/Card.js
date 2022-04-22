@@ -262,17 +262,37 @@ export default class Card extends PIXI.Container {
 		this.cardStats.setTexture(PIXI.Texture.fromFrame('tile_1_' + (32 * 10 + 9) + '.png'));
 		this.canDie = false;
 		this.cardStats.scale.set(0.5)
-		this.cardStats.x = 5
-		this.cardStats.y = 5
+		this.cardStats.x = 0
+		this.cardStats.y = CARD.height - this.cardStats.height * this.cardStats.scale.x - 4
 		this.cardStats.visible = true;
+
+		this.idleAnimationLayer1 = [];
+		this.idleAnimationLayer2 = [];
+		for (let index = 1; index <= 5; index++) {
+			this.idleAnimationLayer1.push("l0_heart_0_" + index + ".png")
+			this.idleAnimationLayer2.push("l1_heart_0_" + index + ".png")
+		}
+
+		this.scaleRef = 0.6;
+		let heartColor = colorSchemes.getCurrentColorScheme().heartColor;
+		if(heartColor){
+
+			this.forceNewColor(heartColor)
+		}
+
+		this.enemySpriteWhite.alpha = 1
+		//this.life = 0;
+		this.removeActionZones();
+
+		this.updateSize()
 	}
 	itEndGameIfDie() {
 		this.cardStats.setTexture(PIXI.Texture.fromFrame('tile_1_' + (32 * 10 + 7) + '.png'));
 		this.endGameIfDie = true;
 		this.cardStats.scale.set(0.35)
-		this.cardStats.x = 5
-		this.cardStats.y = 5
-		this.cardStats.visible = false;
+		this.cardStats.x = 0
+		this.cardStats.y = 0
+		this.cardStats.visible = true;
 
 		this.idleAnimationLayer1 = [];
 		this.idleAnimationLayer2 = [];
@@ -283,7 +303,7 @@ export default class Card extends PIXI.Container {
 
 		this.scaleRef = 0.7;
 
-
+		this.enemySpriteWhite.alpha = 1
 		let bosscolor = colorSchemes.getCurrentColorScheme().bossColor;
 		if(bosscolor){
 
@@ -361,6 +381,8 @@ export default class Card extends PIXI.Container {
 		}
 
 		this.addActionZones(totalSides, order);
+
+		this.enemySpriteWhite.alpha = 0.85
 	}
 	attacked(hits = 1) {
 		this.life -= hits;

@@ -593,9 +593,10 @@ function extractData(element, debug) {
 		data.colorPalletId = element.colorPalletId;
 		//data.colorPalletId = colorSchemes.findPallet(element.colorPalletId);
 
-		if (!element.isAddon && data.setAutoBlocker > 0) {
+		if (!element.isAddon && (data.setAutoBlocker > 0 || data.setAutoBlocker < 0)) {
 			//if(debug)
 			// console.log("AddBlocker",data.colorPalletId)
+			data.setAutoBlocker = Math.max(0,data.setAutoBlocker)
 			utils.addBlockers(data.pieces, data.setAutoBlocker, data.colorPalletId)
 		}
 

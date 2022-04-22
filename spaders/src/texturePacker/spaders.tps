@@ -771,6 +771,30 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">spaderHeart/l0_heart_0_1.png</key>
+            <key type="filename">spaderHeart/l0_heart_0_2.png</key>
+            <key type="filename">spaderHeart/l0_heart_0_3.png</key>
+            <key type="filename">spaderHeart/l0_heart_0_4.png</key>
+            <key type="filename">spaderHeart/l0_heart_0_5.png</key>
+            <key type="filename">spaderHeart/l1_heart_0_1.png</key>
+            <key type="filename">spaderHeart/l1_heart_0_2.png</key>
+            <key type="filename">spaderHeart/l1_heart_0_3.png</key>
+            <key type="filename">spaderHeart/l1_heart_0_4.png</key>
+            <key type="filename">spaderHeart/l1_heart_0_5.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0,0</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>54,54,108,108</rect>
+                <key>scale9Paddings</key>
+                <rect>54,54,108,108</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">verticalbar.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -977,6 +1001,7 @@
             <filename>shooting.png</filename>
             <filename>spaderBomb1</filename>
             <filename>spaderBoss</filename>
+            <filename>spaderHeart</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

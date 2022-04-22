@@ -5,17 +5,17 @@
     },
     "activeFile": "debug/debug.tmx",
     "expandedProjectPaths": [
-        "debug",
-        "gb",
+        "videogames",
         "movies",
-        "basics",
-        "world",
         "templates",
-        "how-to-play",
-        "synth",
+        "world",
         "tutorial",
-        "main",
-        "videogames"
+        "gb",
+        "how-to-play",
+        "debug",
+        "basics",
+        "synth",
+        "main"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {

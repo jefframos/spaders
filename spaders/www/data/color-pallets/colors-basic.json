@@ -105,6 +105,7 @@
                     "life": 3.3
                 }
             ],
+            "heartColor": "0xff5ede",
             "bossColor": "0xFF5522",
             "dark": "0x111111",
             "logoColor": "0xFFFFFF",
