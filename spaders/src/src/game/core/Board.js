@@ -599,7 +599,7 @@ export default class Board {
 
 		this.explosionChain.push(cardFound)
 
-		this.chainTimer += this.chainExplosionTime;
+		this.chainTimer = this.chainExplosionTime;
 
 		this.chainTimer = Math.min(this.chainTimer, this.chainExplosionTime * 5);
 		this.addTurnTime(this.chainTimer * 0.01)

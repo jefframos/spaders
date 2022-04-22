@@ -467,7 +467,6 @@ export default class TetraScreen extends Screen {
 	generateImage(levelData, size = 24, paddingBottom = 0, schemeID = 0, addPadding = true, ignoreEmpty = false) {
 
 		ignoreEmpty = true;
-		size = 6
 		if (window.imageThumbs[levelData.idSaveData]) {
 			let sprite = window.imageThumbs[levelData.idSaveData]
 			sprite.scale.set(1);
@@ -475,10 +474,14 @@ export default class TetraScreen extends Screen {
 			copy.setTexture(sprite.texture);
 			return copy;
 		}
-
+		
 		let container = new PIXI.Container();
 		let level = [];
-
+		size = 200 / levelData.piecesToDraw[0].length
+		size = Math.max(size, 6)
+		size = Math.min(size, 24)
+		size = Math.round(size)
+		
 		for (let i = 0; i < levelData.piecesToDraw.length; i++) {
 			let temp = []
 			for (let j = 0; j < levelData.piecesToDraw[i].length; j++) {
