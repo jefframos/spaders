@@ -747,6 +747,16 @@
             <key type="filename">spaderBomb1/l1_nuke_3.png</key>
             <key type="filename">spaderBomb1/l1_nuke_4.png</key>
             <key type="filename">spaderBomb1/l1_nuke_5.png</key>
+            <key type="filename">spaderBoss/l0_boss_0_1.png</key>
+            <key type="filename">spaderBoss/l0_boss_0_2.png</key>
+            <key type="filename">spaderBoss/l0_boss_0_3.png</key>
+            <key type="filename">spaderBoss/l0_boss_0_4.png</key>
+            <key type="filename">spaderBoss/l0_boss_0_5.png</key>
+            <key type="filename">spaderBoss/l1_boss_0_1.png</key>
+            <key type="filename">spaderBoss/l1_boss_0_2.png</key>
+            <key type="filename">spaderBoss/l1_boss_0_3.png</key>
+            <key type="filename">spaderBoss/l1_boss_0_4.png</key>
+            <key type="filename">spaderBoss/l1_boss_0_5.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -966,6 +976,7 @@
             <filename>planets/planetZero</filename>
             <filename>shooting.png</filename>
             <filename>spaderBomb1</filename>
+            <filename>spaderBoss</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

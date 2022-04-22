@@ -10,7 +10,10 @@ import Pool from './game/core/Pool';
 import SoundManager from './game/SoundManager';
 import colorSchemes from './colorSchemes';
 
-
+window.JOSIE = function (vl1, vl2) {
+	console.log((vl1 + vl2) * 0.5)
+	//console.log((vl1 * 0.4) + (vl2 * 0.6))
+}
 window.SAVE_DATA = function (data, filename, type = 'text/plain') {
 	var file = new Blob([data], { type: type });
 	if (window.navigator.msSaveOrOpenBlob) // IE10+
