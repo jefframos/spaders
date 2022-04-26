@@ -16,66 +16,66 @@
             "colorPalletId": 0,
             "levels": [
                 {
-                    "name": "---",
+                    "name": "--",
                     "dataPath": "how-to-play/shapes.json",
                     "levelOrderMap": "worldMaps/tier1/tier1-1.json",
                     "order": -1,
                     "require": -1
                 },
                 {
-                    "name": "---",
+                    "name": "--",
                     "dataPath": "how-to-play/creatures.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
                     "order": -1,
-                    "require": 0
+                    "require": -1
                 },
                 {
-                    "name": "---",
+                    "name": "--",
                     "dataPath": "how-to-play/people-set-1.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
                     "order": -1,
-                    "require": 1
+                    "require": -1
                 },
                 {
-                    "name": "---",
+                    "name": "--",
                     "dataPath": "how-to-play/things.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
                     "order": -1,
-                    "require": 2
+                    "require": -1
                 },
                 {
-                    "name": "---",
+                    "name": "--",
                     "dataPath": "basics/food.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
                     "order": -1,
-                    "require": 3
+                    "require": -1
                 },
                 {
                     "name": "2nd gen",
                     "dataPath": "videogames/largeSpaders.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
                     "order": -1,
-                    "require": 6
+                    "require": -1
                 },
                 {
                     "name": "2nd gen",
                     "dataPath": "videogames/spaders.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
                     "order": -1,
-                    "require": 5
+                    "require": -1
                 },
                 {
-                    "name": "---",
+                    "name": "--",
                     "dataPath": "debug/debug2.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
                     "order": -1,
-                    "require": 4
+                    "require": -1
                 }
             ]
         },
         {
             "color": "0xDDDDDD",
-            "ignore": false,
+            "ignore": true,
             "name": "Video Games",
             "displayName": "Video Game History",
             "tilemapPath": "worldMaps/world1.json",
@@ -100,7 +100,7 @@
         },
         {
             "color": "0xDDDDDD",
-            "ignore": false,
+            "ignore": true,
             "name": "Movies",
             "displayName": "Video Game History",
             "tilemapPath": "worldMaps/world1.json",
@@ -125,7 +125,7 @@
         },
         {
             "color": "0xDDDDDD",
-            "ignore": false,
+            "ignore": true,
             "name": "Pokemon",
             "displayName": "Video Game History",
             "tilemapPath": "worldMaps/world1.json",
@@ -157,7 +157,7 @@
         },
         {
             "color": "0xDDDDDD",
-            "ignore": false,
+            "ignore": true,
             "name": "Synthwave",
             "displayName": "Video Game History",
             "tilemapPath": "worldMaps/worldSynth.json",
@@ -165,21 +165,21 @@
             "colorPalletId": 1,
             "levels": [
                 {
-                    "name": "---",
+                    "name": "--",
                     "dataPath": "how-to-play/shapes-synt.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
                     "order": -1,
                     "require": -1
                 },
                 {
-                    "name": "---",
+                    "name": "--",
                     "dataPath": "synth/synth1.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
                     "order": -1,
                     "require": -1
                 },
                 {
-                    "name": "---",
+                    "name": "--",
                     "dataPath": "synth/sunset.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
                     "order": -1,
@@ -189,7 +189,7 @@
         },
         {
             "color": "0xDDDDDD",
-            "ignore": false,
+            "ignore": true,
             "name": "Game Boy",
             "displayName": "Video Game History",
             "tilemapPath": "worldMaps/world1.json",
@@ -235,7 +235,7 @@
         },
         {
             "color": "0xDDDDDD",
-            "ignore": false,
+            "ignore": true,
             "name": "Bossa",
             "displayName": "Video Game History",
             "tilemapPath": "worldMaps/world1.json",
@@ -243,7 +243,7 @@
             "colorPalletId": 1,
             "levels": [
                 {
-                    "name": "---",
+                    "name": "--",
                     "dataPath": "how-to-play/bossa.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
                     "order": -1,
@@ -253,7 +253,7 @@
         },
         {
             "color": "0xDDDDDD",
-            "ignore": false,
+            "ignore": true,
             "name": "Tutorial",
             "displayName": "Video Game History",
             "tilemapPath": "worldMaps/world1.json",
@@ -261,7 +261,7 @@
             "colorPalletId": 0,
             "levels": [
                 {
-                    "name": "---",
+                    "name": "--",
                     "dataPath": "tutorial/tutorial.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
                     "order": -1,
@@ -271,7 +271,7 @@
         },
         {
             "color": "0xDDDDDD",
-            "ignore": false,
+            "ignore": true,
             "name": "Debug",
             "displayName": "Video Game History",
             "tilemapPath": "worldMaps/world1.json",
@@ -279,7 +279,7 @@
             "colorPalletId": 0,
             "levels": [
                 {
-                    "name": "---",
+                    "name": "--",
                     "dataPath": "debug/debug.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
                     "order": -1,
