@@ -128,7 +128,7 @@ export default class EndGameContainer extends PIXI.Container {
             this.playNextLevel()
         });
         this.addChild(this.nextLevel);
-        this.nextLevel.addLabelLeft("NEXT");
+        this.nextLevel.addLabelLeft("CONTINUE");
 
         this.mainCanvas = new PIXI.Graphics().beginFill(0xFF0000).drawRect(0, 0, config.width, config.height);
         this.addChild(this.mainCanvas)
@@ -392,7 +392,8 @@ export default class EndGameContainer extends PIXI.Container {
         this.gameScreen.mainmenuStateFromGame(true)
     }
     playNextLevel() {
-        this.gameScreen.playNextLevel()
+        this.gameScreen.mainmenuStateFromGame(true)
+        //this.gameScreen.playNextLevel()
     }
     removeEvents() {
         //console.log("removeEvents")

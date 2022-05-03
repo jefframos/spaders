@@ -6,27 +6,27 @@ export default class SoundManager {
     constructor() {
         this.sound = sound
         this.soundData = []
-        this.soundData.push({ id: 'ingame-soundtrack', src: './audio/dream2.mp3', sound: null })
-        this.soundData.push({ id: 'main-soundtrack', src: './audio/dream1.mp3', sound: null })
-        this.soundData.push({ id: 'kill', src: './audio/fx/kill.mp3', sound: null })
-        this.soundData.push({ id: 'magic', src: './audio/fx/teleport.mp3', sound: null })
-        this.soundData.push({ id: 'pop', src: './audio/fx/pop.mp3', sound: null })
-        this.soundData.push({ id: 'pop2', src: './audio/fx/pop2.mp3', sound: null })
-        this.soundData.push({ id: 'revealSpecial', src: './audio/fx/getCrazyOne.mp3', sound: null })
-        this.soundData.push({ id: 'dropTile', src: './audio/fx/dropTile.mp3', sound: null })
-        this.soundData.push({ id: 'getThemAll', src: './audio/fx/getThemAll.mp3', sound: null })
-        this.soundData.push({ id: 'coin', src: './audio/fx/getstar.mp3', sound: null })
-        //this.soundData.push({ id: 'place', src: './audio/fx/place.mp3', sound: null })
-        this.soundData.push({ id: 'place', src: './audio/fx/Pop-Low-Pitch-Up-02.mp3', sound: null })
-        this.soundData.push({ id: 'fireworks', src: './audio/fx/Ping-Slide-Down.mp3', sound: null })
-        this.soundData.push({ id: 'shoosh', src: './audio/fx/shoosh.mp3', sound: null })
-        this.soundData.push({ id: 'coins_04', src: './audio/fx/coins_04.mp3', sound: null })
-        this.soundData.push({ id: 'tap', src: './audio/fx/Tap-01.mp3', sound: null })
-        this.soundData.push({ id: 'tap2', src: './audio/fx/Pop-Tone.mp3', sound: null })
-        this.soundData.push({ id: 'tapPlay', src: './audio/fx/Pop-Musical.mp3', sound: null })
-        this.soundData.push({ id: 'explosion', src: './audio/fx/Fire-Burst-Small-01.mp3', sound: null })
-        this.soundData.push({ id: 'startLevel', src: './audio/fx/Harp-Flutter-02.mp3', sound: null })
-        this.soundData.push({ id: 'endLevel', src: './audio/fx/Musical-Beep-Loop-02.mp3', sound: null })
+        this.soundData.push({ id: 'ingame-soundtrack', src: './audio/dream2.ogg', sound: null })
+        this.soundData.push({ id: 'main-soundtrack', src: './audio/dream1.ogg', sound: null })
+        this.soundData.push({ id: 'kill', src: './audio/fx/kill.ogg', sound: null })
+        this.soundData.push({ id: 'magic', src: './audio/fx/teleport.ogg', sound: null })
+        this.soundData.push({ id: 'pop', src: './audio/fx/pop.ogg', sound: null })
+        this.soundData.push({ id: 'pop2', src: './audio/fx/pop2.ogg', sound: null })
+        this.soundData.push({ id: 'revealSpecial', src: './audio/fx/getCrazyOne.ogg', sound: null })
+        this.soundData.push({ id: 'dropTile', src: './audio/fx/dropTile.ogg', sound: null })
+        this.soundData.push({ id: 'getThemAll', src: './audio/fx/getThemAll.ogg', sound: null })
+        this.soundData.push({ id: 'coin', src: './audio/fx/getstar.ogg', sound: null })
+        //this.soundData.push({ id: 'place', src: './audio/fx/place.ogg', sound: null })
+        this.soundData.push({ id: 'place', src: './audio/fx/Pop-Low-Pitch-Up-02.ogg', sound: null })
+        this.soundData.push({ id: 'fireworks', src: './audio/fx/Ping-Slide-Down.ogg', sound: null })
+        this.soundData.push({ id: 'shoosh', src: './audio/fx/shoosh.ogg', sound: null })
+        this.soundData.push({ id: 'coins_04', src: './audio/fx/coins_04.ogg', sound: null })
+        this.soundData.push({ id: 'tap', src: './audio/fx/Tap-01.ogg', sound: null })
+        this.soundData.push({ id: 'tap2', src: './audio/fx/Pop-Tone.ogg', sound: null })
+        this.soundData.push({ id: 'tapPlay', src: './audio/fx/Pop-Musical.ogg', sound: null })
+        this.soundData.push({ id: 'explosion', src: './audio/fx/Fire-Burst-Small-01.ogg', sound: null })
+        this.soundData.push({ id: 'startLevel', src: './audio/fx/Harp-Flutter-02.ogg', sound: null })
+        this.soundData.push({ id: 'endLevel', src: './audio/fx/Musical-Beep-Loop-02.ogg', sound: null })
 
         this.soundData.forEach(element => {
             element.sound = sound.add(element.id, element.src)
@@ -50,7 +50,7 @@ export default class SoundManager {
     mute(){
         this.sound.muteAll();
         this.isMute = true;
-    }
+    }   
     toggleMute(){
         this.isMute = this.sound.toggleMuteAll();
         window.COOKIE_MANAGER.updateSettings({sound:!this.isMute})

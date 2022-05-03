@@ -598,7 +598,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         let order = this.currentTier[0].tier.mapData.levelLayers[data.order >= 0 ? level.order : this.levelCards.length]
 
         //console.log(order)
-        this.levelMap.addTierLevel(levelButton, order)
+        this.levelMap.addTierLevel(levelButton, order, 1.5)
         //
         this.refreshCard(levelButton, data);
 
@@ -642,6 +642,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         levelTierButton.updateIcon(icon, 0.35, { x: 0, y: -10 });
         this.gameScreen.resizeToFitAR(this.unscaledTierButtonSize, levelTierButton)
 
+        //levelTierButton.scale.set(1.2)
         levelTierButton.tierData = level;
 
         this.refreshTier(levelTierButton, level.data, index)
@@ -726,7 +727,7 @@ export default class LevelSelectContainer extends PIXI.Container {
             let order = section.mapData.levelLayers[level.order >= 0 ? level.order : this.tierButtons.length];
             //console.log(order)
 
-            this.tierMap.addTierLevel(levelTierButton, order)
+            this.tierMap.addTierLevel(levelTierButton, order, 1.5)
             this.tierButtons.push(levelTierButton);
 
             //this.refreshTier(levelTierButton, levelTierButton.data);
@@ -935,7 +936,9 @@ export default class LevelSelectContainer extends PIXI.Container {
             //if(levelTierButton)
             // finishedLevels + "/" + countLevels
             levelTierButton.setProgressBar(count / data.length);
-            levelTierButton.updateLabel(count + "/" + data.length, { x: 0, y: -25 });
+            //levelTierButton.updateLabel(data.tierName, { x: 0, y: -25 });
+            levelTierButton.updateLabel(data[0].tierName + " (" + count + "/" + data.length + ")", { x: 0, y: -25 });
+            //levelTierButton.updateLabel(count + "/" + data.length, { x: 0, y: -25 });
 
             if (COOKIE_MANAGER.isTierLocked(data[0].tier)) {
                 levelTierButton.lockMode()
@@ -949,14 +952,16 @@ export default class LevelSelectContainer extends PIXI.Container {
         let debugThumb = window.COOKIE_MANAGER.debug.showAllThumbs;
         if (debugThumb) {
             levelTierButton.incompleteMode();
-            levelTierButton.updateLabel(count + "/" + data.length, { x: 0, y: -25 });
+            console.log(data)
+            //levelTierButton.updateLabel(count + "/" + data.length, { x: 0, y: -25 });
+            levelTierButton.updateLabel(data[0].tierName + "(" + count + "/" + data.length + ")", { x: 0, y: -25 });
             levelTierButton.updateLabelTop(data[0].tierName + ' ~' + utils.convertNumToTime(Math.ceil(totalEstimatedTime)))// + '    ' + '~' + utils.convertNumToTime(Math.ceil(totalEstimatedTimeHard)));
         }
 
         levelTierButton.setLargeButtonMode();
         let debugNames = window.COOKIE_MANAGER.debug.showAllNames;
         if (debugNames) {
-            levelTierButton.updateDebugLabel(data[0].tierName + " - " + tierOrder + "\n" +utils.convertNumToTime(Math.ceil(totalEstimatedTime)))
+            levelTierButton.updateDebugLabel(data[0].tierName + " - " + tierOrder + "\n" + utils.convertNumToTime(Math.ceil(totalEstimatedTime)))
         }
     }
     refreshSplitCard(levelButton, data) {
@@ -1032,7 +1037,7 @@ export default class LevelSelectContainer extends PIXI.Container {
                     findID = index
                 }
             }
-            levelButton.updateDebugLabel(data.id + " - " + findID + "\n"+ data.estimateTime2)
+            levelButton.updateDebugLabel(data.id + " - " + findID + "\n" + data.estimateTime2)
         }
 
     }
@@ -1098,6 +1103,34 @@ export default class LevelSelectContainer extends PIXI.Container {
             return;
         }
 
+        let wasMute = SOUND_MANAGER.isMute
+		if(!wasMute){
+			SOUND_MANAGER.mute();
+		}		
+        PokiSDK.gameplayStop();
+        PokiSDK.commercialBreak().then(
+            () => {
+                console.log("Commercial break finished, proceeding to game");
+                //PokiSDK.gameplayStart();
+                // fire your function to continue to game
+                this.startTheLevel(data);
+                if(!wasMute){
+                    SOUND_MANAGER.toggleMute();
+                }
+            }
+        ).catch(
+            () => {
+                console.log("Initialized, but the user likely has adblock");
+                // fire your function to continue to game
+                this.startTheLevel(data);
+                if(!wasMute){
+                    SOUND_MANAGER.toggleMute();
+                }
+            }
+        );
+
+    }
+    startTheLevel(data) {
         this.addStandardBackgroundColor()
         this.gameScreen.mainMenuSettings.collapse();
         this.gameScreen.startNewLevel(data, false);
@@ -1106,6 +1139,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         //this.currentUISection = 0;
         this.resetDrags()
         this.resize(null, true)
+
     }
     drawGrid(elements, margin, size, isVertical, lineOverride = 1) {
         let maxPerLine = Math.floor((this.mainCanvas.width - this.currentGridOffset.x - 20) / (size.width + margin * 3)) + 1
@@ -1225,7 +1259,7 @@ export default class LevelSelectContainer extends PIXI.Container {
             this.disableClickCounter = 0;
             this.openSection(this.isSinglePlanet)
             setTimeout(() => {
-                
+
                 this.centerLevels()
 
                 this.resetDrags();
@@ -1235,7 +1269,7 @@ export default class LevelSelectContainer extends PIXI.Container {
     centerLevels() {
         if (this.shouldUpdate) {
 
-            if (!this.isSinglePlanet){
+            if (!this.isSinglePlanet) {
                 this.drawPlanets(this.planetButtons, 20, this.unscaledLinePlanetSize, true, 2);
             }
 

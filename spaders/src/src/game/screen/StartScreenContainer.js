@@ -30,32 +30,32 @@ export default class StartScreenContainer extends PIXI.Container {
 
 		this.planet = new Planet()// new PIXI.Sprite()//.fromFrame("l0_planet_2_1.png");
 
-	
 
 
-		this.logoLabel = new PIXI.Text(this.currentButtonLabel, { font: '64px', fill: config.colors.white, align: 'center', fontWeight: '800', fontFamily: window.LOGO_FONT, stroke:0, strokeThickness:8 });
+
+		this.logoLabel = new PIXI.Text(this.currentButtonLabel, { font: '64px', fill: config.colors.white, align: 'center', fontWeight: '800', fontFamily: window.LOGO_FONT, stroke: 0, strokeThickness: 8 });
 		//this.logoLabel = new PIXI.Sprite()//.fromFrame("logo1.png");
 
 		// this.logoLabel.scale.set(0.7)
 		this.logoLabel.anchor.set(0.5)
-		
+
 		this.gameBy = new PIXI.Text("by jeff ramos", { font: '18px', fill: config.colors.white, align: 'center', fontFamily: window.LOGO_FONT });
 		this.gameBy.pivot.x = this.gameBy.width / 2;
 		this.logoLabel.addChild(this.gameBy);
 		//this.logoLabel.visible = false;
 		//this.logoLabel.addChild(this.planet);
 		this.gameBy.y = this.logoLabel.height / 2 // + 70
-		
-		
+
+
 		this.addChild(this.levelSelectionContainer);
 		this.addChild(this.screenContainer);
-		
+
 		this.screenContainer.positionSpringX = new Spring();
 		this.screenContainer.positionSpringY = new Spring();
 		this.screenContainer.rotationSpring = new Spring();
 		this.screenContainer.rotationSpring.damp = 0.6
 		this.screenContainer.positionSpringY.damp = 0.7
-		
+
 		this.screenContainer.addChild(this.stripsContainer);
 		let height = 35;
 		let width = 3000;
@@ -64,38 +64,38 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.spadersContainer.addChild(this.planet);
 
 		this.spadersList = [];
-		
-		let order = [8,3,6,4,0,1,7,2,5,9]
+
+		let order = [8, 3, 6, 4, 0, 1, 7, 2, 5, 9]
 		//let order = [3,6,4,1,0,2,5,9]
 		for (let index = 0; index < window.IMAGE_DATA.enemyImagesFrame.length; index++) {
 			let element = window.IMAGE_DATA.enemyImagesFrame[order[index]];
 
 			let sprite = new SprteSpritesheetAnimation();
 
-			let spaderID = (order[index])%5 + 1
+			let spaderID = (order[index]) % 5 + 1
 
-			sprite.addLayer("l0_spader_"+spaderID+"_", {min:1, max:5}, 0.15)
-			sprite.addLayer("l1_spader_"+spaderID+"_", {min:1, max:5}, 0.15)
+			sprite.addLayer("l0_spader_" + spaderID + "_", { min: 1, max: 5 }, 0.15)
+			sprite.addLayer("l1_spader_" + spaderID + "_", { min: 1, max: 5 }, 0.15)
 
 			sprite.tint = window.colorsOrder[order[index]]
 			this.spadersContainer.addChild(sprite);
-			if(index > 0){
+			if (index > 0) {
 				sprite.x += this.spadersList[index - 1].x + this.spadersList[index - 1].width / 2;
-				
+
 			}
 			this.spadersList.push(sprite)
-			let n = ((index+1) / window.IMAGE_DATA.enemyImagesFrame.length)
+			let n = ((index + 1) / window.IMAGE_DATA.enemyImagesFrame.length)
 			sprite.x = Math.sin(n * (Math.PI * 2)) * 300
-			sprite.y = Math.cos(n * Math.PI) *Math.cos(n * Math.PI) * -80 + 80
-			
-			sprite.scale.set( Math.sin(n * Math.PI) * 0.25 + 0.75)
+			sprite.y = Math.cos(n * Math.PI) * Math.cos(n * Math.PI) * -80 + 80
+
+			sprite.scale.set(Math.sin(n * Math.PI) * 0.25 + 0.75)
 		}
-		
-		this.spadersContainer.children.sort((a,b) => (a.y > b.y) ? 1 : ((b.y > a.y) ? -1 : 0))
-		
+
+		this.spadersContainer.children.sort((a, b) => (a.y > b.y) ? 1 : ((b.y > a.y) ? -1 : 0))
+
 		this.spadersOfset = 0;
 
-		
+
 		this.spadersContainer.rotation = -Math.PI * 0.25
 		this.planet.rotation = -this.spadersContainer.rotation
 		this.planet.x = 50
@@ -150,7 +150,7 @@ export default class StartScreenContainer extends PIXI.Container {
 
 
 		this.playLabel = new PIXI.Text("Choose your level", {
-			font: '24px', fill: config.colors.background, fontWeight: '800',align: 'center', fontFamily: window.STANDARD_FONT1,
+			font: '24px', fill: config.colors.background, fontWeight: '800', align: 'center', fontFamily: window.STANDARD_FONT1,
 			// stroke: 0xFFFFFF,
 			// strokeThickness: 4
 		});
@@ -160,24 +160,24 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.mainMenuButtons = [];
 
 		this.mainMenucontainer = new PIXI.Container();
-		
+
 		this.chooseLevelButton = new UIButton1(config.colors.dark, window.iconsData.next, config.colors.white);
 		this.chooseLevelButton.addLabelLeftMenu("PLAY");
-		this.chooseLevelButton.updateRotation(0, true);	
+		this.chooseLevelButton.updateRotation(0, true);
 		//this.chooseLevelButton.icon.rotation = Math.PI / 4
 		this.chooseLevelButton.scale.set(0.85)
 		this.chooseLevelButton.onClick.add(this.resetGame.bind(this))
-		
+
 		this.howToPlayButton = new UIButton1(config.colors.dark, window.iconsData.question, config.colors.white);
 		this.howToPlayButton.addLabelLeftMenu("HELP");
-		this.howToPlayButton.updateRotation(0, true);		
+		this.howToPlayButton.updateRotation(0, true);
 		//this.howToPlayButton.icon.rotation = Math.PI / 4
 		this.howToPlayButton.scale.set(0.85)
 		this.howToPlayButton.onClick.add(this.onHowToPlay.bind(this))
 
 		this.settingsButton = new UIButton1(config.colors.dark, window.iconsData.settings, config.colors.white);
 		this.settingsButton.addLabelLeftMenu("SETTINGS");
-		this.settingsButton.updateRotation(0, true);		
+		this.settingsButton.updateRotation(0, true);
 		//this.settingsButton.icon.rotation = Math.PI / 4
 		this.settingsButton.scale.set(0.85)
 		this.settingsButton.onClick.add(this.onSettings.bind(this))
@@ -185,16 +185,16 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.mainMenuButtons.push(this.chooseLevelButton);
 		this.mainMenuButtons.push(this.howToPlayButton);
 		this.mainMenuButtons.push(this.settingsButton);
-		
+
 		for (let index = 0; index < this.mainMenuButtons.length; index++) {
 			const element = this.mainMenuButtons[index];
-			
+
 			this.mainMenucontainer.addChild(element)
 			element.x = 190 - index * 70
 			element.y = 130 + index * 70
 		}
 		this.playLine.addChild(this.mainMenucontainer)
-		
+
 		this.playLabel.pivot.x = this.playLabel.width / 2
 		this.playLabel.pivot.y = this.playLabel.height / 2
 
@@ -268,7 +268,7 @@ export default class StartScreenContainer extends PIXI.Container {
 			element.updateMenuColors(colorScheme.background, colorScheme.fontColor);
 
 			//element.updateMenuColors(colorScheme.fontColor, colorScheme.background);
-			
+
 		});
 		this.updateLinesColor();
 		//this.staticLogo.tint = colorScheme.fontColor;
@@ -283,9 +283,9 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.planet.tint = colors.list[0].color;
 		this.planet.updateColors(colors)
 
-		if(colors.planetID){
+		if (colors.planetID) {
 			this.planet.updateMapTextures(colors.planetID);
-		}else{
+		} else {
 			this.planet.updateMapTextures(0);
 		}
 
@@ -298,15 +298,15 @@ export default class StartScreenContainer extends PIXI.Container {
 		let scheme = colorSchemes.getCurrentColorScheme();
 
 		for (let index = 0; index < this.spadersList.length; index++) {
-			const element = this.spadersList[index];		
+			const element = this.spadersList[index];
 			element.tintLayer(0, colors.list[index].color);
 		}
 
 	}
-	onSettings(){
+	onSettings() {
 		this.gameScreen.mainMenuSettings.open()
 	}
-	onHowToPlay(){
+	onHowToPlay() {
 		this.gameScreen.openTutorial();
 	}
 	getRect(size = 4, color = 0xFFFFFF) {
@@ -322,7 +322,7 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.currentMask.y = this.y
 		return this.currentMask
 	}
-	updateSpadersPosition(delta){
+	updateSpadersPosition(delta) {
 
 
 		this.planet.sin += delta;
@@ -334,24 +334,24 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.planet.pivot.y = 150
 		this.planet.y = Math.floor(Math.sin(this.planet.sin) * 10) //- 120
 
-		this.spadersOfset += delta  * 0.1;
+		this.spadersOfset += delta * 0.1;
 		this.spadersOfset %= Math.PI * 2;
 		let w = 200 + Math.sin(this.planet.sin) * 40
 		let h = 120
 		for (let index = 0; index < this.spadersList.length; index++) {
 			const element = this.spadersList[index];
-			let n = ((index+1) / this.spadersList.length) + this.spadersOfset + Math.PI / 4;
+			let n = ((index + 1) / this.spadersList.length) + this.spadersOfset + Math.PI / 4;
 			element.x = Math.sin(n * (Math.PI * 2)) * w //+ 280
-			element.y = Math.cos(n * Math.PI) *Math.cos(n * Math.PI) * -h + (h/2)
+			element.y = Math.cos(n * Math.PI) * Math.cos(n * Math.PI) * -h + (h / 2)
 
-			element.scale.set( ((element.y / 120) * 0.35 + 0.85) * 0.75)
+			element.scale.set(((element.y / 120) * 0.35 + 0.85) * 0.75)
 			element.update(delta)
 
 		}
 
-		this.spadersContainer.children.sort((a,b) => (a.y > b.y) ? 1 : ((b.y > a.y) ? -1 : 0))
+		this.spadersContainer.children.sort((a, b) => (a.y > b.y) ? 1 : ((b.y > a.y) ? -1 : 0))
 
-		
+
 
 	}
 	resize(innerResolution, ratio) {
@@ -377,7 +377,7 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.backButton.y = this.mainCanvas.y + this.backButton.height
 
 
-		
+
 		////console.log(this.chooseLevelPanel.visible, this.screenState)
 
 		this.backButton.x = this.mainCanvas.x + this.backButton.width
@@ -393,7 +393,7 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.closeApplicationButton.scale.set(0.75);
 
 	}
-	updatePositions(){
+	updatePositions() {
 		this.screenContainer.positionSpringX.update()
 		this.screenContainer.positionSpringY.update()
 		this.screenContainer.rotationSpring.update()
@@ -569,10 +569,10 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.playButton.visible = true;
 		this.backButton.visible = true;
 		this.chooseLevelPanel.show();
-		if(redirectData){
+		if (redirectData) {
 			this.chooseLevelPanel.setRedirectData(redirectData);
 		}
-		
+
 		this.chooseLevelPanel.showingBlockTime = 0.5;
 		TweenLite.to(this.screenContainer, force ? 0 : 0.2, { alpha: 1 })
 
@@ -606,21 +606,19 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.gameScreen.resetGame()
 
 		this.gameScreen.currentGameState = 1
-		
+
 		console.log("GO TO LEVEL")
 		this.closeApplicationButton.visible = false;
-		
-		
+
+
 	}
 	resetGame() {
-		
+
 		window.SOUND_MANAGER.play('tapPlay', { volume: 0.65 })
-		
+
 		this.gameScreen.mainMenuSettings.collapse();
 		this.chooseLevelPanel.show();
 		this.startMenuState();
-
-
 	}
 	removeEvents() {
 

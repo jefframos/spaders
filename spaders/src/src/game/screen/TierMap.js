@@ -102,11 +102,12 @@ export default class TierMap extends PIXI.Container {
         return newLayer;
     }
 
-    addTierLevel(tierButton, pos) {
+    addTierLevel(tierButton, pos, scale = 1) {
         this.buttonsContainer.addChild(tierButton);
-        tierButton.x = pos.i * this.sizeTile.width + this.sizeTile.width / 2 - tierButton.unscaledCardSize.width / 2;
-        tierButton.y = pos.j * this.sizeTile.height// + this.sizeTile.height - tierButton.height;
-
+        tierButton.x = pos.i * this.sizeTile.width + this.sizeTile.width / 2 - tierButton.unscaledCardSize.width / 2 + (tierButton.width *((1 - scale) * 0.5));
+        tierButton.y = pos.j * this.sizeTile.height+ (tierButton.height *((1 - scale) * 0.5));
+        tierButton.scale.set(scale);
+        
         this.currentButtons.push(tierButton);
     }
     cleanMap() {

@@ -359,9 +359,7 @@ window.SOUND_MANAGER = sManager;
 sManager.soundData.forEach(element => {
 	PIXI.loader.add(element.src);
 });
-PIXI.loader
-	.add('./data/colors.json')
-	.load(setUpColors)
+
 
 let mainColors = null;
 function setUpColors() {
@@ -411,6 +409,62 @@ function setUpSchemes() {
 			}
 		});
 }
+
+const urlParams = new URLSearchParams(window.location.search);
+if(urlParams.get('level') != null){
+	var hash = window.location.hash.substring(1)
+	PokiSDK.init = function(){
+		return new Promise(function(resolve, reject) {
+			resolve("Success!");
+		});
+	}
+	
+	PokiSDK.gameplayStart = function(){
+		return new Promise(function(resolve, reject) {
+			resolve("Success!");
+		});
+	}
+	
+	PokiSDK.gameplayStop = function(){
+		return new Promise(function(resolve, reject) {
+			resolve("Success!");
+		});
+	}
+	
+	PokiSDK.commercialBreak = function(){
+		return new Promise(function(resolve, reject) {
+			resolve("Success!");
+		});
+	}
+	
+	PokiSDK.rewardedBreak = function(){
+		return new Promise(function(resolve, reject) {
+			resolve("Success!");
+		});
+	}
+}
+
+PokiSDK.init().then(
+	() => {
+		console.log("Poki SDK successfully initialized");
+
+		PIXI.loader
+			.add('./data/colors.json')
+			.load(setUpColors)
+		// fire your function to continue to game
+	}
+).catch(
+	() => {
+		PIXI.loader
+			.add('./data/colors.json')
+			.load(setUpColors)
+		console.log("Initialized, but the user likely has adblock");
+		// fire your function to continue to game
+	}
+);
+PokiSDK.setDebug(true);
+
+
 window.levelsJson = ""
 
 window.TIME_SCALE = 1;
@@ -419,7 +473,7 @@ const jsonPath = "./data/"
 function loadJsons() {
 
 
-
+	PokiSDK.gameLoadingStart();
 	window.levelSections = PIXI.loader.resources[jsonPath + "levelSections.json"].data
 
 	PIXI.loader.add(jsonPath + window.levelSections.question.dataPath)
@@ -596,7 +650,7 @@ function extractData(element, debug) {
 		if (!element.isAddon && (data.setAutoBlocker > 0 || data.setAutoBlocker < 0)) {
 			//if(debug)
 			// console.log("AddBlocker",data.colorPalletId)
-			data.setAutoBlocker = Math.max(0,data.setAutoBlocker)
+			data.setAutoBlocker = Math.max(0, data.setAutoBlocker)
 			utils.addBlockers(data.pieces, data.setAutoBlocker, data.colorPalletId)
 		}
 
@@ -1035,6 +1089,8 @@ function configGame() {
 
 	game.onCompleteLoad();
 
+	PokiSDK.gameLoadingFinished();
+
 	let screenManager = game.screenManager;
 	let gameScreen = new TetraScreen('GameScreen');
 
@@ -1072,3 +1128,10 @@ function onBackKeyDown() {
 	}
 	window.game.screenManager.backKeyDown();
 }
+
+window.addEventListener('keydown', ev => {
+    if (['ArrowDown', 'ArrowUp', ' '].includes(ev.key)) {
+        ev.preventDefault();
+    }
+});
+window.addEventListener('wheel', ev => ev.preventDefault(), { passive: false });

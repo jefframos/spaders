@@ -51,6 +51,86 @@
                 },
                 {
                     "hasWhite": false,
+                    "color": "0x6cdbe5",
+                    "life": 0.1
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xef3254",
+                    "life": 1.1
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xfadb5f",
+                    "life": 2.1
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x8ae3a5",
+                    "life": 3.1
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x188cd9",
+                    "life": 4.1
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xf56ca0",
+                    "life": 5.1
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xfc7b3a",
+                    "life": 6.1
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xa267eb",
+                    "life": 7.1
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x3e7f85",
+                    "life": 0.2
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x8f0e26",
+                    "life": 1.2
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xb39c44",
+                    "life": 2.2
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x5f9c71",
+                    "life": 3.2
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x0f5a8c",
+                    "life": 4.2
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xad4c72",
+                    "life": 5.2
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0xba5b2b",
+                    "life": 6.2
+                },
+                {
+                    "hasWhite": false,
+                    "color": "0x7148a3",
+                    "life": 7.2
+                },
+                {
+                    "hasWhite": false,
                     "color": "0xDDDDDD",
                     "life": 8.1
                 },
@@ -105,8 +185,6 @@
                     "life": 3.3
                 }
             ],
-            "heartColor": "0xff5ede",
-            "bossColor": "0xFF5522",
             "dark": "0x111111",
             "logoColor": "0xFFFFFF",
             "fillBarColor": "0x7BCA93",
@@ -139,9 +217,20 @@
             },
             "map": {
                 "terrainColors": [
-                    "0x4bc16f",
-                    "0x8957c7",
-                    "0xE2C756"
+                    "0xa55c1b",
+                    "0xa55c1b",
+                    "0x3eba63",
+                    "0x2e323c",
+                    "0x0c6a0e",
+                    "0xE2C756",
+                    "0x66462c",
+                    "0x6dc3d5",
+                    "0x905018",
+                    "0x5ee285",
+                    "0x66462c",
+                    "0x905018",
+                    "0x66462c",
+                    "0x3eba63"
                 ],
                 "pathColors": [
                     "0xFFFFFF",

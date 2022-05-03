@@ -25,7 +25,7 @@ export default class TierWorldButton extends SquareButton {
 
 
         this.label = new PIXI.Text("", {
-            font: '32px',
+            font: '12px',
             fill: 0xFFFFFF,
             align: 'center',
             //fontWeight: '200',
@@ -169,7 +169,7 @@ export default class TierWorldButton extends SquareButton {
                 this.backTop.visible = false;
                 //this.crownIcon.visible = true;
 
-                this.iconBackgroundWhite.tint = window.colorTweenBomb.currentColor
+                this.iconBackgroundWhite.tint = 0xFFFFFF//window.colorTweenBomb.currentColor
                 //this.crownIcon.tint = window.colorTweenBomb.currentColor
             }
             if (this.forceLabel) {
@@ -264,11 +264,11 @@ export default class TierWorldButton extends SquareButton {
             return
         }
 
-        utils.resizeToFitAR(
-            {
-                width: this.unscaledCardSize.width,
-                height: this.unscaledCardSize.height * 0.3
-            }, this.label)
+        // utils.resizeToFitAR(
+        //     {
+        //         width: this.unscaledCardSize.width,
+        //         height: this.unscaledCardSize.height * 0.3
+        //     }, this.label)
 
         this.labelTop.visible = false;
         this.backTop.visible = true;
@@ -280,10 +280,10 @@ export default class TierWorldButton extends SquareButton {
         this.label.y += this.unscaledCardSize.height / 2 + this.label.height + 4
         this.label.x = this.iconBackgroundWhite.x + this.unscaledCardSize.width / 2
 
-        this.backTop.x = this.iconBackgroundWhite.x + 4
-        this.backTop.y = this.label.y - this.label.height / 2 - 2
-        this.backTop.width = this.unscaledCardSize.width - 8
-        this.backTop.height = this.label.height + 4
+        this.backTop.width = this.unscaledCardSize.width * 2
+        this.backTop.x = this.iconBackgroundWhite.x - this.unscaledCardSize.width / 2
+        this.backTop.y = this.label.y - this.label.height / 2
+        //this.backTop.height = this.label.height + 4
 
 
 
@@ -325,16 +325,16 @@ export default class TierWorldButton extends SquareButton {
         this.label.text = text;
         this.label.visible = true;
 
-        utils.resizeToFitAR(
-            {
-                width: this.unscaledCardSize.width,// * 0.7,
-                height: this.unscaledCardSize.height * 0.15
-            }, this.label)
+        // utils.resizeToFitAR(
+        //     {
+        //         width: this.unscaledCardSize.width * 2,// * 0.7,
+        //         height: this.unscaledCardSize.height * 0.3
+        //     }, this.label)
 
         this.label.pivot.x = this.label.width / 2 / this.label.scale.x
         this.label.pivot.y = this.label.height / 2 / this.label.scale.y;
         this.label.x = this.unscaledCardSize.width / 2 + offset.x// this.container.scale.x
-        this.label.y = this.unscaledCardSize.height - this.label.height + offset.y// this.container.scale.y
+        //this.label.y = this.unscaledCardSize.height - this.label.height // + offset.y// this.container.scale.y
 
         this.backTop.visible = true;
 

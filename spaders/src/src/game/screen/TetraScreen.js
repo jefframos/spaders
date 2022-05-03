@@ -118,7 +118,7 @@ export default class TetraScreen extends Screen {
 
 		this.currentButtonLabel = 'START';
 
-		this.gameRunning = false;
+		this.stopGameplay();
 
 		this.mouseDirty = false;
 
@@ -629,7 +629,7 @@ export default class TetraScreen extends Screen {
 		
 		this.chargeBombBar = new ProgressBar(sizeBar, 16);
 		this.chargeBombBar.currentChargeValue = 0;
-		this.chargeBombBar.maxValue = 1000;
+		this.chargeBombBar.maxValue = 500;
 		this.chargeBombBar.updateBackgroundColor(0, 0.2)
 		this.fallBar = new ProgressBar(sizeBar, 16);
 		this.bottomUINewContainer.addChild(this.chargeBombBar)
@@ -750,7 +750,7 @@ export default class TetraScreen extends Screen {
 		this.bottomUIContainer.visible = false;
 	}
 	pauseGame() {
-		//this.gameRunning = false;
+		//this.stopGameplay();
 	}
 	onUnPause() {
 		//this.gameRunning = true;
@@ -758,7 +758,7 @@ export default class TetraScreen extends Screen {
 	openTutorial(id = 0) {
 		this.tutorialOverlay.visible = true;
 		this.tutorialOverlay.show(id)
-		this.gameRunning = false;
+		this.stopGameplay();
 
 		this.colorTweenBomb.startTween(window.COOKIE_MANAGER.stats.colorPalletID)
 
@@ -910,7 +910,7 @@ export default class TetraScreen extends Screen {
 		window.SOUND_MANAGER.playMainMenu();
 		this.endGameScreenContainer.hide(force);
 		this.startScreenContainer.show(force, force ? 0.2 : 0.75);
-		this.gameRunning = false;
+		this.stopGameplay();
 		this.mainMenuSettings.visible = true;
 		this.useBomb.visible = false;
 		this.startScreenContainer.showCloseButton();
@@ -930,7 +930,7 @@ export default class TetraScreen extends Screen {
 		this.mainMenuSettings.collapse();
 		this.endGameScreenContainer.hide(force);
 		this.startScreenContainer.showFromGame(force, force ? 0.2 : 0.75, redirectData);
-		this.gameRunning = false;
+		this.stopGameplay();
 		this.mainMenuSettings.visible = true;
 		this.useBomb.visible = true;
 		this.startScreenContainer.showCloseButton();
@@ -947,7 +947,7 @@ export default class TetraScreen extends Screen {
 		if (this.endGameLabel && this.endGameLabel.parent) {
 			this.endGameLabel.parent.removeChild(this.endGameLabel);
 		}
-		this.gameRunning = false;
+		this.stopGameplay();
 		this.startScreenContainer.hide(true);
 		let tempid = this.currentLevelID >= 0 ? this.currentLevelID : 0
 
@@ -1259,11 +1259,38 @@ export default class TetraScreen extends Screen {
 
 	}
 	replaceForBomb() {
-		if (this.currentCard) {
-			this.currentCard.isABomb();
-			this.chargeBombBar.currentChargeValue = 0;
-			this.chargeBombBar.setProgressBar2(0)
+
+		if(!this.currentCard){
+			return;
 		}
+		let wasMute = SOUND_MANAGER.isMute
+		if(!wasMute){
+			SOUND_MANAGER.mute();
+		}
+		PokiSDK.gameplayStop();
+		PokiSDK.rewardedBreak().then(
+			(success) => {
+				if(success){
+					PokiSDK.gameplayStart();
+					this.replaceForBombAfterBreak();
+					if(!wasMute){
+						SOUND_MANAGER.toggleMute();
+					}
+				}else{
+					if(!wasMute){
+						SOUND_MANAGER.toggleMute();
+					}
+					this.replaceForBombAfterBreak();
+				}
+			}
+	
+		)
+	}
+	replaceForBombAfterBreak(){
+		this.currentCard.isABomb();
+		this.chargeBombBar.currentChargeValue = 0;
+		this.chargeBombBar.setProgressBar2(0)
+
 	}
 	startNewLevel(data, isEasy) {
 		this.currentLevelData = data;
@@ -1310,6 +1337,8 @@ export default class TetraScreen extends Screen {
 	resetGame() {
 
 		console.log(this.currentLevelData)
+
+
 		// if (this.hasHash) {
 		// 	this.currentLevelData.pieces = utils.scaleLevel(this.currentLevelData.pieces, 2, true)
 		// 	this.updateGridDimensions();
@@ -1567,6 +1596,9 @@ export default class TetraScreen extends Screen {
 			this.fallBar.visible = false;
 		}
 
+		PokiSDK.gameplayStart();
+
+
 	}
 	setAddons() {
 
@@ -1676,11 +1708,16 @@ export default class TetraScreen extends Screen {
 		this.cardQueue[1].update(1 / 60)
 
 	}
+	stopGameplay(){
+		this.gameRunning = false;
+		PokiSDK.gameplayStop();
+	}
 	OnWin(card) {
 		if (!this.gameRunning) {
 			return;
 		}
-		this.gameRunning = false;
+		this.stopGameplay();
+		PokiSDK.gameplayStop();
 		this.board.removeAllStates();
 		this.board.destroyAllCards();
 		this.endGameState();
@@ -1689,7 +1726,7 @@ export default class TetraScreen extends Screen {
 		if (!this.gameRunning) {
 			return;
 		}
-		this.gameRunning = false;
+		this.stopGameplay();
 
 		setTimeout(() => {
 			let data = { text: 'Game Over, would you like to try again?' }
@@ -2039,7 +2076,7 @@ export default class TetraScreen extends Screen {
 
 		if (!this.board.newGameFinished && this.board.totalCards <= 0) {
 			this.endGameState();
-			this.gameRunning = false;
+			this.stopGameplay();
 			return;
 		}
 
