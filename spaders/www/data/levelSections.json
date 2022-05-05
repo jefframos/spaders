@@ -279,7 +279,7 @@
         },
         {
             "color": "0xDDDDDD",
-            "ignore": false,
+            "ignore": true,
             "name": "Debug",
             "displayName": "Video Game History",
             "tilemapPath": "worldMaps/world1.json",

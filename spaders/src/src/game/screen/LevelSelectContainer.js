@@ -343,19 +343,28 @@ export default class LevelSelectContainer extends PIXI.Container {
                 element.x = target;
             }
 
+
         });
 
         // if(this.levelMap)console.log(this.levelMap.scale)
         if (this.levelMap) {
-            let levelYStart = - (this.levelMap.height + 50) + window.innerHeight
+            // if(element.targetY){
+            //     target = element.targetY
+            //     element.spring.tx = target
+            //     element.spring.x = target
+
+            //     element.y = target;
+            // }
+            let levelYStart = - (this.levelMap.height + 50) + window.innerHeight //+ 500
             this.levelsView.y = levelYStart
             this.levelsView.spring.x = levelYStart
             this.levelsView.spring.tx = levelYStart
         }
 
         if (this.tierMap && this.tierMap.width > 80) {
-            let levelYStart = window.innerHeight / 2 - this.tierMap.height / 2
-            levelYStart = Math.max(window.innerHeight * 0.05, levelYStart)
+            let levelYStart = -this.tierButtons[0].y * this.tierMap.scale.y + this.tierMap.height / 4//window.innerHeight / 2 * this.tierMap.scale.y//- this.tierMap.height / 2 - (this.tierButtons[0].y * this.tierMap.scale.y)//window.innerHeight / 2 //- this.tierButtons[0].y//- this.tierMap.height / 2 
+            //console.log(levelYStart, this.tierMap.scale)
+            //levelYStart = Math.max(window.innerHeight * 0.05, levelYStart)
             this.tiersView.y = levelYStart
             this.tiersView.spring.x = levelYStart
             this.tiersView.spring.tx = levelYStart
@@ -560,6 +569,8 @@ export default class LevelSelectContainer extends PIXI.Container {
         if (this.planetButtons.length <= 1) {
 
             this.isSinglePlanet = this.planetButtons[0].section;
+
+            this.sectionsView.visible = false;
         }
     }
 
@@ -591,11 +602,14 @@ export default class LevelSelectContainer extends PIXI.Container {
     addCard(data) {
 
         //console.log(data);
-
+        let orderTemp = data.order >= 0 ? level.order : this.levelCards.length;
+        if(this.currentTier[0].tier.mapData.levelLayers.length <= orderTemp){
+            return;
+        }
         let levelButton = new TierWorldButton(this.newUnscaledLevelButtonSize);//= new SquareButton(this.unscaledCardSize);
         levelButton.updateLabel(data.levelName);
 
-        let order = this.currentTier[0].tier.mapData.levelLayers[data.order >= 0 ? level.order : this.levelCards.length]
+        let order = this.currentTier[0].tier.mapData.levelLayers[orderTemp]
 
         //console.log(order)
         this.levelMap.addTierLevel(levelButton, order, 1.5)
@@ -1104,9 +1118,9 @@ export default class LevelSelectContainer extends PIXI.Container {
         }
 
         let wasMute = SOUND_MANAGER.isMute
-		if(!wasMute){
-			SOUND_MANAGER.mute();
-		}		
+        if (!wasMute) {
+            SOUND_MANAGER.mute();
+        }
         PokiSDK.gameplayStop();
         PokiSDK.commercialBreak().then(
             () => {
@@ -1114,7 +1128,7 @@ export default class LevelSelectContainer extends PIXI.Container {
                 //PokiSDK.gameplayStart();
                 // fire your function to continue to game
                 this.startTheLevel(data);
-                if(!wasMute){
+                if (!wasMute) {
                     SOUND_MANAGER.toggleMute();
                 }
             }
@@ -1123,7 +1137,7 @@ export default class LevelSelectContainer extends PIXI.Container {
                 console.log("Initialized, but the user likely has adblock");
                 // fire your function to continue to game
                 this.startTheLevel(data);
-                if(!wasMute){
+                if (!wasMute) {
                     SOUND_MANAGER.toggleMute();
                 }
             }
@@ -1243,8 +1257,14 @@ export default class LevelSelectContainer extends PIXI.Container {
                 targetScale = Math.min(1, targetScale)
 
             } else {
+
+                if (this.currentResolution.width > this.currentResolution.height) {
+                    targetScale = (this.currentResolution.width - this.currentGridOffset.x * 2 - 20) / (this.unscaledTierButtonSize.width * 20)
+                }
                 targetScale = Math.min(1, targetScale)
+                targetScale = Math.max(0.5, targetScale)
             }
+
             this.tierMap.scale.set(targetScale)
             this.levelMap.scale.set(targetScale)
             this.levelMap.x = this.currentGridOffset.x * 2
@@ -1258,6 +1278,7 @@ export default class LevelSelectContainer extends PIXI.Container {
             this.currentUISection = 1
             this.disableClickCounter = 0;
             this.openSection(this.isSinglePlanet)
+            this.sectionsView.visible = false;
             setTimeout(() => {
 
                 this.centerLevels()
@@ -1271,6 +1292,8 @@ export default class LevelSelectContainer extends PIXI.Container {
 
             if (!this.isSinglePlanet) {
                 this.drawPlanets(this.planetButtons, 20, this.unscaledLinePlanetSize, true, 2);
+            } else {
+                this.sectionsView.visible = false;
             }
 
             if (this.levelSplitCards.length > 0 && this.currentUISection == 2) {
@@ -1293,7 +1316,8 @@ export default class LevelSelectContainer extends PIXI.Container {
         if (this.tiersView.width < window.innerWidth) {
             this.tiersView.targetX = this.mainCanvas.x + this.mainCanvas.width / 2 - this.tiersView.width / 2// - this.currentGridOffset.x//this.mainCanvas.x + this.currentGridOffset.x * 2
         } else {
-            this.tiersView.targetX = this.mainCanvas.x + this.currentGridOffset.x * 2
+            this.tiersView.targetX = this.mainCanvas.x + this.mainCanvas.width / 2 - this.tiersView.width / 2 - this.unscaledTierButtonSize.width / 2// this.currentGridOffset.x * 2 - (this.tiersView.width * this.tiersView.scale.x) / 2
+            this.tiersView.targetY = 0//this.mainCanvas.x + this.currentGridOffset.x * 2 - 500
         }
 
     }

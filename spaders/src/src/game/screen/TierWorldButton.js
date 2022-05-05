@@ -60,9 +60,9 @@ export default class TierWorldButton extends SquareButton {
         this.currentState = 0;
 
         this.backTop = new PIXI.mesh.NineSlicePlane(
-            PIXI.Texture.fromFrame('tile_1_' + (32 * 8) + '.png'), 10, 10, 10, 10)
+            PIXI.Texture.fromFrame('tile_1_' + (32 * 8 + 9) + '.png'), 10, 10, 10, 10)
         this.backTop.width = 20;
-        this.backTop.height = 20;
+        this.backTop.height = 25;
         this.squareButtonShape.addChild(this.backTop)
         this.backTop.tint = 0;
         this.backTop.alpha = 1
@@ -277,12 +277,12 @@ export default class TierWorldButton extends SquareButton {
 
         utils.centerObject(this.label, this.iconBackgroundWhite)
 
-        this.label.y += this.unscaledCardSize.height / 2 + this.label.height + 4
+        this.label.y += this.unscaledCardSize.height / 2 + this.label.height + 11
         this.label.x = this.iconBackgroundWhite.x + this.unscaledCardSize.width / 2
 
         this.backTop.width = this.unscaledCardSize.width * 2
         this.backTop.x = this.iconBackgroundWhite.x - this.unscaledCardSize.width / 2
-        this.backTop.y = this.label.y - this.label.height / 2
+        this.backTop.y = this.label.y - this.label.height / 2- 3
         //this.backTop.height = this.label.height + 4
 
 
