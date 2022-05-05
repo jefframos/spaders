@@ -5,17 +5,17 @@
     },
     "activeFile": "debug/debug.tmx",
     "expandedProjectPaths": [
-        "videogames",
-        "movies",
-        "templates",
-        "world",
-        "tutorial",
+        "main",
         "gb",
+        "movies",
         "how-to-play",
-        "debug",
         "basics",
+        "templates",
+        "videogames",
+        "tutorial",
         "synth",
-        "main"
+        "debug",
+        "world"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -259,8 +259,8 @@
             "scale": 0.5,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 640,
-                "y": 640
+                "x": 638,
+                "y": 638
             }
         },
         "how-to-play/spadersTileset.tsx": {

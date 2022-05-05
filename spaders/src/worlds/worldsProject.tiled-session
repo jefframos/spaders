@@ -3,20 +3,20 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "world/testWorld1.tmx",
+    "activeFile": "world/tier1/tier1-1.tmx",
     "expandedProjectPaths": [
-        "D:/projects/spaders/spaders/src/map/how-to-play",
-        "D:/projects/spaders/spaders/src/map/gb",
-        "D:/projects/spaders/spaders/src/map/videogames",
-        "D:/projects/spaders/spaders/src/map/debug",
-        "D:/projects/spaders/spaders/src/map/movies",
         "world/tier1",
+        "D:/projects/spaders/spaders/src/map/main",
+        "D:/projects/spaders/spaders/src/map/gb",
+        "D:/projects/spaders/spaders/src/map/movies",
+        "D:/projects/spaders/spaders/src/map/how-to-play",
+        "D:/projects/spaders/spaders/src/map/basics",
         "D:/projects/spaders/spaders/src/map/templates",
+        "D:/projects/spaders/spaders/src/map/videogames",
         "D:/projects/spaders/spaders/src/map/tutorial",
         "D:/projects/spaders/spaders/src/map/synth",
-        "D:/projects/spaders/spaders/src/map/basics",
-        "D:/projects/spaders/spaders/src/map/world",
-        "D:/projects/spaders/spaders/src/map/main"
+        "D:/projects/spaders/spaders/src/map/debug",
+        "D:/projects/spaders/spaders/src/map/world"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -544,7 +544,7 @@
         },
         "world/tier1/tier1-1.tmx": {
             "scale": 0.75,
-            "selectedLayer": 7,
+            "selectedLayer": 10,
             "viewCenter": {
                 "x": 192,
                 "y": 464
@@ -555,7 +555,7 @@
             "selectedLayer": 8,
             "viewCenter": {
                 "x": 192.3374340949033,
-                "y": 718.7346221441126
+                "y": 719.859402460457
             }
         },
         "world/tilesets/numbers.tsx": {
@@ -593,8 +593,8 @@
         "world/basicWorld.tmx",
         "world/tier1BasicMap.tmx",
         "world/testWorldSynth.tmx",
-        "world/tier1/tier1-1.tmx",
         "world/testWorld1.tmx",
+        "world/tier1/tier1-1.tmx",
         "D:/projects/spaders/spaders/src/map/videogames/levels.tmx",
         "world/tiniMap.tmx",
         "D:/projects/spaders/spaders/src/map/world/tier1BasicMap.tmx",

@@ -356,9 +356,9 @@ const sManager = new SoundManager();
 window.SOUND_MANAGER = sManager;
 
 
-sManager.soundData.forEach(element => {
-	PIXI.loader.add(element.src);
-});
+// sManager.soundData.forEach(element => {
+// 	PIXI.loader.add(element.src);
+// });
 
 
 let mainColors = null;
@@ -1011,7 +1011,7 @@ function configGame() {
 
 
 	//let rawData = "./data/gameboy/gameboycreatures.json";
-	let rawData = "./data/how-to-play/shapes-synt.json";
+	let rawData = "./data/_world1/world1_tier1_levels.json";
 	window.levelsRawJson = PIXI.loader.resources[rawData].data
 
 
