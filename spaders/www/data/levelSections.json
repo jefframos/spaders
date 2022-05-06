@@ -70,8 +70,7 @@
                     "levelOrderMap": "worldMaps/tier1/tier1-8.json",
                     "order": -1,
                     "require": -1
-                }
-                ,
+                },
                 {
                     "name": "---",
                     "dataPath": "world1/world1_tier9_levels.json",
@@ -80,7 +79,25 @@
                     "require": -1
                 }
             ]
-        },        
+        },
+        {
+            "color": "0xDDDDDD",
+            "ignore": true,
+            "name": "Tutorial",
+            "displayName": "Video Game History",
+            "tilemapPath": "worldMaps/world1.json",
+            "imageSrc": "",
+            "colorPalletId": 0,
+            "levels": [
+                {
+                    "name": "---",
+                    "dataPath": "tutorial/tutorial.json",
+                    "levelOrderMap": "basics/tier-basic-1.json",
+                    "order": -1,
+                    "require": -1
+                }
+            ]
+        },
         {
             "color": "0xDDDDDD",
             "ignore": true,

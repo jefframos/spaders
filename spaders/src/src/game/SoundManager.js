@@ -89,15 +89,19 @@ export default class SoundManager {
         }else{
             data.volume = this.fxMasterVolume;
         }
-        let playPromise = soundData.sound.play(data);
 
-        if(playPromise.then){
-            playPromise.then(function() {
-                // carregou
-              }, function(error) {
-                console.log(soundData, error)
-              });
-        }
+        setTimeout(() => {
+            
+            let playPromise = soundData.sound.play(data);
+    
+            if(playPromise.then){
+                playPromise.then(function() {
+                    // carregou
+                  }, function(error) {
+                    console.log(soundData, error)
+                  });
+            }
+        }, 1);
        
     }
     playUnique(id, loop = true, offset = 0) {
