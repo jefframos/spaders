@@ -1011,7 +1011,7 @@ function configGame() {
 
 
 	//let rawData = "./data/gameboy/gameboycreatures.json";
-	let rawData = "./data/_world1/world1_tier1_levels.json";
+	let rawData = "./data/world1/world1_tier1_levels.json";
 	window.levelsRawJson = PIXI.loader.resources[rawData].data
 
 

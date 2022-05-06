@@ -17,56 +17,56 @@
             "levels": [
                 {
                     "name": "---",
-                    "dataPath": "_world1/world1_tier1_levels.json",
+                    "dataPath": "world1/world1_tier1_levels.json",
                     "levelOrderMap": "worldMaps/tier1/tier1-1.json",
                     "order": -1,
                     "require": -1
                 },
                 {
                     "name": "---",
-                    "dataPath": "_world1/world1_tier2_levels.json",
+                    "dataPath": "world1/world1_tier2_levels.json",
                     "levelOrderMap": "worldMaps/tier1/tier1-2.json",
                     "order": -1,
                     "require": -1
                 },
                 {
                     "name": "---",
-                    "dataPath": "_world1/world1_tier3_levels.json",
+                    "dataPath": "world1/world1_tier3_levels.json",
                     "levelOrderMap": "worldMaps/tier1/tier1-3.json",
                     "order": -1,
                     "require": -1
                 },
                 {
                     "name": "---",
-                    "dataPath": "_world1/world1_tier4_levels.json",
+                    "dataPath": "world1/world1_tier4_levels.json",
                     "levelOrderMap": "worldMaps/tier1/tier1-4.json",
                     "order": -1,
                     "require": -1
                 },
                 {
                     "name": "---",
-                    "dataPath": "_world1/world1_tier5_levels.json",
+                    "dataPath": "world1/world1_tier5_levels.json",
                     "levelOrderMap": "worldMaps/tier1/tier1-5.json",
                     "order": -1,
                     "require": -1
                 },
                 {
                     "name": "2nd gen",
-                    "dataPath": "_world1/world1_tier6_levels.json",
+                    "dataPath": "world1/world1_tier6_levels.json",
                     "levelOrderMap": "worldMaps/tier1/tier1-6.json",
                     "order": -1,
                     "require": -1
                 },
                 {
                     "name": "2nd gen",
-                    "dataPath": "_world1/world1_tier7_levels.json",
+                    "dataPath": "world1/world1_tier7_levels.json",
                     "levelOrderMap": "worldMaps/tier1/tier1-7.json",
                     "order": -1,
                     "require": -1
                 },
                 {
                     "name": "---",
-                    "dataPath": "_world1/world1_tier8_levels.json",
+                    "dataPath": "world1/world1_tier8_levels.json",
                     "levelOrderMap": "worldMaps/tier1/tier1-8.json",
                     "order": -1,
                     "require": -1
@@ -74,7 +74,7 @@
                 ,
                 {
                     "name": "---",
-                    "dataPath": "_world1/world1_tier9_levels.json",
+                    "dataPath": "world1/world1_tier9_levels.json",
                     "levelOrderMap": "worldMaps/tier1/tier1-9.json",
                     "order": -1,
                     "require": -1
