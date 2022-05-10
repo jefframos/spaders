@@ -162,29 +162,29 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.mainMenucontainer = new PIXI.Container();
 
 		this.chooseLevelButton = new UIButton1(config.colors.dark, window.iconsData.next, config.colors.white);
-		this.chooseLevelButton.addLabelLeftMenu("PLAY");
+		this.chooseLevelButton.addLabelLeftMenu("Play");
 		this.chooseLevelButton.updateRotation(0, true);
 		//this.chooseLevelButton.icon.rotation = Math.PI / 4
 		this.chooseLevelButton.scale.set(0.85)
 		this.chooseLevelButton.onClick.add(this.resetGame.bind(this))
 
 		this.howToPlayButton = new UIButton1(config.colors.dark, window.iconsData.question, config.colors.white);
-		this.howToPlayButton.addLabelLeftMenu("HELP");
+		this.howToPlayButton.addLabelLeftMenu("How To Play");
 		this.howToPlayButton.updateRotation(0, true);
 		//this.howToPlayButton.icon.rotation = Math.PI / 4
 		this.howToPlayButton.scale.set(0.85)
 		this.howToPlayButton.onClick.add(this.onHowToPlay.bind(this))
 
 		this.settingsButton = new UIButton1(config.colors.dark, window.iconsData.settings, config.colors.white);
-		this.settingsButton.addLabelLeftMenu("SETTINGS");
+		this.settingsButton.addLabelLeftMenu("Settings");
 		this.settingsButton.updateRotation(0, true);
 		//this.settingsButton.icon.rotation = Math.PI / 4
 		this.settingsButton.scale.set(0.85)
 		this.settingsButton.onClick.add(this.onSettings.bind(this))
 
 		this.mainMenuButtons.push(this.chooseLevelButton);
-		this.mainMenuButtons.push(this.howToPlayButton);
 		this.mainMenuButtons.push(this.settingsButton);
+		this.mainMenuButtons.push(this.howToPlayButton);
 
 		for (let index = 0; index < this.mainMenuButtons.length; index++) {
 			const element = this.mainMenuButtons[index];

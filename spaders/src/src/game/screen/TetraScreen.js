@@ -87,6 +87,8 @@ export default class TetraScreen extends Screen {
 			}
 		}
 
+
+
 		this.findURLParams()
 
 		this.updateGridDimensions();
@@ -252,7 +254,17 @@ export default class TetraScreen extends Screen {
 	}
 	findURLParams() {
 		const urlParams = new URLSearchParams(window.location.search);
-		if (urlParams) {
+		if (window.COOKIE_MANAGER.stats.timesLoaded <= 1) {
+			//alert(window.COOKIE_MANAGER.stats.timesLoaded)
+			setTimeout(() => {
+				window.game.onTapUp();
+
+				this.colorTweenBomb.startTween(0)
+
+				this.openTutorial(0)
+
+			}, 10);
+		} else if (urlParams) {
 
 			if (urlParams.get('debug')) {
 				let debugParameters = urlParams.get('debug')
@@ -266,6 +278,7 @@ export default class TetraScreen extends Screen {
 					}, 10);
 				}
 			}
+
 
 			let levelRedirectParameters = urlParams.get('level')
 			if (levelRedirectParameters) {
@@ -474,14 +487,14 @@ export default class TetraScreen extends Screen {
 			copy.setTexture(sprite.texture);
 			return copy;
 		}
-		
+
 		let container = new PIXI.Container();
 		let level = [];
 		size = 200 / levelData.piecesToDraw[0].length
 		size = Math.max(size, 6)
 		size = Math.min(size, 24)
 		size = Math.round(size)
-		
+
 		for (let i = 0; i < levelData.piecesToDraw.length; i++) {
 			let temp = []
 			for (let j = 0; j < levelData.piecesToDraw[i].length; j++) {
@@ -624,16 +637,16 @@ export default class TetraScreen extends Screen {
 		this.movesRect = new UIRectLabel(config.colors.green, 'fire-96x96-1408702.png');
 		this.bottomUINewContainer.addChild(this.movesRect)
 
-		
+
 		let sizeBar = { width: config.width, height: 50 }
-		
+
 		this.chargeBombBar = new ProgressBar(sizeBar, 16);
 		this.chargeBombBar.currentChargeValue = 0;
 		this.chargeBombBar.maxValue = 500;
 		this.chargeBombBar.updateBackgroundColor(0, 0.2)
 		this.fallBar = new ProgressBar(sizeBar, 16);
 		this.bottomUINewContainer.addChild(this.chargeBombBar)
-		
+
 		this.scoreRect = new UIRectLabel(config.colors.red2, 'icons8-star-48.png', false);
 		this.scoreRect.backShape.visible = false;
 		this.bottomUINewContainer.addChild(this.scoreRect)
@@ -646,8 +659,8 @@ export default class TetraScreen extends Screen {
 		let spaderIcon = new SprteSpritesheetAnimation()
 
 
-		spaderIcon.addLayer("l0_spader_1_", {min:1, max:5}, 0.15)
-		spaderIcon.addLayer("l1_spader_1_", {min:1, max:5}, 0.15)	
+		spaderIcon.addLayer("l0_spader_1_", { min: 1, max: 5 }, 0.15)
+		spaderIcon.addLayer("l1_spader_1_", { min: 1, max: 5 }, 0.15)
 
 
 		this.fallBar.icon = spaderIcon;
@@ -663,14 +676,14 @@ export default class TetraScreen extends Screen {
 		this.chargeBombBar.visible = true;
 
 
-	
+
 		//bombIconTop.scale = bombIcon.scale
 
 		let nuke = new SprteSpritesheetAnimation()
 
 
-		nuke.addLayer("l0_nuke_", {min:1, max:5}, 0.15)
-		nuke.addLayer("l1_nuke_", {min:1, max:5}, 0.15)	
+		nuke.addLayer("l0_nuke_", { min: 1, max: 5 }, 0.15)
+		nuke.addLayer("l1_nuke_", { min: 1, max: 5 }, 0.15)
 
 		//nuke.scale.set(0.25);
 
@@ -815,14 +828,14 @@ export default class TetraScreen extends Screen {
 		this.scoreRect.y = this.bottomUICanvas.height * 0.5
 		this.scoreRect.x = 15;
 		this.chargeBombBar.x = 10
-		this.chargeBombBar.y = this.scoreRect.y -  this.bottomUICanvas.height * 0.025//+ this.scoreRect.height / 2 - this.chargeBombBar.height * 0.12
+		this.chargeBombBar.y = this.scoreRect.y - this.bottomUICanvas.height * 0.025//+ this.scoreRect.height / 2 - this.chargeBombBar.height * 0.12
 
 
-		this.useBomb.scale.set( (this.bottomUICanvas.width - 40) * 0.15 / this.useBomb.width * this.useBomb.scale.x);
+		this.useBomb.scale.set((this.bottomUICanvas.width - 40) * 0.15 / this.useBomb.width * this.useBomb.scale.x);
 		this.useBomb.visible = true;
 
 		this.useBomb.x = this.chargeBombBar.x + this.chargeBombBar.width + this.useBomb.width / 2 + 5
-		this.useBomb.y = this.chargeBombBar.y - this.useBomb.height / 2 +this.chargeBombBar.height
+		this.useBomb.y = this.chargeBombBar.y - this.useBomb.height / 2 + this.chargeBombBar.height
 
 
 		this.fallBar.rotation = -Math.PI / 2;
@@ -831,11 +844,11 @@ export default class TetraScreen extends Screen {
 		this.fallBar.alpha = this.cardsContainer.alpha;
 
 
-		if(this.gameRunning && this.cardQueue.length > 0){
-			
-			
+		if (this.gameRunning && this.cardQueue.length > 0) {
+
+
 			this.shootingGun.scale.set(CARD.height / this.shootingGun.height * this.shootingGun.scale.y)
-			if(this.currentCard){
+			if (this.currentCard) {
 				this.shootingGun.x = this.currentCard.x
 			}
 			this.shootingGun.visible = false;
@@ -843,11 +856,11 @@ export default class TetraScreen extends Screen {
 			this.containerQueue.visible = true;
 			this.containerQueue.x = 0//this.bottomUICanvas.height * 0.1
 			this.containerQueue.y = this.trailHorizontal.y + CARD.height//this.timerRect.y + 8//this.movesRect.y + this.movesRect.height - this.containerQueue.height
-		}else{
+		} else {
 			this.containerQueue.visible = false;
 			this.shootingGun.visible = false;
 		}
-		
+
 		//console.log()
 		// // // // this.backButton.scale.set(this.topCanvas.height / (this.backButton.height / this.backButton.scale.y) * 0.7)// / this.backButton.scale.y)
 		// // // this.backButton.x = this.topCanvas.x + this.topCanvas.width - this.backButton.width * 0.5 - this.backButton.width * 0.25;
@@ -865,7 +878,7 @@ export default class TetraScreen extends Screen {
 		this.mainMenuSettings.y = toLoc.y + scaledWidth;
 
 
-		
+
 		//this.useBomb.scale.set(this.inGameMenu.scale.x);
 		// this.useBomb.x = toLoc.x + scaledWidth;
 		// this.useBomb.y = toLoc.y + scaledWidth;
@@ -1260,33 +1273,33 @@ export default class TetraScreen extends Screen {
 	}
 	replaceForBomb() {
 
-		if(!this.currentCard){
+		if (!this.currentCard) {
 			return;
 		}
 		let wasMute = SOUND_MANAGER.isMute
-		if(!wasMute){
+		if (!wasMute) {
 			SOUND_MANAGER.mute();
 		}
 		PokiSDK.gameplayStop();
 		PokiSDK.rewardedBreak().then(
 			(success) => {
-				if(success){
+				if (success) {
 					PokiSDK.gameplayStart();
 					this.replaceForBombAfterBreak();
-					if(!wasMute){
+					if (!wasMute) {
 						SOUND_MANAGER.toggleMute();
 					}
-				}else{
-					if(!wasMute){
+				} else {
+					if (!wasMute) {
 						SOUND_MANAGER.toggleMute();
 					}
 					this.replaceForBombAfterBreak();
 				}
 			}
-	
+
 		)
 	}
-	replaceForBombAfterBreak(){
+	replaceForBombAfterBreak() {
 		this.currentCard.isABomb();
 		this.chargeBombBar.currentChargeValue = 0;
 		this.chargeBombBar.setProgressBar2(0)
@@ -1708,7 +1721,7 @@ export default class TetraScreen extends Screen {
 		this.cardQueue[1].update(1 / 60)
 
 	}
-	stopGameplay(){
+	stopGameplay() {
 		this.gameRunning = false;
 		PokiSDK.gameplayStop();
 	}
@@ -1813,7 +1826,7 @@ export default class TetraScreen extends Screen {
 		}
 		let isBombPossible = (this.chargeBombBar.currentChargeValue / this.chargeBombBar.maxValue) >= 1
 
-		if(!isBombPossible){
+		if (!isBombPossible) {
 			if (!first && this.board.findOutGameOver()) {
 				return;
 			}
@@ -2039,20 +2052,20 @@ export default class TetraScreen extends Screen {
 			const element = this.cardQueue[index];
 			element.update(delta)
 		}
-		if(this.fallBar.visible){
+		if (this.fallBar.visible) {
 			this.fallBar.icon.update(delta)
 		}
 		if (this.chargeBombBar.visible) {
 
 			this.chargeBombBar.icon.update(delta)
 
-			if(targetBar >= 1){				
-				this.chargeBombBar.icon.tintLayer(0,this.colorTweenBomb.currentColor)
+			if (targetBar >= 1) {
+				this.chargeBombBar.icon.tintLayer(0, this.colorTweenBomb.currentColor)
 				this.useBomb.interactive = true
-			}else{
-				
+			} else {
+
 				this.useBomb.interactive = false
-				this.chargeBombBar.icon.tintLayer(0,0xDDDDDD)
+				this.chargeBombBar.icon.tintLayer(0, 0xDDDDDD)
 			}
 		}
 
@@ -2317,21 +2330,21 @@ export default class TetraScreen extends Screen {
 
 
 		if (!this.board.isPossibleShot(this.mousePosID)) {
-			if(this.currentCard.isBomb){
+			if (this.currentCard.isBomb) {
 				let cardLast = this.board.getLastCardOnLane(this.mousePosID)
 				//if player have bomb and theres no space to shoot
-				if(cardLast){
+				if (cardLast) {
 					this.board.canGoNext = true;
 					cardLast.isABomb();
 					this.board.explodeCard(cardLast);
 					this.board.removeCardFromList(cardLast);
 					cardLast.destroy();
-					
+
 					this.currentCard.destroy();
 					this.currentCard = null;
-	
+
 					this.board.addTurnTime(0.3)
-	
+
 					this.isFirstClick = false;
 					this.currentRound++;
 				}
@@ -2342,7 +2355,7 @@ export default class TetraScreen extends Screen {
 
 		this.isFirstClick = false;
 		this.currentRound++;
-		
+
 		this.board.shootCard(this.mousePosID, this.currentCard);
 
 		this.cardsContainer.addChild(this.currentCard)

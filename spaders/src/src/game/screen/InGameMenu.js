@@ -96,7 +96,7 @@ export default class InGameMenu extends PIXI.Container {
 
 		this.state = 1;
 
-		this.buttons = [this.refreshButton, this.nextLevel, this.toggleSound, this.closeButton]
+		this.buttons = [this.refreshButton,  this.toggleSound, this.closeButton]
 
 		let padding = 60
 		let space = 20

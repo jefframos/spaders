@@ -110,11 +110,11 @@ export default class MainMenu extends PIXI.Container {
         this.wipeDataButton.x = this.wipeDataButton.width * 0.5 + 30
         this.wipeDataButton.y = this.toggleSound.y;
         // this.refreshButton.y = 50
-        this.mainContainer.addChild(this.toggleDebug);
+       // this.mainContainer.addChild(this.toggleDebug);
         this.toggleDebug.x = this.wipeDataButton.x + this.toggleDebug.width * 0.5 + 60
         this.toggleDebug.y = this.toggleSound.y;
 
-        this.mainContainer.addChild(this.toggleDebugNames);
+       // this.mainContainer.addChild(this.toggleDebugNames);
         this.toggleDebugNames.x = this.toggleDebug.x + this.toggleDebugNames.width * 0.5 + 60
         this.toggleDebugNames.y = this.toggleSound.y;
 
@@ -138,21 +138,27 @@ export default class MainMenu extends PIXI.Container {
         this.totalMoves = new PIXI.Text("", this.fontStyle('22px', config.colors.pink));
         this.totalShards = new PIXI.Text("", this.fontStyle('22px', config.colors.purple));
         this.totalPIeces = new PIXI.Text("", this.fontStyle('22px', config.colors.background));
+        this.credits = new PIXI.Text("Programing/Art/Game Design: Jeff Ramos\n"
+        +"Game/Level Design: Alberto Zolet", this.fontStyle('14px', config.colors.background));
 
         let dist = 80;
-        this.statsOrder = [this.stats, this.totalPlayTime, this.totalMoves, this.totalCombos, this.totalShards, this.levelsFinished, this.totalPIeces];
+        this.statsOrder = [this.stats, this.totalPlayTime, this.totalMoves, this.totalCombos, this.totalShards, this.levelsFinished, this.totalPIeces,this.credits];
 
         for (let index = 0; index < this.statsOrder.length; index++) {
             const element = this.statsOrder[index];
             this.statsContainer.addChild(element);
             element.y = dist * index;
-            if(index >= 0){
+            if(index > 6){
+                dist = 25
+                element.y += 30
+            }
+            else if(index >= 0){
                 dist = 35
             }
         }
 
         this.statsContainer.x = this.backShape.width / 2;
-        this.statsContainer.y = 120;
+        this.statsContainer.y = 100;
         this.mainContainer.addChild(this.statsContainer)
 
         this.state = 1;
