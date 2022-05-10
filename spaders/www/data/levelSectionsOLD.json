@@ -1,0 +1,181 @@
+{
+    "question": {
+        "dataPath": "question.json",
+        "levelOrderMap": "basics/tier-basic-1.json",
+        "order": -1,
+        "require": -1
+    },
+    "sections": [
+        {
+            "color": "0xDDDDDD",
+            "ignore": false,
+            "name": "Basics",
+            "displayName": "Video Game History",
+            "tilemapPath": "worldMaps/world1Beto.json",
+            "imageSrc": "",
+            "colorPalletId": 0,
+            "levels": [
+                {
+                    "name": "---",
+                    "dataPath": "world1/world1_tier1_levels.json",
+                    "levelOrderMap": "worldMaps/tier1/tier1-1.json",
+                    "order": -1,
+                    "require": -1
+                },
+                {
+                    "name": "---",
+                    "dataPath": "world1/world1_tier2_levels.json",
+                    "levelOrderMap": "worldMaps/tier1/tier1-2.json",
+                    "order": -1,
+                    "require": -1
+                },
+                {
+                    "name": "---",
+                    "dataPath": "world1/world1_tier3_levels.json",
+                    "levelOrderMap": "worldMaps/tier1/tier1-3.json",
+                    "order": -1,
+                    "require": -1
+                },
+                {
+                    "name": "---",
+                    "dataPath": "world1/world1_tier4_levels.json",
+                    "levelOrderMap": "worldMaps/tier1/tier1-4.json",
+                    "order": -1,
+                    "require": -1
+                },
+                {
+                    "name": "---",
+                    "dataPath": "world1/world1_tier5_levels.json",
+                    "levelOrderMap": "worldMaps/tier1/tier1-5.json",
+                    "order": -1,
+                    "require": -1
+                },
+                {
+                    "name": "2nd gen",
+                    "dataPath": "world1/world1_tier6_levels.json",
+                    "levelOrderMap": "worldMaps/tier1/tier1-6.json",
+                    "order": -1,
+                    "require": -1
+                },
+                {
+                    "name": "2nd gen",
+                    "dataPath": "world1/world1_tier7_levels.json",
+                    "levelOrderMap": "worldMaps/tier1/tier1-7.json",
+                    "order": -1,
+                    "require": -1
+                },
+                {
+                    "name": "---",
+                    "dataPath": "world1/world1_tier8_levels.json",
+                    "levelOrderMap": "worldMaps/tier1/tier1-8.json",
+                    "order": -1,
+                    "require": -1
+                },
+                {
+                    "name": "---",
+                    "dataPath": "world1/world1_tier9_levels.json",
+                    "levelOrderMap": "worldMaps/tier1/tier1-9.json",
+                    "order": -1,
+                    "require": -1
+                }
+            ]
+        },
+        {
+            "color": "0xDDDDDD",
+            "ignore": false,
+            "name": "Synthwave",
+            "displayName": "Video Game History",
+            "imageSrc": "",
+            "colorPalletId": 1,
+            "levels": [
+                {
+                    "name": "---",
+                    "dataPath": "how-to-play/shapes-synt.json",
+                    "levelOrderMap": "worldMaps/tier1/tier1-9.json",
+                    "order": -1,
+                    "require": -1
+
+                }
+            ]
+        },
+        {
+            "color": "0xDDDDDD",
+            "ignore": false,
+            "name": "Game Boy",
+            "displayName": "Video Game History",
+            "imageSrc": "",
+            "colorPalletId": 2,
+            "levels": [
+                {
+                    "name": "---",
+                    "dataPath": "gameboy/gameboy1.json",
+                    "levelOrderMap": "worldMaps/tier1/tier1-9.json",
+                    "order": -1,
+                    "require": -1
+
+                },
+                {
+                    "name": "---",
+                    "dataPath": "gameboy/gameboyWeapons2.json",
+                    "levelOrderMap": "worldMaps/tier1/tier1-9.json",
+                    "order": -1,
+                    "require": -1
+
+                },
+                {
+                    "name": "---",
+                    "dataPath": "gameboy/gameboyMisc.json",
+                    "levelOrderMap": "worldMaps/tier1/tier1-9.json",
+                    "order": -1,
+                    "require": -1
+
+                },
+                {
+                    "name": "---",
+                    "dataPath": "gameboy/gameboyMisc2.json",
+                    "levelOrderMap": "worldMaps/tier1/tier1-9.json",
+                    "order": -1,
+                    "require": -1
+
+                }
+                
+            ]
+        },
+        {
+            "color": "0xDDDDDD",
+            "ignore": true,
+            "name": "Tutorial",
+            "displayName": "Video Game History",
+            "tilemapPath": "worldMaps/world1.json",
+            "imageSrc": "",
+            "colorPalletId": 0,
+            "levels": [
+                {
+                    "name": "---",
+                    "dataPath": "tutorial/tutorial.json",
+                    "levelOrderMap": "basics/tier-basic-1.json",
+                    "order": -1,
+                    "require": -1
+                }
+            ]
+        },
+        {
+            "color": "0xDDDDDD",
+            "ignore": true,
+            "name": "Debug",
+            "displayName": "Video Game History",
+            "tilemapPath": "worldMaps/world1.json",
+            "imageSrc": "",
+            "colorPalletId": 0,
+            "levels": [
+                {
+                    "name": "---",
+                    "dataPath": "debug/debugBeto.json",
+                    "levelOrderMap": "basics/tier-basic-1.json",
+                    "order": -1,
+                    "require": -1
+                }
+            ]
+        }
+    ]
+}

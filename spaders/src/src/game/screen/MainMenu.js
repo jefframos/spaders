@@ -24,7 +24,7 @@ export default class MainMenu extends PIXI.Container {
 
         this.backShape = new PIXI.mesh.NineSlicePlane(
             PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
-        this.backShape.width = config.width
+        this.backShape.width = config.width * 0.75
         this.backShape.height = config.height * 0.5
         this.backShape.tint = config.colors.white
 
@@ -139,17 +139,20 @@ export default class MainMenu extends PIXI.Container {
         this.totalShards = new PIXI.Text("", this.fontStyle('22px', config.colors.purple));
         this.totalPIeces = new PIXI.Text("", this.fontStyle('22px', config.colors.background));
 
-        let dist = 30;
+        let dist = 80;
         this.statsOrder = [this.stats, this.totalPlayTime, this.totalMoves, this.totalCombos, this.totalShards, this.levelsFinished, this.totalPIeces];
 
         for (let index = 0; index < this.statsOrder.length; index++) {
             const element = this.statsOrder[index];
             this.statsContainer.addChild(element);
             element.y = dist * index;
+            if(index >= 0){
+                dist = 35
+            }
         }
 
         this.statsContainer.x = this.backShape.width / 2;
-        this.statsContainer.y = 80;
+        this.statsContainer.y = 120;
         this.mainContainer.addChild(this.statsContainer)
 
         this.state = 1;

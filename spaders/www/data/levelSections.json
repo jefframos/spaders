@@ -9,7 +9,7 @@
         {
             "color": "0xDDDDDD",
             "ignore": false,
-            "name": "Basics",
+            "name": "Planet Spader",
             "displayName": "Video Game History",
             "tilemapPath": "worldMaps/world1Beto.json",
             "imageSrc": "",
@@ -70,11 +70,190 @@
                     "levelOrderMap": "worldMaps/tier1/tier1-8.json",
                     "order": -1,
                     "require": -1
-                },
+                }
+                ,
                 {
                     "name": "---",
                     "dataPath": "world1/world1_tier9_levels.json",
                     "levelOrderMap": "worldMaps/tier1/tier1-9.json",
+                    "order": -1,
+                    "require": -1
+                }
+            ]
+        },
+        {
+            "color": "0xDDDDDD",
+            "ignore": true,
+            "name": "Video Games",
+            "displayName": "Video Game History",
+            "tilemapPath": "worldMaps/world1.json",
+            "imageSrc": "",
+            "colorPalletId": 4,
+            "levels": [
+                {
+                    "name": "2nd gen",
+                    "dataPath": "videogames/videogamesLevels1.json",
+                    "levelOrderMap": "basics/tier-basic-1.json",
+                    "order": -1,
+                    "require": -1
+                },
+                {
+                    "name": "2nd gen",
+                    "dataPath": "videogames/videogamesLevels2.json",
+                    "levelOrderMap": "basics/tier-basic-1.json",
+                    "order": -1,
+                    "require": -1
+                }
+            ]
+        },
+        {
+            "color": "0xDDDDDD",
+            "ignore": true,
+            "name": "Movies",
+            "displayName": "Video Game History",
+            "tilemapPath": "worldMaps/world1.json",
+            "imageSrc": "",
+            "colorPalletId": 0,
+            "levels": [
+                {
+                    "name": "2nd gen",
+                    "dataPath": "movies/moviesLevels1.json",
+                    "levelOrderMap": "basics/tier-basic-1.json",
+                    "order": -1,
+                    "require": -1
+                },
+                {
+                    "name": "2nd gen",
+                    "dataPath": "movies/moviesLevelsAdventure.json",
+                    "levelOrderMap": "basics/tier-basic-1.json",
+                    "order": -1,
+                    "require": -1
+                }
+            ]
+        },
+        {
+            "color": "0xDDDDDD",
+            "ignore": true,
+            "name": "Pokemon",
+            "displayName": "Video Game History",
+            "tilemapPath": "worldMaps/world1.json",
+            "imageSrc": "",
+            "colorPalletId": 3,
+            "levels": [
+                {
+                    "name": "pokemon",
+                    "dataPath": "pokemon/pokemon1-25.json",
+                    "levelOrderMap": "basics/tier-basic-1.json",
+                    "order": -1,
+                    "require": -1
+                },
+                {
+                    "name": "pokemon",
+                    "dataPath": "pokemon/pokemon26-50.json",
+                    "levelOrderMap": "basics/tier-basic-1.json",
+                    "order": -1,
+                    "require": -1
+                },
+                {
+                    "name": "pokemon",
+                    "dataPath": "pokemon/pokemon51-75.json",
+                    "levelOrderMap": "basics/tier-basic-1.json",
+                    "order": -1,
+                    "require": -1
+                }
+            ]
+        },
+        {
+            "color": "0xDDDDDD",
+            "ignore": true,
+            "name": "Synthwave",
+            "displayName": "Video Game History",
+            "tilemapPath": "worldMaps/worldSynth.json",
+            "imageSrc": "",
+            "colorPalletId": 1,
+            "levels": [
+                {
+                    "name": "---",
+                    "dataPath": "how-to-play/shapes-synt.json",
+                    "levelOrderMap": "basics/tier-basic-1.json",
+                    "order": -1,
+                    "require": -1
+                },
+                {
+                    "name": "---",
+                    "dataPath": "synth/synth1.json",
+                    "levelOrderMap": "basics/tier-basic-1.json",
+                    "order": -1,
+                    "require": -1
+                },
+                {
+                    "name": "---",
+                    "dataPath": "synth/sunset.json",
+                    "levelOrderMap": "basics/tier-basic-1.json",
+                    "order": -1,
+                    "require": -1
+                }
+            ]
+        },
+        {
+            "color": "0xDDDDDD",
+            "ignore": true,
+            "name": "Game Boy",
+            "displayName": "Video Game History",
+            "tilemapPath": "worldMaps/world1.json",
+            "imageSrc": "",
+            "colorPalletId": "gameboy",
+            "levels": [
+                {
+                    "name": "gameboy",
+                    "dataPath": "gameboy/gameboy1.json",
+                    "levelOrderMap": "basics/tier-basic-1.json",
+                    "order": -1,
+                    "require": -1
+                },
+                {
+                    "name": "gameboy",
+                    "dataPath": "gameboy/gameboyWeapons2.json",
+                    "levelOrderMap": "basics/tier-basic-1.json",
+                    "order": -1,
+                    "require": -1
+                },
+                {
+                    "name": "gameboy",
+                    "dataPath": "gameboy/gameboyMisc.json",
+                    "levelOrderMap": "basics/tier-basic-1.json",
+                    "order": -1,
+                    "require": -1
+                },
+                {
+                    "name": "gameboy",
+                    "dataPath": "gameboy/gameboyMisc2.json",
+                    "levelOrderMap": "basics/tier-basic-1.json",
+                    "order": -1,
+                    "require": -1
+                },
+                {
+                    "name": "gameboy",
+                    "dataPath": "gameboy/gameboycreatures.json",
+                    "levelOrderMap": "basics/tier-basic-1.json",
+                    "order": -1,
+                    "require": -1
+                }
+            ]
+        },
+        {
+            "color": "0xDDDDDD",
+            "ignore": true,
+            "name": "Bossa",
+            "displayName": "Video Game History",
+            "tilemapPath": "worldMaps/world1.json",
+            "imageSrc": "",
+            "colorPalletId": 1,
+            "levels": [
+                {
+                    "name": "---",
+                    "dataPath": "how-to-play/bossa.json",
+                    "levelOrderMap": "basics/tier-basic-1.json",
                     "order": -1,
                     "require": -1
                 }

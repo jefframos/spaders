@@ -148,9 +148,9 @@ export default class TierWorldButton extends SquareButton {
                 this.incompleteState.visible = true;
                 this.incompleteState.tint = window.colorTweenBomb.currentColor
 
-                this.questionIcon.sin += delta * 3;
-                this.questionIcon.sin %= Math.PI * 2
-                this.questionIcon.x = Math.sin(this.questionIcon.sin) * 10
+                // this.questionIcon.sin += delta * 3;
+                // this.questionIcon.sin %= Math.PI * 2
+                // this.questionIcon.x = Math.sin(this.questionIcon.sin) * 10
                 //this.crownIcon.visible = true;
             } else if (this.buttonState == 0) {
                 this.icon.visible = true;

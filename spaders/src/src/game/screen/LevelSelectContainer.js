@@ -612,7 +612,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         let order = this.currentTier[0].tier.mapData.levelLayers[orderTemp]
 
         //console.log(order)
-        this.levelMap.addTierLevel(levelButton, order, 1.5)
+        this.levelMap.addTierLevel(levelButton, order, 1)
         //
         this.refreshCard(levelButton, data);
 
@@ -1253,20 +1253,25 @@ export default class LevelSelectContainer extends PIXI.Container {
         if (this.unscaledTierButtonSize && this.currentGridOffset.x > 0) {
 
             let targetScale = (this.currentResolution.width - this.currentGridOffset.x * 2 - 20) / (this.unscaledTierButtonSize.width * 7)
+            let targetScaleLevel = (this.currentResolution.width - this.currentGridOffset.x * 2 - 20) / (this.unscaledTierButtonSize.width * 5)
             if (window.isMobile) {
+                targetScaleLevel = (this.currentResolution.width - this.currentGridOffset.x * 2 - 20) / (this.unscaledTierButtonSize.width * 6)
                 targetScale = Math.min(1, targetScale)
-
+                targetScaleLevel = Math.min(1, targetScaleLevel)
+                
             } else {
-
+                
                 if (this.currentResolution.width > this.currentResolution.height) {
                     targetScale = (this.currentResolution.width - this.currentGridOffset.x * 2 - 20) / (this.unscaledTierButtonSize.width * 20)
                 }
                 targetScale = Math.min(1, targetScale)
                 targetScale = Math.max(0.5, targetScale)
+                targetScaleLevel = Math.min(1.2, targetScaleLevel)
+                targetScaleLevel =  Math.max(0.5, targetScaleLevel)
             }
 
             this.tierMap.scale.set(targetScale)
-            this.levelMap.scale.set(targetScale)
+            this.levelMap.scale.set(targetScaleLevel)
             this.levelMap.x = this.currentGridOffset.x * 2
         }
 

@@ -259,8 +259,8 @@
             "scale": 0.5,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 638,
-                "y": 638
+                "x": 640,
+                "y": 640
             }
         },
         "how-to-play/spadersTileset.tsx": {
