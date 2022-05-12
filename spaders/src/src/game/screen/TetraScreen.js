@@ -1280,24 +1280,31 @@ export default class TetraScreen extends Screen {
 		if (!wasMute) {
 			SOUND_MANAGER.mute();
 		}
-		PokiSDK.gameplayStop();
-		PokiSDK.rewardedBreak().then(
-			(success) => {
-				if (success) {
-					PokiSDK.gameplayStart();
-					this.replaceForBombAfterBreak();
-					if (!wasMute) {
-						SOUND_MANAGER.toggleMute();
-					}
-				} else {
-					if (!wasMute) {
-						SOUND_MANAGER.toggleMute();
-					}
-					this.replaceForBombAfterBreak();
-				}
-			}
 
+
+		let data = { text: 'Would you like to watch a video and get a Nuke' }
+		window.popUpOverlay.show(data, () => {
+			window.GAMEPLAY_STOP();
+			PokiSDK.rewardedBreak().then(
+				(success) => {
+					if (success) {
+						window.GAMEPLAY_START()
+						this.replaceForBombAfterBreak();
+						if (!wasMute) {
+							SOUND_MANAGER.toggleMute();
+						}
+					} else {
+						if (!wasMute) {
+							SOUND_MANAGER.toggleMute();
+						}
+						this.replaceForBombAfterBreak();
+					}
+				}
+
+			)
+		}
 		)
+
 	}
 	replaceForBombAfterBreak() {
 		this.currentCard.isABomb();
@@ -1609,7 +1616,7 @@ export default class TetraScreen extends Screen {
 			this.fallBar.visible = false;
 		}
 
-		PokiSDK.gameplayStart();
+		window.GAMEPLAY_START()
 
 
 	}
@@ -1723,14 +1730,14 @@ export default class TetraScreen extends Screen {
 	}
 	stopGameplay() {
 		this.gameRunning = false;
-		PokiSDK.gameplayStop();
+		window.GAMEPLAY_STOP();
 	}
 	OnWin(card) {
 		if (!this.gameRunning) {
 			return;
 		}
 		this.stopGameplay();
-		PokiSDK.gameplayStop();
+		window.GAMEPLAY_STOP();
 		this.board.removeAllStates();
 		this.board.destroyAllCards();
 		this.endGameState();

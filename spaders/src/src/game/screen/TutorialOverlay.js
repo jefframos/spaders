@@ -394,10 +394,11 @@ export default class TutorialOverlay extends PIXI.Container {
         
         this.addChild(this.tutorialPopLabel);
 
-        this.killTutorialButton = new UIButton1(config.colors.dark, window.iconsData.cancel, config.colors.white);
+        this.killTutorialButton = new UIButton1(config.colors.white, window.iconsData.cancel, config.colors.background);
         this.addChild(this.killTutorialButton)
         this.killTutorialButton.onClick.add(() => { this.killTutorial() });
         this.killTutorialButton.scale.set(0.5)
+        this.killTutorialButton.addLabelLeft("SKIP");
         
         this.toggleSound = new UIButton1(config.colors.dark, window.iconsData.soundOn, config.colors.white);
         this.toggleSound.onClick.add(() => this.toggleSoundButton());

@@ -1121,7 +1121,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         if (!wasMute) {
             SOUND_MANAGER.mute();
         }
-        PokiSDK.gameplayStop();
+        window.GAMEPLAY_STOP();
         PokiSDK.commercialBreak().then(
             () => {
                 console.log("Commercial break finished, proceeding to game");
