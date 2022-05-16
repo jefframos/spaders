@@ -113,6 +113,7 @@ export default class InGameMenu extends PIXI.Container {
 			element.y = 50
 		}
 
+
 	}
 	toggleState() {
 		if (this.state == 1) {

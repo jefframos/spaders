@@ -140,8 +140,15 @@ export default class TetraScreen extends Screen {
 
 		this.colorTweenBomb.startTween(0)
 
+		window.onEscPressed.add(()=>{
+			if(this.gameRunning){
+				this.inGameMenu.toggleState();
+			}
+
+		})
 
 	}
+
 	uniq_fast(a) {
 		var seen = {};
 		var out = [];

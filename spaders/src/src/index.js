@@ -9,6 +9,7 @@ import EffectLayer from './game/effects/EffectLayer';
 import Pool from './game/core/Pool';
 import SoundManager from './game/SoundManager';
 import colorSchemes from './colorSchemes';
+import signals from 'signals';
 
 window.GAMEPLAY_IS_STOP = false;
 window.GAMEPLAY_STOP = function(){
@@ -45,6 +46,30 @@ window.SAVE_DATA = function (data, filename, type = 'text/plain') {
 
 }
 
+
+window.onEscPressed = new signals();
+window.onSpacePressed = new signals();
+
+window.getKey = function(e) {
+	if (e.key === "Escape") { // escape key maps to keycode `27`
+		// <DO YOUR WORK HERE>
+		window.onEscPressed.dispatch()
+		// if(this.gameRunning){
+		// 	this.inGameMenu.toggleState();
+		// }
+	}
+	
+	if (e.keyCode === 32) { // escape key maps to keycode `27`
+		window.onSpacePressed.dispatch()
+		// <DO YOUR WORK HERE>
+		
+	}
+}
+
+document.addEventListener('keydown', (event) => {
+	window.getKey(event);
+	event.preventDefault()
+})
 
 window.LOGO_FONT = "round_popregular"
 

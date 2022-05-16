@@ -80,6 +80,7 @@ export default class Game {
 		this.disableContextMenu(this.app.renderer.view);
 		document.body.style.margin = 0;
 
+
 		this.addLoading();
 	}
 	// 	addFont(fontFace = 'londrina_solidregular', fontsrc = 'londrinasolid-regular-webfont') {
@@ -145,11 +146,11 @@ export default class Game {
 	addLoading() {
 
 		let colors = colorSchemes.getCurrentColorScheme();
-
 		this.tapToStart = new PIXI.Container();
 		this.backTapShape = new PIXI.Graphics().beginFill(colors.background).drawRect(0, 0, 4000, 4000);
 		this.tapToStart.addChild(this.backTapShape);
 		this.stage.addChild(this.tapToStart);
+
 		this.infoLabel = new PIXI.Text('', { font: '16px', fill: colors.fontColor, fontFamily: window.STANDARD_FONT1 });
 		// , stroke: 0x000000,		strokeThickness: 5 });
 		this.infoLabel.pivot.x = this.infoLabel.width / 2
@@ -190,6 +191,13 @@ export default class Game {
 		this.tapToStart.addChild(this.loadingBarFill)
 		this.tapToStart.addChild(this.infoLabel)
 
+
+
+		this.logo = new PIXI.Sprite.fromImage('assets/logospaders.png')
+		this.logo.anchor.set(0.5)
+		this.stage.addChild(this.logo);
+
+
 		this.resize2();
 
 	}
@@ -197,6 +205,12 @@ export default class Game {
 		this.tapToStart.interactive = true;
 		this.tapToStart.buttonMode = true;
 		this.tapToStart.on('mouseup', this.onTapUp.bind(this)).on('touchend', this.onTapUp.bind(this));
+
+		window.onSpacePressed.add(()=>{
+			if(this.tapToStart.visible){ 
+				this.onTapUp()
+			}
+		})  
 
 		this.infoLabel.text = 'Tap to Start'
 		this.infoLabel.pivot.x = this.infoLabel.width / 2
@@ -213,6 +227,7 @@ export default class Game {
 	onTapUp() {
 		if (this.tapToStart && this.tapToStart.parent) {
 			this.stage.removeChild(this.tapToStart);
+			this.stage.removeChild(this.logo);
 			this.update();
 		}
 	}
@@ -264,12 +279,12 @@ export default class Game {
 		this.renderer.render(this.stage);
 		requestAnimationFrame(this.update.bind(this));
 
-		if(window.SOUND_MANAGER && window.SOUND_MANAGER.update){
+		if (window.SOUND_MANAGER && window.SOUND_MANAGER.update) {
 			window.SOUND_MANAGER.update();
 		}
 	}
 	resize2() {
-		if(this.innerResolution && this.innerResolution.width == window.innerWidth && this.innerResolution.height == window.innerHeight){
+		if (this.innerResolution && this.innerResolution.width == window.innerWidth && this.innerResolution.height == window.innerHeight) {
 			//return
 		}
 		//this.resolution = { width: window.outerWidth, height: window.outerHeight };
@@ -291,6 +306,7 @@ export default class Game {
 		this.renderer.view.style.height = `${this.innerResolution.height}px`;
 
 		window.appScale = { x: sclX, y: sclY };
+
 
 
 		window.ratio = Math.min(sclX, sclY);
@@ -331,6 +347,22 @@ export default class Game {
 
 			this.infoLabel.x = this.innerResolution.width / 2;
 			this.infoLabel.y = this.loadingBarFill.y - this.infoLabel.height * 1.5;
+
+			//this.logo.scale.x = sclX
+			//this.logo.scale.y = sclY
+
+			if(this.logo.width > this.innerResolution.width){
+				this.logo.scale.set(this.innerResolution.width/ this.logo.width * 0.8 * this.logo.scale.x)
+			}else{
+				let targ = this.innerResolution.width/ this.logo.width * 0.8 * this.logo.scale.x
+				let targY = this.innerResolution.height/ this.logo.height * 0.5 * this.logo.scale.y
+				targ = Math.min(targ, 1)
+				targY = Math.min(targY, 1)
+				this.logo.scale.set(Math.min(targY, targ))
+			}
+			this.logo.x = this.innerResolution.width / 2;//this.innerResolution.width / 4
+			this.logo.y = this.innerResolution.height / 2
+			this.tapToStart.addChild(this.logo)
 		}
 
 	}

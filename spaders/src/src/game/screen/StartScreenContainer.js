@@ -248,6 +248,10 @@ export default class StartScreenContainer extends PIXI.Container {
 
 		this.updateColorScheme();
 
+		window.onSpacePressed.add(()=>{
+			this.resetGame()
+		}) 
+
 	}
 	updateColorScheme() {
 		let colorScheme = colorSchemes.getCurrentColorScheme();
@@ -270,7 +274,7 @@ export default class StartScreenContainer extends PIXI.Container {
 			//element.updateMenuColors(colorScheme.fontColor, colorScheme.background);
 
 		});
-		this.updateLinesColor();
+		this.updateLinesColor(); 
 		//this.staticLogo.tint = colorScheme.fontColor;
 	}
 	updateLinesColor() {
@@ -614,11 +618,17 @@ export default class StartScreenContainer extends PIXI.Container {
 	}
 	resetGame() {
 
+		if(this.screenState == 2){
+			return;
+		}
 		window.SOUND_MANAGER.play('tapPlay', { volume: 0.65 })
 
 		this.gameScreen.mainMenuSettings.collapse();
 		this.chooseLevelPanel.show();
 		this.startMenuState();
+
+		this.screenState = 2
+		
 	}
 	removeEvents() {
 
