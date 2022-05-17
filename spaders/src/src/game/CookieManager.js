@@ -201,6 +201,9 @@ export default class CookieManager {
 
 		}
 
+		if(!bestTime){
+			bestTime = 0;
+		}
 
 		let averageTimePoints = totalPoints / bestTime;
 		let levelsCompleted = {

@@ -6,16 +6,16 @@
     "activeFile": "how-to-play/creatures.tmx",
     "expandedProjectPaths": [
         "tutorial",
-        "synth",
-        "movies",
-        "basics",
-        "main",
         "debug",
-        "world",
-        "templates",
+        "main",
         "videogames",
-        "gb",
-        "how-to-play"
+        "world",
+        "how-to-play",
+        "synth",
+        "basics",
+        "movies",
+        "templates",
+        "gb"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -147,7 +147,7 @@
             "scale": 0.75,
             "selectedLayer": 14,
             "viewCenter": {
-                "x": 321.33333333333337,
+                "x": 322.6666666666667,
                 "y": 384
             }
         },

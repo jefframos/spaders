@@ -132,7 +132,9 @@ export default class LevelSelectContainer extends PIXI.Container {
             this.addChild(this.verticalBar)
             this.addChild(this.backButton)
 
-
+            window.onSpacePressed.add(() => {
+                this.sortPressSpace()
+            })
         }, 100);
 
         this.sectionsContainer.x = 0;
@@ -603,7 +605,7 @@ export default class LevelSelectContainer extends PIXI.Container {
 
         //console.log(data);
         let orderTemp = data.order >= 0 ? level.order : this.levelCards.length;
-        if(this.currentTier[0].tier.mapData.levelLayers.length <= orderTemp){
+        if (this.currentTier[0].tier.mapData.levelLayers.length <= orderTemp) {
             return;
         }
         let levelButton = new TierWorldButton(this.newUnscaledLevelButtonSize);//= new SquareButton(this.unscaledCardSize);
@@ -664,6 +666,46 @@ export default class LevelSelectContainer extends PIXI.Container {
         //levelTierButton.setLargeButtonMode();
 
         return levelTierButton
+    }
+    sortPressSpace() {
+        if (this.disableClickCounter > 0) {
+            return;
+        }
+        if (!this.visible || this.tempBlockPanel.visible) {
+            return;
+        }
+        if (this.currentUISection == 1) {
+            this.getLatestOpenTier();
+        } else if (this.currentUISection == 2) {
+            this.getLatestOpenLevel();
+        }
+    }
+    getLatestOpenLevel() {
+        console.log(this.currentTier);
+
+
+
+
+        for (let index = this.levelCards.length - 1; index >= 0; index--) {
+            const element = this.levelCards[index];
+            if (element.isEnabled) {
+                this.selectLevel(element.data)
+                //this.openLevelTier(element.data)
+                break;
+            }
+        }
+
+    }
+    getLatestOpenTier() {
+
+        for (let index = this.currentSection.levels.length - 1; index >= 0; index--) {
+            const element = this.currentSection.levels[index];
+            if (!window.COOKIE_MANAGER.isTierLocked(element)) {
+                console.log(element)
+                this.openLevelTier(element.data)
+                break;
+            }
+        }
     }
     openSection(section) {
         if (this.disableClickCounter > 0) {
@@ -739,7 +781,7 @@ export default class LevelSelectContainer extends PIXI.Container {
 
 
             let order = section.mapData.levelLayers[level.order >= 0 ? level.order : this.tierButtons.length];
-            //console.log(order)
+            
 
             this.tierMap.addTierLevel(levelTierButton, order, 1.5)
             this.tierButtons.push(levelTierButton);
@@ -954,7 +996,29 @@ export default class LevelSelectContainer extends PIXI.Container {
             levelTierButton.updateLabel(data[0].tierName + " (" + count + "/" + data.length + ")", { x: 0, y: -25 });
             //levelTierButton.updateLabel(count + "/" + data.length, { x: 0, y: -25 });
 
-            if (COOKIE_MANAGER.isTierLocked(data[0].tier)) {
+            let tempTier = data[0].tier
+
+            //console.log(tempTier)
+            let shouldLock = false;
+            if (tempTier.require[0] < 0) {
+                shouldLock = false;
+            } else {
+                shouldLock = false;
+                tempTier.require.forEach(element => {
+                    if (element < 0) {
+                        console.log("Required level doesnt exist", element, tempTier,data);
+                        shouldLock = false;
+                    } else {
+                        if (COOKIE_MANAGER.isTierLocked(tempTier)) {
+                            shouldLock = true;
+                        }
+                    }
+                });
+            }
+
+            //console.log(shouldLock)
+
+            if (shouldLock) {// if (COOKIE_MANAGER.isTierLocked(data[0].tier)) {
                 levelTierButton.lockMode()
             } else {
                 levelTierButton.incompleteMode()
@@ -1034,8 +1098,10 @@ export default class LevelSelectContainer extends PIXI.Container {
 
                 levelButton.updateLabel("~" + data.estimateTime2)//,
                 levelButton.incompleteMode();
+                levelButton.isEnabled = true;
             } else {
                 levelButton.lockMode();
+                levelButton.isEnabled = false;
 
             }
             levelButton.setLargeButtonMode(false);
@@ -1112,6 +1178,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         this.backButton.visible = false;
         this.verticalBar.visible = false;
     }
+
     selectLevel(data) {
         if (this.disableClickCounter > 0) {
             return;
@@ -1258,16 +1325,16 @@ export default class LevelSelectContainer extends PIXI.Container {
                 targetScaleLevel = (this.currentResolution.width - this.currentGridOffset.x * 2 - 20) / (this.unscaledTierButtonSize.width * 6)
                 targetScale = Math.min(1, targetScale)
                 targetScaleLevel = Math.min(1, targetScaleLevel)
-                
+
             } else {
-                
+
                 if (this.currentResolution.width > this.currentResolution.height) {
                     targetScale = (this.currentResolution.width - this.currentGridOffset.x * 2 - 20) / (this.unscaledTierButtonSize.width * 20)
                 }
                 targetScale = Math.min(1, targetScale)
                 targetScale = Math.max(0.5, targetScale)
                 targetScaleLevel = Math.min(1.2, targetScaleLevel)
-                targetScaleLevel =  Math.max(0.5, targetScaleLevel)
+                targetScaleLevel = Math.max(0.5, targetScaleLevel)
             }
 
             this.tierMap.scale.set(targetScale)

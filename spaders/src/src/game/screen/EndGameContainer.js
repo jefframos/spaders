@@ -138,6 +138,15 @@ export default class EndGameContainer extends PIXI.Container {
         })
 
         this.updateColorScheme();
+
+
+        window.onSpacePressed.add(()=>{
+            if(this.nextLevel.visible){
+                this.playNextLevel()
+            }
+        })
+
+
     }
     updateColorScheme() {
         let colorScheme = colorSchemes.getCurrentColorScheme();

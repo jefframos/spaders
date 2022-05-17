@@ -3,7 +3,7 @@
         "dataPath": "question.json",
         "levelOrderMap": "basics/tier-basic-1.json",
         "order": -1,
-        "require": -1
+        "require": [-1]
     },
     "sections": [
         {
@@ -16,68 +16,68 @@
             "colorPalletId": 0,
             "levels": [
                 {
-                    "name": "---",
+                    "name": "0",
                     "dataPath": "world1/world1_tier1_levels.json",
                     "levelOrderMap": "worldMaps/tier1/tier1-1.json",
                     "order": -1,
-                    "require": -1
+                    "require": [-1]
                 },
                 {
-                    "name": "---",
+                    "name": "1water",
                     "dataPath": "world1/world1_tier2_levels.json",
                     "levelOrderMap": "worldMaps/tier1/tier1-2.json",
                     "order": -1,
-                    "require": -1
+                    "require": [0]
                 },
                 {
-                    "name": "---",
+                    "name": "2people",
                     "dataPath": "world1/world1_tier3_levels.json",
                     "levelOrderMap": "worldMaps/tier1/tier1-3.json",
                     "order": -1,
-                    "require": -1
+                    "require": [1]
                 },
                 {
-                    "name": "---",
+                    "name": "3food",
                     "dataPath": "world1/world1_tier4_levels.json",
                     "levelOrderMap": "worldMaps/tier1/tier1-4.json",
                     "order": -1,
-                    "require": -1
+                    "require": [2]
                 },
                 {
-                    "name": "---",
+                    "name": "4cemitery",
                     "dataPath": "world1/world1_tier5_levels.json",
                     "levelOrderMap": "worldMaps/tier1/tier1-5.json",
                     "order": -1,
-                    "require": -1
+                    "require": [2]
                 },
                 {
-                    "name": "2nd gen",
+                    "name": "5forest",
                     "dataPath": "world1/world1_tier6_levels.json",
                     "levelOrderMap": "worldMaps/tier1/tier1-6.json",
                     "order": -1,
-                    "require": -1
+                    "require": [1]
                 },
                 {
-                    "name": "2nd gen",
+                    "name": "6desert",
                     "dataPath": "world1/world1_tier7_levels.json",
                     "levelOrderMap": "worldMaps/tier1/tier1-7.json",
                     "order": -1,
-                    "require": -1
+                    "require": [5]
                 },
                 {
-                    "name": "---",
+                    "name": "7caves",
                     "dataPath": "world1/world1_tier8_levels.json",
                     "levelOrderMap": "worldMaps/tier1/tier1-8.json",
                     "order": -1,
-                    "require": -1
+                    "require": [6]
                 }
                 ,
                 {
-                    "name": "---",
+                    "name": "8castle",
                     "dataPath": "world1/world1_tier9_levels.json",
                     "levelOrderMap": "worldMaps/tier1/tier1-9.json",
                     "order": -1,
-                    "require": -1
+                    "require": [7]
                 }
             ]
         },
@@ -95,14 +95,14 @@
                     "dataPath": "videogames/videogamesLevels1.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
                     "order": -1,
-                    "require": -1
+                    "require": [-1]
                 },
                 {
                     "name": "2nd gen",
                     "dataPath": "videogames/videogamesLevels2.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
                     "order": -1,
-                    "require": -1
+                    "require": [-1]
                 }
             ]
         },
@@ -120,14 +120,14 @@
                     "dataPath": "movies/moviesLevels1.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
                     "order": -1,
-                    "require": -1
+                    "require": [-1]
                 },
                 {
                     "name": "2nd gen",
                     "dataPath": "movies/moviesLevelsAdventure.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
                     "order": -1,
-                    "require": -1
+                    "require": [-1]
                 }
             ]
         },
@@ -145,21 +145,21 @@
                     "dataPath": "pokemon/pokemon1-25.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
                     "order": -1,
-                    "require": -1
+                    "require": [-1]
                 },
                 {
                     "name": "pokemon",
                     "dataPath": "pokemon/pokemon26-50.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
                     "order": -1,
-                    "require": -1
+                    "require": [-1]
                 },
                 {
                     "name": "pokemon",
                     "dataPath": "pokemon/pokemon51-75.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
                     "order": -1,
-                    "require": -1
+                    "require": [-1]
                 }
             ]
         },
@@ -177,21 +177,21 @@
                     "dataPath": "how-to-play/shapes-synt.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
                     "order": -1,
-                    "require": -1
+                    "require": [-1]
                 },
                 {
                     "name": "---",
                     "dataPath": "synth/synth1.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
                     "order": -1,
-                    "require": -1
+                    "require": [-1]
                 },
                 {
                     "name": "---",
                     "dataPath": "synth/sunset.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
                     "order": -1,
-                    "require": -1
+                    "require": [-1]
                 }
             ]
         },
@@ -209,35 +209,35 @@
                     "dataPath": "gameboy/gameboy1.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
                     "order": -1,
-                    "require": -1
+                    "require": [-1]
                 },
                 {
                     "name": "gameboy",
                     "dataPath": "gameboy/gameboyWeapons2.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
                     "order": -1,
-                    "require": -1
+                    "require": [-1]
                 },
                 {
                     "name": "gameboy",
                     "dataPath": "gameboy/gameboyMisc.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
                     "order": -1,
-                    "require": -1
+                    "require": [-1]
                 },
                 {
                     "name": "gameboy",
                     "dataPath": "gameboy/gameboyMisc2.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
                     "order": -1,
-                    "require": -1
+                    "require": [-1]
                 },
                 {
                     "name": "gameboy",
                     "dataPath": "gameboy/gameboycreatures.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
                     "order": -1,
-                    "require": -1
+                    "require": [-1]
                 }
             ]
         },
@@ -255,7 +255,7 @@
                     "dataPath": "how-to-play/bossa.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
                     "order": -1,
-                    "require": -1
+                    "require": [-1]
                 }
             ]
         },
@@ -273,7 +273,7 @@
                     "dataPath": "tutorial/tutorial.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
                     "order": -1,
-                    "require": -1
+                    "require": [-1]
                 }
             ]
         },
@@ -291,7 +291,7 @@
                     "dataPath": "debug/debugBeto.json",
                     "levelOrderMap": "basics/tier-basic-1.json",
                     "order": -1,
-                    "require": -1
+                    "require": [-1]
                 }
             ]
         }
