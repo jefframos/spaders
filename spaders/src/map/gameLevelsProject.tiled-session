@@ -54,6 +54,20 @@
             "scaleInDock": 0.75,
             "scaleInEditor": 1
         },
+        "D:/projects/Spaders_GameDesign/src/map/_world1/world1_tier9_levels.tmx": {
+            "scale": 0.8887695312499999,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 513.0688935281837,
+                "y": 513.0688935281837
+            }
+        },
+        "D:/projects/Spaders_GameDesign/src/map/tilesets/gb.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/projects/Spaders_GameDesign/src/map/tilesets/spadersTileset.tsx": {
+            "scaleInDock": 1
+        },
         "D:/projects/spaders/spaders/src/worlds/tilesets/numbers.tsx": {
             "scaleInDock": 1
         },
@@ -257,7 +271,7 @@
         },
         "how-to-play/simple-shapes.tmx": {
             "scale": 0.5,
-            "selectedLayer": 3,
+            "selectedLayer": 0,
             "viewCenter": {
                 "x": 640,
                 "y": 640
@@ -439,7 +453,7 @@
             "scale": 0.5,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 769,
+                "x": 770,
                 "y": 768
             }
         },
@@ -447,7 +461,7 @@
             "scale": 0.5,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 385,
+                "x": 386,
                 "y": 384
             }
         },
@@ -455,7 +469,7 @@
             "scale": 0.125,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 2308,
+                "x": 2312,
                 "y": 3072
             }
         },
@@ -538,6 +552,7 @@
     "project": "gameLevelsProject.tiled-project",
     "property.type": "int",
     "recentFiles": [
+        "D:/projects/Spaders_GameDesign/src/map/_world1/world1_tier9_levels.tmx",
         "how-to-play/simple-shapes.tmx",
         "videogames/levels.tmx",
         "debug/debug2.tmx",
@@ -548,8 +563,7 @@
         "D:/projects/spaders/spaders/src/worlds/world/tiniMap.tmx",
         "world/tier1BasicMap.tmx",
         "world/tiniMap.tmx",
-        "world/worldSynth.tmx",
-        "world/testWorld1.tmx"
+        "world/worldSynth.tmx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",

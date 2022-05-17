@@ -987,6 +987,7 @@ export default class LevelSelectContainer extends PIXI.Container {
             //levelTierButton.setColor(config.colors.purple)
             levelTierButton.tierCompleteMode();//updateLabel('COMPLETED');
             levelTierButton.hideProgressBar();
+            levelTierButton.updateLabel( "", { x: 0, y: -25 });
         } else {
 
             //if(levelTierButton)

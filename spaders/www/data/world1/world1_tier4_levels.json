@@ -108,6 +108,11 @@
                  "value":0
                 }, 
                 {
+                 "name":"require",
+                 "type":"string",
+                 "value":"-1"
+                }, 
+                {
                  "name":"scale",
                  "type":"int",
                  "value":2
@@ -237,6 +242,11 @@
                  "name":"padding-top",
                  "type":"int",
                  "value":0
+                }, 
+                {
+                 "name":"require",
+                 "type":"string",
+                 "value":"0"
                 }, 
                 {
                  "name":"scale",
@@ -370,6 +380,11 @@
                  "value":0
                 }, 
                 {
+                 "name":"require",
+                 "type":"string",
+                 "value":"1"
+                }, 
+                {
                  "name":"scale",
                  "type":"int",
                  "value":2
@@ -499,6 +514,11 @@
                  "name":"padding-top",
                  "type":"int",
                  "value":0
+                }, 
+                {
+                 "name":"require",
+                 "type":"string",
+                 "value":"2"
                 }, 
                 {
                  "name":"scale",
@@ -632,6 +652,11 @@
                  "value":0
                 }, 
                 {
+                 "name":"require",
+                 "type":"string",
+                 "value":"3"
+                }, 
+                {
                  "name":"scale",
                  "type":"int",
                  "value":2
@@ -761,6 +786,11 @@
                  "name":"padding-top",
                  "type":"int",
                  "value":0
+                }, 
+                {
+                 "name":"require",
+                 "type":"string",
+                 "value":"3"
                 }, 
                 {
                  "name":"scale",
@@ -894,6 +924,11 @@
                  "value":0
                 }, 
                 {
+                 "name":"require",
+                 "type":"string",
+                 "value":"5"
+                }, 
+                {
                  "name":"scale",
                  "type":"int",
                  "value":2
@@ -1023,6 +1058,11 @@
                  "name":"padding-top",
                  "type":"int",
                  "value":0
+                }, 
+                {
+                 "name":"require",
+                 "type":"string",
+                 "value":"4"
                 }, 
                 {
                  "name":"scale",
@@ -1156,6 +1196,11 @@
                  "value":0
                 }, 
                 {
+                 "name":"require",
+                 "type":"string",
+                 "value":"6,7"
+                }, 
+                {
                  "name":"scale",
                  "type":"int",
                  "value":2
@@ -1285,6 +1330,11 @@
                  "name":"padding-top",
                  "type":"int",
                  "value":0
+                }, 
+                {
+                 "name":"require",
+                 "type":"string",
+                 "value":"8"
                 }, 
                 {
                  "name":"scale",
@@ -2168,7 +2218,7 @@
         {
          "name":"coverID",
          "type":"int",
-         "value":0
+         "value":3
         }, 
         {
          "name":"iconURL",
@@ -2178,7 +2228,7 @@
         {
          "name":"sectionName",
          "type":"string",
-         "value":"Food"
+         "value":"Fantastic Farm"
         }],
  "renderorder":"right-down",
  "tiledversion":"1.7.2",

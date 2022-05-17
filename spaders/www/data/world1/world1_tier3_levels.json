@@ -45,6 +45,11 @@
                  "value":0
                 }, 
                 {
+                 "name":"require",
+                 "type":"string",
+                 "value":"-1"
+                }, 
+                {
                  "name":"startI",
                  "type":"int",
                  "value":0
@@ -106,6 +111,11 @@
                  "name":"padding-top",
                  "type":"int",
                  "value":0
+                }, 
+                {
+                 "name":"require",
+                 "type":"string",
+                 "value":"0"
                 }, 
                 {
                  "name":"startI",
@@ -171,6 +181,11 @@
                  "value":0
                 }, 
                 {
+                 "name":"require",
+                 "type":"string",
+                 "value":"1"
+                }, 
+                {
                  "name":"startI",
                  "type":"int",
                  "value":0
@@ -232,6 +247,11 @@
                  "name":"padding-top",
                  "type":"int",
                  "value":0
+                }, 
+                {
+                 "name":"require",
+                 "type":"string",
+                 "value":"1"
                 }, 
                 {
                  "name":"startI",
@@ -297,6 +317,11 @@
                  "value":0
                 }, 
                 {
+                 "name":"require",
+                 "type":"string",
+                 "value":"2"
+                }, 
+                {
                  "name":"startI",
                  "type":"int",
                  "value":0
@@ -360,6 +385,11 @@
                  "value":0
                 }, 
                 {
+                 "name":"require",
+                 "type":"string",
+                 "value":"3"
+                }, 
+                {
                  "name":"startI",
                  "type":"int",
                  "value":0
@@ -421,6 +451,11 @@
                  "name":"padding-top",
                  "type":"int",
                  "value":0
+                }, 
+                {
+                 "name":"require",
+                 "type":"string",
+                 "value":"4,5"
                 }, 
                 {
                  "name":"startI",
@@ -549,6 +584,11 @@
                  "value":0
                 }, 
                 {
+                 "name":"require",
+                 "type":"string",
+                 "value":"6"
+                }, 
+                {
                  "name":"startI",
                  "type":"int",
                  "value":0
@@ -673,6 +713,11 @@
                  "name":"padding-top",
                  "type":"int",
                  "value":0
+                }, 
+                {
+                 "name":"require",
+                 "type":"string",
+                 "value":"7"
                 }, 
                 {
                  "name":"startI",
@@ -801,6 +846,11 @@
                  "value":0
                 }, 
                 {
+                 "name":"require",
+                 "type":"string",
+                 "value":"8"
+                }, 
+                {
                  "name":"startI",
                  "type":"int",
                  "value":0
@@ -891,12 +941,12 @@
         {
          "name":"coverID",
          "type":"int",
-         "value":1
+         "value":2
         }, 
         {
          "name":"sectionName",
          "type":"string",
-         "value":"People"
+         "value":"Village"
         }],
  "renderorder":"right-down",
  "tiledversion":"1.7.2",

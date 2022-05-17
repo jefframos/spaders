@@ -108,6 +108,11 @@
                  "value":0
                 }, 
                 {
+                 "name":"require",
+                 "type":"string",
+                 "value":"-1"
+                }, 
+                {
                  "name":"scale",
                  "type":"int",
                  "value":2
@@ -237,6 +242,11 @@
                  "name":"padding-top",
                  "type":"int",
                  "value":0
+                }, 
+                {
+                 "name":"require",
+                 "type":"string",
+                 "value":"0"
                 }, 
                 {
                  "name":"scale",
@@ -370,6 +380,11 @@
                  "value":0
                 }, 
                 {
+                 "name":"require",
+                 "type":"string",
+                 "value":"1"
+                }, 
+                {
                  "name":"scale",
                  "type":"int",
                  "value":2
@@ -499,6 +514,11 @@
                  "name":"padding-top",
                  "type":"int",
                  "value":0
+                }, 
+                {
+                 "name":"require",
+                 "type":"string",
+                 "value":"2"
                 }, 
                 {
                  "name":"scale",
@@ -632,6 +652,11 @@
                  "value":0
                 }, 
                 {
+                 "name":"require",
+                 "type":"string",
+                 "value":"3"
+                }, 
+                {
                  "name":"scale",
                  "type":"int",
                  "value":2
@@ -761,6 +786,11 @@
                  "name":"padding-top",
                  "type":"int",
                  "value":0
+                }, 
+                {
+                 "name":"require",
+                 "type":"string",
+                 "value":"4"
                 }, 
                 {
                  "name":"scale",
@@ -894,6 +924,11 @@
                  "value":0
                 }, 
                 {
+                 "name":"require",
+                 "type":"string",
+                 "value":"5"
+                }, 
+                {
                  "name":"scale",
                  "type":"int",
                  "value":2
@@ -1023,6 +1058,11 @@
                  "name":"padding-top",
                  "type":"int",
                  "value":0
+                }, 
+                {
+                 "name":"require",
+                 "type":"string",
+                 "value":"6"
                 }, 
                 {
                  "name":"scale",
@@ -1156,6 +1196,11 @@
                  "value":0
                 }, 
                 {
+                 "name":"require",
+                 "type":"string",
+                 "value":"6"
+                }, 
+                {
                  "name":"scale",
                  "type":"int",
                  "value":2
@@ -1285,6 +1330,11 @@
                  "name":"padding-top",
                  "type":"int",
                  "value":0
+                }, 
+                {
+                 "name":"require",
+                 "type":"string",
+                 "value":"7,8"
                 }, 
                 {
                  "name":"scale",

@@ -314,7 +314,7 @@
                 {
                  "name":"require",
                  "type":"string",
-                 "value":"1"
+                 "value":"0"
                 }, 
                 {
                  "name":"startI",
@@ -450,7 +450,7 @@
                 {
                  "name":"require",
                  "type":"string",
-                 "value":"3"
+                 "value":"2"
                 }, 
                 {
                  "name":"startI",
@@ -518,7 +518,7 @@
                 {
                  "name":"require",
                  "type":"string",
-                 "value":"2"
+                 "value":"3,4"
                 }, 
                 {
                  "name":"startI",
@@ -659,7 +659,7 @@
                 {
                  "name":"require",
                  "type":"string",
-                 "value":"4"
+                 "value":"6"
                 }, 
                 {
                  "name":"startI",
@@ -732,7 +732,7 @@
                 {
                  "name":"require",
                  "type":"string",
-                 "value":"6,7"
+                 "value":"7"
                 }, 
                 {
                  "name":"startI",
