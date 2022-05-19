@@ -141,6 +141,10 @@ export default class EndGameContainer extends PIXI.Container {
 
 
         window.onSpacePressed.add(()=>{
+
+            if (window.blockSpace || this.gameScreen.gameRunning) {
+                return;
+            }
             if(this.nextLevel.visible){
                 this.playNextLevel()
             }

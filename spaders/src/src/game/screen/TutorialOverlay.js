@@ -615,6 +615,8 @@ export default class TutorialOverlay extends PIXI.Container {
 
         this.nextStepTutorial.x = this.killTutorialButton.x//toLoc.x + innerResolution.width - this.killTutorialButton.width;
         this.nextStepTutorial.y = toLoc.y + innerResolution.height - this.nextStepTutorial.height;
+
+
     }
 
 
@@ -677,6 +679,9 @@ export default class TutorialOverlay extends PIXI.Container {
 
         window.GRID.widthDraw = CARD.width / currentLevel.levelDataScale;
         window.GRID.heightDraw = CARD.height / currentLevel.levelDataScale;
+
+
+
     }
     shoot(ignoreSpawn = false) {
         let timer = this.board.shootCard(this.currentPositionID, this.currentCard, true);
@@ -751,6 +756,10 @@ export default class TutorialOverlay extends PIXI.Container {
 
             this.currentCard.x = this.currentPositionID * CARD.width
 
+
+        this.gridContainer.hitArea = new PIXI.Rectangle(this.gridContainer.x, this.gridContainer.y, this.gridContainer.width, this.gridContainer.height * 5);
+
+
             setTimeout(() => {
                 this.trailVertical.alpha = 0;
                 this.trailVertical.visible = true;
@@ -818,6 +827,8 @@ export default class TutorialOverlay extends PIXI.Container {
         this.trailHorizontal.height = CARD.height
 
         this.trailHorizontal.alpha = 0;
+
+
         this.trailVertical = new PIXI.mesh.NineSlicePlane(
             PIXI.Texture.fromFrame(scheme.spriteTrail), 20, 20, 20, 20)
         this.trailVertical.width = CARD.width

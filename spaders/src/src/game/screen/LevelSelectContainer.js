@@ -668,7 +668,8 @@ export default class LevelSelectContainer extends PIXI.Container {
         return levelTierButton
     }
     sortPressSpace() {
-        if (this.disableClickCounter > 0) {
+        
+        if (window.blockSpace || this.gameScreen.gameRunning || this.disableClickCounter > 0) {
             return;
         }
         if (!this.visible || this.tempBlockPanel.visible) {
@@ -1190,10 +1191,12 @@ export default class LevelSelectContainer extends PIXI.Container {
             SOUND_MANAGER.mute();
         }
         window.GAMEPLAY_STOP();
+        window.blockSpace = true;
         PokiSDK.commercialBreak().then(
             () => {
                 console.log("Commercial break finished, proceeding to game");
                 //PokiSDK.gameplayStart();
+                window.blockSpace = false;
                 // fire your function to continue to game
                 this.startTheLevel(data);
                 if (!wasMute) {
@@ -1204,6 +1207,7 @@ export default class LevelSelectContainer extends PIXI.Container {
             () => {
                 console.log("Initialized, but the user likely has adblock");
                 // fire your function to continue to game
+                window.blockSpace = false;
                 this.startTheLevel(data);
                 if (!wasMute) {
                     SOUND_MANAGER.toggleMute();

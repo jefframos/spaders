@@ -99,7 +99,7 @@ export default class TutorialPopLabel extends PIXI.Container {
             targetScale = scale;
         }
         this.tutorialActionShape.width = this.trackingData.target.width * targetScale.x;
-        this.tutorialActionShape.height = this.trackingData.target.height* targetScale.y;
+        this.tutorialActionShape.height = this.trackingData.target.height* targetScale.y + 150;
         this.tutorialActionShape.x = loc.x
         this.tutorialActionShape.y = loc.y
 

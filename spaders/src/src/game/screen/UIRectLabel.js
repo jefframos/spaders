@@ -25,12 +25,12 @@ export default class UIRectLabel extends PIXI.Container {
 
 
 		this.backShape = new PIXI.mesh.NineSlicePlane(
-            PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
-        this.backShape.width = 224
-        this.backShape.height = 60
+			PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
+		this.backShape.width = 224
+		this.backShape.height = 60
 
 
-		this.label = new PIXI.Text("name", { font: '30px', wight: '800',fill: 0xFFFFFF, align: center?'center':'left', fontFamily: window.STANDARD_FONT1});
+		this.label = new PIXI.Text("name", { font: '30px', wight: '800', fill: 0xFFFFFF, align: center ? 'center' : 'left', fontFamily: window.STANDARD_FONT1 });
 		this.title = new PIXI.Text("title", {
 			font: '20px',
 			fill: 0x000000,
@@ -41,8 +41,7 @@ export default class UIRectLabel extends PIXI.Container {
 			strokeThickness: 8
 		});
 
-
-		this.icon.scale.set(this.backShape.height /this.icon.height * 0.7)
+		this.sortIconScale()
 		this.mainContainer.addChild(this.backShape);
 		this.mainContainer.addChild(this.icon);
 		this.mainContainer.addChild(this.label);
@@ -51,20 +50,23 @@ export default class UIRectLabel extends PIXI.Container {
 
 		this.updateLavel("00000")
 		window.COOKIE_MANAGER.onChangeColors.add(() => {
-            this.updateColorScheme();
-        })
+			this.updateColorScheme();
+		})
 
-        this.updateColorScheme();
-    }
-    updateFontSize(size) {
+		this.updateColorScheme();
+	}
+	sortIconScale() {
+		this.icon.scale.set(this.backShape.height / this.icon.height * 0.7 * this.icon.scale.y)
+	}
+	updateFontSize(size) {
 		this.label.style.fontSize = size;
 	}
 	addStroke(stroke, strokeThickness) {
 		this.label.style.stroke = stroke;
 		this.label.style.strokeThickness = strokeThickness;
 	}
-    updateColorScheme() {
-        let colorScheme = colorSchemes.getCurrentColorScheme();
+	updateColorScheme() {
+		let colorScheme = colorSchemes.getCurrentColorScheme();
 		this.backShape.texture = PIXI.Texture.fromFrame(colorScheme.grid.spriteRect)
 		this.backShape.tint = colorScheme.background
 		this.backShape.alpha = 0.75
@@ -85,14 +87,14 @@ export default class UIRectLabel extends PIXI.Container {
 		// this.backQueueShape.tint = colorScheme.background;
 		// this.backQueueShape.alpha = 0.75;
 	}
-	updateColor(fontColor){
-		if(this.label){
+	updateColor(fontColor) {
+		if (this.label) {
 			this.label.style.fill = fontColor;
 			this.icon.tint = fontColor;
 		}
 
 	}
-	updateLavel(text, title, center = true, offset = {x:0, y:0}) {
+	updateLavel(text, title, center = true, offset = { x: 0, y: 0 }) {
 		this.label.text = text;
 		this.title.text = title ? title : "";
 		//this.title.pivot.x = this.title.width * 0.5
@@ -102,12 +104,12 @@ export default class UIRectLabel extends PIXI.Container {
 		utils.centerObject2(this.icon, this.mainContainer);
 		this.icon.x = this.icon.y;
 
-		if(center){
+		if (center) {
 
 			utils.centerObject(this.label, this.mainContainer);
 			this.label.x += this.icon.x + 10
 			this.label.y += -3
-		}else{
+		} else {
 			this.label.x = this.icon.x + this.icon.width + 5;
 			this.label.y = 12;
 		}
@@ -115,20 +117,20 @@ export default class UIRectLabel extends PIXI.Container {
 		this.label.x += offset.x;
 		this.label.y += offset.y;
 	}
-	getParticles(particle){
+	getParticles(particle) {
 		TweenMax.killTweensOf(this.icon.scale);
-		
-		if(!this.colorIcon){
+
+		if (!this.colorIcon) {
 			this.colorIcon = PIXI.Sprite.fromImage(this.iconSrc);
 			this.icon.addChild(this.colorIcon);
 			this.colorIcon.anchor.set(0.5);
 		}
 		TweenMax.killTweensOf(this.colorIcon);
-		this.icon.scale.set(this.backShape.height /this.icon.height * 0.7*this.icon.scale.y)
+		this.icon.scale.set(this.backShape.height / this.icon.height * 0.7 * this.icon.scale.y)
 		this.colorIcon.tint = particle.tint;
 
 		this.colorIcon.alpha = 1;
-		TweenMax.from(this.icon.scale, 0.5, {x:this.icon.scale.x*1.25, y:this.icon.scale.y*0.75, ease:Elastic.easeOut})
-		TweenMax.to(this.colorIcon, 0.5, {delay:0.1, alpha:0})
+		TweenMax.from(this.icon.scale, 0.5, { x: this.icon.scale.x * 1.25, y: this.icon.scale.y * 0.75, ease: Elastic.easeOut })
+		TweenMax.to(this.colorIcon, 0.5, { delay: 0.1, alpha: 0 })
 	}
 }

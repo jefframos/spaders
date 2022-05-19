@@ -446,9 +446,10 @@ function setUpSchemes() {
 			}
 		});
 }
-
+window.DISABLE_POKI = true;
 const urlParams = new URLSearchParams(window.location.search);
-if(urlParams.get('level') != null){
+if(window.DISABLE_POKI || urlParams.get('level') != null){
+	window.PokiSDK = {}
 	var hash = window.location.hash.substring(1)
 	PokiSDK.init = function(){
 		return new Promise(function(resolve, reject) {
@@ -479,6 +480,15 @@ if(urlParams.get('level') != null){
 			resolve("Success!");
 		});
 	}
+
+	PokiSDK.setDebug = function(){
+		
+	}
+	PokiSDK.gameLoadingStart = function(){
+		
+	}
+
+	PokiSDK.gameLoadingFinished = function(){}
 }
 
 PokiSDK.init().then(
@@ -499,7 +509,7 @@ PokiSDK.init().then(
 		// fire your function to continue to game
 	}
 );
-PokiSDK.setDebug(true);
+PokiSDK.setDebug(false);
 
 
 window.levelsJson = ""
@@ -1172,3 +1182,4 @@ window.addEventListener('keydown', ev => {
     }
 });
 window.addEventListener('wheel', ev => ev.preventDefault(), { passive: false });
+

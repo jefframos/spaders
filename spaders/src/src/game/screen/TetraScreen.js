@@ -101,6 +101,7 @@ export default class TetraScreen extends Screen {
 
 		this.grid = new Grid(this);
 		this.grid.onDestroyAllStartedCards.add(() => this.onDestroyAllStartedCards());
+		this.grid.onDestroyTile.add((tile) => this.onDestroyTile(tile));
 
 		this.board = new Board(this);
 		window.board = this.board;
@@ -140,8 +141,8 @@ export default class TetraScreen extends Screen {
 
 		this.colorTweenBomb.startTween(0)
 
-		window.onEscPressed.add(()=>{
-			if(this.gameRunning){
+		window.onEscPressed.add(() => {
+			if (this.gameRunning) {
 				this.inGameMenu.toggleState();
 			}
 
@@ -329,6 +330,16 @@ export default class TetraScreen extends Screen {
 
 			}
 		}
+
+	}
+	onDestroyTile(tile){
+		this.movesRect.icon.tint = tile.tint;
+this.movesRect.sortIconScale();
+		TweenMax.from(this.movesRect.icon.scale, 0.5, {
+            x: this.movesRect.icon.scale.x * 0.8,
+            y: this.movesRect.icon.scale.y * 1.2,
+            ease: Elastic.easeOut
+        })
 
 	}
 	onDestroyAllStartedCards() {
@@ -640,8 +651,9 @@ export default class TetraScreen extends Screen {
 
 		this.timerRect = new UIRectLabel(config.colors.yellow, 'time.png');
 		this.bottomUINewContainer.addChild(this.timerRect)
+		this.timerRect.icon.visible = false;
 
-		this.movesRect = new UIRectLabel(config.colors.green, 'fire-96x96-1408702.png');
+		this.movesRect = new UIRectLabel(config.colors.green, "progressBarSmall.png");
 		this.bottomUINewContainer.addChild(this.movesRect)
 
 
@@ -789,7 +801,7 @@ export default class TetraScreen extends Screen {
 		this.timerRect.updateColor(colorScheme.fontColor);
 		this.movesRect.updateColor(colorScheme.fontColor);
 		this.scoreRect.updateColor(0xFFFFFF);
-
+		this.movesRect.icon.tint = colorScheme.list[0].color
 		this.useBomb.setColor(colorScheme.fontColor)
 
 		let colorSchemeGrid = colorScheme.grid;
@@ -815,8 +827,13 @@ export default class TetraScreen extends Screen {
 		let nameLevelSize = { width: this.timeLabelStatic.x - this.pointsLabel.x, height: 40 }
 		nameLevelSize.width += this.timeLabelStatic.width
 
-		this.timerRect.visible = false;
-		this.movesRect.visible = false;
+		this.timerRect.visible = true;
+		
+		if (this.currentLevelData.gameMode == 0){
+			this.movesRect.visible = true;			
+		}else{
+			this.movesRect.visible = false;
+		}
 
 		this.timerRect.scale.set(this.bottomUICanvas.height / this.timerRect.backShape.height * 0.3)
 		this.movesRect.scale.set(this.timerRect.scale.x)
@@ -829,21 +846,28 @@ export default class TetraScreen extends Screen {
 
 
 		this.movesRect.y = this.bottomUICanvas.height - this.movesRect.height - this.bottomUICanvas.height * 0.1
-		this.timerRect.y = this.movesRect.y - this.timerRect.height - 2 //- this.bottomUICanvas.height * 0.05
-
-
+		
+		
 		this.scoreRect.y = this.bottomUICanvas.height * 0.5
-		this.scoreRect.x = 15;
-		this.chargeBombBar.x = 10
 		this.chargeBombBar.y = this.scoreRect.y - this.bottomUICanvas.height * 0.025//+ this.scoreRect.height / 2 - this.chargeBombBar.height * 0.12
+		
+		
+		this.useBomb.scale.set(this.chargeBombBar.height / this.useBomb.height * 1.9 * this.useBomb.scale.y);
+		
+		this.chargeBombBar.x = this.bottomUICanvas.width / 2 - (this.chargeBombBar.width + this.useBomb.width + 5) / 2
+		this.scoreRect.x = this.chargeBombBar.x + 10;
 
-
-		this.useBomb.scale.set((this.bottomUICanvas.width - 40) * 0.15 / this.useBomb.width * this.useBomb.scale.x);
+		//this.useBomb.scale.set((this.bottomUICanvas.width - 40) * 0.15 / this.useBomb.width * this.useBomb.scale.x);
 		this.useBomb.visible = true;
 
 		this.useBomb.x = this.chargeBombBar.x + this.chargeBombBar.width + this.useBomb.width / 2 + 5
 		this.useBomb.y = this.chargeBombBar.y - this.useBomb.height / 2 + this.chargeBombBar.height
+		
+		this.timerRect.x = this.useBomb.x - this.timerRect.width - this.useBomb.width / 2
+		this.timerRect.y = this.useBomb.y - this.timerRect.height - 5
 
+		this.movesRect.x = this.chargeBombBar.x;
+		this.movesRect.y = this.timerRect.y
 
 		this.fallBar.rotation = -Math.PI / 2;
 		this.fallBar.x = this.topCanvas.x + this.gridContainer.x + this.gridContainer.width + (40 * this.scoreRect.scale.x);
@@ -1276,6 +1300,9 @@ export default class TetraScreen extends Screen {
 
 		this.frontGridContainer.addChild(this.shootingGun)
 
+		this.trailHorizontal.hitArea = new PIXI.Rectangle(this.trailHorizontal.x, this.trailHorizontal.y, this.trailHorizontal.width, this.trailHorizontal.height * 5);
+
+
 
 	}
 	replaceForBomb() {
@@ -1284,35 +1311,48 @@ export default class TetraScreen extends Screen {
 			return;
 		}
 		let wasMute = SOUND_MANAGER.isMute
-		if (!wasMute) {
-			SOUND_MANAGER.mute();
-		}
+
 
 
 		let data = { text: 'Would you like to watch a video and get a Nuke' }
-		window.popUpOverlay.show(data, () => {
-			window.GAMEPLAY_STOP();
-			PokiSDK.rewardedBreak().then(
-				(success) => {
-					if (success) {
-						window.GAMEPLAY_START()
-						this.replaceForBombAfterBreak();
-						if (!wasMute) {
-							SOUND_MANAGER.toggleMute();
-						}
-					} else {
-						if (!wasMute) {
-							SOUND_MANAGER.toggleMute();
-						}
-						this.replaceForBombAfterBreak();
-					}
-				}
 
-			)
+		if (window.DISABLE_POKI) {
+			data = { text: 'Would you like to activate the Nuke?' }
 		}
-		)
+
+		window.popUpOverlay.show(data, () => {	
+			if (window.DISABLE_POKI) {
+				this.replaceForBombAfterBreak();
+			} else {
+				
+				if (!wasMute) {
+					SOUND_MANAGER.mute();
+				}
+				window.GAMEPLAY_STOP();
+				PokiSDK.rewardedBreak().then(
+					(success) => {
+						if (success) {
+							window.GAMEPLAY_START()
+							this.replaceForBombAfterBreak();
+							if (!wasMute) {
+								SOUND_MANAGER.toggleMute();
+							}
+						} else {
+							if (!wasMute) {
+								SOUND_MANAGER.toggleMute();
+							}
+							this.replaceForBombAfterBreak();
+						}
+					}
+
+				)
+			}
+
+		})
+
 
 	}
+
 	replaceForBombAfterBreak() {
 		this.currentCard.isABomb();
 		this.chargeBombBar.currentChargeValue = 0;
@@ -1339,12 +1379,17 @@ export default class TetraScreen extends Screen {
 		}
 	}
 	spawnFireworks() {
-		let w = this.innerResolution.width * 0.2;
-		if (Math.random() < 0.5) {
 
+		let w = this.innerResolution.width * 0.2;
+		if (Math.random() < 1) {
+
+			this.fxContainer.toLocal({ x:this.innerResolution.width/2, y: this.innerResolution.height })
+
+			let posX = this.bottomUIContainer.x + this.bottomUIContainer.width * Math.random()
+			let dir = (posX < this.bottomUIContainer.x + this.bottomUIContainer.width/2)?1:-1
 			this.fxContainer.startFireworks(
-				this.toLocal({ x: Math.random() * this.innerResolution.width, y: this.innerResolution.height }),
-				Math.random() * this.innerResolution.width * 0.1, this.colorTween.currentColor)
+				{x:posX,y:this.bottomUIContainer.y},
+				Math.random() * this.innerResolution.width * 0.1 * dir, this.colorTween.currentColor)
 		} else {
 			this.fxContainer.startFireworks(
 				this.toLocal({ x: Math.random() * this.innerResolution.width + this.innerResolution.width * 0.8, y: this.innerResolution.height }),
@@ -1636,8 +1681,12 @@ export default class TetraScreen extends Screen {
 		this.entitiesLabel.text = utils.formatPointsLabel(Math.ceil(this.board.totalCards));
 		this.timeLabel.text = utils.convertNumToTime(Math.ceil(this.currentTime));
 
+		
+
 		this.timerRect.updateLavel(utils.convertNumToTime(Math.ceil(this.currentTime)))
-		this.movesRect.updateLavel(utils.formatPointsLabel(Math.ceil(this.currentRound)))
+		this.movesRect.updateLavel(this.grid.cardsStartedOnGrid,'', false, { x: -15, y:0})
+
+
 		this.scoreRect.updateLavel(Math.ceil(this.currentPointsLabel), '', false, { x: -15, y: -4 })
 
 	}
@@ -2004,7 +2053,11 @@ export default class TetraScreen extends Screen {
 
 			this.hashUsed = true;
 		}
-
+		// if (this.fireworksTimer <= 0) {
+		// 	this.spawnFireworks();
+		// } else {
+		// 	this.fireworksTimer -= delta;
+		// }
 		if (this.colorTween.isActive) {
 			if (this.fireworksTimer <= 0) {
 				this.spawnFireworks();
@@ -2123,6 +2176,7 @@ export default class TetraScreen extends Screen {
 			}
 		}
 		this.trailMarker.overShapeVisible = this.isTouchingDown
+
 		if (this.trailMarker.overShapeVisible) {
 			this.trailMarker.arrowsUp.alpha = utils.lerp(this.trailMarker.arrowsUp.alpha, 0.5, 0.2)
 
@@ -2191,6 +2245,9 @@ export default class TetraScreen extends Screen {
 			this.trailMarker.positionSpringX.tx = this.latestCardPosition;
 			this.trailMarker.x = utils.lerp(this.trailMarker.x, this.latestCardPosition, 0.5)
 		}
+
+
+
 		if (this.currentCard && this.mousePosID >= 0 && this.mousePosID < GRID.i) {
 
 			this.updateTrailLenght();
@@ -2445,6 +2502,7 @@ export default class TetraScreen extends Screen {
 		this.trailHorizontal.interactive = true;
 		this.trailHorizontal.on('mousedown', this.onTapDown.bind(this)).on('touchstart', this.onTapDown.bind(this));
 		this.trailHorizontal.on('mouseup', this.onTapUp.bind(this)).on('touchend', this.onTapUp.bind(this));
+
 		this.trailHorizontal.on('touchmove', this.onTouchMove.bind(this));
 		this.gridContainer.on('touchmove', this.onTouchMove.bind(this));
 

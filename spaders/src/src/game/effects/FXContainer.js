@@ -42,7 +42,7 @@ export default class FXContainer extends PIXI.Container {
         particle.alpha = 1;
         particle.timeToLive = 2 + Math.random() * 2;
         particle.scaleSpeed = 0;
-        particle.gravity = this.particleSpeed * 0.01 + this.particleSpeed * 0.01 * Math.random();
+        particle.gravity = 0//this.particleSpeed * 0.01 + this.particleSpeed * 0.01 * Math.random();
         particle.speed = this.particleSpeedTarget;
         particle.acceleration = this.particleSpeedTarget * 0.5;
         particle.timeToStick = 50;
@@ -130,7 +130,7 @@ export default class FXContainer extends PIXI.Container {
             if (element.scale.x < 0) {
                 element.scale.set(0);
             }
-            if( element.isFireworks && (element.y < 150 || element.velocity.y > 20)){
+            if( element.isFireworks && (element.y < 100 + Math.random()*20 || element.velocity.y > 20)){
                 element.timeToLive = 0;
             }
             if (element.timeToLive <= 0) {

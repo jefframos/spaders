@@ -249,6 +249,9 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.updateColorScheme();
 
 		window.onSpacePressed.add(()=>{
+			if (window.blockSpace || this.gameScreen.gameRunning){
+				return;
+			}
 			this.resetGame()
 		}) 
 

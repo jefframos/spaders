@@ -13,6 +13,7 @@ export default class Grid extends PIXI.Container {
 		this.dropTiles = [];
 
 		this.onDestroyAllStartedCards = new signals();
+		this.onDestroyTile = new signals();
 
 		this.topGridContainer = new PIXI.Container();
 
@@ -375,6 +376,10 @@ export default class Grid extends PIXI.Container {
 			this.cardsStartedOnGrid--;
 
 			let shape = this.gridsSquares[card.pos.i][card.pos.j].shape;
+
+			this.onDestroyTile.dispatch(shape);
+
+
 			let fallData = {
 				gravity: 500,
 				timeToDie: 5,

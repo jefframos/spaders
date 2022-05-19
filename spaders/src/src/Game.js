@@ -4,6 +4,7 @@ import config from './config';
 import TweenLite from 'gsap';
 import TweenMax from 'gsap';
 import colorSchemes from './colorSchemes';
+import utils from './utils';
 export default class Game {
 
 	constructor() {
@@ -195,10 +196,13 @@ export default class Game {
 
 		this.logo = new PIXI.Sprite.fromImage('assets/logospaders.png')
 		this.logo.anchor.set(0.5)
+		this.logo.visible = false;
 		this.stage.addChild(this.logo);
-
-
+		
+		
 		this.resize2();
+		this.logo.alpha = 0;
+		this.logo.scale.set(0.1)
 
 	}
 	addTapToStart() {
@@ -351,18 +355,31 @@ export default class Game {
 			//this.logo.scale.x = sclX
 			//this.logo.scale.y = sclY
 
+			let targScale = 1
 			if(this.logo.width > this.innerResolution.width){
-				this.logo.scale.set(this.innerResolution.width/ this.logo.width * 0.8 * this.logo.scale.x)
+				//this.logo.scale.set(this.innerResolution.width/ this.logo.width * 0.8 * this.logo.scale.x)
+				targScale = this.innerResolution.width/ this.logo.width * 0.8 * this.logo.scale.x
 			}else{
 				let targ = this.innerResolution.width/ this.logo.width * 0.8 * this.logo.scale.x
 				let targY = this.innerResolution.height/ this.logo.height * 0.5 * this.logo.scale.y
 				targ = Math.min(targ, 1)
 				targY = Math.min(targY, 1)
-				this.logo.scale.set(Math.min(targY, targ))
+				targScale = Math.min(targY, targ)
+				//this.logo.scale.set()
+
+				
+				
+				
 			}
+			this.logo.scale.x = utils.lerp(this.logo.scale.x,targScale, 0.5)
+			this.logo.scale.y = utils.lerp(this.logo.scale.y,targScale, 0.5)
+			this.logo.alpha = utils.lerp(1, this.logo.alpha, 0.05)
+			this.logo.visible = true;
 			this.logo.x = this.innerResolution.width / 2;//this.innerResolution.width / 4
 			this.logo.y = this.innerResolution.height / 2
 			this.tapToStart.addChild(this.logo)
+		}else{
+			this.logo.visible = false;
 		}
 
 	}

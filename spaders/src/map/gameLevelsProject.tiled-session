@@ -3,19 +3,19 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "how-to-play/creatures.tmx",
+    "activeFile": "videogames/spadersLarge.tmx",
     "expandedProjectPaths": [
-        "tutorial",
-        "debug",
-        "main",
-        "videogames",
-        "world",
-        "how-to-play",
         "synth",
-        "basics",
+        "debug",
+        "videogames",
+        "gb",
         "movies",
+        "main",
+        "tutorial",
+        "basics",
+        "world",
         "templates",
-        "gb"
+        "how-to-play"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -547,23 +547,26 @@
         "videogames/levels.tmx",
         "debug/debug2.tmx",
         "debug/debug.tmx",
-        "how-to-play/creatures.tmx"
+        "how-to-play/creatures.tmx",
+        "videogames/levels2.tmx",
+        "videogames/levels3.tmx",
+        "videogames/spadersLarge.tmx"
     ],
     "project": "gameLevelsProject.tiled-project",
     "property.type": "int",
     "recentFiles": [
-        "D:/projects/Spaders_GameDesign/src/map/_world1/world1_tier9_levels.tmx",
         "how-to-play/simple-shapes.tmx",
         "videogames/levels.tmx",
         "debug/debug2.tmx",
         "debug/debug.tmx",
         "how-to-play/creatures.tmx",
+        "videogames/levels2.tmx",
+        "videogames/levels3.tmx",
+        "videogames/spadersLarge.tmx",
+        "D:/projects/Spaders_GameDesign/src/map/_world1/world1_tier9_levels.tmx",
         "tilesets/arrowsPieces.tsx",
         "tilesets/References.tsx",
-        "D:/projects/spaders/spaders/src/worlds/world/tiniMap.tmx",
-        "world/tier1BasicMap.tmx",
-        "world/tiniMap.tmx",
-        "world/worldSynth.tmx"
+        "D:/projects/spaders/spaders/src/worlds/world/tiniMap.tmx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",
