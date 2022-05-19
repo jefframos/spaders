@@ -9,7 +9,8 @@ export default {
             target: "backgroundInteractable",
             centerBox: { x: 0.5, y: 0.5 },
             delay: 0.5
-        }, {
+        },
+        {
             textBoxOffset: { x: 0, y: 0 },
             text: 'Welcome to Spaders!',
             callback: this.showFirstCard.bind(this, 0),
