@@ -446,7 +446,7 @@ function setUpSchemes() {
 			}
 		});
 }
-window.DISABLE_POKI = false;
+window.DISABLE_POKI = true;
 const urlParams = new URLSearchParams(window.location.search);
 if(window.DISABLE_POKI || urlParams.get('level') != null){
 	window.PokiSDK = {}
