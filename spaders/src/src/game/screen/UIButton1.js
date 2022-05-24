@@ -54,6 +54,10 @@ export default class UIButton1 extends PIXI.Container {
 		this.interactive = true;
 		this.buttonMode = true;
 	}
+	addFrontShape(){
+		this.backShape.y = -10
+		this.backShapeBorder.y = 5
+	}
 	resize(width, height){
 		if(!width || !height){
 			return

@@ -278,6 +278,7 @@ export default class Card extends PIXI.Container {
 			this.idleAnimationLayer2.push("l1_heart_0_" + index + ".png")
 		}
 
+		this.frameTime = 1 / 8;
 		this.scaleRef = 0.6;
 		let heartColor = colorSchemes.getCurrentColorScheme().heartColor;
 		if (heartColor) {
@@ -309,6 +310,7 @@ export default class Card extends PIXI.Container {
 			this.idleAnimationLayer2.push("l1_boss_0_" + index + ".png")
 		}
 
+		this.frameTime = 1 / 6;
 		this.scaleRef = 0.7;
 
 		this.enemySpriteWhite.alpha = 1
@@ -348,6 +350,8 @@ export default class Card extends PIXI.Container {
 
 		this.isBlockedByPivotHorizontal = false;
 		this.isBlockedByPivotVertical = false;
+
+		this.frameTime = 1 / 10;
 
 		this.cardStats.scale.set(1)
 		this.cardStats.position.set(0)

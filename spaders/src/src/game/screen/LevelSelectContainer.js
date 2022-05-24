@@ -357,14 +357,14 @@ export default class LevelSelectContainer extends PIXI.Container {
 
             //     element.y = target;
             // }
-            let levelYStart = - (this.levelMap.height + 50) + window.innerHeight //+ 500
+            let levelYStart = - (this.levelMap.height+ 150) + window.innerHeight //+ 500
             this.levelsView.y = levelYStart
             this.levelsView.spring.x = levelYStart
             this.levelsView.spring.tx = levelYStart
         }
 
         if (this.tierMap && this.tierMap.width > 80) {
-            let levelYStart = -this.tierButtons[0].y * this.tierMap.scale.y + this.tierMap.height / 4//window.innerHeight / 2 * this.tierMap.scale.y//- this.tierMap.height / 2 - (this.tierButtons[0].y * this.tierMap.scale.y)//window.innerHeight / 2 //- this.tierButtons[0].y//- this.tierMap.height / 2 
+            let levelYStart = -this.tierButtons[0].y * this.tierMap.scale.y + this.tierMap.height / 4 + 64//window.innerHeight / 2 * this.tierMap.scale.y//- this.tierMap.height / 2 - (this.tierButtons[0].y * this.tierMap.scale.y)//window.innerHeight / 2 //- this.tierButtons[0].y//- this.tierMap.height / 2 
             //console.log(levelYStart, this.tierMap.scale)
             //levelYStart = Math.max(window.innerHeight * 0.05, levelYStart)
             this.tiersView.y = levelYStart
@@ -682,16 +682,11 @@ export default class LevelSelectContainer extends PIXI.Container {
         }
     }
     getLatestOpenLevel() {
-        console.log(this.currentTier);
-
-
-
-
+        
         for (let index = this.levelCards.length - 1; index >= 0; index--) {
             const element = this.levelCards[index];
             if (element.isEnabled) {
                 this.selectLevel(element.data)
-                //this.openLevelTier(element.data)
                 break;
             }
         }

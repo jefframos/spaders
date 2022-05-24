@@ -53,7 +53,7 @@ export default class SpecialCardsManager{
             },
             _47:{
                 cardFunction:"setCountdown",
-                parameter:1
+                parameter:2
             }
         }
 	}

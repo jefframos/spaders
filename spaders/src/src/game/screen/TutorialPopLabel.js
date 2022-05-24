@@ -6,7 +6,7 @@ import UIButton1 from './UIButton1';
 
 
 export default class TutorialPopLabel extends PIXI.Container {
-    constructor() {
+    constructor(ignoreActionShape = false) {
         super();
         this.textBoxContainer = new PIXI.Container();
         this.backShape = new PIXI.mesh.NineSlicePlane(
@@ -31,7 +31,9 @@ export default class TutorialPopLabel extends PIXI.Container {
 
         //this.tutorialActionShape = new PIXI.Graphics().lineStyle(1,0x00FF00).drawRect(0, 0, 300, 300);
         this.tutorialActionShape = new PIXI.Graphics().beginFill(0x00FF00).drawRect(0, 0, 300, 300);
-        this.addChild(this.tutorialActionShape)
+        if(!ignoreActionShape){
+            this.addChild(this.tutorialActionShape)
+        }
         this.tutorialActionShape.interactive = true;
         this.tutorialActionShape.buttonMode = true;
         this.tutorialActionShape.alpha = 0;

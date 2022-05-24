@@ -54,9 +54,12 @@ export default class UIRectLabel extends PIXI.Container {
 		})
 
 		this.updateColorScheme();
+
+		this.targetScale = 0.7;
 	}
-	sortIconScale() {
-		this.icon.scale.set(this.backShape.height / this.icon.height * 0.7 * this.icon.scale.y)
+	sortIconScale(target = 0.7) {
+		this.targetScale = target;
+		this.icon.scale.set(this.backShape.height / this.icon.height * target * this.icon.scale.y)
 	}
 	updateFontSize(size) {
 		this.label.style.fontSize = size;
@@ -126,7 +129,7 @@ export default class UIRectLabel extends PIXI.Container {
 			this.colorIcon.anchor.set(0.5);
 		}
 		TweenMax.killTweensOf(this.colorIcon);
-		this.icon.scale.set(this.backShape.height / this.icon.height * 0.7 * this.icon.scale.y)
+		this.icon.scale.set(this.backShape.height / this.icon.height * this.targetScale * this.icon.scale.y)
 		this.colorIcon.tint = particle.tint;
 
 		this.colorIcon.alpha = 1;

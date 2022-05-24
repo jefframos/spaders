@@ -651,7 +651,7 @@ export default class TetraScreen extends Screen {
 		this.frontGridContainer.addChild(this.containerQueue)
 
 
-		this.popLabel = new TutorialPopLabel();
+		this.popLabel = new TutorialPopLabel(true);
 		this.frontGridContainer.addChild(this.popLabel)
 
 		this.shootingGun = new PIXI.Sprite.fromFrame('shooting.png');
@@ -681,11 +681,13 @@ export default class TetraScreen extends Screen {
 		this.fallBar = new ProgressBar(sizeBar, 16);
 		this.bottomUINewContainer.addChild(this.chargeBombBar)
 
-		this.scoreRect = new UIRectLabel(config.colors.red2, 'icons8-star-48.png', false);
+		this.scoreRect = new UIRectLabel(config.colors.red2, 'tile_1_'+(8*32+5)+'.png', false);
 		this.scoreRect.backShape.visible = false;
 		this.bottomUINewContainer.addChild(this.scoreRect)
 		this.scoreRect.updateFontSize(20);
 		this.gameContainer.addChild(this.fallBar)
+
+		this.scoreRect.sortIconScale(0.5)
 
 		this.fallBar.visible = false;
 
@@ -725,8 +727,12 @@ export default class TetraScreen extends Screen {
 		this.chargeBombBar.icon = nuke;
 		this.chargeBombBar.sin = 0;
 		this.chargeBombBar.scaleOffset = { x: 0, y: 0 };
-		//this.chargeBombBar.addChild(nuke);
 
+		this.chargeBombBar.readyLabel = new PIXI.Text("READY!", { font: '30px', fill: 0xFFFFFF, align: 'center', fontWeight: '800', fontFamily: window.STANDARD_FONT1 });
+
+		this.chargeBombBar.readyLabel.x = this.chargeBombBar.width - this.chargeBombBar.readyLabel.width - 10
+		this.chargeBombBar.readyLabel.y = 2
+		this.chargeBombBar.addChild(this.chargeBombBar.readyLabel);
 
 
 		// this.backButton = new UIButton1(config.colors.white, 'icons8-menu-48.png', config.colors.dark);
@@ -756,9 +762,10 @@ export default class TetraScreen extends Screen {
 		nuke.scale.set(0.5);
 		this.useBomb.replaceIcon(nuke);
 		nuke.x = -36
-		nuke.y = -36
+		nuke.y = -46
 		this.useBomb.onClick.add(() => { this.replaceForBomb() });
 		this.useBomb.updateRotation(0);
+		this.useBomb.addFrontShape()
 		this.endGameScreenContainer.hide(true);
 
 		this.hashUsed = false;
@@ -832,7 +839,9 @@ export default class TetraScreen extends Screen {
 		this.fallBar.updateBackgroundColor(colorScheme.background)
 
 		this.scoreRect.addStroke(colorScheme.background, 4)
-
+		
+		this.chargeBombBar.readyLabel.style.stroke = colorScheme.background;
+		this.chargeBombBar.readyLabel.style.strokeThickness = 4;
 
 	}
 
@@ -864,7 +873,7 @@ export default class TetraScreen extends Screen {
 
 
 		this.scoreRect.y = this.bottomUICanvas.height * 0.5
-		this.chargeBombBar.y = this.scoreRect.y - this.bottomUICanvas.height * 0.025//+ this.scoreRect.height / 2 - this.chargeBombBar.height * 0.12
+		this.chargeBombBar.y = this.scoreRect.y - this.bottomUICanvas.height * 0.025 - 5//+ this.scoreRect.height / 2 - this.chargeBombBar.height * 0.12
 
 
 		this.useBomb.scale.set(this.chargeBombBar.height / this.useBomb.height * 1.9 * this.useBomb.scale.y);
@@ -1716,7 +1725,7 @@ export default class TetraScreen extends Screen {
 		this.movesRect.updateLavel(this.grid.cardsStartedOnGrid, '', false, { x: -15, y: 0 })
 
 
-		this.scoreRect.updateLavel(Math.ceil(this.currentPointsLabel), '', false, { x: -15, y: -4 })
+		this.scoreRect.updateLavel(Math.ceil(this.currentPointsLabel), '', false, { x: -15, y: -8 })
 
 	}
 	addRandomPiece() {
@@ -2155,13 +2164,20 @@ export default class TetraScreen extends Screen {
 		}
 		if (this.chargeBombBar.visible) {
 
-			this.chargeBombBar.icon.update(delta)
-
+			
 			if (targetBar >= 1) {
-				this.chargeBombBar.icon.tintLayer(0, this.colorTweenBomb.currentColor)
+				this.chargeBombBar.icon.update(delta)
+				this.chargeBombBar.icon.alpha = 1
+
+				this.chargeBombBar.readyLabel.visible = true;
+				//this.chargeBombBar.icon.tintLayer(0, this.colorTweenBomb.currentColor)
+				//this.useBomb.backShape.tint = this.colorTweenBomb.currentColor
+				//this.useBomb.backShapeBorder.tint = this.colorTweenBomb.currentColor
 				this.useBomb.interactive = true
 			} else {
-
+				
+				this.chargeBombBar.readyLabel.visible = false;
+				this.chargeBombBar.icon.alpha = 0.75
 				this.useBomb.interactive = false
 				this.chargeBombBar.icon.tintLayer(0, 0xDDDDDD)
 			}
