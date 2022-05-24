@@ -23,6 +23,7 @@ export default class CookieManager {
 		let defaultDebug = {
 			showAllThumbs: false,
 			showAllNames: false,
+			showDebugButtons: false
 		}
 		let defaultTutorialDisplayed = {
 			
@@ -116,6 +117,10 @@ export default class CookieManager {
 			this.tierProgress = {};
 			this.storeObject("tierProgress", this.tierProgress)
 		}
+	}
+	unlockToogleDebug() {
+		this.debug.showDebugButtons = !this.debug.showDebugButtons;
+		this.storeObject("debug", this.debug);
 	}
 	toogleDebug() {
 		this.debug.showAllThumbs = !this.debug.showAllThumbs;

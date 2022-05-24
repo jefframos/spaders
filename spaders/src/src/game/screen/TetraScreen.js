@@ -425,13 +425,13 @@ export default class TetraScreen extends Screen {
 		this.grid.destroyCard(card);
 		this.currentSectionPiecesKilled++;
 
-		if(this.specialCardsOnGrid.cards.length){
-			for (let index = this.specialCardsOnGrid.cards.length - 1; index >= 0 ; index--) {
+		if (this.specialCardsOnGrid.cards.length) {
+			for (let index = this.specialCardsOnGrid.cards.length - 1; index >= 0; index--) {
 				const element = this.specialCardsOnGrid.cards[index];
-				if(element == card){
+				if (element == card) {
 					this.specialCardsOnGrid.cards.splice(index, 1);
 				}
-				
+
 			}
 		}
 	}
@@ -681,7 +681,7 @@ export default class TetraScreen extends Screen {
 		this.fallBar = new ProgressBar(sizeBar, 16);
 		this.bottomUINewContainer.addChild(this.chargeBombBar)
 
-		this.scoreRect = new UIRectLabel(config.colors.red2, 'tile_1_'+(8*32+5)+'.png', false);
+		this.scoreRect = new UIRectLabel(config.colors.red2, 'tile_1_' + (8 * 32 + 5) + '.png', false);
 		this.scoreRect.backShape.visible = false;
 		this.bottomUINewContainer.addChild(this.scoreRect)
 		this.scoreRect.updateFontSize(20);
@@ -839,7 +839,7 @@ export default class TetraScreen extends Screen {
 		this.fallBar.updateBackgroundColor(colorScheme.background)
 
 		this.scoreRect.addStroke(colorScheme.background, 4)
-		
+
 		this.chargeBombBar.readyLabel.style.stroke = colorScheme.background;
 		this.chargeBombBar.readyLabel.style.strokeThickness = 4;
 
@@ -873,7 +873,7 @@ export default class TetraScreen extends Screen {
 
 
 		this.scoreRect.y = this.bottomUICanvas.height * 0.5
-		this.chargeBombBar.y = this.scoreRect.y - this.bottomUICanvas.height * 0.025 - 5//+ this.scoreRect.height / 2 - this.chargeBombBar.height * 0.12
+		this.chargeBombBar.y = this.scoreRect.y - this.bottomUICanvas.height * 0.025 - this.scoreRect.height * 0.1//+ this.scoreRect.height / 2 - this.chargeBombBar.height * 0.12
 
 
 		this.useBomb.scale.set(this.chargeBombBar.height / this.useBomb.height * 1.9 * this.useBomb.scale.y);
@@ -2164,7 +2164,7 @@ export default class TetraScreen extends Screen {
 		}
 		if (this.chargeBombBar.visible) {
 
-			
+
 			if (targetBar >= 1) {
 				this.chargeBombBar.icon.update(delta)
 				this.chargeBombBar.icon.alpha = 1
@@ -2175,7 +2175,7 @@ export default class TetraScreen extends Screen {
 				//this.useBomb.backShapeBorder.tint = this.colorTweenBomb.currentColor
 				this.useBomb.interactive = true
 			} else {
-				
+
 				this.chargeBombBar.readyLabel.visible = false;
 				this.chargeBombBar.icon.alpha = 0.75
 				this.useBomb.interactive = false
@@ -2190,6 +2190,36 @@ export default class TetraScreen extends Screen {
 			this.containerQueue.y = this.trailHorizontal.y
 			//console.log(this.trailHorizontal)
 			this.trailHorizontal.tint = this.currentCard.currentColor;
+
+			if (this.specialCardsOnGrid.cards.length && this.specialCardsOnGrid.timesShown <= 2) {
+				if (this.specialCardsOnGrid.timer > 0) {
+					this.specialCardsOnGrid.timer -= delta;
+					if (this.specialCardsOnGrid.current >= this.specialCardsOnGrid.cards.length) {
+						this.specialCardsOnGrid.current = 0;
+						utils.shuffle(this.specialCardsOnGrid.cards);
+
+						this.specialCardsOnGrid.timesShown++;
+					}
+					let targetCard = this.specialCardsOnGrid.cards[this.specialCardsOnGrid.current]
+					if (this.specialCardsOnGrid.timer <= 0) {
+						this.popLabel.popLabel({
+							textBoxOffset: { x: 0, y: -1.1 },
+							text: targetCard.popUpMessage,
+							callback: null,
+							target: targetCard,
+							centerBox: { x: 0.5, y: 0 },
+							delay: 0,
+							autoHide: 4000,
+							ingame: true
+						});
+
+						this.specialCardsOnGrid.current++;
+
+						this.specialCardsOnGrid.timer = 10 + Math.random() * 10 + this.specialCardsOnGrid.timesShown * 5
+					}
+				}
+			}
+
 		}
 		this.trailMarker.arrowsUp.tint = this.trailHorizontal.tint;
 
@@ -2207,34 +2237,7 @@ export default class TetraScreen extends Screen {
 			return;
 		}
 
-		if (this.specialCardsOnGrid.cards.length && this.specialCardsOnGrid.timesShown <= 2) {
-			if (this.specialCardsOnGrid.timer > 0) {
-				this.specialCardsOnGrid.timer -= delta;
-				if (this.specialCardsOnGrid.current >= this.specialCardsOnGrid.cards.length) {
-					this.specialCardsOnGrid.current = 0;
-					utils.shuffle(this.specialCardsOnGrid.cards);
 
-					this.specialCardsOnGrid.timesShown++;
-				}
-				let targetCard = this.specialCardsOnGrid.cards[this.specialCardsOnGrid.current]
-				if (this.specialCardsOnGrid.timer <= 0) {
-					this.popLabel.popLabel({
-						textBoxOffset: { x: 0, y: -1.1 },
-						text: targetCard.popUpMessage,
-						callback: null,
-						target: targetCard,
-						centerBox: { x: 0.5, y: 0 },
-						delay: 0,
-						autoHide: 5000,
-						ingame: true
-					});
-
-					this.specialCardsOnGrid.current++;
-
-					this.specialCardsOnGrid.timer = 10 + Math.random() * 10 + this.specialCardsOnGrid.timesShown * 5
-				}
-			}
-		}
 
 
 		if (renderer.plugins.interaction.mouse.global) {

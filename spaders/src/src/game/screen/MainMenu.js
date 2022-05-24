@@ -25,7 +25,7 @@ export default class MainMenu extends PIXI.Container {
         this.backShape = new PIXI.mesh.NineSlicePlane(
             PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
         this.backShape.width = config.width * 0.75
-        this.backShape.height = config.height * 0.5
+        this.backShape.height = config.height * 0.65
         this.backShape.tint = config.colors.white
 
         this.positionSpring = new Spring();
@@ -34,7 +34,7 @@ export default class MainMenu extends PIXI.Container {
         this.openMenu = new UIButton1(config.colors.white, window.iconsData.settings, config.colors.dark);
         this.openMenu.onClick.add(() => this.toggleState());
 
-        this.wipeDataButton = new UIButton1(config.colors.background, window.iconsData.wipeData, config.colors.white);
+        this.wipeDataButton = new UIButton1(config.colors.red, window.iconsData.wipeData, config.colors.white);
         this.wipeDataButton.onClick.add(() => {
 
             window.popUpOverlay.show({ text: 'Do you want to clean your data?' }, () => { window.COOKIE_MANAGER.wipeData() })
@@ -63,7 +63,6 @@ export default class MainMenu extends PIXI.Container {
         });
         this.toggleSound.updateRotation(0);
 
-
         this.toggleDebug = new UIButton1(config.colors.green, window.iconsData.debugging, config.colors.white);
         this.toggleDebug.onClick.add(() => {
 
@@ -79,11 +78,26 @@ export default class MainMenu extends PIXI.Container {
 
         });
 
+        this.unlockDebug = new UIButton1(config.colors.green, window.iconsData.debugging, config.colors.white);
+        this.unlockDebug.onClick.add(() => {
+
+            window.COOKIE_MANAGER.unlockToogleDebug();
+                this.updateDebugColor()
+
+        });
+
+
         this.toggleDebugNames = new UIButton1(config.colors.green, window.iconsData.debugging, config.colors.white);
         this.toggleDebugNames.onClick.add(() => {
 
-            window.COOKIE_MANAGER.toogleNames();
-            this.updateDebugColor()
+            let data = { text: 'Do you want to ACTIVATE level names mode?' }
+            if (window.COOKIE_MANAGER.debug.showAllNames) {
+                data.text = 'Do you want to REMOVE level names mode?'
+            }
+            window.popUpOverlay.show(data, () => {
+                window.COOKIE_MANAGER.toogleNames();
+                this.updateDebugColor()
+            })
 
         });
 
@@ -104,19 +118,24 @@ export default class MainMenu extends PIXI.Container {
         this.mainContainer.addChild(this.toggleSound);
         this.toggleSound.x = this.backShape.width - 60
         this.toggleSound.y = 50;
-
+        
+        this.mainContainer.addChild(this.unlockDebug);
+        this.unlockDebug.x = -config.width * 0.5;
+        this.unlockDebug.alpha = 0;
 
         // this.refreshButton.x = this.backShape.width - 60
-        this.wipeDataButton.x = this.wipeDataButton.width * 0.5 + 30
-        this.wipeDataButton.y = this.toggleSound.y;
+        this.wipeDataButton.x = this.toggleSound.x//this.wipeDataButton.width * 0.5 + 30
+        this.wipeDataButton.y =this.backShape.height - this.wipeDataButton.height * 0.5 - 20// this.toggleSound.y;
         // this.refreshButton.y = 50
-       // this.mainContainer.addChild(this.toggleDebug);
-        this.toggleDebug.x = this.wipeDataButton.x + this.toggleDebug.width * 0.5 + 60
-        this.toggleDebug.y = this.toggleSound.y;
-
-       // this.mainContainer.addChild(this.toggleDebugNames);
-        this.toggleDebugNames.x = this.toggleDebug.x + this.toggleDebugNames.width * 0.5 + 60
-        this.toggleDebugNames.y = this.toggleSound.y;
+        if(window.COOKIE_MANAGER.debug.showDebugButtons){
+            this.mainContainer.addChild(this.toggleDebug);
+            this.mainContainer.addChild(this.toggleDebugNames);
+        }
+        this.toggleDebug.x = this.wipeDataButton.x - this.toggleDebug.width * 0.5 - 60
+        this.toggleDebug.y = this.wipeDataButton.y;
+        
+        this.toggleDebugNames.x = this.toggleDebug.x - this.toggleDebugNames.width * 0.5 - 60
+        this.toggleDebugNames.y = this.wipeDataButton.y;
 
         // this.autoPlayButton.x = this.wipeDataButton.x - 90;
         // this.autoPlayButton.y = this.refreshButton.y;
