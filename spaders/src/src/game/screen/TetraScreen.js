@@ -865,11 +865,14 @@ export default class TetraScreen extends Screen {
 		this.chargeBombBar.scale.set(((this.bottomUICanvas.width - 20) * 0.85) / this.chargeBombBar.width * this.chargeBombBar.scale.x)
 		this.fallBar.scale.set(this.scoreRect.scale.x)
 		this.timerRect.x = this.bottomUICanvas.x + this.bottomUICanvas.width - this.timerRect.width - this.bottomUICanvas.height * 0.1
-		this.movesRect.x = this.bottomUICanvas.x + this.bottomUICanvas.width - this.timerRect.width - this.bottomUICanvas.height * 0.1
 
 
 
-		this.movesRect.y = this.bottomUICanvas.height - this.movesRect.height - this.bottomUICanvas.height * 0.1
+		// this.movesRect.x = this.bottomUICanvas.x + this.bottomUICanvas.width - this.timerRect.width - this.bottomUICanvas.height * 0.1
+		// this.movesRect.y = this.bottomUICanvas.height - this.movesRect.height - this.bottomUICanvas.height * 0.1
+
+		// this.movesRect.x = this.bottomUICanvas.x + this.bottomUICanvas.width - this.timerRect.width - this.bottomUICanvas.height * 0.1
+		// this.movesRect.y = this.bottomUICanvas.height - this.movesRect.height - this.bottomUICanvas.height * 0.1
 
 
 		this.scoreRect.y = this.bottomUICanvas.height * 0.5
@@ -892,6 +895,9 @@ export default class TetraScreen extends Screen {
 
 		this.movesRect.x = this.chargeBombBar.x;
 		this.movesRect.y = this.timerRect.y
+
+		// this.movesRect.x = this.useBomb.x //- this.useBomb.width * 0.5
+		// this.movesRect.y = this.useBomb.y - 40
 
 		this.fallBar.rotation = -Math.PI / 2;
 		this.fallBar.x = this.topCanvas.x + this.gridContainer.x + this.gridContainer.width + (40 * this.scoreRect.scale.x);
@@ -2674,7 +2680,7 @@ export default class TetraScreen extends Screen {
 
 
 		utils.scaleSize(this.gameCanvas, innerResolution, this.ratio)
-		utils.resizeToFitAR({ width: this.gameCanvas.width * 0.95, height: this.gameCanvas.height * 0.75 }, this.gridContainer)
+		utils.resizeToFitAR({ width: this.gameCanvas.width * 0.95, height: this.gameCanvas.height * 0.735 }, this.gridContainer)
 
 		if (this.gridContainer.scale.x > 1) {
 			this.gridContainer.scale.set(1)
