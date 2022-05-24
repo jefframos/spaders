@@ -27,6 +27,7 @@ import ProgressBar from './ProgressBar';
 import Spring from '../effects/Spring';
 import SpecialCardsManager from '../core/SpecialCardsManager';
 import SprteSpritesheetAnimation from './SprteSpritesheetAnimation';
+import TutorialPopLabel from './TutorialPopLabel';
 
 export default class TetraScreen extends Screen {
 	constructor(label) {
@@ -332,14 +333,14 @@ export default class TetraScreen extends Screen {
 		}
 
 	}
-	onDestroyTile(tile){
+	onDestroyTile(tile) {
 		this.movesRect.icon.tint = tile.tint;
-this.movesRect.sortIconScale();
+		this.movesRect.sortIconScale();
 		TweenMax.from(this.movesRect.icon.scale, 0.5, {
-            x: this.movesRect.icon.scale.x * 0.8,
-            y: this.movesRect.icon.scale.y * 1.2,
-            ease: Elastic.easeOut
-        })
+			x: this.movesRect.icon.scale.x * 0.8,
+			y: this.movesRect.icon.scale.y * 1.2,
+			ease: Elastic.easeOut
+		})
 
 	}
 	onDestroyAllStartedCards() {
@@ -423,6 +424,16 @@ this.movesRect.sortIconScale();
 	onDestroyCard(card) {
 		this.grid.destroyCard(card);
 		this.currentSectionPiecesKilled++;
+
+		if(this.specialCardsOnGrid.cards.length){
+			for (let index = this.specialCardsOnGrid.cards.length - 1; index >= 0 ; index--) {
+				const element = this.specialCardsOnGrid.cards[index];
+				if(element == card){
+					this.specialCardsOnGrid.cards.splice(index, 1);
+				}
+				
+			}
+		}
 	}
 	updateGridDimensions() {
 		window.GRID = {
@@ -639,6 +650,10 @@ this.movesRect.sortIconScale();
 		this.containerQueue = new PIXI.Container();
 		this.frontGridContainer.addChild(this.containerQueue)
 
+
+		this.popLabel = new TutorialPopLabel();
+		this.frontGridContainer.addChild(this.popLabel)
+
 		this.shootingGun = new PIXI.Sprite.fromFrame('shooting.png');
 		this.frontGridContainer.addChild(this.shootingGun)
 
@@ -828,10 +843,10 @@ this.movesRect.sortIconScale();
 		nameLevelSize.width += this.timeLabelStatic.width
 
 		this.timerRect.visible = true;
-		
-		if (this.currentLevelData.gameMode == 0){
-			this.movesRect.visible = true;			
-		}else{
+
+		if (this.currentLevelData.gameMode == 0) {
+			this.movesRect.visible = true;
+		} else {
 			this.movesRect.visible = false;
 		}
 
@@ -846,14 +861,14 @@ this.movesRect.sortIconScale();
 
 
 		this.movesRect.y = this.bottomUICanvas.height - this.movesRect.height - this.bottomUICanvas.height * 0.1
-		
-		
+
+
 		this.scoreRect.y = this.bottomUICanvas.height * 0.5
 		this.chargeBombBar.y = this.scoreRect.y - this.bottomUICanvas.height * 0.025//+ this.scoreRect.height / 2 - this.chargeBombBar.height * 0.12
-		
-		
+
+
 		this.useBomb.scale.set(this.chargeBombBar.height / this.useBomb.height * 1.9 * this.useBomb.scale.y);
-		
+
 		this.chargeBombBar.x = this.bottomUICanvas.width / 2 - (this.chargeBombBar.width + this.useBomb.width + 5) / 2
 		this.scoreRect.x = this.chargeBombBar.x + 10;
 
@@ -862,7 +877,7 @@ this.movesRect.sortIconScale();
 
 		this.useBomb.x = this.chargeBombBar.x + this.chargeBombBar.width + this.useBomb.width / 2 + 5
 		this.useBomb.y = this.chargeBombBar.y - this.useBomb.height / 2 + this.chargeBombBar.height
-		
+
 		this.timerRect.x = this.useBomb.x - this.timerRect.width - this.useBomb.width / 2
 		this.timerRect.y = this.useBomb.y - this.timerRect.height - 5
 
@@ -1320,11 +1335,11 @@ this.movesRect.sortIconScale();
 			data = { text: 'Would you like to activate the Nuke?' }
 		}
 
-		window.popUpOverlay.show(data, () => {	
+		window.popUpOverlay.show(data, () => {
 			if (window.DISABLE_POKI) {
 				this.replaceForBombAfterBreak();
 			} else {
-				
+
 				if (!wasMute) {
 					SOUND_MANAGER.mute();
 				}
@@ -1383,12 +1398,12 @@ this.movesRect.sortIconScale();
 		let w = this.innerResolution.width * 0.2;
 		if (Math.random() < 1) {
 
-			this.fxContainer.toLocal({ x:this.innerResolution.width/2, y: this.innerResolution.height })
+			this.fxContainer.toLocal({ x: this.innerResolution.width / 2, y: this.innerResolution.height })
 
 			let posX = this.bottomUIContainer.x + this.bottomUIContainer.width * Math.random()
-			let dir = (posX < this.bottomUIContainer.x + this.bottomUIContainer.width/2)?1:-1
+			let dir = (posX < this.bottomUIContainer.x + this.bottomUIContainer.width / 2) ? 1 : -1
 			this.fxContainer.startFireworks(
-				{x:posX,y:this.bottomUIContainer.y},
+				{ x: posX, y: this.bottomUIContainer.y },
 				Math.random() * this.innerResolution.width * 0.1 * dir, this.colorTween.currentColor)
 		} else {
 			this.fxContainer.startFireworks(
@@ -1551,7 +1566,12 @@ this.movesRect.sortIconScale();
 
 		let hasAddon = false;
 		let countAdd = 0;
-
+		this.specialCardsOnGrid = {
+			cards: [],
+			timer: 1,
+			current: 0,
+			timesShown: 0
+		};
 
 		for (var i = 0; i < this.currentLevelData.addOn.length; i++) {
 			for (var j = 0; j < this.currentLevelData.addOn[i].length; j++) {
@@ -1597,6 +1617,7 @@ this.movesRect.sortIconScale();
 						} else {
 							let card = this.placeCard(j, i, ENEMIES.list[this.currentLevelData.pieces[i][j]], customData, this.currentLevelData.pieces[i][j])
 							this.cardsContainer.addChild(card);
+
 							if (this.currentLevelData.gameMode == 0) {
 								this.grid.paintTile(card)
 							}
@@ -1604,6 +1625,9 @@ this.movesRect.sortIconScale();
 
 								this.specialCardsManager.sortCardEffect(card, this.currentLevelData.addOn[i][j])
 								//card.startCrazyMood();
+								if (card.popUpMessage) {
+									this.specialCardsOnGrid.cards.push(card);
+								}
 							}
 						}
 					}
@@ -1620,6 +1644,12 @@ this.movesRect.sortIconScale();
 		this.currentRound = 0;
 
 		// this.board.debugBoard();
+
+		if (this.specialCardsOnGrid.cards.length) {
+			utils.shuffle(this.specialCardsOnGrid.cards)
+		}
+
+		console.log(this.specialCardsOnGrid)
 
 		if (hasAddon) {
 			setTimeout(() => {
@@ -1670,7 +1700,6 @@ this.movesRect.sortIconScale();
 
 		window.GAMEPLAY_START()
 
-
 	}
 	setAddons() {
 
@@ -1681,10 +1710,10 @@ this.movesRect.sortIconScale();
 		this.entitiesLabel.text = utils.formatPointsLabel(Math.ceil(this.board.totalCards));
 		this.timeLabel.text = utils.convertNumToTime(Math.ceil(this.currentTime));
 
-		
+
 
 		this.timerRect.updateLavel(utils.convertNumToTime(Math.ceil(this.currentTime)))
-		this.movesRect.updateLavel(this.grid.cardsStartedOnGrid,'', false, { x: -15, y:0})
+		this.movesRect.updateLavel(this.grid.cardsStartedOnGrid, '', false, { x: -15, y: 0 })
 
 
 		this.scoreRect.updateLavel(Math.ceil(this.currentPointsLabel), '', false, { x: -15, y: -4 })
@@ -2024,6 +2053,7 @@ this.movesRect.sortIconScale();
 		this.inGameMenu.update(delta)
 		this.mainMenuSettings.update(delta)
 		this.fxContainer.update(delta)
+		this.popLabel.update(delta)
 
 		if (this.debugCardsContainer) {
 			for (let index = 0; index < this.debugCardsContainer.children.length; index++) {
@@ -2108,10 +2138,11 @@ this.movesRect.sortIconScale();
 			if (this.currentCard) {
 				this.currentCard.alpha = utils.lerp(this.currentCard.alpha, 0, 0.5)
 			}
-
+			this.popLabel.visible = false;
 			return;
 		}
 
+		this.popLabel.visible = true;
 
 		let targetBar = Math.min(1, this.chargeBombBar.currentChargeValue / this.chargeBombBar.maxValue)
 		// this.useBomb.visible = targetBar >= 1;
@@ -2159,6 +2190,36 @@ this.movesRect.sortIconScale();
 			this.stopGameplay();
 			return;
 		}
+
+		if (this.specialCardsOnGrid.cards.length && this.specialCardsOnGrid.timesShown <= 2) {
+			if (this.specialCardsOnGrid.timer > 0) {
+				this.specialCardsOnGrid.timer -= delta;
+				if (this.specialCardsOnGrid.current >= this.specialCardsOnGrid.cards.length) {
+					this.specialCardsOnGrid.current = 0;
+					utils.shuffle(this.specialCardsOnGrid.cards);
+
+					this.specialCardsOnGrid.timesShown++;
+				}
+				let targetCard = this.specialCardsOnGrid.cards[this.specialCardsOnGrid.current]
+				if (this.specialCardsOnGrid.timer <= 0) {
+					this.popLabel.popLabel({
+						textBoxOffset: { x: 0, y: -1.1 },
+						text: targetCard.popUpMessage,
+						callback: null,
+						target: targetCard,
+						centerBox: { x: 0.5, y: 0 },
+						delay: 0,
+						autoHide: 5000,
+						ingame: true
+					});
+
+					this.specialCardsOnGrid.current++;
+
+					this.specialCardsOnGrid.timer = 10 + Math.random() * 10 + this.specialCardsOnGrid.timesShown * 5
+				}
+			}
+		}
+
 
 		if (renderer.plugins.interaction.mouse.global) {
 			this.mousePosition = renderer.plugins.interaction.mouse.global;

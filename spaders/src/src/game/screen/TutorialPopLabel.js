@@ -9,16 +9,16 @@ export default class TutorialPopLabel extends PIXI.Container {
     constructor() {
         super();
         this.textBoxContainer = new PIXI.Container();
-        this.backShape  = new PIXI.mesh.NineSlicePlane(
+        this.backShape = new PIXI.mesh.NineSlicePlane(
             PIXI.Texture.fromFrame("largeCard.png"), 20, 20, 20, 20)
         this.backShape.alpha = 1
 
         this.textBoxContainer.addChild(this.backShape);
 
-        if(window.isMobile){
+        if (window.isMobile) {
 
             this.tutorialLabel = new PIXI.Text('', { font: '13px', fill: config.colors.background, align: 'center', fontWeight: '500', fontFamily: window.STANDARD_FONT1 });
-        }else{
+        } else {
 
             this.tutorialLabel = new PIXI.Text('', { font: '16px', fill: config.colors.background, align: 'center', fontWeight: '500', fontFamily: window.STANDARD_FONT1 });
         }
@@ -27,7 +27,7 @@ export default class TutorialPopLabel extends PIXI.Container {
         this.addChild(this.textBoxContainer);
         this.textBoxContainer.scale.set(0);
 
-    
+
 
         //this.tutorialActionShape = new PIXI.Graphics().lineStyle(1,0x00FF00).drawRect(0, 0, 300, 300);
         this.tutorialActionShape = new PIXI.Graphics().beginFill(0x00FF00).drawRect(0, 0, 300, 300);
@@ -40,47 +40,61 @@ export default class TutorialPopLabel extends PIXI.Container {
     popLabel(data, callbackNext) {
 
         this.trackingData = data;
-        
-        this.sortPositions({x:1,y:1});
-        
-        let obj = {chars:0}
+
+        this.sortPositions({ x: 1, y: 1 });
+
+        let obj = { chars: 0 }
         let targetTime = data.text.length * 0.02
         targetTime = Math.min(targetTime, 1.5)
-        TweenMax.to(obj,targetTime , {delay: data.delay,chars:data.text.length, onUpdate:()=>{
+        TweenMax.to(obj, targetTime, {
+            delay: data.delay, chars: data.text.length, onUpdate: () => {
 
-            this.tutorialLabel.text = data.text.substring(0, Math.floor(obj.chars));
-            if(this.tutorialLabel.text.length == 1 || this.tutorialLabel.text.length %4 == 0){
-                window.SOUND_MANAGER.play('place', { volume: 0.3 + Math.random()*0.2, speed: 0.85 + Math.random() * 0.75 })
-            }
-            this.backShape.width = this.tutorialLabel.width + 25
-            this.backShape.height = this.tutorialLabel.height + 20
-            this.backShape.alpha = 1
-            this.tutorialLabel.x = 8
-            this.tutorialLabel.y = 10
-            if(this.trackingData.useGlobalScale){
-                this.backShape.x = 0
+                this.tutorialLabel.text = data.text.substring(0, Math.floor(obj.chars));
+                if (this.tutorialLabel.text.length == 1 || this.tutorialLabel.text.length % 4 == 0) {
+                    window.SOUND_MANAGER.play('place', { volume: 0.3 + Math.random() * 0.2, speed: 0.85 + Math.random() * 0.75 })
+                }
+                this.backShape.width = this.tutorialLabel.width + 25
+                this.backShape.height = this.tutorialLabel.height + 20
+                this.backShape.alpha = 1
+                this.tutorialLabel.x = 8
+                this.tutorialLabel.y = 10
+                if (this.trackingData.useGlobalScale) {
+                    this.backShape.x = 0
 
-            }else{
+                } else {
 
-                this.backShape.x = -5
-            }
-        }, ease:Linear.easeNone})
-        
+                    this.backShape.x = -5
+                }
+            }, ease: Linear.easeNone
+        })
+
         TweenMax.killTweensOf(this.textBoxContainer.scale);
         this.textBoxContainer.visible = false;
         this.tutorialActionShape.visible = false;
         this.textBoxContainer.scale.set(1.5, 0.5)
         TweenMax.to(this.textBoxContainer.scale, 0.75, {
             delay: data.delay, x: 1, y: 1, ease: Elastic.easeOut, onStart: () => {
+
                 this.textBoxContainer.visible = true;
-                setTimeout(() => {                    
-                    this.tutorialActionShape.visible = true;
-                }, 500);
+                if (!data.ingame) {
+
+                    setTimeout(() => {
+                        this.tutorialActionShape.visible = true;
+                    }, 500);
+                }
+            }, onComplete: () => {
+                if (data.autoHide) {
+                    setTimeout(() => {
+                        this.textBoxContainer.visible = false;
+                    }, data.autoHide);
+                }
             }
         })
 
         this.currentCallback = callbackNext;
         this.dataCallback = data.callback;
+
+
 
     }
     sortPositions(scale) {
@@ -89,22 +103,22 @@ export default class TutorialPopLabel extends PIXI.Container {
         }
 
         let loc = this.toLocal(this.trackingData.target.getGlobalPosition());
-       
 
-        
-       
-        let targetScale = {x:1,y:1}
 
-        if(this.trackingData.useGlobalScale){
+
+
+        let targetScale = { x: 1, y: 1 }
+
+        if (this.trackingData.useGlobalScale) {
             targetScale = scale;
         }
         this.tutorialActionShape.width = this.trackingData.target.width * targetScale.x;
-        this.tutorialActionShape.height = this.trackingData.target.height* targetScale.y + 150;
+        this.tutorialActionShape.height = this.trackingData.target.height * targetScale.y + 150;
         this.tutorialActionShape.x = loc.x
         this.tutorialActionShape.y = loc.y
 
         //loc = this.toLocal(this.trackingData.targetSpeech.getGlobalPosition());
-        
+
         this.textBoxContainer.position.x = loc.x;
         this.textBoxContainer.position.y = loc.y;
         if (this.trackingData.centerBox) {

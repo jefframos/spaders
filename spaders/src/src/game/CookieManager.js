@@ -24,6 +24,9 @@ export default class CookieManager {
 			showAllThumbs: false,
 			showAllNames: false,
 		}
+		let defaultTutorialDisplayed = {
+			
+		}
 		let stats = this.getCookie("stats");
 		if (stats) {
 			this.stats = stats;
@@ -39,6 +42,22 @@ export default class CookieManager {
 			this.stats = defaultStats
 
 			this.storeObject("stats", this.stats)
+		}
+		let tutorialDisplayed = this.getCookie("tutorials");
+		if (tutorialDisplayed) {
+			this.tutorialDisplayed = tutorialDisplayed;
+
+			for (const key in defaultTutorialDisplayed) {
+				const element = defaultTutorialDisplayed[key];
+				if (this.tutorialDisplayed[key] === undefined) {
+					this.tutorialDisplayed[key] = element;
+					this.storeObject("tutorials", this.tutorialDisplayed)
+				}
+			}
+		} else {
+			this.tutorialDisplayed = defaultTutorialDisplayed
+
+			this.storeObject("tutorials", this.tutorialDisplayed)
 		}
 
 		let debug = this.getCookie("debug");

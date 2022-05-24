@@ -1071,7 +1071,6 @@ export default class Board {
 
 
 	sortMoveDown(cardsToMove) {
-
 		let moveDownList = [];
 
 		let byCol = [];
@@ -1082,7 +1081,7 @@ export default class Board {
 		}
 		for (var i = 0; i < cardsToMove.length; i++) {
 			let id = cardsToMove[i].pos.i;
-			for (var j = cardsToMove[i].pos.j; j < GRID.i; j++) {
+			for (var j = cardsToMove[i].pos.j; j < GRID.j; j++) {
 				let tempCard = this.cards[id][j];
 				if (tempCard) {
 					byCol[id].push(tempCard);
@@ -1094,6 +1093,7 @@ export default class Board {
 				}
 			}
 		}
+		//console.log(moveDownList.length)
 		//if find a block, this removes it
 		let toRemove = []
 		for (let index = 0; index < moveDownList.length; index++) {
@@ -1110,8 +1110,6 @@ export default class Board {
 				}
 			}
 		}
-
-		
 
 		byCol.forEach(colList => {
 			let blocker = false;
@@ -1134,31 +1132,18 @@ export default class Board {
 			}
 		}
 
-		// for (let index = 0; index < moveDownList.length; index++) {
-		// 	const element = moveDownList[index];
-		// 	if (element.hasAnyBlocker() ) {
-		// 		toRemove.push(element);
-		// 		let old = element.pos.j;
-		// 		for (let j = element.pos.j; j >= 0; j--) {
-		// 			const element2 = byCol[element.pos.i][j];
-		// 			if (element2 && element2.pos.j == old) {
-		// 				toRemove.push(element2);
-		// 				old--
-		// 			} else {
-		// 				//break;
-		// 			}
-
-		// 		}
-		// 	}
-		// }
-
 		moveDownList = moveDownList.filter(function (item, pos, self) {
 			return self.indexOf(item) == pos;
 		})
 
-		//console.log("Move Down List",moveDownList)
 		for (var i = moveDownList.length - 1; i >= 0; i--) {
-			this.moveCardDown(moveDownList[i], (i / moveDownList.length) * 0.5 + 0.25);
+			if(i == 0){
+
+				this.moveCardDown(moveDownList[i], 0.25, Back.easeIn);
+			}else{
+
+				this.moveCardDown(moveDownList[i], (i / moveDownList.length) * 0.25 + 0.35, Back.easeOut);
+			}
 		}
 	}
 	updateCounters(value = 1) {
@@ -1198,7 +1183,7 @@ export default class Board {
 
 	}
 
-	moveCardDown(card, delay) {
+	moveCardDown(card, delay, ease = null) {
 		//console.log(card)
 		this.game.grid.destroyCard(card)
 		this.cards[card.pos.i][card.pos.j] = 0;
@@ -1214,7 +1199,7 @@ export default class Board {
 		card.move({
 			x: card.pos.i * CARD.width,
 			y: card.pos.j * CARD.height
-		}, 0.2, delay);
+		}, 0.2, delay, ease);
 
 	}
 

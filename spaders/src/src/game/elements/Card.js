@@ -178,7 +178,7 @@ export default class Card extends PIXI.Container {
 		// 	this.startCrazyMood();
 		// }
 	}
-	isBlockerPivot(){
+	isBlockerPivot() {
 		return this.isBlockHorizontalPivot || this.isBlockVerticalPivot
 
 	}
@@ -207,6 +207,7 @@ export default class Card extends PIXI.Container {
 		this.cardBlocks.scale.set(CARD.width / this.cardBlocks.width * this.cardBlocks.scale.x)
 	}
 	blockHorizontalPivot() {
+		this.popUpMessage = "Break me";
 		this.isBlockHorizontalPivot = true;
 		this.updateBlockAsset();
 		this.removeActionZones();
@@ -221,6 +222,7 @@ export default class Card extends PIXI.Container {
 
 	}
 	blockVerticalPivot() {
+		this.popUpMessage = "Break me";
 		this.isBlockVerticalPivot = true;
 		this.updateBlockAsset();
 		this.removeActionZones();
@@ -235,24 +237,24 @@ export default class Card extends PIXI.Container {
 	removeBlockStateVertical() {
 		this.isBlockedByPivotVertical = false;
 
-		if(!this.isBlockedByPivotHorizontal){
+		if (!this.isBlockedByPivotHorizontal) {
 			this.enableAfterBlock();
-		}else{
+		} else {
 			this.updateBlockAsset();
 		}
 	}
 	removeBlockStateHorizontal() {
 		this.isBlockedByPivotHorizontal = false;
 
-		if(!this.isBlockedByPivotVertical){
+		if (!this.isBlockedByPivotVertical) {
 			this.enableAfterBlock();
-		}else{
+		} else {
 			this.updateBlockAsset();
 		}
 	}
-	enableAfterBlock(){
+	enableAfterBlock() {
 		this.canBeAttacked = true;
-	
+
 		this.cardBlocks.setTexture(PIXI.Texture.EMPTY);
 		this.shake(0.2, 6, 0.2);
 		TweenMax.to(this.cardActions, 0.5, { delay: 0.5, alpha: 1 })
@@ -261,6 +263,9 @@ export default class Card extends PIXI.Container {
 	itCannotDie() {
 		this.cardStats.setTexture(PIXI.Texture.fromFrame('tile_1_' + (32 * 10 + 9) + '.png'));
 		this.canDie = false;
+
+		this.popUpMessage = "Don't hurt me";
+
 		this.cardStats.scale.set(0.5)
 		this.cardStats.x = 0
 		this.cardStats.y = CARD.height - this.cardStats.height * this.cardStats.scale.x - 4
@@ -275,7 +280,7 @@ export default class Card extends PIXI.Container {
 
 		this.scaleRef = 0.6;
 		let heartColor = colorSchemes.getCurrentColorScheme().heartColor;
-		if(heartColor){
+		if (heartColor) {
 
 			this.forceNewColor(heartColor)
 		}
@@ -289,6 +294,9 @@ export default class Card extends PIXI.Container {
 	itEndGameIfDie() {
 		this.cardStats.setTexture(PIXI.Texture.fromFrame('tile_1_' + (32 * 10 + 7) + '.png'));
 		this.endGameIfDie = true;
+
+		this.popUpMessage = "You can't get me!";
+
 		this.cardStats.scale.set(0.35)
 		this.cardStats.x = 0
 		this.cardStats.y = 0
@@ -305,7 +313,7 @@ export default class Card extends PIXI.Container {
 
 		this.enemySpriteWhite.alpha = 1
 		let bosscolor = colorSchemes.getCurrentColorScheme().bossColor;
-		if(bosscolor){
+		if (bosscolor) {
 
 			this.forceNewColor(bosscolor)
 		}
@@ -333,6 +341,7 @@ export default class Card extends PIXI.Container {
 		this.canDie = true;
 		this.endGameIfDie = false;
 		this.dead = false;
+		this.popUpMessage = null;
 		this.isBlockHorizontalPivot = false;
 		this.isBlockVerticalPivot = false;
 		this.canBeAttacked = true;
@@ -675,36 +684,17 @@ export default class Card extends PIXI.Container {
 			}
 		});
 	}
-	move(pos, time = 0.3, delay = 0) {
-		// console.log(	pos);
-		// if (delay > 0) {
-
-		// 	setTimeout(() => {
-
-		// 		this.horizontalSpring.tx = pos.x;
-		// 		this.targetY = pos.y;
-		// 	}, delay * 1000);
-		// } else {
-		// 	this.horizontalSpring.tx = pos.x;
-		// 	this.targetY = pos.y;
-		// }
-		// return;
+	move(pos, time = 0.3, delay = 0, ease = null) {
 		TweenMax.killTweensOf(this)
 		TweenMax.killTweensOf(this.position)
 		TweenMax.killTweensOf(this.scale)
 		if (this.backshape && this.backshape.parent) {
 			this.backshape.parent.removeChild(this.backshape)
 		}
-
-		TweenMax.to(this, time, { x: pos.x, y: pos.y, delay: delay });
-
-		return
-		if (!this.isCurrent) {
-
+		if (ease) {
+			TweenMax.to(this, time, { ease, x: pos.x, y: pos.y, delay: delay });
 		} else {
-			this.horizontalSpring.tx = pos.x
-			TweenMax.to(this, time, { y: pos.y, delay: delay });
-
+			TweenMax.to(this, time, { x: pos.x, y: pos.y, delay: delay });
 		}
 	}
 
