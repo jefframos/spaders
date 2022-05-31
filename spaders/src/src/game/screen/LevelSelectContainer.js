@@ -357,7 +357,7 @@ export default class LevelSelectContainer extends PIXI.Container {
 
             //     element.y = target;
             // }
-            let levelYStart = - (this.levelMap.height+ 150) + window.innerHeight //+ 500
+            let levelYStart = - (this.levelMap.height + 150) + window.innerHeight //+ 500
             this.levelsView.y = levelYStart
             this.levelsView.spring.x = levelYStart
             this.levelsView.spring.tx = levelYStart
@@ -668,7 +668,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         return levelTierButton
     }
     sortPressSpace() {
-        
+
         if (window.blockSpace || this.gameScreen.gameRunning || this.disableClickCounter > 0) {
             return;
         }
@@ -682,7 +682,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         }
     }
     getLatestOpenLevel() {
-        
+
         for (let index = this.levelCards.length - 1; index >= 0; index--) {
             const element = this.levelCards[index];
             if (element.isEnabled) {
@@ -777,7 +777,7 @@ export default class LevelSelectContainer extends PIXI.Container {
 
 
             let order = section.mapData.levelLayers[level.order >= 0 ? level.order : this.tierButtons.length];
-            
+
 
             this.tierMap.addTierLevel(levelTierButton, order, 1.5)
             this.tierButtons.push(levelTierButton);
@@ -983,7 +983,7 @@ export default class LevelSelectContainer extends PIXI.Container {
             //levelTierButton.setColor(config.colors.purple)
             levelTierButton.tierCompleteMode();//updateLabel('COMPLETED');
             levelTierButton.hideProgressBar();
-            levelTierButton.updateLabel( "", { x: 0, y: -25 });
+            levelTierButton.updateLabel("", { x: 0, y: -25 });
         } else {
 
             //if(levelTierButton)
@@ -1003,7 +1003,7 @@ export default class LevelSelectContainer extends PIXI.Container {
                 shouldLock = false;
                 tempTier.require.forEach(element => {
                     if (element < 0) {
-                        console.log("Required level doesnt exist", element, tempTier,data);
+                        console.log("Required level doesnt exist", element, tempTier, data);
                         shouldLock = false;
                     } else {
                         if (COOKIE_MANAGER.isTierLocked(tempTier)) {
@@ -1187,28 +1187,37 @@ export default class LevelSelectContainer extends PIXI.Container {
         }
         window.GAMEPLAY_STOP();
         window.blockSpace = true;
-        PokiSDK.commercialBreak().then(
-            () => {
-                console.log("Commercial break finished, proceeding to game");
-                //PokiSDK.gameplayStart();
-                window.blockSpace = false;
-                // fire your function to continue to game
-                this.startTheLevel(data);
-                if (!wasMute) {
-                    SOUND_MANAGER.toggleMute();
-                }
+        if (window.DISABLE_POKI) {
+            window.blockSpace = false;
+            this.startTheLevel(data);
+            if (!wasMute) {
+                SOUND_MANAGER.toggleMute();
             }
-        ).catch(
-            () => {
-                console.log("Initialized, but the user likely has adblock");
-                // fire your function to continue to game
-                window.blockSpace = false;
-                this.startTheLevel(data);
-                if (!wasMute) {
-                    SOUND_MANAGER.toggleMute();
+        } else {
+
+            PokiSDK.commercialBreak().then(
+                () => {
+                    console.log("Commercial break finished, proceeding to game");
+                    //PokiSDK.gameplayStart();
+                    window.blockSpace = false;
+                    // fire your function to continue to game
+                    this.startTheLevel(data);
+                    if (!wasMute) {
+                        SOUND_MANAGER.toggleMute();
+                    }
                 }
-            }
-        );
+            ).catch(
+                () => {
+                    console.log("Initialized, but the user likely has adblock");
+                    // fire your function to continue to game
+                    window.blockSpace = false;
+                    this.startTheLevel(data);
+                    if (!wasMute) {
+                        SOUND_MANAGER.toggleMute();
+                    }
+                }
+            );
+        }
 
     }
     startTheLevel(data) {

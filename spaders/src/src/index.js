@@ -10,6 +10,7 @@ import Pool from './game/core/Pool';
 import SoundManager from './game/SoundManager';
 import colorSchemes from './colorSchemes';
 import signals from 'signals';
+import ScrabbleManager from './game/screen/ScrabbleManager';
 
 window.GAMEPLAY_IS_STOP = false;
 window.GAMEPLAY_STOP = function(){
@@ -435,6 +436,8 @@ function setUpSchemes() {
 		.add('./assets/images/tilemap_1.json')
 		.add('./assets/images/arrowsUp.png')
 		.add('./data/levelSections.json')
+		.add('./data/letters/scrabble.json')
+		.add('./data/letters/words_dictionary.json')
 		.add('./assets/fonts/stylesheet.css')
 		.add('./assets/levels.json')
 		.add('./assets/levelsRaw.json')
@@ -446,7 +449,7 @@ function setUpSchemes() {
 			}
 		});
 }
-window.DISABLE_POKI = true;
+window.DISABLE_POKI = false;
 const urlParams = new URLSearchParams(window.location.search);
 if(window.DISABLE_POKI || urlParams.get('level') != null){
 	window.PokiSDK = {}
@@ -515,13 +518,15 @@ PokiSDK.setDebug(false);
 window.levelsJson = ""
 
 window.TIME_SCALE = 1;
-const jsonPath = "./data/"
+window.jsonPath = "./data/"
 
 function loadJsons() {
 
 
 	PokiSDK.gameLoadingStart();
 	window.levelSections = PIXI.loader.resources[jsonPath + "levelSections.json"].data
+
+	window.scrabbleManager = new ScrabbleManager('./data/letters/scrabble.json', './data/letters/words_dictionary.json');
 
 	PIXI.loader.add(jsonPath + window.levelSections.question.dataPath)
 

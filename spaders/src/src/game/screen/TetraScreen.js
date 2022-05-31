@@ -1636,6 +1636,12 @@ export default class TetraScreen extends Screen {
 							if (this.currentLevelData.gameMode == 0) {
 								this.grid.paintTile(card)
 							}
+							if(this.currentLevelData.gameMode == 10){
+								card.removeActionZones();
+								card.addLetter(window.scrabbleManager.getRandomLetter(1.5));
+								this.grid.paintTile(card)
+								
+							}
 							if (hasAddon && this.currentLevelData.addOn[i][j] >= 32) {
 
 								this.specialCardsManager.sortCardEffect(card, this.currentLevelData.addOn[i][j])
@@ -1755,6 +1761,7 @@ export default class TetraScreen extends Screen {
 	}
 
 	updateQueue() {
+		
 		while (this.cardQueue.length < this.cardQueueSize) {
 			let card;
 			if (CARD_POOL.length) {
@@ -1815,6 +1822,11 @@ export default class TetraScreen extends Screen {
 			this.containerQueue.addChild(card);
 			this.cardQueue.push(card);
 			card.setOnQueue();
+
+			if(this.currentLevelData.gameMode == 10){
+				card.removeActionZones();
+				card.addLetter(window.scrabbleManager.getRandomLetter());
+			}
 		}
 		// for (var i = this.cardQueue.length - 1; i >= 0; i--) {
 		for (var i = 0; i < this.cardQueue.length; i++) {
@@ -1870,8 +1882,9 @@ export default class TetraScreen extends Screen {
 		//gamemode: 1 - fallpieces
 		//gamemode: 2 - no tiles
 		//gamemode: 3 - move limit
+		//gamemode: 10 - letters
 		//console.log("newRound", first);
-		if (this.currentLevelData.gameMode == 0 || this.currentLevelData.gameMode == 2) {
+		if (this.currentLevelData.gameMode == 0 || this.currentLevelData.gameMode == 2|| this.currentLevelData.gameMode == 10) {
 			if (first) {
 				this.getNextPieceRound(first);
 			} else {
@@ -2515,6 +2528,12 @@ export default class TetraScreen extends Screen {
 
 		this.board.shootCard(this.mousePosID, this.currentCard);
 
+
+		if(this.currentLevelData.gameMode == 10){
+			window.scrabbleManager.findWords(this.board, this.currentCard.pos);
+		}
+
+
 		this.cardsContainer.addChild(this.currentCard)
 
 		window.fxSpeed = 5;
@@ -2735,7 +2754,7 @@ export default class TetraScreen extends Screen {
 
 
 		this.popUpOverlay.resize(scaledResolution, innerResolution)
-		this.popUpOverlay.scale.set(this.inGameMenu.scale.x)
+		this.popUpOverlay.scale.set(this.inGameMenu.scale.x * 1.5)
 		this.popUpOverlay.x = this.gameCanvas.x + this.gameCanvas.width / 2
 		this.popUpOverlay.y = this.gameCanvas.y + this.gameCanvas.height / 2
 

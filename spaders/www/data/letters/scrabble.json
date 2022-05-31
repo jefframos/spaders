@@ -1,0 +1,30 @@
+{
+    "letters":[
+        {"key":"a","points":1, "total":9},
+        {"key":"b","points":3, "total":2},
+        {"key":"c","points":3, "total":2},
+        {"key":"d","points":2, "total":4},
+        {"key":"e","points":1, "total":12},
+        {"key":"f","points":4, "total":2},
+        {"key":"g","points":2, "total":3},
+        {"key":"h","points":4, "total":2},
+        {"key":"i","points":1, "total":9},
+        {"key":"j","points":8, "total":1},
+        {"key":"k","points":5, "total":1},
+        {"key":"l","points":1, "total":4},
+        {"key":"m","points":3, "total":2},
+        {"key":"n","points":1, "total":6},
+        {"key":"o","points":1, "total":8},
+        {"key":"p","points":3, "total":2},
+        {"key":"q","points":10, "total":1},
+        {"key":"r","points":1, "total":6},
+        {"key":"s","points":1, "total":4},
+        {"key":"t","points":1, "total":6},
+        {"key":"u","points":1, "total":4},
+        {"key":"v","points":4, "total":2},
+        {"key":"x","points":8, "total":1},
+        {"key":"y","points":4, "total":2},
+        {"key":"w","points":4, "total":2},
+        {"key":"z","points":10, "total":1}
+    ]
+}
