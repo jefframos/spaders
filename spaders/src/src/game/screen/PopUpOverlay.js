@@ -10,7 +10,7 @@ export default class PopUpOverlay extends PIXI.Container {
         super();
         this.background = new PIXI.Graphics().beginFill(0x000000).drawRect(-5000, -5000, 10000, 10000);
 
-        this.modalSize = { width: 500, height: 300 };
+        this.modalSize = { width: 600, height: 500 };
         this.addChild(this.background);
         this.background.alpha = 0.25;
         this.background.interactive = true;
@@ -56,6 +56,9 @@ export default class PopUpOverlay extends PIXI.Container {
 
         this.textBoxContainer.addChild(this.confirmButton)
         this.textBoxContainer.addChild(this.cancelButton)
+
+        this.confirmButton.scale.set(1.35)
+        this.cancelButton.scale.set(1.35)
         this.first = true;
 
         this.close();
@@ -91,8 +94,8 @@ export default class PopUpOverlay extends PIXI.Container {
 		this.backShape.height = this.tutorialLabel.height + 200;
 
         this.textBoxContainer.scale.set(1)
-        this.cancelButton.x = 100;
-        this.confirmButton.x = this.modalSize.width - 100;
+        this.cancelButton.x = 150;
+        this.confirmButton.x = this.modalSize.width - 150;
 
 
         TweenMax.killTweensOf(this.background);

@@ -961,14 +961,14 @@ this.tutorialData = {
         this.tutorialPopLabel.y = this.gameCanvas.y
 
         let toLoc = this.toLocal({ x: 0, y: 0 });
-        this.killTutorialButton.x = toLoc.x + innerResolution.width - this.killTutorialButton.width;
-        this.killTutorialButton.y = toLoc.y + this.killTutorialButton.width;
+        this.killTutorialButton.x = toLoc.x + innerResolution.width - this.killTutorialButton.width * this.killTutorialButton.scale.x;
+        this.killTutorialButton.y = toLoc.y + this.killTutorialButton.width * this.killTutorialButton.scale.x;
 
         this.toggleSound.x = this.killTutorialButton.x;
-        this.toggleSound.y = this.killTutorialButton.y +this.killTutorialButton.width ;
+        this.toggleSound.y = this.killTutorialButton.y +this.killTutorialButton.width * this.killTutorialButton.scale.x * 1.5;
 
         this.nextStepTutorial.x = this.killTutorialButton.x//toLoc.x + innerResolution.width - this.killTutorialButton.width;
-        this.nextStepTutorial.y = toLoc.y + innerResolution.height - this.nextStepTutorial.height;
+        this.nextStepTutorial.y = toLoc.y + innerResolution.height - this.nextStepTutorial.height * this.killTutorialButton.scale.x;
 
 
     }

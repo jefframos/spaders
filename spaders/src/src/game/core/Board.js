@@ -673,25 +673,9 @@ export default class Board {
 						})
 
 
-
+						this.addStandardAttackParticles(cardFound, arrowGlobal, id);
 						//window.EFFECTS.addShockwave(screenPos.x, screenPos.y, 2);
-						this.game.addPoints(10 * id);
-						window.SOUND_MANAGER.play('pop', { speed: Math.random() * 0.075 + 0.925 + 0.2 * id })
-						//normal attack
-						this.popAttack(cardFound)
-
-
-						this.game.fxContainer.addParticlesToScore(
-							id,
-							this.game.toLocal(arrowGlobal),
-							this.game.scoreRect,
-							cardFound.currentColor
-						)
-						let hitOffset = {
-							x: arrowGlobal.x,
-							y: arrowGlobal.y - CARD.height
-						}
-						this.popLabel(this.game.toLocal(hitOffset), "+" + 10 * id, 0, 1, 0.5 + id * 0.2, window.textStyles.normalAttack);
+						
 
 					}
 				}.bind(this),
@@ -757,9 +741,6 @@ export default class Board {
 					})
 				}
 
-
-
-
 				this.delayedDestroy(card, autoDestroyCardData.hits);
 
 				let counterHits = (list.length + 1);
@@ -811,6 +792,39 @@ export default class Board {
 		}
 
 
+	}
+	addStandardAttackParticles2(arrowGlobal, id){
+		this.game.addPoints(10 * id);
+		window.SOUND_MANAGER.play('pop', { speed: Math.random() * 0.075 + 0.925 + 0.2 * id })
+		//normal attack
+		this.game.fxContainer.addParticlesToScore(
+			id,
+			this.game.toLocal(arrowGlobal),
+			this.game.scoreRect,
+			0xFFFFFF
+		)
+		let hitOffset = {
+			x: arrowGlobal.x,
+			y: arrowGlobal.y - CARD.height
+		}
+		this.popLabel(this.game.toLocal(hitOffset), "+" + 10 * id, 0, 1, 0.5 + id * 0.2, window.textStyles.normalAttack);
+	}
+	addStandardAttackParticles(cardFound, arrowGlobal, id){
+		this.game.addPoints(10 * id);
+		window.SOUND_MANAGER.play('pop', { speed: Math.random() * 0.075 + 0.925 + 0.2 * id })
+		//normal attack
+		this.popAttack(cardFound)
+		this.game.fxContainer.addParticlesToScore(
+			id,
+			this.game.toLocal(arrowGlobal),
+			this.game.scoreRect,
+			cardFound.currentColor
+		)
+		let hitOffset = {
+			x: arrowGlobal.x,
+			y: arrowGlobal.y - CARD.height
+		}
+		this.popLabel(this.game.toLocal(hitOffset), "+" + 10 * id, 0, 1, 0.5 + id * 0.2, window.textStyles.normalAttack);
 	}
 	addTurnTime(value) {
 		this.nextTurnTimer = value + 0.05;
@@ -886,8 +900,10 @@ export default class Board {
 			}
 		})
 	}
-	popLabel(pos, label, delay = 0, dir = 1, scale = 1, style = {}, ease = Back.easeOut, time = 0.5) {
 
+
+
+	popLabel(pos, label, delay = 0, dir = 1, scale = 1, style = {}, ease = Back.easeOut, time = 0.5) {
 		let tempLabel = null;
 		if (window.LABEL_POOL.length > 0) {
 			tempLabel = window.LABEL_POOL[0];

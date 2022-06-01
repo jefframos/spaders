@@ -162,6 +162,9 @@ export default class Card extends PIXI.Container {
 		this.currentCountdown = baseCountdown;
 		this.baseCountdown = baseCountdown;
 		this.countdowLabel.text = this.currentCountdown;
+
+		this.countdowLabel.style = { font: '14px', fontWeight: '200', fill: 0xFFFFFF, fontFamily: window.STANDARD_FONT2 }
+
 		this.idleAnimationLayer1 = [];
 		this.idleAnimationLayer2 = [];
 		for (let index = 1; index <= 5; index++) {
@@ -174,9 +177,6 @@ export default class Card extends PIXI.Container {
 
 		this.life = 0;
 		this.updateCurrentLife();
-		// if (this.life < 1) {
-		// 	this.startCrazyMood();
-		// }
 	}
 	isBlockerPivot() {
 		return this.isBlockHorizontalPivot || this.isBlockVerticalPivot
@@ -339,6 +339,7 @@ export default class Card extends PIXI.Container {
 	}
 	removeAllStates() {
 		this.isCountdown = false;
+		this.isLetter = false;
 		this.crazyMood = false;
 		this.canDie = true;
 		this.endGameIfDie = false;
@@ -687,6 +688,27 @@ export default class Card extends PIXI.Container {
 				this.startCrazyMood();
 			}
 		});
+	}
+	addLetter(letterData) {
+		this.isLetter = true;
+		this.life = letterData.points;
+
+		this.letterData = letterData;
+
+		this.countdowLabel.style = window.textStyles.letterStandard
+
+		this.countdowLabel.text = letterData.key.toUpperCase();
+		// this.idleAnimationLayer1 = [];
+		// this.idleAnimationLayer2 = [];
+		// for (let index = 1; index <= 5; index++) {
+		// 	this.idleAnimationLayer1.push("l0_spader_countdown_" + index + ".png")
+		// 	this.idleAnimationLayer2.push("l1_spader_countdown_" + index + ".png")
+		// }
+		this.countdowLabel.x = CARD.width / 2 - this.countdowLabel.width / 4;
+		this.countdowLabel.y = CARD.height / 2 - CARD.height * 0.08;
+		this.cardContainer.addChild(this.countdowLabel);
+
+		this.updateCurrentLife();
 	}
 	move(pos, time = 0.3, delay = 0, ease = null) {
 		TweenMax.killTweensOf(this)
