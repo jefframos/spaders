@@ -13,15 +13,15 @@ import signals from 'signals';
 import ScrabbleManager from './game/screen/ScrabbleManager';
 
 window.GAMEPLAY_IS_STOP = false;
-window.GAMEPLAY_STOP = function(){
-	if(window.GAMEPLAY_IS_STOP){
+window.GAMEPLAY_STOP = function () {
+	if (window.GAMEPLAY_IS_STOP) {
 		return
 	}
 	window.GAMEPLAY_IS_STOP = true;
 	PokiSDK.gameplayStop();
 }
-window.GAMEPLAY_START = function(){
-	if(!window.GAMEPLAY_IS_STOP){
+window.GAMEPLAY_START = function () {
+	if (!window.GAMEPLAY_IS_STOP) {
 		return
 	}
 	window.GAMEPLAY_IS_STOP = false;
@@ -51,7 +51,7 @@ window.SAVE_DATA = function (data, filename, type = 'text/plain') {
 window.onEscPressed = new signals();
 window.onSpacePressed = new signals();
 
-window.getKey = function(e) {
+window.getKey = function (e) {
 	if (e.key === "Escape") { // escape key maps to keycode `27`
 		// <DO YOUR WORK HERE>
 		window.onEscPressed.dispatch()
@@ -59,11 +59,11 @@ window.getKey = function(e) {
 		// 	this.inGameMenu.toggleState();
 		// }
 	}
-	
+
 	if (e.keyCode === 32) { // escape key maps to keycode `27`
 		window.onSpacePressed.dispatch()
 		// <DO YOUR WORK HERE>
-		
+
 	}
 }
 
@@ -312,6 +312,15 @@ window.textStyles = {
 		stroke: 0x000000,
 		strokeThickness: 3
 	},
+	letterStandard: {
+		align: "center",
+		font: '20px',
+		fontWeight: '800',
+		fill: 0xFFFFFF,
+		stroke: 0x000000,
+		strokeThickness: 6,
+		fontFamily: window.STANDARD_FONT1
+	},
 	areaAttack: {
 		font: '48px',
 		fill: config.colors.purple,//yellow
@@ -451,47 +460,47 @@ function setUpSchemes() {
 }
 window.DISABLE_POKI = false;
 const urlParams = new URLSearchParams(window.location.search);
-if(window.DISABLE_POKI || urlParams.get('level') != null){
+if (window.DISABLE_POKI || urlParams.get('level') != null) {
 	window.PokiSDK = {}
 	var hash = window.location.hash.substring(1)
-	PokiSDK.init = function(){
-		return new Promise(function(resolve, reject) {
-			resolve("Success!");
-		});
-	}
-	
-	PokiSDK.gameplayStart = function(){
-		return new Promise(function(resolve, reject) {
-			resolve("Success!");
-		});
-	}
-	
-	PokiSDK.gameplayStop = function(){
-		return new Promise(function(resolve, reject) {
-			resolve("Success!");
-		});
-	}
-	
-	PokiSDK.commercialBreak = function(){
-		return new Promise(function(resolve, reject) {
-			resolve("Success!");
-		});
-	}
-	
-	PokiSDK.rewardedBreak = function(){
-		return new Promise(function(resolve, reject) {
+	PokiSDK.init = function () {
+		return new Promise(function (resolve, reject) {
 			resolve("Success!");
 		});
 	}
 
-	PokiSDK.setDebug = function(){
-		
-	}
-	PokiSDK.gameLoadingStart = function(){
-		
+	PokiSDK.gameplayStart = function () {
+		return new Promise(function (resolve, reject) {
+			resolve("Success!");
+		});
 	}
 
-	PokiSDK.gameLoadingFinished = function(){}
+	PokiSDK.gameplayStop = function () {
+		return new Promise(function (resolve, reject) {
+			resolve("Success!");
+		});
+	}
+
+	PokiSDK.commercialBreak = function () {
+		return new Promise(function (resolve, reject) {
+			resolve("Success!");
+		});
+	}
+
+	PokiSDK.rewardedBreak = function () {
+		return new Promise(function (resolve, reject) {
+			resolve("Success!");
+		});
+	}
+
+	PokiSDK.setDebug = function () {
+
+	}
+	PokiSDK.gameLoadingStart = function () {
+
+	}
+
+	PokiSDK.gameLoadingFinished = function () { }
 }
 
 PokiSDK.init().then(
@@ -1182,9 +1191,9 @@ function onBackKeyDown() {
 }
 
 window.addEventListener('keydown', ev => {
-    if (['ArrowDown', 'ArrowUp', ' '].includes(ev.key)) {
-        ev.preventDefault();
-    }
+	if (['ArrowDown', 'ArrowUp', ' '].includes(ev.key)) {
+		ev.preventDefault();
+	}
 });
 window.addEventListener('wheel', ev => ev.preventDefault(), { passive: false });
 

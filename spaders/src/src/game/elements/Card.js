@@ -695,8 +695,7 @@ export default class Card extends PIXI.Container {
 
 		this.letterData = letterData;
 
-		this.countdowLabel.style = {align:"center", font: '20px', fontWeight: '800', fill: 0xFFFFFF,stroke: 0x000000,
-		strokeThickness: 6, fontFamily: window.STANDARD_FONT1 }
+		this.countdowLabel.style = window.textStyles.letterStandard
 
 		this.countdowLabel.text = letterData.key.toUpperCase();
 		// this.idleAnimationLayer1 = [];

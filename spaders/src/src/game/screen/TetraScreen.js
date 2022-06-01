@@ -368,7 +368,9 @@ export default class TetraScreen extends Screen {
 
 		if (this.currentCard) {
 			this.currentCard.setZeroLife();
+			this.applyFinalState();
 		}
+
 		this.cardQueue.forEach(element => {
 
 			element.setZeroLife();
@@ -672,7 +674,7 @@ export default class TetraScreen extends Screen {
 		this.bottomUINewContainer.addChild(this.movesRect)
 
 
-		let sizeBar = { width: config.width, height: 50 }
+		let sizeBar = { width: config.width, height: 30 }
 
 		this.chargeBombBar = new ProgressBar(sizeBar, 16);
 		this.chargeBombBar.currentChargeValue = 0;
@@ -877,24 +879,25 @@ export default class TetraScreen extends Screen {
 
 		this.scoreRect.y = this.bottomUICanvas.height * 0.5
 		this.chargeBombBar.y = this.scoreRect.y - this.bottomUICanvas.height * 0.025 - this.scoreRect.height * 0.1//+ this.scoreRect.height / 2 - this.chargeBombBar.height * 0.12
-
-
+		
+		
 		this.useBomb.scale.set(this.chargeBombBar.height / this.useBomb.height * 1.9 * this.useBomb.scale.y);
-
+		
 		this.chargeBombBar.x = this.bottomUICanvas.width / 2 - (this.chargeBombBar.width + this.useBomb.width + 5) / 2
 		this.scoreRect.x = this.chargeBombBar.x + 10;
-
+		
 		//this.useBomb.scale.set((this.bottomUICanvas.width - 40) * 0.15 / this.useBomb.width * this.useBomb.scale.x);
 		this.useBomb.visible = true;
-
+		
 		this.useBomb.x = this.chargeBombBar.x + this.chargeBombBar.width + this.useBomb.width / 2 + 5
 		this.useBomb.y = this.chargeBombBar.y - this.useBomb.height / 2 + this.chargeBombBar.height
-
+		
 		this.timerRect.x = this.useBomb.x - this.timerRect.width - this.useBomb.width / 2
 		this.timerRect.y = this.useBomb.y - this.timerRect.height - 5
+		this.scoreRect.y = this.timerRect.y
 
-		this.movesRect.x = this.chargeBombBar.x;
-		this.movesRect.y = this.timerRect.y
+		this.movesRect.x = this.chargeBombBar.x + 8;
+		this.movesRect.y = this.scoreRect.y - this.scoreRect.height
 
 		// this.movesRect.x = this.useBomb.x //- this.useBomb.width * 0.5
 		// this.movesRect.y = this.useBomb.y - 40
@@ -1607,6 +1610,7 @@ export default class TetraScreen extends Screen {
 			this.currentLevelData.addOnDirty = true;
 		}
 
+		let cardsCound = 0;
 		for (var i = 0; i < this.currentLevelData.pieces.length; i++) {
 			for (var j = 0; j < this.currentLevelData.pieces[i].length; j++) {
 				if (this.currentLevelData.pieces[i][j] >= 0) {
@@ -1632,13 +1636,13 @@ export default class TetraScreen extends Screen {
 						} else {
 							let card = this.placeCard(j, i, ENEMIES.list[this.currentLevelData.pieces[i][j]], customData, this.currentLevelData.pieces[i][j])
 							this.cardsContainer.addChild(card);
-
+							cardsCound++;
 							if (this.currentLevelData.gameMode == 0) {
 								this.grid.paintTile(card)
 							}
 							if(this.currentLevelData.gameMode == 10){
 								card.removeActionZones();
-								card.addLetter(window.scrabbleManager.getRandomLetter(1.5));
+								card.addLetter(window.scrabbleManager.getRandomLetter(cardsCound > 10 ? 0 : 1.5));
 								this.grid.paintTile(card)
 								
 							}
@@ -1822,9 +1826,12 @@ export default class TetraScreen extends Screen {
 			this.containerQueue.addChild(card);
 			this.cardQueue.push(card);
 			card.setOnQueue();
-
 			if(this.currentLevelData.gameMode == 10){
-				card.removeActionZones();
+				if(this.isFinalState){
+					card.isBomb = true;
+				}else{
+					card.removeActionZones();
+				}
 				card.addLetter(window.scrabbleManager.getRandomLetter());
 			}
 		}
@@ -1870,7 +1877,6 @@ export default class TetraScreen extends Screen {
 		}, 750);
 	}
 	OnStartNextRound(card, first = false) {
-		console.log("NEXT")
 		if (!this.gameRunning) {
 			return;
 		}
@@ -1940,6 +1946,13 @@ export default class TetraScreen extends Screen {
 			}
 		}
 	}
+	applyFinalState(){
+		if(this.currentLevelData.gameMode == 10){
+			if(this.isFinalState){
+				this.currentCard.isBomb = true;
+			}
+		}
+	}
 	getNextPieceRound(first = false) {
 		if (!this.gameRunning) {
 			return;
@@ -1954,6 +1967,10 @@ export default class TetraScreen extends Screen {
 		this.blockGameTimer = 0.2;
 		this.updateQueue();
 		this.currentCard = this.cardQueue[0];
+
+		this.applyFinalState();
+
+
 		this.cardQueue.shift();
 		this.mousePosID = this.latestShoot.id
 		this.currentCard.x = this.latestShoot.x
@@ -2170,6 +2187,9 @@ export default class TetraScreen extends Screen {
 			return;
 		}
 
+		if(window.scrabbleManager){
+			window.scrabbleManager.update(delta);
+		}
 		this.popLabel.visible = true;
 
 		let targetBar = Math.min(1, this.chargeBombBar.currentChargeValue / this.chargeBombBar.maxValue)
@@ -2699,7 +2719,14 @@ export default class TetraScreen extends Screen {
 
 
 		utils.scaleSize(this.gameCanvas, innerResolution, this.ratio)
-		utils.resizeToFitAR({ width: this.gameCanvas.width * 0.95, height: this.gameCanvas.height * 0.735 }, this.gridContainer)
+
+		if(this.currentLevelData.gameMode == 10){
+
+			utils.resizeToFitAR({ width: this.gameCanvas.width * 0.95, height: this.gameCanvas.height * 0.5 }, this.gridContainer)
+		}else{
+
+			utils.resizeToFitAR({ width: this.gameCanvas.width * 0.95, height: this.gameCanvas.height * 0.735 }, this.gridContainer)
+		}
 
 		if (this.gridContainer.scale.x > 1) {
 			this.gridContainer.scale.set(1)
@@ -2722,12 +2749,16 @@ export default class TetraScreen extends Screen {
 		this.background.x = innerResolution.width / 2 + offset.x//* window.appScale.x// (innerResolution.width / 2 * window.appScale.x)
 		this.background.y = innerResolution.height / 2 + offset.y// * window.appScale.y
 
-
 		this.gridContainer.x = this.gameCanvas.x + this.gameCanvas.width / 2 - (this.gridContainer.width) / 2 + this.grid.backgroundOffset.x / 4
-		this.gridContainer.y = this.gameCanvas.y + this.gameCanvas.height / 2 - this.gridContainer.height / 2 - this.topCanvas.height * 2//+ this.grid.backgroundOffset.y / 2
+		if(window.isMobile && this.currentLevelData.gameMode == 10){
+			this.gridContainer.y =this.gameCanvas.y + this.gameCanvas.height / 2 - this.gridContainer.height / 2 - this.topCanvas.height * 2 + CARD.height// this.gameCanvas.y + this.gameCanvas.height / 2 - this.gridContainer.height / 2 - this.topCanvas.height * 2//+ this.grid.backgroundOffset.y / 2
+		}else{
+
+			this.gridContainer.y = this.gameCanvas.y + this.gameCanvas.height / 2 - this.gridContainer.height / 2 - this.topCanvas.height * 2//+ this.grid.backgroundOffset.y / 2
+		}
+		this.gridContainer.y = Math.max(this.gameCanvas.y + this.topCanvas.height * 0.5, this.gridContainer.y)
 		//utils.centerObject(this.gridContainer, this.gameCanvas)
 
-		this.gridContainer.y = Math.max(this.gameCanvas.y + this.topCanvas.height * 0.5, this.gridContainer.y)
 
 		this.cardsContainer.x = this.gridContainer.x;
 		this.cardsContainer.y = this.gridContainer.y;
