@@ -78,7 +78,7 @@ window.LOGO_FONT = "round_popregular"
 //retro_gamingregular
 //pixellarimedium
 //early_gameboyregular
-window.STANDARD_FONT1 = "pixolletta8pxmedium"
+window.STANDARD_FONT1 = "early_gameboyregular"
 window.STANDARD_FONT2 = "round_popregular"
 window.COOKIE_MANAGER = new CookieManager();
 window.GAME_DATA = new GameData();
@@ -314,7 +314,7 @@ window.textStyles = {
 	},
 	letterStandard: {
 		align: "center",
-		font: '20px',
+		font: '18px',
 		fontWeight: '800',
 		fill: 0xFFFFFF,
 		stroke: 0x000000,

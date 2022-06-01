@@ -136,7 +136,7 @@ export default class Card extends PIXI.Container {
 		this.enemySprite.setTexture(PIXI.Texture.fromFrame(this.idleAnimationLayer1[this.currentFrame]));
 		this.enemySpriteWhite.setTexture(PIXI.Texture.fromFrame(this.idleAnimationLayer2[this.currentFrame]));
 
-		if (this.isCountdown) {
+		if (this.isCountdown || this.isLetter) {
 			if (this.currentFrame == 1 || this.currentFrame == 2) {
 
 				this.countdowLabel.y = CARD.height / 2 - CARD.height * 0.06;
@@ -369,6 +369,7 @@ export default class Card extends PIXI.Container {
 		this.removeAllStates();
 
 		this.scaleRef = 0.7
+		this.realSpriteWidth = 72 * 2;
 
 
 		this.removeCrazyMood();
@@ -690,14 +691,18 @@ export default class Card extends PIXI.Container {
 		});
 	}
 	addLetter(letterData) {
+
 		this.isLetter = true;
-		this.life = letterData.points;
+		this.life = letterData.points - 1;
 
 		this.letterData = letterData;
 
 		this.countdowLabel.style = window.textStyles.letterStandard
 
 		this.countdowLabel.text = letterData.key.toUpperCase();
+
+		//this.realSpriteWidth = 72 * 4;
+		//this.scaleRef = 0.8
 		// this.idleAnimationLayer1 = [];
 		// this.idleAnimationLayer2 = [];
 		// for (let index = 1; index <= 5; index++) {

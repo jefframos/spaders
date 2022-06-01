@@ -176,6 +176,7 @@ export default class Grid extends PIXI.Container {
 					gridSquare.x = i * CARD.width;
 					gridSquare.y = j * CARD.height;
 	
+					gridSquare.tint = colorScheme.border ? colorScheme.border: 0xFFFFFF
 					gridBackground.addChild(gridSquare)
 					if (levelData && (levelData.pieces[j][i] == 32)) {
 						//gridSquare.alpha = 0;

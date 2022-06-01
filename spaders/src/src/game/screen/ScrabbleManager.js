@@ -130,7 +130,7 @@ export default class ScrabbleManager {
                         x: cardGlobal.x,
                         y: cardGlobal.y + CARD.height
                     }
-                    board.addStandardAttackParticles2(hitOffset, positions.originalCardPoints);
+                    board.addStandardAttackParticles2(hitOffset, positions.originalCardPoints, 2);
                     if(card){
                         setTimeout(() => {
                             
@@ -165,6 +165,15 @@ export default class ScrabbleManager {
 
     angleLerp(a0, a1, t) {
         return a0 + this.shortAngleDist(a0, a1) * t;
+    }
+    destroyAllWords(){
+        while (this.currentWords.length) {
+            this.currentWords[0].labels.forEach(element => {
+                element.parent.removeChild(element);
+                window.LABEL_POOL.push(element);
+            });
+            this.currentWords.shift()
+        }
     }
     update(delta) {
         let speed = 450;

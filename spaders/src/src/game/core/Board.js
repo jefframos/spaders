@@ -29,38 +29,38 @@ export default class Board {
 
 		this.chainExplosionTime = 300;
 
-		this.explosionAreaChain=[];
+		this.explosionAreaChain = [];
 
 	}
-	bossParticle(card, delta){
-		if(!card.particleTimer){
+	bossParticle(card, delta) {
+		if (!card.particleTimer) {
 			card.particleTimer = 2;
-//			card.particleTimer2 = 2;
+			//			card.particleTimer2 = 2;
 		}
 
 		card.particleTimer -= delta;
-//		card.particleTimer2 -= delta;
+		//		card.particleTimer2 -= delta;
 		// if(card.particleTimer2 <= 0){
 		// 	card.particleTimer2 = 2.5;
 
 		// 	this.popCircle2(card.toGlobal({x:card.width/2, y:card.height/2}), card.currentColor);
 		// }
-		if(card.particleTimer <= 0){
+		if (card.particleTimer <= 0) {
 			card.particleTimer = 0.3;
 
-			let targetPos = card.enemySprite.toGlobal({x:card.enemySprite.width* Math.random() - card.enemySprite.width / 2, y:-card.enemySprite.height * 2})
+			let targetPos = card.enemySprite.toGlobal({ x: card.enemySprite.width * Math.random() - card.enemySprite.width / 2, y: -card.enemySprite.height * 2 })
 
 
 			this.game.fxContainer.addParticlesToScoreGravity(
-						1,
-						this.game.fxContainer.toLocal(targetPos),
-						null,
-						card.currentColor,
-						0,
-						-1.5 + 1 * Math.random(),
-						5 + 3 * Math.random(),
-						0.2 + 0.5 * Math.random()
-					)
+				1,
+				this.game.fxContainer.toLocal(targetPos),
+				null,
+				card.currentColor,
+				0,
+				-1.5 + 1 * Math.random(),
+				5 + 3 * Math.random(),
+				0.2 + 0.5 * Math.random()
+			)
 		}
 	}
 	update(delta) {
@@ -69,7 +69,7 @@ export default class Board {
 				if (this.cards[i][j] && this.cards[i][j].update) {
 					this.cards[i][j].update(delta);
 
-					if(this.cards[i][j].endGameIfDie){
+					if (this.cards[i][j].endGameIfDie) {
 						this.bossParticle(this.cards[i][j], delta)
 					}
 				}
@@ -89,8 +89,8 @@ export default class Board {
 	startNewGame() {
 		this.updateNumberOfEntities();
 		this.newGameFinished = false;
-		this.explosionAreaChain=[];
-		this.explosionChain=[];
+		this.explosionAreaChain = [];
+		this.explosionChain = [];
 
 	}
 	postProcessAddons() {
@@ -189,7 +189,33 @@ export default class Board {
 		this.isFinalState = false;
 		this.updateNumberOfEntities()
 	}
+	stickAllToTop() {
+		let movers = 0;		
+		for (var i = 0; i < this.allCards.length; i++) {
+			if (this.allCards[i] && this.allCards[i].startCrazyMood) {
+				if (this.allCards[i]) {
+					let card = this.allCards[i];
+					if (card.pos.j > 0) {
+						for (let totalMoves = card.pos.j; totalMoves >= 0; totalMoves--) {
+							if (!this.cards[card.pos.i][card.pos.j - totalMoves]) {
+								this.cards[card.pos.i][card.pos.j] = 0;
+								card.pos.j -= totalMoves;
+								this.addCard(card);
+								card.move({
+									x: card.pos.i * CARD.width,
+									y: card.pos.j * CARD.height
+								}, 0.05 * movers + 0.2);
+								movers++;
+								break;
+							}
+						}
+					}
 
+				}
+			}
+		}
+		return movers
+	}
 	setFinalState() {
 		////console.log("FINAL STATE")
 		//utils.shuffle(this.allCards);
@@ -242,7 +268,7 @@ export default class Board {
 			return self.indexOf(item) == pos;
 		})
 	}
-	getLastCardOnLane(laneID){
+	getLastCardOnLane(laneID) {
 		return this.cards[laneID][this.cards[laneID].length - 1]
 	}
 	isPossibleShot(laneID) {
@@ -675,7 +701,7 @@ export default class Board {
 
 						this.addStandardAttackParticles(cardFound, arrowGlobal, id);
 						//window.EFFECTS.addShockwave(screenPos.x, screenPos.y, 2);
-						
+
 
 					}
 				}.bind(this),
@@ -793,8 +819,8 @@ export default class Board {
 
 
 	}
-	addStandardAttackParticles2(arrowGlobal, id){
-		this.game.addPoints(10 * id);
+	addStandardAttackParticles2(arrowGlobal, id, multipply) {
+		this.game.addPoints(10 * id * multipply);
 		window.SOUND_MANAGER.play('pop', { speed: Math.random() * 0.075 + 0.925 + 0.2 * id })
 		//normal attack
 		this.game.fxContainer.addParticlesToScore(
@@ -809,7 +835,7 @@ export default class Board {
 		}
 		this.popLabel(this.game.toLocal(hitOffset), "+" + 10 * id, 0, 1, 0.5 + id * 0.2, window.textStyles.normalAttack);
 	}
-	addStandardAttackParticles(cardFound, arrowGlobal, id){
+	addStandardAttackParticles(cardFound, arrowGlobal, id) {
 		this.game.addPoints(10 * id);
 		window.SOUND_MANAGER.play('pop', { speed: Math.random() * 0.075 + 0.925 + 0.2 * id })
 		//normal attack
@@ -922,6 +948,8 @@ export default class Board {
 		tempLabel.pivot.y = tempLabel.height / 2;
 		tempLabel.alpha = 0;
 		tempLabel.scale.set(0);
+
+		scale = Math.min(scale, 3)
 		TweenMax.to(tempLabel.scale, 0.5, { delay: delay, x: scale, y: scale, ease: ease })
 		TweenMax.to(tempLabel, 1, {
 			delay: delay, y: tempLabel.y - 50 * dir, onStartParams: [tempLabel], onStart: function (temp) {
@@ -1130,7 +1158,7 @@ export default class Board {
 		byCol.forEach(colList => {
 			let blocker = false;
 			colList.forEach(element => {
-				if(blocker || element.hasAnyBlocker()){
+				if (blocker || element.hasAnyBlocker()) {
 					blocker = true;
 					toRemove.push(element)
 				}
@@ -1153,10 +1181,10 @@ export default class Board {
 		})
 
 		for (var i = moveDownList.length - 1; i >= 0; i--) {
-			if(i == 0){
+			if (i == 0) {
 
 				this.moveCardDown(moveDownList[i], 0.25, Back.easeIn);
-			}else{
+			} else {
 
 				this.moveCardDown(moveDownList[i], (i / moveDownList.length) * 0.25 + 0.35, Back.easeOut);
 			}
