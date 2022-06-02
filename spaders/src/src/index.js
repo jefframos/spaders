@@ -711,8 +711,12 @@ function extractData(element, debug) {
 		if (!element.isAddon && (data.setAutoBlocker > 0 || data.setAutoBlocker < 0)) {
 			//if(debug)
 			// console.log("AddBlocker",data.colorPalletId)
-			data.setAutoBlocker = Math.max(0, data.setAutoBlocker)
-			utils.addBlockers(data.pieces, data.setAutoBlocker, data.colorPalletId)
+			//data.setAutoBlocker = Math.max(0, data.setAutoBlocker)
+			if (data.setAutoBlocker < 0) {
+				utils.addBlockersStick(data.pieces, data.setAutoBlocker, data.colorPalletId, data.setAutoBlocker < 0)
+			} else {
+				utils.addBlockers(data.pieces, data.setAutoBlocker, data.colorPalletId)
+			}
 		}
 
 		data.piecesToDraw = matrixCopy;

@@ -45,47 +45,47 @@ export default {
         }
     },
     uniq_fast(a) {
-		var seen = {};
-		var out = [];
-		var len = a.length;
-		var j = 0;
-		for(var i = 0; i < len; i++) {
-			 var item = a[i];
-			 if(seen[item] !== 1) {
-				   seen[item] = 1;
-				   out[j++] = item;
-			 }
-		}
-		return out;
-	},
-    flat3Arrays(array1, array2, array3){
+        var seen = {};
+        var out = [];
+        var len = a.length;
+        var j = 0;
+        for (var i = 0; i < len; i++) {
+            var item = a[i];
+            if (seen[item] !== 1) {
+                seen[item] = 1;
+                out[j++] = item;
+            }
+        }
+        return out;
+    },
+    flat3Arrays(array1, array2, array3) {
         var comb6 = array3.flatMap(t => array1.flatMap(d => array2.map(v => [t, d, v])))
-		comb6.forEach(element => {
-			element.sort()
-		});
-		comb6 = this.uniq_fast(comb6)
+        comb6.forEach(element => {
+            element.sort()
+        });
+        comb6 = this.uniq_fast(comb6)
 
-		for (let index = comb6.length - 1; index >= 0; index--) {
-			if (comb6[index][0] == comb6[index][1] || comb6[index][2] == comb6[index][1] || comb6[index][0] == comb6[index][2]) {
-				comb6.splice(index, 1)
-			}
-		}
+        for (let index = comb6.length - 1; index >= 0; index--) {
+            if (comb6[index][0] == comb6[index][1] || comb6[index][2] == comb6[index][1] || comb6[index][0] == comb6[index][2]) {
+                comb6.splice(index, 1)
+            }
+        }
 
         return comb6
 
     },
-    flat2Arrays(array1, array2){
+    flat2Arrays(array1, array2) {
         var comb6 = array1.flatMap(d => array2.map(v => [d, v]))
-		comb6.forEach(element => {
-			element.sort()
-		});
-		comb6 = this.uniq_fast(comb6)
+        comb6.forEach(element => {
+            element.sort()
+        });
+        comb6 = this.uniq_fast(comb6)
 
-		for (let index = comb6.length - 1; index >= 0; index--) {
-			if (comb6[index][0] == comb6[index][1] ) {
-				comb6.splice(index, 1)
-			}
-		}
+        for (let index = comb6.length - 1; index >= 0; index--) {
+            if (comb6[index][0] == comb6[index][1]) {
+                comb6.splice(index, 1)
+            }
+        }
 
         return comb6
 
@@ -107,9 +107,9 @@ export default {
                 const element = pieces[i][j];
                 if (element >= 0) {
                     //if (!ignoreBlocker || (ignoreBlocker && element != 19)) {
-                   // if (!ignoreBlocker) {
-                        lineCounters[j]++;
-                        colCounters[i]++;
+                    // if (!ignoreBlocker) {
+                    lineCounters[j]++;
+                    colCounters[i]++;
                     //}
                 }
             }
@@ -161,7 +161,7 @@ export default {
         }
 
 
-            return padding
+        return padding
         // console.log(lineCounters);
         // console.log(colCounters);
         // console.log(padding);
@@ -179,13 +179,13 @@ export default {
             return;
         }
         //console.log(pieces)
-        if(padding.left < 0){
+        if (padding.left < 0) {
             for (let i = 0; i < pieces.length; i++) {
                 for (let p = 0; p < Math.abs(padding.left); p++) {
                     pieces[i].shift();
                 }
             }
-        }else{
+        } else {
 
             for (let i = 0; i < pieces.length; i++) {
                 for (let p = 0; p < padding.left; p++) {
@@ -196,8 +196,8 @@ export default {
                 }
             }
         }
-        
-        if(padding.top < 0){
+
+        if (padding.top < 0) {
             for (let i = 0; i < Math.abs(padding.top); i++) {
                 let colCounters = [];
                 for (let index = 0; index < pieces[0].length; index++) {
@@ -311,6 +311,94 @@ export default {
         //console.log(scaledLevel)
         return scaledLevel;
     },
+    addBlockersStick(pieces, distance = 2, colorPallete = 0, debug = false) {
+        if (pieces.length <= 0) {
+            return;
+        }
+        let colorScheme = colorSchemes.getColorScheme(colorPallete);
+
+        let colCounters = [];
+        let lineCounters = [];
+        for (let i = 0; i < pieces.length; i++) {
+            colCounters.push(0);
+        }
+        for (let i = 0; i < pieces[0].length; i++) {
+            lineCounters.push(-1);
+        }
+
+        for (let i = 0; i < pieces.length; i++) {
+            for (let j = 0; j < pieces[i].length; j++) {
+                const element = pieces[i][j];
+                if (element > 0) {
+                    lineCounters[j] = i;
+                }
+            }
+        }
+        for (let i = 0; i < pieces.length; i++) {
+            let found = false;
+            for (let j = 0; j <= lineCounters[i]; j++) {
+
+                const element = pieces[j][i];
+
+                if (!found && element < 0) {
+                    lineCounters[i] = j
+                    found = true;
+                }
+            }
+
+            if (!found) {
+                lineCounters[i] = -1
+            }
+
+        }
+
+        let left = false
+        let right = false
+        for (let index = 0; index < lineCounters.length; index++) {
+            if (lineCounters[index] == -1) {
+                if (index < lineCounters.length / 2) {
+
+                    for (let j = 0; j < lineCounters.length; j++) {
+                        if (!left && lineCounters[j] >= 0) {
+                            lineCounters[index] = lineCounters[j];
+                            left = true
+                            break;
+                        }
+
+                    }
+                }
+            }
+        }
+
+        for (let index = lineCounters.length - 1; index >= 0; index--) {
+            if (lineCounters[index] == -1) {
+                if (index >= lineCounters.length / 2) {
+                    for (let j = lineCounters.length - 1; j >= 0; j--) {
+                        if (!right && lineCounters[j] >= 0) {
+                            lineCounters[index] = lineCounters[j];
+                            right = true
+                            break;
+                        }
+
+                    }
+                }
+            }
+        }
+
+        
+
+        for (let i = 0; i < pieces.length; i++) {
+            for (let j = 0; j < pieces[i].length; j++) {
+                const element = pieces[i][j];
+
+                if (i <= lineCounters[j]) {
+                    pieces[i][j] = colorScheme.block.id;
+                    //console.log(colorScheme.block.id)
+                }
+            }
+        }
+
+    },
     addBlockers(pieces, distance = 2, colorPallete = 0, debug = false) {
         if (pieces.length <= 0) {
             return;
@@ -389,29 +477,29 @@ export default {
         }
     },
     resizeToFitMaxAR(size, element, res) {
-		if (!res) {
-			res = element
-		}
-		let sclX = (size.width) / (res.width / res.scale.x);
-		let sclY = (size.height) / (res.height / res.scale.y);
-		let min = Math.max(sclX, sclY);
-		element.scale.set(min)
-	},
+        if (!res) {
+            res = element
+        }
+        let sclX = (size.width) / (res.width / res.scale.x);
+        let sclY = (size.height) / (res.height / res.scale.y);
+        let min = Math.max(sclX, sclY);
+        element.scale.set(min)
+    },
     resizeToFitAR(size, element, res) {
-		if (!res) {
-			res = element
-		}
-		let sclX = (size.width) / (res.width / res.scale.x);
-		let sclY = (size.height) / (res.height / res.scale.y);
-		let min = Math.min(sclX, sclY);
-		element.scale.set(min)
-	},
-	resizeToFit(size, element) {
-		let sclX = (size.width) / (element.width / element.scale.x);
-		let sclY = (size.height) / (element.height / element.scale.y);
-		let min = Math.min(sclX, sclY);
-		element.scale.set(sclX, sclY)
-	},
+        if (!res) {
+            res = element
+        }
+        let sclX = (size.width) / (res.width / res.scale.x);
+        let sclY = (size.height) / (res.height / res.scale.y);
+        let min = Math.min(sclX, sclY);
+        element.scale.set(min)
+    },
+    resizeToFit(size, element) {
+        let sclX = (size.width) / (element.width / element.scale.x);
+        let sclY = (size.height) / (element.height / element.scale.y);
+        let min = Math.min(sclX, sclY);
+        element.scale.set(sclX, sclY)
+    },
     formatPointsLabel(tempPoints) {
         if (tempPoints < 10) {
             return "00000" + tempPoints

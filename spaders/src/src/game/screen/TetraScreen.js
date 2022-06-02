@@ -768,17 +768,17 @@ export default class TetraScreen extends Screen {
 		nuke.x = -36
 		nuke.y = -46
 		this.useBomb.onClick.add(() => {
-			if(this.currentLevelData.gameMode == 10){
+			if (this.currentLevelData.gameMode == 10) {
 				this.onDestroyAllStartedCards();
 				this.board.setFinalState();
-			}else{
-				this.replaceForBomb() 
+			} else {
+				this.replaceForBomb()
 			}
 		});
 		this.useBomb.updateRotation(0);
 		this.useBomb.addFrontShape()
 		this.endGameScreenContainer.hide(true);
-		
+
 		this.shuffleButton = new UIButton1(config.colors.white, "fire-96x96-1408702.png", config.colors.white);
 		this.shuffleButton.resize(100, 100)
 		this.bottomUINewContainer.addChild(this.shuffleButton)
@@ -1359,7 +1359,9 @@ export default class TetraScreen extends Screen {
 	}
 	shuffleAllLetters() {
 		this.board.allCards.forEach(element => {
-			element.addLetter(window.scrabbleManager.getRandomLetter());
+			if (element.addLetter) {
+				element.addLetter(window.scrabbleManager.getRandomLetter());
+			}
 		});
 	}
 	replaceForBomb() {
@@ -1666,7 +1668,15 @@ export default class TetraScreen extends Screen {
 							}
 							if (this.currentLevelData.gameMode == 10) {
 								card.removeActionZones();
-								card.addLetter(window.scrabbleManager.getRandomLetter(cardsCound > 10 ? 0 : 1.5));
+
+								if (cardsCound % 2 == 0) {
+
+									card.addLetter(window.scrabbleManager.getVowel(cardsCound > 10 ? 0 : 1.5));
+								} else {
+
+									card.addLetter(window.scrabbleManager.getConsonant(cardsCound > 10 ? 0 : 1.5));
+								}
+								//	card.addLetter(window.scrabbleManager.getRandomLetter(cardsCound > 10 ? 0 : 1.5));
 								//this.grid.paintTile(card)
 
 							}
