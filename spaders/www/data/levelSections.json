@@ -83,7 +83,7 @@
         },
         {
             "color": "0xDDDDDD",
-            "ignore": true,
+            "ignore": false,
             "name": "Video Games",
             "displayName": "Video Game History",
             "tilemapPath": "worldMaps/world1.json",
@@ -108,12 +108,12 @@
         },
         {
             "color": "0xDDDDDD",
-            "ignore": true,
+            "ignore": false,
             "name": "Movies",
             "displayName": "Video Game History",
             "tilemapPath": "worldMaps/world1.json",
             "imageSrc": "",
-            "colorPalletId": 0,
+            "colorPalletId": "monalisa",
             "levels": [
                 {
                     "name": "2nd gen",
@@ -133,7 +133,7 @@
         },
         {
             "color": "0xDDDDDD",
-            "ignore": true,
+            "ignore": false,
             "name": "Pokemon",
             "displayName": "Video Game History",
             "tilemapPath": "worldMaps/world1.json",
@@ -165,7 +165,7 @@
         },
         {
             "color": "0xDDDDDD",
-            "ignore": true,
+            "ignore": false,
             "name": "Synthwave",
             "displayName": "Video Game History",
             "tilemapPath": "worldMaps/worldSynth.json",
@@ -197,7 +197,7 @@
         },
         {
             "color": "0xDDDDDD",
-            "ignore": true,
+            "ignore": false,
             "name": "Game Boy",
             "displayName": "Video Game History",
             "tilemapPath": "worldMaps/world1.json",

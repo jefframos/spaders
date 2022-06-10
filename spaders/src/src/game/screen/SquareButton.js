@@ -12,10 +12,10 @@ export default class SquareButton extends PIXI.Container {
 
         this.unscaledCardSize = unscaledCardSize;
         this.isPlanet = isPlanet;
-        
+
         this.buildBase();
     }
-    buildBase(){
+    buildBase() {
         this.container = new PIXI.Container();
         if (!this.isPlanet) {
             this.squareButtonBackShape = new PIXI.mesh.NineSlicePlane(
@@ -37,7 +37,7 @@ export default class SquareButton extends PIXI.Container {
             this.squareButtonBackShape = new PIXI.Sprite.fromFrame('l0_planet_2_1.png')
 
             this.squareButtonShape.sin = Math.random() * Math.PI * 2;
-           
+
             //this.squareButtonShape.scale.set(this.unscaledCardSize.width / this.squareButtonShape.width)
             //this.squareButtonBackShape.scale.set(this.unscaledCardSize.width / this.squareButtonBackShape.width)
             this.squareButtonBackShape.alpha = 0;
@@ -66,10 +66,10 @@ export default class SquareButton extends PIXI.Container {
             // strokeThickness: 12
         });
 
-        if(this.isPlanet){
+        if (this.isPlanet) {
 
             this.squareButtonBackShape.y = this.unscaledCardSize.height * 0.025
-        }else{
+        } else {
 
             this.squareButtonBackShape.y = this.unscaledCardSize.height * 0.075
         }
@@ -77,6 +77,8 @@ export default class SquareButton extends PIXI.Container {
         this.container.addChild(this.squareButtonBackShape)
         //this.container.addChild(this.innerBorder)
         this.container.addChild(this.squareButtonShape)
+        this.labelsContainer = new PIXI.Container();
+        //this.container.addChild(this.labelsContainer)
 
 
         this.addChild(this.container);
@@ -94,19 +96,19 @@ export default class SquareButton extends PIXI.Container {
         this.progressBar.x = this.unscaledCardSize.width / 2 - sizeBar.width / 2
         this.progressBar.y = this.unscaledCardSize.height - sizeBar.height * 1.5
         //this.updateLabel("round_ar rlar")
-        this.squareButtonShape.addChild(this.progressBar)
+        this.labelsContainer.addChild(this.progressBar)
 
         this.currentState = 0;
-        this.squareButtonShape.addChild(this.label)
+        this.labelsContainer.addChild(this.label)
 
         this.backTop = new PIXI.mesh.NineSlicePlane(
             PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
         this.backTop.width = 20;
         this.backTop.height = 20;
-        this.squareButtonShape.addChild(this.backTop)
+        this.labelsContainer.addChild(this.backTop)
         this.backTop.tint = 0;
         this.backTop.alpha = 0.25
-        this.squareButtonShape.addChild(this.labelTop)
+        this.labelsContainer.addChild(this.labelTop)
 
 
         window.COOKIE_MANAGER.onChangeColors.add(() => {
@@ -151,9 +153,9 @@ export default class SquareButton extends PIXI.Container {
     onPointerOver() {
         TweenMax.killTweensOf(this.squareButtonShape)
 
-        if(this.isPlanet){
+        if (this.isPlanet) {
             TweenMax.to(this.squareButtonShape, 0.6, { y: this.unscaledCardSize.height * 0.015, ease: Elastic.easeOut })
-        }else{
+        } else {
 
             TweenMax.to(this.squareButtonShape, 0.2, { y: this.unscaledCardSize.height * 0.075, ease: Back.easeOut })
         }
@@ -214,16 +216,19 @@ export default class SquareButton extends PIXI.Container {
                 height: this.squareButtonBackShape.height * 0.1
             }, this.labelTop)
 
-            let marginBack = this.labelTop.height * 0.2
+        let marginBack = this.labelTop.height * 0.2
 
-            if(index % 2 == 0){
+        if (index % 2 == 0) {
 
-                this.labelTop.x = this.squareButtonBackShape.width * 1.25
-            }else{
-                this.labelTop.x = -this.squareButtonBackShape.width * 0.25//this.unscaledCardSize.width * 1.25
-                this.squareButtonShape.x = this.squareButtonBackShape.width * 0.5
-            }
-        this.labelTop.y = this.labelTop.height//this.squareButtonShape.height / 2 - this.labelTop.height
+            this.labelTop.x = this.squareButtonBackShape.width * 1.25
+        } else {
+            this.labelTop.x = -this.squareButtonBackShape.width * 0.25//this.unscaledCardSize.width * 1.25
+            this.squareButtonShape.x = this.squareButtonBackShape.width * 0.5
+        }
+
+        this.labelsContainer.x = this.squareButtonShape.x
+
+        this.labelTop.y = this.labelTop.height + 50//this.squareButtonShape.height / 2 - this.labelTop.height
         this.backTop.height = this.labelTop.height + marginBack
         this.backTop.width = this.squareButtonBackShape.width - 40
         this.backTop.x = this.labelTop.x - this.backTop.width / 2
@@ -301,12 +306,12 @@ export default class SquareButton extends PIXI.Container {
         this.backTop.y = this.labelTop.y - marginBack * 0.5
 
     }
-    update(delta){
+    update(delta) {
 
-        if(!delta){
-            delta = 1/60
+        if (!delta) {
+            delta = 1 / 60
         }
-        if(this.isPlanet){
+        if (this.isPlanet) {
 
             this.squareButtonShape.sin += delta * 0.5;
             this.squareButtonShape.sin %= Math.PI * 2
@@ -318,18 +323,18 @@ export default class SquareButton extends PIXI.Container {
             this.pallet.parent.removeChild(this.pallet);
         }
 
-        if(this.isPlanet){
+        if (this.isPlanet) {
             //console.log(colorList.list)
-            
+
             this.squareButtonShape.updateColors(colorList)
-            
-            if(colorList.planetID){
+
+            if (colorList.planetID) {
                 this.squareButtonShape.updateMapTextures(colorList.planetID);
-            }else{
+            } else {
                 this.squareButtonShape.updateMapTextures(0);
             }
-          
-            
+
+
             return;
         }
         this.pallet = colors;

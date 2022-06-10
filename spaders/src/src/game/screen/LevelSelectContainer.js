@@ -11,6 +11,7 @@ import VerticalNavBar from './VerticalNavBar';
 import LargeImageButton from './LargeImageButton';
 import TierWorldButton from './TierWorldButton';
 import TierMap from './TierMap';
+import TileRope from './TileRope';
 
 
 export default class LevelSelectContainer extends PIXI.Container {
@@ -135,6 +136,15 @@ export default class LevelSelectContainer extends PIXI.Container {
             window.onSpacePressed.add(() => {
                 this.sortPressSpace()
             })
+
+
+
+            this.test = new PIXI.Graphics();
+
+
+
+            this.addChild(this.test)
+
         }, 100);
 
         this.sectionsContainer.x = 0;
@@ -1269,6 +1279,8 @@ export default class LevelSelectContainer extends PIXI.Container {
     }
 
     drawPlanets(elements, margin, size, isVertical, lineOverride = 1) {
+
+        let drawPoints = []
         let maxPerLine = Math.floor((this.mainCanvas.width - this.currentGridOffset.x) / (size.width + margin * 2.5)) + 1
         if (isVertical) {
             maxPerLine = lineOverride;
@@ -1281,6 +1293,8 @@ export default class LevelSelectContainer extends PIXI.Container {
 
         let lines = []
 
+        let off1 = 0
+        let off2 = 0
         for (let index = 0; index < elements.length; index++) {
             const element = elements[index];
 
@@ -1289,11 +1303,33 @@ export default class LevelSelectContainer extends PIXI.Container {
             }
             let chunck = distance
             let adj = -(chunck * maxPerLine) / 2//0//(margin - fullWidth) * 0.5
-            element.x = (index % maxPerLine) * chunck + adj + chunck / 2 - element.width / 2 + this.currentGridOffset.x
-            element.y = 50 + index * size.height * 0.5
+            let dir = (index % maxPerLine) ? 1 : -1
+            if (dir == 1) {
+                off1++
+                off1 %= 2
+            } else {
+                off2++
+                off2 %= 2
+            }
+            element.x = (index % maxPerLine) * chunck + adj + chunck / 2 - element.width / 2 + this.currentGridOffset.x - 60 * off1 - dir * 10+10
+            element.y = 50 + index * size.height * 0.75
 
             lines.push(element.y + size.height)
+
+            drawPoints.push({ x: element.x + element.width / 2, y: element.y + element.height / 2 + element.squareButtonShape.y, index: drawPoints.length });
         }
+        elements[0].parent.addChildAt(this.test, 0)
+        this.test.clear()
+        this.test.lineStyle(2, 0xFFFFFF)
+        this.test.texture
+        this.test.moveTo(drawPoints[0].x, drawPoints[0].y)
+        //console.log(drawPoints)
+        for (let index = 1; index < drawPoints.length; index++) {
+            const element1 = drawPoints[index - 1];
+            const element2 = drawPoints[index];
+            this.test.bezierCurveTo(element1.x,element2.y,element2.x, element1.y,element2.x,element2.y)           
+        }
+
     }
 
     resize(innerResolution, force) {

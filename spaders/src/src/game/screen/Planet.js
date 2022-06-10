@@ -21,10 +21,21 @@ export default class Planet extends PIXI.Container {
 
     }
     updateColors(colorList){
-        this.planetSprite.tint = colorList.list[0].color;
+        let list = colorList.planetColors;
+
+        if(!list){
+            list = []
+            colorList.list.forEach(element => {
+                list.push(element.color);
+            });
+        }
+        this.planetSprite.tint = list[0];
         for (let index = 0; index < this.layers.length; index++) {
             const element = this.layers[index];
-            element.tint = colorList.list[index].color
+
+            let colorId = index;
+            colorId %= list.length
+            element.tint = list[colorId]
         }
     }
     updateMapTextures(id){

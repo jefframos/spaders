@@ -1243,7 +1243,7 @@ export default class TetraScreen extends Screen {
 		let debugThumb = window.COOKIE_MANAGER.debug.showAllThumbs;
 
 		if (debugThumb) {
-			this.debugLabel.visible = true;
+			this.debugLabel.visible = false
 			this.debugLabel.text = (
 				'Normal: ~' + utils.convertNumToTime(Math.ceil(window.allEstimate)) +
 				' Hard: ~' + utils.convertNumToTime(Math.ceil(window.allEstimateHard)) +

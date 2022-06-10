@@ -53,8 +53,13 @@ export default class StartScreenContainer extends PIXI.Container {
 		this.screenContainer.positionSpringX = new Spring();
 		this.screenContainer.positionSpringY = new Spring();
 		this.screenContainer.rotationSpring = new Spring();
-		this.screenContainer.rotationSpring.damp = 0.6
-		this.screenContainer.positionSpringY.damp = 0.7
+		this.screenContainer.rotationSpring.damp = 0.56
+		this.screenContainer.positionSpringY.damp = 0.57
+		this.screenContainer.positionSpringX.damp = 0.37
+
+		this.screenContainer.rotationSpring.springness = 0.1
+		this.screenContainer.positionSpringY.springness = 0.1
+		this.screenContainer.positionSpringX.springness = 0.1
 
 		this.screenContainer.addChild(this.stripsContainer);
 		let height = 35;
@@ -154,7 +159,7 @@ export default class StartScreenContainer extends PIXI.Container {
 			// stroke: 0xFFFFFF,
 			// strokeThickness: 4
 		});
-		this.playLine.addChild(this.playLabel);
+		//this.playLine.addChild(this.playLabel);
 		this.playLabel.y = this.playLine.height / 2 - 2
 
 		this.mainMenuButtons = [];
