@@ -110,7 +110,6 @@ export default class SquareButton extends PIXI.Container {
         this.backTop.alpha = 0.25
         this.labelsContainer.addChild(this.labelTop)
 
-
         window.COOKIE_MANAGER.onChangeColors.add(() => {
             this.updateColorScheme();
         })
