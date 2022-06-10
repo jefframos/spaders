@@ -124,6 +124,7 @@
             },
             "grid": {
                 "color": "0xFFFFFF",
+                "border": "0x3b3c2e",
                 "background": "0x3b3c2e",
                 "sprite": "tile_1_22.png",
                 "spriteTile": "tile_1_22.png",
@@ -131,8 +132,8 @@
                 "spriteTrail": "tile_1_22.png",
                 "spriteRect": "tile_1_22.png",
                 "scaleTrail": false,
-                "minAlpha": 0.05,
-                "maxAlpha": 0.1,
+                "minAlpha": 0.25,
+                "maxAlpha": 0.3,
                 "extraTileAlpha": 0.5
             },
             "backgroundAssets": {

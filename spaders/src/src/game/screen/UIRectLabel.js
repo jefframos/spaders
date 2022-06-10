@@ -90,6 +90,12 @@ export default class UIRectLabel extends PIXI.Container {
 		// this.backQueueShape.tint = colorScheme.background;
 		// this.backQueueShape.alpha = 0.75;
 	}
+	updateTextColor(fontColor) {
+		if (this.label) {
+			this.label.style.fill = fontColor;
+		}
+
+	}
 	updateColor(fontColor) {
 		if (this.label) {
 			this.label.style.fill = fontColor;

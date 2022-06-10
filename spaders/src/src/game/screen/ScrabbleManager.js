@@ -21,8 +21,38 @@ export default class ScrabbleManager {
 
         this.currentWords = [];
 
+        this.vowel = [];
+        this.consonant = []
+        this.letterByTotal.forEach(element => {
+            if (element.key == 'a' || element.key == 'e' || element.key == 'i' ||
+                element.key == 'o' || element.key == 'u') {
+                this.vowel.push(element)
+            } else {
+                this.consonant.push(element)
+            }
+        });
     }
-
+    getConsonant(easy = 0) {
+        let id = this.consonant.length * Math.random();
+        if (easy && id > this.consonant.length / easy) {
+            id = this.consonant.length * Math.random();
+        }
+        return this.consonant[Math.floor(id)];
+    }
+    getVowel(easy = 0) {
+        let id = this.vowel.length * Math.random();
+        if (easy && id > this.vowel.length / easy) {
+            id = this.vowel.length * Math.random();
+        }
+        return this.vowel[Math.floor(id)];
+    }
+    getRandomLetter(easy = 0) {
+        let id = this.letterByTotal.length * Math.random();
+        if (easy && id > this.letterByTotal.length / easy) {
+            id = this.letterByTotal.length * Math.random();
+        }
+        return this.letterByTotal[Math.floor(id)];
+    }
     popLetterCard(card, letter, delay, target, style) {
         let cardGlobal = card.getGlobalPosition({ x: 0, y: 0 });
         let hitOffset = {
@@ -30,7 +60,7 @@ export default class ScrabbleManager {
             y: cardGlobal.y
         }
         let label = this.popLabel(this.game.toLocal(hitOffset), letter.toUpperCase(), delay, 0.5, 1, style);
-        
+
         return label
     }
 
@@ -57,13 +87,7 @@ export default class ScrabbleManager {
         return tempLabel
     }
 
-    getRandomLetter(easy = 0) {
-        let id = this.letterByTotal.length * Math.random();
-        if (easy && id > this.letterByTotal.length / easy) {
-            id = this.letterByTotal.length * Math.random();
-        }
-        return this.letterByTotal[Math.floor(id)];
-    }
+
 
     findWords(board, cardPos) {
         this.game = board.game;
@@ -73,7 +97,7 @@ export default class ScrabbleManager {
             const element = board.cards[index];
             let tempLine = []
             for (let j = 0; j < element.length; j++) {
-                if (board.cards[index][j]) {
+                if (board.cards[index][j] && board.cards[index][j].letterData) {
                     tempLine.push(board.cards[index][j].letterData.key)
                 } else {
                     tempLine.push("")
@@ -103,14 +127,14 @@ export default class ScrabbleManager {
                     let label = this.popLetterCard(card, card.letterData.key, 0.5 + index * 0.2, target, window.textStyles.letterStandard);
 
                     label.scale.set(0)
-                    TweenMax.to(label.scale, 0.5, { x: 1.2, y: 1.2, delay:0.5 + index * 0.2, ease:Back.easeOut })
+                    TweenMax.to(label.scale, 0.5, { x: 1.2, y: 1.2, delay: 0.5 + index * 0.2, ease: Back.easeOut })
                     label.x = card.x + card.width * card.scale.x
-                    label.y = card.y + card.height* card.scale.x
+                    label.y = card.y + card.height * card.scale.x
                     label.velocity = { x: 0, y: 0 };
                     label.targetVelocity = { x: 0, y: -0.3 };
                     label.angle = Math.random() * 360;
                     label.startTimer = index * 0.1 + 0.5;
-                    label.delay = Math.random()*0.5 + 0.2;
+                    label.delay = Math.random() * 0.5 + 0.2;
                     wordLabel.labels.push(label);
                     wordLabel.targets.push({ x: hitOffset.x, y: hitOffset.y });
                     wordLabel.inverted = element.inverted;
@@ -125,15 +149,15 @@ export default class ScrabbleManager {
                 for (let index = 0; index < element.positions.length; index++) {
                     const positions = element.positions[index];
                     let card = board.cards[positions.i][positions.j]
-                    let cardGlobal = card? card.getGlobalPosition() : positions.originalGlobalCardPosition
+                    let cardGlobal = card ? card.getGlobalPosition() : positions.originalGlobalCardPosition
                     let hitOffset = {
                         x: cardGlobal.x,
                         y: cardGlobal.y + CARD.height
                     }
-                    board.addStandardAttackParticles2(hitOffset, positions.originalCardPoints);
-                    if(card){
+                    board.addStandardAttackParticles2(hitOffset, positions.originalCardPoints, 2);
+                    if (card) {
                         setTimeout(() => {
-                            
+
                             board.attackCard(card, 100);
                         }, 10);
                     }
@@ -142,7 +166,7 @@ export default class ScrabbleManager {
             });
         }, 400);
 
-        if(wordsFound.length > 0){
+        if (wordsFound.length > 0) {
             board.addTurnTime(1)
         }
 
@@ -165,6 +189,15 @@ export default class ScrabbleManager {
 
     angleLerp(a0, a1, t) {
         return a0 + this.shortAngleDist(a0, a1) * t;
+    }
+    destroyAllWords() {
+        while (this.currentWords.length) {
+            this.currentWords[0].labels.forEach(element => {
+                element.parent.removeChild(element);
+                window.LABEL_POOL.push(element);
+            });
+            this.currentWords.shift()
+        }
     }
     update(delta) {
         let speed = 450;
@@ -356,21 +389,36 @@ export default class ScrabbleManager {
         let verticalInvertData = { word: this.reverseString(vertical), positions: this.reverseArray(verticalArrayPos) }
 
         let findVertical1 = this.findWord(verticalData);
-        let findVertical2 = null;
-        if (!findVertical1) {
+        let findVertical2 = [];
+        if (!findVertical1.length) {
             findVertical1 = this.findWord(verticalInvertData);
         } else {
             findVertical2 = this.findWord(verticalInvertData);
         }
-        if (findVertical1 && findVertical2) {
-            if (findVertical1.length >= findVertical2.length) {
-                allwords.push(findVertical1);
+
+        if (findVertical1.length > 0 && findVertical2.length > 0) {
+            console.log(findVertical1, findVertical2)
+            if (findVertical1[0].word.length >= findVertical2[0].word.length) {
+                findVertical1.forEach(element => {
+                    allwords.push(element);
+                });
+                findVertical2.forEach(element => {
+                    element.inverted = true;
+                    allwords.push(element);
+                });
             } else {
-                findVertical2.inverted = true;
-                allwords.push(findVertical2);
+                findVertical1.forEach(element => {
+                    allwords.push(element);
+                });
+                findVertical2.forEach(element => {
+                    element.inverted = true;
+                    allwords.push(element);
+                });
             }
         } else if (findVertical1) {
-            allwords.push(findVertical1);
+            findVertical1.forEach(element => {
+                allwords.push(element);
+            });
         }
 
         let horizontalData = { word: horizontal, positions: horizontalArrayPos }
@@ -378,22 +426,39 @@ export default class ScrabbleManager {
 
 
         let findHorizontal1 = this.findWord(horizontalData);
-        let findHorizontal2 = null;
-        if (!findHorizontal1) {
+        let findHorizontal2 = [];
+        if (!findHorizontal1.length) {
             findHorizontal1 = this.findWord(horizontalInvertData);
         } else {
             findHorizontal2 = this.findWord(horizontalInvertData);
         }
-        if (findHorizontal1 && findHorizontal2) {
-            if (findHorizontal1.length >= findHorizontal2.length) {
-                allwords.push(findHorizontal1);
+        if (findHorizontal1.length > 0 && findHorizontal2.length > 0) {
+            console.log(findHorizontal1, findHorizontal2)
+            if (findHorizontal1[0].word.length >= findHorizontal2[0].word.length) {
+                findHorizontal1.forEach(element => {
+                    allwords.push(element);
+                });
+//adding both, whatever
+                findHorizontal2.forEach(element => {
+                    element.inverted = true;
+                    allwords.push(element);
+                });
+
             } else {
-                findHorizontal2.inverted = true;
-                allwords.push(findHorizontal2);
+                findHorizontal1.forEach(element => {
+                    allwords.push(element);
+                });
+                findHorizontal2.forEach(element => {
+                    element.inverted = true;
+                    allwords.push(element);
+                });
             }
-        } else if (findHorizontal1) {
-            allwords.push(findHorizontal1);
+        } else if (findHorizontal1.length) {
+            findHorizontal1.forEach(element => {
+                allwords.push(element);
+            });
         }
+
 
         //allwords.push({ word: vertical, positions: verticalArrayPos })
         //allwords.push({word:this.reverseString(vertical), positions:this.reverseArray(verticalArrayPos)})
@@ -410,21 +475,24 @@ export default class ScrabbleManager {
         //allwords.push({word:this.reverseString(cross2), positions:this.reverseArray(cross2ArrayPos)})
 
         // console.log(cardPos)
-        // console.log(allwords)
+        console.log(allwords)
         // let wordsFound = []
         allwords.forEach(word => {
             let addedAlready = false;
             for (let index = 0; index < word.positions.length; index++) {
                 const element = word.positions[index];
                 let card = this.board.cards[element.i][element.j]
-                word.positions[index].originalCardPosition = {x:card.x, y:card.y}
-                word.positions[index].originalGlobalCardPosition = card.getGlobalPosition({x:0, y:0});
+                word.positions[index].originalCardPosition = { x: card.x, y: card.y }
+                word.positions[index].originalGlobalCardPosition = card.getGlobalPosition({ x: 0, y: 0 });
                 word.positions[index].originalCardPoints = card.letterData.points
                 word.positions[index].originalCardKey = card.letterData.key
                 if (!addedAlready && element.i == cardPos.i && element.j == cardPos.j) {
                     wordsFound.push(word)
                     addedAlready = true;
                 }
+            }
+            if (!addedAlready) {
+                console.log('remove', word)
             }
         });
 
@@ -446,20 +514,37 @@ export default class ScrabbleManager {
         }
         return newArray;
     }
-
+    copyArray(array) {
+        var newArray = [];
+        for (var i = 0; i < array.length; i++) {
+            newArray.push(array[i]);
+        }
+        return newArray;
+    }
     findWord(testData) {
         let newWord = testData.word//.slice(0)
         let positions = testData.positions;
 
+        //console.log(newWord)
+
+        let words = []
+
         while (newWord.length > 2) {
             if (this.dictionary[newWord]) {
-                //console.log(newWord)
-                return { word: newWord, positions };
+                console.log(newWord)
+                words.push({ word: newWord.slice(0), positions: this.copyArray(positions) });
             }
 
             newWord = newWord.slice(0, newWord.length - 1)
             positions = positions.slice(0, positions.length - 1)
         }
-        return null;
+        console.log([words])
+
+        words.sort(function (a, b) { return a.positions.length - b.positions.length });
+
+        if(words.length > 0){
+            return [words[0]]
+        }
+        return words;
     }
 }
