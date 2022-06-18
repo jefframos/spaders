@@ -83,7 +83,7 @@
         },
         {
             "color": "0xDDDDDD",
-            "ignore": false,
+            "ignore": true,
             "name": "Video Games",
             "displayName": "Video Game History",
             "tilemapPath": "worldMaps/world1.json",
@@ -108,7 +108,7 @@
         },
         {
             "color": "0xDDDDDD",
-            "ignore": false,
+            "ignore": true,
             "name": "Movies",
             "displayName": "Video Game History",
             "tilemapPath": "worldMaps/world1.json",
@@ -133,7 +133,7 @@
         },
         {
             "color": "0xDDDDDD",
-            "ignore": false,
+            "ignore": true,
             "name": "Pokemon",
             "displayName": "Video Game History",
             "tilemapPath": "worldMaps/world1.json",
@@ -165,7 +165,7 @@
         },
         {
             "color": "0xDDDDDD",
-            "ignore": false,
+            "ignore": true,
             "name": "Synthwave",
             "displayName": "Video Game History",
             "tilemapPath": "worldMaps/worldSynth.json",
@@ -197,7 +197,7 @@
         },
         {
             "color": "0xDDDDDD",
-            "ignore": false,
+            "ignore": true,
             "name": "Game Boy",
             "displayName": "Video Game History",
             "tilemapPath": "worldMaps/world1.json",

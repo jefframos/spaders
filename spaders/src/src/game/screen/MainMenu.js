@@ -158,7 +158,8 @@ export default class MainMenu extends PIXI.Container {
         this.totalShards = new PIXI.Text("", this.fontStyle('22px', config.colors.purple));
         this.totalPIeces = new PIXI.Text("", this.fontStyle('22px', config.colors.background));
         this.credits = new PIXI.Text("Programing/Art/Game Design: Jeff Ramos\n"
-        +"Game/Level Design: Alberto Zolet", this.fontStyle('14px', config.colors.background));
+        +"Game/Level Design: Alberto Zolet\n"+
+        "v 0.0.2", this.fontStyle('14px', config.colors.background));
 
         let dist = 80;
         this.statsOrder = [this.stats, this.totalPlayTime, this.totalMoves, this.totalCombos, this.totalShards, this.levelsFinished, this.totalPIeces,this.credits];
@@ -172,7 +173,7 @@ export default class MainMenu extends PIXI.Container {
                 element.y += 30
             }
             else if(index >= 0){
-                dist = 35
+                dist = 45
             }
         }
 

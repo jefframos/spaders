@@ -275,7 +275,7 @@ export default class Grid extends PIXI.Container {
 			/////////
 		}
 
-		console.log(levelData)
+		//console.log(levelData)
 		let backGridContainer = new PIXI.Container();
 		let backGridContainerBlocker = new PIXI.Container();
 		for (var i = GRID.i - 1; i >= 0; i--) {

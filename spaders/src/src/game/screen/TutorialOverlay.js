@@ -477,7 +477,7 @@ this.tutorialData = {
             
             this.tutorial = this.tutorialData.tutorialPoki
         }
-        console.log(this.tutorial)
+        //console.log(this.tutorial)
         // this.tutorial = [
         //     // {
         //     //     textBoxOffset: { x: 0, y: 0 },
@@ -836,7 +836,7 @@ this.tutorialData = {
         this.visible = true;
         this.updateSoundButton();
         this.currentTutorial = id ? id : 0;
-        console.log(this.currentTutorial)
+        //console.log(this.currentTutorial)
 
         TweenMax.to(this, 0.5, { alpha: 1 })
         this.nextTutorial();
@@ -1145,7 +1145,7 @@ this.tutorialData = {
         card.createCard(order.length, { order });
         tut.boardPieces++;
 
-        console.log(tut)
+        //console.log(tut)
         //card.addActionZones(2, tut.board[tut.boardPieces])
 
         card.updateSprite(data.life, data, cardID);

@@ -45,7 +45,7 @@ export default class TileDesigner {
             let theresLeft = this.onBounds(offsetLeft, pieces);
             let theresRight = this.onBounds(offsetRight, pieces);
 
-            console.log(theresRight)
+            //console.log(theresRight)
 
             if (!theresRight) {
             } else {

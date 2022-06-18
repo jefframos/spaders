@@ -84,8 +84,8 @@ window.STANDARD_FONT2 = "round_popregular"
 window.COOKIE_MANAGER = new CookieManager();
 window.GAME_DATA = new GameData();
 
-var version = '[AIV]{version}[/AIV]';
-console.log('version', version);
+//var version = '[AIV]{version}[/AIV]';
+//console.log('version', version);
 window.CARD_ID = 0;
 
 window.imageThumbs = {};
@@ -122,8 +122,8 @@ for (let i = 0; i < 32; i++) {
 //
 //window.SAVE_DATA(JSON.stringify(obj), "test.json")
 window.getNextLevel = function (data) {
-	console.log('getNextLevel', data)
-	console.log(window.levelSections.sections)
+	//console.log('getNextLevel', data)
+	//console.log(window.levelSections.sections)
 	let section = null;
 	let tier = null;
 
@@ -142,10 +142,10 @@ window.getNextLevel = function (data) {
 
 	//find on tier.data if theres an unfinished level
 	//if doesnt find nothing, finished the whole tier
-	console.log(tier);
+	//console.log(tier);
 	//find on section.levels the next section
 	//if doesnt find nothing, finished the whole section
-	console.log(section);
+	//console.log(section);
 
 }
 
@@ -172,7 +172,7 @@ window.getLevelData = function (sec, ti, lvl) {
 	let tier = null;
 	let level = null;
 
-	console.log(sec, ti, lvl)
+	//console.log(sec, ti, lvl)
 	if (sec != undefined) {
 
 		if (isNaN(sec)) {
@@ -227,7 +227,7 @@ window.getLevelData = function (sec, ti, lvl) {
 	// console.log("level", level)
 
 	let toReturn = { section, tier, level }
-	console.log(toReturn)
+	//console.log(toReturn)
 	return toReturn
 
 }
@@ -446,8 +446,8 @@ function setUpSchemes() {
 		.add('./assets/images/tilemap_1.json')
 		.add('./assets/images/arrowsUp.png')
 		.add('./data/levelSections.json')
-		.add('./data/letters/scrabble.json')
-		.add('./data/letters/words_dictionary.json')
+		// .add('./data/letters/scrabble.json')
+		// .add('./data/letters/words_dictionary.json')
 		.add('./assets/fonts/stylesheet.css')
 		.add('./assets/levels.json')
 		.add('./assets/levelsRaw.json')
@@ -459,7 +459,7 @@ function setUpSchemes() {
 			}
 		});
 }
-window.DISABLE_POKI = true;
+window.DISABLE_POKI = false;
 const urlParams = new URLSearchParams(window.location.search);
 if (window.DISABLE_POKI || urlParams.get('level') != null) {
 	window.PokiSDK = {}
@@ -536,7 +536,7 @@ function loadJsons() {
 	PokiSDK.gameLoadingStart();
 	window.levelSections = PIXI.loader.resources[jsonPath + "levelSections.json"].data
 
-	window.scrabbleManager = new ScrabbleManager('./data/letters/scrabble.json', './data/letters/words_dictionary.json');
+	//window.scrabbleManager = new ScrabbleManager('./data/letters/scrabble.json', './data/letters/words_dictionary.json');
 
 	PIXI.loader.add(jsonPath + window.levelSections.question.dataPath)
 
@@ -1079,7 +1079,7 @@ function configGame() {
 
 	window.levelsJson = PIXI.loader.resources["./assets/levels.json"].data
 
-	console.log("SECTIONS", window.levelSections.sections)
+	//console.log("SECTIONS", window.levelSections.sections)
 	let targetColorPallet = 0;
 	window.levelSections.sections.forEach(element => {
 		element.levels.forEach(dataLevel => {
@@ -1118,7 +1118,7 @@ function configGame() {
 		}
 	});
 
-	console.log(window.levelData)
+	//console.log(window.levelData)
 
 	window.levelData.forEach(element => {
 		if (element.scaled && element.addOn) {
@@ -1129,7 +1129,7 @@ function configGame() {
 	// utils.paddingMatrix(window.levelData[0].pieces, { left: 3, right: 3, top: 2, bottom: 2 })
 	// utils.addBlockers(window.levelData[0].pieces, 2)
 
-	console.log("ALL DATA", window.levelSections)
+	//console.log("ALL DATA", window.levelSections)
 
 
 	splitables.forEach(element => {

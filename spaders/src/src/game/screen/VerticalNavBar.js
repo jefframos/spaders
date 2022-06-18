@@ -43,7 +43,7 @@ export default class VerticalNavBar extends PIXI.Container {
     }
     updateColorScheme() {
         let colorScheme = colorSchemes.getCurrentColorScheme();
-        console.log(colorScheme)
+        //console.log(colorScheme)
         this.sectionPanel.tint = colorScheme.fillBarColor
     }
     setSectionLabel(text = "") {

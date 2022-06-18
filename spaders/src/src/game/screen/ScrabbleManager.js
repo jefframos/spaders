@@ -16,7 +16,7 @@ export default class ScrabbleManager {
                 this.letterByTotal.push(element);
             }
         });
-        console.log(this.letters)
+        //console.log(this.letters)
         this.game = null;
 
         this.currentWords = [];

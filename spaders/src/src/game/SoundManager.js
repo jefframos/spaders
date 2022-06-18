@@ -1,6 +1,6 @@
+import { sound } from '@pixi/sound';
 import * as PIXI from 'pixi.js';
 import TweenLite from 'gsap';
-import { sound } from '@pixi/sound';
 
 export default class SoundManager {
     constructor() {
@@ -28,8 +28,10 @@ export default class SoundManager {
         this.soundData.push({ id: 'startLevel', src: './audio/fx/Harp-Flutter-02.mp3', sound: null })
         this.soundData.push({ id: 'endLevel', src: './audio/fx/Musical-Beep-Loop-02.mp3', sound: null })
 
+
         this.soundData.forEach(element => {
             element.sound = sound.add(element.id, element.src)
+            element.sound.preload = true;
         });
 
         this.currentSoundtrack = null;
@@ -59,7 +61,9 @@ export default class SoundManager {
     }
     playMainMenu() {
         this.stopSound('ingame-soundtrack');
-        this.playUnique('main-soundtrack');
+        setTimeout(() => {
+            this.playUnique('main-soundtrack');
+        }, 10);
     }
   
     speedUpSoundTrack(speed = 1.15) {
@@ -69,7 +73,10 @@ export default class SoundManager {
     }
     playInGame() {
         this.stopSound('main-soundtrack');
-        this.playUnique('ingame-soundtrack', true, 2);
+        setTimeout(() => {
+            
+            this.playUnique('ingame-soundtrack', true, 2);
+        }, 10);
     }
     play(id, data = {}) {
         let soundData = this.findById(id)
@@ -91,6 +98,7 @@ export default class SoundManager {
         }
 
         setTimeout(() => {
+
             
             let playPromise = soundData.sound.play(data);
     
@@ -101,7 +109,7 @@ export default class SoundManager {
                     console.log(soundData, error)
                   });
             }
-        }, 1);
+        }, Math.random() * 10);
        
     }
     playUnique(id, loop = true, offset = 0) {
@@ -125,7 +133,6 @@ export default class SoundManager {
             return;
         }
         if (soundData.sound.isPlaying) {
-            console.log("STOP", id)
             soundData.sound.stop(soundData.id);
         }
     }

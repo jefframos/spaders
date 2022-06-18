@@ -202,7 +202,7 @@ export default class TetraScreen extends Screen {
 			orders.push(element)
 		});
 		orders = utils.uniq_fast(orders);
-		console.log(orders)
+		//console.log(orders)
 		let card
 		for (let index = 0; index < orders.length; index++) {
 			card = new Card(this);
@@ -301,7 +301,7 @@ export default class TetraScreen extends Screen {
 				let parameters = window.getLevelData(levelRedirectParameters[0], levelRedirectParameters[1], levelRedirectParameters[2])
 				if (levelRedirectParameters[0] == 'tutorial') {
 					setTimeout(() => {
-						console.log(levelRedirectParameters)
+						//console.log(levelRedirectParameters)
 						window.game.onTapUp();
 
 						this.colorTweenBomb.startTween(0)
@@ -349,7 +349,9 @@ export default class TetraScreen extends Screen {
 		}
 		this.blockGameTimer = 1;
 
-		window.scrabbleManager.destroyAllWords()
+		if (this.currentLevelData.gameMode == 10) {
+			window.scrabbleManager.destroyAllWords()
+		}
 
 		let targetPallet = this.currentLevelData.colorPalletId
 		if (this.currentLevelData.customPallet && this.currentLevelData.customPallet > 0) {
@@ -783,6 +785,7 @@ export default class TetraScreen extends Screen {
 		this.shuffleButton.resize(100, 100)
 		this.bottomUINewContainer.addChild(this.shuffleButton)
 		this.shuffleButton.onClick.add(() => { this.shuffleAllLetters() });
+		this.shuffleButton.visible = false;
 
 		this.hashUsed = false;
 		if (!this.hasHash) {
@@ -802,7 +805,7 @@ export default class TetraScreen extends Screen {
 		if (this.autoRedirectToLevelSelect) {
 			this.autoRedirectToLevelSelect = false;
 			setTimeout(() => {
-				//console.log("AUTO REDIRECTH", this.autoRedirectData)
+				////console.log("AUTO REDIRECTH", this.autoRedirectData)
 				this.mainmenuStateFromGame(false, this.autoRedirectData);
 			}, 200);
 		}
@@ -944,7 +947,7 @@ export default class TetraScreen extends Screen {
 			this.shootingGun.visible = false;
 		}
 
-		//console.log()
+		////console.log()
 		// // // // this.backButton.scale.set(this.topCanvas.height / (this.backButton.height / this.backButton.scale.y) * 0.7)// / this.backButton.scale.y)
 		// // // this.backButton.x = this.topCanvas.x + this.topCanvas.width - this.backButton.width * 0.5 - this.backButton.width * 0.25;
 		// // // this.backButton.y = this.backButton.height * 0.5 + this.backButton.width * 0.25
@@ -1001,7 +1004,7 @@ export default class TetraScreen extends Screen {
 	mainmenuState(force = false) {
 		this.removeTrails();
 
-		console.log("TO MAIN MENU ONE")
+		//console.log("TO MAIN MENU ONE")
 
 		window.SOUND_MANAGER.playMainMenu();
 		this.endGameScreenContainer.hide(force);
@@ -1467,7 +1470,7 @@ export default class TetraScreen extends Screen {
 	}
 	resetGame() {
 
-		console.log(this.currentLevelData)
+		//console.log(this.currentLevelData)
 
 
 		// if (this.hasHash) {
@@ -1708,7 +1711,7 @@ export default class TetraScreen extends Screen {
 			utils.shuffle(this.specialCardsOnGrid.cards)
 		}
 
-		console.log(this.specialCardsOnGrid)
+		//console.log(this.specialCardsOnGrid)
 
 		if (hasAddon) {
 			setTimeout(() => {
@@ -1747,7 +1750,7 @@ export default class TetraScreen extends Screen {
 		window.SOUND_MANAGER.playInGame();
 		window.SOUND_MANAGER.play('startLevel');
 
-		console.log(this.currentLevelData)
+		//console.log(this.currentLevelData)
 
 		if (this.currentLevelData.gameMode == 1 || this.currentLevelData.gameMode == 3) {
 			this.fallBar.visible = true;
@@ -2120,7 +2123,7 @@ export default class TetraScreen extends Screen {
 	}
 
 	placeBlock(i, j, visible = true) {
-		console.log("BLOCK")
+		//console.log("BLOCK")
 		let block;
 		block = new Block(this);
 		block.x = i * CARD.width;
@@ -2233,8 +2236,13 @@ export default class TetraScreen extends Screen {
 			return;
 		}
 
-		if (window.scrabbleManager) {
-			window.scrabbleManager.update(delta);
+		if (this.currentLevelData.gameMode == 10) {
+			if (window.scrabbleManager) {
+				window.scrabbleManager.update(delta);
+			}
+			this.shuffleButton.visible = true;
+		} else {
+			this.shuffleButton.visible = false;
 		}
 		this.popLabel.visible = true;
 
@@ -2249,17 +2257,42 @@ export default class TetraScreen extends Screen {
 		}
 		if (this.chargeBombBar.visible) {
 
-
+			if (!this.GAMBS) {
+				this.GAMBS = true
+				
+			}
 			if (targetBar >= 1) {
 				this.chargeBombBar.icon.update(delta)
 				this.chargeBombBar.icon.alpha = 1
 
 				this.chargeBombBar.readyLabel.visible = true;
 				//this.chargeBombBar.icon.tintLayer(0, this.colorTweenBomb.currentColor)
-				//this.useBomb.backShape.tint = this.colorTweenBomb.currentColor
-				//this.useBomb.backShapeBorder.tint = this.colorTweenBomb.currentColor
+				this.useBomb.backShape.tint = this.colorTweenBomb.currentColor
+				this.useBomb.backShapeBorder.tint = this.colorTweenBomb.currentColor
+
+				if (!this.useBomb.interactive) {
+
+					SOUND_MANAGER.play('magic')
+					this.popLabel.popLabel({
+						textBoxOffset: { x: -0.7, y: -2 },
+						text: "I'm READY!",
+						callback: null,
+						target: this.useBomb,
+						centerBox: { x: 1, y: 0 },
+						delay: 0,
+						autoHide: 8000,
+						ingame: true
+					});
+				}
+
 				this.useBomb.interactive = true
 			} else {
+				if(this.useBomb.interactive){
+					let colorScheme = colorSchemes.getCurrentColorScheme();
+					this.useBomb.setColor(colorScheme.fontColor)
+
+					this.useBomb.backShapeBorder.tint = this.useBomb.backShape.tint;
+				}
 
 				this.chargeBombBar.readyLabel.visible = false;
 				this.chargeBombBar.icon.alpha = 0.75
@@ -2593,7 +2626,10 @@ export default class TetraScreen extends Screen {
 		this.currentRound++;
 
 		this.board.shootCard(this.mousePosID, this.currentCard);
-
+		
+		if (this.currentCard.isBomb) {
+			SOUND_MANAGER.play('fireworks');
+		}
 
 		if (this.currentLevelData.gameMode == 10) {
 			window.scrabbleManager.findWords(this.board, this.currentCard.pos);
@@ -2614,7 +2650,7 @@ export default class TetraScreen extends Screen {
 		this.currentCard.move({
 			x: this.currentCard.pos.i * CARD.width,
 			y: this.currentCard.pos.j * CARD.height
-		}, 0.1 * normalDist);
+		}, 0.5 * normalDist, 0, Back.easeIn);
 
 		this.updateTrailLenght()
 		this.currentCard = null;

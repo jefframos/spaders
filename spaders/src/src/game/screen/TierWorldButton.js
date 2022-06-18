@@ -14,8 +14,9 @@ export default class TierWorldButton extends SquareButton {
     buildBase() {
         this.container = new PIXI.Container();
 
-        this.squareButtonShape = new PIXI.mesh.NineSlicePlane(
-            PIXI.Texture.EMPTY, 20, 20, 20, 20)//new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
+        this.squareButtonShape = new PIXI.Container();
+        //new PIXI.mesh.NineSlicePlane(
+        //   PIXI.Texture.EMPTY, 20, 20, 20, 20)//new PIXI.Graphics().beginFill(section.color).drawRect(0, 0, this.unscaledCardSize.width, this.unscaledCardSize.height);
         //this.squareButtonShape.scale.set(this.unscaledCardSize.width / this.squareButtonShape.width)
         this.squareButtonShape.tint = 0x333333
 
@@ -58,14 +59,25 @@ export default class TierWorldButton extends SquareButton {
         this.squareButtonShape.addChild(this.progressBar)
 
         this.currentState = 0;
+        try {
 
-        this.backTop = new PIXI.mesh.NineSlicePlane(
-            PIXI.Texture.fromFrame('tile_1_' + (32 * 8 + 9) + '.png'), 10, 10, 10, 10)
-        this.backTop.width = 20;
-        this.backTop.height = 25;
-        this.squareButtonShape.addChild(this.backTop)
-        this.backTop.tint = 0;
-        this.backTop.alpha = 1
+            this.backTop = new PIXI.mesh.NineSlicePlane(
+                PIXI.Texture.fromFrame('tile_1_' + (32 * 8 + 9) + '.png'), 10, 10, 10, 10)
+            this.backTop.width = 20;
+            this.backTop.height = 25;
+            this.squareButtonShape.addChild(this.backTop)
+            this.backTop.tint = 0;
+            this.backTop.alpha = 1
+        } catch (error) {
+            this.backTop = new PIXI.Sprite.fromFrame('progressBarSmall.png')
+            this.backTop.width = 20;
+            this.backTop.height = 25;
+            this.squareButtonShape.addChild(this.backTop)
+            this.backTop.tint = 0;
+            this.backTop.alpha = 1
+        }
+
+
         this.squareButtonShape.addChild(this.labelTop)
         this.squareButtonShape.addChild(this.label)
 
@@ -179,13 +191,13 @@ export default class TierWorldButton extends SquareButton {
             }
             //this.iconBackgroundWhite.y = Math.random() * 10
 
-            if(this.showCrown){
+            if (this.showCrown) {
                 this.crownIcon.visible = true;
             }
         }
 
     }
-    setCrown(){
+    setCrown() {
         this.showCrown = true;
     }
     completeMode() {
@@ -282,7 +294,7 @@ export default class TierWorldButton extends SquareButton {
 
         this.backTop.width = this.unscaledCardSize.width * 2
         this.backTop.x = this.iconBackgroundWhite.x - this.unscaledCardSize.width / 2
-        this.backTop.y = this.label.y - this.label.height / 2- 3
+        this.backTop.y = this.label.y - this.label.height / 2 - 3
         //this.backTop.height = this.label.height + 4
 
 
