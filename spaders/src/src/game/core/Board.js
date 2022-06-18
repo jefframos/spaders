@@ -410,7 +410,7 @@ export default class Board {
 		} else {
 			setTimeout(function () {
 				this.destroyCards(cardsToDestroy, card, autoDestroyCardData, starterLife + 1);
-			}.bind(this), 500 / window.TIME_SCALE);
+			}.bind(this), 400 / window.TIME_SCALE);
 			return 200 + 300 * (cardsToDestroy.length + 1) / window.TIME_SCALE
 		}
 		//this.findOutGameOver();
@@ -854,7 +854,7 @@ export default class Board {
 	}
 	addTurnTime(value) {
 		this.nextTurnTimer = value + 0.05;
-		this.nextTurnTimer = Math.max(this.nextTurnTimer, 0.2)
+		this.nextTurnTimer = Math.max(this.nextTurnTimer, 0.15)
 		this.nextTurnTimer = Math.min(this.nextTurnTimer, 1.25)
 	}
 	playDelayedCoins(total) {

@@ -2656,7 +2656,7 @@ export default class TetraScreen extends Screen {
 			this.currentCard.move({
 				x: this.currentCard.pos.i * CARD.width,
 				y: this.currentCard.pos.j * CARD.height
-			}, 0.5 * normalDist, 0, Back.easeIn);
+			}, 0.3 * normalDist, 0, Back.easeIn);
 		}
 
 		this.updateTrailLenght()
