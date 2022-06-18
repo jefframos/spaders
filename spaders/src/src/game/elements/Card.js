@@ -723,12 +723,14 @@ export default class Card extends PIXI.Container {
 			this.backshape.parent.removeChild(this.backshape)
 		}
 		if (ease) {
-			TweenMax.to(this, time, { ease, x: pos.x, y: pos.y, delay: delay });
+			TweenMax.to(this, time, { ease, x: pos.x, y: pos.y, delay: delay, onComplete: () => { this.playUhu() } });
 		} else {
-			TweenMax.to(this, time, { x: pos.x, y: pos.y, delay: delay });
+			TweenMax.to(this, time, { x: pos.x, y: pos.y, delay: delay, onComplete: () => { this.playUhu() } });
 		}
 	}
-
+	playUhu() {
+		window.SOUND_MANAGER.play('spaderSound' + Math.floor(Math.random() * 5), { volume: 0.2 + Math.random() * 0.3, speed: 1.4 + Math.random() * 0.2 })
+	}
 	show(time = 0.3, delay = 0) {
 		//let scheme = colorSchemes.getCurrentColorScheme().grid;
 

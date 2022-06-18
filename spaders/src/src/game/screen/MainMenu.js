@@ -82,7 +82,7 @@ export default class MainMenu extends PIXI.Container {
         this.unlockDebug.onClick.add(() => {
 
             window.COOKIE_MANAGER.unlockToogleDebug();
-                this.updateDebugColor()
+            this.updateDebugColor()
 
         });
 
@@ -118,22 +118,22 @@ export default class MainMenu extends PIXI.Container {
         this.mainContainer.addChild(this.toggleSound);
         this.toggleSound.x = this.backShape.width - 60
         this.toggleSound.y = 50;
-        
+
         this.mainContainer.addChild(this.unlockDebug);
         this.unlockDebug.x = -config.width * 0.5;
         this.unlockDebug.alpha = 0;
 
         // this.refreshButton.x = this.backShape.width - 60
         this.wipeDataButton.x = this.toggleSound.x//this.wipeDataButton.width * 0.5 + 30
-        this.wipeDataButton.y =this.backShape.height - this.wipeDataButton.height * 0.5 - 20// this.toggleSound.y;
+        this.wipeDataButton.y = this.backShape.height - this.wipeDataButton.height * 0.5 - 20// this.toggleSound.y;
         // this.refreshButton.y = 50
-        if(window.COOKIE_MANAGER.debug.showDebugButtons){
+        if (window.COOKIE_MANAGER.debug.showDebugButtons) {
             this.mainContainer.addChild(this.toggleDebug);
             this.mainContainer.addChild(this.toggleDebugNames);
         }
         this.toggleDebug.x = this.wipeDataButton.x - this.toggleDebug.width * 0.5 - 60
         this.toggleDebug.y = this.wipeDataButton.y;
-        
+
         this.toggleDebugNames.x = this.toggleDebug.x - this.toggleDebugNames.width * 0.5 - 60
         this.toggleDebugNames.y = this.wipeDataButton.y;
 
@@ -150,30 +150,53 @@ export default class MainMenu extends PIXI.Container {
 
 
         this.statsContainer = new PIXI.Container();
-        this.stats = new PIXI.Text("Stats", this.fontStyle('26px', config.colors.dark));
+        this.stats = new PIXI.Text("STATS", this.fontStyle('26px', config.colors.dark));
         this.totalCombos = new PIXI.Text("", this.fontStyle('22px', config.colors.blue2));
         this.levelsFinished = new PIXI.Text("", this.fontStyle('22px', config.colors.red));
         this.totalPlayTime = new PIXI.Text("", this.fontStyle('22px', config.colors.red2));
         this.totalMoves = new PIXI.Text("", this.fontStyle('22px', config.colors.pink));
         this.totalShards = new PIXI.Text("", this.fontStyle('22px', config.colors.purple));
         this.totalPIeces = new PIXI.Text("", this.fontStyle('22px', config.colors.background));
-        this.credits = new PIXI.Text("Programing/Art/Game Design: Jeff Ramos\n"
-        +"Game/Level Design: Alberto Zolet\n"+
-        "v 0.0.2", this.fontStyle('14px', config.colors.background));
+        this.credits =
+            new PIXI.Text("Programing/Art/Game Design: Jeff Ramos\n"
+                + "Game/Level Design: Alberto Zolet", this.fontStyle('14px', config.colors.background));
 
         let dist = 80;
-        this.statsOrder = [this.stats, this.totalPlayTime, this.totalMoves, this.totalCombos, this.totalShards, this.levelsFinished, this.totalPIeces,this.credits];
+        this.statsOrder = [this.stats, this.totalPlayTime, this.totalMoves, this.totalCombos, this.totalShards, this.levelsFinished, this.totalPIeces, this.credits];
+
+
+
+
+
 
         for (let index = 0; index < this.statsOrder.length; index++) {
             const element = this.statsOrder[index];
+
+            let backShape = new PIXI.mesh.NineSlicePlane(
+                PIXI.Texture.fromFrame('progressBarSmall.png'), 10, 10, 10, 10)
+            if (index < this.statsOrder.length - 1) {
+
+                backShape.width = config.width * 0.75 - 20
+                backShape.height = 20
+                backShape.tint = 0xffffff
+                element.back = backShape;
+                backShape.x = -this.backShape.width / 2 + 10;
+                backShape.y = element.y - 10
+                backShape.height = dist - 6
+
+                this.statsContainer.addChild(backShape);
+            }
             this.statsContainer.addChild(element);
             element.y = dist * index;
-            if(index > 6){
+            if (index > 6) {
                 dist = 25
                 element.y += 30
             }
-            else if(index >= 0){
+            else if (index >= 0) {
                 dist = 45
+            }
+            if (index < this.statsOrder.length - 1) {
+                backShape.y = element.y - 6
             }
         }
 
@@ -183,7 +206,10 @@ export default class MainMenu extends PIXI.Container {
 
         this.state = 1;
 
-
+        this.version = new PIXI.Text("v 0.0.2", this.fontStyle('14px', config.colors.background));
+        this.mainContainer.addChild(this.version);
+        this.version.x = 10
+        this.version.y = this.backShape.height - this.version.height - 10
 
     }
     updateDebugColor() {
@@ -236,6 +262,13 @@ export default class MainMenu extends PIXI.Container {
         for (let index = 0; index < this.statsOrder.length; index++) {
             const element = this.statsOrder[index];
             element.pivot.x = element.width / 2;
+
+            if (index >= this.statsOrder.length - 1) {
+                break;
+            }
+            element.back.tint = element.style.fill;
+            element.style.fill = 0xFFFFFF
+            element.back.height = Math.max(element.height, element.back.height)
         }
 
     }

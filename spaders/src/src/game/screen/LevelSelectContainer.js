@@ -13,6 +13,7 @@ import TierWorldButton from './TierWorldButton';
 import TierMap from './TierMap';
 import TileRope from './TileRope';
 import TweenMax from 'gsap';
+import SprteSpritesheetAnimation from './SprteSpritesheetAnimation';
 
 
 export default class LevelSelectContainer extends PIXI.Container {
@@ -131,18 +132,16 @@ export default class LevelSelectContainer extends PIXI.Container {
             window.COOKIE_MANAGER.onToggleDebug.add(() => { this.refreshAll() });
             window.COOKIE_MANAGER.onToggleNames.add(() => { this.refreshAll() });
 
-            this.loadingLabel = new PIXI.Text("Loading", {
-                font: '32px',
-                fill: 0xFFFFFF,
-                align: 'center',
-                //fontWeight: '200',
-                fontFamily: window.STANDARD_FONT1,
-                stroke: 0x000000,
-                strokeThickness: 4
-            });
+           
+
+            let element = window.IMAGE_DATA.enemyImagesFrame[0];
+
+     
+
+
             this.addChild(this.verticalBar)
             this.addChild(this.backButton)
-            
+
             window.onSpacePressed.add(() => {
                 this.sortPressSpace()
             })
@@ -154,10 +153,32 @@ export default class LevelSelectContainer extends PIXI.Container {
 
             this.addChild(this.test)
             this.addChild(this.fader)
+
+            
+            this.loaderAnimation = new SprteSpritesheetAnimation();
+            let spaderID = 1
+
+            this.loaderAnimation.addLayer("l0_spader_" + spaderID + "_", { min: 1, max: 5 }, 0.15)
+            this.loaderAnimation.addLayer("l1_spader_" + spaderID + "_", { min: 1, max: 5 }, 0.15)
+
+            this.loaderAnimation.tintLayer(0, window.colorsOrder[0])
+
+            this.loadingLabel = new PIXI.Text("Loading", {
+                font: '32px',
+                fill: 0xFFFFFF,
+                align: 'center',
+                //fontWeight: '200',
+                fontFamily: window.STANDARD_FONT1,
+                stroke: 0x333333,
+                strokeThickness: 3
+            });
+            this.addChild(this.loaderAnimation)
             this.addChild(this.loadingLabel)
 
+            this.updateColorScheme();
+
         }, 100);
-        
+
         this.sectionsContainer.x = 0;
         this.tiersContainer.x = config.width;
         this.levelsContainer.x = config.width * 2;
@@ -251,7 +272,9 @@ export default class LevelSelectContainer extends PIXI.Container {
             this.openLevelTier(redirectData.tier.data)
         } else if (redirectData.section) {
             setTimeout(() => {
-
+                this.fader.alpha = 1;
+                TweenMax.killTweensOf(this.fader)
+                TweenMax.to(this.fader, 0.5, { alpha: 0, delay: 2 })
                 this.openSection(redirectData.section)
             }, 30);
         }
@@ -260,6 +283,9 @@ export default class LevelSelectContainer extends PIXI.Container {
         let colorScheme = colorSchemes.getCurrentColorScheme().buttonData;
         this.backButton.setColor(colorScheme.buttonStandardDarkColor)
         this.backButton.setIconColor(colorScheme.fontColor)
+        if (this.loaderAnimation) {
+            this.loaderAnimation.tintLayer(0, colorSchemes.getCurrentColorScheme().list[0].color)
+        }
         this.fader.tint = colorScheme.background
 
     }
@@ -516,6 +542,8 @@ export default class LevelSelectContainer extends PIXI.Container {
             return;
         }
 
+            TweenMax.killTweensOf(this.fader)
+            TweenMax.to(this.fader, 0.5, { alpha: 0, delay: 1 })
 
         this.gameScreen.mainMenuSettings.collapse();
 
@@ -525,7 +553,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         }
         if (this.currentUISection > firstId) {
             this.currentUISection--
-            window.SOUND_MANAGER.play('shoosh', { volume: 0.2 })
+            //window.SOUND_MANAGER.play('shoosh', { volume: 0.2 })
             if (this.currentUISection <= 0) {
                 this.verticalBar.setSectionLabel("")
                 this.refreshNavButtons()
@@ -840,7 +868,7 @@ export default class LevelSelectContainer extends PIXI.Container {
 
         let targetPallet = tier[0].tier.customPallet
 
-       // console.log(targetPallet)
+        // console.log(targetPallet)
 
         if (targetPallet != undefined) {
             if (isNaN(targetPallet)) {
@@ -1377,11 +1405,20 @@ export default class LevelSelectContainer extends PIXI.Container {
             this.verticalBar.x = this.backButton.x
             this.verticalBar.y = this.backButton.y - 2// + this.backButton.height / 2
 
-            if(this.loadingLabel){
+            if (this.loadingLabel) {
+
+                this.loaderAnimation.scale.set(targetScale * 0.5);
+
+                this.loaderAnimation.updateAnimation(1 / 60)
+
                 this.loadingLabel.alpha = this.fader.alpha;
-                this.loadingLabel.scale.set(targetScale);    
-                this.loadingLabel.x = this.backButton.x
+                this.loaderAnimation.alpha = this.fader.alpha;
+                this.loadingLabel.scale.set(targetScale);
+                this.loadingLabel.x = this.backButton.x + (72 * targetScale) + (15 * targetScale)
                 this.loadingLabel.y = this.backButton.y - this.loadingLabel.height / 2
+
+                this.loaderAnimation.x = this.backButton.x
+                this.loaderAnimation.y = this.backButton.y - (72 * targetScale) / 2
             }
         }
 
@@ -1418,7 +1455,7 @@ export default class LevelSelectContainer extends PIXI.Container {
             this.addWorldBackgroundColor()
             this.fader.alpha = 1;
             TweenMax.killTweensOf(this.fader)
-            TweenMax.to(this.fader, 1, { alpha: 0, delay: 2 })
+            TweenMax.to(this.fader, 0.5, { alpha: 0, delay: 2 })
             setTimeout(() => {
 
                 this.currentUISection = 1

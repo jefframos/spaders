@@ -27,6 +27,15 @@ export default class SoundManager {
         this.soundData.push({ id: 'explosion', src: './audio/fx/Fire-Burst-Small-01.mp3', sound: null })
         this.soundData.push({ id: 'startLevel', src: './audio/fx/Harp-Flutter-02.mp3', sound: null })
         this.soundData.push({ id: 'endLevel', src: './audio/fx/Musical-Beep-Loop-02.mp3', sound: null })
+        this.soundData.push({ id: 'spaderSound0', src: './audio/fx/Cartoon-Mouth-Sound-01.mp3', sound: null })
+        this.soundData.push({ id: 'spaderSound1', src: './audio/fx/Cartoon-Mouth-Sound-02.mp3', sound: null })
+        this.soundData.push({ id: 'spaderSound2', src: './audio/fx/Cartoon-Mouth-Sound-06.mp3', sound: null })
+       // this.soundData.push({ id: 'spaderSound3', src: './audio/fx/Cartoon-Mouth-Sound-13.mp3', sound: null })
+        this.soundData.push({ id: 'spaderSound3', src: './audio/fx/Cartoon-Mouth-Sound-18.mp3', sound: null })
+        this.soundData.push({ id: 'spaderSound4', src: './audio/fx/Cartoon-Mouth-Sound-20.mp3', sound: null })
+
+
+        
 
 
         this.soundData.forEach(element => {
