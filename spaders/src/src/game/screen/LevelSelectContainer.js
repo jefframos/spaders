@@ -1038,7 +1038,7 @@ export default class LevelSelectContainer extends PIXI.Container {
             //levelTierButton.setColor(config.colors.purple)
             levelTierButton.tierCompleteMode();//updateLabel('COMPLETED');
             levelTierButton.hideProgressBar();
-            levelTierButton.updateLabel("", { x: 0, y: -25 });
+            levelTierButton.updateLabel(data[0].tierName, { x: 0, y: -25 });
         } else {
 
             //if(levelTierButton)
@@ -1091,7 +1091,8 @@ export default class LevelSelectContainer extends PIXI.Container {
         levelTierButton.setLargeButtonMode();
         let debugNames = window.COOKIE_MANAGER.debug.showAllNames;
         if (debugNames) {
-            levelTierButton.updateDebugLabel(data[0].tierName + " - " + tierOrder + "\n" + utils.convertNumToTime(Math.ceil(totalEstimatedTime)))
+            //levelTierButton.updateDebugLabel(data[0].tierName + " - " + tierOrder + "\n" + utils.convertNumToTime(Math.ceil(totalEstimatedTime)))
+            levelTierButton.updateDebugLabel(data[0].tierName + " - " + tierOrder)
         }
     }
     refreshSplitCard(levelButton, data) {

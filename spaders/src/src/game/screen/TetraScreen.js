@@ -2627,9 +2627,7 @@ export default class TetraScreen extends Screen {
 
 		this.board.shootCard(this.mousePosID, this.currentCard);
 		
-		if (this.currentCard.isBomb) {
-			SOUND_MANAGER.play('fireworks');
-		}
+		
 
 		if (this.currentLevelData.gameMode == 10) {
 			window.scrabbleManager.findWords(this.board, this.currentCard.pos);
@@ -2647,10 +2645,19 @@ export default class TetraScreen extends Screen {
 		this.latestCardPosition = this.currentCard.x
 
 		this.latestShoot.id = this.mousePosID
-		this.currentCard.move({
-			x: this.currentCard.pos.i * CARD.width,
-			y: this.currentCard.pos.j * CARD.height
-		}, 0.5 * normalDist, 0, Back.easeIn);
+
+		if (this.currentCard.isBomb) {
+			SOUND_MANAGER.play('fireworks');
+			this.currentCard.move({
+				x: this.currentCard.pos.i * CARD.width,
+				y: this.currentCard.pos.j * CARD.height
+			}, 0.3 * normalDist, 0);
+		}else{
+			this.currentCard.move({
+				x: this.currentCard.pos.i * CARD.width,
+				y: this.currentCard.pos.j * CARD.height
+			}, 0.5 * normalDist, 0, Back.easeIn);
+		}
 
 		this.updateTrailLenght()
 		this.currentCard = null;

@@ -31,8 +31,8 @@ export default class TierWorldButton extends SquareButton {
             align: 'center',
             //fontWeight: '200',
             fontFamily: window.STANDARD_FONT1,
-            // stroke: 0x000000,
-            // strokeThickness: 4
+             stroke: 0x111111,
+             strokeThickness: 4
         });
 
         this.labelTop = new PIXI.Text("", {
@@ -59,23 +59,23 @@ export default class TierWorldButton extends SquareButton {
         this.squareButtonShape.addChild(this.progressBar)
 
         this.currentState = 0;
-        try {
+        this.backTop = new PIXI.Sprite.fromFrame('progressBarSmall.png')
+        this.backTop.width = 20;
+        this.backTop.height = 25;
+        this.squareButtonShape.addChild(this.backTop)
+        this.backTop.tint = 0;
+        this.backTop.alpha = 1
+        // try {
 
-            this.backTop = new PIXI.mesh.NineSlicePlane(
-                PIXI.Texture.fromFrame('tile_1_' + (32 * 8 + 9) + '.png'), 10, 10, 10, 10)
-            this.backTop.width = 20;
-            this.backTop.height = 25;
-            this.squareButtonShape.addChild(this.backTop)
-            this.backTop.tint = 0;
-            this.backTop.alpha = 1
-        } catch (error) {
-            this.backTop = new PIXI.Sprite.fromFrame('progressBarSmall.png')
-            this.backTop.width = 20;
-            this.backTop.height = 25;
-            this.squareButtonShape.addChild(this.backTop)
-            this.backTop.tint = 0;
-            this.backTop.alpha = 1
-        }
+        //     this.backTop = new PIXI.mesh.NineSlicePlane(
+        //         PIXI.Texture.fromFrame('tile_1_' + (32 * 8 + 9) + '.png'), 10, 10, 10, 10)
+        //     this.backTop.width = 20;
+        //     this.backTop.height = 25;
+        //     this.squareButtonShape.addChild(this.backTop)
+        //     this.backTop.tint = 0;
+        //     this.backTop.alpha = 1
+        // } catch (error) {
+        // }
 
 
         this.squareButtonShape.addChild(this.labelTop)
@@ -186,8 +186,8 @@ export default class TierWorldButton extends SquareButton {
             }
             if (this.forceLabel) {
                 this.label.visible = true;
-                this.label.scale.set(0.5)
-                this.label.y = this.unscaledCardSize.height + 10
+              //  this.label.scale.set(0.5)
+               // this.label.y = this.unscaledCardSize.height + 5
             }
             //this.iconBackgroundWhite.y = Math.random() * 10
 
@@ -224,7 +224,7 @@ export default class TierWorldButton extends SquareButton {
 
         this.forceLabel = true;
 
-        this.label.style.fill = 0xFF0000
+        //this.label.style.fill = 0xFF0000
     }
     setLargeButtonMode(addLabel = true) {
 
@@ -283,13 +283,13 @@ export default class TierWorldButton extends SquareButton {
         //     }, this.label)
 
         this.labelTop.visible = false;
-        this.backTop.visible = true;
+        this.backTop.visible = false;
         this.labelTop.pivot.x = 0
         this.labelTop.pivot.y = 0
 
         utils.centerObject(this.label, this.iconBackgroundWhite)
 
-        this.label.y += this.unscaledCardSize.height / 2 + this.label.height + 11
+        this.label.y += this.unscaledCardSize.height / 2 + this.label.height + 5
         this.label.x = this.iconBackgroundWhite.x + this.unscaledCardSize.width / 2
 
         this.backTop.width = this.unscaledCardSize.width * 2
@@ -348,7 +348,7 @@ export default class TierWorldButton extends SquareButton {
         this.label.x = this.unscaledCardSize.width / 2 + offset.x// this.container.scale.x
         //this.label.y = this.unscaledCardSize.height - this.label.height // + offset.y// this.container.scale.y
 
-        this.backTop.visible = true;
+        this.backTop.visible = false;
 
         this.forceLabel = false;
 
