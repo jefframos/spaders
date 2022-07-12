@@ -796,7 +796,7 @@ export default class TetraScreen extends Screen {
 				window.game.onTapUp();
 			}, 60);
 		}
-		this.tutorialOverlay = new TutorialOverlay();
+		this.tutorialOverlay = new TutorialOverlay(this);
 		this.addChild(this.tutorialOverlay);
 		this.tutorialOverlay.visible = false;
 
@@ -830,8 +830,8 @@ export default class TetraScreen extends Screen {
 	}
 	openTutorial(id = 0) {
 		this.tutorialOverlay.visible = true;
-		this.tutorialOverlay.show(id)
 		this.stopGameplay();
+		this.tutorialOverlay.show(id)
 
 		this.colorTweenBomb.startTween(window.COOKIE_MANAGER.stats.colorPalletID)
 

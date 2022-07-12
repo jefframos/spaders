@@ -12,9 +12,10 @@ import UIButton1 from './UIButton1';
 
 
 export default class TutorialOverlay extends PIXI.Container {
-    constructor() {
+    constructor(game) {
         super();
 
+        this.gameScreen = game;
         this.tutorialPopLabel = new TutorialPopLabel()
         this.background = new PIXI.Graphics().beginFill(config.colors.background).drawRect(-5000, -5000, 10000, 10000);
         this.addChild(this.background);
@@ -27,7 +28,7 @@ export default class TutorialOverlay extends PIXI.Container {
         this.interactive = true;
         this.backGridContainer = new PIXI.Container();
         this.gridContainer = new PIXI.Container();
-        
+
         this.frontGridContainer = new PIXI.Container();
         this.cardsContainer = new PIXI.Container();
         this.grid = new Grid(this);
@@ -48,7 +49,7 @@ export default class TutorialOverlay extends PIXI.Container {
         this.addChild(this.fxContainer);
 
 
-       
+
 
         this.first = true;
 
@@ -124,357 +125,357 @@ export default class TutorialOverlay extends PIXI.Container {
 
 
         this.currentTutorial = 0;
-this.tutorialData = {
-        tutorialStandard: [
-            {
-                textBoxOffset: { x: 0, y: 0 },
-                text: 'Hi',
-                callback: null,
-                requireSpecificAction: false,
-                target: "backgroundInteractable",
-                centerBox: { x: 0.5, y: 0.5 },
-                delay: 0.5
-            },
-            {
-                textBoxOffset: { x: 0, y: 0 },
-                text: 'Welcome to Spaders!',
-                callback: this.showFirstCard.bind(this, 0),
-                requireSpecificAction: false,
-                target: "backgroundInteractable",
-                centerBox: { x: 0.5, y: 0.3 },
-                delay: 0.5
-            },
-            {
-                textBoxOffset: { x: 0, y: 0 },
-                text: 'This are the Spaders',
-                callback: null,
-                requireSpecificAction: false,
-                useGlobalScale: false,
-                target: "backgroundInteractable",
-                centerBox: { x: 0.5, y: 0.6 },
-                delay: 0.5
-            },
-            {
-                textBoxOffset: { x: 0, y: 0 },
-                text: 'Every spader have\nfew attack arrows',
-                callback: null,
-                requireSpecificAction: false,
-                useGlobalScale: false,
-                target: "backgroundInteractable",
-                centerBox: { x: 0.5, y: 0.65 },
-                delay: 0.5
-            },
-            {
-                textBoxOffset: { x: 0, y: 0 },
-                text: 'And life',
-                callback: null,
-                requireSpecificAction: false,
-                useGlobalScale: false,
-                target: "backgroundInteractable",
-                centerBox: { x: 0.77, y: 0.55 },
-                delay: 0.5
-            },
-            {
-                textBoxOffset: { x: 0, y: 0 },
-                text: 'Life is also their attack power',
-                callback: null,
-                requireSpecificAction: false,
-                useGlobalScale: false,
-                target: "backgroundInteractable",
-                centerBox: { x: 0.5, y: 0.55 },
-                delay: 0.5
-            },
-            {
-                textBoxOffset: { x: 0, y: 0 },
-                text: "Let's see how it works",
-                callback: this.startNewTutorial.bind(this, 0),
-                requireSpecificAction: false,
-                target: "backgroundInteractable",
-                centerBox: { x: 0.5, y: 0.6 },
-                delay: 0.5
-            },
-            {
-                textBoxOffset: { x: 0, y: -1.25 },
-                text: 'Every level has a board\nwith other Spaders',
-                callback: null,
-                requireSpecificAction: false,
-                target: "gridContainer",
-                centerBox: { x: 0.5, y: 0 },
-                delay: 1.4
-            },
-            {
-                textBoxOffset: { x: 0, y: -1.25 },
-                text: 'Every starter spader\nhave a TILE behind',
-                callback: null,
-                requireSpecificAction: false,
-                highlightElementParameters: [1, Math.PI],
-                highlightElement: this.getFirstBoardPiece,
-                target: "gridContainer",
-                centerBox: { x: 0.5, y: 0 },
-                delay: 0
-            },
-            {
-                textBoxOffset: { x: 0, y: -1.25 },
-                text: 'When you kill then,\ntheir TILE is removed',
-                callback: this.shoot.bind(this),
-                requireSpecificAction: false,
-                hideNextButton: true,
-                target: "gridContainer",
-                centerBox: { x: 0.5, y: 0 },
-                delay: 0
-            },
-            {
-                textBoxOffset: { x: 0, y: -1.25 },
-                text: 'If you attack and the other spader\nhave an opposite arrow,\nit will attack you back',
-                callback: this.shoot.bind(this, true),
-                requireSpecificAction: false,
-                hideNextButton: true,
-                target: "gridContainer",
-                centerBox: { x: 0.5, y: 0 },
-                delay: 1.5
-            }, {
-                textBoxOffset: { x: 0, y: -1.1 },
-                text: 'By using the counter attack,\nyou wipe two at the same time',
-                callback: null,
-                requireSpecificAction: false,
-                target: "gridContainer",
-                centerBox: { x: 0.5, y: 0 },
-                delay: 1
-            },
-            {
-                textBoxOffset: { x: 0, y: -1.1 },
-                text: 'First,\nyou should wipe all starters',
-                callback: this.getNewPiece.bind(this),
-                requireSpecificAction: false,
-                target: "gridContainer",
-                centerBox: { x: 0.5, y: 0 },
-                delay: 0
-            },
-            {
-                textBoxOffset: { x: 0, y: -1.1 },
-                text: 'And then kill the leftovers',
-                callback: this.shoot.bind(this, true),
-                hideNextButton: true,
-                requireSpecificAction: false,
-                target: "gridContainer",
-                centerBox: { x: 0.5, y: 0 },
-                delay: 0
-            },
-            {
-                textBoxOffset: { x: 0, y: -2 },
-                text: 'Thats how you win',
-                callback: this.startNewTutorial.bind(this, 1),
-                requireSpecificAction: false,
-                target: "gridContainer",
-                delay: 1,
-                centerBox: { x: 0.5, y: 0.5 }
-            },
-            // {
-            //     textBoxOffset: { x: 0, y: -1.1 },
-            //     text: 'Some spaders needs\nmore than one attack',
-            //     callback: null,
-            //     requireSpecificAction: false,
-            //     target: "gridContainer",
-            //     useGlobalScale: false,
-            //     centerBox: { x: 0.5, y: 0 },
-            //     delay: 1
-            // },
-            {
-                textBoxOffset: { x: 0, y: -1.1 },
-                text: 'Try to attack as much\nas you can in one move',
-                callback: this.shootAndCrazy.bind(this),
-                hideNextButton: true,
-                requireSpecificAction: false,
-                target: "gridContainer",
-                useGlobalScale: false,
-                centerBox: { x: 0.5, y: 0 },
-                delay: 1
-            },
-            {
-                textBoxOffset: { x: 0, y: -1.1 },
-                text: 'High combos transform\nrandom spaders in bombs',
-                callback: null,
-                highlightElementParameters: [1, Math.PI * 0.25 + Math.PI],
-                highlightElement: this.getFirstBoardPiece,
-                requireSpecificAction: false,
-                target: "gridContainer",
-                centerBox: { x: 0.5, y: 0 },
-                delay: 2
-            },
-            {
-                textBoxOffset: { x: 0, y: -1.1 },
-                text: 'If you kill them, they will explode\nand give +1 damage on\nall spaders around',
-                callback: this.shoot.bind(this, true),
-                highlightElementParameters: [1, Math.PI * 0.25 + Math.PI],
-                highlightElement: this.getFirstBoardPiece,
-                hideNextButton: true,
-                requireSpecificAction: false,
-                target: "gridContainer",
-                centerBox: { x: 0.5, y: 0 },
-                delay: 0
-            },
-            {
-                textBoxOffset: { x: 0, y: 0 },
-                text: 'For stronger Spaders...',
-                callback: this.startNewTutorial.bind(this, 2),
-                requireSpecificAction: false,
-                target: "backgroundInteractable",
-                centerBox: { x: 0.5, y: 0.5 },
-                delay: 2
-            },
-            {
-                textBoxOffset: { x: 0, y: -1.1 },
-                text: 'Try to use their arrows\nto counter attack you',
-                callback: this.shoot.bind(this, false),
-                hideNextButton: true,
-                requireSpecificAction: false,
-                target: "gridContainer",
-                centerBox: { x: 0.5, y: 0 },
-                delay: 2
-            },
-            {
-                textBoxOffset: { x: 0, y: -1.1 },
-                text: 'This is the best way to\nkeep the board cleaner',
-                callback: this.shoot.bind(this, false),
-                hideNextButton: true,
-                requireSpecificAction: false,
-                target: "gridContainer",
-                centerBox: { x: 0.5, y: 0 },
-                delay: 2
-            },
-            {
-                textBoxOffset: { x: 0, y: -1.1 },
-                text: "Don't let spaders too close to the bottom\nyou might need pile your spaders\nto wipe those",
-                callback: this.shoot.bind(this, true),
-                hideNextButton: true,
-                requireSpecificAction: false,
-                target: "gridContainer",
-                centerBox: { x: 0.5, y: 0.6 },
-                delay: 2
-            },
-            {
-                textBoxOffset: { x: 0, y: 0 },
-                text: 'Have fun!',
-                callback: null,
-                requireSpecificAction: false,
-                target: "gridContainer",
-                centerBox: { x: 0.5, y: 0.5 },
-                delay: 2
-            }]
-        ,
-        tutorialPoki: [
-            {
-                textBoxOffset: { x: 0, y: 0 },
-                //text: "Let's see how it works",
-                text: "How SPADERS works?",
-                callback: this.startNewTutorial.bind(this, 0),
-                requireSpecificAction: false,
-                target: "backgroundInteractable",
-                centerBox: { x: 0.5, y: 0.5 },
-                delay: 0.5
-            },
-            {
-                textBoxOffset: { x: 0, y: -1.25 },
-                text: 'Every starter spader\nhave a TILE behind',
-                callback: null,
-                requireSpecificAction: false,
-                highlightElementParameters: [1, Math.PI],
-                highlightElement: this.getFirstBoardPiece,
-                target: "gridContainer",
-                centerBox: { x: 0.5, y: 0 },
-                delay: 0
-            },
-            {
-                textBoxOffset: { x: 0, y: -1.25 },
-                text: 'When you kill then,\ntheir TILE is removed',
-                callback: this.shoot.bind(this),
-                requireSpecificAction: false,
-                hideNextButton: true,
-                target: "gridContainer",
-                centerBox: { x: 0.5, y: 0 },
-                delay: 0
-            },
-            {
-                textBoxOffset: { x: 0, y: -1.25 },
-                text: 'If you attack and the other spader\nhave an opposite arrow,\nit will attack you back',
-                callback: () => {
-                    this.shoot(true)
-                    this.getNewPiece()
+        this.tutorialData = {
+            tutorialStandard: [
+                {
+                    textBoxOffset: { x: 0, y: 0 },
+                    text: 'Hi',
+                    callback: null,
+                    requireSpecificAction: false,
+                    target: "backgroundInteractable",
+                    centerBox: { x: 0.5, y: 0.5 },
+                    delay: 0.5
                 },
-                requireSpecificAction: false,
-                hideNextButton: true,
-                target: "gridContainer",
-                centerBox: { x: 0.5, y: 0 },
-                delay: 1.5
-            },
-            {
-                textBoxOffset: { x: 0, y: -1.1 },
-                text: 'And then kill the leftovers',
-                callback: this.shoot.bind(this, true),
-                hideNextButton: true,
-                requireSpecificAction: false,
-                target: "gridContainer",
-                centerBox: { x: 0.5, y: 0 },
-                delay: 0
-            },
-            {
-                textBoxOffset: { x: 0, y: -2 },
-                // text: 'Thats how you win',
-                text: 'Erase the board to win',
-                callback: this.startNewTutorial.bind(this, 1),
-                requireSpecificAction: false,
-                target: "gridContainer",
-                delay: 1,
-                centerBox: { x: 0.5, y: 0.5 }
-            },
-            {
-                textBoxOffset: { x: 0, y: -1.1 },
-                text: 'Try to attack as much\nas you can in one move',
-                callback: this.shootAndCrazy.bind(this),
-                hideNextButton: true,
-                requireSpecificAction: false,
-                target: "gridContainer",
-                useGlobalScale: false,
-                centerBox: { x: 0.5, y: 0 },
-                delay: 1
-            },
-            {
-                textBoxOffset: { x: 0, y: -1.1 },
-                text: 'High combos transform\nrandom spaders in bombs',
-                callback: null,
-                highlightElementParameters: [1, Math.PI * 0.25 + Math.PI],
-                highlightElement: this.getFirstBoardPiece,
-                requireSpecificAction: false,
-                target: "gridContainer",
-                centerBox: { x: 0.5, y: 0 },
-                delay: 2
-            },
-            {
-                textBoxOffset: { x: 0, y: -1.1 },
-                text: 'If you kill them, they will explode\nand give +1 damage on\nall spaders around',
-                callback: this.shoot.bind(this, true),
-                highlightElementParameters: [1, Math.PI * 0.25 + Math.PI],
-                highlightElement: this.getFirstBoardPiece,
-                hideNextButton: true,
-                requireSpecificAction: false,
-                target: "gridContainer",
-                centerBox: { x: 0.5, y: 0 },
-                delay: 0
-            },
-            {
-                textBoxOffset: { x: 0, y: 0 },
-                text: 'Have fun!',
-                callback: null,
-                requireSpecificAction: false,
-                target: "gridContainer",
-                centerBox: { x: 0.5, y: 0.5 },
-                delay: 2
-            }]
+                {
+                    textBoxOffset: { x: 0, y: 0 },
+                    text: 'Welcome to Spaders!',
+                    callback: this.showFirstCard.bind(this, 0),
+                    requireSpecificAction: false,
+                    target: "backgroundInteractable",
+                    centerBox: { x: 0.5, y: 0.3 },
+                    delay: 0.5
+                },
+                {
+                    textBoxOffset: { x: 0, y: 0 },
+                    text: 'This are the Spaders',
+                    callback: null,
+                    requireSpecificAction: false,
+                    useGlobalScale: false,
+                    target: "backgroundInteractable",
+                    centerBox: { x: 0.5, y: 0.6 },
+                    delay: 0.5
+                },
+                {
+                    textBoxOffset: { x: 0, y: 0 },
+                    text: 'Every spader have\nfew attack arrows',
+                    callback: null,
+                    requireSpecificAction: false,
+                    useGlobalScale: false,
+                    target: "backgroundInteractable",
+                    centerBox: { x: 0.5, y: 0.65 },
+                    delay: 0.5
+                },
+                {
+                    textBoxOffset: { x: 0, y: 0 },
+                    text: 'And life',
+                    callback: null,
+                    requireSpecificAction: false,
+                    useGlobalScale: false,
+                    target: "backgroundInteractable",
+                    centerBox: { x: 0.77, y: 0.55 },
+                    delay: 0.5
+                },
+                {
+                    textBoxOffset: { x: 0, y: 0 },
+                    text: 'Life is also their attack power',
+                    callback: null,
+                    requireSpecificAction: false,
+                    useGlobalScale: false,
+                    target: "backgroundInteractable",
+                    centerBox: { x: 0.5, y: 0.55 },
+                    delay: 0.5
+                },
+                {
+                    textBoxOffset: { x: 0, y: 0 },
+                    text: "Let's see how it works",
+                    callback: this.startNewTutorial.bind(this, 0),
+                    requireSpecificAction: false,
+                    target: "backgroundInteractable",
+                    centerBox: { x: 0.5, y: 0.6 },
+                    delay: 0.5
+                },
+                {
+                    textBoxOffset: { x: 0, y: -1.25 },
+                    text: 'Every level has a board\nwith other Spaders',
+                    callback: null,
+                    requireSpecificAction: false,
+                    target: "gridContainer",
+                    centerBox: { x: 0.5, y: 0 },
+                    delay: 1.4
+                },
+                {
+                    textBoxOffset: { x: 0, y: -1.25 },
+                    text: 'Every starter spader\nhave a TILE behind',
+                    callback: null,
+                    requireSpecificAction: false,
+                    highlightElementParameters: [1, Math.PI],
+                    highlightElement: this.getFirstBoardPiece,
+                    target: "gridContainer",
+                    centerBox: { x: 0.5, y: 0 },
+                    delay: 0
+                },
+                {
+                    textBoxOffset: { x: 0, y: -1.25 },
+                    text: 'When you kill then,\ntheir TILE is removed',
+                    callback: this.shoot.bind(this),
+                    requireSpecificAction: false,
+                    hideNextButton: true,
+                    target: "gridContainer",
+                    centerBox: { x: 0.5, y: 0 },
+                    delay: 0
+                },
+                {
+                    textBoxOffset: { x: 0, y: -1.25 },
+                    text: 'If you attack and the other spader\nhave an opposite arrow,\nit will attack you back',
+                    callback: this.shoot.bind(this, true),
+                    requireSpecificAction: false,
+                    hideNextButton: true,
+                    target: "gridContainer",
+                    centerBox: { x: 0.5, y: 0 },
+                    delay: 1.5
+                }, {
+                    textBoxOffset: { x: 0, y: -1.1 },
+                    text: 'By using the counter attack,\nyou wipe two at the same time',
+                    callback: null,
+                    requireSpecificAction: false,
+                    target: "gridContainer",
+                    centerBox: { x: 0.5, y: 0 },
+                    delay: 1
+                },
+                {
+                    textBoxOffset: { x: 0, y: -1.1 },
+                    text: 'First,\nyou should wipe all starters',
+                    callback: this.getNewPiece.bind(this),
+                    requireSpecificAction: false,
+                    target: "gridContainer",
+                    centerBox: { x: 0.5, y: 0 },
+                    delay: 0
+                },
+                {
+                    textBoxOffset: { x: 0, y: -1.1 },
+                    text: 'And then kill the leftovers',
+                    callback: this.shoot.bind(this, true),
+                    hideNextButton: true,
+                    requireSpecificAction: false,
+                    target: "gridContainer",
+                    centerBox: { x: 0.5, y: 0 },
+                    delay: 0
+                },
+                {
+                    textBoxOffset: { x: 0, y: -2 },
+                    text: 'Thats how you win',
+                    callback: this.startNewTutorial.bind(this, 1),
+                    requireSpecificAction: false,
+                    target: "gridContainer",
+                    delay: 1,
+                    centerBox: { x: 0.5, y: 0.5 }
+                },
+                // {
+                //     textBoxOffset: { x: 0, y: -1.1 },
+                //     text: 'Some spaders needs\nmore than one attack',
+                //     callback: null,
+                //     requireSpecificAction: false,
+                //     target: "gridContainer",
+                //     useGlobalScale: false,
+                //     centerBox: { x: 0.5, y: 0 },
+                //     delay: 1
+                // },
+                {
+                    textBoxOffset: { x: 0, y: -1.1 },
+                    text: 'Try to attack as much\nas you can in one move',
+                    callback: this.shootAndCrazy.bind(this),
+                    hideNextButton: true,
+                    requireSpecificAction: false,
+                    target: "gridContainer",
+                    useGlobalScale: false,
+                    centerBox: { x: 0.5, y: 0 },
+                    delay: 1
+                },
+                {
+                    textBoxOffset: { x: 0, y: -1.1 },
+                    text: 'High combos transform\nrandom spaders in bombs',
+                    callback: null,
+                    highlightElementParameters: [1, Math.PI * 0.25 + Math.PI],
+                    highlightElement: this.getFirstBoardPiece,
+                    requireSpecificAction: false,
+                    target: "gridContainer",
+                    centerBox: { x: 0.5, y: 0 },
+                    delay: 2
+                },
+                {
+                    textBoxOffset: { x: 0, y: -1.1 },
+                    text: 'If you kill them, they will explode\nand give +1 damage on\nall spaders around',
+                    callback: this.shoot.bind(this, true),
+                    highlightElementParameters: [1, Math.PI * 0.25 + Math.PI],
+                    highlightElement: this.getFirstBoardPiece,
+                    hideNextButton: true,
+                    requireSpecificAction: false,
+                    target: "gridContainer",
+                    centerBox: { x: 0.5, y: 0 },
+                    delay: 0
+                },
+                {
+                    textBoxOffset: { x: 0, y: 0 },
+                    text: 'For stronger Spaders...',
+                    callback: this.startNewTutorial.bind(this, 2),
+                    requireSpecificAction: false,
+                    target: "backgroundInteractable",
+                    centerBox: { x: 0.5, y: 0.5 },
+                    delay: 2
+                },
+                {
+                    textBoxOffset: { x: 0, y: -1.1 },
+                    text: 'Try to use their arrows\nto counter attack you',
+                    callback: this.shoot.bind(this, false),
+                    hideNextButton: true,
+                    requireSpecificAction: false,
+                    target: "gridContainer",
+                    centerBox: { x: 0.5, y: 0 },
+                    delay: 2
+                },
+                {
+                    textBoxOffset: { x: 0, y: -1.1 },
+                    text: 'This is the best way to\nkeep the board cleaner',
+                    callback: this.shoot.bind(this, false),
+                    hideNextButton: true,
+                    requireSpecificAction: false,
+                    target: "gridContainer",
+                    centerBox: { x: 0.5, y: 0 },
+                    delay: 2
+                },
+                {
+                    textBoxOffset: { x: 0, y: -1.1 },
+                    text: "Don't let spaders too close to the bottom\nyou might need pile your spaders\nto wipe those",
+                    callback: this.shoot.bind(this, true),
+                    hideNextButton: true,
+                    requireSpecificAction: false,
+                    target: "gridContainer",
+                    centerBox: { x: 0.5, y: 0.6 },
+                    delay: 2
+                },
+                {
+                    textBoxOffset: { x: 0, y: 0 },
+                    text: 'Have fun!',
+                    callback: null,
+                    requireSpecificAction: false,
+                    target: "gridContainer",
+                    centerBox: { x: 0.5, y: 0.5 },
+                    delay: 2
+                }]
+            ,
+            tutorialPoki: [
+                {
+                    textBoxOffset: { x: 0, y: 0 },
+                    //text: "Let's see how it works",
+                    text: "How SPADERS works?",
+                    callback: this.startNewTutorial.bind(this, 0),
+                    requireSpecificAction: false,
+                    target: "backgroundInteractable",
+                    centerBox: { x: 0.5, y: 0.5 },
+                    delay: 0.5
+                },
+                {
+                    textBoxOffset: { x: 0, y: -1.25 },
+                    text: 'Every starter spader\nhave a TILE behind',
+                    callback: null,
+                    requireSpecificAction: false,
+                    highlightElementParameters: [1, Math.PI],
+                    highlightElement: this.getFirstBoardPiece,
+                    target: "gridContainer",
+                    centerBox: { x: 0.5, y: 0 },
+                    delay: 0
+                },
+                {
+                    textBoxOffset: { x: 0, y: -1.25 },
+                    text: 'When you kill then,\ntheir TILE is removed',
+                    callback: this.shoot.bind(this),
+                    requireSpecificAction: false,
+                    hideNextButton: true,
+                    target: "gridContainer",
+                    centerBox: { x: 0.5, y: 0 },
+                    delay: 0
+                },
+                {
+                    textBoxOffset: { x: 0, y: -1.25 },
+                    text: 'If you attack and the other spader\nhave an opposite arrow,\nit will attack you back',
+                    callback: () => {
+                        this.shoot(true)
+                        this.getNewPiece()
+                    },
+                    requireSpecificAction: false,
+                    hideNextButton: true,
+                    target: "gridContainer",
+                    centerBox: { x: 0.5, y: 0 },
+                    delay: 1.5
+                },
+                {
+                    textBoxOffset: { x: 0, y: -1.1 },
+                    text: 'And then kill the leftovers',
+                    callback: this.shoot.bind(this, true),
+                    hideNextButton: true,
+                    requireSpecificAction: false,
+                    target: "gridContainer",
+                    centerBox: { x: 0.5, y: 0 },
+                    delay: 0
+                },
+                {
+                    textBoxOffset: { x: 0, y: -2 },
+                    // text: 'Thats how you win',
+                    text: 'Erase the board to win',
+                    callback: this.startNewTutorial.bind(this, 1),
+                    requireSpecificAction: false,
+                    target: "gridContainer",
+                    delay: 1,
+                    centerBox: { x: 0.5, y: 0.5 }
+                },
+                {
+                    textBoxOffset: { x: 0, y: -1.1 },
+                    text: 'Try to attack as much\nas you can in one move',
+                    callback: this.shootAndCrazy.bind(this),
+                    hideNextButton: true,
+                    requireSpecificAction: false,
+                    target: "gridContainer",
+                    useGlobalScale: false,
+                    centerBox: { x: 0.5, y: 0 },
+                    delay: 1
+                },
+                {
+                    textBoxOffset: { x: 0, y: -1.1 },
+                    text: 'High combos transform\nrandom spaders in bombs',
+                    callback: null,
+                    highlightElementParameters: [1, Math.PI * 0.25 + Math.PI],
+                    highlightElement: this.getFirstBoardPiece,
+                    requireSpecificAction: false,
+                    target: "gridContainer",
+                    centerBox: { x: 0.5, y: 0 },
+                    delay: 2
+                },
+                {
+                    textBoxOffset: { x: 0, y: -1.1 },
+                    text: 'If you kill them, they will explode\nand give +1 damage on\nall spaders around',
+                    callback: this.shoot.bind(this, true),
+                    highlightElementParameters: [1, Math.PI * 0.25 + Math.PI],
+                    highlightElement: this.getFirstBoardPiece,
+                    hideNextButton: true,
+                    requireSpecificAction: false,
+                    target: "gridContainer",
+                    centerBox: { x: 0.5, y: 0 },
+                    delay: 0
+                },
+                {
+                    textBoxOffset: { x: 0, y: 0 },
+                    text: 'Have fun!',
+                    callback: null,
+                    requireSpecificAction: false,
+                    target: "gridContainer",
+                    centerBox: { x: 0.5, y: 0.5 },
+                    delay: 2
+                }]
         }
-        if(window.DISABLE_POKI){
+        if (window.DISABLE_POKI) {
             this.tutorial = this.tutorialData.tutorialStandard
-        }else{
-            
+        } else {
+
             this.tutorial = this.tutorialData.tutorialPoki
         }
         //console.log(this.tutorial)
@@ -752,7 +753,7 @@ this.tutorialData = {
         this.arrowSpriteElements.rotation = 0;
         this.arrowSpriteElements.offset = 0;
         this.arrowSpriteElements.speed = 3;
-        
+
         this.addChild(this.tutorialPopLabel);
 
         this.killTutorialButton = new UIButton1(config.colors.white, window.iconsData.cancel, config.colors.background);
@@ -760,7 +761,7 @@ this.tutorialData = {
         this.killTutorialButton.onClick.add(() => { this.killTutorial() });
         this.killTutorialButton.scale.set(0.5)
         this.killTutorialButton.addLabelLeft("SKIP");
-        
+
         this.toggleSound = new UIButton1(config.colors.dark, window.iconsData.soundOn, config.colors.white);
         this.toggleSound.onClick.add(() => this.toggleSoundButton());
         this.addChild(this.toggleSound);
@@ -825,6 +826,20 @@ this.tutorialData = {
     }
     hide() {
         this.tutorialPopLabel.visible = false;
+        window.GAMEPLAY_STOP();
+
+
+        let parameters = window.getLevelData(0, 0, 0)
+        console.log(parameters)
+
+        // this.gameScreen.currentLevelData = parameters.level
+        // this.gameScreen.hasHash = true;
+        // this.gameScreen.currentLevelID = 0;
+
+        this.gameScreen.autoRedirectData = { section: parameters.section, tier: parameters.tier }
+        this.gameScreen.mainmenuStateFromGame(false, this.gameScreen.autoRedirectData);
+
+
         TweenMax.to(this, 0.5, {
             alpha: 0, onComplete: () => {
                 this.visible = false;
@@ -832,6 +847,8 @@ this.tutorialData = {
         })
     }
     show(id = 0) {
+
+        window.GAMEPLAY_START();
         this.tutorialPopLabel.visible = true;
         this.visible = true;
         this.updateSoundButton();
@@ -916,7 +933,7 @@ this.tutorialData = {
             this.arrowSpriteCard.offset %= Math.PI
             this.arrowSpriteCard.x = this.currentCard.x + CARD.width / 2
 
-            this.arrowSpriteCard.y = utils.lerp(this.trailHorizontal.y + CARD.height * 1.5 + Math.sin(this.arrowSpriteCard.offset) * CARD.height * 0.5,this.arrowSpriteCard.y, 0.3)
+            this.arrowSpriteCard.y = utils.lerp(this.trailHorizontal.y + CARD.height * 1.5 + Math.sin(this.arrowSpriteCard.offset) * CARD.height * 0.5, this.arrowSpriteCard.y, 0.3)
             this.currentCard.y = this.currentCard.y = (this.grid.gridSprite.height + this.offsetCard.y + 4)// ((this.gridContainer.height) / this.gridContainer.scale.y) + this.offsetCard.y - CARD.height - 10;
             this.trailHorizontal.y = this.currentCard.y - this.offsetCard.y;
             this.trailHorizontal.tint = this.currentCard.currentColor;
@@ -965,7 +982,7 @@ this.tutorialData = {
         this.killTutorialButton.y = toLoc.y + this.killTutorialButton.width * this.killTutorialButton.scale.x;
 
         this.toggleSound.x = this.killTutorialButton.x;
-        this.toggleSound.y = this.killTutorialButton.y +this.killTutorialButton.width * this.killTutorialButton.scale.x * 1.5;
+        this.toggleSound.y = this.killTutorialButton.y + this.killTutorialButton.width * this.killTutorialButton.scale.x * 1.5;
 
         this.nextStepTutorial.x = this.killTutorialButton.x//toLoc.x + innerResolution.width - this.killTutorialButton.width;
         this.nextStepTutorial.y = toLoc.y + innerResolution.height - this.nextStepTutorial.height * this.killTutorialButton.scale.x;
@@ -1111,7 +1128,7 @@ this.tutorialData = {
             this.currentCard.x = this.currentPositionID * CARD.width
 
 
-        this.gridContainer.hitArea = new PIXI.Rectangle(this.gridContainer.x, this.gridContainer.y, this.gridContainer.width, this.gridContainer.height * 5);
+            this.gridContainer.hitArea = new PIXI.Rectangle(this.gridContainer.x, this.gridContainer.y, this.gridContainer.width, this.gridContainer.height * 5);
 
 
             setTimeout(() => {

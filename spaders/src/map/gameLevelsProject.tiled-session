@@ -3,19 +3,19 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "debug/debug.tmx",
+    "activeFile": "D:/projects/Spaders_GameDesign/src/worlds/world/testWorld1Simple.tmx",
     "expandedProjectPaths": [
-        "debug",
         "tutorial",
-        "basics",
-        "main",
         "world",
-        "how-to-play",
+        "debug",
+        "main",
         "synth",
-        "templates",
         "gb",
-        "movies",
-        "videogames"
+        "templates",
+        "videogames",
+        "basics",
+        "how-to-play",
+        "movies"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -68,6 +68,36 @@
         "D:/projects/Spaders_GameDesign/src/map/tilesets/spadersTileset.tsx": {
             "scaleInDock": 1
         },
+        "D:/projects/Spaders_GameDesign/src/worlds/tilesets/numbers.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/projects/Spaders_GameDesign/src/worlds/world/Tilemap_1.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/projects/Spaders_GameDesign/src/worlds/world/basicWorld.tmx": {
+            "scale": 0.9480208333333333,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 416.6575101637183,
+                "y": 528.4693989671464
+            }
+        },
+        "D:/projects/Spaders_GameDesign/src/worlds/world/testWorld1Beto.tmx": {
+            "scale": 0.40629464285714284,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1058.3452367871664,
+                "y": 849.1374574222615
+            }
+        },
+        "D:/projects/Spaders_GameDesign/src/worlds/world/testWorld1Simple.tmx": {
+            "scale": 1,
+            "selectedLayer": 7,
+            "viewCenter": {
+                "x": 251,
+                "y": 552
+            }
+        },
         "D:/projects/spaders/spaders/src/worlds/tilesets/numbers.tsx": {
             "scaleInDock": 1
         },
@@ -97,15 +127,15 @@
             "scale": 0.6522518382352941,
             "selectedLayer": 20,
             "viewCenter": {
-                "x": 342.6590572817586,
-                "y": 512.0721482420911
+                "x": 481.40914535334326,
+                "y": 512.0721482420912
             }
         },
         "debug/debug2.tmx": {
             "scale": 0.125,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 2308,
+                "x": 2304,
                 "y": 3072
             }
         },
@@ -113,7 +143,7 @@
             "scale": 0.5,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 735,
+                "x": 736,
                 "y": 768
             }
         },
@@ -121,8 +151,8 @@
             "scale": 0.33,
             "selectedLayer": 21,
             "viewCenter": {
-                "x": 481.8181818181818,
-                "y": 512.1212121212121
+                "x": 481.81818181818176,
+                "y": 512.1212121212122
             }
         },
         "gb/gameboyMisc2.tmx": {
@@ -535,7 +565,7 @@
             "scaleInDock": 0.75
         }
     },
-    "last.exportedFilePath": "D:/projects/spaders/spaders/www/data/basics",
+    "last.exportedFilePath": "D:/projects/spaders/spaders/www/data/worldMaps",
     "last.externalTilesetPath": "E:/projects/spaders/spaders/src/map/tilesets",
     "last.imagePath": "D:/projects/spaders/spaders/src/map/tilesets",
     "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
@@ -552,7 +582,10 @@
         "videogames/levels3.tmx",
         "videogames/spadersLarge.tmx",
         "gb/gameboyCreatures.tmx",
-        "gb/gameboyMisc.tmx"
+        "gb/gameboyMisc.tmx",
+        "D:/projects/Spaders_GameDesign/src/worlds/world/basicWorld.tmx",
+        "D:/projects/Spaders_GameDesign/src/worlds/world/testWorld1Beto.tmx",
+        "D:/projects/Spaders_GameDesign/src/worlds/world/testWorld1Simple.tmx"
     ],
     "project": "gameLevelsProject.tiled-project",
     "property.type": "int",
@@ -560,15 +593,15 @@
         "how-to-play/simple-shapes.tmx",
         "videogames/levels.tmx",
         "debug/debug2.tmx",
-        "gb/gameboyMisc.tmx",
-        "gb/gameboyCreatures.tmx",
-        "videogames/spadersLarge.tmx",
-        "videogames/levels3.tmx",
-        "videogames/levels2.tmx",
-        "how-to-play/creatures.tmx",
         "debug/debug.tmx",
-        "D:/projects/Spaders_GameDesign/src/map/_world1/world1_tier9_levels.tmx",
-        "tilesets/arrowsPieces.tsx"
+        "how-to-play/creatures.tmx",
+        "videogames/levels2.tmx",
+        "videogames/levels3.tmx",
+        "videogames/spadersLarge.tmx",
+        "gb/gameboyCreatures.tmx",
+        "gb/gameboyMisc.tmx",
+        "D:/projects/Spaders_GameDesign/src/worlds/world/basicWorld.tmx",
+        "D:/projects/Spaders_GameDesign/src/worlds/world/testWorld1Beto.tmx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",

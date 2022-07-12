@@ -152,7 +152,7 @@ export default class LevelSelectContainer extends PIXI.Container {
 
 
             this.addChild(this.test)
-            this.addChild(this.fader)
+            //this.addChild(this.fader)
 
             
             this.loaderAnimation = new SprteSpritesheetAnimation();
@@ -172,8 +172,8 @@ export default class LevelSelectContainer extends PIXI.Container {
                 stroke: 0x333333,
                 strokeThickness: 3
             });
-            this.addChild(this.loaderAnimation)
-            this.addChild(this.loadingLabel)
+            //this.addChild(this.loaderAnimation)
+            //this.addChild(this.loadingLabel)
 
             this.updateColorScheme();
 
@@ -223,7 +223,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         this.tierMap = new TierMap()
         this.levelMap = new TierMap()
 
-        this.tiersView.isHorizontal = true;
+        this.tiersView.isHorizontal = false;
         this.tiersView.map = this.tierMap;
         this.levelsView.map = this.levelMap;
         this.draggables = [this.sectionsView, this.tiersView, this.levelsView]
@@ -269,12 +269,26 @@ export default class LevelSelectContainer extends PIXI.Container {
     setRedirectData(redirectData) {
         this.disableClickCounter = 0;
         if (redirectData.tier) {
-            this.openLevelTier(redirectData.tier.data)
+            //console.log(redirectData)
+            //this.currentSection = redirectData.section
+
+            this.sectionsView.alpha = 0
+            this.openSection(redirectData.section)
+            
+            setTimeout(() => {
+                this.fader.alpha = 1;
+                TweenMax.killTweensOf(this.fader)
+                TweenMax.killTweensOf(this.sectionsView)
+                TweenMax.to(this.fader, 0.5, { alpha: 0, delay: 1 })
+                TweenMax.to(this.sectionsView, 0.5, { alpha: 1, delay: 1.5 })
+                this.openLevelTier(redirectData.tier.data)
+            }, 60);
+
         } else if (redirectData.section) {
             setTimeout(() => {
                 this.fader.alpha = 1;
                 TweenMax.killTweensOf(this.fader)
-                TweenMax.to(this.fader, 0.5, { alpha: 0, delay: 2 })
+                TweenMax.to(this.fader, 0.5, { alpha: 0, delay: 1 })
                 this.openSection(redirectData.section)
             }, 30);
         }
@@ -392,6 +406,8 @@ export default class LevelSelectContainer extends PIXI.Container {
                 element.springX.x = target
 
                 element.x = target;
+
+                console.log("WHY")
             }
 
 
@@ -413,9 +429,14 @@ export default class LevelSelectContainer extends PIXI.Container {
         }
 
         if (this.tierMap && this.tierMap.width > 80) {
-            let levelYStart = -this.tierButtons[0].y * this.tierMap.scale.y + this.tierMap.height / 4 + 64//window.innerHeight / 2 * this.tierMap.scale.y//- this.tierMap.height / 2 - (this.tierButtons[0].y * this.tierMap.scale.y)//window.innerHeight / 2 //- this.tierButtons[0].y//- this.tierMap.height / 2 
-            //console.log(levelYStart, this.tierMap.scale)
-            //levelYStart = Math.max(window.innerHeight * 0.05, levelYStart)
+            // let levelYStart = -this.tierButtons[0].y * this.tierMap.scale.y + this.tierMap.height / 4 + 64//window.innerHeight / 2 * this.tierMap.scale.y//- this.tierMap.height / 2 - (this.tierButtons[0].y * this.tierMap.scale.y)//window.innerHeight / 2 //- this.tierButtons[0].y//- this.tierMap.height / 2 
+            // //console.log(levelYStart, this.tierMap.scale)
+            // //levelYStart = Math.max(window.innerHeight * 0.05, levelYStart)
+            // this.tiersView.y = levelYStart
+            // this.tiersView.spring.x = levelYStart
+            // this.tiersView.spring.tx = levelYStart
+
+            let levelYStart = - (this.tiersView.height + 150) + window.innerHeight //+ 500
             this.tiersView.y = levelYStart
             this.tiersView.spring.x = levelYStart
             this.tiersView.spring.tx = levelYStart
@@ -457,8 +478,8 @@ export default class LevelSelectContainer extends PIXI.Container {
 
         }
 
-        element.springX.update();
-        element.x = element.springX.x
+        // element.springX.update();
+        // element.x = element.springX.x
 
 
         element.spring.update();
@@ -865,7 +886,6 @@ export default class LevelSelectContainer extends PIXI.Container {
             return;
         }
 
-
         let targetPallet = tier[0].tier.customPallet
 
         // console.log(targetPallet)
@@ -896,7 +916,7 @@ export default class LevelSelectContainer extends PIXI.Container {
         this.gameScreen.mainMenuSettings.collapse();
         this.currentUISection = 2
 
-        this.verticalBar.setSectionLabel(this.currentSection.name + " - " + tier[0].tierName)
+        this.verticalBar.setSectionLabel((this.currentSection.name || 'Planet Spaders') + " - " + tier[0].tierName)
 
 
 
@@ -955,8 +975,6 @@ export default class LevelSelectContainer extends PIXI.Container {
         }
 
         this.resetDrags()
-
-
     }
 
     update(delta) {
@@ -1457,18 +1475,20 @@ export default class LevelSelectContainer extends PIXI.Container {
             this.fader.alpha = 1;
             TweenMax.killTweensOf(this.fader)
             TweenMax.to(this.fader, 0.5, { alpha: 0, delay: 2 })
+            TweenMax.to(this.sectionsView, 0.5, { alpha: 1, delay: 1 })
             setTimeout(() => {
 
                 this.currentUISection = 1
                 this.disableClickCounter = 0;
                 this.openSection(this.isSinglePlanet)
                 this.sectionsView.visible = false;
-                setTimeout(() => {
+                this.sectionsView.alpha = 0;
 
+                setTimeout(() => {
                     this.centerLevels()
                     this.resetDrags();
                 }, 30);
-            }, 1000);
+            }, 500);
         }
     }
     centerLevels() {
@@ -1493,16 +1513,17 @@ export default class LevelSelectContainer extends PIXI.Container {
         }
 
         this.levelsView.x = this.mainCanvas.x + this.mainCanvas.width / 2 - this.levelsView.width / 2 - this.currentGridOffset.x
+        this.tiersView.x = this.mainCanvas.x + this.mainCanvas.width / 2 - this.tiersView.width / 2+25// - this.currentGridOffset.x
 
         this.sectionsView.pivot.x = this.mainCanvas.width / 2
         this.sectionsView.x = this.mainCanvas.x + this.mainCanvas.width
 
-        if (this.tiersView.width < window.innerWidth) {
-            this.tiersView.targetX = this.mainCanvas.x + this.mainCanvas.width / 2 - this.tiersView.width / 2// - this.currentGridOffset.x//this.mainCanvas.x + this.currentGridOffset.x * 2
-        } else {
-            this.tiersView.targetX = this.mainCanvas.x + this.mainCanvas.width / 2 - this.tiersView.width / 2 - this.unscaledTierButtonSize.width / 2// this.currentGridOffset.x * 2 - (this.tiersView.width * this.tiersView.scale.x) / 2
-            this.tiersView.targetY = 0//this.mainCanvas.x + this.currentGridOffset.x * 2 - 500
-        }
+        // if (this.tiersView.width < window.innerWidth) {
+        //     this.tiersView.targetX = this.mainCanvas.x + this.mainCanvas.width / 2 - this.tiersView.width / 2// - this.currentGridOffset.x//this.mainCanvas.x + this.currentGridOffset.x * 2
+        // } else {
+        //     this.tiersView.targetX = this.mainCanvas.x + this.mainCanvas.width / 2 - this.tiersView.width / 2 - this.unscaledTierButtonSize.width / 2// this.currentGridOffset.x * 2 - (this.tiersView.width * this.tiersView.scale.x) / 2
+        //     this.tiersView.targetY = 0//this.mainCanvas.x + this.currentGridOffset.x * 2 - 500
+        // }
 
     }
 }
